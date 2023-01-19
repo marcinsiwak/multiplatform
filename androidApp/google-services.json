@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "607279059338",
+    "project_id": "sportplatform-b5318",
+    "storage_bucket": "sportplatform-b5318.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607279059338:android:a06e2bdec766c941cb3873",
+        "android_client_info": {
+          "package_name": "pl.msiwak.multiplatform.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607279059338-ildvb5nvgahchrkqje1vhk6fr5ns23tk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuGdmDq8ooDXggYvkgQviYbGUykdOBjOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607279059338-ildvb5nvgahchrkqje1vhk6fr5ns23tk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "607279059338-emvsg361v8ook2jqkho9gs4b8k5o57d8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pl.msiwak.kmmproject.iosApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

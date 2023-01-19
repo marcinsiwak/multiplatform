@@ -25,9 +25,9 @@ kotlin {
                     api(core)
                     api(test)
                 }
-//                with(Deps.Firebase) {
-//                    api(authentication)
-//                }
+                with(Deps.Firebase) {
+                    api(authentication)
+                }
             }
         }
         val commonTest by getting {
