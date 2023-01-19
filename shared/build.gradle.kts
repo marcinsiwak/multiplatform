@@ -1,3 +1,5 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
@@ -5,7 +7,7 @@ plugins {
 
 kotlin {
     android()
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -17,7 +19,17 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                with(Deps.Koin) {
+                    api(core)
+                    api(test)
+                }
+//                with(Deps.Firebase) {
+//                    api(authentication)
+//                }
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -47,10 +59,10 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 27
-        targetSdk = 32
+        targetSdk = 33
     }
 }
