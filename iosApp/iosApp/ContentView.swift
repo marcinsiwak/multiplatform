@@ -3,10 +3,39 @@ import shared
 
 struct ContentView: View {
 	let greet = Greeting().greeting()
+    let authRepo: FirebaseAuthorization = FirebaseAuthorization()
 
-	var body: some View {
-		Text(greet)
-	}
+    
+    @State var username: String = ""
+    @State var password: String = ""
+     
+     var body: some View {
+         VStack(alignment: .leading) {
+             Text("Username")
+                 .font(.callout)
+                 .bold()
+             TextField("Enter username...", text: $username)
+                 .textFieldStyle(RoundedBorderTextFieldStyle())
+             
+             Text("Password")
+                 .font(.callout)
+                 .bold()
+             TextField("Enter password...", text: $password)
+                 .textFieldStyle(RoundedBorderTextFieldStyle())
+             
+             
+             Button("Register") {
+                 Task {
+                     do {
+                         try await authRepo.createNewUser(email: username, password: password)
+                     } catch {
+                         print(error)
+                     }
+                 }
+             }.padding(30)
+         }.padding()
+ 
+     }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -14,3 +43,4 @@ struct ContentView_Previews: PreviewProvider {
 		ContentView()
 	}
 }
+

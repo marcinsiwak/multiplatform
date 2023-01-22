@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.authorization
 
 import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.AuthResult
 import dev.gitlive.firebase.auth.auth
 
 
@@ -12,8 +13,8 @@ class FirebaseAuthorization {
         auth.createUserWithEmailAndPassword(email, password)
     }
 
-    suspend fun loginUser(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
+    suspend fun loginUser(email: String, password: String): AuthResult {
+        return auth.signInWithEmailAndPassword(email, password)
     }
 
 }

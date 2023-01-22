@@ -6,9 +6,11 @@ import pl.msiwak.multiplatform.android.navigation.Navigator
 
 class WelcomeScreenViewModel(private val navigator: Navigator) : ViewModel() {
 
-    val title = "TITLE"
-
-    fun navigateToRegistration() {
+    fun onRegistrationClicked() {
         navigator.navigate(NavigationDirections.Registration)
+    }
+
+    fun onLoginClicked() {
+        navigator.navigate(NavigationDirections.Login)
     }
 }

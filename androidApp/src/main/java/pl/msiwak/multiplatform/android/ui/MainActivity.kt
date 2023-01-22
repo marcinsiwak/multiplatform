@@ -12,14 +12,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.koin.java.KoinJavaComponent.inject
+import pl.msiwak.multiplatform.android.navigation.NavigationDirections
+import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
+import pl.msiwak.multiplatform.android.ui.login.LoginScreen
 import pl.msiwak.multiplatform.android.ui.register.RegisterScreen
 import pl.msiwak.multiplatform.android.ui.theme.BaseKmm_ProjectTheme
 import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
-import pl.msiwak.multiplatform.android.navigation.NavigationDirections
 
 class MainActivity : ComponentActivity() {
 
-    val viewModel: MainViewModel by inject(MainViewModel::class.java)
+    private val viewModel: MainViewModel by inject(MainViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,8 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(NavigationDirections.Welcome.destination) { WelcomeScreen() }
                         composable(NavigationDirections.Registration.destination) { RegisterScreen() }
-
+                        composable(NavigationDirections.Login.destination) { LoginScreen() }
+                        composable(NavigationDirections.Dashboard.destination) { DashboardScreen() }
                     }
 
                     viewModel.mainNavigator.commands.collectAsState().value.also { command ->

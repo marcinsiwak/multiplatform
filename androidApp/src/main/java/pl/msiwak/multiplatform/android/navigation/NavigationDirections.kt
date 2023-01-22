@@ -11,4 +11,12 @@ sealed class NavigationDirections : NavigationCommand {
         override val arguments: List<NamedNavArgument> = emptyList()
         override val destination: String = "registration"
     }
+    object Login : NavigationDirections() {
+        override val arguments: List<NamedNavArgument> = emptyList()
+        override val destination: String = "login"
+    }
+    object Dashboard : NavigationDirections() {
+        override val arguments: List<NamedNavArgument> = emptyList()
+        override val destination: String = "dashboard"
+    }
 }

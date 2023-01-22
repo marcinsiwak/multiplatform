@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.android.ui.register
+package pl.msiwak.multiplatform.android.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -10,21 +10,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.koin.java.KoinJavaComponent.inject
+import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.components.InputView
 
-val viewModel: RegisterViewModel by inject(RegisterViewModel::class.java)
+val viewModel: LoginViewModel by KoinJavaComponent.inject(LoginViewModel::class.java)
 
 @Composable
-fun RegisterScreen() {
-    val state = viewModel.registerState.collectAsState()
+fun LoginScreen() {
+    val state = viewModel.loginState.collectAsState()
+
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.fillMaxSize(),
@@ -49,20 +48,14 @@ fun RegisterScreen() {
             })
             Button(
                 modifier = Modifier
-                    .align(CenterHorizontally)
+                    .align(Alignment.CenterHorizontally)
                     .padding(vertical = 16.dp),
                 onClick = {
-                    viewModel.onRegisterClicked()
+                    viewModel.onLoginClicked()
                 }) {
-                Text(text = "Register")
+                Text(text = "Login")
             }
         }
 
     }
-}
-
-@Preview
-@Composable
-fun RegisterScreenPreview() {
-    RegisterScreen()
 }
