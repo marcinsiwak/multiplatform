@@ -30,7 +30,8 @@ kotlin {
                     api(authentication)
                 }
                 with(Deps.Kotlinx) {
-                    api(lifecycle)
+//                    api(lifecycle)
+                    api(coroutines)
                 }
             }
         }

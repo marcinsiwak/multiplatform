@@ -4,6 +4,8 @@ import org.koin.dsl.module
 import pl.msiwak.multiplatform.android.ui.MainViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
+import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
+import pl.msiwak.multiplatform.domain.authorization.RegisterUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
@@ -15,4 +17,9 @@ val androidModule = module {
     factory { RegisterViewModel(get()) }
     factory { LoginViewModel(get()) }
     factory { WelcomeScreenViewModel(get()) }
+}
+
+val useCaseModule = module {
+    single { RegisterUseCase(get()) }
+    single { LoginUseCase(get()) }
 }

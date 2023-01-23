@@ -5,6 +5,7 @@ buildscript {
         gradlePluginPortal()
         google()
         mavenCentral()
+
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
