@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.ui.viewModels.WelcomeScreenViewModel
+import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
 @Composable
 fun WelcomeScreen() {

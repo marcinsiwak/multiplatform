@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.authorization
+package pl.msiwak.multiplatform.api.authorization
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.AuthResult

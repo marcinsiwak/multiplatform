@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.viewModels
+package pl.msiwak.multiplatform.ui.welcome
 
 import pl.msiwak.multiplatform.BaseViewModel
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections

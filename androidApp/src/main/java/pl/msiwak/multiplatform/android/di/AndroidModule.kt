@@ -1,12 +1,12 @@
 package pl.msiwak.multiplatform.android.di
 
 import org.koin.dsl.module
-import pl.msiwak.multiplatform.ui.viewModels.WelcomeScreenViewModel
 import pl.msiwak.multiplatform.android.ui.MainViewModel
-import pl.msiwak.multiplatform.android.ui.login.LoginViewModel
-import pl.msiwak.multiplatform.android.ui.register.RegisterViewModel
-import pl.msiwak.multiplatform.authorization.FirebaseAuthorization
+import pl.msiwak.multiplatform.ui.login.LoginViewModel
+import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
 import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.ui.register.RegisterViewModel
+import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
 val androidModule = module {
     single { Navigator() }

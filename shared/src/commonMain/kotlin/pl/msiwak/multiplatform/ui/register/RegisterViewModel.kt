@@ -1,13 +1,12 @@
-package pl.msiwak.multiplatform.android.ui.register
+package pl.msiwak.multiplatform.ui.register
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.authorization.FirebaseAuthorization
+import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.domain.authorization.RegisterUseCase
 
-class RegisterViewModel(private val firebaseAuthorization: FirebaseAuthorization) : ViewModel() {
+class RegisterViewModel(private val registerUseCase: RegisterUseCase) : ViewModel() {
 
     private val _registerState = MutableStateFlow(RegisterState())
     val registerState: StateFlow<RegisterState> = _registerState
@@ -22,9 +21,11 @@ class RegisterViewModel(private val firebaseAuthorization: FirebaseAuthorization
 
     fun onRegisterClicked() {
         viewModelScope.launch {
-            firebaseAuthorization.createNewUser(
-                registerState.value.login,
-                registerState.value.password
+            registerUseCase(
+                RegisterUseCase.Params(
+                    registerState.value.login,
+                    registerState.value.password
+                )
             )
         }
     }

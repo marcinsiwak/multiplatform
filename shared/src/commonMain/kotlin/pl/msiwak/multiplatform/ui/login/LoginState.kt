@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.android.ui.login
+package pl.msiwak.multiplatform.ui.login
 
 data class LoginState(
     val login: String = "",

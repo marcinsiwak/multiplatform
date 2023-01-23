@@ -1,13 +1,12 @@
-package pl.msiwak.multiplatform.android.ui.login
+package pl.msiwak.multiplatform.ui.login
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.authorization.FirebaseAuthorization
+import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 
-class LoginViewModel(private val firebaseAuthorization: FirebaseAuthorization) : ViewModel() {
+class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
 
     private val _loginState = MutableStateFlow(LoginState())
     val loginState: StateFlow<LoginState> = _loginState
@@ -22,9 +21,11 @@ class LoginViewModel(private val firebaseAuthorization: FirebaseAuthorization) :
 
     fun onLoginClicked() {
         viewModelScope.launch {
-            val result = firebaseAuthorization.loginUser(
-                loginState.value.login,
-                loginState.value.password
+            loginUseCase(
+                LoginUseCase.Params(
+                    loginState.value.login,
+                    loginState.value.password
+                )
             )
         }
     }
