@@ -29,6 +29,9 @@ kotlin {
                 with(Deps.Firebase) {
                     api(authentication)
                 }
+                with(Deps.Kotlinx) {
+                    api(lifecycle)
+                }
             }
         }
         val commonTest by getting {
@@ -36,7 +39,13 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+//            dependencies {
+//                with(Deps.Navigation) {
+//                    api(navigation)
+//                }
+//            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
