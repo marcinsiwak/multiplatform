@@ -33,6 +33,9 @@ kotlin {
 //                    api(lifecycle)
                     api(coroutines)
                 }
+                with(Deps.Ktor) {
+                    api(ktor)
+                }
             }
         }
         val commonTest by getting {
@@ -41,6 +44,11 @@ kotlin {
             }
         }
         val androidMain by getting {
+            dependencies {
+                with(Deps.Ktor) {
+                    api(ktorAndroid)
+                }
+            }
 //            dependencies {
 //                with(Deps.Navigation) {
 //                    api(navigation)
@@ -56,6 +64,11 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                with(Deps.Ktor) {
+                    api(ktorIOS)
+                }
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting

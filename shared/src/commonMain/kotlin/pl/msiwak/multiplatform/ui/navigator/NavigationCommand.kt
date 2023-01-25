@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.ui.navigator
 
-
-expect interface NavigationCommand {
+interface NavigationCommand {
     val destination: String
 }

@@ -27,4 +27,10 @@ object Deps {
         const val navigation = "androidx.navigation:navigation-compose:${Versions.navigation}"
     }
 
+    object Ktor {
+        const val ktor = "io.ktor:ktor-client-core:2.2.2"
+        const val ktorAndroid = "io.ktor:ktor-client-okhttp:2.2.2"
+        const val ktorIOS = "io.ktor:ktor-client-darwin:2.2.2"
+    }
+
 }

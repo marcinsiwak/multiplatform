@@ -6,7 +6,7 @@ import Firebase
 
 @main
 struct iOSApp: App {
-    
+        
     init() {
         HelperKt.doInitKoin()
         FirebaseApp.configure()
@@ -14,7 +14,7 @@ struct iOSApp: App {
     
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
+            ContentView()
 		}
 	}
 }

@@ -1,46 +1,38 @@
 import SwiftUI
 import shared
 
+private let RegistrationRoute = "registration"
+private let LoginRoute = "login"
+
+
 struct ContentView: View {
-	let greet = Greeting().greeting()
-    let authRepo: FirebaseAuthorization = FirebaseAuthorization()
+    @State private var route = [String]()
 
+    let diHelper = DiHelper()
     
-    @State var username: String = ""
-    @State var password: String = ""
-     
-     var body: some View {
-         VStack(alignment: .leading) {
-             Text("Username")
-                 .font(.callout)
-                 .bold()
-             TextField("Enter username...", text: $username)
-                 .textFieldStyle(RoundedBorderTextFieldStyle())
-             
-             Text("Password")
-                 .font(.callout)
-                 .bold()
-             TextField("Enter password...", text: $password)
-                 .textFieldStyle(RoundedBorderTextFieldStyle())
-             
-             
-             Button("Register") {
-                 Task {
-                     do {
-                         try await authRepo.createNewUser(email: username, password: password)
-                     } catch {
-                         print(error)
-                     }
-                 }
-             }.padding(30)
-         }.padding()
- 
-     }
+    var body: some View {
+        NavigationStack(path: $route) {
+            WelcomeScreen(
+                viewModel: diHelper.getMainViewModel(),
+                navigateToRegistration: { route.append(RegistrationRoute) },
+                navigateToLogin: { route.append(LoginRoute) }
+            ).navigationDestination(for: String.self) { destination in
+                switch (destination) {
+                    case RegistrationRoute:
+                        RegisterScreen()
+                    default:
+                        Text("None")
+                }
+            }
+        }
+    }
 }
 
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
-}
+
+
+//struct ContentView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		ContentView()
+//	}
+//}
 
