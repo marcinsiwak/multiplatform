@@ -42,11 +42,20 @@ fun LoginScreen() {
                 value = state.value.login,
                 onValueChange = {
                     viewModel.onLoginChanged(it)
-                })
+                },
+                hintText = "E-mail..."
+            )
 
-            InputView(modifier = Modifier, value = state.value.password, onValueChange = {
-                viewModel.onPasswordChanged(it)
-            })
+            InputView(
+                modifier = Modifier,
+                value = state.value.password,
+                errorMessage = state.value.authErrorMessage,
+                onValueChange = {
+                    viewModel.onPasswordChanged(it)
+                },
+                isPassword = true,
+                hintText = "Password..."
+            )
             Button(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)

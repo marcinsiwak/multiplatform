@@ -5,8 +5,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
+import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
+import pl.msiwak.multiplatform.ui.navigator.Navigator
 
-class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
+class LoginViewModel(
+    private val loginUseCase: LoginUseCase,
+    private val navigator: Navigator
+) : ViewModel() {
 
     private val _loginState = MutableStateFlow(LoginState())
     val loginState: StateFlow<LoginState> = _loginState
@@ -21,12 +26,8 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
 
     fun onLoginClicked() {
         viewModelScope.launch {
-            loginUseCase(
-                LoginUseCase.Params(
-                    loginState.value.login,
-                    loginState.value.password
-                )
-            )
+            loginUseCase(LoginUseCase.Params(loginState.value.login, loginState.value.password))
+            navigator.navigate(NavigationDirections.Dashboard)
         }
     }
 }

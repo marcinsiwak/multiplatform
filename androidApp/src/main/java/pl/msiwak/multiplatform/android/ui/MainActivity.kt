@@ -47,11 +47,6 @@ class MainActivity : ComponentActivity() {
                             navController.navigate(it.destination)
                         }
                     }
-//                    viewModel.mainNavigator.commands.collectAsState(initial = NavigationDirections.Welcome).value.also { command ->
-//                        if (command.destination.isNotEmpty()) {
-//                            navController.navigate(command.destination)
-//                        }
-//                    }
                 }
             }
         }

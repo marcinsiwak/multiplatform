@@ -4,25 +4,41 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
-import pl.msiwak.multiplatform.domain.authorization.RegisterUseCase
+import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
+import pl.msiwak.multiplatform.validators.Validator
 
-class RegisterViewModel(private val registerUseCase: RegisterUseCase) : ViewModel() {
+class RegisterViewModel(
+    private val registerUserUseCase: RegisterUserUseCase,
+    private val validator: Validator
+) : ViewModel() {
 
     private val _registerState = MutableStateFlow(RegisterState())
     val registerState: StateFlow<RegisterState> = _registerState
 
     fun onLoginChanged(text: String) {
+        val isLoginValid = validator.validateEmail(text)
+        if (isLoginValid) {
+            _registerState.value = registerState.value.copy(loginErrorMessage = null)
+        } else {
+            _registerState.value = registerState.value.copy(loginErrorMessage = "wrong format")
+        }
         _registerState.value = registerState.value.copy(login = text)
     }
 
     fun onPasswordChanged(text: String) {
+        val isPasswordValid = validator.validatePassword(text)
+        if (isPasswordValid) {
+            _registerState.value = registerState.value.copy(passwordErrorMessage = null)
+        } else {
+            _registerState.value = registerState.value.copy(passwordErrorMessage = "wrong format")
+        }
         _registerState.value = registerState.value.copy(password = text)
     }
 
     fun onRegisterClicked() {
         viewModelScope.launch {
-            registerUseCase(
-                RegisterUseCase.Params(
+            registerUserUseCase(
+                RegisterUserUseCase.Params(
                     registerState.value.login,
                     registerState.value.password
                 )

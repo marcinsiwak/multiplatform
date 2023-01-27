@@ -41,13 +41,23 @@ fun RegisterScreen() {
             InputView(
                 modifier = Modifier.padding(vertical = 8.dp),
                 value = state.value.login,
+                errorMessage = state.value.loginErrorMessage,
                 onValueChange = {
                     viewModel.onLoginChanged(it)
-                })
+                },
+                hintText = "E-mail..."
+            )
 
-            InputView(modifier = Modifier, value = state.value.password, onValueChange = {
-                viewModel.onPasswordChanged(it)
-            })
+            InputView(
+                modifier = Modifier,
+                value = state.value.password,
+                errorMessage = state.value.passwordErrorMessage,
+                onValueChange = {
+                    viewModel.onPasswordChanged(it)
+                },
+                isPassword = true,
+                hintText = "Password..."
+            )
             Button(
                 modifier = Modifier
                     .align(CenterHorizontally)
