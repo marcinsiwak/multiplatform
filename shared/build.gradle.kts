@@ -30,11 +30,13 @@ kotlin {
                     api(authentication)
                 }
                 with(Deps.Kotlinx) {
-//                    api(lifecycle)
                     api(coroutines)
                 }
                 with(Deps.Ktor) {
                     api(ktor)
+                }
+                with(Deps.Napier) {
+                    api(napier)
                 }
             }
         }
@@ -49,11 +51,6 @@ kotlin {
                     api(ktorAndroid)
                 }
             }
-//            dependencies {
-//                with(Deps.Navigation) {
-//                    api(navigation)
-//                }
-//            }
         }
         val androidTest by getting
         val iosX64Main by getting

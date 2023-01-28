@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.di
 
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
+import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
@@ -20,12 +21,13 @@ val apiModule = module {
 val toolsModule = module {
     single { Navigator() }
     single { Validator() }
+    single { GlobalErrorHandler() }
 }
 
 val viewModelsModule = module {
     factory { MainViewModel(get()) }
-    factory { RegisterViewModel(get(), get()) }
-    factory { LoginViewModel(get(), get()) }
+    factory { RegisterViewModel(get(), get(), get()) }
+    factory { LoginViewModel(get(), get(), get()) }
     factory { WelcomeScreenViewModel(get()) }
 }
 

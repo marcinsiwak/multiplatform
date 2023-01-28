@@ -33,4 +33,9 @@ object Deps {
         const val ktorIOS = "io.ktor:ktor-client-darwin:2.2.2"
     }
 
+    // todo change napier to timber when ready
+    object Napier {
+        const val napier = "io.github.aakira:napier:2.6.1"
+    }
+
 }
