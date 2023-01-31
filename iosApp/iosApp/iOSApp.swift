@@ -9,6 +9,7 @@ struct iOSApp: App {
         
     init() {
         HelperKt.doInitKoin()
+        HelperKt.doInitNapier()
         FirebaseApp.configure()
        }
     
