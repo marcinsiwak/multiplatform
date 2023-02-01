@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.components.InputView
+import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 
 val viewModel: LoginViewModel by KoinJavaComponent.inject(LoginViewModel::class.java)

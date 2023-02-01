@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.android.components
+package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon

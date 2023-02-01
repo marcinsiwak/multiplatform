@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.components.BottomNavigation
+import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.account.AccountScreen
 import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
 import pl.msiwak.multiplatform.android.ui.summary.SummaryScreen

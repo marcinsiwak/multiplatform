@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationDirections.Dashboard.destination
+                        startDestination = NavigationDirections.Welcome.destination
                     ) {
                         composable(NavigationDirections.Welcome.destination) { WelcomeScreen() }
                         composable(NavigationDirections.Registration.destination) { RegisterScreen() }

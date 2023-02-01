@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.components.InputView
+import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
 val viewModel: RegisterViewModel by inject(RegisterViewModel::class.java)
