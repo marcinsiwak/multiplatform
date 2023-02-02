@@ -38,7 +38,7 @@ val viewModelsModule = module {
     factory { MainViewModel(get()) }
     factory { RegisterViewModel(get(), get(), get()) }
     factory { LoginViewModel(get(), get(), get()) }
-    factory { WelcomeScreenViewModel(get(), get(), get()) }
+    factory { WelcomeScreenViewModel(get()) }
 }
 
 val useCaseModule = module {
