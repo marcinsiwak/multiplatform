@@ -6,4 +6,8 @@
 
     <color name="button_color">#2D3384</color>
     <color name="button_color_two">#595C84</color>
+
+    <color name="summary">#0a0a0a</color>
+    <color name="summary_two">#020c1c</color>
+    <color name="white">#FFFFFF</color>
 </resources>
