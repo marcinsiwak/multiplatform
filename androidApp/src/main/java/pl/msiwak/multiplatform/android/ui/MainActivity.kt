@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.koin.java.KoinJavaComponent.inject
+import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
 import pl.msiwak.multiplatform.android.ui.login.LoginScreen
 import pl.msiwak.multiplatform.android.ui.register.RegisterScreen

@@ -15,8 +15,8 @@ import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 @Composable
 fun BottomNavigation(navController: NavController, items: List<DashboardNavigationDirections>) {
     androidx.compose.material.BottomNavigation(
-        backgroundColor = Color.White,
-        contentColor = Color.Gray
+        backgroundColor = Color.Black,
+        contentColor = Color.White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -29,8 +29,8 @@ fun BottomNavigation(navController: NavController, items: List<DashboardNavigati
                         fontSize = 8.sp
                     )
                 },
-                selectedContentColor = Color.Black,
-                unselectedContentColor = Color.Black.copy(0.4f),
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.Gray.copy(0.4f),
                 alwaysShowLabel = true,
                 selected = currentRoute == item.destination,
                 onClick = {

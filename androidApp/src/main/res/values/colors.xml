@@ -10,4 +10,5 @@
     <color name="summary">#0a0a0a</color>
     <color name="summary_two">#020c1c</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
