@@ -24,9 +24,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pl.msiwak.multiplatform.android.R
+import pl.msiwak.multiplatform.data.entity.Summary
 
 @Composable
-fun SummaryItem(modifier: Modifier = Modifier) {
+fun SummaryItem(modifier: Modifier = Modifier, summary: Summary) {
     Box(
         modifier = modifier
             .background(
@@ -53,7 +54,7 @@ fun SummaryItem(modifier: Modifier = Modifier) {
                     shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 8.dp)
                 )
                 .padding(horizontal = 12.dp, vertical = 8.dp),
-            text = "Sprint 100m",
+            text = summary.exerciseType,
             fontSize = 12.sp,
             color = Color.White
         )
@@ -68,7 +69,7 @@ fun SummaryItem(modifier: Modifier = Modifier) {
                     .height(48.dp)
                     .padding(horizontal = 8.dp)
                     .align(Alignment.Bottom),
-                text = "10s",
+                text = summary.result,
                 fontSize = 32.sp,
                 color = Color.LightGray
             )
@@ -97,5 +98,5 @@ fun SummaryItem(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun SummaryItemPreview() {
-    SummaryItem()
+//    SummaryItem()
 }

@@ -5,6 +5,7 @@ import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
+import pl.msiwak.multiplatform.android.di.androidDatabaseModule
 import pl.msiwak.multiplatform.android.di.sharedPreferencesModule
 import pl.msiwak.multiplatform.di.appModule
 
@@ -16,7 +17,7 @@ class App : Application() {
         Napier.base(DebugAntilog())
 
         startKoin {
-            modules(appModule() + sharedPreferencesModule)
+            modules(appModule() + sharedPreferencesModule + androidDatabaseModule)
             androidContext(this@App)
         }
     }

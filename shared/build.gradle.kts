@@ -3,6 +3,8 @@ import pl.msiwak.multiplatfor.dependencies.Deps
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    kotlin("plugin.serialization") version "1.8.10"
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -33,10 +35,13 @@ kotlin {
                     api(coroutines)
                 }
                 with(Deps.Ktor) {
-                    api(ktor)
+                    api(core)
                 }
                 with(Deps.Napier) {
                     api(napier)
+                }
+                with(Deps.SQLDelight) {
+                    api(runtime)
                 }
             }
         }
@@ -48,7 +53,10 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 with(Deps.Ktor) {
-                    api(ktorAndroid)
+                    api(android)
+                }
+                with(Deps.SQLDelight) {
+                    api(android)
                 }
             }
         }
@@ -63,7 +71,10 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 with(Deps.Ktor) {
-                    api(ktorIOS)
+                    api(ios)
+                }
+                with(Deps.SQLDelight) {
+                    api(ios)
                 }
             }
         }
@@ -85,5 +96,11 @@ android {
     defaultConfig {
         minSdk = 27
         targetSdk = 33
+    }
+}
+
+sqldelight {
+    database("AppDatabase") {
+        packageName = "pl.msiwak.multiplatform.cache"
     }
 }

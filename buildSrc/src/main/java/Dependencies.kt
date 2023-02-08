@@ -1,16 +1,22 @@
 package pl.msiwak.multiplatfor.dependencies
 
+import pl.msiwak.multiplatfor.dependencies.Versions.koinVersion
+import pl.msiwak.multiplatfor.dependencies.Versions.ktorVersion
+import pl.msiwak.multiplatfor.dependencies.Versions.sqlDelightVersion
+
 object Versions {
-    const val koin = "3.3.2"
+    const val koinVersion = "3.3.2"
+    const val ktorVersion = "2.2.1"
+    const val sqlDelightVersion = "1.5.4"
 }
 
 object Deps {
 
     object Koin {
-        const val core = "io.insert-koin:koin-core:${Versions.koin}"
-        const val test = "io.insert-koin:koin-test:${Versions.koin}"
-        const val android = "io.insert-koin:koin-android:${Versions.koin}"
-        const val navigation = "io.insert-koin:koin-androidx-navigation:${Versions.koin}"
+        const val core = "io.insert-koin:koin-core:$koinVersion"
+        const val test = "io.insert-koin:koin-test:$koinVersion"
+        const val android = "io.insert-koin:koin-android:$koinVersion"
+        const val navigation = "io.insert-koin:koin-androidx-navigation:$koinVersion"
     }
 
     object Firebase {
@@ -23,9 +29,15 @@ object Deps {
     }
 
     object Ktor {
-        const val ktor = "io.ktor:ktor-client-core:2.2.2"
-        const val ktorAndroid = "io.ktor:ktor-client-okhttp:2.2.2"
-        const val ktorIOS = "io.ktor:ktor-client-darwin:2.2.2"
+        const val core = "io.ktor:ktor-client-core:$ktorVersion"
+        const val android = "io.ktor:ktor-client-android:$ktorVersion"
+        const val ios = "io.ktor:ktor-client-darwin:$ktorVersion"
+    }
+
+    object SQLDelight {
+        const val runtime = "com.squareup.sqldelight:runtime:$sqlDelightVersion"
+        const val android = "com.squareup.sqldelight:android-driver:$sqlDelightVersion"
+        const val ios = "com.squareup.sqldelight:native-driver:$sqlDelightVersion"
     }
 
     // todo change napier to timber when ready

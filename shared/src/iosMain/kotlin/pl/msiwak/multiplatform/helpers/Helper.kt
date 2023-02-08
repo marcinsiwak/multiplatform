@@ -4,13 +4,14 @@ import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import pl.msiwak.multiplatform.database.DatabaseDriverFactory
 import pl.msiwak.multiplatform.di.appModule
 import pl.msiwak.multiplatform.utils.KMMPreferences
 import platform.darwin.NSObject
 
 fun initKoin() {
     startKoin {
-        modules(appModule() + sharedPreferencesModule)
+        modules(appModule() + sharedPreferencesModule + iosDatabaseModule)
     }
 }
 
@@ -20,4 +21,8 @@ fun initNapier() {
 
 val sharedPreferencesModule = module {
     single { KMMPreferences(NSObject()) }
+}
+
+val iosDatabaseModule = module {
+    single { DatabaseDriverFactory() }
 }

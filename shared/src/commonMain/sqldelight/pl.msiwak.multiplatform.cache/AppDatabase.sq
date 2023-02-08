@@ -1,0 +1,18 @@
+CREATE TABLE Summary (
+    exerciseType    TEXT NOT NULL,
+    result     TEXT     NOT NULL
+);
+
+insertSummary:
+INSERT INTO Summary(exerciseType, result)
+VALUES (?,?);
+
+removeAllSummaries:
+DELETE FROM Summary;
+
+selectFromSummary:
+SELECT * FROM Summary
+WHERE exerciseType = ?;
+
+selectAllFromSummary:
+SELECT * FROM Summary;
