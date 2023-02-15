@@ -4,13 +4,22 @@ import pl.msiwak.multiplatform.cache.AppDatabase
 import pl.msiwak.multiplatform.data.entity.Summary
 
 class Database(databaseDriverFactory: DatabaseDriverFactory) {
-    private val database = AppDatabase(databaseDriverFactory.createDriver())
+    private val database = AppDatabase(
+        databaseDriverFactory.createDriver(),
+        SummaryAdapter = plmsiwakmultiplatformcache.Summary.Adapter(
+            resultsAdapter = listAdapter
+        )
+    )
     private val dbQuery = database.appDatabaseQueries
 
     fun clearDatabase() {
         dbQuery.transaction {
             dbQuery.removeAllSummaries()
         }
+    }
+
+    fun getSummary(id: Long): Summary {
+        return dbQuery.selectFromSummary(id, ::mapSummary).executeAsOne()
     }
 
     fun getAllSummaries(): List<Summary> {
@@ -25,17 +34,18 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         }
     }
 
-    private fun insertSummary(summary: Summary) {
+    fun insertSummary(summary: Summary) {
         dbQuery.insertSummary(
             exerciseType = summary.exerciseType,
-            result = summary.result
+            results = summary.results
         )
     }
 
     private fun mapSummary(
+        id: Long,
         exerciseType: String,
-        result: String
+        results: List<String>
     ): Summary {
-        return Summary(exerciseType, result)
+        return Summary(id, exerciseType, results)
     }
 }

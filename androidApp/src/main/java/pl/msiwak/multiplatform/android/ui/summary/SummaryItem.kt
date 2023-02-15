@@ -28,6 +28,9 @@ import pl.msiwak.multiplatform.data.entity.Summary
 
 @Composable
 fun SummaryItem(modifier: Modifier = Modifier, summary: Summary) {
+    val topResult = summary.results.getOrNull(0) ?: ""
+    val secondResult = summary.results.getOrNull(1) ?: ""
+    val thirdResult = summary.results.getOrNull(2) ?: ""
     Box(
         modifier = modifier
             .background(
@@ -69,7 +72,7 @@ fun SummaryItem(modifier: Modifier = Modifier, summary: Summary) {
                     .height(48.dp)
                     .padding(horizontal = 8.dp)
                     .align(Alignment.Bottom),
-                text = summary.result,
+                text = topResult,
                 fontSize = 32.sp,
                 color = Color.LightGray
             )
@@ -78,7 +81,7 @@ fun SummaryItem(modifier: Modifier = Modifier, summary: Summary) {
                     .height(64.dp)
                     .padding(horizontal = 8.dp)
                     .align(Alignment.Bottom),
-                text = "10s",
+                text = secondResult,
                 fontSize = 48.sp,
                 color = Color.DarkGray
             )
@@ -87,7 +90,7 @@ fun SummaryItem(modifier: Modifier = Modifier, summary: Summary) {
                     .height(80.dp)
                     .padding(horizontal = 8.dp)
                     .align(Alignment.Bottom),
-                text = "10s",
+                text = thirdResult,
                 fontSize = 64.sp,
                 color = Color.Black
             )

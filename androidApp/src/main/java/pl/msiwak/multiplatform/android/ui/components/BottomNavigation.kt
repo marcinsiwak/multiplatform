@@ -32,9 +32,9 @@ fun BottomNavigation(navController: NavController, items: List<DashboardNavigati
                 selectedContentColor = Color.White,
                 unselectedContentColor = Color.Gray.copy(0.4f),
                 alwaysShowLabel = true,
-                selected = currentRoute == item.destination,
+                selected = currentRoute == item.route,
                 onClick = {
-                    navController.navigate(item.destination) {
+                    navController.navigate(item.route) {
 
                         navController.graph.startDestinationRoute?.let { screen_route ->
                             popUpTo(screen_route) {

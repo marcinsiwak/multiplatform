@@ -9,9 +9,13 @@ import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummariesUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummariesUseCase
+import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.SummaryRepository
+import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
+import pl.msiwak.multiplatform.ui.exercise.ExerciseViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 import pl.msiwak.multiplatform.ui.main.MainViewModel
 import pl.msiwak.multiplatform.ui.navigator.Navigator
@@ -50,6 +54,8 @@ val viewModelsModule = module {
     factory { LoginViewModel(get(), get(), get()) }
     factory { WelcomeScreenViewModel(get()) }
     factory { SummaryViewModel(get(), get()) }
+    factory { ExerciseViewModel(get(), get()) }
+    factory { AddExerciseViewModel(get()) }
 }
 
 val useCaseModule = module {
@@ -59,6 +65,8 @@ val useCaseModule = module {
     single { GetUserTokenUseCase(get()) }
     single { GetSummariesUseCase(get()) }
     single { InsertSummariesUseCase(get()) }
+    single { InsertSummaryUseCase(get()) }
+    single { GetSummaryUseCase(get()) }
 }
 
 val repositoryUseModule = module {

@@ -21,7 +21,7 @@ import pl.msiwak.multiplatform.android.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputView(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     backgroundColor: Color = Color.Transparent,
@@ -42,7 +42,7 @@ fun InputView(
             onValueChange = { newText ->
                 onValueChange(newText)
             },
-            placeholder = { Text(text = hintText) },
+            label = { Text(text = hintText) },
             singleLine = true,
             visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
         )

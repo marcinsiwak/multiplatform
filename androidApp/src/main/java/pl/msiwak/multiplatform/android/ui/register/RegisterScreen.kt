@@ -45,7 +45,7 @@ fun RegisterScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = "E-mail..."
+                hintText = "E-mail"
             )
 
             InputView(
@@ -56,7 +56,7 @@ fun RegisterScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = "Password..."
+                hintText = "Password"
             )
             Button(
                 modifier = Modifier

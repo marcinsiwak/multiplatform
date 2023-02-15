@@ -1,10 +1,13 @@
+import kotlin.collections.List;
+
 CREATE TABLE Summary (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     exerciseType    TEXT NOT NULL,
-    result     TEXT     NOT NULL
+    results     TEXT AS List<String>    NOT NULL
 );
 
 insertSummary:
-INSERT INTO Summary(exerciseType, result)
+INSERT INTO Summary(exerciseType, results)
 VALUES (?,?);
 
 removeAllSummaries:
@@ -12,7 +15,7 @@ DELETE FROM Summary;
 
 selectFromSummary:
 SELECT * FROM Summary
-WHERE exerciseType = ?;
+WHERE id = ?;
 
 selectAllFromSummary:
 SELECT * FROM Summary;

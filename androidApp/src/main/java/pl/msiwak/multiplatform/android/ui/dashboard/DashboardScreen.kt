@@ -32,11 +32,11 @@ fun DashboardScreen() {
         NavHost(
             modifier = Modifier.padding(paddingValues = it),
             navController = navController,
-            startDestination = items[0].destination
+            startDestination = items[0].route
         ) {
-            composable(items[0].destination) { SummaryScreen() }
-            composable(items[1].destination) { AccountScreen() }
-            composable(items[2].destination) { SettingsScreen() }
+            composable(items[0].route) { SummaryScreen() }
+            composable(items[1].route) { AccountScreen() }
+            composable(items[2].route) { SettingsScreen() }
         }
     }
 }
