@@ -8,14 +8,14 @@ import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
 class SummaryViewModel(
-    getSummariesUseCase: GetSummariesUseCase,
+    private val getSummariesUseCase: GetSummariesUseCase,
     private val navigator: Navigator
 ) : ViewModel() {
 
     private val _summaryState = MutableStateFlow(SummaryState())
     val summaryState: StateFlow<SummaryState> = _summaryState
 
-    init {
+    fun onInit() {
         val summaries = getSummariesUseCase()
         _summaryState.value = _summaryState.value.copy(summaries = summaries)
     }

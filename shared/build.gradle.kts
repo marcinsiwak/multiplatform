@@ -33,6 +33,8 @@ kotlin {
                 }
                 with(Deps.Kotlinx) {
                     api(coroutines)
+                    api(dateTime)
+                    api(serialization)
                 }
                 with(Deps.Ktor) {
                     api(core)

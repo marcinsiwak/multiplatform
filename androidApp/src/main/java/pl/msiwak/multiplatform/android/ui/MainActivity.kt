@@ -58,8 +58,13 @@ class MainActivity : ComponentActivity() {
                     }
 
                     viewModel.mainNavigator.commands.watch {
-                        if (it.destination.isNotEmpty()) {
-                            navController.navigate(route = it.destination)
+                        when (it) {
+                            NavigationDirections.NavigateUp -> navController.navigateUp()
+                            else -> {
+                                if (it.destination.isNotEmpty()) {
+                                    navController.navigate(route = it.destination)
+                                }
+                            }
                         }
                     }
                 }

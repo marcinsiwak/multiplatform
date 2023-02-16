@@ -5,6 +5,11 @@ sealed class NavigationDirections : NavigationCommand {
     override val destination: String
         get() = route
 
+    object NavigateUp : NavigationDirections() {
+        override val route: String
+            get() = "navigateUp"
+    }
+
     object Welcome : NavigationDirections() {
         override val route: String = "welcome"
     }

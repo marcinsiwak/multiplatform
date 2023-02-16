@@ -21,8 +21,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
+import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 
 val viewModel: SummaryViewModel by KoinJavaComponent.inject(SummaryViewModel::class.java)
@@ -30,6 +32,14 @@ val viewModel: SummaryViewModel by KoinJavaComponent.inject(SummaryViewModel::cl
 @Composable
 fun SummaryScreen() {
     val state = viewModel.summaryState.collectAsState()
+
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> viewModel.onInit()
+            else -> Unit
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()

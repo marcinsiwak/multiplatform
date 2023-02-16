@@ -3,12 +3,15 @@ package pl.msiwak.multiplatform.android.ui.summary
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +23,9 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,15 +34,16 @@ import pl.msiwak.multiplatform.data.entity.Summary
 
 @Composable
 fun SummaryItem(modifier: Modifier = Modifier, summary: Summary) {
-    val topResult = summary.results.getOrNull(0) ?: ""
-    val secondResult = summary.results.getOrNull(1) ?: ""
-    val thirdResult = summary.results.getOrNull(2) ?: ""
+    val topResult = summary.results.getOrNull(0)?.result ?: ""
+    val secondResult = summary.results.getOrNull(1)?.result ?: ""
+    val thirdResult = summary.results.getOrNull(2)?.result ?: ""
     Box(
         modifier = modifier
             .background(
                 color = Color.Black,
                 shape = RoundedCornerShape(8.dp),
-            ).shadow(2.dp)
+            )
+            .shadow(2.dp)
             .border(2.dp, Color.Black, RoundedCornerShape(8.dp))
             .height(132.dp)
             .fillMaxWidth(),
@@ -64,35 +71,41 @@ fun SummaryItem(modifier: Modifier = Modifier, summary: Summary) {
 
         Row(
             modifier = Modifier
-                .padding(top = 16.dp, end = 16.dp)
-                .align(Alignment.CenterEnd)
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+                .align(Alignment.CenterEnd),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
             Text(
                 modifier = Modifier
-                    .height(48.dp)
-                    .padding(horizontal = 8.dp)
+                    .wrapContentHeight()
                     .align(Alignment.Bottom),
-                text = topResult,
-                fontSize = 32.sp,
-                color = Color.LightGray
-            )
-            Text(
-                modifier = Modifier
-                    .height(64.dp)
-                    .padding(horizontal = 8.dp)
-                    .align(Alignment.Bottom),
-                text = secondResult,
-                fontSize = 48.sp,
-                color = Color.DarkGray
-            )
-            Text(
-                modifier = Modifier
-                    .height(80.dp)
-                    .padding(horizontal = 8.dp)
-                    .align(Alignment.Bottom),
+                maxLines = 1,
                 text = thirdResult,
-                fontSize = 64.sp,
-                color = Color.Black
+                fontSize = 28.sp,
+                fontStyle = FontStyle.Italic,
+                color = Color.LightGray,
+            )
+            Text(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .align(Alignment.Bottom),
+                maxLines = 1,
+                text = secondResult,
+                fontSize = 36.sp,
+                fontStyle = FontStyle.Italic,
+                color = Color.Gray,
+            )
+            Text(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .align(Alignment.Bottom),
+                maxLines = 1,
+                text = topResult,
+                fontSize = 48.sp,
+                fontStyle = FontStyle.Italic,
+                color = Color.Black,
             )
         }
     }

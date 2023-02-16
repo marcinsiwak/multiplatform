@@ -1,13 +1,14 @@
 package pl.msiwak.multiplatform.database
 
 import pl.msiwak.multiplatform.cache.AppDatabase
+import pl.msiwak.multiplatform.data.common.ResultData
 import pl.msiwak.multiplatform.data.entity.Summary
 
 class Database(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = AppDatabase(
         databaseDriverFactory.createDriver(),
         SummaryAdapter = plmsiwakmultiplatformcache.Summary.Adapter(
-            resultsAdapter = listAdapter
+            resultsAdapter = resultListAdapter
         )
     )
     private val dbQuery = database.appDatabaseQueries
@@ -41,10 +42,18 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         )
     }
 
+    fun updateSummary(summary: Summary) {
+        dbQuery.updateSummary(summary.id, summary.exerciseType, summary.results)
+    }
+
+    fun removeSummary(id: Long) {
+        dbQuery.removeSummary(id)
+    }
+
     private fun mapSummary(
         id: Long,
         exerciseType: String,
-        results: List<String>
+        results: List<ResultData>
     ): Summary {
         return Summary(id, exerciseType, results)
     }

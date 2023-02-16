@@ -12,6 +12,8 @@ import pl.msiwak.multiplatform.domain.summaries.GetSummariesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummariesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.RemoveSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.UpdateSummaryUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.SummaryRepository
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
@@ -55,7 +57,7 @@ val viewModelsModule = module {
     factory { WelcomeScreenViewModel(get()) }
     factory { SummaryViewModel(get(), get()) }
     factory { ExerciseViewModel(get(), get()) }
-    factory { AddExerciseViewModel(get()) }
+    factory { AddExerciseViewModel(get(), get()) }
 }
 
 val useCaseModule = module {
@@ -66,7 +68,9 @@ val useCaseModule = module {
     single { GetSummariesUseCase(get()) }
     single { InsertSummariesUseCase(get()) }
     single { InsertSummaryUseCase(get()) }
+    single { UpdateSummaryUseCase(get()) }
     single { GetSummaryUseCase(get()) }
+    single { RemoveSummaryUseCase(get()) }
 }
 
 val repositoryUseModule = module {

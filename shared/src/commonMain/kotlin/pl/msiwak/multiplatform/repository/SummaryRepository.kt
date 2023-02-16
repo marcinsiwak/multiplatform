@@ -15,6 +15,14 @@ class SummaryRepository(private val database: Database) {
         database.insertSummaries(summaries)
     }
 
+    fun updateSummary(summary: Summary) {
+        database.updateSummary(summary)
+    }
+
+    fun removeSummary(id: Long) {
+        database.removeSummary(id)
+    }
+
     fun getSummary(id: Long): Summary {
         return database.getSummary(id)
     }

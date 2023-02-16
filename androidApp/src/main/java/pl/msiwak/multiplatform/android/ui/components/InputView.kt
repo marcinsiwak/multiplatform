@@ -27,7 +27,8 @@ fun InputView(
     backgroundColor: Color = Color.Transparent,
     errorMessage: String? = null,
     isPassword: Boolean = false,
-    hintText: String = ""
+    hintText: String = "",
+    readOnly: Boolean = false,
 ) {
     Column(modifier = modifier) {
         OutlinedTextField(
@@ -44,6 +45,7 @@ fun InputView(
             },
             label = { Text(text = hintText) },
             singleLine = true,
+            readOnly = readOnly,
             visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
         )
     }
