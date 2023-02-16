@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.data.common
 
-sealed class ExerciseType {
-    class Running: ExerciseType()
+sealed class ExerciseType(val backgroundId: Int) {
+    class Running(): ExerciseType()
     class Gym(): ExerciseType()
 }

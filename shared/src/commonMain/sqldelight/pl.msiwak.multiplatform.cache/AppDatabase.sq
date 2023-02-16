@@ -1,19 +1,21 @@
 import kotlin.collections.List;
 import pl.msiwak.multiplatform.data.common.ResultData;
+import pl.msiwak.multiplatform.data.common.ExerciseType;
 
 CREATE TABLE Summary (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     exerciseTitle    TEXT NOT NULL,
-    results     TEXT AS List<ResultData>    NOT NULL
+    results     TEXT AS List<ResultData>    NOT NULL,
+    exerciseType TEXT AS ExerciseType NOT NULL
 );
 
 updateSummary:
-INSERT OR REPLACE INTO Summary(id, exerciseTitle, results)
-VALUES (?, ?,?);
+INSERT OR REPLACE INTO Summary(id, exerciseTitle, results, exerciseType)
+VALUES (?, ?,?, ?);
 
 insertSummary:
-INSERT INTO Summary(exerciseTitle, results)
-VALUES (?,?);
+INSERT INTO Summary(exerciseTitle, results, exerciseType)
+VALUES (?,?, ?);
 
 removeAllSummaries:
 DELETE FROM Summary;
