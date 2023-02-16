@@ -29,6 +29,7 @@ fun InputView(
     isPassword: Boolean = false,
     hintText: String = "",
     readOnly: Boolean = false,
+    errorsEnabled: Boolean = true
 ) {
     Column(modifier = modifier) {
         OutlinedTextField(
@@ -50,14 +51,15 @@ fun InputView(
         )
     }
     val isErrorVisible = if (errorMessage.isNullOrEmpty()) 0f else 1f
-    Text(
-        modifier = Modifier
-            .alpha(isErrorVisible)
-            .padding(bottom = 8.dp),
-        text = errorMessage ?: "",
-        color = Color.Red
-    )
-
+    if (errorsEnabled) {
+        Text(
+            modifier = Modifier
+                .alpha(isErrorVisible)
+                .padding(bottom = 8.dp),
+            text = errorMessage ?: "",
+            color = Color.Red
+        )
+    }
 }
 
 @Preview

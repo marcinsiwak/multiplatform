@@ -29,9 +29,11 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
+import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.ResultView
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
+import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
@@ -78,6 +80,14 @@ fun AddExerciseScreen() {
                     viewModel.onExerciseTitleChanged(it)
                 },
                 hintText = "Exercise"
+            )
+
+            DropDownView(
+                currentValue = state.value.exerciseType.name,
+                items = ExerciseType.values().toList(),
+                onItemPicked = {
+                    viewModel.onExerciseTypeClicked(it)
+                },
             )
 
             Text(text = "RESULTS", color = Color.White)

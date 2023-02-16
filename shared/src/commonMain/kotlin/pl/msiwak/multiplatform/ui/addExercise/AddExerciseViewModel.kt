@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
 import pl.msiwak.multiplatform.data.entity.Summary
 import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
@@ -41,7 +42,13 @@ class AddExerciseViewModel(
     fun onAddNewExerciseClicked() {
         val type = _viewState.value.exerciseTitle
         val results = _viewState.value.results
-        insertSummaryUseCase(Summary(exerciseTitle = type, results = results))
+        insertSummaryUseCase(
+            Summary(
+                exerciseTitle = type,
+                results = results,
+                exerciseType = ExerciseType.GYM
+            )
+        )
         navigator.navigateUp()
     }
 
@@ -58,4 +65,9 @@ class AddExerciseViewModel(
         currentResults.removeAt(resultIndex)
         _viewState.value = _viewState.value.copy(results = currentResults)
     }
+
+    fun onExerciseTypeClicked(type: ExerciseType) {
+        _viewState.value = _viewState.value.copy(exerciseType = type)
+    }
+
 }
