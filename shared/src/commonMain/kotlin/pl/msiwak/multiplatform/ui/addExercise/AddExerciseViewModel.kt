@@ -41,7 +41,7 @@ class AddExerciseViewModel(
     fun onAddNewExerciseClicked() {
         val type = _viewState.value.exerciseTitle
         val results = _viewState.value.results
-        insertSummaryUseCase(Summary(exerciseType = type, results = results))
+        insertSummaryUseCase(Summary(exerciseTitle = type, results = results))
         navigator.navigateUp()
     }
 

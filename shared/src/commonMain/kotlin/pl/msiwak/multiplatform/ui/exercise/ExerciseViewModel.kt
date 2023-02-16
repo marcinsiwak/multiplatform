@@ -27,7 +27,7 @@ class ExerciseViewModel(
     fun onInit(id: Long) {
         currentSummary = getSummaryUseCase(id)
         _viewState.value = _viewState.value.copy(
-            exerciseTitle = currentSummary.exerciseType,
+            exerciseTitle = currentSummary.exerciseTitle,
             results = currentSummary.results,
         )
     }

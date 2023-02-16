@@ -37,13 +37,13 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
 
     fun insertSummary(summary: Summary) {
         dbQuery.insertSummary(
-            exerciseType = summary.exerciseType,
+            exerciseTitle = summary.exerciseTitle,
             results = summary.results
         )
     }
 
     fun updateSummary(summary: Summary) {
-        dbQuery.updateSummary(summary.id, summary.exerciseType, summary.results)
+        dbQuery.updateSummary(summary.id, summary.exerciseTitle, summary.results)
     }
 
     fun removeSummary(id: Long) {
@@ -52,9 +52,9 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
 
     private fun mapSummary(
         id: Long,
-        exerciseType: String,
+        exerciseTitle: String,
         results: List<ResultData>
     ): Summary {
-        return Summary(id, exerciseType, results)
+        return Summary(id, exerciseTitle, results)
     }
 }

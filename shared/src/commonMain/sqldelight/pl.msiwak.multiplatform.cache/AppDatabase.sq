@@ -3,16 +3,16 @@ import pl.msiwak.multiplatform.data.common.ResultData;
 
 CREATE TABLE Summary (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    exerciseType    TEXT NOT NULL,
+    exerciseTitle    TEXT NOT NULL,
     results     TEXT AS List<ResultData>    NOT NULL
 );
 
 updateSummary:
-INSERT OR REPLACE INTO Summary(id, exerciseType, results)
+INSERT OR REPLACE INTO Summary(id, exerciseTitle, results)
 VALUES (?, ?,?);
 
 insertSummary:
-INSERT INTO Summary(exerciseType, results)
+INSERT INTO Summary(exerciseTitle, results)
 VALUES (?,?);
 
 removeAllSummaries:
