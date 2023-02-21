@@ -55,7 +55,7 @@ fun SummaryScreen() {
                             .clickable {
                                 viewModel.onExerciseClicked(summary.id)
                             },
-                        summary = summary
+                        summaryEntity = summary
                     )
                 }
                 item {

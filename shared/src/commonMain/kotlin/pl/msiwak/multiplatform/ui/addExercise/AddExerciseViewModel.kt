@@ -8,13 +8,15 @@ import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
-import pl.msiwak.multiplatform.data.entity.Summary
+import pl.msiwak.multiplatform.data.entity.SummaryEntity
 import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.utils.DateFormatter
 
 class AddExerciseViewModel(
     private val insertSummaryUseCase: InsertSummaryUseCase,
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    private val dateFormatter: DateFormatter
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddExerciseState())
@@ -22,6 +24,8 @@ class AddExerciseViewModel(
 
     private val _viewEvent = MutableSharedFlow<AddExerciseEvent>(extraBufferCapacity = 1)
     val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent
+
+    private var pickedDate: LocalDateTime? = null
 
     fun onExerciseTitleChanged(title: String) {
         _viewState.value = _viewState.value.copy(exerciseTitle = title)
@@ -34,7 +38,7 @@ class AddExerciseViewModel(
     fun onAddNewResultClicked() {
         val currentResults = _viewState.value.results.toMutableList()
         val newResult = _viewState.value.newResult
-        val newResultDate = _viewState.value.newResultDate
+        val newResultDate = pickedDate
         currentResults.add(ResultData(newResult, newResultDate))
         _viewState.value = _viewState.value.copy(results = currentResults)
     }
@@ -43,7 +47,7 @@ class AddExerciseViewModel(
         val type = _viewState.value.exerciseTitle
         val results = _viewState.value.results
         insertSummaryUseCase(
-            Summary(
+            SummaryEntity(
                 exerciseTitle = type,
                 results = results,
                 exerciseType = ExerciseType.GYM
@@ -57,7 +61,9 @@ class AddExerciseViewModel(
     }
 
     fun onDatePicked(date: LocalDateTime) {
-        _viewState.value = _viewState.value.copy(newResultDate = date)
+        val formattedDate = dateFormatter.formatDate(date)
+        pickedDate = date
+        _viewState.value = _viewState.value.copy(newResultDate = formattedDate)
     }
 
     fun onResultRemoved(resultIndex: Int) {

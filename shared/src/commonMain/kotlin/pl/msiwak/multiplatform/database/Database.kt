@@ -3,7 +3,7 @@ package pl.msiwak.multiplatform.database
 import pl.msiwak.multiplatform.cache.AppDatabase
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
-import pl.msiwak.multiplatform.data.entity.Summary
+import pl.msiwak.multiplatform.data.entity.SummaryEntity
 
 class Database(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = AppDatabase(
@@ -21,15 +21,15 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         }
     }
 
-    fun getSummary(id: Long): Summary {
+    fun getSummary(id: Long): SummaryEntity {
         return dbQuery.selectFromSummary(id, ::mapSummary).executeAsOne()
     }
 
-    fun getAllSummaries(): List<Summary> {
+    fun getAllSummaries(): List<SummaryEntity> {
         return dbQuery.selectAllFromSummary(::mapSummary).executeAsList()
     }
 
-    fun insertSummaries(summaries: List<Summary>) {
+    fun insertSummaries(summaries: List<SummaryEntity>) {
         dbQuery.transaction {
             summaries.forEach {
                 insertSummary(it)
@@ -37,20 +37,20 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         }
     }
 
-    fun insertSummary(summary: Summary) {
+    fun insertSummary(summaryEntity: SummaryEntity) {
         dbQuery.insertSummary(
-            exerciseTitle = summary.exerciseTitle,
-            results = summary.results,
-            exerciseType = summary.exerciseType
+            exerciseTitle = summaryEntity.exerciseTitle,
+            results = summaryEntity.results,
+            exerciseType = summaryEntity.exerciseType
         )
     }
 
-    fun updateSummary(summary: Summary) {
+    fun updateSummary(summaryEntity: SummaryEntity) {
         dbQuery.updateSummary(
-            summary.id,
-            summary.exerciseTitle,
-            summary.results,
-            summary.exerciseType
+            summaryEntity.id,
+            summaryEntity.exerciseTitle,
+            summaryEntity.results,
+            summaryEntity.exerciseType
         )
     }
 
@@ -63,7 +63,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         exerciseTitle: String,
         results: List<ResultData>,
         exerciseType: ExerciseType
-    ): Summary {
-        return Summary(id, exerciseTitle, results, exerciseType)
+    ): SummaryEntity {
+        return SummaryEntity(id, exerciseTitle, results, exerciseType)
     }
 }

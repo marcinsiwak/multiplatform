@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.di
 
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
@@ -24,6 +25,7 @@ import pl.msiwak.multiplatform.ui.navigator.Navigator
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
+import pl.msiwak.multiplatform.utils.DateFormatter
 import pl.msiwak.multiplatform.validators.Validator
 
 fun appModule() = listOf(
@@ -48,6 +50,7 @@ val toolsModule = module {
     single { Navigator() }
     single { Validator() }
     single { GlobalErrorHandler() }
+    single { DateFormatter() }
 }
 
 val viewModelsModule = module {
@@ -56,8 +59,8 @@ val viewModelsModule = module {
     factory { LoginViewModel(get(), get(), get()) }
     factory { WelcomeScreenViewModel(get()) }
     factory { SummaryViewModel(get(), get()) }
-    factory { ExerciseViewModel(get(), get()) }
-    factory { AddExerciseViewModel(get(), get()) }
+    factory { ExerciseViewModel(get(), get(), get()) }
+    factory { AddExerciseViewModel(get(), get(), get()) }
 }
 
 val useCaseModule = module {

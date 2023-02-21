@@ -2,8 +2,11 @@ package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,7 +45,8 @@ fun DropDownView(
             onValueChange = {},
             hintText = "Exercise type",
             readOnly = true,
-            errorsEnabled = false
+            errorsEnabled = false,
+            trailingIcon = { Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null) }
         )
         DropdownMenu(
             modifier = modifier,

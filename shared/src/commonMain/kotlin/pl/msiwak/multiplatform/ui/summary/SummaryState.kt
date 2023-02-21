@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.ui.summary
 
-import pl.msiwak.multiplatform.data.entity.Summary
+import pl.msiwak.multiplatform.data.entity.SummaryEntity
 
 data class SummaryState(
-    val summaries: List<Summary> = emptyList()
+    val summaries: List<SummaryEntity> = emptyList()
 )

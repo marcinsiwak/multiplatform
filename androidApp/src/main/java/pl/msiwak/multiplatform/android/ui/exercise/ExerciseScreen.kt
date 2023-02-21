@@ -104,7 +104,7 @@ fun ExerciseScreen(id: Long) {
                                 viewModel.onDateClicked()
                             }
                         },
-                    value = state.value.newResultDate.toString(),
+                    value = state.value.newResultDate,
                     onValueChange = {},
                     hintText = "Date",
                     readOnly = true,

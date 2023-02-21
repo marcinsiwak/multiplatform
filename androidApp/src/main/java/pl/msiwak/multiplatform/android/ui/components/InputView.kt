@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.R
@@ -29,7 +30,8 @@ fun InputView(
     isPassword: Boolean = false,
     hintText: String = "",
     readOnly: Boolean = false,
-    errorsEnabled: Boolean = true
+    errorsEnabled: Boolean = true,
+    trailingIcon: @Composable (() -> Unit)? = null
 ) {
     Column(modifier = modifier) {
         OutlinedTextField(
@@ -39,12 +41,18 @@ fun InputView(
                 focusedBorderColor = colorResource(id = R.color.button_color),
                 unfocusedBorderColor = Color.Gray
             ),
+            trailingIcon = trailingIcon,
             shape = RoundedCornerShape(12.dp),
             value = value,
             onValueChange = { newText ->
                 onValueChange(newText)
             },
-            label = { Text(text = hintText) },
+            label = {
+                Text(
+                    text = hintText,
+                    maxLines = 1,
+                )
+            },
             singleLine = true,
             readOnly = readOnly,
             visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
