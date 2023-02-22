@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.di
 
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
@@ -9,6 +8,8 @@ import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummariesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummariesUseCase
@@ -54,26 +55,36 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    factory { MainViewModel(get()) }
-    factory { RegisterViewModel(get(), get(), get()) }
-    factory { LoginViewModel(get(), get(), get()) }
-    factory { WelcomeScreenViewModel(get()) }
-    factory { SummaryViewModel(get(), get()) }
-    factory { ExerciseViewModel(get(), get(), get()) }
-    factory { AddExerciseViewModel(get(), get(), get()) }
+    viewModelDefinition { MainViewModel(get()) }
+    viewModelDefinition { RegisterViewModel(get(), get(), get()) }
+    viewModelDefinition { LoginViewModel(get(), get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get()) }
+    viewModelDefinition { SummaryViewModel(get(), get()) }
+    viewModelDefinition { params ->
+        ExerciseViewModel(
+            id = params.get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
+    viewModelDefinition { AddExerciseViewModel(get(), get(), get(), get()) }
 }
 
 val useCaseModule = module {
-    single { RegisterUserUseCase(get()) }
-    single { LoginUseCase(get()) }
-    single { SaveUserTokenUseCase(get()) }
-    single { GetUserTokenUseCase(get()) }
-    single { GetSummariesUseCase(get()) }
-    single { InsertSummariesUseCase(get()) }
-    single { InsertSummaryUseCase(get()) }
-    single { UpdateSummaryUseCase(get()) }
-    single { GetSummaryUseCase(get()) }
-    single { RemoveSummaryUseCase(get()) }
+    factory { RegisterUserUseCase(get()) }
+    factory { LoginUseCase(get()) }
+    factory { SaveUserTokenUseCase(get()) }
+    factory { GetUserTokenUseCase(get()) }
+    factory { GetSummariesUseCase(get()) }
+    factory { InsertSummariesUseCase(get()) }
+    factory { InsertSummaryUseCase(get()) }
+    factory { UpdateSummaryUseCase(get()) }
+    factory { GetSummaryUseCase(get()) }
+    factory { RemoveSummaryUseCase(get()) }
+    factory { FormatDateUseCase(get()) }
+    factory { FormatResultsUseCase(get()) }
 }
 
 val repositoryUseModule = module {

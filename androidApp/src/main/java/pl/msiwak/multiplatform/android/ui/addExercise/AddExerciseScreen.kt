@@ -27,21 +27,21 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.java.KoinJavaComponent
+import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.ResultView
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
 import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.data.common.ResultData
+import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 
-val viewModel: AddExerciseViewModel by KoinJavaComponent.inject(AddExerciseViewModel::class.java)
-
 @Composable
 fun AddExerciseScreen() {
+    val viewModel = koinViewModel<AddExerciseViewModel>()
+
     val state = viewModel.viewState.collectAsState()
     val context = LocalContext.current
 
@@ -133,10 +133,10 @@ fun AddExerciseScreen() {
             LazyColumn(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 content = {
-                    itemsIndexed(state.value.results) { index: Int, it: ResultData ->
+                    itemsIndexed(state.value.results) { index: Int, it: FormattedResultData ->
                         ResultView(
                             result = it.result,
-                            date = it.date.toString(),
+                            date = it.date,
                             onRemove = {
                                 viewModel.onResultRemoved(index)
                             })

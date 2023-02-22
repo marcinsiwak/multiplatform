@@ -1,11 +1,13 @@
 package pl.msiwak.multiplatfor.dependencies
 
+import pl.msiwak.multiplatfor.dependencies.Versions.koinComposeVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.koinVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.ktorVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.sqlDelightVersion
 
 object Versions {
     const val koinVersion = "3.3.2"
+    const val koinComposeVersion = "3.4.2"
     const val ktorVersion = "2.2.1"
     const val sqlDelightVersion = "1.5.4"
 }
@@ -17,6 +19,7 @@ object Deps {
         const val test = "io.insert-koin:koin-test:$koinVersion"
         const val android = "io.insert-koin:koin-android:$koinVersion"
         const val navigation = "io.insert-koin:koin-androidx-navigation:$koinVersion"
+        const val compose = "io.insert-koin:koin-androidx-compose:$koinComposeVersion"
     }
 
     object Firebase {

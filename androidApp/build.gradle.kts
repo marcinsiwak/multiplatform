@@ -62,6 +62,7 @@ dependencies {
     with(Deps.Koin) {
         implementation(core)
         implementation(android)
+        implementation(pl.msiwak.multiplatfor.dependencies.Deps.Koin.compose)
     }
 
 }

@@ -8,5 +8,5 @@ import kotlinx.datetime.toLocalDateTime
 @kotlinx.serialization.Serializable
 data class ResultData(
     val result: String,
-    val date: LocalDateTime? = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    val date: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 )

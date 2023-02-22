@@ -4,11 +4,16 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
-import pl.msiwak.multiplatform.data.entity.SummaryEntity
+import pl.msiwak.multiplatform.data.entity.Summary
+import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 import pl.msiwak.multiplatform.utils.DateFormatter
@@ -16,7 +21,8 @@ import pl.msiwak.multiplatform.utils.DateFormatter
 class AddExerciseViewModel(
     private val insertSummaryUseCase: InsertSummaryUseCase,
     private val navigator: Navigator,
-    private val dateFormatter: DateFormatter
+    private val formatDateUseCase: FormatDateUseCase,
+    private val formatResultsUseCase: FormatResultsUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddExerciseState())
@@ -25,7 +31,9 @@ class AddExerciseViewModel(
     private val _viewEvent = MutableSharedFlow<AddExerciseEvent>(extraBufferCapacity = 1)
     val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent
 
-    private var pickedDate: LocalDateTime? = null
+    private var pickedDate: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+
+    private val currentResults: MutableList<ResultData> = mutableListOf()
 
     fun onExerciseTitleChanged(title: String) {
         _viewState.value = _viewState.value.copy(exerciseTitle = title)
@@ -36,18 +44,18 @@ class AddExerciseViewModel(
     }
 
     fun onAddNewResultClicked() {
-        val currentResults = _viewState.value.results.toMutableList()
         val newResult = _viewState.value.newResult
         val newResultDate = pickedDate
         currentResults.add(ResultData(newResult, newResultDate))
-        _viewState.value = _viewState.value.copy(results = currentResults)
+        val results = formatResultsUseCase(currentResults)
+        _viewState.value = _viewState.value.copy(results = results)
     }
 
     fun onAddNewExerciseClicked() {
         val type = _viewState.value.exerciseTitle
-        val results = _viewState.value.results
+        val results = currentResults
         insertSummaryUseCase(
-            SummaryEntity(
+            Summary(
                 exerciseTitle = type,
                 results = results,
                 exerciseType = ExerciseType.GYM
@@ -61,15 +69,15 @@ class AddExerciseViewModel(
     }
 
     fun onDatePicked(date: LocalDateTime) {
-        val formattedDate = dateFormatter.formatDate(date)
+        val formattedDate = formatDateUseCase(date)
         pickedDate = date
         _viewState.value = _viewState.value.copy(newResultDate = formattedDate)
     }
 
     fun onResultRemoved(resultIndex: Int) {
-        val currentResults = _viewState.value.results.toMutableList()
         currentResults.removeAt(resultIndex)
-        _viewState.value = _viewState.value.copy(results = currentResults)
+        val results = formatResultsUseCase(currentResults)
+        _viewState.value = _viewState.value.copy(results = results)
     }
 
     fun onExerciseTypeClicked(type: ExerciseType) {

@@ -54,6 +54,9 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                with(Deps.Koin) {
+                    api(android)
+                }
                 with(Deps.Ktor) {
                     api(android)
                 }

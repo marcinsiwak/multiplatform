@@ -27,13 +27,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.data.entity.SummaryEntity
+import pl.msiwak.multiplatform.data.entity.Summary
 
 @Composable
-fun SummaryItem(modifier: Modifier = Modifier, summaryEntity: SummaryEntity) {
-    val topResult = summaryEntity.results.getOrNull(0)?.result ?: ""
-    val secondResult = summaryEntity.results.getOrNull(1)?.result ?: ""
-    val thirdResult = summaryEntity.results.getOrNull(2)?.result ?: ""
+fun SummaryItem(modifier: Modifier = Modifier, summary: Summary) {
+    val topResult = summary.results.getOrNull(0)?.result ?: ""
+    val secondResult = summary.results.getOrNull(1)?.result ?: ""
+    val thirdResult = summary.results.getOrNull(2)?.result ?: ""
     Box(
         modifier = modifier
             .background(
@@ -61,7 +61,7 @@ fun SummaryItem(modifier: Modifier = Modifier, summaryEntity: SummaryEntity) {
                     shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 8.dp)
                 )
                 .padding(horizontal = 12.dp, vertical = 8.dp),
-            text = summaryEntity.exerciseTitle,
+            text = summary.exerciseTitle,
             fontSize = 12.sp,
             color = Color.White
         )

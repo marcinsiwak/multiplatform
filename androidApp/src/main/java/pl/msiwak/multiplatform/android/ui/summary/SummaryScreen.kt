@@ -22,15 +22,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import org.koin.androidx.compose.koinViewModel
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 
-val viewModel: SummaryViewModel by KoinJavaComponent.inject(SummaryViewModel::class.java)
 
 @Composable
 fun SummaryScreen() {
+    val viewModel = koinViewModel<SummaryViewModel>()
     val state = viewModel.summaryState.collectAsState()
 
     OnLifecycleEvent { _, event ->
@@ -55,7 +56,7 @@ fun SummaryScreen() {
                             .clickable {
                                 viewModel.onExerciseClicked(summary.id)
                             },
-                        summaryEntity = summary
+                        summary = summary
                     )
                 }
                 item {

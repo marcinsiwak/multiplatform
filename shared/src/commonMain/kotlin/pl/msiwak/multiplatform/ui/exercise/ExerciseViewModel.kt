@@ -4,18 +4,25 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.ResultData
-import pl.msiwak.multiplatform.data.entity.SummaryEntity
+import pl.msiwak.multiplatform.data.entity.Summary
+import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateSummaryUseCase
-import pl.msiwak.multiplatform.utils.DateFormatter
 
 class ExerciseViewModel(
+    id: Long,
     private val getSummaryUseCase: GetSummaryUseCase,
     private val updateSummaryUseCase: UpdateSummaryUseCase,
-    private val dateFormatter: DateFormatter
+    private val formatDateUseCase: FormatDateUseCase,
+    private val formatResultsUseCase: FormatResultsUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ExerciseState())
@@ -24,15 +31,18 @@ class ExerciseViewModel(
     private val _viewEvent = MutableSharedFlow<ExerciseEvent>(extraBufferCapacity = 1)
     val viewEvent: SharedFlow<ExerciseEvent> = _viewEvent
 
-    private lateinit var currentSummaryEntity: SummaryEntity
+    private var currentSummary: Summary = getSummaryUseCase(id)
 
-    private var pickedDate: LocalDateTime? = null
+    private var pickedDate: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
-    fun onInit(id: Long) {
-        currentSummaryEntity = getSummaryUseCase(id)
+    private var currentResults: MutableList<ResultData> = mutableListOf()
+
+    init {
+        currentResults.addAll(currentSummary.results)
+        val results = formatResultsUseCase(currentSummary.results)
         _viewState.value = _viewState.value.copy(
-            exerciseTitle = currentSummaryEntity.exerciseTitle,
-            results = currentSummaryEntity.results,
+            exerciseTitle = currentSummary.exerciseTitle,
+            results = results,
         )
     }
 
@@ -45,16 +55,15 @@ class ExerciseViewModel(
     }
 
     fun onAddNewResultClicked() {
-        val currentResults = _viewState.value.results.toMutableList()
         val newResult = _viewState.value.newResult
-        val newResultDate = pickedDate
-        currentResults.add(ResultData(newResult, newResultDate))
+        currentResults.add(ResultData(newResult, pickedDate))
 
-        val newSummary = currentSummaryEntity.copy(results = currentResults)
+        val newSummary = currentSummary.copy(results = currentResults.toList())
         updateSummaryUseCase(newSummary)
         val summary = getSummaryUseCase(newSummary.id)
 
-        _viewState.value = _viewState.value.copy(results = summary.results)
+        val results = formatResultsUseCase(summary.results)
+        _viewState.value = _viewState.value.copy(results = results)
     }
 
     fun onDateClicked() {
@@ -62,17 +71,18 @@ class ExerciseViewModel(
     }
 
     fun onDatePicked(date: LocalDateTime) {
-        val formattedDate = dateFormatter.formatDate(date)
+        val formattedDate = formatDateUseCase(date)
         pickedDate = date
         _viewState.value = _viewState.value.copy(newResultDate = formattedDate)
     }
 
     fun onResultRemoved(resultIndex: Int) {
-        val currentResults = _viewState.value.results.toMutableList()
         currentResults.removeAt(resultIndex)
-        val newSummary = currentSummaryEntity.copy(results = currentResults)
+        val newSummary = currentSummary.copy(results = currentResults)
         updateSummaryUseCase(newSummary)
         val summary = getSummaryUseCase(newSummary.id)
-        _viewState.value = _viewState.value.copy(results = summary.results)
+
+        val results = formatResultsUseCase(summary.results)
+        _viewState.value = _viewState.value.copy(results = results)
     }
 }

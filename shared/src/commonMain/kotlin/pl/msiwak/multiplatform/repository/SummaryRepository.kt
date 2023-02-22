@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.repository
 
-import pl.msiwak.multiplatform.data.entity.SummaryEntity
+import pl.msiwak.multiplatform.data.entity.Summary
 import pl.msiwak.multiplatform.database.Database
 
 class SummaryRepository(private val database: Database) {
@@ -8,25 +8,25 @@ class SummaryRepository(private val database: Database) {
     fun clearSummaries() {
         database.clearDatabase()
     }
-    fun insertSummary(summaryEntity: SummaryEntity) {
-        database.insertSummary(summaryEntity)
+    fun insertSummary(summary: Summary) {
+        database.insertSummary(summary)
     }
-    fun insertSummaries(summaries: List<SummaryEntity>) {
+    fun insertSummaries(summaries: List<Summary>) {
         database.insertSummaries(summaries)
     }
 
-    fun updateSummary(summaryEntity: SummaryEntity) {
-        database.updateSummary(summaryEntity)
+    fun updateSummary(summary: Summary) {
+        database.updateSummary(summary)
     }
 
     fun removeSummary(id: Long) {
         database.removeSummary(id)
     }
 
-    fun getSummary(id: Long): SummaryEntity {
+    fun getSummary(id: Long): Summary {
         return database.getSummary(id)
     }
-    fun getSummaries(): List<SummaryEntity> {
+    fun getSummaries(): List<Summary> {
         return database.getAllSummaries()
     }
 }
