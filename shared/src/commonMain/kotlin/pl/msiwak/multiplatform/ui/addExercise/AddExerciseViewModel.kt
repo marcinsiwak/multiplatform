@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -52,16 +53,18 @@ class AddExerciseViewModel(
     }
 
     fun onAddNewExerciseClicked() {
-        val type = _viewState.value.exerciseTitle
-        val results = currentResults
-        insertSummaryUseCase(
-            Summary(
-                exerciseTitle = type,
-                results = results,
-                exerciseType = ExerciseType.GYM
+        viewModelScope.launch {
+            val type = _viewState.value.exerciseTitle
+            val results = currentResults
+            insertSummaryUseCase(
+                Summary(
+                    exerciseTitle = type,
+                    results = results,
+                    exerciseType = ExerciseType.GYM
+                )
             )
-        )
-        navigator.navigateUp()
+            navigator.navigateUp()
+        }
     }
 
     fun onDateClicked() {

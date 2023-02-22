@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.ui.summary
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.GetSummariesUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
@@ -16,8 +17,10 @@ class SummaryViewModel(
     val summaryState: StateFlow<SummaryState> = _summaryState
 
     fun onInit() {
-        val summaries = getSummariesUseCase()
-        _summaryState.value = _summaryState.value.copy(summaries = summaries)
+        viewModelScope.launch {
+            val summaries = getSummariesUseCase()
+            _summaryState.value = _summaryState.value.copy(summaries = summaries)
+        }
     }
 
     fun onAddExerciseClicked() {

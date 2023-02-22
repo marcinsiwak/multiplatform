@@ -1,5 +1,7 @@
 package pl.msiwak.multiplatform.database
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.cache.AppDatabase
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
@@ -15,29 +17,33 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
     )
     private val dbQuery = database.appDatabaseQueries
 
-    fun clearDatabase() {
+    suspend fun clearDatabase() = withContext(Dispatchers.Default){
         dbQuery.transaction {
             dbQuery.removeAllSummaries()
         }
     }
 
-    fun getSummary(id: Long): Summary {
-        return dbQuery.selectFromSummary(id, ::mapSummary).executeAsOne()
+    suspend fun getSummary(id: Long): Summary = withContext(Dispatchers.Default) {
+        return@withContext dbQuery.selectFromSummary(id, ::mapSummary).executeAsOne()
     }
 
-    fun getAllSummaries(): List<Summary> {
-        return dbQuery.selectAllFromSummary(::mapSummary).executeAsList()
+    suspend fun getAllSummaries(): List<Summary> = withContext(Dispatchers.Default) {
+        return@withContext dbQuery.selectAllFromSummary(::mapSummary).executeAsList()
     }
 
-    fun insertSummaries(summaries: List<Summary>) {
+    suspend fun insertSummaries(summaries: List<Summary>) = withContext(Dispatchers.Default) {
         dbQuery.transaction {
             summaries.forEach {
-                insertSummary(it)
+                insert(it)
             }
         }
     }
 
-    fun insertSummary(summary: Summary) {
+    suspend fun insertSummary(summary: Summary) = withContext(Dispatchers.Default) {
+        insert(summary)
+    }
+
+    private fun insert(summary: Summary) {
         dbQuery.insertSummary(
             exerciseTitle = summary.exerciseTitle,
             results = summary.results,
@@ -45,7 +51,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         )
     }
 
-    fun updateSummary(summary: Summary) {
+    suspend fun updateSummary(summary: Summary) = withContext(Dispatchers.Default){
         dbQuery.updateSummary(
             summary.id,
             summary.exerciseTitle,
@@ -54,7 +60,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         )
     }
 
-    fun removeSummary(id: Long) {
+    suspend fun removeSummary(id: Long) = withContext(Dispatchers.Default){
         dbQuery.removeSummary(id)
     }
 

@@ -44,6 +44,7 @@ kotlin {
                 }
                 with(Deps.SQLDelight) {
                     api(runtime)
+                    api(coroutines)
                 }
             }
         }

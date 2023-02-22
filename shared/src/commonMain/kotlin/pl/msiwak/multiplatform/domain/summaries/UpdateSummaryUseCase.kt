@@ -4,7 +4,7 @@ import pl.msiwak.multiplatform.data.entity.Summary
 import pl.msiwak.multiplatform.repository.SummaryRepository
 
 class UpdateSummaryUseCase(private val summaryRepository: SummaryRepository) {
-    operator fun invoke(summary: Summary) {
+    suspend operator fun invoke(summary: Summary) {
         summaryRepository.updateSummary(summary)
     }
 }
