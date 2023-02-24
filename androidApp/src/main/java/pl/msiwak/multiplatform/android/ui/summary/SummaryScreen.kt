@@ -23,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import org.koin.androidx.compose.koinViewModel
-import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
@@ -49,14 +48,14 @@ fun SummaryScreen() {
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             content = {
-                items(state.value.summaries) { summary ->
-                    SummaryItem(
+                items(state.value.categories) { category ->
+                    CategoryItem(
                         modifier = Modifier
                             .padding(vertical = 8.dp)
                             .clickable {
-                                viewModel.onExerciseClicked(summary.id)
+                                viewModel.onExerciseClicked(category.id)
                             },
-                        summary = summary
+                        categoryData = category
                     )
                 }
                 item {

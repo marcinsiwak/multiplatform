@@ -40,4 +40,13 @@ sealed class NavigationDirections : NavigationCommand {
             const val BUNDLE_ARG_ID = "id"
         }
     }
+    class Category(private val id: Long = 0) : NavigationDirections() {
+        override val route: String = "category/{${BUNDLE_ARG_ID}}"
+        override val destination: String
+            get() = "category/$id"
+
+        companion object {
+            const val BUNDLE_ARG_ID = "id"
+        }
+    }
 }

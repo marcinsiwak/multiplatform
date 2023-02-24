@@ -1,6 +1,7 @@
 import kotlin.collections.List;
-import pl.msiwak.multiplatform.data.common.ResultData;
+import pl.msiwak.multiplatform.data.common.ExerciseShort;
 import pl.msiwak.multiplatform.data.common.ExerciseType;
+import pl.msiwak.multiplatform.data.common.ResultData;
 
 CREATE TABLE Summary (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -30,3 +31,32 @@ WHERE id = ?;
 
 selectAllFromSummary:
 SELECT * FROM Summary;
+
+CREATE TABLE Category (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name    TEXT NOT NULL,
+    exercises     TEXT AS List<ExerciseShort>    NOT NULL,
+    exerciseType TEXT AS ExerciseType NOT NULL
+);
+
+updateCategory:
+INSERT OR REPLACE INTO Category(id, name, exercises, exerciseType)
+VALUES (?, ?,?, ?);
+
+insertCategory:
+INSERT INTO Category(id, name, exercises, exerciseType)
+VALUES (?, ?,?, ?);
+
+removeAllCategories:
+DELETE FROM Category;
+
+removeCategory:
+DELETE FROM Category
+WHERE id = ?;
+
+selectFromCategory:
+SELECT * FROM Category
+WHERE id = ?;
+
+selectAllFromCategory:
+SELECT * FROM Category;

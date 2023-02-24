@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.ui.addExercise.AddExerciseScreen
+import pl.msiwak.multiplatform.android.ui.category.CategoryScreen
 import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
 import pl.msiwak.multiplatform.android.ui.exercise.ExerciseScreen
 import pl.msiwak.multiplatform.android.ui.login.LoginScreen
@@ -22,7 +23,8 @@ import pl.msiwak.multiplatform.android.ui.theme.BaseKmm_ProjectTheme
 import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
 import pl.msiwak.multiplatform.ui.main.MainViewModel
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections.Exercise.Companion.BUNDLE_ARG_ID
+import pl.msiwak.multiplatform.ui.navigator.NavigationDirections.Category
+import pl.msiwak.multiplatform.ui.navigator.NavigationDirections.Exercise
 
 class MainActivity : ComponentActivity() {
 
@@ -47,13 +49,22 @@ class MainActivity : ComponentActivity() {
                         composable(NavigationDirections.AddExercise.route) { AddExerciseScreen() }
                         composable(NavigationDirections.Dashboard.route) { DashboardScreen() }
                         composable(
-                            NavigationDirections.Exercise().route,
+                            Exercise().route,
                             arguments = listOf(
-                                navArgument(BUNDLE_ARG_ID) { type = NavType.LongType },
+                                navArgument(Exercise.BUNDLE_ARG_ID) { type = NavType.LongType },
                             )
                         ) { backStackEntry ->
-                            val id = backStackEntry.arguments?.getLong(BUNDLE_ARG_ID) ?: 0
+                            val id = backStackEntry.arguments?.getLong(Exercise.BUNDLE_ARG_ID) ?: 0
                             ExerciseScreen(id)
+                        }
+                        composable(
+                            Category().route,
+                            arguments = listOf(
+                                navArgument(Category.BUNDLE_ARG_ID) { type = NavType.LongType },
+                            )
+                        ) { backStackEntry ->
+                            val id = backStackEntry.arguments?.getLong(Category.BUNDLE_ARG_ID) ?: 0
+                            CategoryScreen(id)
                         }
                     }
 

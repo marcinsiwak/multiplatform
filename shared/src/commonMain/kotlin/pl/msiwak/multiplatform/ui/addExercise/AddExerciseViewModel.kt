@@ -12,12 +12,11 @@ import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
-import pl.msiwak.multiplatform.data.entity.Summary
+import pl.msiwak.multiplatform.data.entity.SummaryData
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
-import pl.msiwak.multiplatform.utils.DateFormatter
 
 class AddExerciseViewModel(
     private val insertSummaryUseCase: InsertSummaryUseCase,
@@ -56,11 +55,12 @@ class AddExerciseViewModel(
         viewModelScope.launch {
             val type = _viewState.value.exerciseTitle
             val results = currentResults
+            val exerciseType = _viewState.value.exerciseType
             insertSummaryUseCase(
-                Summary(
+                SummaryData(
                     exerciseTitle = type,
                     results = results,
-                    exerciseType = ExerciseType.GYM
+                    exerciseType = exerciseType
                 )
             )
             navigator.navigateUp()

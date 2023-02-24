@@ -4,21 +4,29 @@ import org.koin.dsl.module
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.database.Database
+import pl.msiwak.multiplatform.database.dao.CategoriesDao
+import pl.msiwak.multiplatform.database.dao.SummaryDao
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetCategoriesUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummariesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummariesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateSummaryUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
+import pl.msiwak.multiplatform.repository.CategoryRepository
 import pl.msiwak.multiplatform.repository.SummaryRepository
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
+import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.exercise.ExerciseViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 import pl.msiwak.multiplatform.ui.main.MainViewModel
@@ -41,6 +49,8 @@ fun appModule() = listOf(
 
 val databaseModule = module {
     single { Database(get()) }
+    single { SummaryDao(get()) }
+    single { CategoriesDao(get()) }
 }
 
 val apiModule = module {
@@ -59,7 +69,7 @@ val viewModelsModule = module {
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { LoginViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get()) }
-    viewModelDefinition { SummaryViewModel(get(), get()) }
+    viewModelDefinition { SummaryViewModel(get(), get(), get()) }
     viewModelDefinition { params ->
         ExerciseViewModel(
             id = params.get(),
@@ -70,6 +80,7 @@ val viewModelsModule = module {
         )
     }
     viewModelDefinition { AddExerciseViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { params -> CategoryViewModel(id = params.get(), get(), get()) }
 }
 
 val useCaseModule = module {
@@ -78,6 +89,10 @@ val useCaseModule = module {
     factory { SaveUserTokenUseCase(get()) }
     factory { GetUserTokenUseCase(get()) }
     factory { GetSummariesUseCase(get()) }
+    factory { GetCategoriesUseCase(get()) }
+    factory { InsertCategoriesUseCase(get()) }
+    factory { UpdateCategoriesUseCase(get()) }
+    factory { GetCategoryUseCase(get()) }
     factory { InsertSummariesUseCase(get()) }
     factory { InsertSummaryUseCase(get()) }
     factory { UpdateSummaryUseCase(get()) }
@@ -90,4 +105,5 @@ val useCaseModule = module {
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { SummaryRepository(get()) }
+    single { CategoryRepository(get()) }
 }

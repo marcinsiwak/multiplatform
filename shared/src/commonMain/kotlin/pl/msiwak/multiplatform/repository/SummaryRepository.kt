@@ -1,32 +1,37 @@
 package pl.msiwak.multiplatform.repository
 
-import pl.msiwak.multiplatform.data.entity.Summary
-import pl.msiwak.multiplatform.database.Database
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import pl.msiwak.multiplatform.data.entity.SummaryData
+import pl.msiwak.multiplatform.database.dao.SummaryDao
 
-class SummaryRepository(private val database: Database) {
+class SummaryRepository(private val summaryDao: SummaryDao) {
 
-    suspend fun clearSummaries() {
-        database.clearDatabase()
-    }
-    suspend fun insertSummary(summary: Summary) {
-        database.insertSummary(summary)
-    }
-    suspend fun insertSummaries(summaries: List<Summary>) {
-        database.insertSummaries(summaries)
+    suspend fun clearSummaries() = withContext(Dispatchers.Default) {
+        summaryDao.clearDatabase()
     }
 
-    suspend fun updateSummary(summary: Summary) {
-        database.updateSummary(summary)
+    suspend fun insertSummary(summaryData: SummaryData) = withContext(Dispatchers.Default) {
+        summaryDao.insertSummary(summaryData)
     }
 
-    suspend fun removeSummary(id: Long) {
-        database.removeSummary(id)
+    suspend fun insertSummaries(summaries: List<SummaryData>) = withContext(Dispatchers.Default) {
+        summaryDao.insertSummaries(summaries)
     }
 
-    suspend fun getSummary(id: Long): Summary {
-        return database.getSummary(id)
+    suspend fun updateSummary(summaryData: SummaryData) = withContext(Dispatchers.Default) {
+        summaryDao.updateSummary(summaryData)
     }
-    suspend fun getSummaries(): List<Summary> {
-        return database.getAllSummaries()
+
+    suspend fun removeSummary(id: Long) = withContext(Dispatchers.Default) {
+        summaryDao.removeSummary(id)
+    }
+
+    suspend fun getSummary(id: Long): SummaryData = withContext(Dispatchers.Default) {
+        return@withContext summaryDao.getSummary(id)
+    }
+
+    suspend fun getSummaries(): List<SummaryData> = withContext(Dispatchers.Default) {
+        return@withContext summaryDao.getAllSummaries()
     }
 }

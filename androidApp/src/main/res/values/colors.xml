@@ -11,4 +11,6 @@
     <color name="summary_two">#020c1c</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="black_transparent">#000000</color>
+
 </resources>
