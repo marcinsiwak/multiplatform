@@ -126,6 +126,7 @@ fun ExerciseScreen(id: Long) {
                         ResultView(
                             result = it.result,
                             date = it.date,
+                            amount = it.amount,
                             onRemove = {
                                 viewModel.onResultRemoved(index)
                             })

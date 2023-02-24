@@ -5,39 +5,54 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ResultView(
-    result: String,
-    amount: String,
-    date: String,
+fun NewResultView(
     onRemove: () -> Unit = {},
 ) {
     Row(
         modifier = Modifier
-            .background(Color.Gray)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        Text(
+
+        TextField(
             modifier = Modifier
                 .weight(1f)
-                .padding(16.dp), text = result, color = Color.White
+                .padding(16.dp),
+            value = "aaa",
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = Color.White
+            ),
+            onValueChange = {
+
+            }
         )
-        Text(
+
+        TextField(
             modifier = Modifier
                 .weight(1f)
-                .padding(16.dp), text = amount, color = Color.White
+                .padding(16.dp),
+            value = "aa",
+            onValueChange = {
+
+            }
         )
-        Text(
+
+        TextField(
             modifier = Modifier
                 .weight(1f)
-                .padding(16.dp), text = date, color = Color.White
+                .padding(16.dp),
+            value = "aa",
+            onValueChange = {
+
+            }
         )
     }
 }

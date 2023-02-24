@@ -7,7 +7,7 @@ import pl.msiwak.multiplatform.utils.DateFormatter
 class FormatResultsUseCase(private val dateFormatter: DateFormatter) {
     operator fun invoke(resultData: List<ResultData>): List<FormattedResultData> {
         return resultData.map {
-            FormattedResultData(it.result, dateFormatter.formatDate(it.date))
+            FormattedResultData(it.result, it.amount.toString(), dateFormatter.formatDate(it.date))
         }
     }
 }

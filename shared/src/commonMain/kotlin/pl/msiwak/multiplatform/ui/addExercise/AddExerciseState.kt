@@ -8,5 +8,6 @@ data class AddExerciseState(
     val newResult: String = "",
     val newResultDate: String = "",
     val results: List<FormattedResultData> = listOf(),
-    val exerciseType: ExerciseType = ExerciseType.GYM
+    val exerciseType: ExerciseType = ExerciseType.GYM,
+    val isResultFieldEnabled: Boolean = false
 )

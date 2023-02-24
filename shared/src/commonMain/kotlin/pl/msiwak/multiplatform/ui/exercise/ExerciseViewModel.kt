@@ -60,14 +60,14 @@ class ExerciseViewModel(
 
     fun onAddNewResultClicked() {
         viewModelScope.launch {
-            val newResult = _viewState.value.newResult
-            currentResults.add(ResultData(newResult, pickedDate))
-
-            val newSummary = currentSummaryData.value.copy(results = currentResults.toList())
-            updateSummaryUseCase(newSummary)
-            val summary = getSummaryUseCase(newSummary.id)
-            val results = formatResultsUseCase(summary.results)
-            _viewState.value = _viewState.value.copy(results = results)
+//            val newResult = _viewState.value.newResult
+//            currentResults.add(ResultData(newResult, pickedDate))
+//
+//            val newSummary = currentSummaryData.value.copy(results = currentResults.toList())
+//            updateSummaryUseCase(newSummary)
+//            val summary = getSummaryUseCase(newSummary.id)
+//            val results = formatResultsUseCase(summary.results)
+//            _viewState.value = _viewState.value.copy(results = results)
         }
     }
 

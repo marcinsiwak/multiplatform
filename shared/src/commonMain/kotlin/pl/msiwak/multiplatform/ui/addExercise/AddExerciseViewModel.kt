@@ -44,11 +44,12 @@ class AddExerciseViewModel(
     }
 
     fun onAddNewResultClicked() {
-        val newResult = _viewState.value.newResult
-        val newResultDate = pickedDate
-        currentResults.add(ResultData(newResult, newResultDate))
-        val results = formatResultsUseCase(currentResults)
-        _viewState.value = _viewState.value.copy(results = results)
+        _viewState.value = _viewState.value.copy(isResultFieldEnabled = true)
+//        val newResult = _viewState.value.newResult
+//        val newResultDate = pickedDate
+//        currentResults.add(ResultData(newResult, newResultDate))
+//        val results = formatResultsUseCase(currentResults)
+//        _viewState.value = _viewState.value.copy(results = results)
     }
 
     fun onAddNewExerciseClicked() {
