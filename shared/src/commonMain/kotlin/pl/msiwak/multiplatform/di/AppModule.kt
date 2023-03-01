@@ -17,6 +17,7 @@ import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummariesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
+import pl.msiwak.multiplatform.domain.summaries.InsertCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummariesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveSummaryUseCase
@@ -79,8 +80,8 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition { AddExerciseViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { params -> CategoryViewModel(id = params.get(), get(), get()) }
+    viewModelDefinition { params -> AddExerciseViewModel(id = params.get(), get(), get(), get(), get(), get()) }
+    viewModelDefinition { params -> CategoryViewModel(id = params.get(), get(), get(), get()) }
 }
 
 val useCaseModule = module {
@@ -91,6 +92,7 @@ val useCaseModule = module {
     factory { GetSummariesUseCase(get()) }
     factory { GetCategoriesUseCase(get()) }
     factory { InsertCategoriesUseCase(get()) }
+    factory { InsertCategoryUseCase(get()) }
     factory { UpdateCategoriesUseCase(get()) }
     factory { GetCategoryUseCase(get()) }
     factory { InsertSummariesUseCase(get()) }
@@ -104,6 +106,6 @@ val useCaseModule = module {
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
-    single { SummaryRepository(get()) }
-    single { CategoryRepository(get()) }
+    single { SummaryRepository(get(), get()) }
+    single { CategoryRepository(get(), get()) }
 }

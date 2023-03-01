@@ -5,6 +5,6 @@ import pl.msiwak.multiplatform.repository.CategoryRepository
 
 class InsertCategoriesUseCase(private val categoryRepository: CategoryRepository) {
     suspend operator fun invoke(category: List<CategoryData>) {
-        return categoryRepository.insertCategory(category)
+        return categoryRepository.insertCategories(category)
     }
 }

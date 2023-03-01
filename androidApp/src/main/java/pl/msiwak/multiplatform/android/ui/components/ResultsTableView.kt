@@ -25,7 +25,16 @@ import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 
 @Composable
-fun ResultsTableView(results: List<FormattedResultData>, isNewResultEnabled: Boolean ,onAddNewResultClicked: () -> Unit = {}) {
+fun ResultsTableView(
+    results: List<FormattedResultData>,
+    isNewResultEnabled: Boolean,
+    newResultData: FormattedResultData = FormattedResultData(),
+    onAddNewResultClicked: () -> Unit = {},
+    onResultValueChanged: (String) -> Unit = {},
+    onAmountValueChanged: (String) -> Unit = {},
+    onDateValueChanged: (String) -> Unit = {},
+    onDateClicked: () -> Unit = {},
+) {
     Column {
         Row(
             modifier = Modifier
@@ -41,7 +50,17 @@ fun ResultsTableView(results: List<FormattedResultData>, isNewResultEnabled: Boo
 
             if (isNewResultEnabled) {
                 item {
-                    NewResultView()
+                    NewResultView(
+                        newResultData = newResultData,
+                        onResultValueChanged = {
+                            onResultValueChanged(it)
+                        }, onAmountValueChanged = {
+                            onAmountValueChanged(it)
+                        }, onDateValueChanged = {
+                            onDateValueChanged(it)
+                        }, onDateClicked = {
+                            onDateClicked()
+                        })
                 }
             }
 

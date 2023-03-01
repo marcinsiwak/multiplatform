@@ -23,29 +23,13 @@ class SummaryViewModel(
 
     fun onInit() {
         viewModelScope.launch {
-            updateCategoriesUseCase(
-                CategoryData(
-                    id =1,
-                    "Gym",
-                    emptyList(),
-                    ExerciseType.GYM
-                )
-            )
-            updateCategoriesUseCase(
-                CategoryData(
-                    2,
-                    "Running",
-                    emptyList(),
-                    ExerciseType.RUNNING
-                )
-            )
             val categories = getCategoriesUseCase()
             _summaryState.value = _summaryState.value.copy(categories = categories)
         }
     }
 
     fun onAddExerciseClicked() {
-        navigator.navigate(NavigationDirections.AddExercise)
+//        navigator.navigate(NavigationDirections.AddExercise())
     }
 
     fun onExerciseClicked(id: Long) {

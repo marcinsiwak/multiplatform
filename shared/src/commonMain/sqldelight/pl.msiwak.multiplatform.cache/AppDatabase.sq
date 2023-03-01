@@ -5,18 +5,19 @@ import pl.msiwak.multiplatform.data.common.ResultData;
 
 CREATE TABLE Summary (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    categoryId INTEGER NOT NULL,
     exerciseTitle    TEXT NOT NULL,
     results     TEXT AS List<ResultData>    NOT NULL,
     exerciseType TEXT AS ExerciseType NOT NULL
 );
 
 updateSummary:
-INSERT OR REPLACE INTO Summary(id, exerciseTitle, results, exerciseType)
-VALUES (?, ?,?, ?);
+INSERT OR REPLACE INTO Summary(id, categoryId, exerciseTitle, results, exerciseType)
+VALUES (?, ?,?,?, ?);
 
 insertSummary:
-INSERT INTO Summary(exerciseTitle, results, exerciseType)
-VALUES (?,?, ?);
+INSERT INTO Summary(categoryId, exerciseTitle, results, exerciseType)
+VALUES (?,?,?, ?);
 
 removeAllSummaries:
 DELETE FROM Summary;
@@ -31,6 +32,9 @@ WHERE id = ?;
 
 selectAllFromSummary:
 SELECT * FROM Summary;
+
+selectLastInsertedRowId:
+SELECT last_insert_rowid();
 
 CREATE TABLE Category (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,

@@ -35,8 +35,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BaseKmm_ProjectTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
                     NavHost(
@@ -46,20 +45,25 @@ class MainActivity : ComponentActivity() {
                         composable(NavigationDirections.Welcome.route) { WelcomeScreen() }
                         composable(NavigationDirections.Registration.route) { RegisterScreen() }
                         composable(NavigationDirections.Login.route) { LoginScreen() }
-                        composable(NavigationDirections.AddExercise.route) { AddExerciseScreen() }
                         composable(NavigationDirections.Dashboard.route) { DashboardScreen() }
                         composable(
-                            Exercise().route,
-                            arguments = listOf(
+                            NavigationDirections.AddExercise().route, arguments = listOf(
                                 navArgument(Exercise.BUNDLE_ARG_ID) { type = NavType.LongType },
                             )
                         ) { backStackEntry ->
                             val id = backStackEntry.arguments?.getLong(Exercise.BUNDLE_ARG_ID) ?: 0
-                            ExerciseScreen(id)
+                            AddExerciseScreen(id)
                         }
+//                        composable(
+//                            Exercise().route, arguments = listOf(
+//                                navArgument(Exercise.BUNDLE_ARG_ID) { type = NavType.LongType },
+//                            )
+//                        ) { backStackEntry ->
+//                            val id = backStackEntry.arguments?.getLong(Exercise.BUNDLE_ARG_ID) ?: 0
+//                            ExerciseScreen(id)
+//                        }
                         composable(
-                            Category().route,
-                            arguments = listOf(
+                            Category().route, arguments = listOf(
                                 navArgument(Category.BUNDLE_ARG_ID) { type = NavType.LongType },
                             )
                         ) { backStackEntry ->

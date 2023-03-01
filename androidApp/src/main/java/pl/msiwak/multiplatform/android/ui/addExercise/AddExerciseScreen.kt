@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
@@ -30,8 +31,8 @@ import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 
 @Composable
-fun AddExerciseScreen() {
-    val viewModel = koinViewModel<AddExerciseViewModel>()
+fun AddExerciseScreen(id: Long) {
+    val viewModel = koinViewModel<AddExerciseViewModel> { parametersOf(id) }
 
     val state = viewModel.viewState.collectAsState()
     val context = LocalContext.current
@@ -75,9 +76,22 @@ fun AddExerciseScreen() {
                 hintText = "Exercise"
             )
 
-            ResultsTableView(state.value.results, state.value.isResultFieldEnabled) {
-                viewModel.onAddNewResultClicked()
-            }
+            ResultsTableView(
+                results = state.value.results,
+                isNewResultEnabled = state.value.isResultFieldEnabled,
+                newResultData = state.value.newResultData,
+                onAddNewResultClicked = {
+                    viewModel.onAddNewResultClicked()
+                },
+                onResultValueChanged = {
+                    viewModel.onResultValueChanged(it)
+                }, onAmountValueChanged = {
+                    viewModel.onAmountValueChanged(it)
+                }, onDateValueChanged = {
+                    viewModel.onDateValueChanged(it)
+                }, onDateClicked = {
+                    viewModel.onDateClicked()
+                })
 
 //            Row {
 //                InputView(

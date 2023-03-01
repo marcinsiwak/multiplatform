@@ -29,12 +29,14 @@ class SummaryDao(database: Database) {
         }
     }
 
-    fun insertSummary(summaryData: SummaryData) {
+    fun insertSummary(summaryData: SummaryData): Long {
         insert(summaryData)
+        return getLastInsertedRowId()
     }
 
     private fun insert(summaryData: SummaryData) {
         dbQuery.insertSummary(
+            categoryId = summaryData.categoryId,
             exerciseTitle = summaryData.exerciseTitle,
             results = summaryData.results,
             exerciseType = summaryData.exerciseType,
@@ -44,6 +46,7 @@ class SummaryDao(database: Database) {
     fun updateSummary(summaryData: SummaryData) {
         dbQuery.updateSummary(
             summaryData.id,
+            summaryData.categoryId,
             summaryData.exerciseTitle,
             summaryData.results,
             summaryData.exerciseType
@@ -54,12 +57,17 @@ class SummaryDao(database: Database) {
         dbQuery.removeSummary(id)
     }
 
+    private fun getLastInsertedRowId(): Long {
+        return dbQuery.selectLastInsertedRowId().executeAsOne()
+    }
+
     private fun mapSummary(
         id: Long,
+        categoryId: Long,
         exerciseTitle: String,
         results: List<ResultData>,
         exerciseType: ExerciseType
     ): SummaryData {
-        return SummaryData(id, exerciseTitle, results, exerciseType)
+        return SummaryData(id, categoryId, exerciseTitle, results, exerciseType)
     }
 }

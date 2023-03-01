@@ -16,6 +16,7 @@ class Navigator {
     }
 
     fun navigateUp() {
+
         _commands.tryEmit(NavigationDirections.NavigateUp)
     }
 }

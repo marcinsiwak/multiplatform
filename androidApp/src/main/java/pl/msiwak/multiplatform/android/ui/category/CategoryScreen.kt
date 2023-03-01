@@ -25,10 +25,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
+import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
 @Composable
@@ -36,11 +38,33 @@ fun CategoryScreen(id: Long) {
     val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
     val state = viewModel.viewState.collectAsState()
 
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> viewModel.onInit()
+            else -> Unit
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.Black)
     ) {
+
+        if (state.value.isDialogVisible) {
+            AddExerciseDialog(
+                inputText = state.value.newExerciseName,
+                onExerciseTitleChanged = {
+                    viewModel.onAddExerciseNameChanged(it)
+                },
+                onAddExerciseClicked = {
+                    viewModel.onAddExerciseClicked()
+                },
+                onDialogClosed = {
+                    viewModel.onDialogClosed()
+                }
+            )
+        }
 
         Column {
             Image(
@@ -65,7 +89,9 @@ fun CategoryScreen(id: Long) {
 
             LazyColumn {
                 items(state.value.exerciseList) {
-                    ListItemView(name = it.name, onItemClick = { viewModel.onExerciseClicked(it.id) })
+                    ListItemView(
+                        name = it.name,
+                        onItemClick = { viewModel.onExerciseClicked(it.id) })
                 }
             }
         }
@@ -78,7 +104,7 @@ fun CategoryScreen(id: Long) {
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
-            onClick = { viewModel.onAddExerciseClicked() }
+            onClick = { viewModel.onAddNewExerciseClicked() }
         ) {
             Text(modifier = Modifier.padding(8.dp), text = "Add exercise", fontSize = 16.sp)
         }

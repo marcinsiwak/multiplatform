@@ -26,8 +26,15 @@ sealed class NavigationDirections : NavigationCommand {
         override val route: String = "dashboard"
     }
 
-    object AddExercise : NavigationDirections() {
-        override val route: String = "addExercise"
+    class AddExercise(private val id: Long = 0) :
+        NavigationDirections() {
+        override val route: String = "addExercise/{$BUNDLE_ARG_ID}"
+        override val destination: String
+            get() = "addExercise/$id"
+
+        companion object {
+            const val BUNDLE_ARG_ID = "id"
+        }
     }
 
     class Exercise(private val id: Long = 0) :
