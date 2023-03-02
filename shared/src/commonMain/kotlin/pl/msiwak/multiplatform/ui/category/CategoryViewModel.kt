@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
-import pl.msiwak.multiplatform.data.entity.SummaryData
+import pl.msiwak.multiplatform.data.entity.ExerciseData
 import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
@@ -14,7 +14,7 @@ class CategoryViewModel(
     id: Long,
     private val navigator: Navigator,
     private val getCategoryUseCase: GetCategoryUseCase,
-    private val insertSummaryUseCase: InsertSummaryUseCase
+    private val insertExerciseUseCase: InsertExerciseUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(CategoryState())
@@ -45,7 +45,7 @@ class CategoryViewModel(
         _viewState.value = _viewState.value.copy(isDialogVisible = false)
         viewModelScope.launch {
             val exerciseName = _viewState.value.newExerciseName
-            val id = insertSummaryUseCase(SummaryData(categoryId = categoryId, exerciseTitle = exerciseName))
+            val id = insertExerciseUseCase(ExerciseData(categoryId = categoryId, exerciseTitle = exerciseName))
             navigator.navigate(NavigationDirections.AddExercise(id))
         }
     }

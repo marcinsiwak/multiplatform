@@ -3,7 +3,7 @@ import pl.msiwak.multiplatform.data.common.ExerciseShort;
 import pl.msiwak.multiplatform.data.common.ExerciseType;
 import pl.msiwak.multiplatform.data.common.ResultData;
 
-CREATE TABLE Summary (
+CREATE TABLE Exercise (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     categoryId INTEGER NOT NULL,
     exerciseTitle    TEXT NOT NULL,
@@ -11,27 +11,27 @@ CREATE TABLE Summary (
     exerciseType TEXT AS ExerciseType NOT NULL
 );
 
-updateSummary:
-INSERT OR REPLACE INTO Summary(id, categoryId, exerciseTitle, results, exerciseType)
+updateExercise:
+INSERT OR REPLACE INTO Exercise(id, categoryId, exerciseTitle, results, exerciseType)
 VALUES (?, ?,?,?, ?);
 
-insertSummary:
-INSERT INTO Summary(categoryId, exerciseTitle, results, exerciseType)
+insertExercise:
+INSERT INTO Exercise(categoryId, exerciseTitle, results, exerciseType)
 VALUES (?,?,?, ?);
 
-removeAllSummaries:
-DELETE FROM Summary;
+removeAllExercises:
+DELETE FROM Exercise;
 
-removeSummary:
-DELETE FROM Summary
+removeExercise:
+DELETE FROM Exercise
 WHERE id = ?;
 
-selectFromSummary:
-SELECT * FROM Summary
+selectFromExercise:
+SELECT * FROM Exercise
 WHERE id = ?;
 
-selectAllFromSummary:
-SELECT * FROM Summary;
+selectAllFromExercise:
+SELECT * FROM Exercise;
 
 selectLastInsertedRowId:
 SELECT last_insert_rowid();

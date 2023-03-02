@@ -3,7 +3,7 @@ package pl.msiwak.multiplatform.data.entity
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
 
-data class SummaryData(
+data class ExerciseData(
     val id: Long = 0,
     val categoryId: Long = 0,
     val exerciseTitle: String = "",

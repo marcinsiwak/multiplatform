@@ -5,7 +5,7 @@ import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
-import pl.msiwak.multiplatform.database.dao.SummaryDao
+import pl.msiwak.multiplatform.database.dao.ExerciseDao
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
@@ -15,18 +15,18 @@ import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetSummariesUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetExercisesUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertSummariesUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
-import pl.msiwak.multiplatform.domain.summaries.RemoveSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.InsertExercisesUseCase
+import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
-import pl.msiwak.multiplatform.domain.summaries.UpdateSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.CategoryRepository
-import pl.msiwak.multiplatform.repository.SummaryRepository
+import pl.msiwak.multiplatform.repository.ExerciseRepository
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
@@ -50,7 +50,7 @@ fun appModule() = listOf(
 
 val databaseModule = module {
     single { Database(get()) }
-    single { SummaryDao(get()) }
+    single { ExerciseDao(get()) }
     single { CategoriesDao(get()) }
 }
 
@@ -90,17 +90,17 @@ val useCaseModule = module {
     factory { LoginUseCase(get()) }
     factory { SaveUserTokenUseCase(get()) }
     factory { GetUserTokenUseCase(get()) }
-    factory { GetSummariesUseCase(get()) }
+    factory { GetExercisesUseCase(get()) }
     factory { GetCategoriesUseCase(get()) }
     factory { InsertCategoriesUseCase(get()) }
     factory { InsertCategoryUseCase(get()) }
     factory { UpdateCategoriesUseCase(get()) }
     factory { GetCategoryUseCase(get()) }
-    factory { InsertSummariesUseCase(get()) }
-    factory { InsertSummaryUseCase(get()) }
-    factory { UpdateSummaryUseCase(get()) }
-    factory { GetSummaryUseCase(get()) }
-    factory { RemoveSummaryUseCase(get()) }
+    factory { InsertExercisesUseCase(get()) }
+    factory { InsertExerciseUseCase(get()) }
+    factory { UpdateExerciseUseCase(get()) }
+    factory { GetExerciseUseCase(get()) }
+    factory { RemoveExerciseUseCase(get()) }
     factory { FormatDateUseCase(get()) }
     factory { FormatResultsUseCase(get()) }
     factory { FormatStringToDateUseCase(get()) }
@@ -108,6 +108,6 @@ val useCaseModule = module {
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
-    single { SummaryRepository(get(), get()) }
+    single { ExerciseRepository(get(), get()) }
     single { CategoryRepository(get(), get()) }
 }

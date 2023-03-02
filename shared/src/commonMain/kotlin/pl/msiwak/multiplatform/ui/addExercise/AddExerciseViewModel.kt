@@ -12,21 +12,21 @@ import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.ResultData
-import pl.msiwak.multiplatform.data.entity.SummaryData
+import pl.msiwak.multiplatform.data.entity.ExerciseData
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
-import pl.msiwak.multiplatform.domain.summaries.UpdateSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
 class AddExerciseViewModel(
     id: Long,
-    private val updateSummaryUseCase: UpdateSummaryUseCase,
+    private val updateExerciseUseCase: UpdateExerciseUseCase,
     private val navigator: Navigator,
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
-    private val getSummaryUseCase: GetSummaryUseCase,
+    private val getExerciseUseCase: GetExerciseUseCase,
     private val formatStringToDateUseCase: FormatStringToDateUseCase
 ) : ViewModel() {
 
@@ -41,7 +41,7 @@ class AddExerciseViewModel(
 
     private val currentResults: MutableList<ResultData> = mutableListOf()
 
-    private val currentSummaryData = MutableStateFlow(SummaryData())
+    private val currentExerciseData = MutableStateFlow(ExerciseData())
 
     private val exerciseId = id
 
@@ -49,11 +49,11 @@ class AddExerciseViewModel(
 
     fun onInit() {
         viewModelScope.launch {
-            currentSummaryData.value = getSummaryUseCase(exerciseId)
-            currentResults.addAll(currentSummaryData.value.results)
-            val results = formatResultsUseCase(currentSummaryData.value.results)
+            currentExerciseData.value = getExerciseUseCase(exerciseId)
+            currentResults.addAll(currentExerciseData.value.results)
+            val results = formatResultsUseCase(currentExerciseData.value.results)
             _viewState.value = _viewState.value.copy(
-                exerciseTitle = currentSummaryData.value.exerciseTitle,
+                exerciseTitle = currentExerciseData.value.exerciseTitle,
                 results = results,
             )
         }
@@ -75,11 +75,11 @@ class AddExerciseViewModel(
                 ResultData(newResultData.result.toDouble(), newResultData.amount.toDouble(), date)
 
             currentResults.add(resultData)
-            val newSummary = currentSummaryData.value.copy(
+            val newSummary = currentExerciseData.value.copy(
                 results = currentResults
             )
 
-            updateSummaryUseCase(newSummary)
+            updateExerciseUseCase(newSummary)
             _viewState.value = _viewState.value.copy(
                 results = formatResultsUseCase(currentResults),
                 isResultFieldEnabled = false,

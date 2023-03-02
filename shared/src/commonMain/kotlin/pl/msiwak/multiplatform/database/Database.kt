@@ -9,7 +9,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
             exercisesAdapter = exerciseListAdapter,
             exerciseTypeAdapter = exerciseTypeAdapter
         ),
-        SummaryAdapter = plmsiwakmultiplatformcache.Summary.Adapter(
+        ExerciseAdapter = plmsiwakmultiplatformcache.Exercise.Adapter(
             resultsAdapter = resultListAdapter,
             exerciseTypeAdapter = exerciseTypeAdapter
         )
