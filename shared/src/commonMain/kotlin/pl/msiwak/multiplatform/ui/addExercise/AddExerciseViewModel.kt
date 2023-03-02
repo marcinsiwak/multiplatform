@@ -47,15 +47,27 @@ class AddExerciseViewModel(
 
     private var exerciseToRemovePosition: Int? = null
 
+    private var exerciseName: String? = null
+
     fun onInit() {
         viewModelScope.launch {
             currentExerciseData.value = getExerciseUseCase(exerciseId)
             currentResults.addAll(currentExerciseData.value.results)
             val results = formatResultsUseCase(currentExerciseData.value.results)
+            exerciseName = currentExerciseData.value.exerciseTitle
             _viewState.value = _viewState.value.copy(
                 exerciseTitle = currentExerciseData.value.exerciseTitle,
                 results = results,
             )
+        }
+    }
+
+    fun onPause() {
+        viewModelScope.launch {
+            val newTitle = viewState.value.exerciseTitle
+            if (exerciseName != newTitle) {
+                updateExerciseUseCase(currentExerciseData.value.copy(exerciseTitle = newTitle))
+            }
         }
     }
 
@@ -112,6 +124,7 @@ class AddExerciseViewModel(
         }
         _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
     }
+
     fun onPopupDismissed() {
         _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
     }

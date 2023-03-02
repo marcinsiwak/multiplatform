@@ -40,6 +40,7 @@ fun AddExerciseScreen(id: Long) {
     OnLifecycleEvent { _, event ->
         when (event) {
             Lifecycle.Event.ON_RESUME -> viewModel.onInit()
+            Lifecycle.Event.ON_PAUSE -> viewModel.onPause()
             else -> Unit
         }
     }
