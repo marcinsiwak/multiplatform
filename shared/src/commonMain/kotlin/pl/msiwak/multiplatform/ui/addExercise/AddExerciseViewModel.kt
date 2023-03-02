@@ -10,21 +10,24 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.ResultData
 import pl.msiwak.multiplatform.data.entity.SummaryData
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummaryUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertSummaryUseCase
+import pl.msiwak.multiplatform.domain.summaries.UpdateSummaryUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
 class AddExerciseViewModel(
     id: Long,
-    private val insertSummaryUseCase: InsertSummaryUseCase,
+    private val updateSummaryUseCase: UpdateSummaryUseCase,
     private val navigator: Navigator,
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
-    private val getSummaryUseCase: GetSummaryUseCase
+    private val getSummaryUseCase: GetSummaryUseCase,
+    private val formatStringToDateUseCase: FormatStringToDateUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddExerciseState())
@@ -40,9 +43,13 @@ class AddExerciseViewModel(
 
     private val currentSummaryData = MutableStateFlow(SummaryData())
 
-    init {
+    private val exerciseId = id
+
+    private var exerciseToRemovePosition: Int? = null
+
+    fun onInit() {
         viewModelScope.launch {
-            currentSummaryData.value = getSummaryUseCase(id)
+            currentSummaryData.value = getSummaryUseCase(exerciseId)
             currentResults.addAll(currentSummaryData.value.results)
             val results = formatResultsUseCase(currentSummaryData.value.results)
             _viewState.value = _viewState.value.copy(
@@ -58,26 +65,26 @@ class AddExerciseViewModel(
 
     fun onAddNewResultClicked() {
         _viewState.value = _viewState.value.copy(isResultFieldEnabled = true)
-//        val newResult = _viewState.value.newResult
-//        val newResultDate = pickedDate
-//        currentResults.add(ResultData(newResult, newResultDate))
-//        val results = formatResultsUseCase(currentResults)
-//        _viewState.value = _viewState.value.copy(results = results)
     }
 
     fun onAddNewExerciseClicked() {
         viewModelScope.launch {
-            val type = _viewState.value.exerciseTitle
-            val results = currentResults
-            val exerciseType = _viewState.value.exerciseType
-            insertSummaryUseCase(
-                SummaryData(
-                    exerciseTitle = type,
-                    results = results,
-                    exerciseType = exerciseType
-                )
+            val newResultData = _viewState.value.newResultData
+            val date = formatStringToDateUseCase(newResultData.date)
+            val resultData =
+                ResultData(newResultData.result.toDouble(), newResultData.amount.toDouble(), date)
+
+            currentResults.add(resultData)
+            val newSummary = currentSummaryData.value.copy(
+                results = currentResults
             )
-            navigator.navigateUp()
+
+            updateSummaryUseCase(newSummary)
+            _viewState.value = _viewState.value.copy(
+                results = formatResultsUseCase(currentResults),
+                isResultFieldEnabled = false,
+                newResultData = FormattedResultData()
+            )
         }
     }
 
@@ -92,10 +99,21 @@ class AddExerciseViewModel(
             _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(date = formattedDate))
     }
 
-    fun onResultRemoved(resultIndex: Int) {
-        currentResults.removeAt(resultIndex)
-        val results = formatResultsUseCase(currentResults)
-        _viewState.value = _viewState.value.copy(results = results)
+    fun onResultLongClicked(resultIndex: Int) {
+        exerciseToRemovePosition = resultIndex
+        _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = true)
+    }
+
+    fun onResultRemoved() {
+        exerciseToRemovePosition?.let {
+            currentResults.removeAt(it)
+            val results = formatResultsUseCase(currentResults)
+            _viewState.value = _viewState.value.copy(results = results)
+        }
+        _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
+    }
+    fun onPopupDismissed() {
+        _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
     }
 
 

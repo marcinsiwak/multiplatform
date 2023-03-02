@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -34,6 +35,7 @@ fun ResultsTableView(
     onAmountValueChanged: (String) -> Unit = {},
     onDateValueChanged: (String) -> Unit = {},
     onDateClicked: () -> Unit = {},
+    onResultLongClick: (Int) -> Unit = {}
 ) {
     Column {
         Row(
@@ -79,8 +81,14 @@ fun ResultsTableView(
                     )
                 }
             }
-            items(results) {
-                ResultView(result = it.result, amount = it.amount, date = it.date)
+            itemsIndexed(results) { pos , item ->
+                ResultView(
+                    result = item.result,
+                    amount = item.amount,
+                    date = item.date,
+                    onResultLongClick = {
+                        onResultLongClick(pos)
+                    })
             }
 
 

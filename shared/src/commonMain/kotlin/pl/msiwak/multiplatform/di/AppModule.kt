@@ -12,6 +12,7 @@ import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetSummariesUseCase
@@ -28,7 +29,6 @@ import pl.msiwak.multiplatform.repository.CategoryRepository
 import pl.msiwak.multiplatform.repository.SummaryRepository
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
-import pl.msiwak.multiplatform.ui.exercise.ExerciseViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 import pl.msiwak.multiplatform.ui.main.MainViewModel
 import pl.msiwak.multiplatform.ui.navigator.Navigator
@@ -72,15 +72,16 @@ val viewModelsModule = module {
     viewModelDefinition { WelcomeScreenViewModel(get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get()) }
     viewModelDefinition { params ->
-        ExerciseViewModel(
+        AddExerciseViewModel(
             id = params.get(),
+            get(),
+            get(),
             get(),
             get(),
             get(),
             get()
         )
     }
-    viewModelDefinition { params -> AddExerciseViewModel(id = params.get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { params -> CategoryViewModel(id = params.get(), get(), get(), get()) }
 }
 
@@ -102,6 +103,7 @@ val useCaseModule = module {
     factory { RemoveSummaryUseCase(get()) }
     factory { FormatDateUseCase(get()) }
     factory { FormatResultsUseCase(get()) }
+    factory { FormatStringToDateUseCase(get()) }
 }
 
 val repositoryUseModule = module {

@@ -12,20 +12,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
+import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
@@ -37,8 +37,12 @@ fun AddExerciseScreen(id: Long) {
     val state = viewModel.viewState.collectAsState()
     val context = LocalContext.current
 
-    val focusRequester = remember { FocusRequester() }
-    val focusManager = LocalFocusManager.current
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> viewModel.onInit()
+            else -> Unit
+        }
+    }
 
     LaunchedEffect(viewModel) {
         viewModel.viewEvent.collectLatest { value ->
@@ -47,11 +51,24 @@ fun AddExerciseScreen(id: Long) {
                     context = context,
                     onValueChanged = {
                         viewModel.onDatePicked(it)
-                    }, onCancelled = {
-                        focusManager.clearFocus()
                     })
             }
         }
+    }
+
+    if (state.value.isRemoveExerciseDialogVisible) {
+        PopupDialog(
+            title = "Remove result",
+            description = "Do you want to remove this result",
+            confirmButtonTitle = "Yes",
+            dismissButtonTitle = "No",
+            onConfirmClicked = {
+                viewModel.onResultRemoved()
+            },
+            onDismissClicked = {
+                viewModel.onPopupDismissed()
+            }
+        )
     }
 
     Box(
@@ -91,64 +108,9 @@ fun AddExerciseScreen(id: Long) {
                     viewModel.onDateValueChanged(it)
                 }, onDateClicked = {
                     viewModel.onDateClicked()
+                }, onResultLongClick = { pos ->
+                    viewModel.onResultLongClicked(pos)
                 })
-
-//            Row {
-//                InputView(
-//                    modifier = Modifier
-//                        .weight(1f)
-//                        .padding(8.dp),
-//                    value = state.value.newResult,
-//                    onValueChange = {
-//                        viewModel.onExerciseNewResultChanged(it)
-//                    },
-//                    hintText = "Add new result"
-//                )
-//
-//                InputView(
-//                    modifier = Modifier
-//                        .weight(1f)
-//                        .padding(8.dp)
-//                        .focusRequester(focusRequester)
-//                        .onFocusChanged {
-//                            if (it.hasFocus) {
-//                                viewModel.onDateClicked()
-//                            }
-//                        },
-//                    value = state.value.newResultDate,
-//                    onValueChange = {},
-//                    hintText = "Date",
-//                    readOnly = true,
-//                )
-//            }
-//            // dodawanie z poppupa? dodaj byku jeszcze rozpisanie planu treningu (w przyszlosci trener wysyla plan)
-//            Button(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(vertical = 16.dp, horizontal = 80.dp),
-//                colors = ButtonDefaults.buttonColors(
-//                    containerColor = Color.LightGray,
-//                    contentColor = Color.Black
-//                ),
-//                onClick = { viewModel.onAddNewResultClicked() }
-//            ) {
-//                Text(modifier = Modifier.padding(8.dp), text = "Add result", fontSize = 16.sp)
-//            }
-
-//            LazyColumn(
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//                content = {
-//
-//                    itemsIndexed(state.value.results) { index: Int, it: FormattedResultData ->
-//                        ResultView(
-//                            result = it.result,
-//                            date = it.date,
-//                            amount = it.amount,
-//                            onRemove = {
-//                                viewModel.onResultRemoved(index)
-//                            })
-//                    }
-//                })
         }
 
         Button(
@@ -162,7 +124,7 @@ fun AddExerciseScreen(id: Long) {
             ),
             onClick = { viewModel.onAddNewExerciseClicked() }
         ) {
-            Text(modifier = Modifier.padding(8.dp), text = "Add exercise", fontSize = 16.sp)
+            Text(modifier = Modifier.padding(8.dp), text = "Save new result", fontSize = 16.sp)
         }
     }
 }

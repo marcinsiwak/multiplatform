@@ -22,13 +22,6 @@ class CategoryViewModel(
 
     private val categoryId: Long = id
 
-//    init {
-//        viewModelScope.launch {
-//            val category = getCategoryUseCase(id)
-//            _viewState.value = _viewState.value.copy(exerciseList = category.exercises)
-//        }
-//    }
-
     fun onInit() {
         viewModelScope.launch {
             val category = getCategoryUseCase(categoryId)

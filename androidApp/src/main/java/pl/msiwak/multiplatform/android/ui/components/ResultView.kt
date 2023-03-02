@@ -1,6 +1,8 @@
 package pl.msiwak.multiplatform.android.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,17 +13,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ResultView(
     result: String,
     amount: String,
     date: String,
-    onRemove: () -> Unit = {},
+    onResultLongClick: () -> Unit = {},
 ) {
     Row(
         modifier = Modifier
             .background(Color.Gray)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .combinedClickable(
+                enabled = true,
+                onClick = {},
+                onLongClick = {
+                    onResultLongClick()
+                }),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Text(

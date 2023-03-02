@@ -19,8 +19,7 @@ fun NewResultView(
     onResultValueChanged: (String) -> Unit,
     onAmountValueChanged: (String) -> Unit,
     onDateValueChanged: (String) -> Unit,
-    onDateClicked: () -> Unit,
-    onRemove: () -> Unit = {},
+    onDateClicked: () -> Unit
 ) {
     Row(
         modifier = Modifier

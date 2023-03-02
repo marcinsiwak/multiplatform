@@ -7,7 +7,7 @@ import kotlinx.datetime.toLocalDateTime
 
 @kotlinx.serialization.Serializable
 data class ResultData(
-    val result: String,
+    val result: Double,
     val amount: Double,
     val date: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 )
