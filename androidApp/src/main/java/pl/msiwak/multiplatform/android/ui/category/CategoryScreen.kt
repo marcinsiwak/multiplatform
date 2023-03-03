@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -30,6 +31,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
+import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
@@ -43,6 +45,21 @@ fun CategoryScreen(id: Long) {
             Lifecycle.Event.ON_RESUME -> viewModel.onInit()
             else -> Unit
         }
+    }
+
+    if (state.value.isRemoveExerciseDialogVisible) {
+        PopupDialog(
+            title = "Remove result",
+            description = "Do you want to remove this result",
+            confirmButtonTitle = "Yes",
+            dismissButtonTitle = "No",
+            onConfirmClicked = {
+                viewModel.onResultRemoved()
+            },
+            onDismissClicked = {
+                viewModel.onPopupDismissed()
+            }
+        )
     }
 
     Box(
@@ -88,10 +105,12 @@ fun CategoryScreen(id: Long) {
             )
 
             LazyColumn {
-                items(state.value.exerciseList) {
+                itemsIndexed(state.value.exerciseList) { index, item ->
                     ListItemView(
-                        name = it.name,
-                        onItemClick = { viewModel.onExerciseClicked(it.id) })
+                        name = item.name,
+                        onItemClick = { viewModel.onExerciseClicked(item.id) },
+                        onLongClick = { viewModel.onResultLongClicked(index) }
+                    )
                 }
             }
         }

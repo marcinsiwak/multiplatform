@@ -15,12 +15,12 @@ import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.InsertExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
@@ -82,7 +82,15 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition { params -> CategoryViewModel(id = params.get(), get(), get(), get()) }
+    viewModelDefinition { params ->
+        CategoryViewModel(
+            id = params.get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
 }
 
 val useCaseModule = module {

@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.android.ui.components
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -21,13 +22,16 @@ import androidx.compose.ui.unit.sp
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ListItemView(name: String, onItemClick: () -> Unit = {}) {
+fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> Unit = {}) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(
+            .combinedClickable(
+                enabled = true,
                 onClick = { onItemClick() },
+                onLongClick = { onLongClick() },
                 interactionSource = remember { MutableInteractionSource() },
                 indication = rememberRipple(
                     color = Color.LightGray

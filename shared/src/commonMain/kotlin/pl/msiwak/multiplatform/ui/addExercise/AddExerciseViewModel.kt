@@ -87,11 +87,11 @@ class AddExerciseViewModel(
                 ResultData(newResultData.result.toDouble(), newResultData.amount.toDouble(), date)
 
             currentResults.add(resultData)
-            val newSummary = currentExerciseData.value.copy(
+            val newExercise = currentExerciseData.value.copy(
                 results = currentResults
             )
 
-            updateExerciseUseCase(newSummary)
+            updateExerciseUseCase(newExercise)
             _viewState.value = _viewState.value.copy(
                 results = formatResultsUseCase(currentResults),
                 isResultFieldEnabled = false,
@@ -117,12 +117,18 @@ class AddExerciseViewModel(
     }
 
     fun onResultRemoved() {
-        exerciseToRemovePosition?.let {
-            currentResults.removeAt(it)
-            val results = formatResultsUseCase(currentResults)
-            _viewState.value = _viewState.value.copy(results = results)
+        viewModelScope.launch {
+            exerciseToRemovePosition?.let {
+                currentResults.removeAt(it)
+                val results = formatResultsUseCase(currentResults)
+                val newExercise = currentExerciseData.value.copy(
+                    results = currentResults
+                )
+                updateExerciseUseCase(newExercise)
+                _viewState.value = _viewState.value.copy(results = results)
+            }
+            _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
         }
-        _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
     }
 
     fun onPopupDismissed() {
