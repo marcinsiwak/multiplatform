@@ -116,6 +116,6 @@ val useCaseModule = module {
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
-    single { ExerciseRepository(get(), get()) }
-    single { CategoryRepository(get(), get()) }
+    single { ExerciseRepository(get()) }
+    single { CategoryRepository(get()) }
 }

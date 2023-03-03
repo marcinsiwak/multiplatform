@@ -5,11 +5,9 @@ import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
-import pl.msiwak.multiplatform.database.dao.ExerciseDao
 
 class CategoryRepository(
-    private val categoriesDao: CategoriesDao,
-    private val exerciseDao: ExerciseDao
+    private val categoriesDao: CategoriesDao
 ) {
 
     suspend fun getCategories(): List<CategoryData> = withContext(Dispatchers.Default) {

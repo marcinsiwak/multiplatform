@@ -2,27 +2,15 @@ package pl.msiwak.multiplatform.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import pl.msiwak.multiplatform.data.common.ExerciseShort
 import pl.msiwak.multiplatform.data.entity.ExerciseData
-import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExerciseDao
 
 class ExerciseRepository(
-    private val exerciseDao: ExerciseDao,
-    private val categoriesDao: CategoriesDao
+    private val exerciseDao: ExerciseDao
 ) {
 
-    suspend fun clearSummaries() = withContext(Dispatchers.Default) {
-        exerciseDao.clearDatabase()
-    }
-
     suspend fun insertExercise(exerciseData: ExerciseData): Long = withContext(Dispatchers.Default) {
-        val id = exerciseDao.insertExercise(exerciseData)
-//        val category = categoriesDao.getCategory(exerciseData.categoryId)
-//        val newExercisesList = category.exercises.toMutableList()
-//        newExercisesList.add(ExerciseShort(id = id, name = exerciseData.exerciseTitle))
-//        categoriesDao.updateCategory(category.copy(exercises = newExercisesList))
-        return@withContext id
+        return@withContext exerciseDao.insertExercise(exerciseData)
     }
 
     suspend fun insertExercises(summaries: List<ExerciseData>) = withContext(Dispatchers.Default) {
