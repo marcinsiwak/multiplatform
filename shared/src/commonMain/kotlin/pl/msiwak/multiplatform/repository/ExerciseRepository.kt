@@ -18,10 +18,10 @@ class ExerciseRepository(
 
     suspend fun insertExercise(exerciseData: ExerciseData): Long = withContext(Dispatchers.Default) {
         val id = exerciseDao.insertExercise(exerciseData)
-        val category = categoriesDao.getCategory(exerciseData.categoryId)
-        val newExercisesList = category.exercises.toMutableList()
-        newExercisesList.add(ExerciseShort(id = id, name = exerciseData.exerciseTitle))
-        categoriesDao.updateCategory(category.copy(exercises = newExercisesList))
+//        val category = categoriesDao.getCategory(exerciseData.categoryId)
+//        val newExercisesList = category.exercises.toMutableList()
+//        newExercisesList.add(ExerciseShort(id = id, name = exerciseData.exerciseTitle))
+//        categoriesDao.updateCategory(category.copy(exercises = newExercisesList))
         return@withContext id
     }
 

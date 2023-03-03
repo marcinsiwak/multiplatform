@@ -10,11 +10,11 @@ class CategoriesDao(database: Database) {
     private val dbQuery = database.getDatabaseQueries()
 
     fun getCategories(): List<CategoryData> {
-        return dbQuery.selectAllFromCategory(::mapCategory).executeAsList()
+        return getAllCategoriesWithExercise()
     }
 
     fun getCategory(id: Long): CategoryData {
-        return dbQuery.selectFromCategory(id, ::mapCategory).executeAsOne()
+        return getCategoryWithExercise(id)
     }
 
     fun insertCategories(categories: List<CategoryData>) {
@@ -49,6 +49,31 @@ class CategoriesDao(database: Database) {
                 exercises = exercises,
                 exerciseType = exerciseType
             )
+        }
+    }
+
+    private fun getCategoryWithExercise(id: Long): CategoryData {
+        val category = dbQuery.selectCategoryWithExercise(id).executeAsList()
+        if (category.isEmpty()) {
+            return dbQuery.selectFromCategory(id, ::mapCategory).executeAsOne()
+        }
+        return category.groupBy {
+            Triple(it.id, it.name, it.exerciseType)
+        }.map { (category, rows) ->
+            val exercises =
+                rows.map { ExerciseShort(it.id_, it.exerciseTitle) }
+            CategoryData(category.first, category.second, exercises, category.third)
+        }.firstOrNull() ?: CategoryData()
+    }
+
+    private fun getAllCategoriesWithExercise(): List<CategoryData> {
+        val category = dbQuery.selectAllCategoriesWithExercise().executeAsList()
+        return category.groupBy {
+            Triple(it.id, it.name, it.exerciseType)
+        }.map { (category, rows) ->
+            val exercises = rows.filter { category.first == it.categoryId }
+                .map { ExerciseShort(it.id_, it.exerciseTitle) }
+            CategoryData(category.first, category.second, exercises, category.third)
         }
     }
 

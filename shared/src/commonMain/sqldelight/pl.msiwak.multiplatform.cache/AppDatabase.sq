@@ -64,3 +64,13 @@ WHERE id = ?;
 
 selectAllFromCategory:
 SELECT * FROM Category;
+
+selectCategoryWithExercise:
+SELECT *
+FROM Category
+INNER JOIN Exercise ON Category.id = Exercise.categoryId
+WHERE Category.id=?;
+
+selectAllCategoriesWithExercise:
+SELECT *
+FROM Category INNER JOIN Exercise;
