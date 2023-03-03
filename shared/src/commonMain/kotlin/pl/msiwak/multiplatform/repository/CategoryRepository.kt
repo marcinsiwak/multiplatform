@@ -1,6 +1,8 @@
 package pl.msiwak.multiplatform.repository
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
@@ -34,6 +36,10 @@ class CategoryRepository(
 
     suspend fun getCategory(id: Long): CategoryData = withContext(Dispatchers.Default) {
         return@withContext categoriesDao.getCategory(id)
+    }
+
+    fun observeCategory(id: Long): Flow<CategoryData> {
+        return categoriesDao.observeCategory(id)
     }
 
     suspend fun insertCategories(categories: List<CategoryData>) =

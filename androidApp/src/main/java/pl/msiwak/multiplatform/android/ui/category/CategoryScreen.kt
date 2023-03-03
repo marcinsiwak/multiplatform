@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -26,13 +25,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
-import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
+import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
 @Composable
@@ -40,16 +38,13 @@ fun CategoryScreen(id: Long) {
     val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
     val state = viewModel.viewState.collectAsState()
 
-    OnLifecycleEvent { _, event ->
-        when (event) {
-            Lifecycle.Event.ON_RESUME -> viewModel.onInit()
-            else -> Unit
-        }
+    val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
+        ExerciseType.RUNNING -> R.drawable.bg_running_field
+        ExerciseType.GYM -> R.drawable.bg_gym
     }
 
     if (state.value.isRemoveExerciseDialogVisible) {
-        PopupDialog(
-            title = "Remove result",
+        PopupDialog(title = "Remove result",
             description = "Do you want to remove this result",
             confirmButtonTitle = "Yes",
             dismissButtonTitle = "No",
@@ -58,8 +53,7 @@ fun CategoryScreen(id: Long) {
             },
             onDismissClicked = {
                 viewModel.onPopupDismissed()
-            }
-        )
+            })
     }
 
     Box(
@@ -69,62 +63,50 @@ fun CategoryScreen(id: Long) {
     ) {
 
         if (state.value.isDialogVisible) {
-            AddExerciseDialog(
-                inputText = state.value.newExerciseName,
-                onExerciseTitleChanged = {
-                    viewModel.onAddExerciseNameChanged(it)
-                },
-                onAddExerciseClicked = {
-                    viewModel.onAddExerciseClicked()
-                },
-                onDialogClosed = {
-                    viewModel.onDialogClosed()
-                }
-            )
+            AddExerciseDialog(inputText = state.value.newExerciseName, onExerciseTitleChanged = {
+                viewModel.onAddExerciseNameChanged(it)
+            }, onAddExerciseClicked = {
+                viewModel.onAddExerciseClicked()
+            }, onDialogClosed = {
+                viewModel.onDialogClosed()
+            })
         }
 
         Column {
-            Image(
-                modifier = Modifier
-                    .drawWithCache {
-                        val gradient = Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color.Black),
-                            startY = size.height / 3,
-                            endY = size.height
-                        )
-                        onDrawWithContent {
-                            drawContent()
-                            drawRect(gradient, blendMode = BlendMode.Multiply)
-                        }
+            Image(modifier = Modifier
+                .drawWithCache {
+                    val gradient = Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Black),
+                        startY = size.height / 3,
+                        endY = size.height
+                    )
+                    onDrawWithContent {
+                        drawContent()
+                        drawRect(gradient, blendMode = BlendMode.Multiply)
                     }
-                    .fillMaxWidth()
-                    .height(264.dp),
-                painter = painterResource(id = R.drawable.bg_gym),
+                }
+                .fillMaxWidth()
+                .height(264.dp),
+                painter = painterResource(id = backgroundId),
                 contentScale = ContentScale.Crop,
-                contentDescription = "category background"
-            )
+                contentDescription = "category background")
 
             LazyColumn {
                 itemsIndexed(state.value.exerciseList) { index, item ->
-                    ListItemView(
-                        name = item.name,
+                    ListItemView(name = item.name,
                         onItemClick = { viewModel.onExerciseClicked(item.id) },
-                        onLongClick = { viewModel.onResultLongClicked(index) }
-                    )
+                        onLongClick = { viewModel.onResultLongClicked(index) })
                 }
             }
         }
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .padding(vertical = 16.dp, horizontal = 80.dp),
+        Button(modifier = Modifier
+            .fillMaxWidth()
+            .align(Alignment.BottomCenter)
+            .padding(vertical = 16.dp, horizontal = 80.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.LightGray,
-                contentColor = Color.Black
+                containerColor = Color.LightGray, contentColor = Color.Black
             ),
-            onClick = { viewModel.onAddNewExerciseClicked() }
-        ) {
+            onClick = { viewModel.onAddNewExerciseClicked() }) {
             Text(modifier = Modifier.padding(8.dp), text = "Add exercise", fontSize = 16.sp)
         }
     }

@@ -35,10 +35,7 @@ import pl.msiwak.multiplatform.data.entity.CategoryData
 
 @Composable
 fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
-//    val topResult = summaryData.results.getOrNull(0)?.result ?: ""
-//    val secondResult = summaryData.results.getOrNull(1)?.result ?: ""
-//    val thirdResult = summaryData.results.getOrNull(2)?.result ?: ""
-    val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
+   val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> R.drawable.bg_running_field
         ExerciseType.GYM -> R.drawable.bg_gym
     }
