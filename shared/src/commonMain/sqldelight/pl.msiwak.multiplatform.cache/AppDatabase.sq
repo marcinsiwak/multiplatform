@@ -73,4 +73,4 @@ WHERE Category.id=?;
 
 selectAllCategoriesWithExercise:
 SELECT *
-FROM Category INNER JOIN Exercise;
+FROM Category JOIN Exercise;

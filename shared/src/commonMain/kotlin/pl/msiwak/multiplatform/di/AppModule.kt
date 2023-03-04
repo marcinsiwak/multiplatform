@@ -21,6 +21,7 @@ import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertExercisesUseCase
+import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
@@ -107,6 +108,7 @@ val useCaseModule = module {
     factory { UpdateCategoriesUseCase(get()) }
     factory { GetCategoryUseCase(get()) }
     factory { ObserveCategoryUseCase(get()) }
+    factory { ObserveCategoriesUseCase(get()) }
     factory { InsertExercisesUseCase(get()) }
     factory { InsertExerciseUseCase(get()) }
     factory { UpdateExerciseUseCase(get()) }

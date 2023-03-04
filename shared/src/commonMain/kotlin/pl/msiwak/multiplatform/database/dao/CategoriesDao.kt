@@ -1,45 +1,68 @@
 package pl.msiwak.multiplatform.database.dao
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import pl.msiwak.multiplatform.data.common.ExerciseShort
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 import pl.msiwak.multiplatform.database.Database
+import pl.msiwak.multiplatform.extensions.asFlow
 
 class CategoriesDao(database: Database) {
 
     private val dbQuery = database.getDatabaseQueries()
 
     fun getCategories(): List<CategoryData> {
-        return getAllCategoriesWithExercise()
+        return dbQuery.selectAllFromCategory(::mapCategory).executeAsList()
     }
 
     fun getCategory(id: Long): CategoryData {
         return getCategoryWithExercise(id)
     }
 
-    fun observeCategory(id: Long): Flow<CategoryData> {
-        val category = dbQuery.selectCategoryWithExercise(id).executeAsList()
-        if (category.isEmpty()) {
-            return dbQuery.selectFromCategory(id, ::mapCategory).executeAsList().asFlow()
+    fun observeCategories(): Flow<List<CategoryData>> {
+        return dbQuery.selectAllCategoriesWithExercise().asFlow().map { query ->
+            query.executeAsList().groupBy {
+                Triple(it.id, it.name, it.exerciseType)
+            }.map { (category, rows) ->
+                val exercises = rows.filter { category.first == it.categoryId }
+                    .map { ExerciseShort(it.id_, it.exerciseTitle) }
+                CategoryData(category.first, category.second, exercises, category.third)
+            }
+        }.flatMapConcat {
+            if (it.isEmpty()) {
+                flowOf(dbQuery.selectAllFromCategory(::mapCategory).executeAsList())
+            } else {
+                flowOf(it)
+            }
         }
-        return category.groupBy {
-            Triple(it.id, it.name, it.exerciseType)
-        }.map { (category, rows) ->
-            val exercises =
-                rows.map { ExerciseShort(it.id_, it.exerciseTitle) }
-            CategoryData(category.first, category.second, exercises, category.third)
-        }.asFlow()
+    }
 
+    fun observeCategory(id: Long): Flow<CategoryData> {
+        return dbQuery.selectCategoryWithExercise(id).asFlow().map { query ->
+            query.executeAsList().groupBy {
+                Triple(it.id, it.name, it.exerciseType)
+            }.map { (category, rows) ->
+                val exercises =
+                    rows.map { ExerciseShort(it.id_, it.exerciseTitle) }
+                CategoryData(category.first, category.second, exercises, category.third)
+            }.firstOrNull()
+        }.flatMapConcat {
+            if (it == null) {
+                flowOf(dbQuery.selectFromCategory(id, ::mapCategory).executeAsOne())
+            } else {
+                flowOf(it)
+            }
+        }
     }
 
     fun insertCategories(categories: List<CategoryData>) {
         categories.forEach {
             with(it) {
                 dbQuery.insertCategory(
-                    id = id,
+                    id = null,
                     name = name,
                     exercises = exercises,
                     exerciseType = exerciseType
@@ -62,7 +85,7 @@ class CategoriesDao(database: Database) {
     fun insertCategory(categoryData: CategoryData) {
         with(categoryData) {
             dbQuery.insertCategory(
-                id = id,
+                id = null,
                 name = name,
                 exercises = exercises,
                 exerciseType = exerciseType

@@ -2,6 +2,9 @@ package pl.msiwak.multiplatform.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.dropWhile
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.data.common.ExerciseType
@@ -30,7 +33,8 @@ class CategoryRepository(
                     )
                 )
             )
-            categoriesDao.getCategories()
+            val out =categoriesDao.getCategories()
+            out
         }
     }
 
@@ -39,7 +43,11 @@ class CategoryRepository(
     }
 
     fun observeCategory(id: Long): Flow<CategoryData> {
-        return categoriesDao.observeCategory(id)
+        return categoriesDao.observeCategory(id).conflate()
+    }
+
+    fun observeCategories() : Flow<List<CategoryData>> {
+        return categoriesDao.observeCategories()
     }
 
     suspend fun insertCategories(categories: List<CategoryData>) =

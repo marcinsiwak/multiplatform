@@ -2,8 +2,6 @@ package pl.msiwak.multiplatform.ui.category
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.ExerciseShort
@@ -21,7 +19,7 @@ class CategoryViewModel(
     private val getCategoryUseCase: GetCategoryUseCase,
     private val insertExerciseUseCase: InsertExerciseUseCase,
     private val removeExerciseUseCase: RemoveExerciseUseCase,
-    private val observeCategoryUseCase: ObserveCategoryUseCase
+    observeCategoryUseCase: ObserveCategoryUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(CategoryState())
@@ -32,12 +30,17 @@ class CategoryViewModel(
     private val exercises: MutableList<ExerciseShort> = mutableListOf()
 
     init {
-        observeCategoryUseCase(categoryId).onEach {
-            exercises.addAll(it.exercises)
-            _viewState.value =
-                _viewState.value.copy(exerciseType = it.exerciseType, exerciseList = it.exercises)
+        viewModelScope.launch {
+            observeCategoryUseCase(categoryId).collect {
+                exercises.addAll(it.exercises)
+                _viewState.value =
+                    _viewState.value.copy(
+                        exerciseType = it.exerciseType,
+                        exerciseList = it.exercises
+                    )
 
-        }.launchIn(viewModelScope)
+            }
+        }
     }
 
     fun onAddNewExerciseClicked() {
@@ -62,7 +65,7 @@ class CategoryViewModel(
                     exerciseTitle = exerciseName
                 )
             )
-            navigator.navigate(NavigationDirections.AddExercise(id))
+//            navigator.navigate(NavigationDirections.AddExercise(id))
         }
     }
 

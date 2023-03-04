@@ -33,13 +33,6 @@ fun SummaryScreen() {
     val viewModel = koinViewModel<SummaryViewModel>()
     val state = viewModel.summaryState.collectAsState()
 
-    OnLifecycleEvent { _, event ->
-        when (event) {
-            Lifecycle.Event.ON_RESUME -> viewModel.onInit()
-            else -> Unit
-        }
-    }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
