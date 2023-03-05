@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import org.koin.java.KoinJavaComponent.inject
+import pl.msiwak.multiplatform.android.ui.addCategory.AddCategoryScreen
 import pl.msiwak.multiplatform.android.ui.addExercise.AddExerciseScreen
 import pl.msiwak.multiplatform.android.ui.category.CategoryScreen
 import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
@@ -44,6 +45,7 @@ class MainActivity : ComponentActivity() {
                         composable(NavigationDirections.Registration.route) { RegisterScreen() }
                         composable(NavigationDirections.Login.route) { LoginScreen() }
                         composable(NavigationDirections.Dashboard.route) { DashboardScreen() }
+                        composable(NavigationDirections.AddCategory.route) { AddCategoryScreen() }
                         composable(
                             NavigationDirections.AddExercise().route, arguments = listOf(
                                 navArgument(NavigationDirections.AddExercise.BUNDLE_ARG_ID) {

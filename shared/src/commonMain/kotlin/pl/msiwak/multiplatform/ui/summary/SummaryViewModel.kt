@@ -21,16 +21,14 @@ class SummaryViewModel(
     init {
         viewModelScope.launch {
             val categories = getCategoriesUseCase()
-//            _summaryState.value = _summaryState.value.copy(categories = categories)
             observeCategoriesUseCase().collect {
                 _summaryState.value = _summaryState.value.copy(categories = it)
-
             }
         }
     }
 
     fun onAddExerciseClicked() {
-//        navigator.navigate(NavigationDirections.AddExercise())
+        navigator.navigate(NavigationDirections.AddCategory)
     }
 
     fun onExerciseClicked(id: Long) {

@@ -46,4 +46,8 @@ sealed class NavigationDirections : NavigationCommand {
             const val BUNDLE_ARG_ID = "id"
         }
     }
+
+    object AddCategory : NavigationDirections() {
+        override val route: String = "addCategory"
+    }
 }

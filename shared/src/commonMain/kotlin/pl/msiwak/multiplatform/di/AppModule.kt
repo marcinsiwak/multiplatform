@@ -29,6 +29,7 @@ import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.CategoryRepository
 import pl.msiwak.multiplatform.repository.ExerciseRepository
+import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
@@ -94,6 +95,7 @@ val viewModelsModule = module {
             get()
         )
     }
+    viewModelDefinition { AddCategoryViewModel(get(), get()) }
 }
 
 val useCaseModule = module {
