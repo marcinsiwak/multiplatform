@@ -44,7 +44,7 @@ object Deps {
         const val runtime = "com.squareup.sqldelight:runtime:$sqlDelightVersion"
         const val android = "com.squareup.sqldelight:android-driver:$sqlDelightVersion"
         const val ios = "com.squareup.sqldelight:native-driver:$sqlDelightVersion"
-        const val coroutines = "app.cash.sqldelight:coroutines-extensions:2.0.0-alpha05"
+        const val coroutines = "com.squareup.sqldelight:coroutines-extensions:1.5.5"
     }
 
     // todo change napier to timber when ready
