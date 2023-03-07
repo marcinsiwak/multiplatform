@@ -2,17 +2,20 @@ import SwiftUI
 import shared
 
 struct WelcomeScreen: View {
-    let diHelper = DiHelper()
+    let welcomeDiHelper = WelcomeDiHelper()
     private let navigateToRegistration: () -> Void
     private let navigateToLogin: () -> Void
+    private let navigateToDashboard: () -> Void
     private let viewModel: MainViewModel
 
     
-    init(viewModel: MainViewModel, navigateToRegistration: @escaping () -> Void, navigateToLogin: @escaping () -> Void) {
+    init(viewModel: MainViewModel, navigateToRegistration: @escaping () -> Void, navigateToLogin: @escaping () -> Void, navigateToDashboard: @escaping () -> Void) {
         self.viewModel = viewModel
         self.navigateToRegistration = navigateToRegistration
         self.navigateToLogin = navigateToLogin
+        self.navigateToDashboard = navigateToDashboard
         observeState()
+        
     }
     
     private func observeState() {
@@ -34,19 +37,23 @@ struct WelcomeScreen: View {
             navigateToLogin()
         }
         
+        if(command.destination == "dashboard") {
+            navigateToDashboard()
+        }
+        
      }
     
     var body: some View {
             VStack(alignment: .leading) {
             
                     Button("Register") {
-                        diHelper.onRegistrationClicked()
+                        welcomeDiHelper.onRegistrationClicked()
                         
                     }.padding(30)
                 
                     Button("Login") {
-                        diHelper.onLoginClicked()
-
+//                        welcomeDiHelper.onLoginClicked()
+                        navigateToDashboard()
                     }.padding(30)
 
         }

@@ -15,14 +15,14 @@ class SummaryViewModel(
     private val navigator: Navigator
 ) : ViewModel() {
 
-    private val _summaryState = MutableStateFlow(SummaryState())
-    val summaryState: StateFlow<SummaryState> = _summaryState
+    private val _viewState = MutableStateFlow(SummaryState())
+    val viewState: StateFlow<SummaryState> = _viewState
 
     init {
         viewModelScope.launch {
             val categories = getCategoriesUseCase()
             observeCategoriesUseCase().collect {
-                _summaryState.value = _summaryState.value.copy(categories = it)
+                _viewState.value = _viewState.value.copy(categories = it)
             }
         }
     }

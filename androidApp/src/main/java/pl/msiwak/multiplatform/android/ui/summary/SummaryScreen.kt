@@ -21,17 +21,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 
 
 @Composable
 fun SummaryScreen() {
     val viewModel = koinViewModel<SummaryViewModel>()
-    val state = viewModel.summaryState.collectAsState()
+    val state = viewModel.viewState.collectAsState()
 
     Column(
         modifier = Modifier
