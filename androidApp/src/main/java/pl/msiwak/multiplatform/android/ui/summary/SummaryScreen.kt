@@ -64,7 +64,7 @@ fun SummaryScreen() {
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = "Add exercise"
+                                text = "Add category"
                             )
                         }
                     }

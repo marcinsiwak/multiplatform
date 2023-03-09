@@ -6,16 +6,23 @@ struct WelcomeScreen: View {
     private let navigateToRegistration: () -> Void
     private let navigateToLogin: () -> Void
     private let navigateToDashboard: () -> Void
+    private let navigateToCategory: () -> Void
     private let viewModel: MainViewModel
 
     
-    init(viewModel: MainViewModel, navigateToRegistration: @escaping () -> Void, navigateToLogin: @escaping () -> Void, navigateToDashboard: @escaping () -> Void) {
+    init(
+        viewModel: MainViewModel,
+        navigateToRegistration: @escaping () -> Void,
+        navigateToLogin: @escaping () -> Void,
+        navigateToDashboard: @escaping () -> Void,
+        navigateToCategory: @escaping () -> Void
+    ) {
         self.viewModel = viewModel
         self.navigateToRegistration = navigateToRegistration
         self.navigateToLogin = navigateToLogin
         self.navigateToDashboard = navigateToDashboard
+        self.navigateToCategory = navigateToCategory
         observeState()
-        
     }
     
     private func observeState() {
@@ -39,6 +46,11 @@ struct WelcomeScreen: View {
         
         if(command.destination == "dashboard") {
             navigateToDashboard()
+        }
+        
+        if(command.destination == "category") {
+            (command.destination as? Category)
+//            navigateToCategory(command)
         }
         
      }

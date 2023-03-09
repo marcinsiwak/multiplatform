@@ -4,6 +4,7 @@ import shared
 private let RegistrationRoute = "registration"
 private let LoginRoute = "login"
 private let DashboardRoute = "dashboard"
+private let CategoryRoute = "category"
 
 
 struct ContentView: View {
@@ -18,7 +19,8 @@ struct ContentView: View {
                 viewModel: mainDiHelper.getMainViewModel(),
                 navigateToRegistration: { route.append(RegistrationRoute) },
                 navigateToLogin: { route.append(LoginRoute) },
-                navigateToDashboard: { route.append(DashboardRoute)}
+                navigateToDashboard: { route.append(DashboardRoute)},
+                navigateToCategory: { route.append(CategoryRoute)}
             ).navigationDestination(for: String.self) { destination in
                 switch (destination) {
                     case RegistrationRoute:

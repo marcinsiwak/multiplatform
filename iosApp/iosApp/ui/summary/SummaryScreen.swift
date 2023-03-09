@@ -21,12 +21,17 @@ struct SummaryScreen: View {
     }
     
     var body: some View {
-        List {
-            ForEach(state.value.categories) {item in
-                Text(item.name)
-                
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(state.value.categories) { item in
+                CategoryItem(categoryData: item)
+                    .onTapGesture {
+                        viewModel.onExerciseClicked(id: item.id)
+                    }
             }
         }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+        .background(.gray)
+
     }
 
     private func onStateReceived(state: SummaryState) {
