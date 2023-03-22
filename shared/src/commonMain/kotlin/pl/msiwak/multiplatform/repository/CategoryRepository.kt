@@ -40,7 +40,7 @@ class CategoryRepository(
     }
 
     fun observeCategory(id: Long): Flow<CategoryData> {
-        return categoriesDao.observeCategory(id).conflate()
+        return categoriesDao.observeCategory(id)
     }
 
     fun observeCategories(): Flow<List<CategoryData>> {

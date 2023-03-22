@@ -2,25 +2,85 @@ import SwiftUI
 import shared
 
 struct CategoryScreen: View {
-    private let viewModel = CategoryDiHelper().getCategoryViewModel()
+    let id: Int64
+    let viewModel: CategoryViewModel
     @ObservedObject private var state: ObservableCategoryState
+    
+    init(id: Int64) {
+        self.id = id
+        self.viewModel = CategoryDiHelper(id: id).getCategoryViewModel()
+        self.state = viewModel.observableState()
+        observeState()
+    }
+    
+    private func observeState() {
+        viewModel.viewState.collect(collector: Collector<CategoryState>{
+            state in onStateReceived(state: state)
+            
+        }) { error in
+            print("Error ocurred during state collection")
+        }
+    }
+    
+    
+    private func onStateReceived(state: CategoryState) {
+        self.state.value = state
+     }
+    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Image("bg_running_field")
-                .resizable()
-                .scaledToFill()
-                .clipped()
-            
-            ForEach(state.value.exerciseList) { item in
-                Text(item.name)
+            ZStack {
+                Image("bg_running_field")
+                    .resizable()
+                    .scaledToFill()
+                    .clipped()
+                    .frame(height: 264)
+                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+                Rectangle()
+                    .frame(height: 264)
+                    .foregroundColor(.clear)
+                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                    .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
             }
+            ForEach(state.value.exerciseList) { item in
+                ListItemView(title: item.name)
+                    .frame(height: 64)
+            }
+            Spacer()
+            Button(action: {
+                viewModel.onAddNewExerciseClicked()
+            }, label: {
+                Text("Add exercise")
+                    .padding(16)
+                    .foregroundColor(Color.black)
+                    .background(Color.gray)
+                    .clipShape(RoundedCorner())
+                    .frame(maxWidth: .infinity, alignment: .center)
+            })
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-        .background(.gray)
+        .background(.black)
+        .customDialog(isPresented: $state.value.isDialogVisible, onDismiss: {
+            viewModel.onDialogClosed()
+        }) {
+            VStack {
+                Text("Add exercise")
+                    .padding()
+                TextField("Exercise title", text: $state.value.newExerciseName.onChange({ name in
+                    viewModel.onAddExerciseNameChanged(name: name)
+                }))
+                .padding()
+                Button("Add exercise") {
+                    viewModel.onAddExerciseClicked()
+                }
+                .padding()
+            }
+        }
 
     }
 }
+
 
 
 extension CategoryViewModel {
@@ -29,9 +89,9 @@ extension CategoryViewModel {
     }
 }
 
-//
-//struct CategoryScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-////        CategoryScreen()
-//    }
-//}
+
+struct CategoryScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        CategoryScreen(id: 1)
+    }
+}

@@ -2,7 +2,7 @@ import SwiftUI
 import shared
 
 struct SummaryScreen: View {
-    private let viewModel = SummaryDiHelper().getSummaryViewModel()
+    let viewModel = SummaryDiHelper().getSummaryViewModel()
     @ObservedObject private var state: ObservableSummaryState
     
 

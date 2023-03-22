@@ -20,8 +20,6 @@ struct CategoryItem: View {
       
             ForEach(categoryData?.exercises ?? [ExerciseShort]()) { item in
                 Text(item.name)
-                    .padding(8)
-                    .background(.black)
                     .foregroundColor(.white)
                     .font(.subheadline)
             }
@@ -40,9 +38,6 @@ struct CategoryItem: View {
         )
         .cornerRadius(8)
         .padding(.top, 8)
-        .onTapGesture {
-            
-        }
         
     }
     

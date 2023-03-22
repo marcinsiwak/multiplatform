@@ -6,7 +6,7 @@ import pl.msiwak.multiplatform.data.common.ExerciseType
 data class CategoryState(
     val exerciseType: ExerciseType = ExerciseType.GYM,
     val exerciseList: List<ExerciseShort> = emptyList(),
-    val isDialogVisible: Boolean = false,
-    val newExerciseName: String = "",
+    var isDialogVisible: Boolean = false,
+    var newExerciseName: String = "",
     val isRemoveExerciseDialogVisible: Boolean = false
 )

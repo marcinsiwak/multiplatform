@@ -6,7 +6,7 @@ struct WelcomeScreen: View {
     private let navigateToRegistration: () -> Void
     private let navigateToLogin: () -> Void
     private let navigateToDashboard: () -> Void
-    private let navigateToCategory: () -> Void
+    private let navigateToCategory: (Int64?) -> Void
     private let viewModel: MainViewModel
 
     
@@ -15,7 +15,7 @@ struct WelcomeScreen: View {
         navigateToRegistration: @escaping () -> Void,
         navigateToLogin: @escaping () -> Void,
         navigateToDashboard: @escaping () -> Void,
-        navigateToCategory: @escaping () -> Void
+        navigateToCategory: @escaping (Int64?) -> Void
     ) {
         self.viewModel = viewModel
         self.navigateToRegistration = navigateToRegistration
@@ -49,8 +49,10 @@ struct WelcomeScreen: View {
         }
         
         if(command.destination == "category") {
-            (command.destination as? Category)
-//            navigateToCategory(command)
+            if(command is NavigationDirections.Category){
+                let id = (command as? NavigationDirections.Category)?.getCategoryId()
+                navigateToCategory(id)
+            }
         }
         
      }
