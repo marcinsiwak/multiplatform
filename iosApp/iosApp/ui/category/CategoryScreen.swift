@@ -51,7 +51,7 @@ struct CategoryScreen: View {
             Button(action: {
                 viewModel.onAddNewExerciseClicked()
             }, label: {
-                Text("Add exercise")
+                Text(MR.strings().add_new_result.desc().localized())
                     .padding(16)
                     .foregroundColor(Color.black)
                     .background(Color.gray)

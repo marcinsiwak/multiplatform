@@ -18,9 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.example.library.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.data.common.FormattedResultData
@@ -38,6 +40,7 @@ fun ResultsTableView(
     onResultLongClick: (Int) -> Unit = {}
 ) {
     Column {
+        // todo results type from database
         Row(
             modifier = Modifier
                 .bottomBorder(3.dp, Color.LightGray)
@@ -105,7 +108,7 @@ fun ResultsTableView(
                         shape = RectangleShape,
                         onClick = { onAddNewResultClicked() }
                     ) {
-                        Text(text = "Add new result", fontSize = 16.sp)
+                        Text(text = stringResource(id = MR.strings.add_new_result.resourceId), fontSize = 16.sp)
                     }
                 }
             }

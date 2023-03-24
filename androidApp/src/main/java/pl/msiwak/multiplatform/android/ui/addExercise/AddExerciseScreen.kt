@@ -16,10 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
+import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.InputView
@@ -59,10 +61,10 @@ fun AddExerciseScreen(id: Long) {
 
     if (state.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = "Remove result",
-            description = "Do you want to remove this result",
-            confirmButtonTitle = "Yes",
-            dismissButtonTitle = "No",
+            title = stringResource(id = MR.strings.remove_result_dialog_title.resourceId),
+            description = stringResource(id = MR.strings.remove_result_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(id = MR.strings.yes.resourceId),
+            dismissButtonTitle = stringResource(id = MR.strings.no.resourceId),
             onConfirmClicked = {
                 viewModel.onResultRemoved()
             },

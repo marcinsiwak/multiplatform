@@ -60,7 +60,7 @@ fun NewResultView(
                         onDateClicked()
                     },
                     painter = painterResource(id = R.drawable.ic_calendar),
-                    contentDescription = "date picker"
+                    contentDescription = null
                 )
             }
         )

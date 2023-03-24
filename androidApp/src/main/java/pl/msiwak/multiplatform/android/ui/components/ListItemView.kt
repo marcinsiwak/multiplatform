@@ -51,7 +51,7 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
             modifier = Modifier.padding(16.dp),
             tint = Color.LightGray,
             painter = painterResource(id = R.drawable.ic_arrow_right),
-            contentDescription = "exercise"
+            contentDescription = null
         )
     }
 }

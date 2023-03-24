@@ -13,7 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import org.example.library.MR
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
@@ -30,7 +32,7 @@ fun LoginScreen() {
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(id = R.drawable.bg_welcome_screen),
             contentScale = ContentScale.Crop,
-            contentDescription = "Welcome screen"
+            contentDescription = null
         )
         Column(
             modifier = Modifier
@@ -43,7 +45,7 @@ fun LoginScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = "E-mail"
+                hintText = stringResource(id = MR.strings.email.resourceId)
             )
 
             InputView(
@@ -54,7 +56,7 @@ fun LoginScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = "Password"
+                hintText = stringResource(id = MR.strings.password.resourceId)
             )
             Button(
                 modifier = Modifier
@@ -63,7 +65,7 @@ fun LoginScreen() {
                 onClick = {
                     viewModel.onLoginClicked()
                 }) {
-                Text(text = "Login")
+                Text(text = stringResource(id = MR.strings.login.resourceId))
             }
         }
 

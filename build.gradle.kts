@@ -13,6 +13,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:7.2.2")
         classpath("com.google.gms:google-services:4.3.13")
         classpath("com.squareup.sqldelight:gradle-plugin:$sqlDelightVersion")
+        classpath ("dev.icerock.moko:resources-generator:0.20.1")
     }
 }
 

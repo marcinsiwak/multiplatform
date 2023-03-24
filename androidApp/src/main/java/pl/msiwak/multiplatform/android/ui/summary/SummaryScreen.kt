@@ -19,8 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
@@ -60,11 +62,11 @@ fun SummaryScreen() {
                             Icon(
                                 modifier = Modifier.padding(8.dp),
                                 painter = painterResource(id = R.drawable.ic_add),
-                                contentDescription = "Add exercise"
+                                contentDescription = null
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = "Add category"
+                                text = stringResource(id = MR.strings.summary_add_category.resourceId)
                             )
                         }
                     }

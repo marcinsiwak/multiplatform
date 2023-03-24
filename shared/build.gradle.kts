@@ -5,6 +5,16 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.10"
     id("com.squareup.sqldelight")
+    id("dev.icerock.mobile.multiplatform-resources")
+}
+
+dependencies {
+    commonMainApi("dev.icerock.moko:resources:0.20.1")
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "org.example.library" // required
+    iosBaseLocalizationRegion = "en" // optional, default "en"
 }
 
 kotlin {
@@ -18,6 +28,8 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true
+            export("dev.icerock.moko:resources:0.20.1")
+            export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
         }
     }
 
@@ -94,6 +106,8 @@ kotlin {
             iosSimulatorArm64Test.dependsOn(this)
         }
     }
+
+
 }
 
 android {

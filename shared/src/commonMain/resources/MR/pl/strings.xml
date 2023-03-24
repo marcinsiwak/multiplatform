@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="summary">Podsumowanie</string>
+    <string name="account">Konto</string>
+    <string name="settings">Ustawienia</string>
+    <string name="summary_add_category">Dodaj kategorię</string>
+    <string name="email">E-mail</string>
+    <string name="password">Hasło</string>
+    <string name="register">Zarejestruj</string>
+    <string name="login">Zaloguj</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+
+    <string name="exercise">Exercise</string>
+    <string name="exercise_name">Nazwa ćwiczenia</string>
+    <string name="exercise_type">Kategoria ćwiczenia</string>
+    <string name="add_new_exercise">Dodaj nowe ćwiczenie</string>
+
+    <string name="add_new_result">Dodaj nowy wynik</string>
+    <string name="remove_result_dialog_title">Usuń wynik </string>
+    <string name="remove_result_dialog_description">Czy na pewno chcesz usunąć ten wynik?</string>
+</resources>

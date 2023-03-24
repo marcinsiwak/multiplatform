@@ -20,10 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,7 +33,7 @@ import pl.msiwak.multiplatform.data.entity.CategoryData
 
 @Composable
 fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
-   val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
+    val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> R.drawable.bg_running_field
         ExerciseType.GYM -> R.drawable.bg_gym
     }
@@ -58,9 +56,9 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                 .clip(RoundedCornerShape(8.dp)),
             painter = painterResource(id = backgroundId),
             contentScale = ContentScale.Crop,
-            contentDescription = "summary item background"
+            contentDescription = null
         )
-        
+
         Column {
             Text(
                 modifier = Modifier
@@ -92,54 +90,12 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                     )
                 }
             }
-
         }
-
-
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(top = 16.dp)
-//                .align(Alignment.CenterEnd),
-//            verticalAlignment = Alignment.Bottom,
-//            horizontalArrangement = Arrangement.SpaceAround
-//        ) {
-//            Text(
-//                modifier = Modifier
-//                    .wrapContentHeight()
-//                    .align(Alignment.Bottom),
-//                maxLines = 1,
-//                text = thirdResult,
-//                fontSize = 28.sp,
-//                fontStyle = FontStyle.Italic,
-//                color = Color.LightGray,
-//            )
-//            Text(
-//                modifier = Modifier
-//                    .wrapContentHeight()
-//                    .align(Alignment.Bottom),
-//                maxLines = 1,
-//                text = secondResult,
-//                fontSize = 36.sp,
-//                fontStyle = FontStyle.Italic,
-//                color = Color.Gray,
-//            )
-//            Text(
-//                modifier = Modifier
-//                    .wrapContentHeight()
-//                    .align(Alignment.Bottom),
-//                maxLines = 1,
-//                text = topResult,
-//                fontSize = 48.sp,
-//                fontStyle = FontStyle.Italic,
-//                color = Color.Black,
-//            )
-//        }
     }
 }
 
 @Preview
 @Composable
-fun SummaryItemPreview() {
-//    SummaryItem()
+fun CategoryItemPreview() {
+    CategoryItem(categoryData = CategoryData())
 }

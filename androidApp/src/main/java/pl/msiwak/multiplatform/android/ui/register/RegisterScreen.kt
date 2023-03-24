@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.example.library.MR
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
@@ -31,7 +33,7 @@ fun RegisterScreen() {
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(id = R.drawable.bg_welcome_screen),
             contentScale = ContentScale.Crop,
-            contentDescription = "Welcome screen"
+            contentDescription = null
         )
         Column(
             modifier = Modifier
@@ -45,7 +47,7 @@ fun RegisterScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = "E-mail"
+                hintText = stringResource(id = MR.strings.email.resourceId)
             )
 
             InputView(
@@ -56,7 +58,7 @@ fun RegisterScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = "Password"
+                hintText = stringResource(id = MR.strings.password.resourceId)
             )
             Button(
                 modifier = Modifier
@@ -65,7 +67,7 @@ fun RegisterScreen() {
                 onClick = {
                     viewModel.onRegisterClicked()
                 }) {
-                Text(text = "Register")
+                Text(text = stringResource(id = MR.strings.register.resourceId))
             }
         }
 

@@ -18,7 +18,9 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import org.example.library.MR
 import pl.msiwak.multiplatform.data.common.ExerciseType
 
 @Composable
@@ -43,7 +45,7 @@ fun DropDownView(
                 },
             value = currentValue,
             onValueChange = {},
-            hintText = "Exercise type",
+            hintText = stringResource(id = MR.strings.exercise_type.resourceId),
             readOnly = true,
             errorsEnabled = false,
             trailingIcon = { Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null) }

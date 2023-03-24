@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
@@ -38,7 +40,7 @@ fun AddCategoryScreen() {
             onValueChange = {
                 viewModel.onExerciseName(it)
             },
-            hintText = "Exercise"
+            hintText = stringResource(id = MR.strings.exercise.resourceId)
         )
         DropDownView(
             currentValue = state.value.exerciseType.name,
