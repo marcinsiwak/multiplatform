@@ -19,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import org.koin.java.KoinJavaComponent.inject
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
@@ -31,7 +30,7 @@ fun RegisterScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = R.drawable.bg_welcome_screen),
+            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
             contentScale = ContentScale.Crop,
             contentDescription = null
         )

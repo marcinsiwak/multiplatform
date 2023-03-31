@@ -17,6 +17,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.example.library.MR
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
@@ -27,7 +28,7 @@ fun WelcomeScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = R.drawable.bg_welcome_screen),
+            painter = painterResource(id = MR.images.bg_welcome_screen.drawableResId),
             contentScale = ContentScale.Crop,
             contentDescription = "Welcome screen"
         )

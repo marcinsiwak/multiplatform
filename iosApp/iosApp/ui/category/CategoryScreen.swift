@@ -31,7 +31,7 @@ struct CategoryScreen: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack {
-                Image("bg_running_field")
+                Image(uiImage: MR.images().bg_running_field.toUIImage()!)
                     .resizable()
                     .scaledToFill()
                     .clipped()

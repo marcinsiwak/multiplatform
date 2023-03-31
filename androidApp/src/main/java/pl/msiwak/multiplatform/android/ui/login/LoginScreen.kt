@@ -30,7 +30,7 @@ fun LoginScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = R.drawable.bg_welcome_screen),
+            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
             contentScale = ContentScale.Crop,
             contentDescription = null
         )

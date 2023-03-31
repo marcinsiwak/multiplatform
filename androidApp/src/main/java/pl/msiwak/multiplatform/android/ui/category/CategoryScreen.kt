@@ -41,8 +41,8 @@ fun CategoryScreen(id: Long) {
     val state = viewModel.viewState.collectAsState()
 
     val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
-        ExerciseType.RUNNING -> R.drawable.bg_running_field
-        ExerciseType.GYM -> R.drawable.bg_gym
+        ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
+        ExerciseType.GYM -> MR.images.bg_running_field.drawableResId
     }
 
     if (state.value.isRemoveExerciseDialogVisible) {

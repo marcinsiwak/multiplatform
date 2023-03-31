@@ -27,15 +27,15 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import pl.msiwak.multiplatform.android.R
+import org.example.library.MR
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 
 @Composable
 fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
     val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
-        ExerciseType.RUNNING -> R.drawable.bg_running_field
-        ExerciseType.GYM -> R.drawable.bg_gym
+        ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
+        ExerciseType.GYM -> MR.images.bg_gym.drawableResId
     }
     Box(
         modifier = modifier

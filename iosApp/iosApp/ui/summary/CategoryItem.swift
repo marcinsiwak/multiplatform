@@ -31,7 +31,7 @@ struct CategoryItem: View {
         }
         .frame(height: 164)
         .background(
-            Image("bg_running_field")
+            Image(uiImage: MR.images().bg_running_field.toUIImage()!)
                 .resizable()
                 .scaledToFill()
                 .clipped()
