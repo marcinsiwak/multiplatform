@@ -7,6 +7,7 @@ struct WelcomeScreen: View {
     private let navigateToLogin: () -> Void
     private let navigateToDashboard: () -> Void
     private let navigateToCategory: (Int64?) -> Void
+    private let navigateToAddExercise: (Int64?) -> Void
     private let viewModel: MainViewModel
 
     
@@ -15,13 +16,15 @@ struct WelcomeScreen: View {
         navigateToRegistration: @escaping () -> Void,
         navigateToLogin: @escaping () -> Void,
         navigateToDashboard: @escaping () -> Void,
-        navigateToCategory: @escaping (Int64?) -> Void
+        navigateToCategory: @escaping (Int64?) -> Void,
+        navigateToAddExercise: @escaping (Int64?) -> Void
     ) {
         self.viewModel = viewModel
         self.navigateToRegistration = navigateToRegistration
         self.navigateToLogin = navigateToLogin
         self.navigateToDashboard = navigateToDashboard
         self.navigateToCategory = navigateToCategory
+        self.navigateToAddExercise = navigateToAddExercise
         observeState()
     }
     
@@ -54,6 +57,12 @@ struct WelcomeScreen: View {
                 navigateToCategory(id)
             }
         }
+        
+        if(command is NavigationDirections.AddExercise){
+            let id = (command as? NavigationDirections.AddExercise)?.getExerciseId()
+            navigateToAddExercise(id)
+        }
+        
         
      }
     

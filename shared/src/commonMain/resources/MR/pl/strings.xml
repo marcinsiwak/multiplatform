@@ -11,7 +11,7 @@
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
 
-    <string name="exercise">Exercise</string>
+    <string name="exercise">ćwiczenie</string>
     <string name="exercise_name">Nazwa ćwiczenia</string>
     <string name="exercise_type">Kategoria ćwiczenia</string>
     <string name="add_new_exercise">Dodaj nowe ćwiczenie</string>
@@ -19,4 +19,6 @@
     <string name="add_new_result">Dodaj nowy wynik</string>
     <string name="remove_result_dialog_title">Usuń wynik </string>
     <string name="remove_result_dialog_description">Czy na pewno chcesz usunąć ten wynik?</string>
+
+    <string name="add_result_save">Zapisz wynik</string>
 </resources>

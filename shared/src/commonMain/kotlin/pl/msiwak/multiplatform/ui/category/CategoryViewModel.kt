@@ -38,7 +38,6 @@ class CategoryViewModel(
                         exerciseType = it.exerciseType,
                         exerciseList = it.exercises
                     )
-
             }
         }
     }
@@ -65,7 +64,7 @@ class CategoryViewModel(
                     exerciseTitle = exerciseName
                 )
             )
-//            navigator.navigate(NavigationDirections.AddExercise(id))
+            navigator.navigate(NavigationDirections.AddExercise(id))
         }
     }
 

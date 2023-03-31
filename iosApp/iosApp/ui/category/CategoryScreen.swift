@@ -44,7 +44,9 @@ struct CategoryScreen: View {
                     .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
             }
             ForEach(state.value.exerciseList) { item in
-                ListItemView(title: item.name)
+                ListItemView(title: item.name, onClicked: {
+                    viewModel.onExerciseClicked(id: item.id)
+                })
                     .frame(height: 64)
             }
             Spacer()
@@ -65,13 +67,12 @@ struct CategoryScreen: View {
             viewModel.onDialogClosed()
         }) {
             VStack {
-                Text("Add exercise")
+                Text(MR.strings().exercise_name.desc().localized())
                     .padding()
-                TextField("Exercise title", text: $state.value.newExerciseName.onChange({ name in
-                    viewModel.onAddExerciseNameChanged(name: name)
-                }))
-                .padding()
-                Button("Add exercise") {
+                InputView(value: $state.value.newExerciseName, trailingIcon: {}, onValueChange: { text in
+                    viewModel.onAddExerciseNameChanged(name: text)
+                })
+                Button(MR.strings().add_new_exercise.desc().localized()) {
                     viewModel.onAddExerciseClicked()
                 }
                 .padding()
@@ -80,8 +81,6 @@ struct CategoryScreen: View {
 
     }
 }
-
-
 
 extension CategoryViewModel {
     func observableState() -> ObservableCategoryState {

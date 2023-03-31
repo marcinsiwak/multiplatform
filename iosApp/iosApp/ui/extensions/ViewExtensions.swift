@@ -31,9 +31,11 @@ extension Binding {
 
 struct Ripple: ViewModifier {
     // MARK: Lifecycle
+    private let onClicked: () -> Void
 
-    init(rippleColor: Color) {
+    init(rippleColor: Color, onClicked: @escaping () -> Void) {
         self.color = rippleColor
+        self.onClicked = onClicked
     }
 
     // MARK: Internal
@@ -74,6 +76,7 @@ struct Ripple: ViewModifier {
                         opacityFraction = 0.0
                     }
                 }
+                onClicked()
             })
             .clipped()
         }
@@ -81,7 +84,7 @@ struct Ripple: ViewModifier {
 }
 
 extension View {
-    func rippleEffect(rippleColor: Color = .accentColor.opacity(0.5)) -> some View {
-        modifier(Ripple(rippleColor: rippleColor))
+    func rippleEffect(rippleColor: Color = .accentColor.opacity(0.5), onClicked: @escaping () -> Void) -> some View {
+        modifier(Ripple(rippleColor: rippleColor, onClicked: onClicked))
     }
 }

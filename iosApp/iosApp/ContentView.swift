@@ -22,8 +22,10 @@ struct ContentView: View {
                 navigateToDashboard: { route.append(NavigationDirections.Dashboard()) },
                 navigateToCategory: { id in
                     route.append(NavigationDirections.Category(id: id ?? 0))
+                },
+                navigateToAddExercise: { id in
+                    route.append(NavigationDirections.AddExercise(id: id ?? 0))
                 }
-
             ).navigationDestination(for: NavigationDirections.self) { direction in
                 if(direction is NavigationDirections.Registration) {
                     RegisterScreen()
@@ -34,6 +36,10 @@ struct ContentView: View {
                 if(direction is NavigationDirections.Category) {
                     let id = (direction as? NavigationDirections.Category)?.getCategoryId() ?? 0
                     CategoryScreen(id: id)
+                }
+                if(direction is NavigationDirections.AddExercise) {
+                    let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? 0
+                    AddExerciseScreen(id: id)
                 }
             }
         }

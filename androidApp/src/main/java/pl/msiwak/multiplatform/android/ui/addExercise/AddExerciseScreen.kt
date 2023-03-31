@@ -41,7 +41,6 @@ fun AddExerciseScreen(id: Long) {
 
     OnLifecycleEvent { _, event ->
         when (event) {
-            Lifecycle.Event.ON_RESUME -> viewModel.onInit()
             Lifecycle.Event.ON_PAUSE -> viewModel.onPause()
             else -> Unit
         }
@@ -93,7 +92,7 @@ fun AddExerciseScreen(id: Long) {
                 onValueChange = {
                     viewModel.onExerciseTitleChanged(it)
                 },
-                hintText = "Exercise"
+                hintText = stringResource(id = MR.strings.exercise.resourceId)
             )
 
             ResultsTableView(
@@ -127,7 +126,7 @@ fun AddExerciseScreen(id: Long) {
             ),
             onClick = { viewModel.onAddNewExerciseClicked() }
         ) {
-            Text(modifier = Modifier.padding(8.dp), text = "Save new result", fontSize = 16.sp)
+            Text(modifier = Modifier.padding(8.dp), text = stringResource(id = MR.strings.add_result_save.resourceId), fontSize = 16.sp)
         }
     }
 }

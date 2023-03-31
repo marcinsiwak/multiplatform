@@ -49,7 +49,7 @@ class AddExerciseViewModel(
 
     private var exerciseName: String? = null
 
-    fun onInit() {
+    init {
         viewModelScope.launch {
             currentExerciseData.value = getExerciseUseCase(exerciseId)
             currentResults.addAll(currentExerciseData.value.results)

@@ -3,8 +3,11 @@ import SwiftUI
 struct ListItemView: View {
     let title: String
     
-    init(title: String) {
+    private let onClicked: () -> Void
+    
+    init(title: String, onClicked: @escaping () -> Void) {
         self.title = title
+        self.onClicked = onClicked
     }
     
     var body: some View {
@@ -15,7 +18,9 @@ struct ListItemView: View {
                 Image(systemName: "chevron.compact.right").foregroundColor(.white).padding(.horizontal, 8)
             }.padding(.top, 8)
                 .padding(.horizontal, 8)
-                .rippleEffect(rippleColor: .gray)
+                .rippleEffect(rippleColor: .gray, onClicked: {
+                    onClicked()
+                })
                 
             Divider().background(.white)
         }
@@ -24,6 +29,6 @@ struct ListItemView: View {
 
 struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ListItemView(title: "")
+        ListItemView(title: "", onClicked: {})
     }
 }
