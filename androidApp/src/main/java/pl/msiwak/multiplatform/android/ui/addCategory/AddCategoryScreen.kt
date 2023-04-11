@@ -20,6 +20,7 @@ import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
@@ -28,6 +29,7 @@ import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 fun AddCategoryScreen() {
     val viewModel = koinViewModel<AddCategoryViewModel>()
     val state = viewModel.viewState.collectAsState()
+    val dimens = LocalDim.current
 
     Column(
         modifier = Modifier
@@ -37,7 +39,7 @@ fun AddCategoryScreen() {
         InputView(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(dimens.space_8),
             value = state.value.name,
             onValueChange = {
                 viewModel.onExerciseName(it)
@@ -54,14 +56,14 @@ fun AddCategoryScreen() {
         Button(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp, horizontal = 80.dp),
+                .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
             onClick = { viewModel.onSaveCategoryClicked()  }
         ) {
-            Text(modifier = Modifier.padding(8.dp), text = "Add category", fontSize = 16.sp)
+            Text(modifier = Modifier.padding(dimens.space_8), text = "Add category", fontSize = 16.sp)
         }
     }
 }

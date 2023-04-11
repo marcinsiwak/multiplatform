@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.R
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,6 +34,8 @@ fun InputView(
     errorsEnabled: Boolean = true,
     trailingIcon: @Composable (() -> Unit)? = null
 ) {
+    val dimens = LocalDim.current
+
     Column(modifier = modifier) {
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -42,7 +45,7 @@ fun InputView(
                 unfocusedBorderColor = Color.Gray
             ),
             trailingIcon = trailingIcon,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(dimens.space_12),
             value = value,
             onValueChange = { newText ->
                 onValueChange(newText)
@@ -63,7 +66,7 @@ fun InputView(
         Text(
             modifier = Modifier
                 .alpha(isErrorVisible)
-                .padding(bottom = 8.dp),
+                .padding(bottom = dimens.space_8),
             text = errorMessage ?: "",
             color = Color.Red
         )

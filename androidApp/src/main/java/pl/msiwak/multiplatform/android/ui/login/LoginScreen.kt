@@ -20,6 +20,7 @@ import org.example.library.MR
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 
@@ -28,6 +29,7 @@ val viewModel: LoginViewModel by KoinJavaComponent.inject(LoginViewModel::class.
 @Composable
 fun LoginScreen() {
     val state = viewModel.loginState.collectAsState()
+    val dimens = LocalDim.current
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -39,10 +41,10 @@ fun LoginScreen() {
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(vertical = 24.dp)
+                .padding(vertical = dimens.space_24)
         ) {
             InputView(
-                modifier = Modifier.padding(vertical = 8.dp),
+                modifier = Modifier.padding(vertical = dimens.space_8),
                 value = state.value.login,
                 onValueChange = {
                     viewModel.onLoginChanged(it)
@@ -63,7 +65,7 @@ fun LoginScreen() {
             Button(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(vertical = 16.dp),
+                    .padding(vertical = dimens.space_16),
                 onClick = {
                     viewModel.onLoginClicked()
                 }) {

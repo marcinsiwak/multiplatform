@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.language.LanguageViewModel
 
@@ -32,6 +33,7 @@ import pl.msiwak.multiplatform.ui.language.LanguageViewModel
 fun LanguageScreen() {
     val viewModel = koinViewModel<LanguageViewModel>()
     val state = viewModel.viewState.collectAsState()
+    val dimens = LocalDim.current
 
     val context = LocalContext.current
     Column(
@@ -40,7 +42,7 @@ fun LanguageScreen() {
             .background(color = Color.Black)
     ) {
         Text(
-            modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp),
+            modifier = Modifier.padding(vertical = dimens.space_16, horizontal = dimens.space_24),
             text = getString(LocalContext.current, MR.strings.language),
             fontSize = 24.sp,
             color = Color.White

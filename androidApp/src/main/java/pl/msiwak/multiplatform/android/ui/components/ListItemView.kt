@@ -21,10 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> Unit = {}) {
+    val dimens = LocalDim.current
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,18 +40,18 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                     color = Color.LightGray
                 ),
             )
-            .bottomBorder(strokeWidth = 1.dp, color = Color.DarkGray),
+            .bottomBorder(strokeWidth = dimens.space_1, color = Color.DarkGray),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
+            modifier = Modifier.padding(start = dimens.space_16, top = dimens.space_8, bottom = dimens.space_8),
             text = name,
             fontSize = 20.sp,
             color = Color.LightGray
         )
         Icon(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(dimens.space_16),
             tint = Color.LightGray,
             painter = painterResource(id = R.drawable.ic_arrow_right),
             contentDescription = null

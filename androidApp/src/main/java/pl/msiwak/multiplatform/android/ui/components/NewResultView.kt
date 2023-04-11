@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.R
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 
 @Composable
@@ -27,6 +28,8 @@ fun NewResultView(
     onDateValueChanged: (String) -> Unit,
     onDateClicked: () -> Unit
 ) {
+    val dimens = LocalDim.current
+
     Row(
         modifier = Modifier
             .height(IntrinsicSize.Min)
@@ -35,8 +38,8 @@ fun NewResultView(
 
         ResultInputView(
             modifier = Modifier
-                .width(132.dp)
-                .padding(horizontal = 16.dp),
+                .width(dimens.space_132)
+                .padding(horizontal = dimens.space_16),
             value = newResultData.result,
             onValueChange = {
                 onResultValueChanged(it)
@@ -47,13 +50,13 @@ fun NewResultView(
             color = Color.LightGray,
             modifier = Modifier
                 .fillMaxHeight()
-                .width(1.dp)
+                .width(dimens.space_1)
         )
 
         ResultInputView(
             modifier = Modifier
-                .width(132.dp)
-                .padding(horizontal = 16.dp),
+                .width(dimens.space_132)
+                .padding(horizontal = dimens.space_16),
             value = newResultData.amount,
             onValueChange = {
                 onAmountValueChanged(it)
@@ -64,13 +67,13 @@ fun NewResultView(
             color = Color.LightGray,
             modifier = Modifier
                 .fillMaxHeight()
-                .width(1.dp)
+                .width(dimens.space_1)
         )
 
         ResultInputView(
             modifier = Modifier
-                .width(132.dp)
-                .padding(horizontal = 16.dp),
+                .width(dimens.space_132)
+                .padding(horizontal = dimens.space_16),
             value = newResultData.date,
             onValueChange = {
                 onDateValueChanged(it)

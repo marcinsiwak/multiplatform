@@ -29,11 +29,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.R
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 
 @Composable
 fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
+    val dimens = LocalDim.current
+
     val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
@@ -43,11 +46,11 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
         modifier = modifier
             .background(
                 color = Color.Black,
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(dimens.space_8),
             )
-            .shadow(2.dp)
-            .border(2.dp, Color.Black, RoundedCornerShape(8.dp))
-            .height(164.dp)
+            .shadow(dimens.space_2)
+            .border(dimens.space_2, Color.Black, RoundedCornerShape(dimens.space_8))
+            .height(dimens.space_164)
             .fillMaxWidth(),
     ) {
         backgroundId?.let {
@@ -56,7 +59,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                     .align(Alignment.CenterEnd)
                     .fillMaxSize()
                     .alpha(0.5f)
-                    .clip(RoundedCornerShape(8.dp)),
+                    .clip(RoundedCornerShape(dimens.space_8)),
                 painter = painterResource(id = backgroundId),
                 contentScale = ContentScale.Crop,
                 contentDescription = null
@@ -68,9 +71,9 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                 modifier = Modifier
                     .background(
                         color = Color.Black,
-                        shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 8.dp)
+                        shape = RoundedCornerShape(topStart = dimens.space_8, bottomEnd = dimens.space_8)
                     )
-                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                    .padding(horizontal = dimens.space_12, vertical = dimens.space_8),
                 text = categoryData.name,
                 fontSize = 14.sp,
                 color = Color.White
@@ -85,7 +88,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                     Text(
                         modifier = Modifier
                             .fillMaxHeight()
-                            .padding(start = 8.dp),
+                            .padding(start = dimens.space_8),
                         maxLines = 1,
                         text = it.name,
                         fontSize = 12.sp,

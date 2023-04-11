@@ -20,11 +20,14 @@ import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.R
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
 @Composable
 fun WelcomeScreen() {
     val viewModel: WelcomeScreenViewModel by inject(WelcomeScreenViewModel::class.java)
+    val dimens = LocalDim.current
+
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.fillMaxSize(),
@@ -34,12 +37,12 @@ fun WelcomeScreen() {
         )
         Column(modifier = Modifier
             .align(Alignment.BottomCenter)
-            .padding(horizontal = 36.dp, vertical = 96.dp)) {
+            .padding(horizontal = dimens.space_36, vertical = dimens.space_96)) {
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.button_color)),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .padding(vertical = dimens.space_8),
                 onClick = { viewModel.onRegistrationClicked() }) {
                 Text(text = "Register")
             }

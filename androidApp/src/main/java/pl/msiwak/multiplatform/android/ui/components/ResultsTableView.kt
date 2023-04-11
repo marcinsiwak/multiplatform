@@ -3,14 +3,19 @@ package pl.msiwak.multiplatform.android.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 
@@ -40,18 +46,20 @@ fun ResultsTableView(
     onDateClicked: () -> Unit = {},
     onResultLongClick: (Int) -> Unit = {}
 ) {
+    val dimens = LocalDim.current
+
     Column {
         // todo results type from database
         Row(
             modifier = Modifier
-                .bottomBorder(3.dp, Color.LightGray)
+                .height(IntrinsicSize.Min)
                 .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+                .padding(vertical = dimens.space_16)
+                .bottomBorder(3.dp, Color.LightGray)
         ) {
-            Text(modifier = Modifier, text = "Weight", color = Color.White)
-            Text(modifier = Modifier, text = "Reps", color = Color.White)
-            Text(modifier = Modifier, text = "Date", color = Color.White)
+            Text(modifier = Modifier.width(dimens.space_80).padding(horizontal = dimens.space_8, vertical = dimens.space_16), text = "Weight", color = Color.White, textAlign = TextAlign.Center)
+            Text(modifier = Modifier.width(dimens.space_80).padding(horizontal = dimens.space_8, vertical = dimens.space_16), text = "Reps", color = Color.White, textAlign = TextAlign.Center)
+            Text(modifier = Modifier.fillMaxWidth().padding(horizontal = dimens.space_8, vertical = dimens.space_16), text = "Date", color = Color.White, textAlign = TextAlign.Center)
         }
         LazyColumn {
             if (results.isEmpty() && !isNewResultEnabled) {
@@ -59,7 +67,7 @@ fun ResultsTableView(
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(32.dp)
+                            .padding(dimens.space_32)
                             .clickable {
                                 onAddNewResultClicked()
                             },

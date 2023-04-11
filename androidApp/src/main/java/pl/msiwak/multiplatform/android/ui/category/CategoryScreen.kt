@@ -24,15 +24,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
@@ -41,16 +39,20 @@ import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 fun CategoryScreen(id: Long) {
     val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
     val state = viewModel.viewState.collectAsState()
+    val dimens = LocalDim.current
 
     val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
-        ExerciseType.GYM -> MR.images.bg_running_field.drawableResId
+        ExerciseType.GYM -> MR.images.bg_gym.drawableResId
         ExerciseType.OTHER -> null
     }
 
     if (state.value.isRemoveExerciseDialogVisible) {
         PopupDialog(title = getString(LocalContext.current, MR.strings.remove_result_dialog_title),
-            description = getString(LocalContext.current, MR.strings.remove_result_dialog_description),
+            description = getString(
+                LocalContext.current,
+                MR.strings.remove_result_dialog_description
+            ),
             confirmButtonTitle = getString(LocalContext.current, MR.strings.yes),
             dismissButtonTitle = getString(LocalContext.current, MR.strings.no),
             onConfirmClicked = {
@@ -92,7 +94,7 @@ fun CategoryScreen(id: Long) {
                         }
                     }
                     .fillMaxWidth()
-                    .height(264.dp),
+                    .height(dimens.space_264),
                     painter = painterResource(id = backgroundId),
                     contentScale = ContentScale.Crop,
                     contentDescription = "category background")
@@ -108,12 +110,16 @@ fun CategoryScreen(id: Long) {
         Button(modifier = Modifier
             .fillMaxWidth()
             .align(Alignment.BottomCenter)
-            .padding(vertical = 16.dp, horizontal = 80.dp),
+            .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray, contentColor = Color.Black
             ),
             onClick = { viewModel.onAddNewExerciseClicked() }) {
-            Text(modifier = Modifier.padding(8.dp), text = "Add exercise", fontSize = 16.sp)
+            Text(
+                modifier = Modifier.padding(dimens.space_8),
+                text = "Add exercise",
+                fontSize = 16.sp
+            )
         }
     }
 }

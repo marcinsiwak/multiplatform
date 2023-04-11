@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
@@ -29,6 +30,8 @@ val viewModel: RegisterViewModel by inject(RegisterViewModel::class.java)
 @Composable
 fun RegisterScreen() {
     val state = viewModel.registerState.collectAsState()
+    val dimens = LocalDim.current
+
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.fillMaxSize(),
@@ -39,10 +42,10 @@ fun RegisterScreen() {
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(vertical = 24.dp)
+                .padding(vertical = dimens.space_24)
         ) {
             InputView(
-                modifier = Modifier.padding(vertical = 8.dp),
+                modifier = Modifier.padding(vertical = dimens.space_8),
                 value = state.value.login,
                 errorMessage = state.value.loginErrorMessage,
                 onValueChange = {
@@ -64,7 +67,7 @@ fun RegisterScreen() {
             Button(
                 modifier = Modifier
                     .align(CenterHorizontally)
-                    .padding(vertical = 16.dp),
+                    .padding(vertical = dimens.space_16),
                 onClick = {
                     viewModel.onRegisterClicked()
                 }) {

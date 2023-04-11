@@ -15,12 +15,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 
 @Composable
 fun SettingsScreen() {
     val viewModel = koinViewModel<SettingsViewModel>()
+    val dimens = LocalDim.current
 
     Column(
         modifier = Modifier
@@ -28,7 +30,7 @@ fun SettingsScreen() {
             .background(color = Color.Black)
     ) {
         Text(
-            modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp),
+            modifier = Modifier.padding(vertical = dimens.space_16, horizontal = dimens.space_24),
             text = getString(LocalContext.current, MR.strings.settings),
             fontSize = 24.sp,
             color = Color.White
@@ -37,7 +39,7 @@ fun SettingsScreen() {
         if (isLanguageEnabled) {
             SettingsItem(
                 modifier = Modifier
-                    .padding(top = 8.dp)
+                    .padding(top = dimens.space_8)
                     .clickable {
                         viewModel.onLanguageClicked()
                     },

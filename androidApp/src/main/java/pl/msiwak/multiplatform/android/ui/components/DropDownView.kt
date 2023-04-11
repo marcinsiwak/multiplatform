@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.example.library.MR
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.ExerciseType
 
@@ -32,13 +33,15 @@ fun DropDownView(
     items: List<ExerciseType>,
     onItemPicked: (ExerciseType) -> Unit = {},
 ) {
+    val dimens = LocalDim.current
+
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
     var expand by remember { mutableStateOf(false) }
     Column {
         InputView(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(dimens.space_8)
                 .focusRequester(focusRequester)
                 .onFocusChanged {
                     if (it.hasFocus) {

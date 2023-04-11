@@ -11,16 +11,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.library.MR
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 
 @Composable
 fun SettingsItem(modifier: Modifier = Modifier, text: String) {
+    val dimens = LocalDim.current
+
     Column(modifier = modifier) {
         Text(
-            modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp),
+            modifier = Modifier.padding(vertical = dimens.space_16, horizontal = dimens.space_24),
             text = text,
             fontSize = 16.sp,
             color = Color.White,
         )
-        Divider(thickness = 1.dp, color = Color.White)
+        Divider(thickness = dimens.space_1, color = Color.White)
     }
 }

@@ -27,6 +27,7 @@ import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
@@ -39,6 +40,7 @@ fun AddExerciseScreen(id: Long) {
 
     val state = viewModel.viewState.collectAsState()
     val context = LocalContext.current
+    val dimens = LocalDim.current
 
     OnLifecycleEvent { _, event ->
         when (event) {
@@ -88,7 +90,7 @@ fun AddExerciseScreen(id: Long) {
             InputView(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
+                    .padding(dimens.space_8),
                 value = state.value.exerciseTitle,
                 onValueChange = {
                     viewModel.onExerciseTitleChanged(it)
@@ -120,14 +122,14 @@ fun AddExerciseScreen(id: Long) {
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .padding(vertical = 16.dp, horizontal = 80.dp),
+                .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
             onClick = { viewModel.onAddNewExerciseClicked() }
         ) {
-            Text(modifier = Modifier.padding(8.dp), text = getString(LocalContext.current, MR.strings.add_result_save), fontSize = 16.sp)
+            Text(modifier = Modifier.padding(dimens.space_8), text = getString(LocalContext.current, MR.strings.add_result_save), fontSize = 16.sp)
         }
     }
 }

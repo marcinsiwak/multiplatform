@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 
 @Composable
@@ -23,8 +24,10 @@ fun AddExerciseDialog(
     onAddExerciseClicked: () -> Unit,
     onDialogClosed: () -> Unit = {}
 ) {
+    val dimens = LocalDim.current
+
     AlertDialog(
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(dimens.space_16),
         backgroundColor = Color.DarkGray,
         onDismissRequest = {
             onDialogClosed()
@@ -40,9 +43,9 @@ fun AddExerciseDialog(
         },
         confirmButton = {
             Button(
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(dimens.space_8),
                 modifier = Modifier.fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    .padding(start = dimens.space_16, end = dimens.space_16, bottom = dimens.space_16),
                 onClick = {
                     onAddExerciseClicked()
                 }) {

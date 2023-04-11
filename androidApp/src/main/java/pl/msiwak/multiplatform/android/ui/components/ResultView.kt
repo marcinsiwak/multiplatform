@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -27,6 +28,8 @@ fun ResultView(
     date: String,
     onResultLongClick: () -> Unit = {},
 ) {
+    val dimens = LocalDim.current
+
     Row(
         modifier = Modifier
             .height(IntrinsicSize.Min)
@@ -40,8 +43,8 @@ fun ResultView(
     ) {
         Text(
             modifier = Modifier
-                .width(132.dp)
-                .padding(vertical = 16.dp),
+                .width(dimens.space_132)
+                .padding(vertical = dimens.space_16),
             text = result,
             color = Color.White,
             textAlign = TextAlign.Center,
@@ -51,12 +54,12 @@ fun ResultView(
             color = Color.LightGray,
             modifier = Modifier
                 .fillMaxHeight()
-                .width(1.dp)
+                .width(dimens.space_1)
         )
         Text(
             modifier = Modifier
-                .width(132.dp)
-                .padding(vertical = 16.dp),
+                .width(dimens.space_132)
+                .padding(vertical = dimens.space_16),
             text = amount,
             color = Color.White,
             textAlign = TextAlign.Center,
@@ -66,12 +69,12 @@ fun ResultView(
             color = Color.LightGray,
             modifier = Modifier
                 .fillMaxHeight()
-                .width(1.dp)
+                .width(dimens.space_1)
         )
         Text(
             modifier = Modifier
-                .width(132.dp)
-                .padding(vertical = 16.dp),
+                .width(dimens.space_132)
+                .padding(vertical = dimens.space_16),
             text = date,
             color = Color.White,
             textAlign = TextAlign.Center,
