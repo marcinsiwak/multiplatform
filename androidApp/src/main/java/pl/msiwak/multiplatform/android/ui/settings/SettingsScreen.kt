@@ -32,7 +32,7 @@ fun SettingsScreen() {
         Text(
             modifier = Modifier.padding(vertical = dimens.space_16, horizontal = dimens.space_24),
             text = getString(LocalContext.current, MR.strings.settings),
-            fontSize = 24.sp,
+            fontSize = dimens.font_24,
             color = Color.White
         )
         val isLanguageEnabled = false

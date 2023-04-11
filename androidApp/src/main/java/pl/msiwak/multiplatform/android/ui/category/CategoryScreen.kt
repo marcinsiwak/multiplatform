@@ -118,7 +118,7 @@ fun CategoryScreen(id: Long) {
             Text(
                 modifier = Modifier.padding(dimens.space_8),
                 text = "Add exercise",
-                fontSize = 16.sp
+                fontSize = dimens.font_16
             )
         }
     }

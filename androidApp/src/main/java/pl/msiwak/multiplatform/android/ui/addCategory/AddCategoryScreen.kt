@@ -63,7 +63,7 @@ fun AddCategoryScreen() {
             ),
             onClick = { viewModel.onSaveCategoryClicked()  }
         ) {
-            Text(modifier = Modifier.padding(dimens.space_8), text = "Add category", fontSize = 16.sp)
+            Text(modifier = Modifier.padding(dimens.space_8), text = "Add category", fontSize = dimens.font_16)
         }
     }
 }

@@ -21,7 +21,7 @@ fun SettingsItem(modifier: Modifier = Modifier, text: String) {
         Text(
             modifier = Modifier.padding(vertical = dimens.space_16, horizontal = dimens.space_24),
             text = text,
-            fontSize = 16.sp,
+            fontSize = dimens.font_16,
             color = Color.White,
         )
         Divider(thickness = dimens.space_1, color = Color.White)

@@ -47,7 +47,7 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
         Text(
             modifier = Modifier.padding(start = dimens.space_16, top = dimens.space_8, bottom = dimens.space_8),
             text = name,
-            fontSize = 20.sp,
+            fontSize = dimens.font_24,
             color = Color.LightGray
         )
         Icon(

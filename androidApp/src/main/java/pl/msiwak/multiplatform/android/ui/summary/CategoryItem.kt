@@ -75,7 +75,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                     )
                     .padding(horizontal = dimens.space_12, vertical = dimens.space_8),
                 text = categoryData.name,
-                fontSize = 14.sp,
+                fontSize = dimens.font_14,
                 color = Color.White
             )
 
@@ -91,7 +91,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                             .padding(start = dimens.space_8),
                         maxLines = 1,
                         text = it.name,
-                        fontSize = 12.sp,
+                        fontSize = dimens.font_12,
                         fontStyle = FontStyle.Italic,
                         color = Color.LightGray,
                     )

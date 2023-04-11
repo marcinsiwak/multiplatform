@@ -129,7 +129,7 @@ fun AddExerciseScreen(id: Long) {
             ),
             onClick = { viewModel.onAddNewExerciseClicked() }
         ) {
-            Text(modifier = Modifier.padding(dimens.space_8), text = getString(LocalContext.current, MR.strings.add_result_save), fontSize = 16.sp)
+            Text(modifier = Modifier.padding(dimens.space_8), text = getString(LocalContext.current, MR.strings.add_result_save), fontSize = dimens.font_16)
         }
     }
 }

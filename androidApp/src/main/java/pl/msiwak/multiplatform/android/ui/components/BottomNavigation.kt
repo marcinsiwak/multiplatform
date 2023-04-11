@@ -10,10 +10,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
 @Composable
 fun BottomNavigation(navController: NavController, items: List<DashboardNavigationDirections>) {
+    val dimens = LocalDim.current
+
     androidx.compose.material.BottomNavigation(
         backgroundColor = Color.Black,
         contentColor = Color.White
@@ -26,7 +29,7 @@ fun BottomNavigation(navController: NavController, items: List<DashboardNavigati
                 label = {
                     Text(
                         text = item.title,
-                        fontSize = 8.sp
+                        fontSize = dimens.font_8
                     )
                 },
                 selectedContentColor = Color.White,

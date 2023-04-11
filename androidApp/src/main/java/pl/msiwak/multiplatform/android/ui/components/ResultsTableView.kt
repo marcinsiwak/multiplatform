@@ -103,7 +103,7 @@ fun ResultsTableView(
                     ) {
                         Text(
                             text = getString(LocalContext.current, MR.strings.add_new_result),
-                            fontSize = 16.sp
+                            fontSize = dimens.font_16
                         )
                     }
                 }
