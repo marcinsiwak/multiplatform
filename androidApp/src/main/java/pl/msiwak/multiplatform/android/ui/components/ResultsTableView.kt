@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -17,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
+import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 
 @Composable
@@ -44,31 +45,15 @@ fun ResultsTableView(
         Row(
             modifier = Modifier
                 .bottomBorder(3.dp, Color.LightGray)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            Text(modifier = Modifier.padding(16.dp), text = "Weight", color = Color.White)
-            Text(modifier = Modifier.padding(16.dp), text = "Reps", color = Color.White)
-            Text(modifier = Modifier.padding(16.dp), text = "Date", color = Color.White)
+            Text(modifier = Modifier, text = "Weight", color = Color.White)
+            Text(modifier = Modifier, text = "Reps", color = Color.White)
+            Text(modifier = Modifier, text = "Date", color = Color.White)
         }
         LazyColumn {
-
-            if (isNewResultEnabled) {
-                item {
-                    NewResultView(
-                        newResultData = newResultData,
-                        onResultValueChanged = {
-                            onResultValueChanged(it)
-                        }, onAmountValueChanged = {
-                            onAmountValueChanged(it)
-                        }, onDateValueChanged = {
-                            onDateValueChanged(it)
-                        }, onDateClicked = {
-                            onDateClicked()
-                        })
-                }
-            }
-
             if (results.isEmpty() && !isNewResultEnabled) {
                 item {
                     Text(
@@ -84,7 +69,7 @@ fun ResultsTableView(
                     )
                 }
             }
-            itemsIndexed(results) { pos , item ->
+            itemsIndexed(results) { pos, item ->
                 ResultView(
                     result = item.result,
                     amount = item.amount,
@@ -108,8 +93,27 @@ fun ResultsTableView(
                         shape = RectangleShape,
                         onClick = { onAddNewResultClicked() }
                     ) {
-                        Text(text = stringResource(id = MR.strings.add_new_result.resourceId), fontSize = 16.sp)
+                        Text(
+                            text = getString(LocalContext.current, MR.strings.add_new_result),
+                            fontSize = 16.sp
+                        )
                     }
+                }
+            }
+
+            if (isNewResultEnabled) {
+                item {
+                    NewResultView(
+                        newResultData = newResultData,
+                        onResultValueChanged = {
+                            onResultValueChanged(it)
+                        }, onAmountValueChanged = {
+                            onAmountValueChanged(it)
+                        }, onDateValueChanged = {
+                            onDateValueChanged(it)
+                        }, onDateClicked = {
+                            onDateClicked()
+                        })
                 }
             }
         }

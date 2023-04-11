@@ -15,9 +15,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.R
+import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 
 
@@ -32,7 +35,6 @@ import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 fun SummaryScreen() {
     val viewModel = koinViewModel<SummaryViewModel>()
     val state = viewModel.viewState.collectAsState()
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -66,7 +68,7 @@ fun SummaryScreen() {
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = stringResource(id = MR.strings.summary_add_category.resourceId)
+                                text = getString(LocalContext.current, MR.strings.summary_add_category)
                             )
                         }
                     }

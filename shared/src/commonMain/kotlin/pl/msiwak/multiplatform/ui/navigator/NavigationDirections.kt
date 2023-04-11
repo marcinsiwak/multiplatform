@@ -12,4 +12,5 @@ expect sealed class NavigationDirections : NavigationCommand {
     class AddExercise(id: Long = 0) : NavigationDirections
     class Category(id: Long = 0) : NavigationDirections
     object AddCategory : NavigationDirections
+    object Language: NavigationDirections
 }

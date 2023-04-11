@@ -17,6 +17,7 @@ import pl.msiwak.multiplatform.android.ui.addCategory.AddCategoryScreen
 import pl.msiwak.multiplatform.android.ui.addExercise.AddExerciseScreen
 import pl.msiwak.multiplatform.android.ui.category.CategoryScreen
 import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
+import pl.msiwak.multiplatform.android.ui.language.LanguageScreen
 import pl.msiwak.multiplatform.android.ui.login.LoginScreen
 import pl.msiwak.multiplatform.android.ui.register.RegisterScreen
 import pl.msiwak.multiplatform.android.ui.theme.BaseKmm_ProjectTheme
@@ -46,6 +47,7 @@ class MainActivity : ComponentActivity() {
                         composable(NavigationDirections.Login.route) { LoginScreen() }
                         composable(NavigationDirections.Dashboard.route) { DashboardScreen() }
                         composable(NavigationDirections.AddCategory.route) { AddCategoryScreen() }
+                        composable(NavigationDirections.Language.route) { LanguageScreen() }
                         composable(
                             NavigationDirections.AddExercise().route, arguments = listOf(
                                 navArgument(NavigationDirections.AddExercise.BUNDLE_ARG_ID) {

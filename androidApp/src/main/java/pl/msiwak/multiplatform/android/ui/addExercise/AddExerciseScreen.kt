@@ -28,6 +28,7 @@ import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
+import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
@@ -60,10 +61,10 @@ fun AddExerciseScreen(id: Long) {
 
     if (state.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = stringResource(id = MR.strings.remove_result_dialog_title.resourceId),
-            description = stringResource(id = MR.strings.remove_result_dialog_description.resourceId),
-            confirmButtonTitle = stringResource(id = MR.strings.yes.resourceId),
-            dismissButtonTitle = stringResource(id = MR.strings.no.resourceId),
+            title = getString(LocalContext.current, MR.strings.remove_result_dialog_title),
+            description = getString(LocalContext.current, MR.strings.remove_result_dialog_description),
+            confirmButtonTitle = getString(LocalContext.current, MR.strings.yes),
+            dismissButtonTitle = getString(LocalContext.current, MR.strings.no),
             onConfirmClicked = {
                 viewModel.onResultRemoved()
             },
@@ -92,7 +93,7 @@ fun AddExerciseScreen(id: Long) {
                 onValueChange = {
                     viewModel.onExerciseTitleChanged(it)
                 },
-                hintText = stringResource(id = MR.strings.exercise.resourceId)
+                hintText = getString(LocalContext.current, MR.strings.exercise)
             )
 
             ResultsTableView(
@@ -126,7 +127,7 @@ fun AddExerciseScreen(id: Long) {
             ),
             onClick = { viewModel.onAddNewExerciseClicked() }
         ) {
-            Text(modifier = Modifier.padding(8.dp), text = stringResource(id = MR.strings.add_result_save.resourceId), fontSize = 16.sp)
+            Text(modifier = Modifier.padding(8.dp), text = getString(LocalContext.current, MR.strings.add_result_save), fontSize = 16.sp)
         }
     }
 }

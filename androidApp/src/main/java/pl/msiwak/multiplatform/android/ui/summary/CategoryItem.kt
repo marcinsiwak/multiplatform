@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.library.MR
+import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 
@@ -36,6 +37,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
     val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
+        ExerciseType.OTHER -> null
     }
     Box(
         modifier = modifier
@@ -48,16 +50,18 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
             .height(164.dp)
             .fillMaxWidth(),
     ) {
-        Image(
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .fillMaxSize()
-                .alpha(0.5f)
-                .clip(RoundedCornerShape(8.dp)),
-            painter = painterResource(id = backgroundId),
-            contentScale = ContentScale.Crop,
-            contentDescription = null
-        )
+        backgroundId?.let {
+            Image(
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .fillMaxSize()
+                    .alpha(0.5f)
+                    .clip(RoundedCornerShape(8.dp)),
+                painter = painterResource(id = backgroundId),
+                contentScale = ContentScale.Crop,
+                contentDescription = null
+            )
+        }
 
         Column {
             Text(

@@ -9,10 +9,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.utils.getString
 
 @Composable
 fun AddExerciseDialog(
@@ -28,7 +30,7 @@ fun AddExerciseDialog(
             onDialogClosed()
         },
         title = {
-            Text(text = stringResource(id = MR.strings.exercise_name.resourceId))
+            Text(text = getString(LocalContext.current, MR.strings.exercise_name))
         },
         text = {
             InputView(value = inputText,
@@ -44,7 +46,7 @@ fun AddExerciseDialog(
                 onClick = {
                     onAddExerciseClicked()
                 }) {
-                Text(text = stringResource(id = MR.strings.add_new_exercise.resourceId))
+                Text(text = getString(LocalContext.current, MR.strings.add_new_exercise))
             }
         }
     )

@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -19,6 +20,7 @@ import org.example.library.MR
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 
 val viewModel: LoginViewModel by KoinJavaComponent.inject(LoginViewModel::class.java)
@@ -45,7 +47,7 @@ fun LoginScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = stringResource(id = MR.strings.email.resourceId)
+                hintText = getString(LocalContext.current, MR.strings.email)
             )
 
             InputView(
@@ -56,7 +58,7 @@ fun LoginScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = stringResource(id = MR.strings.password.resourceId)
+                hintText = getString(LocalContext.current, MR.strings.password)
             )
             Button(
                 modifier = Modifier
@@ -65,7 +67,7 @@ fun LoginScreen() {
                 onClick = {
                     viewModel.onLoginClicked()
                 }) {
-                Text(text = stringResource(id = MR.strings.login.resourceId))
+                Text(text = getString(LocalContext.current, MR.strings.login))
             }
         }
 

@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
 val viewModel: RegisterViewModel by inject(RegisterViewModel::class.java)
@@ -46,7 +48,7 @@ fun RegisterScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = stringResource(id = MR.strings.email.resourceId)
+                hintText = getString(LocalContext.current, MR.strings.email)
             )
 
             InputView(
@@ -57,7 +59,7 @@ fun RegisterScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = stringResource(id = MR.strings.password.resourceId)
+                hintText = getString(LocalContext.current, MR.strings.password)
             )
             Button(
                 modifier = Modifier
@@ -66,7 +68,7 @@ fun RegisterScreen() {
                 onClick = {
                     viewModel.onRegisterClicked()
                 }) {
-                Text(text = stringResource(id = MR.strings.register.resourceId))
+                Text(text = getString(LocalContext.current, MR.strings.register))
             }
         }
 

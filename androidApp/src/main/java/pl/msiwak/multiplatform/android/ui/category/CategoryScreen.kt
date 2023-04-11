@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,7 @@ import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
+import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
@@ -43,13 +45,14 @@ fun CategoryScreen(id: Long) {
     val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_running_field.drawableResId
+        ExerciseType.OTHER -> null
     }
 
     if (state.value.isRemoveExerciseDialogVisible) {
-        PopupDialog(title = stringResource(id = MR.strings.remove_result_dialog_title.resourceId),
-            description = stringResource(id = MR.strings.remove_result_dialog_description.resourceId),
-            confirmButtonTitle = stringResource(id = MR.strings.yes.resourceId),
-            dismissButtonTitle = stringResource(id = MR.strings.no.resourceId),
+        PopupDialog(title = getString(LocalContext.current, MR.strings.remove_result_dialog_title),
+            description = getString(LocalContext.current, MR.strings.remove_result_dialog_description),
+            confirmButtonTitle = getString(LocalContext.current, MR.strings.yes),
+            dismissButtonTitle = getString(LocalContext.current, MR.strings.no),
             onConfirmClicked = {
                 viewModel.onResultRemoved()
             },
@@ -75,24 +78,25 @@ fun CategoryScreen(id: Long) {
         }
 
         Column {
-            Image(modifier = Modifier
-                .drawWithCache {
-                    val gradient = Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black),
-                        startY = size.height / 3,
-                        endY = size.height
-                    )
-                    onDrawWithContent {
-                        drawContent()
-                        drawRect(gradient, blendMode = BlendMode.Multiply)
+            backgroundId?.let {
+                Image(modifier = Modifier
+                    .drawWithCache {
+                        val gradient = Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, Color.Black),
+                            startY = size.height / 3,
+                            endY = size.height
+                        )
+                        onDrawWithContent {
+                            drawContent()
+                            drawRect(gradient, blendMode = BlendMode.Multiply)
+                        }
                     }
-                }
-                .fillMaxWidth()
-                .height(264.dp),
-                painter = painterResource(id = backgroundId),
-                contentScale = ContentScale.Crop,
-                contentDescription = "category background")
-
+                    .fillMaxWidth()
+                    .height(264.dp),
+                    painter = painterResource(id = backgroundId),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = "category background")
+            }
             LazyColumn {
                 itemsIndexed(state.value.exerciseList) { index, item ->
                     ListItemView(name = item.name,

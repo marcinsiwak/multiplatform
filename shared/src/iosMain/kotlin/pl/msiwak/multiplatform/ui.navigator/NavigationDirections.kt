@@ -39,4 +39,8 @@ actual sealed class NavigationDirections : NavigationCommand {
     actual object AddCategory : NavigationDirections() {
         override val route: String = "addCategory"
     }
+
+    actual object Language : NavigationDirections() {
+        override val route: String = "language"
+    }
 }
