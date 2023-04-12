@@ -43,7 +43,7 @@ fun ResultView(
     ) {
         Text(
             modifier = Modifier
-                .width(dimens.space_132)
+                .width(dimens.space_96)
                 .padding(vertical = dimens.space_16),
             text = result,
             color = Color.White,
@@ -58,7 +58,7 @@ fun ResultView(
         )
         Text(
             modifier = Modifier
-                .width(dimens.space_132)
+                .width(dimens.space_96)
                 .padding(vertical = dimens.space_16),
             text = amount,
             color = Color.White,
@@ -73,7 +73,7 @@ fun ResultView(
         )
         Text(
             modifier = Modifier
-                .width(dimens.space_132)
+                .fillMaxWidth()
                 .padding(vertical = dimens.space_16),
             text = date,
             color = Color.White,
