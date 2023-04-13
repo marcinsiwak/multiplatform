@@ -10,7 +10,6 @@ plugins {
 
 dependencies {
     commonMainApi("dev.icerock.moko:resources:0.21.2")
-    commonMainApi("dev.icerock.moko:resources-compose:0.21.2")
 }
 
 multiplatformResources {

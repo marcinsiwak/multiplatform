@@ -55,16 +55,16 @@ struct AddExerciseScreen: View {
                 viewModel.onResultLongClicked(resultIndex: newIndex)
             })
             
-            Button(action: {
-                viewModel.onAddNewExerciseClicked()
-            }) {
-                Text(MR.strings().add_result_save.desc().localized())
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .padding(.horizontal, 80)
-            .background(Color.gray)
-            .foregroundColor(.black)
+//            Button(action: {
+//                viewModel.onAddNewExerciseClicked()
+//            }) {
+//                Text(MR.strings().add_result_save.desc().localized())
+//            }
+//            .frame(maxWidth: .infinity)
+//            .padding(.vertical, 16)
+//            .padding(.horizontal, 80)
+//            .background(Color.gray)
+//            .foregroundColor(.black)
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         .background(.black)
