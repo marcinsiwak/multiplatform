@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,7 +35,7 @@ fun AddCategoryScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Black)
+//            .background(color = colorResource(id = MR.colors))
     ) {
         InputView(
             modifier = Modifier

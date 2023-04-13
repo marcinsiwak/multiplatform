@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.extensions
 
-import com.squareup.sqldelight.Query
+import app.cash.sqldelight.Query
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -11,11 +11,7 @@ fun <T : Any> Query<T>.asFlow(): Flow<Query<T>> = flow {
 
     val channel = Channel<Unit>(Channel.CONFLATED)
 
-    val listener = object : Query.Listener {
-        override fun queryResultsChanged() {
-            channel.trySend(Unit)
-        }
-    }
+    val listener = Query.Listener { channel.trySend(Unit) }
     addListener(listener)
 
     try {

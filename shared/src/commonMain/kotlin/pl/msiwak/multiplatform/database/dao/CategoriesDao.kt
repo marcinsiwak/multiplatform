@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.database.dao
 
+import app.cash.sqldelight.coroutines.asFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
@@ -8,7 +9,6 @@ import pl.msiwak.multiplatform.data.common.ExerciseShort
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 import pl.msiwak.multiplatform.database.Database
-import pl.msiwak.multiplatform.extensions.asFlow
 
 class CategoriesDao(database: Database) {
 

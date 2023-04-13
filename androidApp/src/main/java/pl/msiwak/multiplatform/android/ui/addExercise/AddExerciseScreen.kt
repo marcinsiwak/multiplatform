@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -91,6 +92,7 @@ fun AddExerciseScreen(id: Long) {
         Text(
             modifier = Modifier
                 .height(40.dp)
+                .width(132.dp)
                 .background(
                     color = Color.LightGray,
                     shape = RoundedCornerShape(bottomEnd = dimens.space_16)
@@ -112,7 +114,7 @@ fun AddExerciseScreen(id: Long) {
 //        )
 
         ResultsTableView(
-            modifier = Modifier,
+            modifier = Modifier.offset(y = dimens.space_16),
             results = state.value.results,
             isNewResultEnabled = state.value.isResultFieldEnabled,
             newResultData = state.value.newResultData,

@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.database
 
-import com.squareup.sqldelight.ColumnAdapter
+import app.cash.sqldelight.ColumnAdapter
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

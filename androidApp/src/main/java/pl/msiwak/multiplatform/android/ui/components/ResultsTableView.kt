@@ -89,7 +89,7 @@ fun ResultsTableView(
             )
         }
         LazyColumn(
-            modifier = Modifier.height(400.dp),
+            modifier = Modifier.height(420.dp),
             state = listState
         ) {
             if (results.isEmpty() && !isNewResultEnabled) {

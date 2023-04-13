@@ -1,15 +1,17 @@
 package pl.msiwak.multiplatform.database
 
-import pl.msiwak.multiplatform.cache.AppDatabase
+import pl.msiwak.multiplatform.AppDatabase
+import plmsiwakmultiplatformcache.Category
+import plmsiwakmultiplatformcache.Exercise
 
 class Database(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = AppDatabase(
         databaseDriverFactory.createDriver(),
-        CategoryAdapter = plmsiwakmultiplatformcache.Category.Adapter(
+        CategoryAdapter = Category.Adapter(
             exercisesAdapter = exerciseListAdapter,
             exerciseTypeAdapter = exerciseTypeAdapter
         ),
-        ExerciseAdapter = plmsiwakmultiplatformcache.Exercise.Adapter(
+        ExerciseAdapter = Exercise.Adapter(
             resultsAdapter = resultListAdapter,
             exerciseTypeAdapter = exerciseTypeAdapter
         )

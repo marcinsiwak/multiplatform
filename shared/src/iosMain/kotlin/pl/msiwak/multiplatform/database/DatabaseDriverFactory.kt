@@ -1,8 +1,9 @@
 package pl.msiwak.multiplatform.database
 
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
-import pl.msiwak.multiplatform.cache.AppDatabase
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.native.NativeSqliteDriver
+import pl.msiwak.multiplatform.AppDatabase
+
 
 actual class DatabaseDriverFactory {
     actual fun createDriver(): SqlDriver {

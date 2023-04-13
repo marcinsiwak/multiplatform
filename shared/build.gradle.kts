@@ -4,13 +4,13 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.10"
-    id("com.squareup.sqldelight")
+    id("app.cash.sqldelight") version "2.0.0-alpha05"
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
 dependencies {
-    commonMainApi("dev.icerock.moko:resources:0.20.1")
-    commonMainApi("dev.icerock.moko:resources-compose:0.21.1")
+    commonMainApi("dev.icerock.moko:resources:0.21.2")
+    commonMainApi("dev.icerock.moko:resources-compose:0.21.2")
 }
 
 multiplatformResources {
@@ -29,7 +29,7 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true
-            export("dev.icerock.moko:resources:0.20.1")
+            export("dev.icerock.moko:resources:0.21.2")
             export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
         }
     }
@@ -56,7 +56,6 @@ kotlin {
                     api(napier)
                 }
                 with(Deps.SQLDelight) {
-                    api(runtime)
                     api(coroutines)
                 }
             }
@@ -121,7 +120,9 @@ android {
 }
 
 sqldelight {
-    database("AppDatabase") {
-        packageName = "pl.msiwak.multiplatform.cache"
+    databases {
+        create("AppDatabase") {
+            packageName.set("pl.msiwak.multiplatform")
+        }
     }
 }
