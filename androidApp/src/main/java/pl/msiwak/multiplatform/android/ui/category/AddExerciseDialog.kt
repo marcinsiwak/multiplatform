@@ -25,6 +25,7 @@ fun AddExerciseDialog(
     onDialogClosed: () -> Unit = {}
 ) {
     val dimens = LocalDim.current
+    val context = LocalContext.current
 
     AlertDialog(
         shape = RoundedCornerShape(dimens.space_16),
@@ -33,7 +34,7 @@ fun AddExerciseDialog(
             onDialogClosed()
         },
         title = {
-            Text(text = getString(LocalContext.current, MR.strings.exercise_name))
+            Text(text = getString(context, MR.strings.exercise_name))
         },
         text = {
             InputView(value = inputText,
@@ -49,7 +50,7 @@ fun AddExerciseDialog(
                 onClick = {
                     onAddExerciseClicked()
                 }) {
-                Text(text = getString(LocalContext.current, MR.strings.add_new_exercise))
+                Text(text = getString(context, MR.strings.add_new_exercise))
             }
         }
     )

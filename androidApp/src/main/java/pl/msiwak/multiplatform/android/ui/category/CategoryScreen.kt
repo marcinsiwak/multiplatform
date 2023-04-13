@@ -40,6 +40,7 @@ fun CategoryScreen(id: Long) {
     val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
     val state = viewModel.viewState.collectAsState()
     val dimens = LocalDim.current
+    val context = LocalContext.current
 
     val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
@@ -48,13 +49,13 @@ fun CategoryScreen(id: Long) {
     }
 
     if (state.value.isRemoveExerciseDialogVisible) {
-        PopupDialog(title = getString(LocalContext.current, MR.strings.remove_result_dialog_title),
+        PopupDialog(title = getString(context, MR.strings.remove_result_dialog_title),
             description = getString(
-                LocalContext.current,
+                context,
                 MR.strings.remove_result_dialog_description
             ),
-            confirmButtonTitle = getString(LocalContext.current, MR.strings.yes),
-            dismissButtonTitle = getString(LocalContext.current, MR.strings.no),
+            confirmButtonTitle = getString(context, MR.strings.yes),
+            dismissButtonTitle = getString(context, MR.strings.no),
             onConfirmClicked = {
                 viewModel.onResultRemoved()
             },

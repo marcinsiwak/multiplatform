@@ -1,16 +1,13 @@
 package pl.msiwak.multiplatform.android.ui.addExercise
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -23,11 +20,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import dev.icerock.moko.resources.compose.colorResource
 import kotlinx.coroutines.flow.collectLatest
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
@@ -67,13 +64,13 @@ fun AddExerciseScreen(id: Long) {
 
     if (state.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = getString(LocalContext.current, MR.strings.remove_result_dialog_title),
+            title = getString(context, MR.strings.remove_result_dialog_title),
             description = getString(
-                LocalContext.current,
+                context,
                 MR.strings.remove_result_dialog_description
             ),
-            confirmButtonTitle = getString(LocalContext.current, MR.strings.yes),
-            dismissButtonTitle = getString(LocalContext.current, MR.strings.no),
+            confirmButtonTitle = getString(context, MR.strings.yes),
+            dismissButtonTitle = getString(context, MR.strings.no),
             onConfirmClicked = {
                 viewModel.onResultRemoved()
             },
@@ -91,13 +88,13 @@ fun AddExerciseScreen(id: Long) {
     ) {
         Text(
             modifier = Modifier
-                .height(40.dp)
-                .width(132.dp)
+                .widthIn(0.dp, 260.dp)
                 .background(
-                    color = Color.LightGray,
-                    shape = RoundedCornerShape(bottomEnd = dimens.space_16)
+                    color = colorResource(MR.colors.white_transparent),
+                    shape = RoundedCornerShape(bottomEnd = 32.dp)
                 )
-                .padding(horizontal = dimens.space_12, vertical = dimens.space_8),
+                .padding(start = dimens.space_12, end = dimens.space_24)
+                .padding(vertical = dimens.space_8),
             text = state.value.exerciseTitle,
             fontSize = dimens.font_16,
             color = Color.Black
@@ -110,7 +107,7 @@ fun AddExerciseScreen(id: Long) {
 //            onValueChange = {
 //                viewModel.onExerciseTitleChanged(it)
 //            },
-//            hintText = getString(LocalContext.current, MR.strings.exercise)
+//            hintText = getString(context, MR.strings.exercise)
 //        )
 
         ResultsTableView(
@@ -148,7 +145,7 @@ fun AddExerciseScreen(id: Long) {
             ) {
                 Text(
                     modifier = Modifier.padding(dimens.space_8),
-                    text = getString(LocalContext.current, MR.strings.add_new_result),
+                    text = getString(context, MR.strings.add_new_result),
                     fontSize = dimens.font_16
                 )
             }
@@ -168,7 +165,7 @@ fun AddExerciseScreen(id: Long) {
             ) {
                 Text(
                     modifier = Modifier.padding(dimens.space_8),
-                    text = getString(LocalContext.current, MR.strings.add_result_save),
+                    text = getString(context, MR.strings.add_result_save),
                     fontSize = dimens.font_16
                 )
             }

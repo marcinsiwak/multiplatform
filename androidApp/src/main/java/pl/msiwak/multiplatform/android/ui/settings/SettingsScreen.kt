@@ -23,6 +23,7 @@ import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 fun SettingsScreen() {
     val viewModel = koinViewModel<SettingsViewModel>()
     val dimens = LocalDim.current
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -31,7 +32,7 @@ fun SettingsScreen() {
     ) {
         Text(
             modifier = Modifier.padding(vertical = dimens.space_16, horizontal = dimens.space_24),
-            text = getString(LocalContext.current, MR.strings.settings),
+            text = getString(context, MR.strings.settings),
             fontSize = dimens.font_24,
             color = Color.White
         )
@@ -43,7 +44,7 @@ fun SettingsScreen() {
                     .clickable {
                         viewModel.onLanguageClicked()
                     },
-                text = getString(LocalContext.current, MR.strings.settings_language)
+                text = getString(context, MR.strings.settings_language)
             )
         }
     }

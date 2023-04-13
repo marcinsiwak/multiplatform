@@ -31,6 +31,7 @@ fun AddCategoryScreen() {
     val viewModel = koinViewModel<AddCategoryViewModel>()
     val state = viewModel.viewState.collectAsState()
     val dimens = LocalDim.current
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -45,7 +46,7 @@ fun AddCategoryScreen() {
             onValueChange = {
                 viewModel.onExerciseName(it)
             },
-            hintText = getString(LocalContext.current, MR.strings.exercise)
+            hintText = getString(context, MR.strings.exercise)
         )
         DropDownView(
             currentValue = state.value.exerciseType.name,

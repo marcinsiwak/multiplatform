@@ -22,10 +22,12 @@ import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
 @Composable
 fun DashboardScreen() {
+    val context = LocalContext.current
+
     val items = listOf(
-        DashboardNavigationDirections.Summary(R.drawable.ic_workout, getString(LocalContext.current, MR.strings.summary)),
-        DashboardNavigationDirections.Account(R.drawable.ic_account, getString(LocalContext.current, MR.strings.account)),
-        DashboardNavigationDirections.Settings(R.drawable.ic_settings, getString(LocalContext.current, MR.strings.settings))
+        DashboardNavigationDirections.Summary(R.drawable.ic_workout, getString(context, MR.strings.summary)),
+        DashboardNavigationDirections.Account(R.drawable.ic_account, getString(context, MR.strings.account)),
+        DashboardNavigationDirections.Settings(R.drawable.ic_settings, getString(context, MR.strings.settings))
     )
 
     val navController = rememberNavController()

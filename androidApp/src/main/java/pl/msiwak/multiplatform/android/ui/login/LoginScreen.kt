@@ -24,12 +24,14 @@ import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 
-val viewModel: LoginViewModel by KoinJavaComponent.inject(LoginViewModel::class.java)
 
 @Composable
 fun LoginScreen() {
+    val viewModel: LoginViewModel by KoinJavaComponent.inject(LoginViewModel::class.java)
+
     val state = viewModel.loginState.collectAsState()
     val dimens = LocalDim.current
+    val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -49,7 +51,7 @@ fun LoginScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = getString(LocalContext.current, MR.strings.email)
+                hintText = getString(context, MR.strings.email)
             )
 
             InputView(
@@ -60,7 +62,7 @@ fun LoginScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = getString(LocalContext.current, MR.strings.password)
+                hintText = getString(context, MR.strings.password)
             )
             Button(
                 modifier = Modifier
@@ -69,7 +71,7 @@ fun LoginScreen() {
                 onClick = {
                     viewModel.onLoginClicked()
                 }) {
-                Text(text = getString(LocalContext.current, MR.strings.login))
+                Text(text = getString(context, MR.strings.login))
             }
         }
 

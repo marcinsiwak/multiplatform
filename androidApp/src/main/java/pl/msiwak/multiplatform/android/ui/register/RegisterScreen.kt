@@ -25,12 +25,14 @@ import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
-val viewModel: RegisterViewModel by inject(RegisterViewModel::class.java)
 
 @Composable
 fun RegisterScreen() {
+    val viewModel: RegisterViewModel by inject(RegisterViewModel::class.java)
+
     val state = viewModel.registerState.collectAsState()
     val dimens = LocalDim.current
+    val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -51,7 +53,7 @@ fun RegisterScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = getString(LocalContext.current, MR.strings.email)
+                hintText = getString(context, MR.strings.email)
             )
 
             InputView(
@@ -62,7 +64,7 @@ fun RegisterScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = getString(LocalContext.current, MR.strings.password)
+                hintText = getString(context, MR.strings.password)
             )
             Button(
                 modifier = Modifier
@@ -71,7 +73,7 @@ fun RegisterScreen() {
                 onClick = {
                     viewModel.onRegisterClicked()
                 }) {
-                Text(text = getString(LocalContext.current, MR.strings.register))
+                Text(text = getString(context, MR.strings.register))
             }
         }
 

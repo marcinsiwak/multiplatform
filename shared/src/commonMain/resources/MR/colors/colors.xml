@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <!--to make color transparent add transparency at the end of color name-->
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
@@ -11,5 +12,5 @@
     <color name="summary_two">#020c1c</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="white_transparent">#59FFFFFF</color>
+    <color name="white_transparent">#FFFFFF59</color>
 </resources>

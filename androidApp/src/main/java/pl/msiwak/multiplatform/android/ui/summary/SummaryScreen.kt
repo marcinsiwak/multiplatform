@@ -34,6 +34,7 @@ fun SummaryScreen() {
     val viewModel = koinViewModel<SummaryViewModel>()
     val state = viewModel.viewState.collectAsState()
     val dimens = LocalDim.current
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -69,7 +70,7 @@ fun SummaryScreen() {
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
                                 text = getString(
-                                    LocalContext.current,
+                                    context,
                                     MR.strings.summary_add_category
                                 )
                             )

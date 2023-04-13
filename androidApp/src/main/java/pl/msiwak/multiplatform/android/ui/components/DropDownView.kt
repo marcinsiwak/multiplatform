@@ -34,6 +34,7 @@ fun DropDownView(
     onItemPicked: (ExerciseType) -> Unit = {},
 ) {
     val dimens = LocalDim.current
+    val context = LocalContext.current
 
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -50,7 +51,7 @@ fun DropDownView(
                 },
             value = currentValue,
             onValueChange = {},
-            hintText = getString(LocalContext.current, MR.strings.exercise_type),
+            hintText = getString(context, MR.strings.exercise_type),
             readOnly = true,
             errorsEnabled = false,
             trailingIcon = { Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null) }
