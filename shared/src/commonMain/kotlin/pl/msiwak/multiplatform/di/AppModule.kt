@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.di
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
+import pl.msiwak.multiplatform.api.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.data.store.LanguageStore
 import pl.msiwak.multiplatform.data.store.UnitStore
 import pl.msiwak.multiplatform.database.Database
@@ -12,6 +13,8 @@ import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
+import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
+import pl.msiwak.multiplatform.domain.remoteConfig.GetMinVersionUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.domain.settings.SetLanguageUseCase
@@ -36,6 +39,7 @@ import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.CategoryRepository
 import pl.msiwak.multiplatform.repository.ExerciseRepository
+import pl.msiwak.multiplatform.repository.RemoteConfigRepository
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
@@ -76,6 +80,7 @@ val storeModule = module {
 
 val apiModule = module {
     single { FirebaseAuthorization() }
+    single { RemoteConfig() }
 }
 
 val toolsModule = module {
@@ -87,7 +92,7 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition { MainViewModel(get(), get()) }
+    viewModelDefinition { MainViewModel(get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { LoginViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get()) }
@@ -145,10 +150,13 @@ val useCaseModule = module {
     factory { GetLanguageUseCase(get()) }
     factory { GetUnitsUseCase(get()) }
     factory { SetUnitsUseCase(get()) }
+    factory { FetchRemoteConfigUseCase(get()) }
+    factory { GetMinVersionUseCase(get()) }
 }
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { ExerciseRepository(get()) }
     single { CategoryRepository(get()) }
+    single { RemoteConfigRepository(get()) }
 }
