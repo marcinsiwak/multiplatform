@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.ui.language
 
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import pl.msiwak.multiplatform.ViewModel
@@ -8,7 +7,7 @@ import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.settings.SetLanguageUseCase
 
 class LanguageViewModel(
-    private val getLanguageUseCase: GetLanguageUseCase,
+    getLanguageUseCase: GetLanguageUseCase,
     private val setLanguageUseCase: SetLanguageUseCase
 ) : ViewModel() {
 
@@ -18,7 +17,7 @@ class LanguageViewModel(
     init {
         val language = getLanguageUseCase()
         val languages = _viewState.value.languages.map {
-            if (it.code == language){
+            if (it.code == language) {
                 it.copy(isSelected = true)
             } else {
                 it.copy(isSelected = false)

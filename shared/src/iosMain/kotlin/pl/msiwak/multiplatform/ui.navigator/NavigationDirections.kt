@@ -43,4 +43,8 @@ actual sealed class NavigationDirections : NavigationCommand {
     actual object Language : NavigationDirections() {
         override val route: String = "language"
     }
+
+    actual object Unit : NavigationDirections() {
+        override val route: String = "unit"
+    }
 }

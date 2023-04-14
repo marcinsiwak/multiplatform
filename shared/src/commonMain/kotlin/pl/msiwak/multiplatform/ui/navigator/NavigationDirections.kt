@@ -13,4 +13,5 @@ expect sealed class NavigationDirections : NavigationCommand {
     class Category(id: Long = 0) : NavigationDirections
     object AddCategory : NavigationDirections
     object Language: NavigationDirections
+    object Unit: NavigationDirections
 }

@@ -113,20 +113,20 @@ fun AddExerciseScreen(id: Long) {
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.End
             ) {
-                Button(
-                    modifier = Modifier
-                        .padding(bottom = dimens.space_16)
-                        .padding(horizontal = dimens.space_16),
-                    colors = ButtonDefaults.buttonColors(containerColor = colorResource(resource = MR.colors.gray)),
-                    onClick = {
-                        viewModel.onChangeUnitClicked()
-                    }) {
-                    Text(
-                        text = getString(context, MR.strings.exercise_change_unit, state.value.unit)
-                    )
-                }
+//                Button(
+//                    modifier = Modifier
+//                        .padding(bottom = dimens.space_16)
+//                        .padding(horizontal = dimens.space_16),
+//                    colors = ButtonDefaults.buttonColors(containerColor = colorResource(resource = MR.colors.gray)),
+//                    onClick = {
+//                        viewModel.onChangeUnitClicked()
+//                    }) {
+//                    Text(
+//                        text = getString(context, MR.strings.exercise_change_unit, state.value.unit)
+//                    )
+//                }
                 if (state.value.results.isNotEmpty() && !state.value.isResultFieldEnabled) {
                     Button(
                         modifier = Modifier

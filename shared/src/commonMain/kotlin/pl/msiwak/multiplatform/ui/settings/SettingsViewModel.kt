@@ -9,4 +9,7 @@ class SettingsViewModel(private val navigator: Navigator): ViewModel() {
     fun onLanguageClicked() {
         navigator.navigate(NavigationDirections.Language)
     }
+    fun onUnitClicked() {
+        navigator.navigate(NavigationDirections.Unit)
+    }
 }

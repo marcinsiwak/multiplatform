@@ -36,6 +36,14 @@ fun SettingsScreen() {
             fontSize = dimens.font_24,
             color = Color.White
         )
+        SettingsItem(
+            modifier = Modifier
+                .padding(top = dimens.space_8)
+                .clickable {
+                    viewModel.onUnitClicked()
+                },
+            text = getString(context, MR.strings.settings_unit)
+        )
         val isLanguageEnabled = false
         if (isLanguageEnabled) {
             SettingsItem(

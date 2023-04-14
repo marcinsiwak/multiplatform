@@ -27,6 +27,7 @@
 
     <string name="settings">Settings</string>
     <string name="settings_language">Language</string>
+    <string name="settings_unit">Unit type</string>
 
     <string name="language">Language</string>
 

@@ -19,6 +19,7 @@ import pl.msiwak.multiplatform.data.entity.ExerciseData
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetExerciseDataUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
@@ -30,7 +31,7 @@ class AddExerciseViewModel(
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
     private val getExerciseUseCase: GetExerciseUseCase,
-    private val formatStringToDateUseCase: FormatStringToDateUseCase
+    private val formatStringToDateUseCase: FormatStringToDateUseCase,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddExerciseState())
@@ -54,14 +55,16 @@ class AddExerciseViewModel(
 
     init {
         viewModelScope.launch {
-            currentExerciseData.value = getExerciseUseCase(exerciseId)
+            val exerciseWithUnit = getExerciseUseCase(exerciseId)
+            currentExerciseData.value = exerciseWithUnit.exerciseData
             currentResults.addAll(currentExerciseData.value.results)
             val results = formatResultsUseCase(currentExerciseData.value.results)
             exerciseName = currentExerciseData.value.exerciseTitle
             _viewState.value = _viewState.value.copy(
                 exerciseTitle = currentExerciseData.value.exerciseTitle,
                 results = results,
-                resultDataTitles = setTableTitles()
+                resultDataTitles = setTableTitles(),
+                unit = exerciseWithUnit.unit
             )
         }
     }
