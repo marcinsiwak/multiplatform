@@ -29,4 +29,12 @@
     <string name="settings_language">Language</string>
 
     <string name="language">Jezyk</string>
+
+    <string name="filter_day">Dzień</string>
+    <string name="filter_week">Tydzień</string>
+    <string name="filter_month">Miesiąć</string>
+    <string name="filter_year">Rok</string>
+
+    <string name="exercise_change_unit">Zmień na: %s</string>
+
 </resources>

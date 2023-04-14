@@ -45,13 +45,13 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            modifier = Modifier.padding(start = dimens.space_16, top = dimens.space_8, bottom = dimens.space_8),
+            modifier = Modifier.weight(1f).padding(start = dimens.space_16, top = dimens.space_8, bottom = dimens.space_8),
             text = name,
-            fontSize = dimens.font_24,
+            fontSize = dimens.font_20,
             color = Color.LightGray
         )
         Icon(
-            modifier = Modifier.padding(dimens.space_16),
+            modifier = Modifier.weight(0.2f).padding(dimens.space_16),
             tint = Color.LightGray,
             painter = painterResource(id = R.drawable.ic_arrow_right),
             contentDescription = null

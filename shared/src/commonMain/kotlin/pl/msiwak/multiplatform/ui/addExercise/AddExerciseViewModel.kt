@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.ui.addExercise
 
+import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -10,8 +11,10 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.ResultData
+import pl.msiwak.multiplatform.data.common.UnitType
 import pl.msiwak.multiplatform.data.entity.ExerciseData
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
@@ -58,7 +61,16 @@ class AddExerciseViewModel(
             _viewState.value = _viewState.value.copy(
                 exerciseTitle = currentExerciseData.value.exerciseTitle,
                 results = results,
+                resultDataTitles = setTableTitles()
             )
+        }
+    }
+
+    private fun setTableTitles(): List<String> {
+        return when (currentExerciseData.value.exerciseType) {
+            ExerciseType.RUNNING -> listOf("Distance", "Time", "Date")
+            ExerciseType.GYM -> listOf("Weight", "Reps", "Date")
+            ExerciseType.OTHER -> emptyList()
         }
     }
 
@@ -151,5 +163,44 @@ class AddExerciseViewModel(
         _viewState.value =
             _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(date = text))
 
+    }
+
+    fun onTabClicked(pos: Int) {
+        val filterList = _viewState.value.filter.mapIndexed { index, dateFilter ->
+            if (index == pos) {
+                dateFilter.copy(isSelected = true)
+            } else {
+                dateFilter.copy(isSelected = false)
+            }
+        }
+        _viewState.value =
+            _viewState.value.copy(filter = filterList, selectedFilterPosition = pos)
+    }
+
+    fun onChangeUnitClicked() {
+        val currentUnitType = _viewState.value.unitType
+        val exerciseType = currentExerciseData.value.exerciseType
+
+        if (currentUnitType == UnitType.IMPERIAL) {
+            val results = _viewState.value.results.map {
+                it.copy(result = it.result.toDouble().div(exerciseType.convertValue).toString())
+            }
+            _viewState.value = _viewState.value.copy(
+                unitType = UnitType.METRIC,
+                unit = exerciseType.unitMetric,
+            )
+
+        } else {
+            val results = _viewState.value.results.map {
+                it.copy(
+                    result = it.result.toDouble().times(exerciseType.convertValue).roundToInt()
+                        .toString()
+                )
+            }
+            _viewState.value = _viewState.value.copy(
+                unitType = UnitType.IMPERIAL,
+                unit = exerciseType.unitImperial,
+            )
+        }
     }
 }

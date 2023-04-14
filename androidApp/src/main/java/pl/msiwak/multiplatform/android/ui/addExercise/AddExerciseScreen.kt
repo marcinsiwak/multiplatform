@@ -2,13 +2,13 @@ package pl.msiwak.multiplatform.android.ui.addExercise
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -27,6 +27,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
+import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.utils.getString
@@ -80,25 +81,82 @@ fun AddExerciseScreen(id: Long) {
         )
     }
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Black),
-        verticalArrangement = Arrangement.Top
     ) {
-        Text(
+
+        Column(
             modifier = Modifier
-                .widthIn(0.dp, 260.dp)
-                .background(
-                    color = colorResource(MR.colors.white_transparent),
-                    shape = RoundedCornerShape(bottomEnd = 32.dp)
-                )
-                .padding(start = dimens.space_12, end = dimens.space_24)
-                .padding(vertical = dimens.space_8),
-            text = state.value.exerciseTitle,
-            fontSize = dimens.font_16,
-            color = Color.Black
-        )
+                .fillMaxSize()
+                .background(color = Color.Black),
+            verticalArrangement = Arrangement.Top
+        ) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = dimens.space_12, end = dimens.space_24)
+                    .padding(vertical = dimens.space_16),
+                text = state.value.exerciseTitle,
+                fontSize = dimens.font_24,
+                color = Color.White,
+            )
+
+            ResultsTimeFilterView(
+                modifier = Modifier.width(260.dp).padding(bottom = dimens.space_16),
+                tabs = state.value.filter,
+                selectedPos = state.value.selectedFilterPosition,
+                onTabClicked = {
+                    viewModel.onTabClicked(it)
+                }
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Button(
+                    modifier = Modifier
+                        .padding(bottom = dimens.space_16)
+                        .padding(horizontal = dimens.space_16),
+                    colors = ButtonDefaults.buttonColors(containerColor = colorResource(resource = MR.colors.gray)),
+                    onClick = {
+                        viewModel.onChangeUnitClicked()
+                    }) {
+                    Text(
+                        text = getString(context, MR.strings.exercise_change_unit, state.value.unit)
+                    )
+                }
+                if (state.value.results.isNotEmpty() && !state.value.isResultFieldEnabled) {
+                    Button(
+                        modifier = Modifier
+                            .padding(bottom = dimens.space_16)
+                            .padding(horizontal = dimens.space_16),
+                        colors = ButtonDefaults.buttonColors(containerColor = colorResource(resource = MR.colors.gray)),
+                        onClick = {
+                            viewModel.onAddNewResultClicked()
+                        }) {
+                        Text(
+                            text = getString(context, MR.strings.add_new_result),
+                        )
+                    }
+                }
+
+                if (state.value.isResultFieldEnabled) {
+                    Button(
+                        modifier = Modifier
+                            .padding(bottom = dimens.space_16)
+                            .padding(horizontal = dimens.space_16),
+                        colors = ButtonDefaults.buttonColors(containerColor = colorResource(resource = MR.colors.gray)),
+                        onClick = {
+                            viewModel.onAddNewExerciseClicked()
+                        }) {
+                        Text(
+                            text = getString(context, MR.strings.add_result_save),
+                        )
+                    }
+                }
+            }
 //        InputView(
 //            modifier = Modifier
 //                .fillMaxWidth()
@@ -110,65 +168,27 @@ fun AddExerciseScreen(id: Long) {
 //            hintText = getString(context, MR.strings.exercise)
 //        )
 
-        ResultsTableView(
-            modifier = Modifier.offset(y = dimens.space_16),
-            results = state.value.results,
-            isNewResultEnabled = state.value.isResultFieldEnabled,
-            newResultData = state.value.newResultData,
-            onAddNewResultClicked = {
-                viewModel.onAddNewResultClicked()
-            },
-            onResultValueChanged = {
-                viewModel.onResultValueChanged(it)
-            }, onAmountValueChanged = {
-                viewModel.onAmountValueChanged(it)
-            }, onDateValueChanged = {
-                viewModel.onDateValueChanged(it)
-            }, onDateClicked = {
-                viewModel.onDateClicked()
-            }, onResultLongClick = { pos ->
-                viewModel.onResultLongClicked(pos)
-            })
-
-
-        if (state.value.results.isNotEmpty() && !state.value.isResultFieldEnabled) {
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .offset(y = dimens.space_96)
-                    .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.LightGray,
-                    contentColor = Color.Black
-                ),
-                onClick = { viewModel.onAddNewResultClicked() }
-            ) {
-                Text(
-                    modifier = Modifier.padding(dimens.space_8),
-                    text = getString(context, MR.strings.add_new_result),
-                    fontSize = dimens.font_16
-                )
-            }
-        }
-
-        if (state.value.isResultFieldEnabled) {
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .offset(y = dimens.space_96)
-                    .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.LightGray,
-                    contentColor = Color.Black
-                ),
-                onClick = { viewModel.onAddNewExerciseClicked() }
-            ) {
-                Text(
-                    modifier = Modifier.padding(dimens.space_8),
-                    text = getString(context, MR.strings.add_result_save),
-                    fontSize = dimens.font_16
-                )
-            }
+            ResultsTableView(
+                modifier = Modifier,
+                resultDataTitles = state.value.resultDataTitles,
+                unit = state.value.unit,
+                results = state.value.results,
+                isNewResultEnabled = state.value.isResultFieldEnabled,
+                newResultData = state.value.newResultData,
+                onAddNewResultClicked = {
+                    viewModel.onAddNewResultClicked()
+                },
+                onResultValueChanged = {
+                    viewModel.onResultValueChanged(it)
+                }, onAmountValueChanged = {
+                    viewModel.onAmountValueChanged(it)
+                }, onDateValueChanged = {
+                    viewModel.onDateValueChanged(it)
+                }, onDateClicked = {
+                    viewModel.onDateClicked()
+                }, onResultLongClick = { pos ->
+                    viewModel.onResultLongClicked(pos)
+                })
         }
     }
 }

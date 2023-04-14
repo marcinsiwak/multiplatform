@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -39,38 +40,40 @@ fun ResultView(
                 onClick = {},
                 onLongClick = {
                     onResultLongClick()
-                }),
+                })
+            .bottomBorder(1.dp, Color.LightGray)
+        ,
     ) {
         Text(
             modifier = Modifier
-                .width(dimens.space_96)
+                .width(dimens.first_list_item_size)
                 .padding(vertical = dimens.space_16),
             text = result,
             color = Color.White,
             textAlign = TextAlign.Center,
 
             )
-        Divider(
-            color = Color.LightGray,
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(dimens.space_1)
-        )
+//        Divider(
+//            color = Color.LightGray,
+//            modifier = Modifier
+//                .fillMaxHeight()
+//                .width(dimens.space_1)
+//        )
         Text(
             modifier = Modifier
-                .width(dimens.space_96)
+                .width(dimens.second_list_item_size)
                 .padding(vertical = dimens.space_16),
             text = amount,
             color = Color.White,
             textAlign = TextAlign.Center,
 
             )
-        Divider(
-            color = Color.LightGray,
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(dimens.space_1)
-        )
+//        Divider(
+//            color = Color.LightGray,
+//            modifier = Modifier
+//                .fillMaxHeight()
+//                .width(dimens.space_1)
+//        )
         Text(
             modifier = Modifier
                 .fillMaxWidth()

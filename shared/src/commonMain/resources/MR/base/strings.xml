@@ -16,11 +16,11 @@
     <string name="exercise_type">Exercise type</string>
     <string name="add_new_exercise">Add new exercise</string>
 
-    <string name="add_new_result">Add new result</string>
+    <string name="add_new_result">Add result</string>
     <string name="remove_result_dialog_title">Remove result</string>
     <string name="remove_result_dialog_description">Do you want to remove this result</string>
 
-    <string name="add_result_save">Save new result</string>
+    <string name="add_result_save">Save result</string>
 
     <string name="remove_result_dialog_title">Remove result</string>
     <string name="remove_result_dialog_description">Do you want to remove this result</string>
@@ -29,4 +29,11 @@
     <string name="settings_language">Language</string>
 
     <string name="language">Language</string>
+
+    <string name="filter_day">Day</string>
+    <string name="filter_week">Week</string>
+    <string name="filter_month">Month</string>
+    <string name="filter_year">Year</string>
+
+    <string name="exercise_change_unit">Change to: %s</string>
 </resources>
