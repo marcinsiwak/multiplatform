@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.ui.addExercise
 
-import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -14,12 +13,10 @@ import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.ResultData
-import pl.msiwak.multiplatform.data.common.UnitType
 import pl.msiwak.multiplatform.data.entity.ExerciseData
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetExerciseDataUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
@@ -178,32 +175,5 @@ class AddExerciseViewModel(
         }
         _viewState.value =
             _viewState.value.copy(filter = filterList, selectedFilterPosition = pos)
-    }
-
-    fun onChangeUnitClicked() {
-        val currentUnitType = _viewState.value.unitType
-        val exerciseType = currentExerciseData.value.exerciseType
-
-        if (currentUnitType == UnitType.IMPERIAL) {
-            val results = _viewState.value.results.map {
-                it.copy(result = it.result.toDouble().div(exerciseType.convertValue).toString())
-            }
-            _viewState.value = _viewState.value.copy(
-                unitType = UnitType.METRIC,
-                unit = exerciseType.unitMetric,
-            )
-
-        } else {
-            val results = _viewState.value.results.map {
-                it.copy(
-                    result = it.result.toDouble().times(exerciseType.convertValue).roundToInt()
-                        .toString()
-                )
-            }
-            _viewState.value = _viewState.value.copy(
-                unitType = UnitType.IMPERIAL,
-                unit = exerciseType.unitImperial,
-            )
-        }
     }
 }

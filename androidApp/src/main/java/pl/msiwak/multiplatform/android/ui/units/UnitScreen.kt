@@ -1,4 +1,4 @@
-§package pl.msiwak.multiplatform.android.ui.units
+package pl.msiwak.multiplatform.android.ui.units
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

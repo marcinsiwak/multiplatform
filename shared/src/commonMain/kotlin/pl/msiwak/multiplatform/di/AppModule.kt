@@ -132,7 +132,7 @@ val useCaseModule = module {
     factory { ObserveCategoriesUseCase(get()) }
     factory { InsertExercisesUseCase(get()) }
     factory { InsertExerciseUseCase(get()) }
-    factory { UpdateExerciseUseCase(get()) }
+    factory { UpdateExerciseUseCase(get(), get()) }
     factory { GetExerciseDataUseCase(get()) }
     factory { GetExerciseUseCase(get(), get()) }
     factory { RemoveExerciseUseCase(get()) }
