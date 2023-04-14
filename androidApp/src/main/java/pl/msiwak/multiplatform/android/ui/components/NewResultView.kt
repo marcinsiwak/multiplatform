@@ -26,6 +26,7 @@ import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.android.R
@@ -33,10 +34,10 @@ import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NewResultView(
     modifier: Modifier = Modifier,
+    focusRequesters: List<FocusRequester>,
     newResultData: FormattedResultData,
     onResultValueChanged: (String) -> Unit,
     onAmountValueChanged: (String) -> Unit,
@@ -54,6 +55,7 @@ fun NewResultView(
 
         ResultInputView(
             modifier = Modifier
+                .focusRequester(focusRequesters[1])
                 .width(dimens.first_list_item_size)
                 .padding(horizontal = dimens.space_16),
             value = newResultData.result,
@@ -64,6 +66,7 @@ fun NewResultView(
 
         ResultInputView(
             modifier = Modifier
+                .focusRequester(focusRequesters[2])
                 .width(dimens.second_list_item_size)
                 .padding(horizontal = dimens.space_16),
             value = newResultData.amount,
@@ -73,11 +76,13 @@ fun NewResultView(
         )
         ResultInputView(
             modifier = Modifier
+                .focusRequester(focusRequesters[3])
                 .padding(start = dimens.space_16, bottom = dimens.space_16, end = dimens.space_4),
             value = newResultData.date,
             onValueChange = {
                 onDateValueChanged(it)
             },
+            textAlign = TextAlign.End,
             trailingIcon = {
                 Icon(
                     modifier = Modifier.clickable {

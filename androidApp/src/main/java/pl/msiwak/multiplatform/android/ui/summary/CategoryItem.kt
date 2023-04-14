@@ -40,7 +40,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
     val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
-        ExerciseType.OTHER -> null
+//        ExerciseType.OTHER -> null
     }
     Box(
         modifier = modifier

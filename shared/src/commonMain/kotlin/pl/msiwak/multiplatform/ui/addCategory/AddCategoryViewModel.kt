@@ -7,7 +7,6 @@ import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
 class AddCategoryViewModel(
@@ -22,7 +21,7 @@ class AddCategoryViewModel(
         _viewState.value = _viewState.value.copy(exerciseType = exerciseType)
     }
 
-    fun onExerciseName(name: String) {
+    fun onCategoryNameChanged(name: String) {
         _viewState.value = _viewState.value.copy(name = name)
     }
 

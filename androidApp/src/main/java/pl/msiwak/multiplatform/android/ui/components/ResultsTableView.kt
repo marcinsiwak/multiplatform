@@ -19,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
@@ -42,18 +43,17 @@ fun ResultsTableView(
     onAmountValueChanged: (String) -> Unit = {},
     onDateValueChanged: (String) -> Unit = {},
     onDateClicked: () -> Unit = {},
-    onResultLongClick: (Int) -> Unit = {}
+    onResultLongClick: (Int) -> Unit = {},
+    focusRequesters: List<FocusRequester>
 ) {
     val dimens = LocalDim.current
-
-    val focusRequester = remember { FocusRequester() }
 
     val listState = rememberLazyListState()
 
     LaunchedEffect(isNewResultEnabled) {
         if (isNewResultEnabled && results.isNotEmpty()) {
             listState.animateScrollToItem(0, 0)
-            focusRequester.requestFocus()
+            focusRequesters[0].requestFocus()
         }
     }
 
@@ -117,7 +117,8 @@ fun ResultsTableView(
             if (isNewResultEnabled) {
                 item {
                     NewResultView(
-                        modifier = Modifier.focusRequester(focusRequester),
+                        modifier = Modifier.focusRequester(focusRequesters[0]),
+                        focusRequesters = focusRequesters,
                         newResultData = newResultData,
                         onResultValueChanged = {
                             onResultValueChanged(it)

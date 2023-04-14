@@ -49,6 +49,7 @@ import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 import pl.msiwak.multiplatform.utils.DateFormatter
+import pl.msiwak.multiplatform.utils.NumberFormatter
 import pl.msiwak.multiplatform.validators.Validator
 
 fun appModule() = listOf(
@@ -79,9 +80,10 @@ val apiModule = module {
 
 val toolsModule = module {
     single { Navigator() }
-    single { Validator() }
     single { GlobalErrorHandler() }
-    single { DateFormatter() }
+    factory { Validator() }
+    factory { DateFormatter() }
+    factory { NumberFormatter() }
 }
 
 val viewModelsModule = module {
@@ -137,7 +139,7 @@ val useCaseModule = module {
     factory { GetExerciseUseCase(get(), get()) }
     factory { RemoveExerciseUseCase(get()) }
     factory { FormatDateUseCase(get()) }
-    factory { FormatResultsUseCase(get()) }
+    factory { FormatResultsUseCase(get(), get()) }
     factory { FormatStringToDateUseCase(get()) }
     factory { SetLanguageUseCase(get()) }
     factory { GetLanguageUseCase(get()) }

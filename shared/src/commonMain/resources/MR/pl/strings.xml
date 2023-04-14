@@ -16,6 +16,9 @@
     <string name="exercise_type">Kategoria ćwiczenia</string>
     <string name="add_new_exercise">Dodaj nowe ćwiczenie</string>
 
+    <string name="category_name">Nazwa Kategorii</string>
+    <string name="category">Kategoria</string>
+
     <string name="add_new_result">Dodaj nowy wynik</string>
     <string name="remove_result_dialog_title">Usuń wynik </string>
     <string name="remove_result_dialog_description">Czy na pewno chcesz usunąć ten wynik?</string>
@@ -31,6 +34,7 @@
 
     <string name="language">Jezyk</string>
 
+    <string name="filter_all">Wszystko</string>
     <string name="filter_day">Dzień</string>
     <string name="filter_week">Tydzień</string>
     <string name="filter_month">Miesiąć</string>

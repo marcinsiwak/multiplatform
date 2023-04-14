@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.android.ui.addCategory
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,13 +11,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
@@ -33,30 +31,32 @@ fun AddCategoryScreen() {
     val dimens = LocalDim.current
     val context = LocalContext.current
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-//            .background(color = colorResource(id = MR.colors))
+            .background(Color.Black),
     ) {
-        InputView(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(dimens.space_8),
-            value = state.value.name,
-            onValueChange = {
-                viewModel.onExerciseName(it)
-            },
-            hintText = getString(context, MR.strings.exercise)
-        )
-        DropDownView(
-            currentValue = state.value.exerciseType.name,
-            items = ExerciseType.values().toList(),
-            onItemPicked = {
-                viewModel.onTypePicked(it)
-            })
-
+        Column {
+            InputView(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimens.space_8),
+                value = state.value.name,
+                onValueChange = {
+                    viewModel.onCategoryNameChanged(it)
+                },
+                hintText = getString(context, MR.strings.category_name)
+            )
+            DropDownView(
+                currentValue = state.value.exerciseType.name,
+                items = ExerciseType.values().toList(),
+                onItemPicked = {
+                    viewModel.onTypePicked(it)
+                })
+        }
         Button(
             modifier = Modifier
+                .align(Alignment.BottomCenter)
                 .fillMaxWidth()
                 .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
             colors = ButtonDefaults.buttonColors(

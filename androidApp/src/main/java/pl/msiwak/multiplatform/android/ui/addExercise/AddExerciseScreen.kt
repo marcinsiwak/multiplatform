@@ -15,12 +15,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import dev.icerock.moko.resources.compose.colorResource
 import kotlinx.coroutines.flow.collectLatest
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
@@ -43,6 +44,8 @@ fun AddExerciseScreen(id: Long) {
     val context = LocalContext.current
     val dimens = LocalDim.current
 
+    val focusRequesters = List(4) { remember { FocusRequester() } }
+
     OnLifecycleEvent { _, event ->
         when (event) {
             Lifecycle.Event.ON_PAUSE -> viewModel.onPause()
@@ -58,7 +61,7 @@ fun AddExerciseScreen(id: Long) {
                     onValueChanged = {
                         viewModel.onDatePicked(it)
                     })
-                else -> Unit
+                is AddExerciseEvent.FocusOnInput -> focusRequesters[value.pos].requestFocus()
             }
         }
     }
@@ -103,7 +106,9 @@ fun AddExerciseScreen(id: Long) {
             )
 
             ResultsTimeFilterView(
-                modifier = Modifier.width(260.dp).padding(bottom = dimens.space_16),
+                modifier = Modifier
+                    .width(260.dp)
+                    .padding(bottom = dimens.space_16),
                 tabs = state.value.filter,
                 selectedPos = state.value.selectedFilterPosition,
                 onTabClicked = {
@@ -127,12 +132,14 @@ fun AddExerciseScreen(id: Long) {
 //                        text = getString(context, MR.strings.exercise_change_unit, state.value.unit)
 //                    )
 //                }
-                if (state.value.results.isNotEmpty() && !state.value.isResultFieldEnabled) {
+                if (!state.value.isResultFieldEnabled) {
                     Button(
                         modifier = Modifier
                             .padding(bottom = dimens.space_16)
                             .padding(horizontal = dimens.space_16),
-                        colors = ButtonDefaults.buttonColors(containerColor = colorResource(resource = MR.colors.gray)),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.LightGray, contentColor = Color.Black
+                        ),
                         onClick = {
                             viewModel.onAddNewResultClicked()
                         }) {
@@ -147,9 +154,11 @@ fun AddExerciseScreen(id: Long) {
                         modifier = Modifier
                             .padding(bottom = dimens.space_16)
                             .padding(horizontal = dimens.space_16),
-                        colors = ButtonDefaults.buttonColors(containerColor = colorResource(resource = MR.colors.gray)),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.LightGray, contentColor = Color.Black
+                        ),
                         onClick = {
-                            viewModel.onAddNewExerciseClicked()
+                            viewModel.onSaveResultClicked()
                         }) {
                         Text(
                             text = getString(context, MR.strings.add_result_save),
@@ -173,6 +182,7 @@ fun AddExerciseScreen(id: Long) {
                 resultDataTitles = state.value.resultDataTitles,
                 unit = state.value.unit,
                 results = state.value.results,
+                focusRequesters = focusRequesters,
                 isNewResultEnabled = state.value.isResultFieldEnabled,
                 newResultData = state.value.newResultData,
                 onAddNewResultClicked = {

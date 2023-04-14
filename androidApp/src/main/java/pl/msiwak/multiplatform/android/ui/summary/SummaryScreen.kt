@@ -57,7 +57,6 @@ fun SummaryScreen() {
                 item {
                     Button(
                         modifier = Modifier.padding(dimens.space_16),
-                        border = BorderStroke(dimens.space_2, Color.Black),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                         onClick = { viewModel.onAddExerciseClicked() }
                     ) {

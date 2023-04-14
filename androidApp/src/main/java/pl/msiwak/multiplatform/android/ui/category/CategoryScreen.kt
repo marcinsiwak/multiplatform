@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -45,7 +46,7 @@ fun CategoryScreen(id: Long) {
     val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
-        ExerciseType.OTHER -> null
+//        ExerciseType.OTHER -> null
     }
 
     if (state.value.isRemoveExerciseDialogVisible) {
@@ -122,5 +123,18 @@ fun CategoryScreen(id: Long) {
                 fontSize = dimens.font_16
             )
         }
+
+        Text(
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .background(
+                    color = Color.Black,
+                    shape = RoundedCornerShape(topStart = dimens.space_8, bottomEnd = dimens.space_8)
+                )
+                .padding(horizontal = dimens.space_12, vertical = dimens.space_8),
+            text = state.value.categoryName,
+            fontSize = dimens.font_14,
+            color = Color.White
+        )
     }
 }

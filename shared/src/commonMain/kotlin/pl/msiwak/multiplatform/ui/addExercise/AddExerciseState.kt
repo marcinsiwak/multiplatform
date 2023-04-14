@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.ui.addExercise
 
-import org.example.library.MR
 import pl.msiwak.multiplatform.data.common.DateFilter
+import pl.msiwak.multiplatform.data.common.DateFilterType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.UnitType
 
@@ -12,10 +12,11 @@ data class AddExerciseState(
     val isResultFieldEnabled: Boolean = false,
     val isRemoveExerciseDialogVisible: Boolean = false,
     val filter: List<DateFilter> = listOf(
-        DateFilter(MR.strings.filter_day),
-        DateFilter(MR.strings.filter_week),
-        DateFilter(MR.strings.filter_month),
-        DateFilter(MR.strings.filter_year)
+        DateFilter(DateFilterType.ALL),
+        DateFilter(DateFilterType.DAY),
+        DateFilter(DateFilterType.WEEK),
+        DateFilter(DateFilterType.MONTH),
+        DateFilter(DateFilterType.YEAR)
     ),
     val selectedFilterPosition: Int = 0,
     val unitType: UnitType = UnitType.METRIC,

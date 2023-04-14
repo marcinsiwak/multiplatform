@@ -8,8 +8,11 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.data.common.DateFilter
+import pl.msiwak.multiplatform.data.common.DateFilterType
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.ResultData
@@ -70,7 +73,7 @@ class AddExerciseViewModel(
         return when (currentExerciseData.value.exerciseType) {
             ExerciseType.RUNNING -> listOf("Distance", "Time", "Date")
             ExerciseType.GYM -> listOf("Weight", "Reps", "Date")
-            ExerciseType.OTHER -> emptyList()
+//            ExerciseType.OTHER -> emptyList()
         }
     }
 
@@ -91,25 +94,42 @@ class AddExerciseViewModel(
         _viewState.value = _viewState.value.copy(isResultFieldEnabled = true)
     }
 
-    fun onAddNewExerciseClicked() {
+    fun onSaveResultClicked() {
+        if (_viewState.value.newResultData.result.isEmpty()) {
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
+            return
+        }
+        if (_viewState.value.newResultData.amount.isEmpty()) {
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
+            return
+        }
+        if (_viewState.value.newResultData.date.isEmpty()) {
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
+            return
+        }
         viewModelScope.launch {
-            val newResultData = _viewState.value.newResultData
-            val date = formatStringToDateUseCase(newResultData.date)
-            val resultData =
-                ResultData(newResultData.result.toDouble(), newResultData.amount.toDouble(), date)
+            currentResults.add(0, prepareResultData())
+            saveResult()
 
-            currentResults.add(resultData)
-            val newExercise = currentExerciseData.value.copy(
-                results = currentResults
-            )
-
-            updateExerciseUseCase(newExercise)
             _viewState.value = _viewState.value.copy(
                 results = formatResultsUseCase(currentResults),
                 isResultFieldEnabled = false,
                 newResultData = FormattedResultData()
             )
         }
+    }
+
+    private fun prepareResultData(): ResultData {
+        val newResultData = _viewState.value.newResultData
+        val date = formatStringToDateUseCase(newResultData.date)
+        return ResultData(newResultData.result.toDouble(), newResultData.amount.toDouble(), date)
+    }
+
+    private suspend fun saveResult() {
+        val newExercise = currentExerciseData.value.copy(
+            results = currentResults
+        )
+        updateExerciseUseCase(newExercise)
     }
 
     fun onDateClicked() {
@@ -168,6 +188,7 @@ class AddExerciseViewModel(
     fun onTabClicked(pos: Int) {
         val filterList = _viewState.value.filter.mapIndexed { index, dateFilter ->
             if (index == pos) {
+                filterResults(dateFilter)
                 dateFilter.copy(isSelected = true)
             } else {
                 dateFilter.copy(isSelected = false)
@@ -175,5 +196,38 @@ class AddExerciseViewModel(
         }
         _viewState.value =
             _viewState.value.copy(filter = filterList, selectedFilterPosition = pos)
+    }
+
+    private fun filterResults(dateFilter: DateFilter) {
+        when (dateFilter.type) {
+            DateFilterType.ALL -> filterAll()
+            DateFilterType.DAY -> filterDay()
+            DateFilterType.WEEK -> filter(7)
+            DateFilterType.MONTH -> filter(31)
+            DateFilterType.YEAR -> filter(365)
+        }
+    }
+
+    private fun filterAll() {
+        val newResults = formatResultsUseCase(currentResults)
+        _viewState.value = _viewState.value.copy(results = newResults)
+    }
+
+    private fun filterDay() {
+        val currentDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+        val newResults = formatResultsUseCase(currentResults.filter {
+            it.date.dayOfYear == currentDate.dayOfYear
+        })
+        _viewState.value = _viewState.value.copy(results = newResults)
+    }
+
+    private fun filter(previousDaysCount: Int) {
+        val currentDate = Clock.System.now()
+        val newResults = formatResultsUseCase(currentResults.filter {
+            val diff =
+                currentDate.minus(it.date.toInstant(TimeZone.currentSystemDefault())).inWholeDays
+            diff in 0..previousDaysCount
+        })
+        _viewState.value = _viewState.value.copy(results = newResults)
     }
 }

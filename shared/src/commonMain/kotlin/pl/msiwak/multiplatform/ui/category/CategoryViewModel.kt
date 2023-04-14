@@ -35,6 +35,7 @@ class CategoryViewModel(
                 exercises.addAll(it.exercises)
                 _viewState.value =
                     _viewState.value.copy(
+                        categoryName = it.name,
                         exerciseType = it.exerciseType,
                         exerciseList = it.exercises
                     )

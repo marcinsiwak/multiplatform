@@ -32,6 +32,7 @@ fun ResultInputView(
     isPassword: Boolean = false,
     hintText: String = "",
     readOnly: Boolean = false,
+    textAlign: TextAlign = TextAlign.Center,
     errorsEnabled: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
     trailingIcon: @Composable (() -> Unit)? = null
@@ -45,8 +46,9 @@ fun ResultInputView(
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 containerColor = backgroundColor,
                 textColor = Color.White,
-                focusedBorderColor = colorResource(id = R.color.button_color),
-                unfocusedBorderColor = Color.Gray
+                focusedBorderColor = colorResource(id = R.color.white),
+                unfocusedBorderColor = Color.Gray,
+                cursorColor = colorResource(id = R.color.white)
             ),
             trailingIcon = trailingIcon,
             shape = RoundedCornerShape(dimens.space_12),
@@ -60,7 +62,7 @@ fun ResultInputView(
                     maxLines = 1,
                 )
             },
-            textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
+            textStyle = LocalTextStyle.current.copy(textAlign = textAlign),
             singleLine = true,
             readOnly = readOnly,
             keyboardOptions = keyboardOptions,

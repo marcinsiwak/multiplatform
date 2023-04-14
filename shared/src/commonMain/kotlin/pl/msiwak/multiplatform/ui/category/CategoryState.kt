@@ -4,6 +4,7 @@ import pl.msiwak.multiplatform.data.common.ExerciseShort
 import pl.msiwak.multiplatform.data.common.ExerciseType
 
 data class CategoryState(
+    val categoryName: String = "",
     val exerciseType: ExerciseType = ExerciseType.GYM,
     val exerciseList: List<ExerciseShort> = emptyList(),
     var isDialogVisible: Boolean = false,

@@ -67,7 +67,7 @@ fun ResultsTimeFilterView(
                         modifier = Modifier.padding(
                             horizontal = 0.dp
                         ),
-                        text = getString(LocalContext.current, item.titleRes), color = Color.White,
+                        text = getString(LocalContext.current, item.type.nameResourceId), color = Color.White,
                         onTextLayout = { textLayoutResult ->
                             tabWidths[index] =
                                 with(density) { textLayoutResult.size.width.toDp() }

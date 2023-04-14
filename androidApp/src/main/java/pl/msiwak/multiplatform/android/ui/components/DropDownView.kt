@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -17,9 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
@@ -41,7 +44,7 @@ fun DropDownView(
     var expand by remember { mutableStateOf(false) }
     Column {
         InputView(
-            modifier = Modifier
+            modifier = modifier
                 .padding(dimens.space_8)
                 .focusRequester(focusRequester)
                 .onFocusChanged {
@@ -51,13 +54,14 @@ fun DropDownView(
                 },
             value = currentValue,
             onValueChange = {},
-            hintText = getString(context, MR.strings.exercise_type),
+            hintText = getString(context, MR.strings.category),
             readOnly = true,
             errorsEnabled = false,
             trailingIcon = { Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null) }
         )
         DropdownMenu(
-            modifier = modifier,
+            modifier = Modifier,
+            offset = DpOffset(x = dimens.space_8, 0.dp),
             expanded = expand,
             onDismissRequest = {
                 expand = false
