@@ -5,6 +5,9 @@ actual sealed class NavigationDirections : NavigationCommand {
     actual override val destination: String
         get() = route
 
+    actual override val isInclusive: Boolean
+        get() = false
+
     actual object NavigateUp : NavigationDirections() {
         override val route: String
             get() = "navigateUp"
@@ -46,5 +49,15 @@ actual sealed class NavigationDirections : NavigationCommand {
 
     actual object Unit : NavigationDirections() {
         override val route: String = "unit"
+    }
+
+    actual object ForceUpdate : NavigationDirections() {
+        override val route: String
+            get() = "forceUpdate"
+    }
+
+    actual object OpenStore : NavigationDirections() {
+        override val route: String
+            get() = ""
     }
 }

@@ -1,5 +1,8 @@
 package pl.msiwak.multiplatform.android.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,6 +24,7 @@ import pl.msiwak.multiplatform.android.ui.addCategory.AddCategoryScreen
 import pl.msiwak.multiplatform.android.ui.addExercise.AddExerciseScreen
 import pl.msiwak.multiplatform.android.ui.category.CategoryScreen
 import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
+import pl.msiwak.multiplatform.android.ui.forceUpdate.ForceUpdateScreen
 import pl.msiwak.multiplatform.android.ui.language.LanguageScreen
 import pl.msiwak.multiplatform.android.ui.login.LoginScreen
 import pl.msiwak.multiplatform.android.ui.register.RegisterScreen
@@ -27,6 +32,7 @@ import pl.msiwak.multiplatform.android.ui.theme.BaseKmm_ProjectTheme
 import pl.msiwak.multiplatform.android.ui.units.UnitScreen
 import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
 import pl.msiwak.multiplatform.ui.main.MainViewModel
+import pl.msiwak.multiplatform.ui.navigator.NavigationCommand
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 
 class MainActivity : ComponentActivity() {
@@ -53,6 +59,7 @@ class MainActivity : ComponentActivity() {
                         composable(NavigationDirections.AddCategory.route) { AddCategoryScreen() }
                         composable(NavigationDirections.Language.route) { LanguageScreen() }
                         composable(NavigationDirections.Unit.route) { UnitScreen() }
+                        composable(NavigationDirections.ForceUpdate.route) { ForceUpdateScreen() }
                         composable(
                             NavigationDirections.AddExercise().route, arguments = listOf(
                                 navArgument(NavigationDirections.AddExercise.BUNDLE_ARG_ID) {
@@ -81,24 +88,37 @@ class MainActivity : ComponentActivity() {
 
                     viewModel.mainNavigator.commands.watch {
                         when (it) {
+                            is NavigationDirections.OpenStore -> openStore()
                             NavigationDirections.NavigateUp -> navController.navigateUp()
-                            else -> {
-                                if (it.destination.isNotEmpty()) {
-                                    navController.navigate(route = it.destination)
-                                }
-                            }
+                            else -> navigate(navController, it)
                         }
                     }
                 }
             }
         }
+    }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { view, insets ->
-            val bottom = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
-            view.updatePadding(bottom = bottom)
-            insets
+    private fun navigate(navController: NavController, command: NavigationCommand) {
+        if (command.isInclusive) {
+            navController.navigate(route = command.destination) {
+                popUpTo(0)
+            }
+
+        } else {
+            navController.navigate(route = command.destination)
         }
+    }
 
-
+    private fun openStore() {
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
+        } catch (e: ActivityNotFoundException) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+                )
+            )
+        }
     }
 }

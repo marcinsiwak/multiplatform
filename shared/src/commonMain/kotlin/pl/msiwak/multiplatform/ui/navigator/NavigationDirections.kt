@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.ui.navigator
 
 expect sealed class NavigationDirections : NavigationCommand {
     override val destination: String
+    override val isInclusive: Boolean
 
     object NavigateUp : NavigationDirections
     object Welcome : NavigationDirections
@@ -14,4 +15,6 @@ expect sealed class NavigationDirections : NavigationCommand {
     object AddCategory : NavigationDirections
     object Language: NavigationDirections
     object Unit: NavigationDirections
+    object ForceUpdate : NavigationDirections
+    object OpenStore : NavigationDirections
 }

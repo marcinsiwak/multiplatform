@@ -6,14 +6,22 @@ plugins {
     kotlin("android")
 }
 
+val versionMajor = 1
+val versionMinor = 0
+val versionPatch = 0
+val versionBuild = 0
+val versionCode = 1_000_000 * versionMajor + 10_000 * versionMinor + 100 * versionPatch + versionBuild
+
+val appVersionCode: Int = Integer.valueOf(System.getenv("BUILD_NUMBER") ?: "$versionCode")
+
 android {
     compileSdk = 33
     defaultConfig {
         applicationId = "pl.msiwak.multiplatform.android"
         minSdk = 27
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = appVersionCode
+        versionName = "$versionMajor.$versionMinor.$versionPatch ($appVersionCode)"
         vectorDrawables {
             useSupportLibrary = true
         }

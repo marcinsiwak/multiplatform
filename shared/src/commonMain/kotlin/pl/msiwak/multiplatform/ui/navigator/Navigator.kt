@@ -12,11 +12,12 @@ class Navigator {
     )
     val commands: CommonSharedFlow<NavigationCommand> = _commands.asCommonFlow()
     fun navigate(directions: NavigationCommand) {
-        _commands.tryEmit(directions)
+        if (directions.destination.isNotEmpty()){
+            _commands.tryEmit(directions)
+        }
     }
 
     fun navigateUp() {
-
         _commands.tryEmit(NavigationDirections.NavigateUp)
     }
 }

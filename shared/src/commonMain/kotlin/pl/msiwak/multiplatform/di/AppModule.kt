@@ -14,7 +14,7 @@ import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
-import pl.msiwak.multiplatform.domain.remoteConfig.GetMinVersionUseCase
+import pl.msiwak.multiplatform.domain.remoteConfig.GetMinAppCodeUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.domain.settings.SetLanguageUseCase
@@ -36,13 +36,16 @@ import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
+import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.CategoryRepository
 import pl.msiwak.multiplatform.repository.ExerciseRepository
 import pl.msiwak.multiplatform.repository.RemoteConfigRepository
+import pl.msiwak.multiplatform.repository.VersionRepository
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
+import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 import pl.msiwak.multiplatform.ui.language.LanguageViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 import pl.msiwak.multiplatform.ui.main.MainViewModel
@@ -92,7 +95,7 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition { MainViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { LoginViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get()) }
@@ -122,6 +125,7 @@ val viewModelsModule = module {
     viewModelDefinition { SettingsViewModel(get()) }
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
+    viewModelDefinition { ForceUpdateViewModel(get()) }
 }
 
 val useCaseModule = module {
@@ -151,7 +155,8 @@ val useCaseModule = module {
     factory { GetUnitsUseCase(get()) }
     factory { SetUnitsUseCase(get()) }
     factory { FetchRemoteConfigUseCase(get()) }
-    factory { GetMinVersionUseCase(get()) }
+    factory { GetMinAppCodeUseCase(get()) }
+    factory { GetCurrentAppCodeUseCase(get()) }
 }
 
 val repositoryUseModule = module {
@@ -159,4 +164,5 @@ val repositoryUseModule = module {
     single { ExerciseRepository(get()) }
     single { CategoryRepository(get()) }
     single { RemoteConfigRepository(get()) }
+    single { VersionRepository(get()) }
 }
