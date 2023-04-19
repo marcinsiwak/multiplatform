@@ -16,6 +16,7 @@ import pl.msiwak.multiplatform.data.common.DateFilterType
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.ResultData
+import pl.msiwak.multiplatform.data.common.SortType
 import pl.msiwak.multiplatform.data.entity.ExerciseData
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
@@ -179,6 +180,29 @@ class AddExerciseViewModel(
     fun onResultLongClicked(resultIndex: Int) {
         exerciseToRemovePosition = resultIndex
         _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = true)
+    }
+
+    fun onLabelClicked(labelPosition: Int) {
+        val currentSortType = _viewState.value.sortType
+        val sortType = when {
+            labelPosition == 0 && currentSortType != SortType.RESULT_DECREASING -> SortType.RESULT_DECREASING
+            labelPosition == 0 && currentSortType != SortType.RESULT_INCREASING -> SortType.RESULT_INCREASING
+            labelPosition == 1 && currentSortType != SortType.AMOUNT_DECREASING -> SortType.AMOUNT_DECREASING
+            labelPosition == 1 && currentSortType != SortType.AMOUNT_INCREASING -> SortType.AMOUNT_INCREASING
+            labelPosition == 2 && currentSortType != SortType.DATE_DECREASING -> SortType.DATE_DECREASING
+            labelPosition == 2 && currentSortType != SortType.DATE_INCREASING -> SortType.DATE_INCREASING
+            else -> SortType.DATE_DECREASING
+        }
+        _viewState.value = _viewState.value.copy(sortType = sortType)
+        when(sortType) {
+            SortType.RESULT_INCREASING -> currentResults.sortBy { it.result }
+            SortType.AMOUNT_INCREASING -> currentResults.sortBy { it.amount }
+            SortType.DATE_INCREASING -> currentResults.sortBy { it.date }
+            SortType.RESULT_DECREASING -> currentResults.sortByDescending { it.result }
+            SortType.AMOUNT_DECREASING -> currentResults.sortByDescending { it.amount }
+            SortType.DATE_DECREASING -> currentResults.sortByDescending { it.date }
+        }
+        _viewState.value = _viewState.value.copy(results = formatResultsUseCase(currentResults))
     }
 
     fun onResultRemoved() {

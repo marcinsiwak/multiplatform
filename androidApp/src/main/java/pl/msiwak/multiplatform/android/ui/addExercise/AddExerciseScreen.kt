@@ -124,18 +124,6 @@ fun AddExerciseScreen(id: Long) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-//                Button(
-//                    modifier = Modifier
-//                        .padding(bottom = dimens.space_16)
-//                        .padding(horizontal = dimens.space_16),
-//                    colors = ButtonDefaults.buttonColors(containerColor = colorResource(resource = MR.colors.gray)),
-//                    onClick = {
-//                        viewModel.onChangeUnitClicked()
-//                    }) {
-//                    Text(
-//                        text = getString(context, MR.strings.exercise_change_unit, state.value.unit)
-//                    )
-//                }
                 if (!state.value.isResultFieldEnabled) {
                     Button(
                         modifier = Modifier
@@ -170,22 +158,13 @@ fun AddExerciseScreen(id: Long) {
                     }
                 }
             }
-//        InputView(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = dimens.space_8),
-//            value = state.value.exerciseTitle,
-//            onValueChange = {
-//                viewModel.onExerciseTitleChanged(it)
-//            },
-//            hintText = getString(context, MR.strings.exercise)
-//        )
 
             ResultsTableView(
                 modifier = Modifier,
                 resultDataTitles = state.value.resultDataTitles,
                 unit = state.value.unit,
                 results = state.value.results,
+                sortType = state.value.sortType,
                 focusRequesters = focusRequesters,
                 isNewResultEnabled = state.value.isResultFieldEnabled,
                 newResultData = state.value.newResultData,
@@ -202,6 +181,8 @@ fun AddExerciseScreen(id: Long) {
                     viewModel.onDateClicked()
                 }, onResultLongClick = { pos ->
                     viewModel.onResultLongClicked(pos)
+                }, onLabelClicked = { pos ->
+                    viewModel.onLabelClicked(pos)
                 })
         }
     }

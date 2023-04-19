@@ -27,8 +27,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.icerock.moko.resources.compose.colorResource
 import org.example.library.MR
+import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.data.common.FormattedResultData
+import pl.msiwak.multiplatform.data.common.SortType
 
 @Composable
 fun ResultsTableView(
@@ -37,8 +39,10 @@ fun ResultsTableView(
     unit: String = "",
     results: List<FormattedResultData> = emptyList(),
     isNewResultEnabled: Boolean,
+    sortType: SortType? = null,
     newResultData: FormattedResultData = FormattedResultData(),
     onAddNewResultClicked: () -> Unit = {},
+    onLabelClicked: (Int) -> Unit = {},
     onResultValueChanged: (String) -> Unit = {},
     onAmountValueChanged: (String) -> Unit = {},
     onDateValueChanged: (String) -> Unit = {},
@@ -70,29 +74,44 @@ fun ResultsTableView(
                 .padding(vertical = dimens.space_8),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
+            TextWithDrawableView(
                 modifier = Modifier
                     .width(dimens.first_list_item_size)
-                    .padding(horizontal = dimens.space_8, vertical = dimens.space_16),
+                    .clickable { onLabelClicked(0) },
                 text = resultDataTitles.getOrNull(0)?.plus(" [$unit]") ?: "",
                 color = Color.White,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                iconResId = when (sortType) {
+                    SortType.RESULT_INCREASING -> R.drawable.ic_arrow_up
+                    SortType.RESULT_DECREASING -> R.drawable.ic_arrow_down
+                    else -> null
+                }
             )
-            Text(
+            TextWithDrawableView(
                 modifier = Modifier
                     .width(dimens.second_list_item_size)
-                    .padding(horizontal = dimens.space_8, vertical = dimens.space_16),
+                    .clickable { onLabelClicked(1) },
                 text = resultDataTitles.getOrNull(1) ?: "",
                 color = Color.White,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                iconResId = when (sortType) {
+                    SortType.AMOUNT_INCREASING -> R.drawable.ic_arrow_up
+                    SortType.AMOUNT_DECREASING -> R.drawable.ic_arrow_down
+                    else -> null
+                }
             )
-            Text(
+            TextWithDrawableView(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = dimens.space_8, vertical = dimens.space_16),
+                    .clickable { onLabelClicked(2) },
                 text = resultDataTitles.getOrNull(2) ?: "",
                 color = Color.White,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                iconResId = when (sortType) {
+                    SortType.DATE_INCREASING -> R.drawable.ic_arrow_up
+                    SortType.DATE_DECREASING -> R.drawable.ic_arrow_down
+                    else -> null
+                }
             )
         }
         LazyColumn(
