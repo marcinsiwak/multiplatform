@@ -22,7 +22,9 @@ import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
+import pl.msiwak.multiplatform.extensions.isNumber
 import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.utils.DATE_REGEX
 
 class AddExerciseViewModel(
     id: Long,
@@ -95,20 +97,57 @@ class AddExerciseViewModel(
     }
 
     fun onSaveResultClicked() {
-        if (_viewState.value.newResultData.result.isEmpty()) {
+        val savedResult = _viewState.value.newResultData.result
+        val savedAmount = _viewState.value.newResultData.amount
+        val savedDate = _viewState.value.newResultData.date
+        val savedResultDouble: Double
+        val savedAmountDouble: Double
+
+        if (savedResult.isEmpty()) {
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
             return
         }
-        if (_viewState.value.newResultData.amount.isEmpty()) {
+        if (savedAmount.isEmpty()) {
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
-        if (_viewState.value.newResultData.date.isEmpty()) {
+        if (savedDate.isEmpty()) {
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
             return
         }
+        if (!savedDate.matches(Regex(DATE_REGEX))) {
+            _viewState.value = _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(isDateError = true)
+            )
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
+            return
+        }
+        try {
+            savedResultDouble = savedResult.toDouble()
+        } catch (e: NumberFormatException) {
+            _viewState.value = _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(isResultError = true)
+            )
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
+            return
+        }
+        try {
+            savedAmountDouble = savedAmount.toDouble()
+        } catch (e: NumberFormatException) {
+            _viewState.value = _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(isAmountError = true)
+            )
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
+            return
+        }
+
         viewModelScope.launch {
-            currentResults.add(0, prepareResultData())
+            val data = ResultData(
+                savedResultDouble,
+                savedAmountDouble,
+                formatStringToDateUseCase(savedDate)
+            )
+            currentResults.add(0, data)
             saveResult()
 
             _viewState.value = _viewState.value.copy(
@@ -117,12 +156,6 @@ class AddExerciseViewModel(
                 newResultData = FormattedResultData()
             )
         }
-    }
-
-    private fun prepareResultData(): ResultData {
-        val newResultData = _viewState.value.newResultData
-        val date = formatStringToDateUseCase(newResultData.date)
-        return ResultData(newResultData.result.toDouble(), newResultData.amount.toDouble(), date)
     }
 
     private suspend fun saveResult() {
@@ -170,13 +203,22 @@ class AddExerciseViewModel(
 
     fun onResultValueChanged(text: String) {
         _viewState.value =
-            _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(result = text))
+            _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(
+                    result = text.filter { it.isNumber() },
+                    isResultError = false
+                )
+            )
     }
 
     fun onAmountValueChanged(text: String) {
         _viewState.value =
-            _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(amount = text))
-
+            _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(
+                    amount = text.filter { it.isNumber() },
+                    isAmountError = false
+                )
+            )
     }
 
     fun onDateValueChanged(text: String) {

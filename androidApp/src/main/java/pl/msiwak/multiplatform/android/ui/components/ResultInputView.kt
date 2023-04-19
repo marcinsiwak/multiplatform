@@ -29,6 +29,7 @@ fun ResultInputView(
     onValueChange: (String) -> Unit,
     backgroundColor: Color = Color.Transparent,
     errorMessage: String? = null,
+    isError: Boolean = false,
     isPassword: Boolean = false,
     hintText: String = "",
     readOnly: Boolean = false,
@@ -45,9 +46,9 @@ fun ResultInputView(
         TextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 containerColor = backgroundColor,
-                textColor = Color.White,
-                focusedBorderColor = colorResource(id = R.color.white),
-                unfocusedBorderColor = Color.Gray,
+                textColor = if (isError) Color.Red else colorResource(id = R.color.white),
+                focusedBorderColor = if (isError) Color.Red else colorResource(id = R.color.white),
+                unfocusedBorderColor = if (isError) Color.Red else Color.Gray,
                 cursorColor = colorResource(id = R.color.white)
             ),
             trailingIcon = trailingIcon,

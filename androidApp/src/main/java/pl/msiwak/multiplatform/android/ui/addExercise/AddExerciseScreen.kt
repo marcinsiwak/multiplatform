@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.android.ui.addExercise
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -61,7 +62,10 @@ fun AddExerciseScreen(id: Long) {
                     onValueChanged = {
                         viewModel.onDatePicked(it)
                     })
-                is AddExerciseEvent.FocusOnInput -> focusRequesters[value.pos].requestFocus()
+                is AddExerciseEvent.FocusOnInput -> {
+                    focusRequesters[value.pos].requestFocus()
+                    Toast.makeText(context, "Wrong input value", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
