@@ -26,7 +26,7 @@ fun DashboardScreen() {
 
     val items = listOf(
         DashboardNavigationDirections.Summary(R.drawable.ic_workout, getString(context, MR.strings.summary)),
-        DashboardNavigationDirections.Account(R.drawable.ic_account, getString(context, MR.strings.account)),
+//        DashboardNavigationDirections.Account(R.drawable.ic_account, getString(context, MR.strings.account)),
         DashboardNavigationDirections.Settings(R.drawable.ic_settings, getString(context, MR.strings.settings))
     )
 
@@ -39,8 +39,8 @@ fun DashboardScreen() {
             startDestination = items[0].route
         ) {
             composable(items[0].route) { SummaryScreen() }
-            composable(items[1].route) { AccountScreen() }
-            composable(items[2].route) { SettingsScreen() }
+//            composable(items[1].route) { AccountScreen() }
+            composable(items[1].route) { SettingsScreen() }
         }
     }
 }
