@@ -1,4 +1,6 @@
 import pl.msiwak.multiplatfor.dependencies.Deps
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -30,7 +32,7 @@ android {
         compose = true
     }
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
         }
     }
@@ -43,6 +45,51 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+
+    val releaseKeystorePropFile = rootProject.file("signing/release.properties")
+
+    if (releaseKeystorePropFile.exists()) {
+        val releaseKeystoreProp = Properties()
+        releaseKeystoreProp.load(FileInputStream(releaseKeystorePropFile))
+
+        signingConfigs {
+            maybeCreate("release")
+            getByName("release") {
+                keyAlias = releaseKeystoreProp["keyAlias"] as String
+                keyPassword = releaseKeystoreProp["keyPassword"] as String
+                storeFile = rootProject.file(releaseKeystoreProp["storeFile"] as String)
+                storePassword = releaseKeystoreProp["storePassword"] as String
+            }
+        }
+
+        buildTypes {
+            release {
+                signingConfig = signingConfigs.getByName("release")
+            }
+        }
+    }
+
+    val debugKeystorePropFile = rootProject.file("signing/debug.properties")
+    val debugKeystoreProp = Properties()
+    debugKeystoreProp.load(FileInputStream(debugKeystorePropFile))
+
+    android {
+        signingConfigs {
+            maybeCreate("debug")
+            getByName("debug") {
+                keyAlias = debugKeystoreProp["keyAlias"] as String
+                keyPassword = debugKeystoreProp["keyPassword"] as String
+                storeFile = rootProject.file(debugKeystoreProp["storeFile"] as String)
+                storePassword = debugKeystoreProp["storePassword"] as String
+            }
+        }
+
+        buildTypes {
+            debug {
+                signingConfig = signingConfigs.getByName("debug")
+            }
+        }
     }
 }
 

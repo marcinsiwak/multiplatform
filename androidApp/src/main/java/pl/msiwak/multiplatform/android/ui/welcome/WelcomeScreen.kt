@@ -29,12 +29,12 @@ fun WelcomeScreen() {
     val dimens = LocalDim.current
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = MR.images.bg_welcome_screen.drawableResId),
-            contentScale = ContentScale.Crop,
-            contentDescription = "Welcome screen"
-        )
+//        Image(
+//            modifier = Modifier.fillMaxSize(),
+//            painter = painterResource(id = MR.images.bg_welcome_screen.drawableResId),
+//            contentScale = ContentScale.Crop,
+//            contentDescription = "Welcome screen"
+//        )
         Column(modifier = Modifier
             .align(Alignment.BottomCenter)
             .padding(horizontal = dimens.space_36, vertical = dimens.space_96)) {
