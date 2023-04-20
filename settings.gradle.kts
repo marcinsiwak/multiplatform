@@ -6,6 +6,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "multiplatform"
+rootProject.name = "athletetrack"
 include(":androidApp")
 include(":shared")

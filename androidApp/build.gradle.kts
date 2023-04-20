@@ -19,7 +19,7 @@ val appVersionCode: Int = Integer.valueOf(System.getenv("BUILD_NUMBER") ?: "$ver
 android {
     compileSdk = 33
     defaultConfig {
-        applicationId = "pl.msiwak.multiplatform.android"
+        applicationId = "pl.msiwak.athletetrack.android"
         minSdk = 27
         targetSdk = 33
         versionCode = appVersionCode
