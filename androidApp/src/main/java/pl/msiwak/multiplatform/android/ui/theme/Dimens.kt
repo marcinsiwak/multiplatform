@@ -31,6 +31,6 @@ data class Dimensions(
     val font_16: TextUnit = 16.sp,
     val font_20: TextUnit = 20.sp,
     val font_24: TextUnit = 24.sp,
-    val first_list_item_size: Dp = 132.dp,
-    val second_list_item_size: Dp = 104.dp,
+    val first_list_item_size: Dp = 108.dp,
+    val second_list_item_size: Dp = 116.dp,
 )

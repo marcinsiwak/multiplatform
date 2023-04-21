@@ -26,7 +26,7 @@ fun TextWithDrawableView(
     val dimens = LocalDim.current
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
         Text(
-            modifier = Modifier.padding(horizontal = dimens.space_8, vertical = dimens.space_16),
+            modifier = Modifier.padding(horizontal = dimens.space_4, vertical = dimens.space_16),
             text = text,
             color = color,
             textAlign = textAlign,

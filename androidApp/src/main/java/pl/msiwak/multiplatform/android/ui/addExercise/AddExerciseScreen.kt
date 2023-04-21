@@ -164,6 +164,7 @@ fun AddExerciseScreen(id: Long) {
                 resultDataTitles = state.value.resultDataTitles,
                 unit = state.value.unit,
                 results = state.value.results,
+                exerciseType = state.value.exerciseType,
                 sortType = state.value.sortType,
                 focusRequesters = focusRequesters,
                 isNewResultEnabled = state.value.isResultFieldEnabled,

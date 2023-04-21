@@ -59,10 +59,12 @@ class CategoryViewModel(
         _viewState.value = _viewState.value.copy(isDialogVisible = false)
         viewModelScope.launch {
             val exerciseName = _viewState.value.newExerciseName
+            val exerciseType = _viewState.value.exerciseType
             val id = insertExerciseUseCase(
                 ExerciseData(
                     categoryId = categoryId,
-                    exerciseTitle = exerciseName
+                    exerciseTitle = exerciseName,
+                    exerciseType = exerciseType
                 )
             )
             navigator.navigate(NavigationDirections.AddExercise(id))

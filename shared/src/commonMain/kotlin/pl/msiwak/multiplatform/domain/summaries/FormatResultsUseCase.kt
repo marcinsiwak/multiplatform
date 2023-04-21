@@ -13,7 +13,7 @@ class FormatResultsUseCase(
         return resultData.map {
             FormattedResultData(
                 numberFormatter.formatNumber(it.result),
-                numberFormatter.formatNumber(it.amount),
+                it.amount,
                 dateFormatter.formatDate(it.date)
             )
         }

@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 
 @Composable
@@ -26,6 +27,7 @@ fun NewResultView(
     modifier: Modifier = Modifier,
     focusRequesters: List<FocusRequester>,
     newResultData: FormattedResultData,
+    exerciseType: ExerciseType,
     onResultValueChanged: (String) -> Unit,
     onAmountValueChanged: (String) -> Unit,
     onDateValueChanged: (String) -> Unit,
@@ -44,44 +46,46 @@ fun NewResultView(
             modifier = Modifier
                 .focusRequester(focusRequesters[1])
                 .width(dimens.first_list_item_size)
-                .padding(horizontal = dimens.space_16),
+                .padding(start = dimens.space_8),
             value = newResultData.result,
-            isError = newResultData.isResultError,
             onValueChange = {
                 onResultValueChanged(it)
-            }
+            },
+            isError = newResultData.isResultError,
+            hintText = "100"
         )
 
         ResultInputView(
             modifier = Modifier
                 .focusRequester(focusRequesters[2])
                 .width(dimens.second_list_item_size)
-                .padding(horizontal = dimens.space_16),
+                .padding(horizontal = dimens.space_8),
             value = newResultData.amount,
-            isError = newResultData.isAmountError,
             onValueChange = {
                 onAmountValueChanged(it)
-            }
+            },
+            isError = newResultData.isAmountError,
+            hintText = if (exerciseType == ExerciseType.GYM) "10" else "00:00:00"
         )
         ResultInputView(
             modifier = Modifier
                 .focusRequester(focusRequesters[3])
-                .padding(start = dimens.space_16, bottom = dimens.space_16, end = dimens.space_4),
+                .padding(bottom = dimens.space_16, end = dimens.space_8),
             value = newResultData.date,
             onValueChange = {
                 onDateValueChanged(it)
             },
             isError = newResultData.isDateError,
-            textAlign = TextAlign.End,
-            trailingIcon = {
-                Icon(
-                    modifier = Modifier.clickable {
-                        onDateClicked()
-                    },
-                    painter = painterResource(id = R.drawable.ic_calendar),
-                    contentDescription = null
-                )
-            }
-        )
+            hintText = "01.01.2023",
+            textAlign = TextAlign.Start
+        ) {
+            Icon(
+                modifier = Modifier.clickable {
+                    onDateClicked()
+                },
+                painter = painterResource(id = R.drawable.ic_calendar),
+                contentDescription = null
+            )
+        }
     }
 }

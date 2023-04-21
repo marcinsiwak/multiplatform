@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -29,6 +30,7 @@ import dev.icerock.moko.resources.compose.colorResource
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.SortType
 
@@ -40,6 +42,7 @@ fun ResultsTableView(
     results: List<FormattedResultData> = emptyList(),
     isNewResultEnabled: Boolean,
     sortType: SortType? = null,
+    exerciseType: ExerciseType,
     newResultData: FormattedResultData = FormattedResultData(),
     onAddNewResultClicked: () -> Unit = {},
     onLabelClicked: (Int) -> Unit = {},
@@ -55,7 +58,7 @@ fun ResultsTableView(
     val listState = rememberLazyListState()
 
     LaunchedEffect(isNewResultEnabled) {
-        if (isNewResultEnabled && results.isNotEmpty()) {
+        if (isNewResultEnabled) {
             listState.animateScrollToItem(0, 0)
             focusRequesters[0].requestFocus()
         }
@@ -77,6 +80,7 @@ fun ResultsTableView(
             TextWithDrawableView(
                 modifier = Modifier
                     .width(dimens.first_list_item_size)
+                    .offset(x = dimens.space_8)
                     .clickable { onLabelClicked(0) },
                 text = resultDataTitles.getOrNull(0)?.plus(" [$unit]") ?: "",
                 color = Color.White,
@@ -138,6 +142,7 @@ fun ResultsTableView(
                     NewResultView(
                         modifier = Modifier.focusRequester(focusRequesters[0]),
                         focusRequesters = focusRequesters,
+                        exerciseType = exerciseType,
                         newResultData = newResultData,
                         onResultValueChanged = {
                             onResultValueChanged(it)

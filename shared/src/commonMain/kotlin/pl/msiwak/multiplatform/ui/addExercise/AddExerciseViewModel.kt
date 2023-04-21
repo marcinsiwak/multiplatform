@@ -24,13 +24,15 @@ import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.extensions.isNumber
-import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.extensions.isTime
+import pl.msiwak.multiplatform.extensions.safeToDouble
 import pl.msiwak.multiplatform.utils.DATE_REGEX
+import pl.msiwak.multiplatform.utils.NUMBER_REGEX_COMMA
+import pl.msiwak.multiplatform.utils.NUMBER_REGEX_DOT
 
 class AddExerciseViewModel(
     id: Long,
     private val updateExerciseUseCase: UpdateExerciseUseCase,
-    private val navigator: Navigator,
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
     private val getExerciseUseCase: GetExerciseUseCase,
@@ -65,15 +67,16 @@ class AddExerciseViewModel(
             exerciseName = currentExerciseData.value.exerciseTitle
             _viewState.value = _viewState.value.copy(
                 exerciseTitle = currentExerciseData.value.exerciseTitle,
+                exerciseType = currentExerciseData.value.exerciseType,
                 results = results,
-                resultDataTitles = setTableTitles(),
+                resultDataTitles = setTableTitles(exerciseWithUnit.exerciseData.exerciseType),
                 unit = exerciseWithUnit.unit
             )
         }
     }
 
-    private fun setTableTitles(): List<String> {
-        return when (currentExerciseData.value.exerciseType) {
+    private fun setTableTitles(exerciseType: ExerciseType): List<String> {
+        return when (exerciseType) {
             ExerciseType.RUNNING -> listOf("Distance", "Time", "Date")
             ExerciseType.GYM -> listOf("Weight", "Reps", "Date")
 //            ExerciseType.OTHER -> emptyList()
@@ -101,8 +104,6 @@ class AddExerciseViewModel(
         val savedResult = _viewState.value.newResultData.result
         val savedAmount = _viewState.value.newResultData.amount
         val savedDate = _viewState.value.newResultData.date
-        val savedResultDouble: Double
-        val savedAmountDouble: Double
 
         if (savedResult.isEmpty()) {
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
@@ -123,29 +124,38 @@ class AddExerciseViewModel(
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
             return
         }
-        try {
-            savedResultDouble = savedResult.toDouble()
-        } catch (e: NumberFormatException) {
+
+
+        if (!(savedResult.matches(Regex(NUMBER_REGEX_DOT)) || savedResult.matches(
+                Regex(
+                    NUMBER_REGEX_COMMA
+                )
+            ))
+        ) {
             _viewState.value = _viewState.value.copy(
                 newResultData = _viewState.value.newResultData.copy(isResultError = true)
             )
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
             return
         }
-        try {
-            savedAmountDouble = savedAmount.toDouble()
-        } catch (e: NumberFormatException) {
+
+        if (!(savedAmount.matches(Regex(NUMBER_REGEX_DOT)) || savedAmount.matches(
+                Regex(
+                    NUMBER_REGEX_DOT
+                )
+            ))
+        ) {
             _viewState.value = _viewState.value.copy(
                 newResultData = _viewState.value.newResultData.copy(isAmountError = true)
             )
-            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
 
         viewModelScope.launch {
             val data = ResultData(
-                savedResultDouble,
-                savedAmountDouble,
+                savedResult.safeToDouble(),
+                savedAmount,
                 formatStringToDateUseCase(savedDate)
             )
             currentResults.add(0, data)
@@ -194,7 +204,7 @@ class AddExerciseViewModel(
             else -> SortType.DATE_DECREASING
         }
         _viewState.value = _viewState.value.copy(sortType = sortType)
-        when(sortType) {
+        when (sortType) {
             SortType.RESULT_INCREASING -> currentResults.sortBy { it.result }
             SortType.AMOUNT_INCREASING -> currentResults.sortBy { it.amount }
             SortType.DATE_INCREASING -> currentResults.sortBy { it.date }
@@ -236,10 +246,17 @@ class AddExerciseViewModel(
     }
 
     fun onAmountValueChanged(text: String) {
+        val amount = text.filter {
+            if (_viewState.value.exerciseType == ExerciseType.RUNNING) {
+                it.isTime()
+            } else {
+                it.isNumber()
+            }
+        }
         _viewState.value =
             _viewState.value.copy(
                 newResultData = _viewState.value.newResultData.copy(
-                    amount = text.filter { it.isNumber() },
+                    amount = amount,
                     isAmountError = false
                 )
             )
