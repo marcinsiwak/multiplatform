@@ -29,6 +29,7 @@ import pl.msiwak.multiplatform.extensions.safeToDouble
 import pl.msiwak.multiplatform.utils.DATE_REGEX
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_COMMA
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_DOT
+import pl.msiwak.multiplatform.utils.TIME_REGEX
 
 class AddExerciseViewModel(
     id: Long,
@@ -101,6 +102,7 @@ class AddExerciseViewModel(
     }
 
     fun onSaveResultClicked() {
+        val exerciseType = _viewState.value.exerciseType
         val savedResult = _viewState.value.newResultData.result
         val savedAmount = _viewState.value.newResultData.amount
         val savedDate = _viewState.value.newResultData.date
@@ -130,7 +132,7 @@ class AddExerciseViewModel(
                 Regex(
                     NUMBER_REGEX_COMMA
                 )
-            ))
+            ) && exerciseType == ExerciseType.GYM)
         ) {
             _viewState.value = _viewState.value.copy(
                 newResultData = _viewState.value.newResultData.copy(isResultError = true)
@@ -143,7 +145,16 @@ class AddExerciseViewModel(
                 Regex(
                     NUMBER_REGEX_DOT
                 )
-            ))
+            )) && exerciseType == ExerciseType.GYM
+        ) {
+            _viewState.value = _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(isAmountError = true)
+            )
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
+            return
+        }
+
+        if (!(savedAmount.matches(Regex(TIME_REGEX))) && exerciseType == ExerciseType.RUNNING
         ) {
             _viewState.value = _viewState.value.copy(
                 newResultData = _viewState.value.newResultData.copy(isAmountError = true)

@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.android.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
@@ -32,7 +32,8 @@ fun ResultInputView(
     readOnly: Boolean = false,
     textAlign: TextAlign = TextAlign.Center,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-    trailingIcon: @Composable (() -> Unit)? = null
+    trailingIcon: @Composable (() -> Unit)? = null,
+    onViewClicked: () -> Unit = {}
 ) {
     val dimens = LocalDim.current
 
@@ -45,14 +46,14 @@ fun ResultInputView(
             unfocusedBorderColor = if (isError) Color.Red else Color.Gray,
             cursorColor = colorResource(id = R.color.white)
         ),
-        trailingIcon = trailingIcon,
         value = value,
         onValueChange = { newText ->
             onValueChange(newText)
         },
         placeholder = {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth(),
                 text = hintText,
                 maxLines = 1,
                 textAlign = TextAlign.Center
