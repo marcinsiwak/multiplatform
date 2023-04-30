@@ -44,6 +44,7 @@ kotlin {
                 with(Deps.Firebase) {
                     api(authentication)
                     api(remoteConfig)
+                    api(crashlytics)
                 }
                 with(Deps.Kotlinx) {
                     api(coroutines)

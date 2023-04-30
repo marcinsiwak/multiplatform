@@ -39,10 +39,13 @@ fun InputView(
     Column(modifier = modifier) {
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(
+                cursorColor = Color.White,
                 containerColor = backgroundColor,
                 textColor = Color.White,
-                focusedBorderColor = colorResource(id = R.color.button_color),
-                unfocusedBorderColor = Color.Gray
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.Gray,
+                focusedLabelColor = Color.White,
+                unfocusedLabelColor = Color.Gray
             ),
             trailingIcon = trailingIcon,
             shape = RoundedCornerShape(dimens.space_12),
