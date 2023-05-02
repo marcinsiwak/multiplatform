@@ -24,9 +24,9 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.compose.colorResource
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
@@ -66,12 +66,12 @@ fun ResultsTableView(
 
     Column(
         modifier = modifier
-            .background(colorResource(resource = MR.colors.gray_two))
+            .background(colorResource(id = MR.colors.gray_two.resourceId))
     ) {
         // todo results type from database
         Row(
             modifier = Modifier
-                .background(color = colorResource(resource = MR.colors.gray))
+                .background(color = colorResource(id = MR.colors.gray.resourceId))
                 .height(IntrinsicSize.Min)
                 .fillMaxWidth()
                 .padding(vertical = dimens.space_8),

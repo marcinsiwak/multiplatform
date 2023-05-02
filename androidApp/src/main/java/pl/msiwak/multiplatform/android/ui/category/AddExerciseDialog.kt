@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import dev.icerock.moko.resources.compose.colorResource
+import androidx.compose.ui.res.colorResource
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
@@ -29,7 +29,7 @@ fun AddExerciseDialog(
 
     AlertDialog(
         shape = RoundedCornerShape(dimens.space_16),
-        containerColor = colorResource(resource = MR.colors.gray),
+        containerColor = colorResource(MR.colors.gray.resourceId),
         onDismissRequest = {
             onDialogClosed()
         },

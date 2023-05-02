@@ -3,16 +3,11 @@ package pl.msiwak.multiplatform.android.di
 import android.app.Application
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
-import pl.msiwak.multiplatform.database.DatabaseDriverFactory
 import pl.msiwak.multiplatform.utils.KMMPreferences
 
 
 val sharedPreferencesModule = module {
     single { getSharedPrefs(androidApplication()) }
-}
-
-val androidDatabaseModule = module {
-    single { DatabaseDriverFactory(androidApplication()) }
 }
 
 fun getSharedPrefs(androidApplication: Application): KMMPreferences {

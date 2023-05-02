@@ -33,4 +33,6 @@ data class Dimensions(
     val font_24: TextUnit = 24.sp,
     val first_list_item_size: Dp = 116.dp,
     val second_list_item_size: Dp = 132.dp,
+    val bottom_navigation_elevation: Dp = 10.dp,
+    val bottom_navigation_divider_width: Dp = 2.dp,
 )

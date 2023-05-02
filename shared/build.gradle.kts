@@ -28,6 +28,7 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true
+            binaryOption("bundleVersion", "1")
             export("dev.icerock.moko:resources:0.21.2")
             export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
         }

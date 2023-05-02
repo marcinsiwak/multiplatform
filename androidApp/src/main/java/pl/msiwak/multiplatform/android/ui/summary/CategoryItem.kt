@@ -49,7 +49,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                 shape = RoundedCornerShape(dimens.space_8),
             )
             .shadow(dimens.space_2)
-            .border(dimens.space_2, Color.Black, RoundedCornerShape(dimens.space_8))
+            .border(dimens.space_2, Color.DarkGray, RoundedCornerShape(dimens.space_8))
             .height(dimens.space_164)
             .fillMaxWidth(),
     ) {

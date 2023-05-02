@@ -5,11 +5,14 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
+import pl.msiwak.multiplatform.android.ui.extensions.topBorder
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
@@ -18,6 +21,8 @@ fun BottomNavigation(navController: NavController, items: List<DashboardNavigati
     val dimens = LocalDim.current
 
     androidx.compose.material.BottomNavigation(
+        modifier = Modifier.topBorder(dimens.bottom_navigation_divider_width, Color.DarkGray),
+        elevation = dimens.bottom_navigation_elevation,
         backgroundColor = Color.Black,
         contentColor = Color.White
     ) {

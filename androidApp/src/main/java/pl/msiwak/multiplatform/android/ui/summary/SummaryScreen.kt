@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.android.ui.summary
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -39,9 +38,10 @@ fun SummaryScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.DarkGray)
+            .background(color = Color.Black)
     ) {
         LazyColumn(
+            modifier = Modifier.padding(horizontal = dimens.space_16),
             horizontalAlignment = Alignment.CenterHorizontally,
             content = {
                 items(state.value.categories) { category ->
@@ -64,6 +64,7 @@ fun SummaryScreen() {
                             Icon(
                                 modifier = Modifier.padding(dimens.space_8),
                                 painter = painterResource(id = R.drawable.ic_add),
+                                tint = Color.Gray,
                                 contentDescription = null
                             )
                             Text(
@@ -71,7 +72,8 @@ fun SummaryScreen() {
                                 text = getString(
                                     context,
                                     MR.strings.summary_add_category
-                                )
+                                ),
+                                color = Color.Gray
                             )
                         }
                     }
