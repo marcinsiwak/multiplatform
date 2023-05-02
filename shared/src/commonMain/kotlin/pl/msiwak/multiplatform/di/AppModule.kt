@@ -37,6 +37,7 @@ import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
+import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.CategoryRepository
 import pl.msiwak.multiplatform.repository.ExerciseRepository
@@ -121,7 +122,7 @@ val viewModelsModule = module {
         )
     }
     viewModelDefinition { AddCategoryViewModel(get(), get()) }
-    viewModelDefinition { SettingsViewModel(get()) }
+    viewModelDefinition { SettingsViewModel(get(), get()) }
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel(get()) }
@@ -156,6 +157,7 @@ val useCaseModule = module {
     factory { FetchRemoteConfigUseCase(get()) }
     factory { GetMinAppCodeUseCase(get()) }
     factory { GetCurrentAppCodeUseCase(get()) }
+    factory { GetVersionNameUseCase(get()) }
 }
 
 val repositoryUseModule = module {

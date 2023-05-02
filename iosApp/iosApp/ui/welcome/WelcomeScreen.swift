@@ -67,9 +67,7 @@ struct WelcomeScreen: View {
      }
     
     var body: some View {
-            VStack(alignment: .leading) {
-                    Text("")
-            
+            VStack(alignment: .leading) {            
                     Button("Register") {
                         welcomeDiHelper.onRegistrationClicked()
                         
