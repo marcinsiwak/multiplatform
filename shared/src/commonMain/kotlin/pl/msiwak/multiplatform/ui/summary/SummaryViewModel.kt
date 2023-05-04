@@ -27,11 +27,11 @@ class SummaryViewModel(
         }
     }
 
-    fun onAddExerciseClicked() {
+    fun onAddCategoryClicked() {
         navigator.navigate(NavigationDirections.AddCategory)
     }
 
-    fun onExerciseClicked(id: Long) {
+    fun onCategoryClicked(id: Long) {
         navigator.navigate(NavigationDirections.Category(id))
     }
 }

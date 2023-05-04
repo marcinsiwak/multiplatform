@@ -8,15 +8,11 @@ private let CategoryRoute = "category"
 
 
 struct ContentView: View {
-    @State private var route = [NavigationDirections]()
-
-    let mainDiHelper = MainDiHelper()
-    
+    @State private var route : [NavigationDirections] = [NavigationDirections.Dashboard()]
     
     var body: some View {
         NavigationStack(path: $route) {
-            WelcomeScreen(
-                viewModel: mainDiHelper.getMainViewModel(),
+            MainScreen(
                 navigateToRegistration: { route.append(NavigationDirections.Registration()) },
                 navigateToLogin: { route.append(NavigationDirections.Login()) },
                 navigateToDashboard: { route.append(NavigationDirections.Dashboard()) },
@@ -25,6 +21,9 @@ struct ContentView: View {
                 },
                 navigateToAddExercise: { id in
                     route.append(NavigationDirections.AddExercise(id: id ?? 0))
+                },
+                navigateToAddCategory: {
+                    route.append(NavigationDirections.AddCategory())
                 }
             ).navigationDestination(for: NavigationDirections.self) { direction in
                 if(direction is NavigationDirections.Registration) {
@@ -36,13 +35,21 @@ struct ContentView: View {
                 if(direction is NavigationDirections.Category) {
                     let id = (direction as? NavigationDirections.Category)?.getCategoryId() ?? 0
                     CategoryScreen(id: id)
+                        .navigationBarTitleDisplayMode(.inline)
+
                 }
                 if(direction is NavigationDirections.AddExercise) {
                     let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? 0
                     AddExerciseScreen(id: id)
+                        .navigationBarBackButtonHidden(true)
+                }
+                if(direction is NavigationDirections.AddCategory) {
+                    AddCategoryScreen()
+                        .navigationBarTitleDisplayMode(.inline)
                 }
             }
         }
+        .tint(.white)
     }
 }
 

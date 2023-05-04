@@ -1,30 +1,32 @@
 import SwiftUI
 import shared
 
-struct WelcomeScreen: View {
-    let welcomeDiHelper = WelcomeDiHelper()
+struct MainScreen: View {
+    let mainDiHelper = MainDiHelper()
     private let navigateToRegistration: () -> Void
     private let navigateToLogin: () -> Void
     private let navigateToDashboard: () -> Void
     private let navigateToCategory: (Int64?) -> Void
     private let navigateToAddExercise: (Int64?) -> Void
+    private let navigateToAddCategory: () -> Void
     private let viewModel: MainViewModel
 
     
     init(
-        viewModel: MainViewModel,
         navigateToRegistration: @escaping () -> Void,
         navigateToLogin: @escaping () -> Void,
         navigateToDashboard: @escaping () -> Void,
         navigateToCategory: @escaping (Int64?) -> Void,
-        navigateToAddExercise: @escaping (Int64?) -> Void
+        navigateToAddExercise: @escaping (Int64?) -> Void,
+        navigateToAddCategory: @escaping () -> Void
     ) {
-        self.viewModel = viewModel
+        self.viewModel = mainDiHelper.getMainViewModel()
         self.navigateToRegistration = navigateToRegistration
         self.navigateToLogin = navigateToLogin
         self.navigateToDashboard = navigateToDashboard
         self.navigateToCategory = navigateToCategory
         self.navigateToAddExercise = navigateToAddExercise
+        self.navigateToAddCategory = navigateToAddCategory
         observeState()
     }
     
@@ -39,37 +41,41 @@ struct WelcomeScreen: View {
     
     private func onCommandReceived(command: NavigationCommand) {
         print(command.destination)
-        if(command.destination == "registration") {
+        if(command is NavigationDirections.Registration) {
             navigateToRegistration()
         }
         
-        if(command.destination == "login") {
+        if(command is NavigationDirections.Login) {
             navigateToLogin()
         }
         
-        if(command.destination == "dashboard") {
+        if(command is NavigationDirections.Dashboard) {
             navigateToDashboard()
         }
         
-        if(command.destination == "category") {
-            if(command is NavigationDirections.Category){
-                let id = (command as? NavigationDirections.Category)?.getCategoryId()
-                navigateToCategory(id)
-            }
+        if(command is NavigationDirections.Category){
+            let id = (command as? NavigationDirections.Category)?.getCategoryId()
+            navigateToCategory(id)
         }
+        
         
         if(command is NavigationDirections.AddExercise){
             let id = (command as? NavigationDirections.AddExercise)?.getExerciseId()
             navigateToAddExercise(id)
         }
         
+        if(command is NavigationDirections.AddCategory){
+            navigateToAddCategory()
+        }
+        
         
      }
     
     var body: some View {
+        
             VStack(alignment: .leading) {            
                     Button("Register") {
-                        welcomeDiHelper.onRegistrationClicked()
+//                        mainDiHel.per.onRegistrationClicked()
                         
                     }.padding(30)
                 

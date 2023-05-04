@@ -22,16 +22,33 @@ struct SummaryScreen: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ForEach(state.value.categories) { item in
-                CategoryItem(categoryData: item)
-                    .onTapGesture {
-                        viewModel.onExerciseClicked(id: item.id)
+            ScrollView {
+                ForEach(state.value.categories) { item in
+                    CategoryItem(categoryData: item)
+                        .onTapGesture {
+                            viewModel.onCategoryClicked(id: item.id)
+                        }
+                        .padding(.top, 16)
+                }
+                
+                Button(action: {
+                    viewModel.onAddCategoryClicked()
+                }, label: {
+                    HStack {
+                        Image(systemName: "plus.circle")
+                            .tint(.gray)
+                        Text(MR.strings().summary_add_category.desc().localized())
+                            .foregroundColor(.gray)
                     }
+                    .padding(.vertical, 24)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                })
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-        .background(.gray)
-
+        .padding(.horizontal, 8)
+        .background(.black)
+    
     }
 
     private func onStateReceived(state: SummaryState) {

@@ -5,11 +5,12 @@ struct CategoryScreen: View {
     let id: Int64
     let viewModel: CategoryViewModel
     @ObservedObject private var state: ObservableCategoryState
-    
+        
     init(id: Int64) {
         self.id = id
         self.viewModel = CategoryDiHelper(id: id).getCategoryViewModel()
         self.state = viewModel.observableState()
+
         observeState()
     }
     
@@ -27,20 +28,34 @@ struct CategoryScreen: View {
         self.state.value = state
      }
     
+    private func selectBackgroundImage() -> UIImage {
+        switch(self.state.value.exerciseType){
+        case ExerciseType.running:
+            return MR.images().bg_running_field.toUIImage()!
+        case ExerciseType.gym:
+            return MR.images().bg_gym.toUIImage()!
+    //        ExerciseType.OTHER -> null
+        default:
+            return MR.images().bg_gym.toUIImage()!
+        }
+    }
+
     
     var body: some View {
+
         VStack(alignment: .leading, spacing: 0) {
             ZStack {
-                Image(uiImage: MR.images().bg_running_field.toUIImage()!)
+                let backgroundImage = selectBackgroundImage()
+                
+                Image(uiImage: backgroundImage)
                     .resizable()
                     .scaledToFill()
                     .clipped()
                     .frame(height: 264)
-                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
                 Rectangle()
                     .frame(height: 264)
                     .foregroundColor(.clear)
-                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
                     .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
             }
             ForEach(state.value.exerciseList) { item in

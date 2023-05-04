@@ -49,7 +49,7 @@ fun SummaryScreen() {
                         modifier = Modifier
                             .padding(vertical = dimens.space_8)
                             .clickable {
-                                viewModel.onExerciseClicked(category.id)
+                                viewModel.onCategoryClicked(category.id)
                             },
                         categoryData = category
                     )
@@ -58,7 +58,7 @@ fun SummaryScreen() {
                     Button(
                         modifier = Modifier.padding(dimens.space_16),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                        onClick = { viewModel.onAddExerciseClicked() }
+                        onClick = { viewModel.onAddCategoryClicked() }
                     ) {
                         Row {
                             Icon(
