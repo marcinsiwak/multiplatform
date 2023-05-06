@@ -5,12 +5,12 @@ import shared
 struct AddExerciseScreen: View {
     let id: Int64
     let viewModel: AddExerciseViewModel
-    @ObservedObject private var state: ObservableAddExerciseState
+    @ObservedObject private var state: ObservableState<AddExerciseState>
     
     init(id: Int64) {
         self.id = id
         self.viewModel = AddExerciseDiHelper(id: id).getAddExerciseViewModel()
-        self.state = viewModel.observableState()
+        self.state = ObservableState<AddExerciseState>(value: viewModel.viewState.value as! AddExerciseState)
         observeState()
     }
     
@@ -71,12 +71,6 @@ struct AddExerciseScreen: View {
         .onDisappear {
             viewModel.onPause()
         }
-    }
-}
-
-extension AddExerciseViewModel {
-    func observableState() -> ObservableAddExerciseState {
-        return (viewState.value as! AddExerciseState).wrapAsObservable()
     }
 }
 

@@ -13,7 +13,6 @@ fun <T> SharedFlow<T>.asCommonFlow(): CommonSharedFlow<T> = CommonSharedFlow(thi
 class CommonSharedFlow<T>(private val origin: SharedFlow<T>) : SharedFlow<T> by origin {
     fun watch(block: (T) -> Unit): Closeable {
         val job = Job()
-        distinctUntilChanged()
         onEach {
             block(it)
         }.launchIn(CoroutineScope(Dispatchers.Main + job))

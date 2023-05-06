@@ -3,11 +3,11 @@ import shared
 
 struct SummaryScreen: View {
     let viewModel = SummaryDiHelper().getSummaryViewModel()
-    @ObservedObject private var state: ObservableSummaryState
-    
+    @ObservedObject private var state: ObservableState<SummaryState>
+
 
     init() {
-        self.state = viewModel.observableState()
+        self.state = ObservableState<SummaryState>(value: viewModel.viewState.value as! SummaryState)
         observeState()
     }
     
@@ -57,12 +57,6 @@ struct SummaryScreen: View {
     
 }
 extension CategoryData: Identifiable {}
-
-extension SummaryViewModel {
-    func observableState() -> ObservableSummaryState {
-        return (viewState.value as! SummaryState).wrapAsObservable()
-    }
-}
 
 //struct SummaryScreen_Previews: PreviewProvider {
 //    static var previews: some View {

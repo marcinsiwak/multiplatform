@@ -3,14 +3,25 @@ import shared
 
 struct AddCategoryScreen: View {
     let viewModel = AddCategoryDiHelper().getViewModel()
-    @ObservedObject private var state: ObservableAddCategoryState
 
     @State private var title = ""
 
+    @ObservedObject private var state: ObservableState<AddCategoryState>
     
     init() {
-        self.state = viewModel.observableState()
+        self.state = ObservableState<AddCategoryState>(value: viewModel.viewState.value as! AddCategoryState)
+        observeState()
     }
+    
+    private func observeState() {
+        viewModel.viewState.collect(collector: Collector<AddCategoryState>{ state in
+            self.state.value = state
+            
+        }) { error in
+            print("Error ocurred during state collection")
+        }
+    }
+    
     
     var body: some View {
         ZStack {
@@ -59,11 +70,6 @@ struct AddCategoryScreen: View {
     }
 }
 
-extension AddCategoryViewModel {
-    func observableState() -> ObservableAddCategoryState {
-        return (viewState.value as! AddCategoryState).wrapAsObservable()
-    }
-}
 
 //struct AddCategoryScreen_Previews: PreviewProvider {
 //    static var previews: some View {

@@ -4,12 +4,12 @@ import shared
 struct CategoryScreen: View {
     let id: Int64
     let viewModel: CategoryViewModel
-    @ObservedObject private var state: ObservableCategoryState
-        
+    @ObservedObject private var state: ObservableState<CategoryState>
+
     init(id: Int64) {
         self.id = id
         self.viewModel = CategoryDiHelper(id: id).getCategoryViewModel()
-        self.state = viewModel.observableState()
+        self.state = ObservableState<CategoryState>(value: viewModel.viewState.value as! CategoryState)
 
         observeState()
     }
@@ -96,13 +96,6 @@ struct CategoryScreen: View {
 
     }
 }
-
-extension CategoryViewModel {
-    func observableState() -> ObservableCategoryState {
-        return (viewState.value as! CategoryState).wrapAsObservable()
-    }
-}
-
 
 struct CategoryScreen_Previews: PreviewProvider {
     static var previews: some View {

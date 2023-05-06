@@ -11,9 +11,9 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7125855C2A03A07000ACA757 /* AddCategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125855B2A03A07000ACA757 /* AddCategoryScreen.swift */; };
-		712585602A03BD9900ACA757 /* ObservableAddCategoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125855F2A03BD9900ACA757 /* ObservableAddCategoryState.swift */; };
 		712585622A03E19A00ACA757 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585612A03E19A00ACA757 /* Array.swift */; };
 		712585642A0403BA00ACA757 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585632A0403BA00ACA757 /* AppDelegate.swift */; };
+		712585662A05543000ACA757 /* ObservableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585652A05543000ACA757 /* ObservableState.swift */; };
 		71C6B04D297B1239007A3EB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71C6B04C297B1239007A3EB0 /* GoogleService-Info.plist */; };
 		71C6B054297C2871007A3EB0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C6B053297C2871007A3EB0 /* FirebaseAuth */; };
 		71C6B058297F5762007A3EB0 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6B057297F5762007A3EB0 /* MainScreen.swift */; };
@@ -21,15 +21,12 @@
 		71C6B05E298038BB007A3EB0 /* Collector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6B05D298038BB007A3EB0 /* Collector.swift */; };
 		71CF732429B6161A00D51846 /* DashboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF732329B6161A00D51846 /* DashboardScreen.swift */; };
 		71CF732629B61B2C00D51846 /* SummaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF732529B61B2C00D51846 /* SummaryScreen.swift */; };
-		71CF733029B7623000D51846 /* ObservableSummaryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF732F29B7623000D51846 /* ObservableSummaryState.swift */; };
 		71CF733229B7690F00D51846 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF733129B7690F00D51846 /* CategoryItem.swift */; };
 		71CF734129B8EE8F00D51846 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF734029B8EE8F00D51846 /* ViewExtensions.swift */; };
 		71CF734429BA128600D51846 /* CategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF734329BA128600D51846 /* CategoryScreen.swift */; };
-		71CF734629BA173800D51846 /* ObservableCategoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF734529BA173800D51846 /* ObservableCategoryState.swift */; };
 		71CF734929C9FFB100D51846 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF734829C9FFB100D51846 /* ListItemView.swift */; };
 		71CF735129CB2B5A00D51846 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF735029CB2B5A00D51846 /* DialogView.swift */; };
 		71CF735429CB362500D51846 /* AddExerciseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF735329CB362500D51846 /* AddExerciseScreen.swift */; };
-		71F08DCC29D31925007D7E2F /* ObservableAddExerciseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F08DCB29D31925007D7E2F /* ObservableAddExerciseState.swift */; };
 		71F08DCF29D45EFC007D7E2F /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F08DCE29D45EFC007D7E2F /* ResultsView.swift */; };
 		71F08DD129D5B085007D7E2F /* NewResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F08DD029D5B085007D7E2F /* NewResultView.swift */; };
 		71F08DD329D5B0BC007D7E2F /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F08DD229D5B0BC007D7E2F /* InputView.swift */; };
@@ -57,24 +54,21 @@
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7125855B2A03A07000ACA757 /* AddCategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryScreen.swift; sourceTree = "<group>"; };
-		7125855F2A03BD9900ACA757 /* ObservableAddCategoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableAddCategoryState.swift; sourceTree = "<group>"; };
 		712585612A03E19A00ACA757 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		712585632A0403BA00ACA757 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		712585652A05543000ACA757 /* ObservableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableState.swift; sourceTree = "<group>"; };
 		71C6B04C297B1239007A3EB0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71C6B057297F5762007A3EB0 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		71C6B059297F5D89007A3EB0 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		71C6B05D298038BB007A3EB0 /* Collector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collector.swift; sourceTree = "<group>"; };
 		71CF732329B6161A00D51846 /* DashboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreen.swift; sourceTree = "<group>"; };
 		71CF732529B61B2C00D51846 /* SummaryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryScreen.swift; sourceTree = "<group>"; };
-		71CF732F29B7623000D51846 /* ObservableSummaryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableSummaryState.swift; sourceTree = "<group>"; };
 		71CF733129B7690F00D51846 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		71CF734029B8EE8F00D51846 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		71CF734329BA128600D51846 /* CategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScreen.swift; sourceTree = "<group>"; };
-		71CF734529BA173800D51846 /* ObservableCategoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableCategoryState.swift; sourceTree = "<group>"; };
 		71CF734829C9FFB100D51846 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		71CF735029CB2B5A00D51846 /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		71CF735329CB362500D51846 /* AddExerciseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseScreen.swift; sourceTree = "<group>"; };
-		71F08DCB29D31925007D7E2F /* ObservableAddExerciseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableAddExerciseState.swift; sourceTree = "<group>"; };
 		71F08DCE29D45EFC007D7E2F /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		71F08DD029D5B085007D7E2F /* NewResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewResultView.swift; sourceTree = "<group>"; };
 		71F08DD229D5B0BC007D7E2F /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -125,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				7125855B2A03A07000ACA757 /* AddCategoryScreen.swift */,
-				7125855F2A03BD9900ACA757 /* ObservableAddCategoryState.swift */,
 			);
 			path = addCategory;
 			sourceTree = "<group>";
@@ -151,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				71CF732529B61B2C00D51846 /* SummaryScreen.swift */,
-				71CF732F29B7623000D51846 /* ObservableSummaryState.swift */,
 				71CF733129B7690F00D51846 /* CategoryItem.swift */,
 			);
 			path = summary;
@@ -185,6 +177,7 @@
 			children = (
 				71C6B05D298038BB007A3EB0 /* Collector.swift */,
 				712585612A03E19A00ACA757 /* Array.swift */,
+				712585652A05543000ACA757 /* ObservableState.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -201,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				71CF734329BA128600D51846 /* CategoryScreen.swift */,
-				71CF734529BA173800D51846 /* ObservableCategoryState.swift */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -223,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				71CF735329CB362500D51846 /* AddExerciseScreen.swift */,
-				71F08DCB29D31925007D7E2F /* ObservableAddExerciseState.swift */,
 			);
 			path = addExercise;
 			sourceTree = "<group>";
@@ -385,24 +376,21 @@
 				71CF734929C9FFB100D51846 /* ListItemView.swift in Sources */,
 				71F08DD129D5B085007D7E2F /* NewResultView.swift in Sources */,
 				71C6B058297F5762007A3EB0 /* MainScreen.swift in Sources */,
+				712585662A05543000ACA757 /* ObservableState.swift in Sources */,
 				71CF734429BA128600D51846 /* CategoryScreen.swift in Sources */,
-				71F08DCC29D31925007D7E2F /* ObservableAddExerciseState.swift in Sources */,
 				712585622A03E19A00ACA757 /* Array.swift in Sources */,
 				71F08DD529D5C505007D7E2F /* ResultTableView.swift in Sources */,
 				71CF732429B6161A00D51846 /* DashboardScreen.swift in Sources */,
 				71CF733229B7690F00D51846 /* CategoryItem.swift in Sources */,
 				71CF735129CB2B5A00D51846 /* DialogView.swift in Sources */,
-				71CF733029B7623000D51846 /* ObservableSummaryState.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7125855C2A03A07000ACA757 /* AddCategoryScreen.swift in Sources */,
 				71CF732629B61B2C00D51846 /* SummaryScreen.swift in Sources */,
 				71F08DD329D5B0BC007D7E2F /* InputView.swift in Sources */,
-				71CF734629BA173800D51846 /* ObservableCategoryState.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				71CF734129B8EE8F00D51846 /* ViewExtensions.swift in Sources */,
 				71CF735429CB362500D51846 /* AddExerciseScreen.swift in Sources */,
 				71F08DCF29D45EFC007D7E2F /* ResultsView.swift in Sources */,
-				712585602A03BD9900ACA757 /* ObservableAddCategoryState.swift in Sources */,
 				71C6B05E298038BB007A3EB0 /* Collector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
