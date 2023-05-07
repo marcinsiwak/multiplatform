@@ -5,6 +5,8 @@ struct AddCategoryScreen: View {
     let viewModel = AddCategoryDiHelper().getViewModel()
 
     @State private var title = ""
+    
+    @Environment(\.dismiss) var dismiss
 
     @ObservedObject private var state: ObservableState<AddCategoryState>
     
@@ -53,7 +55,10 @@ struct AddCategoryScreen: View {
                 }
                 Spacer()
                 Button(
-                    action: { viewModel.onSaveCategoryClicked() },
+                    action: {
+                        viewModel.onSaveCategoryClicked()
+                        dismiss()
+                    },
                     label: {
                         Text("Add category")
                             .font(.system(size: 16))

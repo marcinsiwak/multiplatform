@@ -1,15 +1,11 @@
 import SwiftUI
 import shared
 
-private let RegistrationRoute = "registration"
-private let LoginRoute = "login"
-private let DashboardRoute = "dashboard"
-private let CategoryRoute = "category"
-
 
 struct ContentView: View {
     @State private var route : [NavigationDirections] = [NavigationDirections.Dashboard()]
     
+
     var body: some View {
         NavigationStack(path: $route) {
             MainScreen(
@@ -24,6 +20,9 @@ struct ContentView: View {
                 },
                 navigateToAddCategory: {
                     route.append(NavigationDirections.AddCategory())
+                },
+                navigateBack: {
+                    route.removeLast()
                 }
             ).navigationDestination(for: NavigationDirections.self) { direction in
                 if(direction is NavigationDirections.Registration) {
@@ -36,7 +35,6 @@ struct ContentView: View {
                     let id = (direction as? NavigationDirections.Category)?.getCategoryId() ?? 0
                     CategoryScreen(id: id)
                         .navigationBarTitleDisplayMode(.inline)
-
                 }
                 if(direction is NavigationDirections.AddExercise) {
                     let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? 0

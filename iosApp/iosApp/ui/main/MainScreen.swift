@@ -9,8 +9,8 @@ struct MainScreen: View {
     private let navigateToCategory: (Int64?) -> Void
     private let navigateToAddExercise: (Int64?) -> Void
     private let navigateToAddCategory: () -> Void
+    private let navigateBack: () -> Void
     private let viewModel: MainViewModel
-
     
     init(
         navigateToRegistration: @escaping () -> Void,
@@ -18,7 +18,8 @@ struct MainScreen: View {
         navigateToDashboard: @escaping () -> Void,
         navigateToCategory: @escaping (Int64?) -> Void,
         navigateToAddExercise: @escaping (Int64?) -> Void,
-        navigateToAddCategory: @escaping () -> Void
+        navigateToAddCategory: @escaping () -> Void,
+        navigateBack: @escaping () -> Void
     ) {
         self.viewModel = mainDiHelper.getMainViewModel()
         self.navigateToRegistration = navigateToRegistration
@@ -27,6 +28,7 @@ struct MainScreen: View {
         self.navigateToCategory = navigateToCategory
         self.navigateToAddExercise = navigateToAddExercise
         self.navigateToAddCategory = navigateToAddCategory
+        self.navigateBack = navigateBack
         observeState()
     }
     
@@ -66,6 +68,10 @@ struct MainScreen: View {
         
         if(command is NavigationDirections.AddCategory){
             navigateToAddCategory()
+        }
+        
+        if(command is NavigationDirections.NavigateUp){
+            navigateBack()
         }
         
         

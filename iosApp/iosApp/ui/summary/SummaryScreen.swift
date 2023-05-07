@@ -4,6 +4,7 @@ import shared
 struct SummaryScreen: View {
     let viewModel = SummaryDiHelper().getSummaryViewModel()
     @ObservedObject private var state: ObservableState<SummaryState>
+    
 
 
     init() {
