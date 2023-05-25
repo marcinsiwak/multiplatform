@@ -25,7 +25,7 @@ fun ResultsTimeFilterView(
     modifier: Modifier = Modifier,
     tabs: List<DateFilter>,
     selectedPos: Int = 0,
-    onTabClicked: (Int) -> Unit
+    onTabClicked: (DateFilter) -> Unit
 ) {
     val density = LocalDensity.current
     val dimen = LocalDim.current
@@ -61,7 +61,7 @@ fun ResultsTimeFilterView(
                     ),
                     selected = true,
                     onClick = {
-                        onTabClicked(index)
+                        onTabClicked(item)
                     }) {
                     Text(
                         modifier = Modifier.padding(

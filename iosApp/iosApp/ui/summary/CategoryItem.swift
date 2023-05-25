@@ -33,7 +33,7 @@ struct CategoryItem: View {
                 Text(item.name)
                     .foregroundColor(.white)
                     .font(.subheadline)
-            }
+            }.padding(.horizontal, 8)
             
             HStack {
                 Spacer()

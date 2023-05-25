@@ -2,34 +2,64 @@ import SwiftUI
 import shared
 
 struct ResultsTableView: View {
+    let resultDataTitles: [String?]
+    let unit: String
     let results: [FormattedResultData]
+    let exerciseType: ExerciseType
+    let sortType: SortType?
     let isNewResultEnabled: Bool
     let newResultData: FormattedResultData
     let onAddNewResultClicked: () -> Void
+    let onLabelClicked: (Int) -> Void
     let onResultValueChanged: (String) -> Void
     let onAmountValueChanged: (String) -> Void
-    let onDateValueChanged: (String) -> Void
+    let onDatePicked: (Kotlinx_datetimeLocalDateTime) -> Void
     let onDateClicked: () -> Void
     let onResultLongClick: (Int) -> Void
     
     var body: some View {
+        
         VStack {
             // Header
             HStack {
-                Text("Weight")
+                TextWithDrawableView(
+                    text: "Weight",
+                    iconResId: sortType == .resultIncreasing ? "chevron.up" :
+                            sortType == .resultDecreasing ? "chevron.down" : nil,
+                    color: Color.white
+                )
                     .padding(.horizontal, 16)
                     .foregroundColor(.white)
-                Text("Reps")
+                    .onTapGesture {
+                        onLabelClicked(0)
+                    }
+                TextWithDrawableView(
+                    text: "Reps",
+                    iconResId: sortType == .amountIncreasing ? "chevron.up" :
+                        sortType == .amountDecreasing ? "chevron.down" : nil,
+                    color: Color.white
+                )
                     .padding(.horizontal, 16)
                     .foregroundColor(.white)
-                Text("Date")
+                    .onTapGesture {
+                        onLabelClicked(1)
+                    }
+                TextWithDrawableView(
+                    text: "Date",
+                    iconResId: sortType == .dateIncreasing ? "chevron.up" :
+                        sortType == .dateDecreasing ? "chevron.down" : nil,
+                    color: Color.white
+                )
                     .padding(.horizontal, 16)
                     .foregroundColor(.white)
+                    .onTapGesture {
+                        onLabelClicked(2)
+                    }
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 8)
-            .background(Color.blue)
-            
+            .background(Color(MR.colors().gray.getUIColor()))
+
             // Results
             List {
                 if isNewResultEnabled {
@@ -37,9 +67,10 @@ struct ResultsTableView: View {
                         newResultData: newResultData,
                         onResultValueChanged: { onResultValueChanged($0) },
                         onAmountValueChanged: { onAmountValueChanged($0) },
-                        onDateValueChanged: { onDateValueChanged($0) },
+                        onDatePicked: { onDatePicked($0) },
                         onDateClicked: onDateClicked
                     )
+                    .listRowBackground(Color.black)
                 }
                 
                 if results.isEmpty && !isNewResultEnabled {
@@ -47,6 +78,7 @@ struct ResultsTableView: View {
                         Text("Add first result")
                     }
                     .frame(maxWidth: .infinity, minHeight: 200)
+                    .listRowBackground(Color.black)
                 }
                 
                 ForEach(results.indices, id: \.self) { index in
@@ -58,14 +90,19 @@ struct ResultsTableView: View {
                         onResultLongClick: { onResultLongClick(index) }
                     )
                 }
-                
+                .listRowBackground(Color.black)
+
                 if !results.isEmpty && !isNewResultEnabled {
                     Button(action: onAddNewResultClicked) {
                         Text("Add new result")
                     }
                     .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.black)
                 }
             }
+            .listStyle(PlainListStyle())
+            .background(.black)
+            .scrollContentBackground(.hidden)
         }
     }
 }

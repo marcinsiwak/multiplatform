@@ -60,11 +60,12 @@ struct AddCategoryScreen: View {
                         dismiss()
                     },
                     label: {
-                        Text("Add category")
-                            .font(.system(size: 16))
-                            .padding(8)
-                            .background(.gray)
+                        Text(MR.strings().summary_add_category.desc().localized())
+                            .padding(16)
                             .foregroundColor(Color.black)
+                            .background(Color.gray)
+                            .clipShape(RoundedCorner())
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
                 )
                 .frame(width: .none, height: 48)

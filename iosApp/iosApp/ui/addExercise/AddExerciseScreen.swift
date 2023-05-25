@@ -6,7 +6,7 @@ struct AddExerciseScreen: View {
     let id: Int64
     let viewModel: AddExerciseViewModel
     @ObservedObject private var state: ObservableState<AddExerciseState>
-    
+        
     init(id: Int64) {
         self.id = id
         self.viewModel = AddExerciseDiHelper(id: id).getAddExerciseViewModel()
@@ -23,7 +23,6 @@ struct AddExerciseScreen: View {
         }
     }
     
-    
     private func onStateReceived(state: AddExerciseState) {
         self.state.value = state
      }
@@ -31,43 +30,77 @@ struct AddExerciseScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            TextField(MR.strings().exercise.desc().localized(), text: $state.value.exerciseTitle.onChange({ title in
-                viewModel.onExerciseTitleChanged(title: title)
-            }))
-            .textFieldStyle(RoundedBorderTextFieldStyle())
+            Text(state.value.exerciseTitle)
+                .padding(.horizontal, 8)
+                .foregroundColor(.white)
+            
+            ResultsTimeFilterView(
+                tabs: state.value.filter,
+                onTabClicked: { item in
+                    viewModel.onTabClicked(item: item)
+                },
+                selectedFilter: state.value.selectedFilterPosition
+            )
+            .frame(width: 280)
+            .padding(.vertical, 16)
+            
+            if !state.value.isResultFieldEnabled {
+                Button(action: {
+                        viewModel.onAddNewResultClicked()
+                    }, label: {
+                        Text(MR.strings().add_new_result.desc().localized())
+                            .padding()
+                            .foregroundColor(.black)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
+                    }
+                )
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 16)
+            } else {
+                Button(action: {
+                        viewModel.onSaveResultClicked()
+                    }, label: {
+                        Text(MR.strings().add_result_save.desc().localized())
+                            .padding()
+                            .foregroundColor(.black)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
+                    }
+                )
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 16)
+            }
             
             ResultsTableView(
+                resultDataTitles: state.value.resultDataTitles,
+                unit: state.value.unit,
                 results: state.value.results,
+                exerciseType: state.value.exerciseType,
+                sortType: state.value.sortType,
                 isNewResultEnabled: state.value.isResultFieldEnabled,
                 newResultData: state.value.newResultData,
                 onAddNewResultClicked: {
                 viewModel.onAddNewResultClicked()
+            }, onLabelClicked: { pos in
+                viewModel.onLabelClicked(labelPosition: Int32(pos))
             }, onResultValueChanged: { text in
                 viewModel.onResultValueChanged(text: text)
             }, onAmountValueChanged: { text in
                 viewModel.onAmountValueChanged(text: text)
-            }, onDateValueChanged: { date in
-                viewModel.onDateValueChanged(text: date)
+            }, onDatePicked: { date in
+                viewModel.onDatePicked(date: date)
             }, onDateClicked: {
                 viewModel.onDateClicked()
             }, onResultLongClick: { index in
                 let newIndex = Int32(index)
                 viewModel.onResultLongClicked(resultIndex: newIndex)
             })
-            
-//            Button(action: {
-//                viewModel.onAddNewExerciseClicked()
-//            }) {
-//                Text(MR.strings().add_result_save.desc().localized())
-//            }
-//            .frame(maxWidth: .infinity)
-//            .padding(.vertical, 16)
-//            .padding(.horizontal, 80)
-//            .background(Color.gray)
-//            .foregroundColor(.black)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         .background(.black)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         .onDisappear {
             viewModel.onPause()
         }

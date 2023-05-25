@@ -1,8 +1,9 @@
 package pl.msiwak.multiplatform.utils
 
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.toLocalDateTime
-import kotlinx.datetime.toNSDateComponents
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toNSDate
 import platform.Foundation.NSDate
 import platform.Foundation.NSDateFormatter
 
@@ -15,7 +16,8 @@ actual class DateFormatter {
 
         val dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = format
-        return date.toNSDateComponents().date?.let { dateFormatter.stringFromDate(it) } ?: ""
+        val nsDate = date.toInstant(TimeZone.currentSystemDefault()).toNSDate()
+        return dateFormatter.stringFromDate(nsDate)
     }
 
     actual fun formatString(

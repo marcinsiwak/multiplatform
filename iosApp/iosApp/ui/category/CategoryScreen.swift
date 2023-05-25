@@ -83,13 +83,24 @@ struct CategoryScreen: View {
         }) {
             VStack {
                 Text(MR.strings().exercise_name.desc().localized())
+                    .foregroundColor(.white)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .padding()
                 InputView(value: $state.value.newExerciseName, trailingIcon: {}, onValueChange: { text in
                     viewModel.onAddExerciseNameChanged(name: text)
                 })
-                Button(MR.strings().add_new_exercise.desc().localized()) {
+                .padding(.horizontal, 16)
+         
+                Button(action: {
                     viewModel.onAddExerciseClicked()
-                }
+                }, label: {
+                    Text(MR.strings().add_new_exercise.desc().localized())
+                        .padding(16)
+                        .foregroundColor(Color.black)
+                        .background(Color.gray)
+                        .clipShape(RoundedCorner())
+                        .frame(maxWidth: .infinity, alignment: .center)
+                })
                 .padding()
             }
         }

@@ -1,4 +1,5 @@
 import SwiftUI
+import shared
 
 struct DialogView<DialogContent: View>: ViewModifier {
     @Binding var isPresented: Bool // set this to show/hide the dialog
@@ -27,10 +28,11 @@ struct DialogView<DialogContent: View>: ViewModifier {
         // the dialog content is in a ZStack to pad it from the edges
         // of the screen
         ZStack {
-          dialogContent
+            dialogContent
             .background(
               RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(.white))
+                .foregroundColor(Color(MR.colors().gray.getUIColor()))
+            )
         }.padding(40)
       }
     }

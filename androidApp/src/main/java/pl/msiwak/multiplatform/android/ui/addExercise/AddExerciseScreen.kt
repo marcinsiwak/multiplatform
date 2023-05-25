@@ -139,9 +139,7 @@ fun AddExerciseScreen(id: Long) {
                             text = getString(context, MR.strings.add_new_result),
                         )
                     }
-                }
-
-                if (state.value.isResultFieldEnabled) {
+                } else
                     Button(
                         modifier = Modifier
                             .padding(bottom = dimens.space_16)
@@ -156,7 +154,6 @@ fun AddExerciseScreen(id: Long) {
                             text = getString(context, MR.strings.add_result_save),
                         )
                     }
-                }
             }
 
             ResultsTableView(

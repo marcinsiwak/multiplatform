@@ -279,9 +279,10 @@ class AddExerciseViewModel(
 
     }
 
-    fun onTabClicked(pos: Int) {
-        val filterList = _viewState.value.filter.mapIndexed { index, dateFilter ->
-            if (index == pos) {
+    fun onTabClicked(item: DateFilter) {
+        val pos = _viewState.value.filter.indexOf(item)
+        val filterList = _viewState.value.filter.map { dateFilter ->
+            if (dateFilter == item) {
                 filterResults(dateFilter)
                 dateFilter.copy(isSelected = true)
             } else {

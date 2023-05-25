@@ -39,7 +39,7 @@ struct ContentView: View {
                 if(direction is NavigationDirections.AddExercise) {
                     let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? 0
                     AddExerciseScreen(id: id)
-                        .navigationBarBackButtonHidden(true)
+                    .navigationBarTitleDisplayMode(.inline)
                 }
                 if(direction is NavigationDirections.AddCategory) {
                     AddCategoryScreen()

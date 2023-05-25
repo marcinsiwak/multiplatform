@@ -10,16 +10,16 @@ struct ResultView: View {
         HStack(spacing: 0) {
             Text(result)
                 .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
                 .padding(16)
-                .background(Color.gray)
             Text(amount)
                 .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
                 .padding(16)
-                .background(Color.gray)
             Text(date)
                 .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
                 .padding(16)
-                .background(Color.gray)
         }
         .contentShape(Rectangle())
         .onTapGesture {

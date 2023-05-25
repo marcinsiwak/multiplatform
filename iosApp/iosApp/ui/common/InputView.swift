@@ -13,24 +13,11 @@ struct InputView<TrailingIcon: View>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            TextField("", text: $value.onChange({ text in
+            TextField(hintText, text: $value.onChange({ text in
                 onValueChange(text)
-            }))                .foregroundColor(.white)
-
+            }))
                 .padding()
-                .background( ZStack{
-                   backgroundColor
-                        if value.count == 0 {
-                            HStack {
-                                Text(hintText)
-                                .fontWeight(.medium)
-                                    .foregroundColor(.gray)
-                                    .padding(.horizontal)
-                                Spacer()
-                          }
-                         .frame(maxWidth: .infinity)
-                        }
-                    })
+                .background(backgroundColor)
                 .cornerRadius(12)
                 .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray, lineWidth: 1))
                 .overlay(trailingIcon().padding(.trailing, 8).padding(.top, 12), alignment: .trailing)

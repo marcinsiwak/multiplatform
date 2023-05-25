@@ -14,6 +14,9 @@
 		712585622A03E19A00ACA757 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585612A03E19A00ACA757 /* Array.swift */; };
 		712585642A0403BA00ACA757 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585632A0403BA00ACA757 /* AppDelegate.swift */; };
 		712585662A05543000ACA757 /* ObservableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585652A05543000ACA757 /* ObservableState.swift */; };
+		712585682A09074500ACA757 /* TextWithDrawableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585672A09074500ACA757 /* TextWithDrawableView.swift */; };
+		7125856A2A09326300ACA757 /* ResultsTimeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585692A09326300ACA757 /* ResultsTimeFilterView.swift */; };
+		7125856F2A0BCD3500ACA757 /* ResultInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125856E2A0BCD3500ACA757 /* ResultInputView.swift */; };
 		71C6B04D297B1239007A3EB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71C6B04C297B1239007A3EB0 /* GoogleService-Info.plist */; };
 		71C6B054297C2871007A3EB0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C6B053297C2871007A3EB0 /* FirebaseAuth */; };
 		71C6B058297F5762007A3EB0 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6B057297F5762007A3EB0 /* MainScreen.swift */; };
@@ -57,6 +60,9 @@
 		712585612A03E19A00ACA757 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		712585632A0403BA00ACA757 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		712585652A05543000ACA757 /* ObservableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableState.swift; sourceTree = "<group>"; };
+		712585672A09074500ACA757 /* TextWithDrawableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithDrawableView.swift; sourceTree = "<group>"; };
+		712585692A09326300ACA757 /* ResultsTimeFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTimeFilterView.swift; sourceTree = "<group>"; };
+		7125856E2A0BCD3500ACA757 /* ResultInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInputView.swift; sourceTree = "<group>"; };
 		71C6B04C297B1239007A3EB0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71C6B057297F5762007A3EB0 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		71C6B059297F5D89007A3EB0 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
@@ -207,6 +213,9 @@
 				71F08DD029D5B085007D7E2F /* NewResultView.swift */,
 				71F08DD229D5B0BC007D7E2F /* InputView.swift */,
 				71F08DD429D5C505007D7E2F /* ResultTableView.swift */,
+				712585672A09074500ACA757 /* TextWithDrawableView.swift */,
+				712585692A09326300ACA757 /* ResultsTimeFilterView.swift */,
+				7125856E2A0BCD3500ACA757 /* ResultInputView.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -378,15 +387,18 @@
 				71C6B058297F5762007A3EB0 /* MainScreen.swift in Sources */,
 				712585662A05543000ACA757 /* ObservableState.swift in Sources */,
 				71CF734429BA128600D51846 /* CategoryScreen.swift in Sources */,
+				712585682A09074500ACA757 /* TextWithDrawableView.swift in Sources */,
 				712585622A03E19A00ACA757 /* Array.swift in Sources */,
 				71F08DD529D5C505007D7E2F /* ResultTableView.swift in Sources */,
 				71CF732429B6161A00D51846 /* DashboardScreen.swift in Sources */,
 				71CF733229B7690F00D51846 /* CategoryItem.swift in Sources */,
+				7125856A2A09326300ACA757 /* ResultsTimeFilterView.swift in Sources */,
 				71CF735129CB2B5A00D51846 /* DialogView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7125855C2A03A07000ACA757 /* AddCategoryScreen.swift in Sources */,
 				71CF732629B61B2C00D51846 /* SummaryScreen.swift in Sources */,
 				71F08DD329D5B0BC007D7E2F /* InputView.swift in Sources */,
+				7125856F2A0BCD3500ACA757 /* ResultInputView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				71CF734129B8EE8F00D51846 /* ViewExtensions.swift in Sources */,
 				71CF735429CB362500D51846 /* AddExerciseScreen.swift in Sources */,
