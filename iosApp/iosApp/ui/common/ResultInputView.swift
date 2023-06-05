@@ -6,12 +6,18 @@ struct ResultInputView: View {
     var hintText: String = ""
     var isError: Bool = false
     var onValueChange: (String) -> Void
+    @FocusState.Binding var hasFocus: Bool
 
     var body: some View {
         VStack {
             TextField("", text: $value.onChange({ text in
                 onValueChange(text)
                 }))
+            .placeholder(when: value.isEmpty, placeholder: {
+                Text(hintText)
+                    .foregroundColor(.gray)
+            })
+            .focused($hasFocus)
                     .foregroundColor(.white)
                     .padding(.horizontal, 8)
                     .frame(height: 44)

@@ -13,10 +13,10 @@ struct TextWithDrawableView: View {
                 .foregroundColor(color)
                 .padding(.vertical, 8)
             
-            if iconResId != nil {
-                Image(systemName: iconResId ?? "chevron.down")
-                    .foregroundColor(color)
-            }
+            Image(systemName: iconResId ?? "chevron.down")
+                .foregroundColor(color)
+                .opacity(iconResId != nil ? 1 : 0)
+            
         }
     }
 }

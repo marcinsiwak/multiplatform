@@ -17,6 +17,9 @@
 		712585682A09074500ACA757 /* TextWithDrawableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585672A09074500ACA757 /* TextWithDrawableView.swift */; };
 		7125856A2A09326300ACA757 /* ResultsTimeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585692A09326300ACA757 /* ResultsTimeFilterView.swift */; };
 		7125856F2A0BCD3500ACA757 /* ResultInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125856E2A0BCD3500ACA757 /* ResultInputView.swift */; };
+		712585742A2A51FE00ACA757 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585732A2A51FE00ACA757 /* ArrayExtensions.swift */; };
+		712585782A2C00D700ACA757 /* ValueObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585772A2C00D700ACA757 /* ValueObserver.swift */; };
+		7125857A2A2CAE2B00ACA757 /* ObservableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585792A2CAE2B00ACA757 /* ObservableEvent.swift */; };
 		71C6B04D297B1239007A3EB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71C6B04C297B1239007A3EB0 /* GoogleService-Info.plist */; };
 		71C6B054297C2871007A3EB0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C6B053297C2871007A3EB0 /* FirebaseAuth */; };
 		71C6B058297F5762007A3EB0 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6B057297F5762007A3EB0 /* MainScreen.swift */; };
@@ -63,6 +66,9 @@
 		712585672A09074500ACA757 /* TextWithDrawableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithDrawableView.swift; sourceTree = "<group>"; };
 		712585692A09326300ACA757 /* ResultsTimeFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTimeFilterView.swift; sourceTree = "<group>"; };
 		7125856E2A0BCD3500ACA757 /* ResultInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInputView.swift; sourceTree = "<group>"; };
+		712585732A2A51FE00ACA757 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		712585772A2C00D700ACA757 /* ValueObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueObserver.swift; sourceTree = "<group>"; };
+		712585792A2CAE2B00ACA757 /* ObservableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableEvent.swift; sourceTree = "<group>"; };
 		71C6B04C297B1239007A3EB0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71C6B057297F5762007A3EB0 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		71C6B059297F5D89007A3EB0 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
@@ -184,6 +190,8 @@
 				71C6B05D298038BB007A3EB0 /* Collector.swift */,
 				712585612A03E19A00ACA757 /* Array.swift */,
 				712585652A05543000ACA757 /* ObservableState.swift */,
+				712585792A2CAE2B00ACA757 /* ObservableEvent.swift */,
+				712585772A2C00D700ACA757 /* ValueObserver.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -192,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				71CF734029B8EE8F00D51846 /* ViewExtensions.swift */,
+				712585732A2A51FE00ACA757 /* ArrayExtensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -386,12 +395,14 @@
 				71F08DD129D5B085007D7E2F /* NewResultView.swift in Sources */,
 				71C6B058297F5762007A3EB0 /* MainScreen.swift in Sources */,
 				712585662A05543000ACA757 /* ObservableState.swift in Sources */,
+				712585742A2A51FE00ACA757 /* ArrayExtensions.swift in Sources */,
 				71CF734429BA128600D51846 /* CategoryScreen.swift in Sources */,
 				712585682A09074500ACA757 /* TextWithDrawableView.swift in Sources */,
 				712585622A03E19A00ACA757 /* Array.swift in Sources */,
 				71F08DD529D5C505007D7E2F /* ResultTableView.swift in Sources */,
 				71CF732429B6161A00D51846 /* DashboardScreen.swift in Sources */,
 				71CF733229B7690F00D51846 /* CategoryItem.swift in Sources */,
+				7125857A2A2CAE2B00ACA757 /* ObservableEvent.swift in Sources */,
 				7125856A2A09326300ACA757 /* ResultsTimeFilterView.swift in Sources */,
 				71CF735129CB2B5A00D51846 /* DialogView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
@@ -404,6 +415,7 @@
 				71CF735429CB362500D51846 /* AddExerciseScreen.swift in Sources */,
 				71F08DCF29D45EFC007D7E2F /* ResultsView.swift in Sources */,
 				71C6B05E298038BB007A3EB0 /* Collector.swift in Sources */,
+				712585782A2C00D700ACA757 /* ValueObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

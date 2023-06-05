@@ -71,7 +71,12 @@ class AddExerciseViewModel(
                 exerciseType = currentExerciseData.value.exerciseType,
                 results = results,
                 resultDataTitles = setTableTitles(exerciseWithUnit.exerciseData.exerciseType),
-                unit = exerciseWithUnit.unit
+                unit = exerciseWithUnit.unit,
+                newResultData = _viewState.value.newResultData.copy(
+                    date = formatDateUseCase(
+                        Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                    )
+                )
             )
         }
     }
@@ -175,7 +180,7 @@ class AddExerciseViewModel(
             _viewState.value = _viewState.value.copy(
                 results = formatResultsUseCase(currentResults),
                 isResultFieldEnabled = false,
-                newResultData = FormattedResultData()
+                newResultData = FormattedResultData(date = _viewState.value.newResultData.date)
             )
         }
     }

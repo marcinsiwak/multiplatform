@@ -9,6 +9,7 @@ struct ResultsTableView: View {
     let sortType: SortType?
     let isNewResultEnabled: Bool
     let newResultData: FormattedResultData
+    @ObservedObject var focusedFieldPos: ObservableEvent<Int32?>
     let onAddNewResultClicked: () -> Void
     let onLabelClicked: (Int) -> Void
     let onResultValueChanged: (String) -> Void
@@ -16,14 +17,18 @@ struct ResultsTableView: View {
     let onDatePicked: (Kotlinx_datetimeLocalDateTime) -> Void
     let onDateClicked: () -> Void
     let onResultLongClick: (Int) -> Void
+
     
     var body: some View {
         
+        
         VStack {
             // Header
-            HStack {
+            HStack(
+                spacing: 20
+            ) {
                 TextWithDrawableView(
-                    text: "Weight",
+                    text: resultDataTitles[safe: 0] ?? "",
                     iconResId: sortType == .resultIncreasing ? "chevron.up" :
                             sortType == .resultDecreasing ? "chevron.down" : nil,
                     color: Color.white
@@ -34,7 +39,7 @@ struct ResultsTableView: View {
                         onLabelClicked(0)
                     }
                 TextWithDrawableView(
-                    text: "Reps",
+                    text: resultDataTitles[safe: 1] ?? "",
                     iconResId: sortType == .amountIncreasing ? "chevron.up" :
                         sortType == .amountDecreasing ? "chevron.down" : nil,
                     color: Color.white
@@ -45,7 +50,7 @@ struct ResultsTableView: View {
                         onLabelClicked(1)
                     }
                 TextWithDrawableView(
-                    text: "Date",
+                    text: resultDataTitles[safe: 2] ?? "",
                     iconResId: sortType == .dateIncreasing ? "chevron.up" :
                         sortType == .dateDecreasing ? "chevron.down" : nil,
                     color: Color.white
@@ -64,7 +69,9 @@ struct ResultsTableView: View {
             List {
                 if isNewResultEnabled {
                     NewResultView(
+                        focusedFieldPos: focusedFieldPos,
                         newResultData: newResultData,
+                        exerciseType: exerciseType,
                         onResultValueChanged: { onResultValueChanged($0) },
                         onAmountValueChanged: { onAmountValueChanged($0) },
                         onDatePicked: { onDatePicked($0) },

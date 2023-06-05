@@ -3,15 +3,20 @@ import shared
 
 
 struct AddExerciseScreen: View {
+    
     let id: Int64
     let viewModel: AddExerciseViewModel
     @ObservedObject private var state: ObservableState<AddExerciseState>
+    @ObservedObject private var focusedFieldPos: ObservableEvent<Int32?>
+
         
     init(id: Int64) {
         self.id = id
         self.viewModel = AddExerciseDiHelper(id: id).getAddExerciseViewModel()
         self.state = ObservableState<AddExerciseState>(value: viewModel.viewState.value as! AddExerciseState)
+        self.focusedFieldPos = ObservableEvent(value: 0)
         observeState()
+        observeEvents()
     }
     
     private func observeState() {
@@ -23,8 +28,23 @@ struct AddExerciseScreen: View {
         }
     }
     
+    private func observeEvents() {
+        viewModel.viewEvent.collect(collector: Collector<AddExerciseEvent>{
+            event in onEventReceived(event: event)
+        }) { error in
+            print("Error ocurred during event collection")
+        }
+    }
+    
     private func onStateReceived(state: AddExerciseState) {
         self.state.value = state
+     }
+    
+    private func onEventReceived(event: AddExerciseEvent) {
+        if(event is AddExerciseEvent.FocusOnInput){
+            let id = (event as? AddExerciseEvent.FocusOnInput)?.getArgument()
+            self.focusedFieldPos.value = id
+        }
      }
     
 
@@ -82,6 +102,7 @@ struct AddExerciseScreen: View {
                 sortType: state.value.sortType,
                 isNewResultEnabled: state.value.isResultFieldEnabled,
                 newResultData: state.value.newResultData,
+                focusedFieldPos: focusedFieldPos,
                 onAddNewResultClicked: {
                 viewModel.onAddNewResultClicked()
             }, onLabelClicked: { pos in
