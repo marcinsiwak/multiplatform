@@ -11,6 +11,7 @@ struct MainScreen: View {
     private let navigateToAddCategory: () -> Void
     private let navigateBack: () -> Void
     private let viewModel: MainViewModel
+
     
     init(
         navigateToRegistration: @escaping () -> Void,

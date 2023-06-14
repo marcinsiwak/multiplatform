@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
@@ -18,14 +17,14 @@ import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.extensions.fittingTabIndicatorOffset
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
-import pl.msiwak.multiplatform.data.common.DateFilter
+import pl.msiwak.multiplatform.data.common.DateFilterType
 
 @Composable
 fun ResultsTimeFilterView(
     modifier: Modifier = Modifier,
-    tabs: List<DateFilter>,
+    tabs: List<DateFilterType>,
     selectedPos: Int = 0,
-    onTabClicked: (DateFilter) -> Unit
+    onTabClicked: (DateFilterType) -> Unit
 ) {
     val density = LocalDensity.current
     val dimen = LocalDim.current
@@ -67,7 +66,7 @@ fun ResultsTimeFilterView(
                         modifier = Modifier.padding(
                             horizontal = 0.dp
                         ),
-                        text = getString(LocalContext.current, item.type.nameResourceId), color = Color.White,
+                        text = getString(LocalContext.current, item.nameResourceId), color = Color.White,
                         onTextLayout = { textLayoutResult ->
                             tabWidths[index] =
                                 with(density) { textLayoutResult.size.width.toDp() }

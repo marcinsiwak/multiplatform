@@ -42,69 +42,69 @@ struct CategoryScreen: View {
 
     
     var body: some View {
-
+        
         VStack(alignment: .leading, spacing: 0) {
-            ZStack {
-                let backgroundImage = selectBackgroundImage()
-                
-                Image(uiImage: backgroundImage)
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
-                    .frame(height: 264)
-                Rectangle()
-                    .frame(height: 264)
-                    .foregroundColor(.clear)
-                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
-                    .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
-            }
-            ForEach(state.value.exerciseList) { item in
-                ListItemView(title: item.name, onClicked: {
-                    viewModel.onExerciseClicked(id: item.id)
-                })
+                ZStack {
+                    let backgroundImage = selectBackgroundImage()
+                    
+                    Image(uiImage: backgroundImage)
+                        .resizable()
+                        .scaledToFill()
+                        .clipped()
+                        .frame(height: 264)
+                    Rectangle()
+                        .frame(height: 264)
+                        .foregroundColor(.clear)
+                        .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+                        .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
+                }
+                ForEach(state.value.exerciseList) { item in
+                    ListItemView(title: item.name, onClicked: {
+                        viewModel.onExerciseClicked(id: item.id)
+                    })
                     .frame(height: 64)
-            }
-            Spacer()
-            Button(action: {
-                viewModel.onAddNewExerciseClicked()
-            }, label: {
-                Text(MR.strings().add_new_result.desc().localized())
-                    .padding(16)
-                    .foregroundColor(Color.black)
-                    .background(Color.gray)
-                    .clipShape(RoundedCorner())
-                    .frame(maxWidth: .infinity, alignment: .center)
-            })
-        }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-        .background(.black)
-        .customDialog(isPresented: $state.value.isDialogVisible, onDismiss: {
-            viewModel.onDialogClosed()
-        }) {
-            VStack {
-                Text(MR.strings().exercise_name.desc().localized())
-                    .foregroundColor(.white)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                InputView(value: $state.value.newExerciseName, trailingIcon: {}, onValueChange: { text in
-                    viewModel.onAddExerciseNameChanged(name: text)
-                })
-                .padding(.horizontal, 16)
-         
+                }
+                Spacer()
                 Button(action: {
-                    viewModel.onAddExerciseClicked()
+                    viewModel.onAddNewExerciseClicked()
                 }, label: {
-                    Text(MR.strings().add_new_exercise.desc().localized())
+                    Text(MR.strings().add_new_result.desc().localized())
                         .padding(16)
                         .foregroundColor(Color.black)
                         .background(Color.gray)
                         .clipShape(RoundedCorner())
                         .frame(maxWidth: .infinity, alignment: .center)
                 })
-                .padding()
             }
-        }
-
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+            .background(.black)
+            .customDialog(isPresented: $state.value.isDialogVisible, onDismiss: {
+                viewModel.onDialogClosed()
+            }) {
+                VStack {
+                    Text(MR.strings().exercise_name.desc().localized())
+                        .foregroundColor(.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                    InputView(value: $state.value.newExerciseName, trailingIcon: {}, onValueChange: { text in
+                        viewModel.onAddExerciseNameChanged(name: text)
+                    })
+                    .padding(.horizontal, 16)
+                    
+                    Button(action: {
+                        viewModel.onAddExerciseClicked()
+                    }, label: {
+                        Text(MR.strings().add_new_exercise.desc().localized())
+                            .padding(16)
+                            .foregroundColor(Color.black)
+                            .background(Color.gray)
+                            .clipShape(RoundedCorner())
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    })
+                    .padding()
+                }
+            }
+            .navigationTitle(Text(state.value.categoryName))
     }
 }
 

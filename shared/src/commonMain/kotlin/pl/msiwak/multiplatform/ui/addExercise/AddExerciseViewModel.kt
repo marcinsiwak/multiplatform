@@ -11,7 +11,6 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
-import pl.msiwak.multiplatform.data.common.DateFilter
 import pl.msiwak.multiplatform.data.common.DateFilterType
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
@@ -62,7 +61,7 @@ class AddExerciseViewModel(
     init {
         viewModelScope.launch {
             val exerciseWithUnit = getExerciseUseCase(exerciseId)
-            currentExerciseData.value = exerciseWithUnit.exerciseData
+            currentExerciseData.value = exerciseWithUnit.exerciseData ?: ExerciseData()
             currentResults.addAll(currentExerciseData.value.results)
             val results = formatResultsUseCase(currentExerciseData.value.results)
             exerciseName = currentExerciseData.value.exerciseTitle
@@ -70,8 +69,8 @@ class AddExerciseViewModel(
                 exerciseTitle = currentExerciseData.value.exerciseTitle,
                 exerciseType = currentExerciseData.value.exerciseType,
                 results = results,
-                resultDataTitles = setTableTitles(exerciseWithUnit.exerciseData.exerciseType),
-                unit = exerciseWithUnit.unit,
+                resultDataTitles = setTableTitles(exerciseWithUnit.exerciseData?.exerciseType),
+                unit = exerciseWithUnit.unit ?: "",
                 newResultData = _viewState.value.newResultData.copy(
                     date = formatDateUseCase(
                         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
@@ -81,11 +80,12 @@ class AddExerciseViewModel(
         }
     }
 
-    private fun setTableTitles(exerciseType: ExerciseType): List<String> {
+    private fun setTableTitles(exerciseType: ExerciseType?): List<String> {
         return when (exerciseType) {
             ExerciseType.RUNNING -> listOf("Distance", "Time", "Date")
             ExerciseType.GYM -> listOf("Weight", "Reps", "Date")
 //            ExerciseType.OTHER -> emptyList()
+            else -> listOf("Distance", "Time", "Date")
         }
     }
 
@@ -284,22 +284,18 @@ class AddExerciseViewModel(
 
     }
 
-    fun onTabClicked(item: DateFilter) {
+    fun onTabClicked(item: DateFilterType) {
         val pos = _viewState.value.filter.indexOf(item)
-        val filterList = _viewState.value.filter.map { dateFilter ->
+        viewState.value.filter.forEach { dateFilter ->
             if (dateFilter == item) {
                 filterResults(dateFilter)
-                dateFilter.copy(isSelected = true)
-            } else {
-                dateFilter.copy(isSelected = false)
             }
         }
-        _viewState.value =
-            _viewState.value.copy(filter = filterList, selectedFilterPosition = pos)
+        _viewState.value = viewState.value.copy(selectedFilterPosition = pos)
     }
 
-    private fun filterResults(dateFilter: DateFilter) {
-        when (dateFilter.type) {
+    private fun filterResults(dateFilter: DateFilterType) {
+        when (dateFilter) {
             DateFilterType.ALL -> filterAll()
             DateFilterType.DAY -> filterDay()
             DateFilterType.WEEK -> filter(7)

@@ -6,7 +6,7 @@ import pl.msiwak.multiplatform.repository.ExerciseRepository
 class GetExerciseDataUseCase(
     private val exerciseRepository: ExerciseRepository
 ) {
-    suspend operator fun invoke(id: Long): ExerciseData {
+    suspend operator fun invoke(id: Long): ExerciseData? {
         return exerciseRepository.getExercise(id)
     }
 }

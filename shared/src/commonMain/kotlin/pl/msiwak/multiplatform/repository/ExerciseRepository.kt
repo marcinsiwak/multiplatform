@@ -25,7 +25,7 @@ class ExerciseRepository(
         exerciseDao.removeExercise(id)
     }
 
-    suspend fun getExercise(id: Long): ExerciseData = withContext(Dispatchers.Default) {
+    suspend fun getExercise(id: Long): ExerciseData? = withContext(Dispatchers.Default) {
         return@withContext exerciseDao.getExercise(id)
     }
 

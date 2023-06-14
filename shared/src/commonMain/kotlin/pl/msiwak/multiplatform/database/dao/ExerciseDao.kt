@@ -13,8 +13,8 @@ class ExerciseDao(database: Database) {
         dbQuery.removeAllExercises()
     }
 
-    fun getExercise(id: Long): ExerciseData {
-        return dbQuery.selectFromExercise(id, ::mapExercise).executeAsOne()
+    fun getExercise(id: Long): ExerciseData? {
+        return dbQuery.selectFromExercise(id, ::mapExercise).executeAsOneOrNull()
     }
 
     fun getAllExercises(): List<ExerciseData> {

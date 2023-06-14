@@ -96,7 +96,7 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get()) }
+    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { LoginViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get()) }

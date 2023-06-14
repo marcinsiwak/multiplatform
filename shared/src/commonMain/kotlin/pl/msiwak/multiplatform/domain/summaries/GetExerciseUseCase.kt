@@ -12,14 +12,14 @@ class GetExerciseUseCase(
         val exercise = getExerciseDataUseCase(id)
         val unitType = getUnitsUseCase()
         if (unitType == UnitType.IMPERIAL) {
-            val newExercise = exercise.copy(
+            val newExercise = exercise?.copy(
                 results = exercise.results.map {
                     it.copy(result = it.result.times(exercise.exerciseType.convertValue))
                 }
             )
-            return ExerciseDataWithUnit(newExercise, exercise.exerciseType.unitImperial)
+            return ExerciseDataWithUnit(newExercise, exercise?.exerciseType?.unitImperial)
         }
 
-        return ExerciseDataWithUnit(exercise, exercise.exerciseType.unitMetric)
+        return ExerciseDataWithUnit(exercise, exercise?.exerciseType?.unitMetric)
     }
 }

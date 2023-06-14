@@ -4,6 +4,7 @@ import dev.icerock.moko.resources.desc.StringDesc
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.GetMinAppCodeUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
@@ -16,13 +17,16 @@ class MainViewModel(
     getLanguageUseCase: GetLanguageUseCase,
     fetchRemoteConfigUseCase: FetchRemoteConfigUseCase,
     getMinAppCodeUseCase: GetMinAppCodeUseCase,
-    getCurrentAppCodeUseCase: GetCurrentAppCodeUseCase
+    getCurrentAppCodeUseCase: GetCurrentAppCodeUseCase,
+    globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     val mainNavigator = navigator
 
+    private val errorHandler = globalErrorHandler.handleError()
+
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             fetchRemoteConfigUseCase()
             val language = getLanguageUseCase()
             StringDesc.localeType = StringDesc.LocaleType.Custom(language)
