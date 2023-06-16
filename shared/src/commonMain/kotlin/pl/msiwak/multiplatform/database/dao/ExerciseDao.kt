@@ -29,9 +29,11 @@ class ExerciseDao(database: Database) {
         }
     }
 
-    fun insertExercise(exerciseData: ExerciseData): Long {
-        insert(exerciseData)
-        return getLastInsertedRowId()
+    fun insertExercise(exerciseData: ExerciseData): Long  {
+        return dbQuery.transactionWithResult {
+            insert(exerciseData)
+            getLastInsertedRowId()
+        }
     }
 
     private fun insert(exerciseData: ExerciseData) {
