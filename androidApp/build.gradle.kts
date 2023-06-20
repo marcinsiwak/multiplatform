@@ -1,6 +1,6 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import java.io.FileInputStream
 import java.util.Properties
+import pl.msiwak.multiplatfor.dependencies.Deps
 
 plugins {
     id("com.android.application")
@@ -13,7 +13,8 @@ val versionMajor = 0
 val versionMinor = 0
 val versionPatch = 1
 val versionBuild = 0
-val versionCode = 1_000_000 * versionMajor + 10_000 * versionMinor + 100 * versionPatch + versionBuild
+val versionCode =
+    1_000_000 * versionMajor + 10_000 * versionMinor + 100 * versionPatch + versionBuild
 
 val appVersionCode: Int = Integer.valueOf(System.getenv("BUILD_NUMBER") ?: "$versionCode")
 
@@ -31,11 +32,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-        }
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.2"
@@ -66,7 +62,15 @@ android {
 
         buildTypes {
             release {
+                isMinifyEnabled = true
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android.txt"),
+                    file("proguard-rules.pro")
+                )
                 signingConfig = signingConfigs.getByName("release")
+            }
+            debug {
+                signingConfig = signingConfigs.getByName("debug")
             }
         }
     }
@@ -75,21 +79,13 @@ android {
     val debugKeystoreProp = Properties()
     debugKeystoreProp.load(FileInputStream(debugKeystorePropFile))
 
-    android {
-        signingConfigs {
-            maybeCreate("debug")
-            getByName("debug") {
-                keyAlias = debugKeystoreProp["keyAlias"] as String
-                keyPassword = debugKeystoreProp["keyPassword"] as String
-                storeFile = rootProject.file(debugKeystoreProp["storeFile"] as String)
-                storePassword = debugKeystoreProp["storePassword"] as String
-            }
-        }
-
-        buildTypes {
-            debug {
-                signingConfig = signingConfigs.getByName("debug")
-            }
+    signingConfigs {
+        maybeCreate("debug")
+        getByName("debug") {
+            keyAlias = debugKeystoreProp["keyAlias"] as String
+            keyPassword = debugKeystoreProp["keyPassword"] as String
+            storeFile = rootProject.file(debugKeystoreProp["storeFile"] as String)
+            storePassword = debugKeystoreProp["storePassword"] as String
         }
     }
 }
