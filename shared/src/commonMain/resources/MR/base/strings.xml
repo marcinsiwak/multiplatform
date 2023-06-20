@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <string name="app_name">Athlete Track</string>
+
     <string name="summary">Summary</string>
     <string name="account">Account</string>
     <string name="settings">Settings</string>
