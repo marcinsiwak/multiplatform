@@ -17,17 +17,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.example.library.MR
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.getString
+import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 
 
 @Composable
 fun LoginScreen() {
-    val viewModel: LoginViewModel by KoinJavaComponent.inject(LoginViewModel::class.java)
+    val viewModel = koinViewModel<LoginViewModel>()
 
     val state = viewModel.loginState.collectAsState()
     val dimens = LocalDim.current

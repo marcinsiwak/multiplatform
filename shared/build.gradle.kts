@@ -53,6 +53,8 @@ kotlin {
                 }
                 with(Deps.Ktor) {
                     api(core)
+                    api(content_negation)
+                    api(serialization)
                 }
                 with(Deps.Napier) {
                     api(napier)

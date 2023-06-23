@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationDirections.Dashboard.route
+                        startDestination = NavigationDirections.Login.route
                     ) {
                         composable(NavigationDirections.Welcome.route) { WelcomeScreen() }
                         composable(NavigationDirections.Registration.route) { RegisterScreen() }

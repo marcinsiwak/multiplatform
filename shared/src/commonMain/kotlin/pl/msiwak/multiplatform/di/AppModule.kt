@@ -2,8 +2,11 @@ package pl.msiwak.multiplatform.di
 
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
+import pl.msiwak.multiplatform.api.client.KtorClient
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.api.remoteConfig.RemoteConfig
+import pl.msiwak.multiplatform.api.service.UserService
+import pl.msiwak.multiplatform.data.store.SessionStore
 import pl.msiwak.multiplatform.data.store.LanguageStore
 import pl.msiwak.multiplatform.data.store.UnitStore
 import pl.msiwak.multiplatform.database.Database
@@ -36,16 +39,20 @@ import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
+import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.CategoryRepository
 import pl.msiwak.multiplatform.repository.ExerciseRepository
 import pl.msiwak.multiplatform.repository.RemoteConfigRepository
+import pl.msiwak.multiplatform.repository.SessionRepository
+import pl.msiwak.multiplatform.repository.UserRepository
 import pl.msiwak.multiplatform.repository.VersionRepository
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
+import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 import pl.msiwak.multiplatform.ui.language.LanguageViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
@@ -68,7 +75,8 @@ fun appModule() = listOf(
     useCaseModule,
     toolsModule,
     repositoryUseModule,
-    storeModule
+    storeModule,
+    serviceModule
 )
 
 val databaseModule = module {
@@ -80,6 +88,7 @@ val databaseModule = module {
 val storeModule = module {
     single { LanguageStore(get()) }
     single { UnitStore(get()) }
+    single { SessionStore(get()) }
 }
 
 val apiModule = module {
@@ -126,11 +135,12 @@ val viewModelsModule = module {
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel(get()) }
+    viewModelDefinition { DashboardViewModel(get()) }
 }
 
 val useCaseModule = module {
     factory { RegisterUserUseCase(get()) }
-    factory { LoginUseCase(get()) }
+    factory { LoginUseCase(get(), get()) }
     factory { SaveUserTokenUseCase(get()) }
     factory { GetUserTokenUseCase(get()) }
     factory { GetExercisesUseCase(get()) }
@@ -158,12 +168,20 @@ val useCaseModule = module {
     factory { GetMinAppCodeUseCase(get()) }
     factory { GetCurrentAppCodeUseCase(get()) }
     factory { GetVersionNameUseCase(get()) }
+    factory { GetUserUseCase(get()) }
 }
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
+    single { UserRepository(get()) }
     single { ExerciseRepository(get()) }
     single { CategoryRepository(get()) }
     single { RemoteConfigRepository(get()) }
     single { VersionRepository(get()) }
+    single { SessionRepository(get()) }
+}
+
+val serviceModule = module {
+    single { KtorClient(get()) }
+    single { UserService(get(), get()) }
 }

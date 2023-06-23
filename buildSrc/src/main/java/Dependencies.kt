@@ -40,6 +40,8 @@ object Deps {
         const val core = "io.ktor:ktor-client-core:$ktorVersion"
         const val android = "io.ktor:ktor-client-android:$ktorVersion"
         const val ios = "io.ktor:ktor-client-darwin:$ktorVersion"
+        const val content_negation = "io.ktor:ktor-client-content-negotiation:$ktorVersion"
+        const val serialization = "io.ktor:ktor-serialization-kotlinx-json:$ktorVersion"
     }
 
     object SQLDelight {
