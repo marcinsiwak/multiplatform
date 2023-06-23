@@ -15,16 +15,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
-import org.koin.java.KoinJavaComponent
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
-import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 
 
@@ -54,7 +48,7 @@ fun LoginScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = getString(context, MR.strings.email)
+                hintText = stringResource(MR.strings.email.resourceId)
             )
 
             InputView(
@@ -65,7 +59,7 @@ fun LoginScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = getString(context, MR.strings.password)
+                hintText = stringResource(MR.strings.password.resourceId)
             )
             Button(
                 modifier = Modifier
@@ -74,7 +68,7 @@ fun LoginScreen() {
                 onClick = {
                     viewModel.onLoginClicked()
                 }) {
-                Text(text = getString(context, MR.strings.login))
+                Text(text = stringResource(MR.strings.login.resourceId))
             }
         }
 

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun AccountScreen() {
-    Column() {
+    Column {
         Text(text = "ACCOUNT")
     }
 }

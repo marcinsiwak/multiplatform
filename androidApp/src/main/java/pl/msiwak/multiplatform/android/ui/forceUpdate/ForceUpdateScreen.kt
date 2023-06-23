@@ -17,10 +17,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import org.example.library.MR
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 
 @Composable
@@ -42,13 +42,13 @@ fun ForceUpdateScreen() {
             )
             Text(
                 modifier = Modifier.padding(dimens.space_16),
-                text = getString(context, MR.strings.force_update_title),
+                text = stringResource(MR.strings.force_update_title.resourceId),
                 color = Color.White,
                 fontSize = dimens.font_24
             )
             Text(
                 modifier = Modifier.padding(horizontal = dimens.space_16),
-                text = getString(context, MR.strings.force_update_description),
+                text = stringResource(MR.strings.force_update_description.resourceId),
                 color = Color.White,
                 fontSize = dimens.font_16
             )

@@ -25,10 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.example.library.MR
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
@@ -53,7 +50,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
             .height(dimens.space_164)
             .fillMaxWidth(),
     ) {
-        backgroundId?.let {
+        backgroundId.let {
             Image(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
@@ -71,7 +68,10 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                 modifier = Modifier
                     .background(
                         color = Color.Black,
-                        shape = RoundedCornerShape(topStart = dimens.space_8, bottomEnd = dimens.space_8)
+                        shape = RoundedCornerShape(
+                            topStart = dimens.space_8,
+                            bottomEnd = dimens.space_8
+                        )
                     )
                     .padding(horizontal = dimens.space_12, vertical = dimens.space_8),
                 text = categoryData.name,

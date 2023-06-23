@@ -19,12 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 
 
@@ -69,10 +69,7 @@ fun SummaryScreen() {
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = getString(
-                                    context,
-                                    MR.strings.summary_add_category
-                                ),
+                                text = stringResource(MR.strings.summary_add_category.resourceId),
                                 color = Color.Gray
                             )
                         }

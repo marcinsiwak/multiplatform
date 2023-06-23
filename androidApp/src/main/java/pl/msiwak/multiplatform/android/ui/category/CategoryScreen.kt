@@ -25,14 +25,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
@@ -50,13 +49,10 @@ fun CategoryScreen(id: Long) {
     }
 
     if (state.value.isRemoveExerciseDialogVisible) {
-        PopupDialog(title = getString(context, MR.strings.remove_result_dialog_title),
-            description = getString(
-                context,
-                MR.strings.remove_result_dialog_description
-            ),
-            confirmButtonTitle = getString(context, MR.strings.yes),
-            dismissButtonTitle = getString(context, MR.strings.no),
+        PopupDialog(title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
+            description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
+            dismissButtonTitle = stringResource(MR.strings.no.resourceId),
             onConfirmClicked = {
                 viewModel.onResultRemoved()
             },
@@ -82,7 +78,7 @@ fun CategoryScreen(id: Long) {
         }
 
         Column {
-            backgroundId?.let {
+            backgroundId.let {
                 Image(modifier = Modifier
                     .drawWithCache {
                         val gradient = Brush.verticalGradient(
@@ -129,7 +125,10 @@ fun CategoryScreen(id: Long) {
                 .align(Alignment.TopStart)
                 .background(
                     color = Color.Black,
-                    shape = RoundedCornerShape(topStart = dimens.space_8, bottomEnd = dimens.space_8)
+                    shape = RoundedCornerShape(
+                        topStart = dimens.space_8,
+                        bottomEnd = dimens.space_8
+                    )
                 )
                 .padding(horizontal = dimens.space_12, vertical = dimens.space_8),
             text = state.value.categoryName,

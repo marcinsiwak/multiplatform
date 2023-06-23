@@ -17,12 +17,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
 
@@ -53,7 +51,7 @@ fun RegisterScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = getString(context, MR.strings.email)
+                hintText = stringResource(MR.strings.email.resourceId)
             )
 
             InputView(
@@ -64,7 +62,7 @@ fun RegisterScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = getString(context, MR.strings.password)
+                hintText = stringResource(MR.strings.password.resourceId)
             )
             Button(
                 modifier = Modifier
@@ -73,7 +71,7 @@ fun RegisterScreen() {
                 onClick = {
                     viewModel.onRegisterClicked()
                 }) {
-                Text(text = getString(context, MR.strings.register))
+                Text(text = stringResource(MR.strings.register.resourceId))
             }
         }
 

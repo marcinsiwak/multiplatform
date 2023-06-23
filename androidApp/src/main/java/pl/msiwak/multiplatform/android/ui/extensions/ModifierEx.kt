@@ -15,12 +15,12 @@ fun Modifier.bottomBorder(strokeWidth: Dp, color: Color) = composed(
 
         Modifier.drawBehind {
             val width = size.width
-            val height = size.height - strokeWidthPx/2
+            val height = size.height - strokeWidthPx / 2
 
             drawLine(
                 color = color,
                 start = Offset(x = 0f, y = height),
-                end = Offset(x = width , y = height),
+                end = Offset(x = width, y = height),
                 strokeWidth = strokeWidthPx
             )
         }
@@ -38,7 +38,7 @@ fun Modifier.topBorder(strokeWidth: Dp, color: Color) = composed(
             drawLine(
                 color = color,
                 start = Offset(x = 0f, y = 0f),
-                end = Offset(x = width , y = 0f),
+                end = Offset(x = width, y = 0f),
                 strokeWidth = strokeWidthPx
             )
         }

@@ -15,12 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 
@@ -45,7 +45,7 @@ fun AddCategoryScreen() {
                 onValueChange = {
                     viewModel.onCategoryNameChanged(it)
                 },
-                hintText = getString(context, MR.strings.category_name)
+                hintText = stringResource(id = MR.strings.category_name.resourceId)
             )
             DropDownView(
                 currentValue = state.value.exerciseType.name,
@@ -63,9 +63,13 @@ fun AddCategoryScreen() {
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
-            onClick = { viewModel.onSaveCategoryClicked()  }
+            onClick = { viewModel.onSaveCategoryClicked() }
         ) {
-            Text(modifier = Modifier.padding(dimens.space_8), text = "Add category", fontSize = dimens.font_16)
+            Text(
+                modifier = Modifier.padding(dimens.space_8),
+                text = "Add category",
+                fontSize = dimens.font_16
+            )
         }
     }
 }

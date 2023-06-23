@@ -13,10 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 
 @Composable
@@ -37,7 +37,7 @@ fun SettingsScreen() {
                     vertical = dimens.space_16,
                     horizontal = dimens.space_24
                 ),
-                text = getString(context, MR.strings.settings),
+                text = stringResource(MR.strings.settings.resourceId),
                 fontSize = dimens.font_24,
                 color = Color.White
             )
@@ -47,7 +47,7 @@ fun SettingsScreen() {
                     .clickable {
                         viewModel.onUnitClicked()
                     },
-                text = getString(context, MR.strings.settings_unit)
+                text = stringResource(MR.strings.settings_unit.resourceId)
             )
             val isLanguageEnabled = false
             if (isLanguageEnabled) {
@@ -57,7 +57,7 @@ fun SettingsScreen() {
                         .clickable {
                             viewModel.onLanguageClicked()
                         },
-                    text = getString(context, MR.strings.settings_language)
+                    text = stringResource(MR.strings.settings_language.resourceId)
                 )
             }
         }

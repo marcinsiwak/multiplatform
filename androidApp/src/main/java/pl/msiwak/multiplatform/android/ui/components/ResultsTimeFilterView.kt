@@ -10,13 +10,12 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.extensions.fittingTabIndicatorOffset
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.data.common.DateFilterType
 
 @Composable
@@ -66,7 +65,8 @@ fun ResultsTimeFilterView(
                         modifier = Modifier.padding(
                             horizontal = 0.dp
                         ),
-                        text = getString(LocalContext.current, item.nameResourceId), color = Color.White,
+                        text = stringResource(item.nameResourceId.resourceId),
+                        color = Color.White,
                         onTextLayout = { textLayoutResult ->
                             tabWidths[index] =
                                 with(density) { textLayoutResult.size.width.toDp() }

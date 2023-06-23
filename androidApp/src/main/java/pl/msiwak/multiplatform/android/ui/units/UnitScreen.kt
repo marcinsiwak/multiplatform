@@ -16,12 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import java.util.Locale
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
 
 @Composable
@@ -38,7 +38,7 @@ fun UnitScreen() {
     ) {
         Text(
             modifier = Modifier.padding(vertical = dimens.space_16, horizontal = dimens.space_24),
-            text = getString(context, MR.strings.settings_unit),
+            text = stringResource(MR.strings.settings_unit.resourceId),
             fontSize = dimens.font_24,
             color = Color.White
         )

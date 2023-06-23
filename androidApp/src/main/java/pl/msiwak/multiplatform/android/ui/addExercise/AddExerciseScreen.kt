@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
@@ -32,7 +33,6 @@ import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
@@ -62,6 +62,7 @@ fun AddExerciseScreen(id: Long) {
                     onValueChanged = {
                         viewModel.onDatePicked(it)
                     })
+
                 is AddExerciseEvent.FocusOnInput -> {
                     focusRequesters[value.pos].requestFocus()
                     Toast.makeText(context, "Wrong input value", Toast.LENGTH_SHORT).show()
@@ -72,13 +73,10 @@ fun AddExerciseScreen(id: Long) {
 
     if (state.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = getString(context, MR.strings.remove_result_dialog_title),
-            description = getString(
-                context,
-                MR.strings.remove_result_dialog_description
-            ),
-            confirmButtonTitle = getString(context, MR.strings.yes),
-            dismissButtonTitle = getString(context, MR.strings.no),
+            title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
+            description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
+            dismissButtonTitle = stringResource(MR.strings.no.resourceId),
             onConfirmClicked = {
                 viewModel.onResultRemoved()
             },
@@ -136,7 +134,7 @@ fun AddExerciseScreen(id: Long) {
                             viewModel.onAddNewResultClicked()
                         }) {
                         Text(
-                            text = getString(context, MR.strings.add_new_result),
+                            text = stringResource(MR.strings.add_new_result.resourceId),
                         )
                     }
                 } else
@@ -151,7 +149,7 @@ fun AddExerciseScreen(id: Long) {
                             viewModel.onSaveResultClicked()
                         }) {
                         Text(
-                            text = getString(context, MR.strings.add_result_save),
+                            text = stringResource(MR.strings.add_result_save.resourceId),
                         )
                     }
             }

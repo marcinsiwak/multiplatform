@@ -11,15 +11,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
-import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.ui.account.AccountScreen
 import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
 import pl.msiwak.multiplatform.android.ui.summary.SummaryScreen
-import pl.msiwak.multiplatform.android.ui.utils.getString
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
-import pl.msiwak.multiplatform.ui.login.LoginViewModel
 import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
 @Composable
@@ -29,9 +25,15 @@ fun DashboardScreen() {
     val context = LocalContext.current
 
     val items = listOf(
-        DashboardNavigationDirections.Summary(R.drawable.ic_workout, getString(context, MR.strings.summary)),
-//        DashboardNavigationDirections.Account(R.drawable.ic_account, getString(context, MR.strings.account)),
-        DashboardNavigationDirections.Settings(R.drawable.ic_settings, getString(context, MR.strings.settings))
+        DashboardNavigationDirections.Summary(
+            R.drawable.ic_workout,
+            stringResource(MR.strings.summary.resourceId)
+        ),
+//        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(MR.strings.account)),
+        DashboardNavigationDirections.Settings(
+            R.drawable.ic_settings,
+            stringResource(MR.strings.settings.resourceId)
+        )
     )
 
     val navController = rememberNavController()
