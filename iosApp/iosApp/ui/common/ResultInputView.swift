@@ -19,12 +19,12 @@ struct ResultInputView: View {
             })
             .focused($hasFocus)
                     .foregroundColor(.white)
-                    .padding(.horizontal, 8)
-                    .frame(height: 44)
+                    .padding(.horizontal, Dimensions.space_8)
+                    .frame(height: Dimensions.space_40)
             
             Divider()
-                .frame(height: 1)
-                .padding(.horizontal, 30)
+                .frame(height: Dimensions.space_1)
+                .padding(.horizontal, Dimensions.space_32)
                 .background(isError ? Color.red: Color.white)
             }
     }

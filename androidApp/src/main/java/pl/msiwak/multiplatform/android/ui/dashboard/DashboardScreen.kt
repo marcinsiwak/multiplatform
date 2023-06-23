@@ -22,8 +22,6 @@ import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 fun DashboardScreen() {
     val viewModel = koinViewModel<DashboardViewModel>()
 
-    val context = LocalContext.current
-
     val items = listOf(
         DashboardNavigationDirections.Summary(
             R.drawable.ic_workout,

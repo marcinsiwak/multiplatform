@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
 
 @Composable
 fun AddExerciseDialog(
@@ -24,10 +26,7 @@ fun AddExerciseDialog(
     onAddExerciseClicked: () -> Unit,
     onDialogClosed: () -> Unit = {}
 ) {
-    val dimens = LocalDim.current
-    val context = LocalContext.current
-
-    AlertDialog(shape = RoundedCornerShape(dimens.space_16),
+    AlertDialog(shape = RoundedCornerShape(MaterialTheme.dimens.space_16),
         containerColor = colorResource(MR.colors.gray.resourceId),
         onDismissRequest = {
             onDialogClosed()
@@ -38,7 +37,7 @@ fun AddExerciseDialog(
             )
         },
         text = {
-            InputView(modifier = Modifier.padding(horizontal = dimens.space_16),
+            InputView(modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
                 value = inputText,
                 onValueChange = {
                     onExerciseTitleChanged(it)
@@ -47,7 +46,7 @@ fun AddExerciseDialog(
         confirmButton = {
             Button(modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = dimens.space_8, horizontal = dimens.space_16),
+                .padding(vertical = MaterialTheme.dimens.space_8, horizontal = MaterialTheme.dimens.space_16),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.LightGray, contentColor = Color.Black
                 ),

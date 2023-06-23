@@ -51,25 +51,25 @@ struct CategoryScreen: View {
                         .resizable()
                         .scaledToFill()
                         .clipped()
-                        .frame(height: 264)
+                        .frame(height: Dimensions.space_264)
                     Rectangle()
-                        .frame(height: 264)
+                        .frame(height: Dimensions.space_264)
                         .foregroundColor(.clear)
-                        .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+                        .padding(EdgeInsets(top: Dimensions.space_12, leading: 0, bottom: 0, trailing: 0))
                         .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
                 }
                 ForEach(state.value.exerciseList) { item in
                     ListItemView(title: item.name, onClicked: {
                         viewModel.onExerciseClicked(id: item.id)
                     })
-                    .frame(height: 64)
+                    .frame(height: Dimensions.space_64)
                 }
                 Spacer()
                 Button(action: {
                     viewModel.onAddNewExerciseClicked()
                 }, label: {
                     Text(MR.strings().add_new_result.desc().localized())
-                        .padding(16)
+                        .padding(Dimensions.space_16)
                         .foregroundColor(Color.black)
                         .background(Color.gray)
                         .clipShape(RoundedCorner())
@@ -89,13 +89,13 @@ struct CategoryScreen: View {
                     InputView(value: $state.value.newExerciseName, trailingIcon: {}, onValueChange: { text in
                         viewModel.onAddExerciseNameChanged(name: text)
                     })
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, Dimensions.space_16)
                     
                     Button(action: {
                         viewModel.onAddExerciseClicked()
                     }, label: {
                         Text(MR.strings().add_new_exercise.desc().localized())
-                            .padding(16)
+                            .padding(Dimensions.space_16)
                             .foregroundColor(Color.black)
                             .background(Color.gray)
                             .clipShape(RoundedCorner())

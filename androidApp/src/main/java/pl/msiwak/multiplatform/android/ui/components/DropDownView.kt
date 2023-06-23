@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.data.common.ExerciseType
 
 @Composable
@@ -33,16 +35,13 @@ fun DropDownView(
     items: List<ExerciseType>,
     onItemPicked: (ExerciseType) -> Unit = {},
 ) {
-    val dimens = LocalDim.current
-    val context = LocalContext.current
-
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
     var expand by remember { mutableStateOf(false) }
     Column {
         InputView(
             modifier = modifier
-                .padding(dimens.space_8)
+                .padding(MaterialTheme.dimens.space_8)
                 .focusRequester(focusRequester)
                 .onFocusChanged {
                     if (it.hasFocus) {
@@ -63,7 +62,7 @@ fun DropDownView(
         )
         DropdownMenu(
             modifier = Modifier,
-            offset = DpOffset(x = dimens.space_8, 0.dp),
+            offset = DpOffset(x = MaterialTheme.dimens.space_8, 0.dp),
             expanded = expand,
             onDismissRequest = {
                 expand = false

@@ -34,25 +34,28 @@ struct NewResultView: View {
     var body: some View {
         
         HStack(
-            spacing: 26
+            spacing: Dimensions.space_24
         ) {
-            ResultInputView(value: $result, hintText: "100", isError: newResultData.isResultError, onValueChange: { text in
-                onResultValueChanged(text)
-            },
-                            
-                            hasFocus: $isResultFieldFocused
-                            
-                            
+            ResultInputView(
+                value: $result,
+                hintText: "100",
+                isError: newResultData.isResultError,
+                onValueChange: { text in onResultValueChanged(text)},
+                hasFocus: $isResultFieldFocused
             )
-            .frame(width: 100)
-                .keyboardType(.decimalPad)
+            .frame(width: Dimensions.result_input_view_height)
+            .keyboardType(.decimalPad)
             
             
-            ResultInputView(value: $amount, hintText: exerciseType == .gym ? "10" : "00:00.000" ,isError: newResultData.isAmountError, onValueChange: onAmountValueChanged,
-                            hasFocus: $isAmountFieldFocused
-)
-                .frame(width: 100)
-                .keyboardType(exerciseType == .gym ? .decimalPad : .default)
+            ResultInputView(
+                value: $amount,
+                hintText: exerciseType == .gym ? "10" : "00:00.000" ,
+                isError: newResultData.isAmountError,
+                onValueChange: onAmountValueChanged,
+                hasFocus: $isAmountFieldFocused
+            )
+            .frame(width: Dimensions.result_input_view_height)
+            .keyboardType(exerciseType == .gym ? .decimalPad : .default)
             
             DatePicker("", selection: $selectedDate, displayedComponents: .date)
 //                .labelsHidden()

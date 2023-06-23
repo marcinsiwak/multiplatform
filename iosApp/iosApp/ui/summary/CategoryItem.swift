@@ -33,14 +33,14 @@ struct CategoryItem: View {
                 Text(item.name)
                     .foregroundColor(.white)
                     .font(.subheadline)
-            }.padding(.horizontal, 8)
+            }.padding(.horizontal, Dimensions.space_8)
             
             HStack {
                 Spacer()
             }
             Spacer()
         }
-        .frame(height: 164)
+        .frame(height: Dimensions.space_164)
         .background(
             ZStack {
                 Image(uiImage: backgroundImage!)
@@ -48,9 +48,9 @@ struct CategoryItem: View {
                     .scaledToFill()
                     .clipped()
                 Rectangle()
-                    .frame(height: 164)
+                    .frame(height: Dimensions.space_164)
                     .foregroundColor(.clear)
-                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                    .padding(EdgeInsets(top: Dimensions.space_24, leading: 0, bottom: 0, trailing: 0))
                     .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
             }
         )

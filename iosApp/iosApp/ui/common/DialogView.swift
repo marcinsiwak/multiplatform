@@ -30,10 +30,10 @@ struct DialogView<DialogContent: View>: ViewModifier {
         ZStack {
             dialogContent
             .background(
-              RoundedRectangle(cornerRadius: 8)
+              RoundedRectangle(cornerRadius: Dimensions.button_corner)
                 .foregroundColor(Color(MR.colors().gray.getUIColor()))
             )
-        }.padding(40)
+        }.padding(Dimensions.space_40)
       }
     }
   }

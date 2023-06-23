@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -21,6 +22,8 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 
@@ -28,8 +31,6 @@ import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 fun AddCategoryScreen() {
     val viewModel = koinViewModel<AddCategoryViewModel>()
     val state = viewModel.viewState.collectAsState()
-    val dimens = LocalDim.current
-    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -40,7 +41,7 @@ fun AddCategoryScreen() {
             InputView(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(dimens.space_8),
+                    .padding(MaterialTheme.dimens.space_8),
                 value = state.value.name,
                 onValueChange = {
                     viewModel.onCategoryNameChanged(it)
@@ -58,7 +59,7 @@ fun AddCategoryScreen() {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
+                .padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_80),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
@@ -66,9 +67,9 @@ fun AddCategoryScreen() {
             onClick = { viewModel.onSaveCategoryClicked() }
         ) {
             Text(
-                modifier = Modifier.padding(dimens.space_8),
+                modifier = Modifier.padding(MaterialTheme.dimens.space_8),
                 text = "Add category",
-                fontSize = dimens.font_16
+                fontSize = MaterialTheme.font.font_16
             )
         }
     }

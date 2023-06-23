@@ -11,15 +11,15 @@ struct ResultView: View {
             Text(result)
                 .frame(maxWidth: .infinity)
                 .foregroundColor(.white)
-                .padding(8)
+                .padding(Dimensions.space_8)
             Text(amount)
                 .frame(maxWidth: .infinity)
                 .foregroundColor(.white)
-                .padding(8)
+                .padding(Dimensions.space_8)
             Text(date)
                 .frame(maxWidth: .infinity)
                 .foregroundColor(.white)
-                .padding(8)
+                .padding()
         }
         .contentShape(Rectangle())
         .onTapGesture {

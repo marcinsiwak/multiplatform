@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.android.ui.components
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -12,15 +13,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import pl.msiwak.multiplatform.android.ui.extensions.topBorder
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
 @Composable
 fun BottomNavigation(navController: NavController, items: List<DashboardNavigationDirections>) {
-    val dimens = LocalDim.current
-
     androidx.compose.material.BottomNavigation(
-        modifier = Modifier.topBorder(dimens.bottom_navigation_divider_width, Color.DarkGray),
-        elevation = dimens.bottom_navigation_elevation,
+        modifier = Modifier.topBorder(MaterialTheme.dimens.bottom_navigation_divider_width, Color.DarkGray),
+        elevation = MaterialTheme.dimens.bottom_navigation_elevation,
         backgroundColor = Color.Black,
         contentColor = Color.White
     ) {
@@ -32,7 +33,7 @@ fun BottomNavigation(navController: NavController, items: List<DashboardNavigati
                 label = {
                     Text(
                         text = item.title,
-                        fontSize = dimens.font_8
+                        fontSize = MaterialTheme.font.font_8
                     )
                 },
                 selectedContentColor = Color.White,

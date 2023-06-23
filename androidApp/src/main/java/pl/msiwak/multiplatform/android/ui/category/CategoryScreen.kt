@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,6 +33,8 @@ import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
@@ -39,8 +42,6 @@ import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 fun CategoryScreen(id: Long) {
     val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
     val state = viewModel.viewState.collectAsState()
-    val dimens = LocalDim.current
-    val context = LocalContext.current
 
     val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
@@ -92,7 +93,7 @@ fun CategoryScreen(id: Long) {
                         }
                     }
                     .fillMaxWidth()
-                    .height(dimens.space_264),
+                    .height(MaterialTheme.dimens.space_264),
                     painter = painterResource(id = backgroundId),
                     contentScale = ContentScale.Crop,
                     contentDescription = "category background")
@@ -108,15 +109,15 @@ fun CategoryScreen(id: Long) {
         Button(modifier = Modifier
             .fillMaxWidth()
             .align(Alignment.BottomCenter)
-            .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
+            .padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_80),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray, contentColor = Color.Black
             ),
             onClick = { viewModel.onAddNewExerciseClicked() }) {
             Text(
-                modifier = Modifier.padding(dimens.space_8),
+                modifier = Modifier.padding(MaterialTheme.dimens.space_8),
                 text = "Add exercise",
-                fontSize = dimens.font_16
+                fontSize = MaterialTheme.font.font_16
             )
         }
 
@@ -126,13 +127,13 @@ fun CategoryScreen(id: Long) {
                 .background(
                     color = Color.Black,
                     shape = RoundedCornerShape(
-                        topStart = dimens.space_8,
-                        bottomEnd = dimens.space_8
+                        topStart = MaterialTheme.dimens.space_8,
+                        bottomEnd = MaterialTheme.dimens.space_8
                     )
                 )
-                .padding(horizontal = dimens.space_12, vertical = dimens.space_8),
+                .padding(horizontal = MaterialTheme.dimens.space_12, vertical = MaterialTheme.dimens.space_8),
             text = state.value.categoryName,
-            fontSize = dimens.font_14,
+            fontSize = MaterialTheme.font.font_14,
             color = Color.White
         )
     }

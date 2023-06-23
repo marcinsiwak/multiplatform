@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.SortType
@@ -50,8 +52,6 @@ fun ResultsTableView(
     onResultLongClick: (Int) -> Unit = {},
     focusRequesters: List<FocusRequester>
 ) {
-    val dimens = LocalDim.current
-
     val listState = rememberLazyListState()
 
     LaunchedEffect(isNewResultEnabled) {
@@ -71,13 +71,13 @@ fun ResultsTableView(
                 .background(color = colorResource(id = MR.colors.gray.resourceId))
                 .height(IntrinsicSize.Min)
                 .fillMaxWidth()
-                .padding(vertical = dimens.space_8),
+                .padding(vertical = MaterialTheme.dimens.space_8),
             verticalAlignment = Alignment.CenterVertically
         ) {
             TextWithDrawableView(
                 modifier = Modifier
-                    .width(dimens.first_list_item_size)
-                    .offset(x = dimens.space_8)
+                    .width(MaterialTheme.dimens.first_list_item_size)
+                    .offset(x = MaterialTheme.dimens.space_8)
                     .clickable { onLabelClicked(0) },
                 text = resultDataTitles.getOrNull(0)?.plus(" [$unit]") ?: "",
                 color = Color.White,
@@ -90,7 +90,7 @@ fun ResultsTableView(
             )
             TextWithDrawableView(
                 modifier = Modifier
-                    .width(dimens.second_list_item_size)
+                    .width(MaterialTheme.dimens.second_list_item_size)
                     .clickable { onLabelClicked(1) },
                 text = resultDataTitles.getOrNull(1) ?: "",
                 color = Color.White,
@@ -124,7 +124,7 @@ fun ResultsTableView(
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(dimens.space_32)
+                            .padding(MaterialTheme.dimens.space_32)
                             .clickable {
                                 onAddNewResultClicked()
                             },

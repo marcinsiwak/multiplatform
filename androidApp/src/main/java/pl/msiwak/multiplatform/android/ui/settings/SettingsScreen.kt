@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -17,14 +18,14 @@ import androidx.compose.ui.res.stringResource
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 
 @Composable
 fun SettingsScreen() {
     val viewModel = koinViewModel<SettingsViewModel>()
     val state = viewModel.viewState.collectAsState()
-    val dimens = LocalDim.current
-    val context = LocalContext.current
 
     Box {
         Column(
@@ -34,16 +35,16 @@ fun SettingsScreen() {
         ) {
             Text(
                 modifier = Modifier.padding(
-                    vertical = dimens.space_16,
-                    horizontal = dimens.space_24
+                    vertical = MaterialTheme.dimens.space_16,
+                    horizontal = MaterialTheme.dimens.space_24
                 ),
                 text = stringResource(MR.strings.settings.resourceId),
-                fontSize = dimens.font_24,
+                fontSize = MaterialTheme.font.font_24,
                 color = Color.White
             )
             SettingsItem(
                 modifier = Modifier
-                    .padding(top = dimens.space_8)
+                    .padding(top = MaterialTheme.dimens.space_8)
                     .clickable {
                         viewModel.onUnitClicked()
                     },
@@ -53,7 +54,7 @@ fun SettingsScreen() {
             if (isLanguageEnabled) {
                 SettingsItem(
                     modifier = Modifier
-                        .padding(top = dimens.space_8)
+                        .padding(top = MaterialTheme.dimens.space_8)
                         .clickable {
                             viewModel.onLanguageClicked()
                         },
@@ -64,7 +65,7 @@ fun SettingsScreen() {
         Text(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(vertical = dimens.space_16),
+                .padding(vertical = MaterialTheme.dimens.space_16),
             text = state.value.versionName,
             color = Color.DarkGray
         )

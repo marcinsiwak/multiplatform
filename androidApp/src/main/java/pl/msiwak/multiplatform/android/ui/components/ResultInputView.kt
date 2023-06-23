@@ -34,8 +34,6 @@ fun ResultInputView(
     trailingIcon: @Composable (() -> Unit)? = null,
     onViewClicked: () -> Unit = {}
 ) {
-    val dimens = LocalDim.current
-
     TextField(
         modifier = modifier,
         colors = TextFieldDefaults.outlinedTextFieldColors(

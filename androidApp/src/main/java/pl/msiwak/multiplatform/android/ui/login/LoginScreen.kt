@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,6 +20,7 @@ import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.ui.login.LoginViewModel
 
 
@@ -27,8 +29,6 @@ fun LoginScreen() {
     val viewModel = koinViewModel<LoginViewModel>()
 
     val state = viewModel.loginState.collectAsState()
-    val dimens = LocalDim.current
-    val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -40,10 +40,10 @@ fun LoginScreen() {
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(vertical = dimens.space_24)
+                .padding(vertical = MaterialTheme.dimens.space_24)
         ) {
             InputView(
-                modifier = Modifier.padding(vertical = dimens.space_8),
+                modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_8),
                 value = state.value.login,
                 onValueChange = {
                     viewModel.onLoginChanged(it)
@@ -64,7 +64,7 @@ fun LoginScreen() {
             Button(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(vertical = dimens.space_16),
+                    .padding(vertical = MaterialTheme.dimens.space_16),
                 onClick = {
                     viewModel.onLoginClicked()
                 }) {

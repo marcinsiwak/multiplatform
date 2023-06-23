@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,8 +32,6 @@ fun InputView(
     errorsEnabled: Boolean = true,
     trailingIcon: @Composable (() -> Unit)? = null
 ) {
-    val dimens = LocalDim.current
-
     Column(modifier = modifier) {
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -44,7 +44,7 @@ fun InputView(
                 unfocusedLabelColor = Color.Gray
             ),
             trailingIcon = trailingIcon,
-            shape = RoundedCornerShape(dimens.space_12),
+            shape = RoundedCornerShape(MaterialTheme.dimens.space_12),
             value = value,
             onValueChange = { newText ->
                 onValueChange(newText)
@@ -65,7 +65,7 @@ fun InputView(
         Text(
             modifier = Modifier
                 .alpha(isErrorVisible)
-                .padding(bottom = dimens.space_8),
+                .padding(bottom = MaterialTheme.dimens.space_8),
             text = errorMessage ?: "",
             color = Color.Red
         )

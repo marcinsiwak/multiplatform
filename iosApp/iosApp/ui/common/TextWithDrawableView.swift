@@ -8,10 +8,10 @@ struct TextWithDrawableView: View {
     
     var body: some View {
         
-        HStack(alignment: .center, spacing: 4) {
+        HStack(alignment: .center, spacing: Dimensions.space_8) {
             Text(text)
                 .foregroundColor(color)
-                .padding(.vertical, 8)
+                .padding(.vertical, Dimensions.space_8)
             
             Image(systemName: iconResId ?? "chevron.down")
                 .foregroundColor(color)

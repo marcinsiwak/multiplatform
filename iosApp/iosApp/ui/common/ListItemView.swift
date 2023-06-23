@@ -15,9 +15,9 @@ struct ListItemView: View {
             HStack{
                 Text(title).foregroundColor(.white)
                 Spacer()
-                Image(systemName: "chevron.compact.right").foregroundColor(.white).padding(.horizontal, 8)
-            }.padding(.top, 8)
-                .padding(.horizontal, 8)
+                Image(systemName: "chevron.compact.right").foregroundColor(.white).padding(.horizontal, Dimensions.space_8)
+            }.padding(.top, Dimensions.space_8)
+                .padding(.horizontal, Dimensions.space_8)
                 .rippleEffect(rippleColor: .gray, onClicked: {
                     onClicked()
                 })

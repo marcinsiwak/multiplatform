@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -22,24 +23,24 @@ import java.util.Locale
 import org.example.library.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
 
 @Composable
 fun UnitScreen() {
     val viewModel = koinViewModel<UnitViewModel>()
     val state = viewModel.viewState.collectAsState()
-    val dimens = LocalDim.current
 
-    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.Black)
     ) {
         Text(
-            modifier = Modifier.padding(vertical = dimens.space_16, horizontal = dimens.space_24),
+            modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_24),
             text = stringResource(MR.strings.settings_unit.resourceId),
-            fontSize = dimens.font_24,
+            fontSize = MaterialTheme.font.font_24,
             color = Color.White
         )
 

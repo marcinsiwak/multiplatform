@@ -12,15 +12,15 @@ struct InputView<TrailingIcon: View>: View {
     var onValueChange: (String) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Dimensions.space_8) {
             TextField(hintText, text: $value.onChange({ text in
                 onValueChange(text)
             }))
                 .padding()
                 .background(backgroundColor)
-                .cornerRadius(12)
-                .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray, lineWidth: 1))
-                .overlay(trailingIcon().padding(.trailing, 8).padding(.top, 12), alignment: .trailing)
+                .cornerRadius(Dimensions.input_view_corner)
+                .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.gray, lineWidth: 1))
+                .overlay(trailingIcon().padding(.trailing, Dimensions.space_8).padding(.top, Dimensions.space_12), alignment: .trailing)
                 .disabled(readOnly)
                 .foregroundColor(.white)
                 .textContentType(isPassword ? .password : .none)
@@ -29,7 +29,7 @@ struct InputView<TrailingIcon: View>: View {
                 Text(errorMessage ?? "")
                     .foregroundColor(.red)
                     .opacity(errorMessage != nil ? 1 : 0)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, Dimensions.space_8)
             }
         }
     }

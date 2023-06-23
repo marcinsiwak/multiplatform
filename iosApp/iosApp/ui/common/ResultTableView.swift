@@ -25,7 +25,7 @@ struct ResultsTableView: View {
         VStack {
             // Header
             HStack(
-                spacing: 20
+                spacing: Dimensions.space_24
             ) {
                 TextWithDrawableView(
                     text: resultDataTitles[safe: 0] ?? "",
@@ -33,7 +33,7 @@ struct ResultsTableView: View {
                             sortType == .resultDecreasing ? "chevron.down" : nil,
                     color: Color.white
                 )
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, Dimensions.space_16)
                     .foregroundColor(.white)
                     .onTapGesture {
                         onLabelClicked(0)
@@ -44,7 +44,7 @@ struct ResultsTableView: View {
                         sortType == .amountDecreasing ? "chevron.down" : nil,
                     color: Color.white
                 )
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, Dimensions.space_16)
                     .foregroundColor(.white)
                     .onTapGesture {
                         onLabelClicked(1)
@@ -55,14 +55,14 @@ struct ResultsTableView: View {
                         sortType == .dateDecreasing ? "chevron.down" : nil,
                     color: Color.white
                 )
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, Dimensions.space_16)
                     .foregroundColor(.white)
                     .onTapGesture {
                         onLabelClicked(2)
                     }
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 8)
+            .padding(.vertical, Dimensions.space_8)
             .background(Color(MR.colors().gray.getUIColor()))
 
             // Results
@@ -84,7 +84,7 @@ struct ResultsTableView: View {
                     Button(action: onAddNewResultClicked) {
                         Text("Add first result")
                     }
-                    .frame(maxWidth: .infinity, minHeight: 200)
+                    .frame(maxWidth: .infinity, minHeight: Dimensions.results_min_height)
                     .listRowBackground(Color.black)
                 }
                 

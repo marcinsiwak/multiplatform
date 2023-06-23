@@ -29,7 +29,7 @@ struct SummaryScreen: View {
                         .onTapGesture {
                             viewModel.onCategoryClicked(id: item.id)
                         }
-                        .padding(.top, 16)
+                        .padding(.top, Dimensions.space_16)
                 }
                 
                 Button(action: {
@@ -41,13 +41,13 @@ struct SummaryScreen: View {
                         Text(MR.strings().summary_add_category.desc().localized())
                             .foregroundColor(.gray)
                     }
-                    .padding(.vertical, 24)
+                    .padding(.vertical, Dimensions.space_24)
                     .frame(maxWidth: .infinity, alignment: .center)
                 })
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-        .padding(.horizontal, 8)
+        .padding(.horizontal, Dimensions.space_8)
         .background(.black)
     
     }

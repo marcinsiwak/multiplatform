@@ -11,7 +11,6 @@ struct MainScreen: View {
     private let navigateToAddCategory: () -> Void
     private let navigateBack: () -> Void
     private let viewModel: MainViewModel
-
     
     init(
         navigateToRegistration: @escaping () -> Void,
@@ -74,8 +73,6 @@ struct MainScreen: View {
         if(command is NavigationDirections.NavigateUp){
             navigateBack()
         }
-        
-        
      }
     
     var body: some View {
@@ -84,13 +81,12 @@ struct MainScreen: View {
                     Button("Register") {
 //                        mainDiHel.per.onRegistrationClicked()
                         
-                    }.padding(30)
+                    }
                 
                     Button("Login") {
 //                        welcomeDiHelper.onLoginClicked()
                         navigateToDashboard()
-                    }.padding(30)
-
+                    }
         }
     }
 //    struct WelcomeScreen_Previews: PreviewProvider {

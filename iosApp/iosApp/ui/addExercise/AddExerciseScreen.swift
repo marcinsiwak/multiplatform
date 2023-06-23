@@ -61,8 +61,8 @@ struct AddExerciseScreen: View {
                 },
                 selectedFilter: state.value.selectedFilterPosition
             )
-            .frame(width: 280)
-            .padding(.vertical, 16)
+            .frame(width: Dimensions.result_view_width)
+            .padding(.vertical, Dimensions.space_16)
             
             if !state.value.isResultFieldEnabled {
                 Button(action: {
@@ -72,12 +72,12 @@ struct AddExerciseScreen: View {
                             .padding()
                             .foregroundColor(.black)
                             .background(Color.gray.opacity(0.2))
-                            .cornerRadius(8)
+                            .cornerRadius(Dimensions.button_corner)
                     }
                 )
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 16)
+                .padding(.horizontal, Dimensions.space_16)
+                .padding(.bottom, Dimensions.space_16)
             } else {
                 Button(action: {
                         viewModel.onSaveResultClicked()
@@ -86,12 +86,12 @@ struct AddExerciseScreen: View {
                             .padding()
                             .foregroundColor(.black)
                             .background(Color.gray.opacity(0.2))
-                            .cornerRadius(8)
+                            .cornerRadius(Dimensions.button_corner)
                     }
                 )
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 16)
+                .padding(.horizontal, Dimensions.space_16)
+                .padding(.bottom, Dimensions.space_16)
             }
             
             ResultsTableView(

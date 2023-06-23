@@ -32,7 +32,7 @@ struct RegisterScreen: View {
                          print(error)
                      }
                  }
-             }.padding(30)
+             }.padding(Dimensions.space_32)
          }.padding()
 
      }

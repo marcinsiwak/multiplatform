@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,13 +22,13 @@ import androidx.compose.ui.res.stringResource
 import org.example.library.MR
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 
 @Composable
 fun ForceUpdateScreen() {
     val viewModel: ForceUpdateViewModel by KoinJavaComponent.inject(ForceUpdateViewModel::class.java)
-    val context = LocalContext.current
-    val dimens = LocalDim.current
 
     Box(
         modifier = Modifier
@@ -41,31 +42,31 @@ fun ForceUpdateScreen() {
                 contentDescription = null
             )
             Text(
-                modifier = Modifier.padding(dimens.space_16),
+                modifier = Modifier.padding(MaterialTheme.dimens.space_16),
                 text = stringResource(MR.strings.force_update_title.resourceId),
                 color = Color.White,
-                fontSize = dimens.font_24
+                fontSize = MaterialTheme.font.font_24
             )
             Text(
-                modifier = Modifier.padding(horizontal = dimens.space_16),
+                modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
                 text = stringResource(MR.strings.force_update_description.resourceId),
                 color = Color.White,
-                fontSize = dimens.font_16
+                fontSize = MaterialTheme.font.font_16
             )
         }
         Button(modifier = Modifier
             .fillMaxWidth()
             .align(Alignment.BottomCenter)
-            .padding(vertical = dimens.space_16, horizontal = dimens.space_80),
+            .padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_80),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             ),
             onClick = { viewModel.onUpdateClicked() }) {
             Text(
-                modifier = Modifier.padding(dimens.space_8),
+                modifier = Modifier.padding(MaterialTheme.dimens.space_8),
                 text = "Update",
-                fontSize = dimens.font_16
+                fontSize = MaterialTheme.font.font_16
             )
         }
     }

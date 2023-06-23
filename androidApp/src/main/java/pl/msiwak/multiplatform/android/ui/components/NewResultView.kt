@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -18,6 +19,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 
@@ -32,7 +34,6 @@ fun NewResultView(
     onDateValueChanged: (String) -> Unit,
     onDateClicked: () -> Unit
 ) {
-    val dimens = LocalDim.current
     val focusManager = LocalFocusManager.current
 
     Row(
@@ -45,8 +46,8 @@ fun NewResultView(
         ResultInputView(
             modifier = Modifier
                 .focusRequester(focusRequesters[1])
-                .width(dimens.first_list_item_size)
-                .padding(start = dimens.space_8),
+                .width(MaterialTheme.dimens.first_list_item_size)
+                .padding(start = MaterialTheme.dimens.space_8),
             value = newResultData.result,
             onValueChange = {
                 onResultValueChanged(it)
@@ -58,8 +59,8 @@ fun NewResultView(
         ResultInputView(
             modifier = Modifier
                 .focusRequester(focusRequesters[2])
-                .width(dimens.second_list_item_size)
-                .padding(horizontal = dimens.space_8),
+                .width(MaterialTheme.dimens.second_list_item_size)
+                .padding(horizontal = MaterialTheme.dimens.space_8),
             value = newResultData.amount,
             onValueChange = {
                 onAmountValueChanged(it)
@@ -81,7 +82,7 @@ fun NewResultView(
                         focusManager.clearFocus()
                     }
                 }
-                .padding(bottom = dimens.space_16, end = dimens.space_8),
+                .padding(bottom = MaterialTheme.dimens.space_16, end = MaterialTheme.dimens.space_8),
             value = newResultData.date,
             onValueChange = {
                 onDateValueChanged(it)

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,13 +28,13 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import org.example.library.MR
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 
 @Composable
 fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
-    val dimens = LocalDim.current
-
     val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
@@ -43,11 +44,11 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
         modifier = modifier
             .background(
                 color = Color.Black,
-                shape = RoundedCornerShape(dimens.space_8),
+                shape = RoundedCornerShape(MaterialTheme.dimens.space_8),
             )
-            .shadow(dimens.space_2)
-            .border(dimens.space_2, Color.DarkGray, RoundedCornerShape(dimens.space_8))
-            .height(dimens.space_164)
+            .shadow(MaterialTheme.dimens.space_2)
+            .border(MaterialTheme.dimens.space_2, Color.DarkGray, RoundedCornerShape(MaterialTheme.dimens.space_8))
+            .height(MaterialTheme.dimens.space_164)
             .fillMaxWidth(),
     ) {
         backgroundId.let {
@@ -56,7 +57,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                     .align(Alignment.CenterEnd)
                     .fillMaxSize()
                     .alpha(0.5f)
-                    .clip(RoundedCornerShape(dimens.space_8)),
+                    .clip(RoundedCornerShape(MaterialTheme.dimens.space_8)),
                 painter = painterResource(id = backgroundId),
                 contentScale = ContentScale.Crop,
                 contentDescription = null
@@ -69,13 +70,13 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                     .background(
                         color = Color.Black,
                         shape = RoundedCornerShape(
-                            topStart = dimens.space_8,
-                            bottomEnd = dimens.space_8
+                            topStart = MaterialTheme.dimens.space_8,
+                            bottomEnd = MaterialTheme.dimens.space_8
                         )
                     )
-                    .padding(horizontal = dimens.space_12, vertical = dimens.space_8),
+                    .padding(horizontal = MaterialTheme.dimens.space_12, vertical = MaterialTheme.dimens.space_8),
                 text = categoryData.name,
-                fontSize = dimens.font_14,
+                fontSize = MaterialTheme.font.font_14,
                 color = Color.White
             )
 
@@ -88,10 +89,10 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                     Text(
                         modifier = Modifier
                             .fillMaxHeight()
-                            .padding(start = dimens.space_8),
+                            .padding(start = MaterialTheme.dimens.space_8),
                         maxLines = 1,
                         text = it.name,
-                        fontSize = dimens.font_12,
+                        fontSize = MaterialTheme.font.font_12,
                         fontStyle = FontStyle.Italic,
                         color = Color.LightGray,
                     )

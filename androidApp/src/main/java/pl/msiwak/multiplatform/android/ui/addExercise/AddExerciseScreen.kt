@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,6 +33,8 @@ import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
@@ -43,7 +46,6 @@ fun AddExerciseScreen(id: Long) {
 
     val state = viewModel.viewState.collectAsState()
     val context = LocalContext.current
-    val dimens = LocalDim.current
 
     val focusRequesters = List(4) { remember { FocusRequester() } }
 
@@ -100,17 +102,17 @@ fun AddExerciseScreen(id: Long) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = dimens.space_12, end = dimens.space_24)
-                    .padding(vertical = dimens.space_16),
+                    .padding(start = MaterialTheme.dimens.space_12, end = MaterialTheme.dimens.space_24)
+                    .padding(vertical = MaterialTheme.dimens.space_16),
                 text = state.value.exerciseTitle,
-                fontSize = dimens.font_24,
+                fontSize = MaterialTheme.font.font_24,
                 color = Color.White,
             )
 
             ResultsTimeFilterView(
                 modifier = Modifier
                     .width(260.dp)
-                    .padding(bottom = dimens.space_16),
+                    .padding(bottom = MaterialTheme.dimens.space_16),
                 tabs = state.value.filter,
                 selectedPos = state.value.selectedFilterPosition,
                 onTabClicked = {
@@ -125,8 +127,8 @@ fun AddExerciseScreen(id: Long) {
                 if (!state.value.isResultFieldEnabled) {
                     Button(
                         modifier = Modifier
-                            .padding(bottom = dimens.space_16)
-                            .padding(horizontal = dimens.space_16),
+                            .padding(bottom = MaterialTheme.dimens.space_16)
+                            .padding(horizontal = MaterialTheme.dimens.space_16),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.LightGray, contentColor = Color.Black
                         ),
@@ -140,8 +142,8 @@ fun AddExerciseScreen(id: Long) {
                 } else
                     Button(
                         modifier = Modifier
-                            .padding(bottom = dimens.space_16)
-                            .padding(horizontal = dimens.space_16),
+                            .padding(bottom = MaterialTheme.dimens.space_16)
+                            .padding(horizontal = MaterialTheme.dimens.space_16),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.LightGray, contentColor = Color.Black
                         ),

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -20,12 +21,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.theme.font
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> Unit = {}) {
-    val dimens = LocalDim.current
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -38,22 +39,22 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                     color = Color.LightGray
                 ),
             )
-            .bottomBorder(strokeWidth = dimens.space_1, color = Color.DarkGray),
+            .bottomBorder(strokeWidth = MaterialTheme.dimens.space_1, color = Color.DarkGray),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             modifier = Modifier
                 .weight(1f)
-                .padding(start = dimens.space_16, top = dimens.space_8, bottom = dimens.space_8),
+                .padding(start = MaterialTheme.dimens.space_16, top = MaterialTheme.dimens.space_8, bottom = MaterialTheme.dimens.space_8),
             text = name,
-            fontSize = dimens.font_20,
+            fontSize = MaterialTheme.font.font_20,
             color = Color.LightGray
         )
         Icon(
             modifier = Modifier
                 .weight(0.2f)
-                .padding(dimens.space_16),
+                .padding(MaterialTheme.dimens.space_16),
             tint = Color.LightGray,
             painter = painterResource(id = R.drawable.ic_arrow_right),
             contentDescription = null

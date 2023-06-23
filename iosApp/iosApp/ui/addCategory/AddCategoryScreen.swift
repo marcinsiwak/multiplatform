@@ -32,13 +32,13 @@ struct AddCategoryScreen: View {
                 InputView(value: $state.value.name, hintText: "Category name...", trailingIcon: {}, onValueChange: { name in
                     viewModel.onCategoryNameChanged(name: name)
                 })
-                .padding(.horizontal, 8)
+                .padding(.horizontal, Dimensions.space_8)
                 .padding(.top)
                 .frame(maxWidth: .infinity)
                     HStack {
                         Text("Category type")
                             .foregroundColor(.white)
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, Dimensions.space_16)
                         Spacer()
                         Picker("Select category type", selection: $state.value.exerciseType, content: {
                             let exercises = ExerciseType.values().parseToSwiftArray()
@@ -61,16 +61,16 @@ struct AddCategoryScreen: View {
                     },
                     label: {
                         Text(MR.strings().summary_add_category.desc().localized())
-                            .padding(16)
+                            .padding(Dimensions.space_16)
                             .foregroundColor(Color.black)
                             .background(Color.gray)
                             .clipShape(RoundedCorner())
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                 )
-                .frame(width: .none, height: 48)
-                .padding(.vertical, 16)
-                .padding(.horizontal, 80)
+                .frame(width: .none, height: Dimensions.space_48)
+                .padding(.vertical, Dimensions.space_16)
+                .padding(.horizontal, Dimensions.space_80)
             }
         }
     }
