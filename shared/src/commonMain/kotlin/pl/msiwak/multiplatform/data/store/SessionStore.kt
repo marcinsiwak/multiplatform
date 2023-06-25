@@ -9,6 +9,10 @@ class SessionStore(private val sharedPreferences: KMMPreferences) {
         sharedPreferences.put(AuthRepository.PREFS_TOKEN_KEY, token)
     }
 
+    fun clearToken() {
+        sharedPreferences.put(AuthRepository.PREFS_TOKEN_KEY, "")
+    }
+
     fun getToken(): String? {
         return sharedPreferences.getString(AuthRepository.PREFS_TOKEN_KEY)
     }

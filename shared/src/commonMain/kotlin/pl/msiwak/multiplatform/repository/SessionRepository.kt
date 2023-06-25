@@ -10,6 +10,10 @@ class SessionRepository(private val sessionStore: SessionStore) {
         sessionStore.saveToken(token)
     }
 
+    suspend fun clearToken() = withContext(Dispatchers.Default) {
+        sessionStore.clearToken()
+    }
+
     suspend fun getToken(): String? = withContext(Dispatchers.Default) {
         return@withContext sessionStore.getToken()
     }

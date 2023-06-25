@@ -39,7 +39,6 @@ struct CategoryScreen: View {
             return MR.images().bg_gym.toUIImage()!
         }
     }
-
     
     var body: some View {
         

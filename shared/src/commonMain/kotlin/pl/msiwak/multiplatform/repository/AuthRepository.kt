@@ -1,7 +1,9 @@
 package pl.msiwak.multiplatform.repository
 
+import dev.gitlive.firebase.auth.FirebaseUser
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
 
@@ -13,6 +15,10 @@ class AuthRepository(
         val result = firebaseAuthorization.loginUser(login, password)
         Napier.e("OUTPUT: ${result.user?.getIdTokenResult(true)?.token}")
         return@withContext result.user?.getIdTokenResult(true)?.token
+    }
+
+    suspend fun observeAuthStateChanged(): Flow<FirebaseUser?> = withContext(Dispatchers.Default) {
+        return@withContext firebaseAuthorization.observeAuthStateChanged()
     }
 
     companion object {

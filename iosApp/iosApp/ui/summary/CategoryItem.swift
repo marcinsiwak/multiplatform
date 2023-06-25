@@ -23,9 +23,9 @@ struct CategoryItem: View {
         VStack(alignment: .leading) {
             Text(categoryData.name)
                 .frame(alignment: .leading)
-                .padding(8)
+                .padding(Dimensions.space_8)
                 .background(.black)
-                .cornerRadius(8, corners: [.topLeft, .bottomRight])
+                .cornerRadius(Dimensions.button_corner, corners: [.topLeft, .bottomRight])
                 .foregroundColor(.white)
                 .font(.subheadline)
       

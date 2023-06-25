@@ -6,14 +6,15 @@ import pl.msiwak.multiplatform.api.client.KtorClient
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.api.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.api.service.UserService
-import pl.msiwak.multiplatform.data.store.SessionStore
 import pl.msiwak.multiplatform.data.store.LanguageStore
+import pl.msiwak.multiplatform.data.store.SessionStore
 import pl.msiwak.multiplatform.data.store.UnitStore
 import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExerciseDao
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
+import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
@@ -105,11 +106,11 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { LoginViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get()) }
-    viewModelDefinition { SummaryViewModel(get(), get(), get()) }
+    viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
             id = params.get(),
@@ -169,6 +170,7 @@ val useCaseModule = module {
     factory { GetCurrentAppCodeUseCase(get()) }
     factory { GetVersionNameUseCase(get()) }
     factory { GetUserUseCase(get()) }
+    factory { ObserveAuthStateChangedUseCase(get(), get()) }
 }
 
 val repositoryUseModule = module {
