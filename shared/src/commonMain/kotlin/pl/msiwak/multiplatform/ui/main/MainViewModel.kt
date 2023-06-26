@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.ui.main
 
 import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -43,14 +44,14 @@ class MainViewModel(
             fetchRemoteConfigUseCase()
             StringDesc.localeType = StringDesc.LocaleType.Custom(getLanguageUseCase())
 
-            if (getForceUpdateStateUseCase()) {
-                navigator.navigate(NavigationDirections.ForceUpdate)
-            }
-            _viewState.update { it.copy(isLoading = false) }
-
             if (!getUserTokenUseCase().isNullOrEmpty()) {
-                navigator.navigate(NavigationDirections.Dashboard)
+                _viewState.update { it.copy(directions = NavigationDirections.Dashboard) }
             }
+            if (getForceUpdateStateUseCase()) {
+                _viewState.update { it.copy(directions = NavigationDirections.ForceUpdate) }
+            }
+            delay(500)
+            _viewState.update { it.copy(isLoading = false) }
         }
     }
 }
