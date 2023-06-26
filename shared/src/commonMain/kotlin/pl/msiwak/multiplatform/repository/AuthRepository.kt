@@ -13,7 +13,6 @@ class AuthRepository(
 
     suspend fun login(login: String, password: String): String? = withContext(Dispatchers.Default) {
         val result = firebaseAuthorization.loginUser(login, password)
-        Napier.e("OUTPUT: ${result.user?.getIdTokenResult(true)?.token}")
         return@withContext result.user?.getIdTokenResult(true)?.token
     }
 

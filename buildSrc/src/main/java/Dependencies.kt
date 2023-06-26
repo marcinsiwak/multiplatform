@@ -8,7 +8,7 @@ import pl.msiwak.multiplatfor.dependencies.Versions.sqlDelightVersion
 object Versions {
     const val koinVersion = "3.3.2"
     const val koinComposeVersion = "3.4.2"
-    const val ktorVersion = "2.2.1"
+    const val ktorVersion = "2.3.1"
     const val sqlDelightVersion = "2.0.0-alpha05"
 }
 
@@ -42,6 +42,8 @@ object Deps {
         const val ios = "io.ktor:ktor-client-darwin:$ktorVersion"
         const val content_negation = "io.ktor:ktor-client-content-negotiation:$ktorVersion"
         const val serialization = "io.ktor:ktor-serialization-kotlinx-json:$ktorVersion"
+        const val cio = "io.ktor:ktor-client-cio:$ktorVersion"
+        const val logger = "io.ktor:ktor-client-logging:$ktorVersion"
     }
 
     object SQLDelight {

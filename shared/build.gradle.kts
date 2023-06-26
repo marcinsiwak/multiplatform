@@ -55,6 +55,8 @@ kotlin {
                     api(core)
                     api(content_negation)
                     api(serialization)
+                    api(cio)
+                    api(logger)
                 }
                 with(Deps.Napier) {
                     api(napier)

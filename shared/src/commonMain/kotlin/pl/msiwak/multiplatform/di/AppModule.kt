@@ -189,5 +189,5 @@ val repositoryUseModule = module {
 
 val serviceModule = module {
     single { KtorClient(get()) }
-    single { UserService(get(), get()) }
+    single { UserService(get()) }
 }
