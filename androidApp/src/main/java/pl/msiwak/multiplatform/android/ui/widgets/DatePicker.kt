@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.android.ui.widgets
 import android.app.DatePickerDialog
 import android.content.Context
 import java.util.Calendar
+import java.util.Date
 import kotlinx.datetime.LocalDateTime
 
 fun openCalendar(
@@ -21,6 +22,7 @@ fun openCalendar(
         onValueChanged(LocalDateTime(year, month + 1, day, currentHour, currentMinute))
         onCancelled()
     }, currentYear, currentMonth, currentDay)
+    dialog.datePicker.maxDate = Date().time
     dialog.setOnCancelListener {
         onCancelled()
     }
