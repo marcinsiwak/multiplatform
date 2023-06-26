@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -53,6 +54,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
+                    LaunchedEffect(key1 = true) {
+                        viewModel.mainNavigator.commands.watch {
+                            when (it) {
+                                is NavigationDirections.OpenStore -> openStore()
+                                NavigationDirections.NavigateUp -> navController.navigateUp()
+                                else -> navigate(navController, it)
+                            }
+                        }
+                    }
                     NavHost(
                         navController = navController,
                         startDestination = viewState.value.directions.route
@@ -88,14 +98,6 @@ class MainActivity : ComponentActivity() {
                                 backStackEntry.arguments?.getLong(NavigationDirections.Category.BUNDLE_ARG_ID)
                                     ?: 0
                             CategoryScreen(id)
-                        }
-                    }
-
-                    viewModel.mainNavigator.commands.watch {
-                        when (it) {
-                            is NavigationDirections.OpenStore -> openStore()
-                            NavigationDirections.NavigateUp -> navController.navigateUp()
-                            else -> navigate(navController, it)
                         }
                     }
                 }

@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
-import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
 import pl.msiwak.multiplatform.domain.summaries.GetCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
@@ -13,8 +12,7 @@ import pl.msiwak.multiplatform.ui.navigator.Navigator
 class SummaryViewModel(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val observeCategoriesUseCase: ObserveCategoriesUseCase,
-    private val navigator: Navigator,
-    private val firebaseAuthorization: FirebaseAuthorization
+    private val navigator: Navigator
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(SummaryState())
@@ -30,10 +28,7 @@ class SummaryViewModel(
     }
 
     fun onAddCategoryClicked() {
-        viewModelScope.launch {
-            firebaseAuthorization.logoutUser()
-        }
-//        navigator.navigate(NavigationDirections.AddCategory)
+        navigator.navigate(NavigationDirections.AddCategory)
     }
 
     fun onCategoryClicked(id: Long) {

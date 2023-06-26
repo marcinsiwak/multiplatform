@@ -61,6 +61,14 @@ fun SettingsScreen() {
                     text = stringResource(MR.strings.settings_language.resourceId)
                 )
             }
+            SettingsItem(
+                modifier = Modifier
+                    .padding(top = MaterialTheme.dimens.space_8)
+                    .clickable {
+                        viewModel.onLogoutClicked()
+                    },
+                text = stringResource(MR.strings.settings_logout.resourceId)
+            )
         }
         Text(
             modifier = Modifier

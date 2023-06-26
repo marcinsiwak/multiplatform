@@ -14,6 +14,7 @@ import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExerciseDao
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
+import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
 import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
@@ -111,7 +112,7 @@ val viewModelsModule = module {
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { LoginViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get()) }
-    viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { SummaryViewModel(get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
             id = params.get(),
@@ -133,7 +134,7 @@ val viewModelsModule = module {
         )
     }
     viewModelDefinition { AddCategoryViewModel(get(), get()) }
-    viewModelDefinition { SettingsViewModel(get(), get()) }
+    viewModelDefinition { SettingsViewModel(get(), get(), get()) }
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel(get()) }
@@ -143,6 +144,7 @@ val viewModelsModule = module {
 val useCaseModule = module {
     factory { RegisterUserUseCase(get()) }
     factory { LoginUseCase(get(), get()) }
+    factory { LogoutUseCase(get()) }
     factory { SaveUserTokenUseCase(get()) }
     factory { GetUserTokenUseCase(get()) }
     factory { GetExercisesUseCase(get()) }

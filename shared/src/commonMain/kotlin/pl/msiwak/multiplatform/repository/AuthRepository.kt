@@ -21,6 +21,10 @@ class AuthRepository(
         return@withContext firebaseAuthorization.observeAuthStateChanged()
     }
 
+    suspend fun logoutUser() = withContext(Dispatchers.Default) {
+        firebaseAuthorization.logoutUser()
+    }
+
     companion object {
         const val PREFS_TOKEN_KEY = "PREFS_TOKEN_KEY"
     }

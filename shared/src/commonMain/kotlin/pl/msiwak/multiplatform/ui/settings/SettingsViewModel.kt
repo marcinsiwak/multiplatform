@@ -2,14 +2,17 @@ package pl.msiwak.multiplatform.ui.settings
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
 class SettingsViewModel(
     private val navigator: Navigator,
-    getVersionNameUseCase: GetVersionNameUseCase
+    getVersionNameUseCase: GetVersionNameUseCase,
+    private val logoutUseCase: LogoutUseCase,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(SettingsState())
@@ -26,5 +29,12 @@ class SettingsViewModel(
 
     fun onUnitClicked() {
         navigator.navigate(NavigationDirections.Unit)
+    }
+
+    fun onLogoutClicked() {
+        viewModelScope.launch {
+            logoutUseCase()
+            navigator.navigate(NavigationDirections.Welcome)
+        }
     }
 }
