@@ -13,6 +13,7 @@ import io.ktor.client.request.header
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import pl.msiwak.multiplatform.BuildKonfig
 import pl.msiwak.multiplatform.data.store.SessionStore
 import pl.msiwak.multiplatform.utils.isDebug
 
@@ -40,7 +41,7 @@ class KtorClient(private val sessionStore: SessionStore) {
             })
         }
         defaultRequest {
-            url("https://siwakapi.azurewebsites.net/")
+            url(BuildKonfig.BASE_URL)
             bearerAuth(sessionStore.getToken() ?: "")
 
         }

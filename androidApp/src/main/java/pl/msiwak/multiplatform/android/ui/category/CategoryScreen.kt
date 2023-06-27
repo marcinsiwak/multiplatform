@@ -27,7 +27,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import org.example.library.MR
+import pl.msiwak.multiplatform.MR
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.ListItemView

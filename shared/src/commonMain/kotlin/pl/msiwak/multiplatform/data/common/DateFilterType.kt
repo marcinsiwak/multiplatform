@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.data.common
 
 import dev.icerock.moko.resources.StringResource
-import org.example.library.MR
+import pl.msiwak.multiplatform.MR
 
 enum class DateFilterType(val nameResourceId: StringResource) {
     ALL(MR.strings.filter_all),

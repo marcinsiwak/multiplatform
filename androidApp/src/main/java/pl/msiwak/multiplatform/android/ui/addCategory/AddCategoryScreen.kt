@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import org.example.library.MR
+import pl.msiwak.multiplatform.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView

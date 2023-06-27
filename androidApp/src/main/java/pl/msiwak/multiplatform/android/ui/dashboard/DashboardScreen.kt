@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import org.example.library.MR
+import pl.msiwak.multiplatform.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.BottomNavigation

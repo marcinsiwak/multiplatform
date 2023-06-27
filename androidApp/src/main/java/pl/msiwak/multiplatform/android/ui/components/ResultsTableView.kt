@@ -25,7 +25,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
-import org.example.library.MR
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens

@@ -20,7 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import java.util.Locale
-import org.example.library.MR
+import pl.msiwak.multiplatform.MR
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens

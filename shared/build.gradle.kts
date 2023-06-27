@@ -1,4 +1,6 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import pl.msiwak.multiplatfor.dependencies.Deps
+
 
 plugins {
     kotlin("multiplatform")
@@ -6,6 +8,7 @@ plugins {
     kotlin("plugin.serialization") version "1.8.22"
     id("app.cash.sqldelight") version "2.0.0-alpha05"
     id("dev.icerock.mobile.multiplatform-resources")
+    id("com.codingfeline.buildkonfig")
 }
 
 dependencies {
@@ -13,7 +16,7 @@ dependencies {
 }
 
 multiplatformResources {
-    multiplatformResourcesPackage = "org.example.library" // required
+    multiplatformResourcesPackage = "pl.msiwak.multiplatform" // required
     iosBaseLocalizationRegion = "en" // optional, default "en"
 }
 
@@ -112,8 +115,27 @@ kotlin {
             iosSimulatorArm64Test.dependsOn(this)
         }
     }
+}
 
+buildkonfig {
+    packageName = "pl.msiwak.multiplatform"
 
+    defaultConfigs {
+        buildConfigField(STRING, "BASE_URL", "https://siwakapi.azurewebsites.net/")
+    }
+    targetConfigs {
+        create("ios") {
+            buildConfigField(STRING, "BASE_URL", "https://siwakapi.azurewebsites.net/")
+        }
+    }
+    targetConfigs("debug") {
+        create("android") {
+            buildConfigField(STRING, "BASE_URL", "https://siwakapi.azurewebsites.net/")
+        }
+        create("ios") {
+            buildConfigField(STRING, "BASE_URL", "https://siwakapi.azurewebsites.net/")
+        }
+    }
 }
 
 android {

@@ -19,7 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import org.example.library.MR
+import pl.msiwak.multiplatform.MR
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens

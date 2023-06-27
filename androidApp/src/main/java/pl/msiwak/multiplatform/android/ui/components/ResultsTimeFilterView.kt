@@ -63,9 +63,6 @@ fun ResultsTimeFilterView(
                         onTabClicked(item)
                     }) {
                     Text(
-                        modifier = Modifier.padding(
-                            horizontal = 0.dp
-                        ),
                         text = stringResource(item.nameResourceId.resourceId),
                         color = Color.White,
                         onTextLayout = { textLayoutResult ->

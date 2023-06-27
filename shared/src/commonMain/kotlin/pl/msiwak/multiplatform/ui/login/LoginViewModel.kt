@@ -18,7 +18,7 @@ class LoginViewModel(
     private val _loginState = MutableStateFlow(LoginState())
     val loginState: StateFlow<LoginState> = _loginState
 
-    val errorHandler = globalErrorHandler.handleError()
+    private val errorHandler = globalErrorHandler.handleError()
 
     fun onLoginChanged(text: String) {
         _loginState.value = loginState.value.copy(login = text)

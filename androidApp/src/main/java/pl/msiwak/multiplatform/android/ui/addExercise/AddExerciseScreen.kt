@@ -26,7 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
-import org.example.library.MR
+import pl.msiwak.multiplatform.MR
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
