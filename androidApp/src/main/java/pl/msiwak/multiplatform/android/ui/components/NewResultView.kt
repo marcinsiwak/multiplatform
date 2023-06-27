@@ -18,7 +18,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
@@ -82,7 +81,10 @@ fun NewResultView(
                         focusManager.clearFocus()
                     }
                 }
-                .padding(bottom = MaterialTheme.dimens.space_16, end = MaterialTheme.dimens.space_8),
+                .padding(
+                    bottom = MaterialTheme.dimens.space_16,
+                    end = MaterialTheme.dimens.space_8
+                ),
             value = newResultData.date,
             onValueChange = {
                 onDateValueChanged(it)

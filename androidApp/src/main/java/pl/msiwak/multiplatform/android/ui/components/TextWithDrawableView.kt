@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 
 @Composable
@@ -31,7 +30,10 @@ fun TextWithDrawableView(
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_4, vertical = MaterialTheme.dimens.space_16),
+            modifier = Modifier.padding(
+                horizontal = MaterialTheme.dimens.space_4,
+                vertical = MaterialTheme.dimens.space_16
+            ),
             text = text,
             color = color,
             textAlign = textAlign,

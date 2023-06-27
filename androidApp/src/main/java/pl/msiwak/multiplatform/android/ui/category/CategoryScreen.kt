@@ -24,15 +24,14 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import pl.msiwak.multiplatform.MR
+import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
@@ -109,7 +108,10 @@ fun CategoryScreen(id: Long) {
         Button(modifier = Modifier
             .fillMaxWidth()
             .align(Alignment.BottomCenter)
-            .padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_80),
+            .padding(
+                vertical = MaterialTheme.dimens.space_16,
+                horizontal = MaterialTheme.dimens.space_80
+            ),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray, contentColor = Color.Black
             ),
@@ -131,10 +133,19 @@ fun CategoryScreen(id: Long) {
                         bottomEnd = MaterialTheme.dimens.space_8
                     )
                 )
-                .padding(horizontal = MaterialTheme.dimens.space_12, vertical = MaterialTheme.dimens.space_8),
+                .padding(
+                    horizontal = MaterialTheme.dimens.space_12,
+                    vertical = MaterialTheme.dimens.space_8
+                ),
             text = state.value.categoryName,
             fontSize = MaterialTheme.font.font_14,
             color = Color.White
         )
     }
+}
+
+@Preview
+@Composable
+fun CategoryScreenPreview() {
+    CategoryScreen(0)
 }

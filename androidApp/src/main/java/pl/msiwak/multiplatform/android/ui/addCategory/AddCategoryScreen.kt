@@ -15,13 +15,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import pl.msiwak.multiplatform.MR
+import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
@@ -59,7 +58,10 @@ fun AddCategoryScreen() {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_80),
+                .padding(
+                    vertical = MaterialTheme.dimens.space_16,
+                    horizontal = MaterialTheme.dimens.space_80
+                ),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
@@ -73,4 +75,10 @@ fun AddCategoryScreen() {
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun AddCategoryScreenPreview() {
+    AddCategoryScreen()
 }

@@ -4,13 +4,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import pl.msiwak.multiplatform.MR
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
@@ -47,4 +47,10 @@ fun DashboardScreen() {
             composable(items[1].route) { SettingsScreen() }
         }
     }
+}
+
+@Preview
+@Composable
+fun DashboardScreenPreview() {
+    DashboardScreen()
 }

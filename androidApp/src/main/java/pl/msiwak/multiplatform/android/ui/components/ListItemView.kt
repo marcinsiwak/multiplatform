@@ -20,7 +20,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 
@@ -46,7 +45,11 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
         Text(
             modifier = Modifier
                 .weight(1f)
-                .padding(start = MaterialTheme.dimens.space_16, top = MaterialTheme.dimens.space_8, bottom = MaterialTheme.dimens.space_8),
+                .padding(
+                    start = MaterialTheme.dimens.space_16,
+                    top = MaterialTheme.dimens.space_8,
+                    bottom = MaterialTheme.dimens.space_8
+                ),
             text = name,
             fontSize = MaterialTheme.font.font_20,
             color = Color.LightGray

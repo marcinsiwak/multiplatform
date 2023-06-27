@@ -27,7 +27,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import pl.msiwak.multiplatform.MR
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
@@ -47,7 +46,11 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                 shape = RoundedCornerShape(MaterialTheme.dimens.space_8),
             )
             .shadow(MaterialTheme.dimens.space_2)
-            .border(MaterialTheme.dimens.space_2, Color.DarkGray, RoundedCornerShape(MaterialTheme.dimens.space_8))
+            .border(
+                MaterialTheme.dimens.space_2,
+                Color.DarkGray,
+                RoundedCornerShape(MaterialTheme.dimens.space_8)
+            )
             .height(MaterialTheme.dimens.space_164)
             .fillMaxWidth(),
     ) {
@@ -74,7 +77,10 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                             bottomEnd = MaterialTheme.dimens.space_8
                         )
                     )
-                    .padding(horizontal = MaterialTheme.dimens.space_12, vertical = MaterialTheme.dimens.space_8),
+                    .padding(
+                        horizontal = MaterialTheme.dimens.space_12,
+                        vertical = MaterialTheme.dimens.space_8
+                    ),
                 text = categoryData.name,
                 fontSize = MaterialTheme.font.font_14,
                 color = Color.White

@@ -16,7 +16,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

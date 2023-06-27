@@ -23,16 +23,16 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
-import pl.msiwak.multiplatform.MR
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
@@ -102,7 +102,10 @@ fun AddExerciseScreen(id: Long) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = MaterialTheme.dimens.space_12, end = MaterialTheme.dimens.space_24)
+                    .padding(
+                        start = MaterialTheme.dimens.space_12,
+                        end = MaterialTheme.dimens.space_24
+                    )
                     .padding(vertical = MaterialTheme.dimens.space_16),
                 text = state.value.exerciseTitle,
                 fontSize = MaterialTheme.font.font_24,
@@ -184,4 +187,10 @@ fun AddExerciseScreen(id: Long) {
                 })
         }
     }
+}
+
+@Preview
+@Composable
+fun AddExerciseScreenPreview() {
+    AddExerciseScreen(0)
 }

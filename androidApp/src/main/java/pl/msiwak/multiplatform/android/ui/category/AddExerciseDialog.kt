@@ -11,12 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 
 @Composable
@@ -37,7 +35,10 @@ fun AddExerciseDialog(
             )
         },
         text = {
-            InputView(modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
+            InputView(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = MaterialTheme.dimens.space_16),
                 value = inputText,
                 onValueChange = {
                     onExerciseTitleChanged(it)
@@ -46,7 +47,10 @@ fun AddExerciseDialog(
         confirmButton = {
             Button(modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = MaterialTheme.dimens.space_8, horizontal = MaterialTheme.dimens.space_16),
+                .padding(
+                    vertical = MaterialTheme.dimens.space_8,
+                    horizontal = MaterialTheme.dimens.space_16
+                ),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.LightGray, contentColor = Color.Black
                 ),

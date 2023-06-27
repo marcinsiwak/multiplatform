@@ -16,12 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import pl.msiwak.multiplatform.MR
+import androidx.compose.ui.tooling.preview.Preview
 import org.koin.java.KoinJavaComponent
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
@@ -57,7 +56,10 @@ fun ForceUpdateScreen() {
         Button(modifier = Modifier
             .fillMaxWidth()
             .align(Alignment.BottomCenter)
-            .padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_80),
+            .padding(
+                vertical = MaterialTheme.dimens.space_16,
+                horizontal = MaterialTheme.dimens.space_80
+            ),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
@@ -70,4 +72,10 @@ fun ForceUpdateScreen() {
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun ForceUpdateScreenPreview() {
+    ForceUpdateScreen()
 }

@@ -12,7 +12,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import pl.msiwak.multiplatform.android.ui.extensions.topBorder
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
@@ -20,7 +19,10 @@ import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 @Composable
 fun BottomNavigation(navController: NavController, items: List<DashboardNavigationDirections>) {
     androidx.compose.material.BottomNavigation(
-        modifier = Modifier.topBorder(MaterialTheme.dimens.bottom_navigation_divider_width, Color.DarkGray),
+        modifier = Modifier.topBorder(
+            MaterialTheme.dimens.bottom_navigation_divider_width,
+            Color.DarkGray
+        ),
         elevation = MaterialTheme.dimens.bottom_navigation_elevation,
         backgroundColor = Color.Black,
         contentColor = Color.White

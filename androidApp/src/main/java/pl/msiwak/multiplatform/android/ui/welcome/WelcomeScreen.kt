@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.android.ui.welcome
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,14 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
@@ -38,7 +33,10 @@ fun WelcomeScreen() {
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(horizontal = MaterialTheme.dimens.space_36, vertical = MaterialTheme.dimens.space_96)
+                .padding(
+                    horizontal = MaterialTheme.dimens.space_36,
+                    vertical = MaterialTheme.dimens.space_96
+                )
         ) {
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.button_color)),

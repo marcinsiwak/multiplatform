@@ -8,7 +8,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 
@@ -16,7 +15,10 @@ import pl.msiwak.multiplatform.android.ui.theme.font
 fun SettingsItem(modifier: Modifier = Modifier, text: String) {
     Column(modifier = modifier) {
         Text(
-            modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_24),
+            modifier = Modifier.padding(
+                vertical = MaterialTheme.dimens.space_16,
+                horizontal = MaterialTheme.dimens.space_24
+            ),
             text = text,
             fontSize = MaterialTheme.font.font_16,
             color = Color.White,

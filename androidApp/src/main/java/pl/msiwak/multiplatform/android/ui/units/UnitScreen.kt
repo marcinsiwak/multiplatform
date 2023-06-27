@@ -16,13 +16,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import java.util.Locale
-import pl.msiwak.multiplatform.MR
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.android.ui.theme.LocalDim
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
@@ -38,7 +36,10 @@ fun UnitScreen() {
             .background(color = Color.Black)
     ) {
         Text(
-            modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_16, horizontal = MaterialTheme.dimens.space_24),
+            modifier = Modifier.padding(
+                vertical = MaterialTheme.dimens.space_16,
+                horizontal = MaterialTheme.dimens.space_24
+            ),
             text = stringResource(MR.strings.settings_unit.resourceId),
             fontSize = MaterialTheme.font.font_24,
             color = Color.White

@@ -138,7 +138,7 @@ val viewModelsModule = module {
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel(get()) }
-    viewModelDefinition { DashboardViewModel(get()) }
+    viewModelDefinition { DashboardViewModel(get(), get()) }
 }
 
 val useCaseModule = module {
