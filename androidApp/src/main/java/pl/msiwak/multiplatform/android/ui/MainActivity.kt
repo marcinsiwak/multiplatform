@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
 
             BaseKmm_ProjectTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     val navController = rememberNavController()
                     LaunchedEffect(key1 = true) {

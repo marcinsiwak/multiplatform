@@ -45,4 +45,7 @@
 
     <string name="exercise_change_unit">Zmień na: %s</string>
 
+    <string name="force_update_title">Update required</string>
+    <string name="force_update_description">We have added some functionalities which require update of app.</string>
+    <string name="force_update_update">Update</string>
 </resources>

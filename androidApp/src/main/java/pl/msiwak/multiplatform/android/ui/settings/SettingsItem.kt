@@ -21,12 +21,12 @@ fun SettingsItem(modifier: Modifier = Modifier, text: String) {
             ),
             text = text,
             fontSize = MaterialTheme.font.font_16,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onPrimary,
         )
         Divider(
             modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
             thickness = MaterialTheme.dimens.space_1,
-            color = Color.DarkGray
+            color = MaterialTheme.colorScheme.secondary
         )
     }
 }

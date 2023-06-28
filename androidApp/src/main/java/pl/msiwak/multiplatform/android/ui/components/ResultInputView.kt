@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -37,10 +38,10 @@ fun ResultInputView(
         modifier = modifier,
         colors = TextFieldDefaults.outlinedTextFieldColors(
             containerColor = backgroundColor,
-            textColor = if (isError) Color.Red else colorResource(id = R.color.white),
-            focusedBorderColor = if (isError) Color.Red else colorResource(id = R.color.white),
-            unfocusedBorderColor = if (isError) Color.Red else Color.Gray,
-            cursorColor = colorResource(id = R.color.white)
+            textColor = if (isError) Color.Red else MaterialTheme.colorScheme.onPrimary,
+            focusedBorderColor = if (isError) Color.Red else MaterialTheme.colorScheme.onPrimary,
+            unfocusedBorderColor = if (isError) Color.Red else MaterialTheme.colorScheme.tertiary,
+            cursorColor = MaterialTheme.colorScheme.onPrimary
         ),
         value = value,
         onValueChange = { newText ->

@@ -32,6 +32,7 @@ import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
+import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
@@ -62,9 +63,7 @@ fun CategoryScreen(id: Long) {
     }
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.Black)
+        modifier = Modifier.fillMaxSize()
     ) {
 
         if (state.value.isDialogVisible) {
@@ -78,25 +77,24 @@ fun CategoryScreen(id: Long) {
         }
 
         Column {
-            backgroundId.let {
-                Image(modifier = Modifier
-                    .drawWithCache {
-                        val gradient = Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color.Black),
-                            startY = size.height / 3,
-                            endY = size.height
-                        )
-                        onDrawWithContent {
-                            drawContent()
-                            drawRect(gradient, blendMode = BlendMode.Multiply)
-                        }
+            val shadowColor = MaterialTheme.color.ShadowColor
+            Image(modifier = Modifier
+                .drawWithCache {
+                    val gradient = Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, shadowColor),
+                        startY = size.height / 3,
+                        endY = size.height
+                    )
+                    onDrawWithContent {
+                        drawContent()
+                        drawRect(gradient, blendMode = BlendMode.Multiply)
                     }
-                    .fillMaxWidth()
-                    .height(MaterialTheme.dimens.space_264),
-                    painter = painterResource(id = backgroundId),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "category background")
-            }
+                }
+                .fillMaxWidth()
+                .height(MaterialTheme.dimens.space_264),
+                painter = painterResource(id = backgroundId),
+                contentScale = ContentScale.Crop,
+                contentDescription = "category background")
             LazyColumn {
                 itemsIndexed(state.value.exerciseList) { index, item ->
                     ListItemView(name = item.name,
@@ -113,7 +111,8 @@ fun CategoryScreen(id: Long) {
                 horizontal = MaterialTheme.dimens.space_80
             ),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.LightGray, contentColor = Color.Black
+                containerColor = MaterialTheme.colorScheme.tertiary,
+                contentColor = MaterialTheme.colorScheme.primary
             ),
             onClick = { viewModel.onAddNewExerciseClicked() }) {
             Text(
@@ -127,7 +126,7 @@ fun CategoryScreen(id: Long) {
             modifier = Modifier
                 .align(Alignment.TopStart)
                 .background(
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(
                         topStart = MaterialTheme.dimens.space_8,
                         bottomEnd = MaterialTheme.dimens.space_8
@@ -139,7 +138,7 @@ fun CategoryScreen(id: Long) {
                 ),
             text = state.value.categoryName,
             fontSize = MaterialTheme.font.font_14,
-            color = Color.White
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.android.ui.settings
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,7 +29,6 @@ fun SettingsScreen() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Color.Black)
         ) {
             Text(
                 modifier = Modifier.padding(
@@ -39,7 +37,7 @@ fun SettingsScreen() {
                 ),
                 text = stringResource(MR.strings.settings.resourceId),
                 fontSize = MaterialTheme.font.font_24,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onPrimary
             )
             SettingsItem(
                 modifier = Modifier
@@ -74,7 +72,7 @@ fun SettingsScreen() {
                 .align(Alignment.BottomCenter)
                 .padding(vertical = MaterialTheme.dimens.space_16),
             text = state.value.versionName,
-            color = Color.DarkGray
+            color = MaterialTheme.colorScheme.secondary
         )
     }
 }

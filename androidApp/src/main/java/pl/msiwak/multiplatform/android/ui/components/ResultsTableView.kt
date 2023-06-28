@@ -79,7 +79,7 @@ fun ResultsTableView(
                     .offset(x = MaterialTheme.dimens.space_8)
                     .clickable { onLabelClicked(0) },
                 text = resultDataTitles.getOrNull(0)?.plus(" [$unit]") ?: "",
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
                 iconResId = when (sortType) {
                     SortType.RESULT_INCREASING -> R.drawable.ic_arrow_up
@@ -92,7 +92,7 @@ fun ResultsTableView(
                     .width(MaterialTheme.dimens.second_list_item_size)
                     .clickable { onLabelClicked(1) },
                 text = resultDataTitles.getOrNull(1) ?: "",
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
                 iconResId = when (sortType) {
                     SortType.AMOUNT_INCREASING -> R.drawable.ic_arrow_up
@@ -105,7 +105,7 @@ fun ResultsTableView(
                     .fillMaxWidth()
                     .clickable { onLabelClicked(2) },
                 text = resultDataTitles.getOrNull(2) ?: "",
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
                 iconResId = when (sortType) {
                     SortType.DATE_INCREASING -> R.drawable.ic_arrow_up
@@ -128,7 +128,7 @@ fun ResultsTableView(
                                 onAddNewResultClicked()
                             },
                         textAlign = TextAlign.Center,
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         text = "Add first result"
                     )
                 }

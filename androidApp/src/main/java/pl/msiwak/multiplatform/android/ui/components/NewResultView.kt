@@ -38,7 +38,7 @@ fun NewResultView(
     Row(
         modifier = modifier
             .height(IntrinsicSize.Min)
-            .bottomBorder(1.dp, Color.LightGray)
+            .bottomBorder(1.dp, MaterialTheme.colorScheme.tertiary)
             .fillMaxWidth()
     ) {
 

@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-val LocalDim = staticCompositionLocalOf { Dimensions() }
+private val LocalDim = staticCompositionLocalOf { Dimensions() }
 
 data class Dimensions(
     val space_0: Dp = 0.dp,

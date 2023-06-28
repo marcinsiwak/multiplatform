@@ -31,7 +31,8 @@ fun AddExerciseDialog(
         },
         title = {
             Text(
-                text = stringResource(MR.strings.exercise_name.resourceId), color = Color.White
+                text = stringResource(MR.strings.exercise_name.resourceId),
+                color = MaterialTheme.colorScheme.onPrimary
             )
         },
         text = {
@@ -52,7 +53,8 @@ fun AddExerciseDialog(
                     horizontal = MaterialTheme.dimens.space_16
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.LightGray, contentColor = Color.Black
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    contentColor = MaterialTheme.colorScheme.primary
                 ),
                 onClick = { onAddExerciseClicked() }) {
                 Text(text = stringResource(MR.strings.add_new_exercise.resourceId))

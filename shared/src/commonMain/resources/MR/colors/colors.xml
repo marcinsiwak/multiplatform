@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <!--to make color transparent add transparency at the end of color name-->
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-
-    <color name="button_color">#2D3384</color>
-    <color name="button_color_two">#595C84</color>
-
-    <color name="summary">#0a0a0a</color>
-    <color name="summary_two">#020c1c</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="white_transparent">#FFFFFF59</color>
     <color name="gray">#282828</color>
     <color name="gray_two">#121212</color>
 
+    <!--Light mode-->
+    <color name="colorPrimary">#000000</color>
+    <color name="colorOnPrimary">#000000</color>
+    <color name="colorSecondary">#FFFFFF</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!--Dark mode-->
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorSecondaryDark">#6200EE</color>
+    <color name="colorTertiaryDark">#6200EE</color>
+    <color name="colorAccentDark">#03DAC5</color>
 </resources>

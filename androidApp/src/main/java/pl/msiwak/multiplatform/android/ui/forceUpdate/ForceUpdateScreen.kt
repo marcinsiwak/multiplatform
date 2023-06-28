@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.java.KoinJavaComponent
 import pl.msiwak.multiplatform.MR
+import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
@@ -30,9 +29,7 @@ fun ForceUpdateScreen() {
     val viewModel: ForceUpdateViewModel by KoinJavaComponent.inject(ForceUpdateViewModel::class.java)
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black)
+        modifier = Modifier.fillMaxSize()
     ) {
         Column {
             Image(
@@ -43,34 +40,27 @@ fun ForceUpdateScreen() {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_16),
                 text = stringResource(MR.strings.force_update_title.resourceId),
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = MaterialTheme.font.font_24
             )
             Text(
                 modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
                 text = stringResource(MR.strings.force_update_description.resourceId),
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = MaterialTheme.font.font_16
             )
         }
-        Button(modifier = Modifier
-            .fillMaxWidth()
-            .align(Alignment.BottomCenter)
-            .padding(
-                vertical = MaterialTheme.dimens.space_16,
-                horizontal = MaterialTheme.dimens.space_80
-            ),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.LightGray,
-                contentColor = Color.Black
-            ),
-            onClick = { viewModel.onUpdateClicked() }) {
-            Text(
-                modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = "Update",
-                fontSize = MaterialTheme.font.font_16
-            )
-        }
+        MainButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(
+                    vertical = MaterialTheme.dimens.space_16,
+                    horizontal = MaterialTheme.dimens.space_80
+                ),
+            onClick = { viewModel.onUpdateClicked() },
+            text = stringResource(id = MR.strings.force_update_update.resourceId)
+        )
     }
 }
 

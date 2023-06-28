@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.android.ui.addExercise
 
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -94,9 +93,7 @@ fun AddExerciseScreen(id: Long) {
     ) {
 
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = Color.Black),
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top
         ) {
             Text(
@@ -109,7 +106,7 @@ fun AddExerciseScreen(id: Long) {
                     .padding(vertical = MaterialTheme.dimens.space_16),
                 text = state.value.exerciseTitle,
                 fontSize = MaterialTheme.font.font_24,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
             )
 
             ResultsTimeFilterView(
@@ -133,7 +130,8 @@ fun AddExerciseScreen(id: Long) {
                             .padding(bottom = MaterialTheme.dimens.space_16)
                             .padding(horizontal = MaterialTheme.dimens.space_16),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.LightGray, contentColor = Color.Black
+                            containerColor = MaterialTheme.colorScheme.tertiary,
+                            contentColor = MaterialTheme.colorScheme.primary
                         ),
                         onClick = {
                             viewModel.onAddNewResultClicked()
@@ -148,7 +146,8 @@ fun AddExerciseScreen(id: Long) {
                             .padding(bottom = MaterialTheme.dimens.space_16)
                             .padding(horizontal = MaterialTheme.dimens.space_16),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.LightGray, contentColor = Color.Black
+                            containerColor = MaterialTheme.colorScheme.tertiary,
+                            contentColor = MaterialTheme.colorScheme.primary
                         ),
                         onClick = {
                             viewModel.onSaveResultClicked()

@@ -36,14 +36,14 @@ fun ResultView(
                 onLongClick = {
                     onResultLongClick()
                 })
-            .bottomBorder(1.dp, Color.LightGray),
+            .bottomBorder(1.dp, MaterialTheme.colorScheme.tertiary),
     ) {
         Text(
             modifier = Modifier
                 .width(MaterialTheme.dimens.first_list_item_size)
                 .padding(vertical = MaterialTheme.dimens.space_16),
             text = result,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onPrimary,
             textAlign = TextAlign.Center,
 
             )
@@ -58,7 +58,7 @@ fun ResultView(
                 .width(MaterialTheme.dimens.second_list_item_size)
                 .padding(vertical = MaterialTheme.dimens.space_16),
             text = amount,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onPrimary,
             textAlign = TextAlign.Center,
 
             )
@@ -73,7 +73,7 @@ fun ResultView(
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_16),
             text = date,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onPrimary,
             textAlign = TextAlign.Center,
 
             )

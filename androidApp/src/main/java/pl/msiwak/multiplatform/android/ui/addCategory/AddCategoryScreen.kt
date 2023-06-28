@@ -34,7 +34,6 @@ fun AddCategoryScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black),
     ) {
         Column {
             InputView(
@@ -63,8 +62,8 @@ fun AddCategoryScreen() {
                     horizontal = MaterialTheme.dimens.space_80
                 ),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.LightGray,
-                contentColor = Color.Black
+                containerColor = MaterialTheme.colorScheme.tertiary,
+                contentColor = MaterialTheme.colorScheme.primary
             ),
             onClick = { viewModel.onSaveCategoryClicked() }
         ) {

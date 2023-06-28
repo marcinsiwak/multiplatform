@@ -21,7 +21,7 @@ fun TextWithDrawableView(
     modifier: Modifier,
     text: String,
     iconResId: Int? = null,
-    color: Color = Color.White,
+    color: Color = MaterialTheme.colorScheme.onPrimary,
     textAlign: TextAlign = TextAlign.Center
 ) {
     Row(
@@ -44,7 +44,7 @@ fun TextWithDrawableView(
                 .alpha(iconAlpha),
             painter = painterResource(id = iconResId ?: R.drawable.ic_arrow_down),
             contentDescription = null,
-            tint = Color.White
+            tint = MaterialTheme.colorScheme.onPrimary
         )
 
     }

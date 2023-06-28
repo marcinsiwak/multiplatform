@@ -44,11 +44,11 @@ fun ResultsTimeFilterView(
                         currentTabPosition = it[selectedPos],
                         tabWidth = tabWidths[selectedPos]
                     ),
-                color = Color.White
+                color = MaterialTheme.colorScheme.onPrimary
             )
         },
         divider = {},
-        containerColor = Color.Black,
+        containerColor = MaterialTheme.colorScheme.primary,
         selectedTabIndex = selectedPos,
         tabs = {
             tabs.forEachIndexed { index, item ->
@@ -63,7 +63,7 @@ fun ResultsTimeFilterView(
                     }) {
                     Text(
                         text = stringResource(item.nameResourceId.resourceId),
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         onTextLayout = { textLayoutResult ->
                             tabWidths[index] =
                                 with(density) { textLayoutResult.size.width.toDp() }

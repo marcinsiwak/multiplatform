@@ -3,15 +3,15 @@ package pl.msiwak.multiplatform.android.ui.register
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -20,9 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
-
 
 @Composable
 fun RegisterScreen() {
@@ -39,8 +39,13 @@ fun RegisterScreen() {
         )
         Column(
             modifier = Modifier
+                .width(IntrinsicSize.Min)
                 .align(Alignment.Center)
-                .padding(vertical = MaterialTheme.dimens.space_24)
+                .padding(
+                    vertical = MaterialTheme.dimens.space_24,
+                    horizontal = MaterialTheme.dimens.space_36
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             InputView(
                 modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_8),
@@ -62,17 +67,16 @@ fun RegisterScreen() {
                 isPassword = true,
                 hintText = stringResource(MR.strings.password.resourceId)
             )
-            Button(
+            MainButton(
                 modifier = Modifier
-                    .align(CenterHorizontally)
+                    .fillMaxWidth()
                     .padding(vertical = MaterialTheme.dimens.space_16),
                 onClick = {
                     viewModel.onRegisterClicked()
-                }) {
-                Text(text = stringResource(MR.strings.register.resourceId))
-            }
+                },
+                text = stringResource(MR.strings.register.resourceId)
+            )
         }
-
     }
 }
 

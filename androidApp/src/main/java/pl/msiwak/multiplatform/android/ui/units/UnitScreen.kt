@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.RadioButton
-import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -54,7 +54,7 @@ fun UnitScreen() {
                             viewModel.onUnitTypeChanged(index)
                         },
                         colors = RadioButtonDefaults.colors(
-                            selectedColor = Color.White,
+                            selectedColor = MaterialTheme.colorScheme.onPrimary,
                             unselectedColor = Color.LightGray
                         )
                     )
@@ -62,7 +62,7 @@ fun UnitScreen() {
                         modifier = Modifier.align(Alignment.CenterVertically),
                         text = item.unitType.name.lowercase()
                             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         textAlign = TextAlign.Center
                     )
                 }

@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.android.ui.summary
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -27,16 +26,13 @@ import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 
-
 @Composable
 fun SummaryScreen() {
     val viewModel = koinViewModel<SummaryViewModel>()
     val state = viewModel.viewState.collectAsState()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.Black)
+        modifier = Modifier.fillMaxSize()
     ) {
         LazyColumn(
             modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
@@ -62,13 +58,13 @@ fun SummaryScreen() {
                             Icon(
                                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
                                 painter = painterResource(id = R.drawable.ic_add),
-                                tint = Color.Gray,
+                                tint = MaterialTheme.colorScheme.tertiary,
                                 contentDescription = null
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
                                 text = stringResource(MR.strings.summary_add_category.resourceId),
-                                color = Color.Gray
+                                color = MaterialTheme.colorScheme.tertiary
                             )
                         }
                     }

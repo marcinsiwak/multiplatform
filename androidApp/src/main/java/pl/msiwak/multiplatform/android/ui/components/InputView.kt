@@ -34,13 +34,13 @@ fun InputView(
     Column(modifier = modifier) {
         OutlinedTextField(
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                cursorColor = Color.White,
+                cursorColor = MaterialTheme.colorScheme.onPrimary,
                 containerColor = backgroundColor,
-                textColor = Color.White,
-                focusedBorderColor = Color.White,
-                unfocusedBorderColor = Color.Gray,
-                focusedLabelColor = Color.White,
-                unfocusedLabelColor = Color.Gray
+                textColor = MaterialTheme.colorScheme.onPrimary,
+                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.tertiary,
+                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.tertiary
             ),
             trailingIcon = trailingIcon,
             shape = RoundedCornerShape(MaterialTheme.dimens.space_12),

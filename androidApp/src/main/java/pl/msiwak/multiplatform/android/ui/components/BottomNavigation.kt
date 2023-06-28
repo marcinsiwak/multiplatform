@@ -1,9 +1,11 @@
 package pl.msiwak.multiplatform.android.ui.components
 
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -18,19 +20,17 @@ import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
 @Composable
 fun BottomNavigation(navController: NavController, items: List<DashboardNavigationDirections>) {
-    androidx.compose.material.BottomNavigation(
+    NavigationBar(
         modifier = Modifier.topBorder(
             MaterialTheme.dimens.bottom_navigation_divider_width,
-            Color.DarkGray
+            MaterialTheme.colorScheme.secondary
         ),
-        elevation = MaterialTheme.dimens.bottom_navigation_elevation,
-        backgroundColor = Color.Black,
-        contentColor = Color.White
+        contentColor = MaterialTheme.colorScheme.onPrimary
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
-            BottomNavigationItem(
+            NavigationBarItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                 label = {
                     Text(
@@ -38,8 +38,14 @@ fun BottomNavigation(navController: NavController, items: List<DashboardNavigati
                         fontSize = MaterialTheme.font.font_8
                     )
                 },
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.Gray.copy(0.4f),
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    indicatorColor = MaterialTheme.colorScheme.primary,
+                    unselectedIconColor = MaterialTheme.colorScheme.secondary,
+                    unselectedTextColor = MaterialTheme.colorScheme.secondary
+
+                ),
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {

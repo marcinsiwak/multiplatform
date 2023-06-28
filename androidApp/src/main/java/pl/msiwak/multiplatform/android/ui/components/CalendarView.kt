@@ -10,12 +10,12 @@ import pl.msiwak.multiplatform.android.R
 //todo replace system calendar with custom
 @Composable
 fun CalendarView() {
-    AndroidView({
-        CalendarView(
-            ContextThemeWrapper(
-                it,
-                R.style.ThemeOverlay_MaterialComponents_MaterialCalendar_Fullscreen
-            )
-        )
-    })
+//    AndroidView({
+//        CalendarView(
+//            ContextThemeWrapper(
+//                it,
+//                R.style.ThemeOverlay_MaterialComponents_MaterialCalendar_Fullscreen
+//            )
+//        )
+//    })
 }

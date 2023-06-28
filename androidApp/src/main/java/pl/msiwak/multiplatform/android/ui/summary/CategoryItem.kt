@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import pl.msiwak.multiplatform.MR
+import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
@@ -42,36 +43,37 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
     Box(
         modifier = modifier
             .background(
-                color = Color.Black,
+                color = MaterialTheme.color.ShadowColor,
+                shape = RoundedCornerShape(MaterialTheme.dimens.space_12),
+            )
+            .shadow(
+                elevation = MaterialTheme.dimens.space_2,
                 shape = RoundedCornerShape(MaterialTheme.dimens.space_8),
             )
-            .shadow(MaterialTheme.dimens.space_2)
             .border(
                 MaterialTheme.dimens.space_2,
-                Color.DarkGray,
+                MaterialTheme.colorScheme.secondary,
                 RoundedCornerShape(MaterialTheme.dimens.space_8)
             )
             .height(MaterialTheme.dimens.space_164)
             .fillMaxWidth(),
     ) {
-        backgroundId.let {
-            Image(
-                modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .fillMaxSize()
-                    .alpha(0.5f)
-                    .clip(RoundedCornerShape(MaterialTheme.dimens.space_8)),
-                painter = painterResource(id = backgroundId),
-                contentScale = ContentScale.Crop,
-                contentDescription = null
-            )
-        }
+        Image(
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .fillMaxSize()
+                .alpha(0.5f)
+                .clip(RoundedCornerShape(MaterialTheme.dimens.space_8)),
+            painter = painterResource(id = backgroundId),
+            contentScale = ContentScale.Crop,
+            contentDescription = null
+        )
 
         Column {
             Text(
                 modifier = Modifier
                     .background(
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.primary,
                         shape = RoundedCornerShape(
                             topStart = MaterialTheme.dimens.space_8,
                             bottomEnd = MaterialTheme.dimens.space_8
@@ -83,7 +85,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                     ),
                 text = categoryData.name,
                 fontSize = MaterialTheme.font.font_14,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
             LazyColumn(
@@ -100,7 +102,7 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
                         text = it.name,
                         fontSize = MaterialTheme.font.font_12,
                         fontStyle = FontStyle.Italic,
-                        color = Color.LightGray,
+                        color = MaterialTheme.colorScheme.onPrimary,
                     )
                 }
             }

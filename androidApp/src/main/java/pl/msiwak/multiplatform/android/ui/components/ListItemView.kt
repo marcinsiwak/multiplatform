@@ -38,7 +38,10 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                     color = Color.LightGray
                 ),
             )
-            .bottomBorder(strokeWidth = MaterialTheme.dimens.space_1, color = Color.DarkGray),
+            .bottomBorder(
+                strokeWidth = MaterialTheme.dimens.space_1,
+                color = MaterialTheme.colorScheme.secondary
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -52,13 +55,13 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                 ),
             text = name,
             fontSize = MaterialTheme.font.font_20,
-            color = Color.LightGray
+            color = MaterialTheme.colorScheme.tertiary
         )
         Icon(
             modifier = Modifier
                 .weight(0.2f)
                 .padding(MaterialTheme.dimens.space_16),
-            tint = Color.LightGray,
+            tint = MaterialTheme.colorScheme.tertiary,
             painter = painterResource(id = R.drawable.ic_arrow_right),
             contentDescription = null
         )
