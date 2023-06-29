@@ -1,6 +1,7 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import pl.msiwak.multiplatfor.dependencies.Deps
-
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     kotlin("multiplatform")
@@ -120,20 +121,29 @@ kotlin {
 buildkonfig {
     packageName = "pl.msiwak.multiplatform"
 
+    val releasePropertiesFile = rootProject.file("release.properties")
+    val releaseProperties = Properties()
+    releaseProperties.load(FileInputStream(releasePropertiesFile))
+
     defaultConfigs {
-        buildConfigField(STRING, "BASE_URL", "https://siwakapi.azurewebsites.net/")
+        buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
     }
     targetConfigs {
         create("ios") {
-            buildConfigField(STRING, "BASE_URL", "https://siwakapi.azurewebsites.net/")
+            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
         }
     }
     targetConfigs("debug") {
+        
+        val debugPropertiesFile = rootProject.file("debug.properties")
+        val debugProperties = Properties()
+        debugProperties.load(FileInputStream(debugPropertiesFile))
+        
         create("android") {
-            buildConfigField(STRING, "BASE_URL", "https://siwakapi.azurewebsites.net/")
+            buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
         }
         create("ios") {
-            buildConfigField(STRING, "BASE_URL", "https://siwakapi.azurewebsites.net/")
+            buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
         }
     }
 }
