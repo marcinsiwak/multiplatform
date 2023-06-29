@@ -27,11 +27,13 @@ val ColorOnSurface = Color.Black
 val ColorBackground = Color.White
 
 data class OwnColorPalette(
-    val ShadowColor: Color = Color.DarkGray
+    val ShadowColor: Color = Color.DarkGray,
+    val ExerciseColor: Color = Color.LightGray,
 )
 
 private val OwnDarkColorPalette = OwnColorPalette(
-    ShadowColor = Color.Black
+    ShadowColor = Color.Black,
+    ExerciseColor = Color.LightGray,
 )
 
 val LocalOwnColorScheme = compositionLocalOf { OwnColorPalette() }

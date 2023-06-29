@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
+import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 
@@ -55,7 +56,7 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                 ),
             text = name,
             fontSize = MaterialTheme.font.font_20,
-            color = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.color.ExerciseColor
         )
         Icon(
             modifier = Modifier
