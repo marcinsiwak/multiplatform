@@ -16,6 +16,11 @@ class AuthRepository(
         return@withContext result.user?.getIdTokenResult(true)?.token
     }
 
+    suspend fun loginWithGoogle(googleToken: String): String? = withContext(Dispatchers.Default) {
+        val result = firebaseAuthorization.loginWithGoogle(googleToken)
+        return@withContext result.user?.getIdTokenResult(true)?.token
+    }
+
     suspend fun observeAuthStateChanged(): Flow<FirebaseUser?> = withContext(Dispatchers.Default) {
         return@withContext firebaseAuthorization.observeAuthStateChanged()
     }

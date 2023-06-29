@@ -68,11 +68,32 @@ android {
                     file("proguard-rules.pro")
                 )
                 signingConfig = signingConfigs.getByName("release")
+
+                val releasePropertiesFile = rootProject.file("androidApp/release.properties")
+                val releaseProperties = Properties()
+                releaseProperties.load(FileInputStream(releasePropertiesFile))
+
+                buildConfigField(
+                    "String",
+                    "GOOGLE_AUTH_WEB_CLIENT_ID",
+                    releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                )
             }
             debug {
                 signingConfig = signingConfigs.getByName("debug")
+
+                val debugPropertiesFile = rootProject.file("androidApp/debug.properties")
+                val debugProperties = Properties()
+                debugProperties.load(FileInputStream(debugPropertiesFile))
+
+                buildConfigField(
+                    "String",
+                    "GOOGLE_AUTH_WEB_CLIENT_ID",
+                    debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                )
             }
         }
+
     }
 
     val debugKeystorePropFile = rootProject.file("signing/debug.properties")
@@ -110,6 +131,7 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("com.google.accompanist:accompanist-navigation-material:0.25.0")
+    implementation("com.google.android.gms:play-services-auth:20.6.0")
 
     with(Deps.Koin) {
         implementation(core)

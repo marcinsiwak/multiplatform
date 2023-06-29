@@ -13,6 +13,7 @@ import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExerciseDao
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
+import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
 import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
@@ -111,7 +112,7 @@ val viewModelsModule = module {
     viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
     viewModelDefinition { LoginViewModel(get(), get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
@@ -144,6 +145,7 @@ val viewModelsModule = module {
 val useCaseModule = module {
     factory { RegisterUserUseCase(get()) }
     factory { LoginUseCase(get(), get()) }
+    factory { GoogleLoginUseCase(get(), get()) }
     factory { LogoutUseCase(get()) }
     factory { SaveUserTokenUseCase(get()) }
     factory { GetUserTokenUseCase(get()) }
