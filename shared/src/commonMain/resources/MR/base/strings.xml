@@ -48,4 +48,7 @@
     <string name="force_update_title">Update required</string>
     <string name="force_update_description">We have added some functionalities which require update of app.</string>
     <string name="force_update_update">Update</string>
+
+    <string name="welcome_no_account">Don\'t have an account?</string>
+    <string name="welcome_create_account">Create account</string>
 </resources>

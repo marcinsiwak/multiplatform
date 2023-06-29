@@ -59,12 +59,10 @@ fun InputView(
             visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
         )
     }
-    val isErrorVisible = if (errorMessage.isNullOrEmpty()) 0f else 1f
     if (errorsEnabled) {
         Text(
             modifier = Modifier
-                .alpha(isErrorVisible)
-                .padding(bottom = MaterialTheme.dimens.space_8),
+                .padding(bottom = MaterialTheme.dimens.space_4),
             text = errorMessage ?: "",
             color = Color.Red
         )

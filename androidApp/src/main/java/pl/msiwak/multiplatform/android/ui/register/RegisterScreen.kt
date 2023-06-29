@@ -1,9 +1,10 @@
 package pl.msiwak.multiplatform.android.ui.register
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,11 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import org.koin.java.KoinJavaComponent.inject
+import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
@@ -26,26 +25,29 @@ import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
 @Composable
 fun RegisterScreen() {
-    val viewModel: RegisterViewModel by inject(RegisterViewModel::class.java)
+    val viewModel = koinViewModel<RegisterViewModel>()
 
-    val state = viewModel.registerState.collectAsState()
+    val state = viewModel.viewState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
-            contentScale = ContentScale.Crop,
-            contentDescription = null
-        )
+//        Image(
+//            modifier = Modifier.fillMaxSize(),
+//            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
+//            contentScale = ContentScale.Crop,
+//            contentDescription = null
+//        )
         Column(
             modifier = Modifier
-                .width(IntrinsicSize.Min)
+                .fillMaxHeight()
                 .align(Alignment.Center)
+                .width(IntrinsicSize.Min)
                 .padding(
-                    vertical = MaterialTheme.dimens.space_24,
-                    horizontal = MaterialTheme.dimens.space_36
+                    start = MaterialTheme.dimens.space_36,
+                    end = MaterialTheme.dimens.space_36,
+                    top = MaterialTheme.dimens.space_164,
                 ),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
             InputView(
                 modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_8),
@@ -70,7 +72,7 @@ fun RegisterScreen() {
             MainButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = MaterialTheme.dimens.space_16),
+                    .padding(vertical = MaterialTheme.dimens.space_32),
                 onClick = {
                     viewModel.onRegisterClicked()
                 },
