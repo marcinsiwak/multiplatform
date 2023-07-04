@@ -1,9 +1,13 @@
 import Foundation
 import SwiftUI
+import Firebase
+import GoogleSignIn
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        
         let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
             navigationBarAppearance.titleTextAttributes = [
@@ -20,6 +24,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             tabBarApperance.shadowColor = .white
             UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
             UITabBar.appearance().standardAppearance = tabBarApperance
+        
         return true
+    }
+    
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+      return GIDSignIn.sharedInstance.handle(url)
     }
 }

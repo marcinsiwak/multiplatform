@@ -1,5 +1,6 @@
 import SwiftUI
 import shared
+import GoogleSignIn
 
 struct WelcomeScreen: View {
     @State private var login: String = ""
@@ -11,6 +12,7 @@ struct WelcomeScreen: View {
     @ObservedObject private var state: ObservableState<WelcomeState>
 
     init() {
+        GoogleAuthOneTapConfiguration().setConfig()
         self.state = ObservableState<WelcomeState>(value: viewModel.viewState.value as! WelcomeState)
         observeState()
     }
@@ -41,7 +43,7 @@ struct WelcomeScreen: View {
             }
             
             Button(action: {
-//                viewModel.onGoogleLogin(idToken: <#T##String#>)
+                loginUsingGoogle()
             }) {
                 Text(MR.strings().welcome_google_login.desc().localized())
             }
@@ -58,6 +60,18 @@ struct WelcomeScreen: View {
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
         .background(Color.black)
+    }
+    
+    func loginUsingGoogle() {
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { result, error in
+            let user = result?.user
+            let idToken = user?.idToken?.tokenString
+            if(idToken != nil) {
+                viewModel.onGoogleLogin(idToken: idToken!)
+            }
+        }
     }
 }
 
