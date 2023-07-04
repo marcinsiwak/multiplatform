@@ -5,6 +5,7 @@ import org.koin.core.component.inject
 
 class WelcomeDiHelper : KoinComponent {
     private val welcomeVM: WelcomeScreenViewModel by inject()
+    fun getViewModel() = welcomeVM
     fun onRegistrationClicked() = welcomeVM.onRegistrationClicked()
     fun onLoginClicked() = welcomeVM.onLoginClicked()
 }

@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     LaunchedEffect(key1 = true) {
-                        viewModel.mainNavigator.commands.watch {
+                        viewModel.mainNavigator.commands.collect {
                             when (it) {
                                 is NavigationDirections.OpenStore -> openStore()
                                 NavigationDirections.NavigateUp -> navController.navigateUp()
@@ -103,7 +103,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun navigate(navController: NavController, command: NavigationCommand) {
+    private fun navigate(navController: NavController, command: NavigationDirections) {
         if (command.isInclusive) {
             navController.navigate(route = command.destination) {
                 popUpTo(0)

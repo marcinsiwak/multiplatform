@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.ui.welcome
 
 data class WelcomeState(
-    val login: String = "",
-    val password: String = "",
+    var login: String = "",
+    var password: String = "",
     val authErrorMessage: String? = null,
 )

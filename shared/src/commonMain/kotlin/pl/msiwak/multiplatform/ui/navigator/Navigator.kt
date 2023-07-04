@@ -6,12 +6,12 @@ import pl.msiwak.multiplatform.CommonSharedFlow
 import pl.msiwak.multiplatform.asCommonFlow
 
 class Navigator {
-    private val _commands = MutableSharedFlow<NavigationCommand>(
+    private val _commands = MutableSharedFlow<NavigationDirections>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
-    val commands: CommonSharedFlow<NavigationCommand> = _commands.asCommonFlow()
-    fun navigate(directions: NavigationCommand) {
+    val commands: CommonSharedFlow<NavigationDirections> = _commands.asCommonFlow()
+    fun navigate(directions: NavigationDirections) {
         if (directions.destination.isNotEmpty()){
             _commands.tryEmit(directions)
         }

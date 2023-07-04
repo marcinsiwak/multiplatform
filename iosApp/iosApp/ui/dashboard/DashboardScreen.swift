@@ -22,7 +22,7 @@ struct DashboardScreen: View {
 //                    //                Image(systemName: "tv.fill")
 //                    Text("Account")
 //                }
-            Text("Settings")
+            SettingsScreen()
                 .tabItem {
                     //                Image(systemName: "tv.fill")
                     Text("Settings")

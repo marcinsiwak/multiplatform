@@ -27,8 +27,7 @@ fun SettingsScreen() {
 
     Box {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
             Text(
                 modifier = Modifier.padding(

@@ -21,9 +21,12 @@
 		712585782A2C00D700ACA757 /* ValueObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585772A2C00D700ACA757 /* ValueObserver.swift */; };
 		7125857A2A2CAE2B00ACA757 /* ObservableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585792A2CAE2B00ACA757 /* ObservableEvent.swift */; };
 		7125857D2A45B2B700ACA757 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125857C2A45B2B700ACA757 /* Dimensions.swift */; };
+		7125857F2A4EBBC600ACA757 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125857E2A4EBBC600ACA757 /* WelcomeScreen.swift */; };
+		712585822A520C6000ACA757 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585812A520C6000ACA757 /* SettingsScreen.swift */; };
+		712585842A54043200ACA757 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712585832A54043200ACA757 /* SettingsItem.swift */; };
 		71C6B04D297B1239007A3EB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71C6B04C297B1239007A3EB0 /* GoogleService-Info.plist */; };
 		71C6B054297C2871007A3EB0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C6B053297C2871007A3EB0 /* FirebaseAuth */; };
-		71C6B058297F5762007A3EB0 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6B057297F5762007A3EB0 /* MainScreen.swift */; };
+		71C6B058297F5762007A3EB0 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6B057297F5762007A3EB0 /* SplashScreen.swift */; };
 		71C6B05A297F5D89007A3EB0 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6B059297F5D89007A3EB0 /* RegisterScreen.swift */; };
 		71C6B05E298038BB007A3EB0 /* Collector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6B05D298038BB007A3EB0 /* Collector.swift */; };
 		71CF732429B6161A00D51846 /* DashboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF732329B6161A00D51846 /* DashboardScreen.swift */; };
@@ -71,8 +74,11 @@
 		712585772A2C00D700ACA757 /* ValueObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueObserver.swift; sourceTree = "<group>"; };
 		712585792A2CAE2B00ACA757 /* ObservableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableEvent.swift; sourceTree = "<group>"; };
 		7125857C2A45B2B700ACA757 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
+		7125857E2A4EBBC600ACA757 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
+		712585812A520C6000ACA757 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		712585832A54043200ACA757 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 		71C6B04C297B1239007A3EB0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		71C6B057297F5762007A3EB0 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		71C6B057297F5762007A3EB0 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		71C6B059297F5D89007A3EB0 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		71C6B05D298038BB007A3EB0 /* Collector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collector.swift; sourceTree = "<group>"; };
 		71CF732329B6161A00D51846 /* DashboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreen.swift; sourceTree = "<group>"; };
@@ -124,7 +130,7 @@
 		712585592A0156FF00ACA757 /* main */ = {
 			isa = PBXGroup;
 			children = (
-				71C6B057297F5762007A3EB0 /* MainScreen.swift */,
+				71C6B057297F5762007A3EB0 /* SplashScreen.swift */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -145,9 +151,19 @@
 			path = utils;
 			sourceTree = "<group>";
 		};
+		712585802A520BF700ACA757 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				712585812A520C6000ACA757 /* SettingsScreen.swift */,
+				712585832A54043200ACA757 /* SettingsItem.swift */,
+			);
+			path = settings;
+			sourceTree = "<group>";
+		};
 		71CF732929B7619100D51846 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				712585802A520BF700ACA757 /* settings */,
 				7125857B2A45B28700ACA757 /* utils */,
 				7125855A2A039EB300ACA757 /* addCategory */,
 				712585592A0156FF00ACA757 /* main */,
@@ -175,6 +191,7 @@
 		71CF732B29B761E500D51846 /* welcome */ = {
 			isa = PBXGroup;
 			children = (
+				7125857E2A4EBBC600ACA757 /* WelcomeScreen.swift */,
 			);
 			path = welcome;
 			sourceTree = "<group>";
@@ -402,9 +419,10 @@
 			files = (
 				712585642A0403BA00ACA757 /* AppDelegate.swift in Sources */,
 				71C6B05A297F5D89007A3EB0 /* RegisterScreen.swift in Sources */,
+				7125857F2A4EBBC600ACA757 /* WelcomeScreen.swift in Sources */,
 				71CF734929C9FFB100D51846 /* ListItemView.swift in Sources */,
 				71F08DD129D5B085007D7E2F /* NewResultView.swift in Sources */,
-				71C6B058297F5762007A3EB0 /* MainScreen.swift in Sources */,
+				71C6B058297F5762007A3EB0 /* SplashScreen.swift in Sources */,
 				712585662A05543000ACA757 /* ObservableState.swift in Sources */,
 				712585742A2A51FE00ACA757 /* ArrayExtensions.swift in Sources */,
 				71CF734429BA128600D51846 /* CategoryScreen.swift in Sources */,
@@ -419,6 +437,7 @@
 				71CF735129CB2B5A00D51846 /* DialogView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7125855C2A03A07000ACA757 /* AddCategoryScreen.swift in Sources */,
+				712585842A54043200ACA757 /* SettingsItem.swift in Sources */,
 				71CF732629B61B2C00D51846 /* SummaryScreen.swift in Sources */,
 				71F08DD329D5B0BC007D7E2F /* InputView.swift in Sources */,
 				7125856F2A0BCD3500ACA757 /* ResultInputView.swift in Sources */,
@@ -427,6 +446,7 @@
 				71CF735429CB362500D51846 /* AddExerciseScreen.swift in Sources */,
 				71F08DCF29D45EFC007D7E2F /* ResultsView.swift in Sources */,
 				71C6B05E298038BB007A3EB0 /* Collector.swift in Sources */,
+				712585822A520C6000ACA757 /* SettingsScreen.swift in Sources */,
 				712585782A2C00D700ACA757 /* ValueObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

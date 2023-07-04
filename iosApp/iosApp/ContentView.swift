@@ -3,28 +3,24 @@ import shared
 
 
 struct ContentView: View {
-    @State private var route : [NavigationDirections] = [NavigationDirections.Dashboard()]
+    @State private var route : [NavigationDirections] = []
+    private let viewModel: MainViewModel = MainDiHelper().getMainViewModel()
     
 
     var body: some View {
         NavigationStack(path: $route) {
-            MainScreen(
-                navigateToRegistration: { route.append(NavigationDirections.Registration()) },
-                navigateToLogin: { route.append(NavigationDirections.Login()) },
-                navigateToDashboard: { route.append(NavigationDirections.Dashboard()) },
-                navigateToCategory: { id in
-                    route.append(NavigationDirections.Category(id: id ?? 0))
-                },
-                navigateToAddExercise: { id in
-                    route.append(NavigationDirections.AddExercise(id: id ?? 0))
-                },
-                navigateToAddCategory: {
-                    route.append(NavigationDirections.AddCategory())
+            SplashScreen(
+                navigate: { command in
+                    route.append(command)
                 },
                 navigateBack: {
                     route.removeLast()
                 }
             ).navigationDestination(for: NavigationDirections.self) { direction in
+                if(direction is NavigationDirections.Welcome) {
+                    WelcomeScreen()
+                        .navigationBarBackButtonHidden(true)
+                }
                 if(direction is NavigationDirections.Registration) {
                     RegisterScreen()
                 }
