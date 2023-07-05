@@ -22,14 +22,25 @@ dependencies {
 //    iosBaseLocalizationRegion = "en" // optional, default "en"
 //}
 
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+//    targetHierarchy.default()
+
     android()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
         version = "1.0"
-        summary = "Some description for a Kotlin/Native module"
-        homepage = "Link to a Kotlin/Native module homepage"
+        ios.deploymentTarget = "16.2"
+
+        podfile = project.file("../iosApp/Podfile")
+
         framework {
+            baseName = "shared"
             isStatic = false
 
 //            binaryOption("bundleVersion", "1")
@@ -39,21 +50,22 @@ kotlin {
 //            pod("GoogleSignIn") {
 //
 //            }
+//
         }
+//        pod("FirebaseAuth")
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        version = "1.0.0"
-//        it.binaries.framework {
-//            baseName = "shared"
-//            isStatic = true
-//
-//        }
-    }
+//    listOf(
+//        iosX64(),
+//        iosArm64(),
+//    ).forEach {
+//        version = "1.0.0"
+////        it.binaries.framework {
+////            baseName = "shared"
+////            isStatic = true
+////
+////        }
+//    }
 
     sourceSets {
         val commonMain by getting {
