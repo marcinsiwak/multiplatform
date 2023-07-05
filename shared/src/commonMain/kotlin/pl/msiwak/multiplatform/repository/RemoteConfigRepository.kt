@@ -6,9 +6,9 @@ import pl.msiwak.multiplatform.api.remoteConfig.RemoteConfig
 
 class RemoteConfigRepository(private val remoteConfig: RemoteConfig) {
     suspend fun fetch() = withContext(Dispatchers.Main) {
-        remoteConfig.fetch()
+//        remoteConfig.fetch()
     }
 
-    fun getMinVersion() = remoteConfig.getMinVersion()
-    fun getLastVersion() = remoteConfig.getLastVersion()
+//    fun getMinVersion() = remoteConfig.getMinVersion()
+//    fun getLastVersion() = remoteConfig.getLastVersion()
 }

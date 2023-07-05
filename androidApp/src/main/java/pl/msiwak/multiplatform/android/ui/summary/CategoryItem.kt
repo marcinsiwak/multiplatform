@@ -21,12 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
@@ -35,11 +33,11 @@ import pl.msiwak.multiplatform.data.entity.CategoryData
 
 @Composable
 fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
-    val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
-        ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
-        ExerciseType.GYM -> MR.images.bg_gym.drawableResId
-//        ExerciseType.OTHER -> null
-    }
+//    val backgroundId = when (categoryData.exerciseType) { //todo maybe share with ios
+//        ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
+//        ExerciseType.GYM -> MR.images.bg_gym.drawableResId
+////        ExerciseType.OTHER -> null
+//    }
     Box(
         modifier = modifier
             .background(
@@ -58,16 +56,16 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
             .height(MaterialTheme.dimens.space_164)
             .fillMaxWidth(),
     ) {
-        Image(
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .fillMaxSize()
-                .alpha(0.5f)
-                .clip(RoundedCornerShape(MaterialTheme.dimens.space_8)),
-            painter = painterResource(id = backgroundId),
-            contentScale = ContentScale.Crop,
-            contentDescription = null
-        )
+//        Image(
+//            modifier = Modifier
+//                .align(Alignment.CenterEnd)
+//                .fillMaxSize()
+//                .alpha(0.5f)
+//                .clip(RoundedCornerShape(MaterialTheme.dimens.space_8)),
+//            painter = painterResource(id = backgroundId),
+//            contentScale = ContentScale.Crop,
+//            contentDescription = null
+//        )
 
         Column {
             Text(

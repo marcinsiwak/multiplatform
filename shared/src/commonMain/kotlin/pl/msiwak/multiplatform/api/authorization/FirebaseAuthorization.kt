@@ -1,41 +1,41 @@
 package pl.msiwak.multiplatform.api.authorization
 
-import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.auth.AuthResult
-import dev.gitlive.firebase.auth.FirebaseUser
-import dev.gitlive.firebase.auth.GoogleAuthProvider
-import dev.gitlive.firebase.auth.auth
+//import dev.gitlive.firebase.Firebase
+//import dev.gitlive.firebase.auth.AuthResult
+//import dev.gitlive.firebase.auth.FirebaseUser
+//import dev.gitlive.firebase.auth.GoogleAuthProvider
+//import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.flow.Flow
 
 
 class FirebaseAuthorization {
 
-    private val auth = Firebase.auth
-
-    suspend fun createNewUser(email: String, password: String) {
-
-        auth.createUserWithEmailAndPassword(email, password)
-    }
-
-    suspend fun loginUser(email: String, password: String): AuthResult {
-        return auth.signInWithEmailAndPassword(email, password)
-    }
-
-    suspend fun loginWithGoogle(googleToken: String): AuthResult {
-        return auth.signInWithCredential(
-            authCredential = GoogleAuthProvider.credential(
-                idToken = googleToken,
-                accessToken = null
-            )
-        )
-    }
-
-    fun observeAuthStateChanged(): Flow<FirebaseUser?> {
-        return auth.authStateChanged
-    }
-
-    suspend fun logoutUser() {
-        auth.signOut()
-    }
+//    private val auth = Firebase.auth
+//
+//    suspend fun createNewUser(email: String, password: String) {
+//
+//        auth.createUserWithEmailAndPassword(email, password)
+//    }
+//
+//    suspend fun loginUser(email: String, password: String): AuthResult {
+//        return auth.signInWithEmailAndPassword(email, password)
+//    }
+//
+//    suspend fun loginWithGoogle(googleToken: String): AuthResult {
+//        return auth.signInWithCredential(
+//            authCredential = GoogleAuthProvider.credential(
+//                idToken = googleToken,
+//                accessToken = null
+//            )
+//        )
+//    }
+//
+//    fun observeAuthStateChanged(): Flow<FirebaseUser?> {
+//        return auth.authStateChanged
+//    }
+//
+//    suspend fun logoutUser() {
+//        auth.signOut()
+//    }
 
 }

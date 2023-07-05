@@ -8,8 +8,8 @@ class LoginUseCase(
     private val sessionRepository: SessionRepository
 ) {
     suspend operator fun invoke(params: Params) {
-        val token = authRepository.login(params.login, params.password)
-        token?.let { sessionRepository.saveToken(it) }
+//        val token = authRepository.login(params.login, params.password)
+//        token?.let { sessionRepository.saveToken(it) }
     }
 
     data class Params(val login: String, val password: String)

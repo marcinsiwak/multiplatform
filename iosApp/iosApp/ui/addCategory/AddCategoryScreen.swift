@@ -60,7 +60,7 @@ struct AddCategoryScreen: View {
                         dismiss()
                     },
                     label: {
-                        Text(MR.strings().summary_add_category.desc().localized())
+                        Text("MR.strings().summary_add_category.desc().localized()")
                             .padding(Dimensions.space_16)
                             .foregroundColor(Color.black)
                             .background(Color.gray)

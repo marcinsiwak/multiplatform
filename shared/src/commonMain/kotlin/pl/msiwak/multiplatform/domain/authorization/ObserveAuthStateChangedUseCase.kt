@@ -8,12 +8,12 @@ class ObserveAuthStateChangedUseCase(
     private val sessionRepository: SessionRepository
 ) {
     suspend operator fun invoke() {
-        authRepository.observeAuthStateChanged().collect {
-            if (it != null) {
-                it.getIdToken(true)?.let { token -> sessionRepository.saveToken(token) }
-            } else {
-                sessionRepository.clearToken()
-            }
-        }
+//        authRepository.observeAuthStateChanged().collect {
+//            if (it != null) {
+//                it.getIdToken(true)?.let { token -> sessionRepository.saveToken(token) }
+//            } else {
+//                sessionRepository.clearToken()
+//            }
+//        }
     }
 }

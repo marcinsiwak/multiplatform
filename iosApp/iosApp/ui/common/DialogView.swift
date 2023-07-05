@@ -31,7 +31,7 @@ struct DialogView<DialogContent: View>: ViewModifier {
             dialogContent
             .background(
               RoundedRectangle(cornerRadius: Dimensions.button_corner)
-                .foregroundColor(Color(MR.colors().gray.getUIColor()))
+                .foregroundColor(.gray)
             )
         }.padding(Dimensions.space_40)
       }

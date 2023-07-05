@@ -61,7 +61,7 @@ fun ResultsTimeFilterView(
                         onTabClicked(item)
                     }) {
                     Text(
-                        text = stringResource(item.nameResourceId.resourceId),
+                        text = "stringResource(item.nameResourceId.resourceId)",
                         color = MaterialTheme.colorScheme.onPrimary,
                         onTextLayout = { textLayoutResult ->
                             tabWidths[index] =

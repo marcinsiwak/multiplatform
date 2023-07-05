@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
@@ -51,7 +50,7 @@ fun LoginScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = stringResource(MR.strings.email.resourceId)
+                hintText = "stringResource(MR.strings.email.resourceId)"
             )
 
             InputView(
@@ -62,7 +61,7 @@ fun LoginScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = stringResource(MR.strings.password.resourceId)
+                hintText = "stringResource(MR.strings.password.resourceId)"
             )
             MainButton(
                 modifier = Modifier
@@ -71,7 +70,7 @@ fun LoginScreen() {
                 onClick = {
                     viewModel.onLoginClicked()
                 },
-                text = stringResource(MR.strings.login.resourceId)
+                text = "stringResource(MR.strings.login.resourceId)"
             )
         }
     }

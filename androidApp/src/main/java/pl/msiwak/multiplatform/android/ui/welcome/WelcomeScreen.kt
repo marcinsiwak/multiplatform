@@ -31,7 +31,6 @@ import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.extensions.findActivity
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
@@ -92,7 +91,7 @@ fun WelcomeScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = stringResource(MR.strings.email.resourceId)
+                hintText = "stringResource(MR.strings.email.resourceId)"
             )
 
             InputView(
@@ -103,14 +102,14 @@ fun WelcomeScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = stringResource(MR.strings.password.resourceId)
+                hintText = "stringResource(MR.strings.password.resourceId)"
             )
             MainButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = MaterialTheme.dimens.space_32),
                 onClick = { viewModel.onLoginClicked() },
-                text = stringResource(id = MR.strings.login.resourceId)
+                text = "stringResource(id = MR.strings.login.resourceId)"
             )
             MainButton(
                 modifier = Modifier
@@ -129,10 +128,10 @@ fun WelcomeScreen() {
                             Napier.e("GOOGLE AUTH FAILED: $e")
                         }
                 },
-                text = stringResource(id = MR.strings.welcome_google_login.resourceId)
+                text = "stringResource(id = MR.strings.welcome_google_login.resourceId)"
             )
             Text(
-                text = stringResource(MR.strings.welcome_no_account.resourceId),
+                text = "stringResource(MR.strings.welcome_no_account.resourceId)",
                 color = MaterialTheme.colorScheme.secondary
             )
             Button(
@@ -143,7 +142,7 @@ fun WelcomeScreen() {
                     containerColor = Color.Transparent,
                 )
             ) {
-                Text(text = stringResource(MR.strings.welcome_create_account.resourceId))
+                Text(text = "stringResource(MR.strings.welcome_create_account.resourceId)")
             }
         }
     }

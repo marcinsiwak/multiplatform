@@ -31,7 +31,6 @@ import pl.msiwak.multiplatform.android.ui.theme.BaseKmm_ProjectTheme
 import pl.msiwak.multiplatform.android.ui.units.UnitScreen
 import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
 import pl.msiwak.multiplatform.ui.main.MainViewModel
-import pl.msiwak.multiplatform.ui.navigator.NavigationCommand
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 
 class MainActivity : ComponentActivity() {

@@ -18,7 +18,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.language.LanguageViewModel
@@ -37,7 +36,7 @@ fun LanguageScreen() {
                 vertical = MaterialTheme.dimens.space_16,
                 horizontal = MaterialTheme.dimens.space_24
             ),
-            text = stringResource(MR.strings.language.resourceId),
+            text = "stringResource(MR.strings.language.resourceId)",
             fontSize = MaterialTheme.font.font_24,
             color = MaterialTheme.colorScheme.onPrimary
         )

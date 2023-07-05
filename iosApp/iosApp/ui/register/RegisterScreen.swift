@@ -27,7 +27,7 @@ struct RegisterScreen: View {
              Button("Register") {
                  Task {
                      do {
-                         try await authRepo.createNewUser(email: username, password: password)
+//                         try await authRepo.createNewUser(email: username, password: password)
                      } catch {
                          print(error)
                      }

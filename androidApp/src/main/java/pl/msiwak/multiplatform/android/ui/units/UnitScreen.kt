@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import java.util.Locale
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
@@ -40,7 +39,7 @@ fun UnitScreen() {
                 vertical = MaterialTheme.dimens.space_16,
                 horizontal = MaterialTheme.dimens.space_24
             ),
-            text = stringResource(MR.strings.settings_unit.resourceId),
+            text = "stringResource(MR.strings.settings_unit.resourceId)",
             fontSize = MaterialTheme.font.font_24,
             color = Color.White
         )

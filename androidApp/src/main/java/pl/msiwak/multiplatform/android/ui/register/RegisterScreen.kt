@@ -14,10 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
@@ -56,7 +54,7 @@ fun RegisterScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = stringResource(MR.strings.email.resourceId)
+                hintText = "stringResource(MR.strings.email.resourceId)"
             )
 
             InputView(
@@ -67,7 +65,7 @@ fun RegisterScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = stringResource(MR.strings.password.resourceId)
+                hintText = "stringResource(MR.strings.password.resourceId)"
             )
             MainButton(
                 modifier = Modifier
@@ -76,7 +74,7 @@ fun RegisterScreen() {
                 onClick = {
                     viewModel.onRegisterClicked()
                 },
-                text = stringResource(MR.strings.register.resourceId)
+                text = "stringResource(MR.strings.register.resourceId)"
             )
         }
     }

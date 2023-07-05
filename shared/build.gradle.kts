@@ -5,37 +5,54 @@ import java.util.Properties
 
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
     id("app.cash.sqldelight") version "2.0.0-alpha05"
-    id("dev.icerock.mobile.multiplatform-resources")
+//    id("dev.icerock.mobile.multiplatform-resources")
     id("com.codingfeline.buildkonfig")
 }
 
 dependencies {
-    commonMainApi("dev.icerock.moko:resources:0.21.2")
+//    commonMainApi("dev.icerock.moko:resources:0.21.2")
 }
 
-multiplatformResources {
-    multiplatformResourcesPackage = "pl.msiwak.multiplatform" // required
-    iosBaseLocalizationRegion = "en" // optional, default "en"
-}
+//multiplatformResources {
+//    multiplatformResourcesPackage = "pl.msiwak.multiplatform" // required
+//    iosBaseLocalizationRegion = "en" // optional, default "en"
+//}
 
 kotlin {
     android()
+
+    cocoapods {
+        version = "1.0"
+        summary = "Some description for a Kotlin/Native module"
+        homepage = "Link to a Kotlin/Native module homepage"
+        framework {
+            isStatic = false
+
+//            binaryOption("bundleVersion", "1")
+//            export("dev.icerock.moko:resources:0.21.2")
+//            export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
+
+//            pod("GoogleSignIn") {
+//
+//            }
+        }
+    }
 
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
-        it.binaries.framework {
-            baseName = "shared"
-            isStatic = true
-            binaryOption("bundleVersion", "1")
-            export("dev.icerock.moko:resources:0.21.2")
-            export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
-        }
+        version = "1.0.0"
+//        it.binaries.framework {
+//            baseName = "shared"
+//            isStatic = true
+//
+//        }
     }
 
     sourceSets {
@@ -45,11 +62,11 @@ kotlin {
                     api(core)
                     api(test)
                 }
-                with(Deps.Firebase) {
-                    api(authentication)
-                    api(remoteConfig)
-                    api(crashlytics)
-                }
+//                with(Deps.Firebase) {
+//                    api(authentication)
+//                    api(remoteConfig)
+//                    api(crashlytics)
+//                }
                 with(Deps.Kotlinx) {
                     api(coroutines)
                     api(dateTime)

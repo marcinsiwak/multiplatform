@@ -23,13 +23,13 @@ struct SettingsScreen: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(MR.strings().settings.desc().localized())
+            Text("")
                 .font(.largeTitle)
                 .foregroundColor(.white)
                 .padding()
             
             SettingsItem(
-                title: MR.strings().settings_logout.desc().localized(),
+                title: "",
                 onItemClicked: {
                     viewModel.onLogoutClicked()
                 }

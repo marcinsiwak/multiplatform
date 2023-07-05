@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.android.ui.addCategory
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,11 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.dimens
@@ -44,7 +41,7 @@ fun AddCategoryScreen() {
                 onValueChange = {
                     viewModel.onCategoryNameChanged(it)
                 },
-                hintText = stringResource(id = MR.strings.category_name.resourceId)
+                hintText = "stringResource(id = MR.strings.category_name.resourceId)"
             )
             DropDownView(
                 currentValue = state.value.exerciseType.name,

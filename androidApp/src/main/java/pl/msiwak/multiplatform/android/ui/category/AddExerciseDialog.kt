@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 
@@ -25,13 +24,14 @@ fun AddExerciseDialog(
     onDialogClosed: () -> Unit = {}
 ) {
     AlertDialog(shape = RoundedCornerShape(MaterialTheme.dimens.space_16),
-        containerColor = colorResource(MR.colors.gray.resourceId),
+        containerColor = Color.Gray,
+//        colorResource(MR.colors.gray.resourceId),
         onDismissRequest = {
             onDialogClosed()
         },
         title = {
             Text(
-                text = stringResource(MR.strings.exercise_name.resourceId),
+                text = "stringResource(MR.strings.exercise_name.resourceId)",
                 color = MaterialTheme.colorScheme.onPrimary
             )
         },
@@ -57,7 +57,7 @@ fun AddExerciseDialog(
                     contentColor = MaterialTheme.colorScheme.primary
                 ),
                 onClick = { onAddExerciseClicked() }) {
-                Text(text = stringResource(MR.strings.add_new_exercise.resourceId))
+                Text(text = "stringResource(MR.strings.add_new_exercise.resourceId)")
             }
         })
 }

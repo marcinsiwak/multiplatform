@@ -1,6 +1,6 @@
 import SwiftUI
 import shared
-import GoogleSignIn
+//import GoogleSignIn
 
 struct WelcomeScreen: View {
     @State private var login: String = ""
@@ -39,22 +39,22 @@ struct WelcomeScreen: View {
             Button(action: {
                 viewModel.onLoginClicked()
             }) {
-                Text(MR.strings().login.desc().localized())
+                Text("MR.strings().login.desc().localized()")
             }
             
             Button(action: {
                 loginUsingGoogle()
             }) {
-                Text(MR.strings().welcome_google_login.desc().localized())
+                Text("MR.strings().welcome_google_login.desc().localized()")
             }
             
-            Text(MR.strings().welcome_no_account.desc().localized())
+            Text("MR.strings().welcome_no_account.desc().localized()")
                 .foregroundColor(Color.secondary)
             
             Button(action: {
                 viewModel.onRegistrationClicked()
             }) {
-                Text(MR.strings().welcome_create_account.desc().localized())
+                Text("MR.strings().welcome_create_account.desc().localized()")
             }
         }
         .padding()
@@ -65,13 +65,13 @@ struct WelcomeScreen: View {
     func loginUsingGoogle() {
         guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
         
-        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { result, error in
-            let user = result?.user
-            let idToken = user?.idToken?.tokenString
-            if(idToken != nil) {
-                viewModel.onGoogleLogin(idToken: idToken!)
-            }
-        }
+//        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { result, error in
+//            let user = result?.user
+//            let idToken = user?.idToken?.tokenString
+//            if(idToken != nil) {
+//                viewModel.onGoogleLogin(idToken: idToken!)
+//            }
+//        }
     }
 }
 

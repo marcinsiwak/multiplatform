@@ -22,10 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.data.common.ExerciseType
@@ -62,12 +60,12 @@ fun ResultsTableView(
 
     Column(
         modifier = modifier
-            .background(colorResource(id = MR.colors.gray_two.resourceId))
+//            .background(colorResource(id = MR.colors.gray_two.resourceId))
     ) {
         // todo results type from database
         Row(
             modifier = Modifier
-                .background(color = colorResource(id = MR.colors.gray.resourceId))
+//                .background(color = colorResource(id = MR.colors.gray.resourceId))
                 .height(IntrinsicSize.Min)
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),

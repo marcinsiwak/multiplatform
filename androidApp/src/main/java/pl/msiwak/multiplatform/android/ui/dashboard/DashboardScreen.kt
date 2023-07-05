@@ -11,7 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
@@ -27,12 +26,12 @@ fun DashboardScreen() {
     val items = listOf(
         DashboardNavigationDirections.Summary(
             R.drawable.ic_workout,
-            stringResource(MR.strings.summary.resourceId)
+            "stringResource(MR.strings.summary.resourceId)"
         ),
 //        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(MR.strings.account)),
         DashboardNavigationDirections.Settings(
             R.drawable.ic_settings,
-            stringResource(MR.strings.settings.resourceId)
+            "stringResource(MR.strings.settings.resourceId)"
         )
     )
 

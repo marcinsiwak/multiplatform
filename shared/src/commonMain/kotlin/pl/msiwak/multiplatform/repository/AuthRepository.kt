@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.repository
 
-import dev.gitlive.firebase.auth.FirebaseUser
+//import dev.gitlive.firebase.auth.FirebaseUser
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,23 +11,23 @@ class AuthRepository(
     private val firebaseAuthorization: FirebaseAuthorization
 ) {
 
-    suspend fun login(login: String, password: String): String? = withContext(Dispatchers.Default) {
-        val result = firebaseAuthorization.loginUser(login, password)
-        return@withContext result.user?.getIdTokenResult(true)?.token
-    }
-
-    suspend fun loginWithGoogle(googleToken: String): String? = withContext(Dispatchers.Default) {
-        val result = firebaseAuthorization.loginWithGoogle(googleToken)
-        return@withContext result.user?.getIdTokenResult(true)?.token
-    }
-
-    suspend fun observeAuthStateChanged(): Flow<FirebaseUser?> = withContext(Dispatchers.Default) {
-        return@withContext firebaseAuthorization.observeAuthStateChanged()
-    }
-
-    suspend fun logoutUser() = withContext(Dispatchers.Default) {
-        firebaseAuthorization.logoutUser()
-    }
+//    suspend fun login(login: String, password: String): String? = withContext(Dispatchers.Default) {
+//        val result = firebaseAuthorization.loginUser(login, password)
+//        return@withContext result.user?.getIdTokenResult(true)?.token
+//    }
+//
+//    suspend fun loginWithGoogle(googleToken: String): String? = withContext(Dispatchers.Default) {
+//        val result = firebaseAuthorization.loginWithGoogle(googleToken)
+//        return@withContext result.user?.getIdTokenResult(true)?.token
+//    }
+//
+//    suspend fun observeAuthStateChanged(): Flow<FirebaseUser?> = withContext(Dispatchers.Default) {
+//        return@withContext firebaseAuthorization.observeAuthStateChanged()
+//    }
+//
+//    suspend fun logoutUser() = withContext(Dispatchers.Default) {
+//        firebaseAuthorization.logoutUser()
+//    }
 
     companion object {
         const val PREFS_TOKEN_KEY = "PREFS_TOKEN_KEY"

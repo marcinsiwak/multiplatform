@@ -63,7 +63,7 @@ struct ResultsTableView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, Dimensions.space_8)
-            .background(Color(MR.colors().gray.getUIColor()))
+            .background(.gray)
 
             // Results
             List {

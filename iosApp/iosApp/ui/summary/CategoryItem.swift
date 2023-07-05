@@ -4,19 +4,19 @@ import shared
 struct CategoryItem: View {
     let categoryData: CategoryData
     
-    let backgroundImage: UIImage?
+//    let backgroundImage: UIImage?
     
     init(categoryData: CategoryData) {
         self.categoryData = categoryData
-        switch(categoryData.exerciseType){
-        case ExerciseType.running:
-            backgroundImage = MR.images().bg_running_field.toUIImage()
-        case ExerciseType.gym:
-            backgroundImage = MR.images().bg_gym.toUIImage()
-    //        ExerciseType.OTHER -> null
-        default:
-            backgroundImage = MR.images().bg_gym.toUIImage()
-        }
+//        switch(categoryData.exerciseType){
+//        case ExerciseType.running:
+//            backgroundImage = MR.images().bg_running_field.toUIImage()
+//        case ExerciseType.gym:
+//            backgroundImage = MR.images().bg_gym.toUIImage()
+//    //        ExerciseType.OTHER -> null
+//        default:
+//            backgroundImage = MR.images().bg_gym.toUIImage()
+//        }
     }
         
     var body: some View {
@@ -43,10 +43,10 @@ struct CategoryItem: View {
         .frame(height: Dimensions.space_164)
         .background(
             ZStack {
-                Image(uiImage: backgroundImage!)
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
+//                Image(uiImage: backgroundImage!)
+//                    .resizable()
+//                    .scaledToFill()
+//                    .clipped()
                 Rectangle()
                     .frame(height: Dimensions.space_164)
                     .foregroundColor(.clear)

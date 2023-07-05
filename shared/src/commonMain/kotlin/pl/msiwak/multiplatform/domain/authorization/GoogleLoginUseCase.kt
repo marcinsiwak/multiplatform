@@ -8,7 +8,7 @@ class GoogleLoginUseCase(
     private val sessionRepository: SessionRepository
 ) {
     suspend operator fun invoke(tokenId: String) {
-        val token = authRepository.loginWithGoogle(tokenId)
-        token?.let { sessionRepository.saveToken(it) }
+//        val token = authRepository.loginWithGoogle(tokenId)
+//        token?.let { sessionRepository.saveToken(it) }
     }
 }
