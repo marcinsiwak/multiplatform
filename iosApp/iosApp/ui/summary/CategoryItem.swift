@@ -55,7 +55,7 @@ struct CategoryItem: View {
             }
         )
         .cornerRadius(8)
-        .overlay( 
+        .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.white, lineWidth: 1)
         )

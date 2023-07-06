@@ -3,10 +3,6 @@ import SwiftUI
 
 struct DashboardScreen: View {
     
-    init() {
-        
-        
-    }
     
     var body: some View {
         

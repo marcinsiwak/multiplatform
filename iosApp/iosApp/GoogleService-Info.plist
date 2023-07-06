@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>607279059338-18rnfh9m3nefhtdj8j783u0n9ovn9cqb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.607279059338-18rnfh9m3nefhtdj8j783u0n9ovn9cqb</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>607279059338-301abm12p5s9hpue4lq6cguuc9h1sdka.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC55t-rGCt_q1uVt40apsrW7K5G1iQwyr4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>607279059338</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>pl.msiwak.multiplatform.ios</string>
+	<key>PROJECT_ID</key>
+	<string>sportplatform-b5318</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sportplatform-b5318.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:607279059338:ios:bc6ba205b213ed16cb3873</string>
+</dict>
+</plist>

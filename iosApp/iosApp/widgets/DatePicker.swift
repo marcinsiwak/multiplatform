@@ -13,10 +13,10 @@ func openCalendar(
 
     let dialog = DatePicker("Select a date", selection: .constant(calendar.date(from: DateComponents(year: currentYear, month: currentMonth, day: currentDay, hour: currentHour, minute: currentMinute)) ?? Date()), displayedComponents: [.date, .hourAndMinute])
         dialog.datePickerStyle(.wheel)
-        dialog.onChange(of: dialog.selection) { date in
-            onValueChanged(date)
-            onCancelled()
-        }
+//        dialog.onChange(of: dialog.selection) { date in
+//            onValueChanged(date)
+//            onCancelled()
+//        }
         dialog.onDisappear {
             onCancelled()
         }
