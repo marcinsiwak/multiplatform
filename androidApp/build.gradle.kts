@@ -19,7 +19,7 @@ val versionCode =
 val appVersionCode: Int = Integer.valueOf(System.getenv("BUILD_NUMBER") ?: "$versionCode")
 
 android {
-    namespace = "pl.msiwak.test.athletetrack.android"
+    namespace = "pl.msiwak.multiplatform.android"
     compileSdk = 33
     defaultConfig {
         applicationId = "pl.msiwak.athletetrack.android"
@@ -36,14 +36,14 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.2"
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
 
     val releaseKeystorePropFile = rootProject.file("signing/release.properties")

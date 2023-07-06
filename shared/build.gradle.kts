@@ -123,7 +123,6 @@ kotlin {
                 }
             }
         }
-        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -140,15 +139,6 @@ kotlin {
                     api(ios)
                 }
             }
-        }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by getting {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
         }
     }
 }
@@ -184,7 +174,7 @@ buildkonfig {
 }
 
 android {
-    namespace = "pl.msiwak.test.athletetrack"
+    namespace = "pl.msiwak.multiplatform.android"
     compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {

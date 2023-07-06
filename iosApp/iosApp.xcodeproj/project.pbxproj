@@ -349,7 +349,7 @@
 				7555FF79242A565900829871 /* Resources */,
 				7113D2A9297AD8EF0094E1A4 /* Embed Frameworks */,
 				712585582A014E8700ACA757 /* ShellScript */,
-				6B38DDFC712380F96BCFB7CE /* [CP] Embed Pods Frameworks */,
+				63812278DB2C7C8BCDF5BFD8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -407,7 +407,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6B38DDFC712380F96BCFB7CE /* [CP] Embed Pods Frameworks */ = {
+		63812278DB2C7C8BCDF5BFD8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -674,9 +674,9 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
-					"$(inherited)",
 					"-framework",
 					shared,
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.multiplatform.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
