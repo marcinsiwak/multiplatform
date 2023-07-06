@@ -22,7 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             tabBarApperance.configureWithOpaqueBackground()
             tabBarApperance.backgroundColor = UIColor.black
             tabBarApperance.shadowColor = .white
-            UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
+//            UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
             UITabBar.appearance().standardAppearance = tabBarApperance
         
         return true
