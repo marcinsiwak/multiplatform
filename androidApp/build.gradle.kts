@@ -19,6 +19,7 @@ val versionCode =
 val appVersionCode: Int = Integer.valueOf(System.getenv("BUILD_NUMBER") ?: "$versionCode")
 
 android {
+    namespace = "pl.msiwak.test.athletetrack.android"
     compileSdk = 33
     defaultConfig {
         applicationId = "pl.msiwak.athletetrack.android"
@@ -32,6 +33,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.2"

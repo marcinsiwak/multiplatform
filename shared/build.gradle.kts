@@ -24,9 +24,15 @@ dependencies {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-//    targetHierarchy.default()
+    targetHierarchy.default()
 
-    android()
+    android {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -41,7 +47,6 @@ kotlin {
 
         framework {
             baseName = "shared"
-            isStatic = false
 
 //            binaryOption("bundleVersion", "1")
 //            export("dev.icerock.moko:resources:0.21.2")
@@ -52,7 +57,8 @@ kotlin {
 //            }
 //
         }
-//        pod("FirebaseAuth")
+
+        pod("FirebaseAuth")
     }
 
 //    listOf(
@@ -121,7 +127,7 @@ kotlin {
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
-        val iosMain by creating {
+        val iosMain by getting {
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
@@ -138,7 +144,7 @@ kotlin {
         val iosX64Test by getting
         val iosArm64Test by getting
         val iosSimulatorArm64Test by getting
-        val iosTest by creating {
+        val iosTest by getting {
             dependsOn(commonTest)
             iosX64Test.dependsOn(this)
             iosArm64Test.dependsOn(this)
@@ -178,6 +184,7 @@ buildkonfig {
 }
 
 android {
+    namespace = "pl.msiwak.test.athletetrack"
     compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
