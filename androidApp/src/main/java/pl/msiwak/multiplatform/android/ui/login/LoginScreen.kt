@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.android.ui.login
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -12,9 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
@@ -28,12 +32,12 @@ fun LoginScreen() {
     val state = viewModel.loginState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-//        Image(
-//            modifier = Modifier.fillMaxSize(),
-//            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
-//            contentScale = ContentScale.Crop,
-//            contentDescription = null
-//        )
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
+            contentScale = ContentScale.Crop,
+            contentDescription = null
+        )
         Column(
             modifier = Modifier
                 .width(IntrinsicSize.Min)
@@ -50,7 +54,7 @@ fun LoginScreen() {
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
-                hintText = "stringResource(MR.strings.email.resourceId)"
+                hintText = stringResource(MR.strings.email.resourceId)
             )
 
             InputView(
@@ -61,7 +65,7 @@ fun LoginScreen() {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                hintText = "stringResource(MR.strings.password.resourceId)"
+                hintText = stringResource(MR.strings.password.resourceId)
             )
             MainButton(
                 modifier = Modifier
@@ -70,7 +74,7 @@ fun LoginScreen() {
                 onClick = {
                     viewModel.onLoginClicked()
                 },
-                text = "stringResource(MR.strings.login.resourceId)"
+                text = stringResource(MR.strings.login.resourceId)
             )
         }
     }

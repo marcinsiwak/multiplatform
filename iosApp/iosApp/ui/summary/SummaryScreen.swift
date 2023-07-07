@@ -38,7 +38,7 @@ struct SummaryScreen: View {
                     HStack {
                         Image(systemName: "plus.circle")
                             .tint(.gray)
-                        Text("MR.strings().summary_add_category.desc().localized()")
+                        Text(MR.strings().summary_add_category.desc().localized())
                             .foregroundColor(.gray)
                     }
                     .padding(.vertical, Dimensions.space_24)

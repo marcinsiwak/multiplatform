@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
@@ -62,7 +63,7 @@ fun SummaryScreen() {
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = "stringResource(MR.strings.summary_add_category.resourceId)",
+                                text = stringResource(MR.strings.summary_add_category.resourceId),
                                 color = MaterialTheme.colorScheme.tertiary
                             )
                         }

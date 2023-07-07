@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 
@@ -31,7 +32,7 @@ fun AddExerciseDialog(
         },
         title = {
             Text(
-                text = "stringResource(MR.strings.exercise_name.resourceId)",
+                text = stringResource(MR.strings.exercise_name.resourceId),
                 color = MaterialTheme.colorScheme.onPrimary
             )
         },
@@ -57,7 +58,7 @@ fun AddExerciseDialog(
                     contentColor = MaterialTheme.colorScheme.primary
                 ),
                 onClick = { onAddExerciseClicked() }) {
-                Text(text = "stringResource(MR.strings.add_new_exercise.resourceId)")
+                Text(text = stringResource(MR.strings.add_new_exercise.resourceId))
             }
         })
 }

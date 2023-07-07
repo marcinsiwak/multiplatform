@@ -39,22 +39,22 @@ struct WelcomeScreen: View {
             Button(action: {
                 viewModel.onLoginClicked()
             }) {
-                Text("MR.strings().login.desc().localized()")
+                Text(MR.strings().login.desc().localized())
             }
             
             Button(action: {
                 loginUsingGoogle()
             }) {
-                Text("MR.strings().welcome_google_login.desc().localized()")
+                Text(MR.strings().welcome_google_login.desc().localized())
             }
             
-            Text("MR.strings().welcome_no_account.desc().localized()")
+            Text(MR.strings().welcome_no_account.desc().localized())
                 .foregroundColor(Color.secondary)
             
             Button(action: {
                 viewModel.onRegistrationClicked()
             }) {
-                Text("MR.strings().welcome_create_account.desc().localized()")
+                Text(MR.strings().welcome_create_account.desc().localized())
             }
         }
         .padding()

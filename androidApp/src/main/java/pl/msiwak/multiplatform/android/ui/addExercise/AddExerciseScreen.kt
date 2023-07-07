@@ -27,6 +27,7 @@ import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
@@ -72,10 +73,10 @@ fun AddExerciseScreen(id: Long) {
 
     if (state.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = "stringResource(MR.strings.remove_result_dialog_title.resourceId)",
-            description = "stringResource(MR.strings.remove_result_dialog_description.resourceId)",
-            confirmButtonTitle = "stringResource(MR.strings.yes.resourceId)",
-            dismissButtonTitle = "stringResource(MR.strings.no.resourceId)",
+            title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
+            description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
+            dismissButtonTitle = stringResource(MR.strings.no.resourceId),
             onConfirmClicked = {
                 viewModel.onResultRemoved()
             },
@@ -135,7 +136,7 @@ fun AddExerciseScreen(id: Long) {
                             viewModel.onAddNewResultClicked()
                         }) {
                         Text(
-                            text = "stringResource(MR.strings.add_new_result.resourceId)",
+                            text = stringResource(MR.strings.add_new_result.resourceId),
                         )
                     }
                 } else
@@ -151,7 +152,7 @@ fun AddExerciseScreen(id: Long) {
                             viewModel.onSaveResultClicked()
                         }) {
                         Text(
-                            text = "stringResource(MR.strings.add_result_save.resourceId)",
+                            text = stringResource(MR.strings.add_result_save.resourceId),
                         )
                     }
             }

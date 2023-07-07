@@ -68,7 +68,7 @@ struct AddExerciseScreen: View {
                 Button(action: {
                         viewModel.onAddNewResultClicked()
                     }, label: {
-                        Text("MR.strings().add_new_result.desc().localized()")
+                        Text(MR.strings().add_new_result.desc().localized())
                             .padding()
                             .foregroundColor(.black)
                             .background(Color.gray.opacity(0.2))
@@ -82,7 +82,7 @@ struct AddExerciseScreen: View {
                 Button(action: {
                         viewModel.onSaveResultClicked()
                     }, label: {
-                        Text("MR.strings().add_result_save.desc().localized()")
+                        Text(MR.strings().add_result_save.desc().localized())
                             .padding()
                             .foregroundColor(.black)
                             .background(Color.gray.opacity(0.2))

@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.java.KoinJavaComponent
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
@@ -29,23 +30,23 @@ fun ForceUpdateScreen() {
         modifier = Modifier.fillMaxSize()
     ) {
         Column {
-//            Image(
-//                painter = painterResource(id = MR.images.bg_force_update.drawableResId),
-//                contentScale = ContentScale.FillWidth,
-//                contentDescription = null
-//            )
-//            Text(
-//                modifier = Modifier.padding(MaterialTheme.dimens.space_16),
-//                text = stringResource(MR.strings.force_update_title.resourceId),
-//                color = MaterialTheme.colorScheme.onPrimary,
-//                fontSize = MaterialTheme.font.font_24
-//            )
-//            Text(
-//                modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
-//                text = stringResource(MR.strings.force_update_description.resourceId),
-//                color = MaterialTheme.colorScheme.onPrimary,
-//                fontSize = MaterialTheme.font.font_16
-//            )
+            Image(
+                painter = painterResource(id = MR.images.bg_force_update.drawableResId),
+                contentScale = ContentScale.FillWidth,
+                contentDescription = null
+            )
+            Text(
+                modifier = Modifier.padding(MaterialTheme.dimens.space_16),
+                text = stringResource(MR.strings.force_update_title.resourceId),
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontSize = MaterialTheme.font.font_24
+            )
+            Text(
+                modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
+                text = stringResource(MR.strings.force_update_description.resourceId),
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontSize = MaterialTheme.font.font_16
+            )
         }
         MainButton(
             modifier = Modifier
@@ -56,7 +57,7 @@ fun ForceUpdateScreen() {
                     horizontal = MaterialTheme.dimens.space_80
                 ),
             onClick = { viewModel.onUpdateClicked() },
-            text = "stringResource(id = MR.strings.force_update_update.resourceId)"
+            text = stringResource(id = MR.strings.force_update_update.resourceId)
         )
     }
 }

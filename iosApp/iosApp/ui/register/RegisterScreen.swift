@@ -3,7 +3,7 @@ import shared
 
 struct RegisterScreen: View {
     
-    let authRepo: FirebaseAuthorization = FirebaseAuthorization()
+//    let authRepo: FirebaseAuthorization = FirebaseAuthorization()
 
 
     @State var username: String = ""

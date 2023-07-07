@@ -28,29 +28,29 @@ struct CategoryScreen: View {
         self.state.value = state
      }
     
-//    private func selectBackgroundImage() -> UIImage {
-////        switch(self.state.value.exerciseType){
-////        case ExerciseType.running:
-////            return MR.images().bg_running_field.toUIImage()!
-////        case ExerciseType.gym:
-////            return MR.images().bg_gym.toUIImage()!
-////    //        ExerciseType.OTHER -> null
-////        default:
-////            return MR.images().bg_gym.toUIImage()!
-////        }
-//    }
+    private func selectBackgroundImage() -> UIImage {
+        switch(self.state.value.exerciseType){
+        case ExerciseType.running:
+            return MR.images().bg_running_field.toUIImage()!
+        case ExerciseType.gym:
+            return MR.images().bg_gym.toUIImage()!
+    //        ExerciseType.OTHER -> null
+        default:
+            return MR.images().bg_gym.toUIImage()!
+        }
+    }
     
     var body: some View {
         
         VStack(alignment: .leading, spacing: 0) {
                 ZStack {
-//                    let backgroundImage = selectBackgroundImage()
-//
-//                    Image(uiImage: backgroundImage)
-//                        .resizable()
-//                        .scaledToFill()
-//                        .clipped()
-//                        .frame(height: Dimensions.space_264)
+                    let backgroundImage = selectBackgroundImage()
+
+                    Image(uiImage: backgroundImage)
+                        .resizable()
+                        .scaledToFill()
+                        .clipped()
+                        .frame(height: Dimensions.space_264)
                     Rectangle()
                         .frame(height: Dimensions.space_264)
                         .foregroundColor(.clear)
@@ -67,7 +67,7 @@ struct CategoryScreen: View {
                 Button(action: {
                     viewModel.onAddNewExerciseClicked()
                 }, label: {
-                    Text("MR.strings().add_new_result.desc().localized()")
+                    Text(MR.strings().add_new_result.desc().localized())
                         .padding(Dimensions.space_16)
                         .foregroundColor(Color.black)
                         .background(Color.gray)
@@ -81,7 +81,7 @@ struct CategoryScreen: View {
                 viewModel.onDialogClosed()
             }) {
                 VStack {
-                    Text("MR.strings().exercise_name.desc().localized()")
+                    Text(MR.strings().exercise_name.desc().localized())
                         .foregroundColor(.white)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding()
@@ -93,7 +93,7 @@ struct CategoryScreen: View {
                     Button(action: {
                         viewModel.onAddExerciseClicked()
                     }, label: {
-                        Text("MR.strings().add_new_exercise.desc().localized()")
+                        Text(MR.strings().add_new_exercise.desc().localized())
                             .padding(Dimensions.space_16)
                             .foregroundColor(Color.black)
                             .background(Color.gray)
