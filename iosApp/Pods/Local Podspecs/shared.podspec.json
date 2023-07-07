@@ -16,6 +16,9 @@
   "dependencies": {
     "FirebaseAuth": [
 
+    ],
+    "FirebaseCore": [
+
     ]
   },
   "pod_target_xcconfig": {

@@ -26,6 +26,10 @@ object Deps {
         const val authentication = "dev.gitlive:firebase-auth:1.6.2"
         const val remoteConfig = "dev.gitlive:firebase-config:1.8.0"
         const val crashlytics = "dev.gitlive:firebase-crashlytics:1.8.0"
+
+        const val andoridBom = "com.google.firebase:firebase-bom:32.1.1"
+        const val auth = "com.google.firebase:firebase-auth-ktx"
+
     }
 
     object Kotlinx {

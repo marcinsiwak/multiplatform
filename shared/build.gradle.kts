@@ -58,6 +58,7 @@ kotlin {
 //
         }
 
+        pod("FirebaseCore")
         pod("FirebaseAuth")
     }
 
@@ -120,6 +121,10 @@ kotlin {
                 }
                 with(Deps.SQLDelight) {
                     api(android)
+                }
+                with(Deps.Firebase) {
+                   api(platform(andoridBom))
+                    api(auth)
                 }
             }
         }

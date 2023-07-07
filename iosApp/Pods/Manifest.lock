@@ -29,6 +29,7 @@ PODS:
   - PromisesObjC (2.1.1)
   - shared (1.0):
     - FirebaseAuth
+    - FirebaseCore
 
 DEPENDENCIES:
   - shared (from `../shared`)
@@ -53,7 +54,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   GTMSessionFetcher: c9e714f7eec91a55641e2bab9f45fd83a219b882
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  shared: b4663a011eba9a31afb3c01b8c3277e64dcf6c97
+  shared: c2cfd778ad90124f378dd48fc172089312010fd4
 
 PODFILE CHECKSUM: f282da88f39e69507b0a255187c8a6b644477756
 

@@ -9,12 +9,13 @@
 /* Begin PBXAggregateTarget section */
 		8777C9F6889E59EFFD631D80AEE9048B /* shared */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 22DBD8FE280F08044432910E9B7346A5 /* Build configuration list for PBXAggregateTarget "shared" */;
+			buildConfigurationList = B81EF6DCC17DC2A9A93B9A715896A709 /* Build configuration list for PBXAggregateTarget "shared" */;
 			buildPhases = (
-				5C167A575513767B2DB7844DC5B2B27B /* [CP-User] Build shared */,
+				6EC915911758C0179B678D80049218C7 /* [CP-User] Build shared */,
 			);
 			dependencies = (
-				4C434229023B8A1FCFDD08BAAA701862 /* PBXTargetDependency */,
+				203E7A61EEA4F1E90EC6E1EE2EC8A2BC /* PBXTargetDependency */,
+				3121F6912093D75519919D0682524DBF /* PBXTargetDependency */,
 			);
 			name = shared;
 		};
@@ -481,6 +482,13 @@
 			remoteGlobalIDString = 8D7F5D5DD528D21A72DC87ADA5B12E2D;
 			remoteInfo = GoogleUtilities;
 		};
+		572D383226B21F2500BF24C6176A82AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AE4A3D573DED275B034E20506596C62;
+			remoteInfo = FirebaseAuth;
+		};
 		726081C2CADF2941B74DAF244794CA4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -516,13 +524,6 @@
 			remoteGlobalIDString = 4402AFF83DBDC4DD07E198685FDC2DF2;
 			remoteInfo = FirebaseCore;
 		};
-		AFB0D2CE0A86D4E1B6A7D8B95331F000 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6AE4A3D573DED275B034E20506596C62;
-			remoteInfo = FirebaseAuth;
-		};
 		C011A80FB44A4515D367DCEB2172B98F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -543,6 +544,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 25E9E9A17BC3F670357D7385C521E48E;
 			remoteInfo = FirebaseCoreInternal;
+		};
+		DE9B19F6FAE2A0B43E78E84E535FFD12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4402AFF83DBDC4DD07E198685FDC2DF2;
+			remoteInfo = FirebaseCore;
 		};
 		F4AF2ADFB8F351E41716FFE50126468F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2309,7 +2317,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5C167A575513767B2DB7844DC5B2B27B /* [CP-User] Build shared */ = {
+		6EC915911758C0179B678D80049218C7 /* [CP-User] Build shared */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2567,17 +2575,23 @@
 			target = 8D7F5D5DD528D21A72DC87ADA5B12E2D /* GoogleUtilities */;
 			targetProxy = 392F063B7E00586392B8C4A0DE70F222 /* PBXContainerItemProxy */;
 		};
+		203E7A61EEA4F1E90EC6E1EE2EC8A2BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FirebaseAuth;
+			target = 6AE4A3D573DED275B034E20506596C62 /* FirebaseAuth */;
+			targetProxy = 572D383226B21F2500BF24C6176A82AF /* PBXContainerItemProxy */;
+		};
+		3121F6912093D75519919D0682524DBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FirebaseCore;
+			target = 4402AFF83DBDC4DD07E198685FDC2DF2 /* FirebaseCore */;
+			targetProxy = DE9B19F6FAE2A0B43E78E84E535FFD12 /* PBXContainerItemProxy */;
+		};
 		496E5B7A0276DEF1AFCE07C219E6A8D2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GTMSessionFetcher;
 			target = D676E21115185671D7258A56944ABE98 /* GTMSessionFetcher */;
 			targetProxy = 2BCB1E488AC653FDB385A5F4CA92F73E /* PBXContainerItemProxy */;
-		};
-		4C434229023B8A1FCFDD08BAAA701862 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FirebaseAuth;
-			target = 6AE4A3D573DED275B034E20506596C62 /* FirebaseAuth */;
-			targetProxy = AFB0D2CE0A86D4E1B6A7D8B95331F000 /* PBXContainerItemProxy */;
 		};
 		501C0272C5C37F5FC266A0A5BECBEA2A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2784,24 +2798,6 @@
 			};
 			name = Release;
 		};
-		3AD57593C68DF9C0858EC6A88D43453B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35548E3BD8DA30925E8FE97E67B84868 /* shared.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		41CD289ADAE75A04DB95F3D588D839C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 303EE1E6CF17491F31E86892CCEE0956 /* FirebaseAuth.release.xcconfig */;
@@ -2930,23 +2926,6 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
-		};
-		5CA53A9222E7E4FFE88A7849624D0D02 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95B09EA82E7AF9ACCCCAF3E55C859116 /* shared.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 		782A2C4805FD18C303152D0C30D014F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3227,6 +3206,24 @@
 			};
 			name = Debug;
 		};
+		CAC6C90E59A531D5D37BA27716560608 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35548E3BD8DA30925E8FE97E67B84868 /* shared.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		D98B1EF1802832CE33459730A2F084AD /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 61EC3CA8A65F800E2DC3F59FE01ADDD2 /* FirebaseCoreInternal.release.xcconfig */;
@@ -3262,6 +3259,23 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		DC00EAE479830B487D8DE1E87F3F4E2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95B09EA82E7AF9ACCCCAF3E55C859116 /* shared.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		E8056964C5D58A871C8ADE86B0640607 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3335,20 +3349,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22DBD8FE280F08044432910E9B7346A5 /* Build configuration list for PBXAggregateTarget "shared" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5CA53A9222E7E4FFE88A7849624D0D02 /* Debug */,
-				3AD57593C68DF9C0858EC6A88D43453B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A0374B8CF9A7D6A45F6D116D698D1C19 /* Debug */,
 				593F10BFFA94DAC7D6E17FB8A7F32D72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B81EF6DCC17DC2A9A93B9A715896A709 /* Build configuration list for PBXAggregateTarget "shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC00EAE479830B487D8DE1E87F3F4E2B /* Debug */,
+				CAC6C90E59A531D5D37BA27716560608 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
