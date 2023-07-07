@@ -53,7 +53,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   GTMSessionFetcher: c9e714f7eec91a55641e2bab9f45fd83a219b882
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  shared: e0fa52a38e9dfd3d21c3e3a8a7a8efbb841632f3
+  shared: b4663a011eba9a31afb3c01b8c3277e64dcf6c97
 
 PODFILE CHECKSUM: f282da88f39e69507b0a255187c8a6b644477756
 
