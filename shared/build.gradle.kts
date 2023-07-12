@@ -113,9 +113,6 @@ kotlin {
                     api(platform(andoridBom))
                     api(auth)
                 }
-                with(Deps.Google) {
-                    api(andorid_play_services_auth)
-                }
             }
         }
         val iosX64Main by getting
@@ -147,11 +144,6 @@ buildkonfig {
 
     defaultConfigs {
         buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
-        buildConfigField(
-            STRING,
-            "GOOGLE_AUTH_WEB_CLIENT_ID",
-            releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-        )
     }
     targetConfigs {
         create("ios") {
@@ -166,11 +158,6 @@ buildkonfig {
 
         create("android") {
             buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
-            buildConfigField(
-                STRING,
-                "GOOGLE_AUTH_WEB_CLIENT_ID",
-                releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-            )
         }
         create("ios") {
             buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)

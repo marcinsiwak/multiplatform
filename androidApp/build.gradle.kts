@@ -61,6 +61,7 @@ android {
                 storePassword = releaseKeystoreProp["storePassword"] as String
             }
         }
+
     }
 
     val debugKeystorePropFile = rootProject.file("signing/debug.properties")
@@ -87,9 +88,29 @@ android {
                 file("proguard-rules.pro")
             )
             signingConfig = signingConfigs.getByName("release")
+
+            val releasePropertiesFile = rootProject.file("androidApp/release.properties")
+            val releaseProperties = Properties()
+            releaseProperties.load(FileInputStream(releasePropertiesFile))
+
+            buildConfigField(
+                "String",
+                "GOOGLE_AUTH_WEB_CLIENT_ID",
+                releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+            )
         }
         debug {
+
+            val debugPropertiesFile = rootProject.file("androidApp/debug.properties")
+            val debugProperties = Properties()
+            debugProperties.load(FileInputStream(debugPropertiesFile))
+
             signingConfig = signingConfigs.getByName("debug")
+            buildConfigField(
+                "String",
+                "GOOGLE_AUTH_WEB_CLIENT_ID",
+                debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+            )
         }
     }
 }
@@ -119,6 +140,9 @@ dependencies {
         implementation(core)
         implementation(android)
         implementation(compose)
+    }
+    with(Deps.Google) {
+        api(andorid_play_services_auth)
     }
 
 }

@@ -36,7 +36,7 @@ import pl.msiwak.multiplatform.android.extensions.findActivity
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.utils.auth.GoogleAuthOneTapConfiguration
+import pl.msiwak.multiplatform.android.ui.utils.auth.GoogleAuthOneTapConfiguration
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
 
