@@ -37,9 +37,9 @@ class WelcomeScreenViewModel(
         }
     }
 
-    fun onGoogleLogin(idToken: String) {
+    fun onGoogleLogin(idToken: String?, accessToken: String?) {
         viewModelScope.launch {
-            googleLoginUseCase(idToken)
+            googleLoginUseCase(idToken, accessToken)
             navigator.navigate(NavigationDirections.Dashboard)
         }
     }

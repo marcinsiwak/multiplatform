@@ -19,6 +19,15 @@
     ],
     "FirebaseCore": [
 
+    ],
+    "FirebaseCrashlytics": [
+
+    ],
+    "FirebaseRemoteConfig": [
+
+    ],
+    "GoogleSignIn": [
+
     ]
   },
   "pod_target_xcconfig": {

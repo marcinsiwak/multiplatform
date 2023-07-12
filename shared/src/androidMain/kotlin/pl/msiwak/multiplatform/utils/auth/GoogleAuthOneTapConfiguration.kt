@@ -1,7 +1,7 @@
-package pl.msiwak.multiplatform.android.utils.auth
+package pl.msiwak.multiplatform.utils.auth
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import pl.msiwak.multiplatform.android.BuildConfig
+import pl.msiwak.multiplatform.BuildKonfig
 
 class GoogleAuthOneTapConfiguration {
 
@@ -9,7 +9,7 @@ class GoogleAuthOneTapConfiguration {
         .setGoogleIdTokenRequestOptions(
             BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                 .setSupported(true)
-                .setServerClientId(BuildConfig.GOOGLE_AUTH_WEB_CLIENT_ID)
+                .setServerClientId(BuildKonfig.GOOGLE_AUTH_WEB_CLIENT_ID)
                 .setFilterByAuthorizedAccounts(false)
                 .build())
         .build()
