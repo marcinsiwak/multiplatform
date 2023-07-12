@@ -1,7 +1,7 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import pl.msiwak.multiplatfor.dependencies.Deps
 import java.io.FileInputStream
 import java.util.Properties
+import pl.msiwak.multiplatfor.dependencies.Deps
 
 plugins {
     kotlin("multiplatform")
@@ -52,27 +52,14 @@ kotlin {
             export("dev.icerock.moko:resources:0.21.2")
             export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
 
-//            pod("GoogleSignIn") {
-//
-//            }
-//
         }
 
         pod("FirebaseCore")
         pod("FirebaseAuth")
+        pod("FirebaseRemoteConfig")
+        pod("FirebaseCrashlytics")
+        pod("GoogleSignIn")
     }
-
-//    listOf(
-//        iosX64(),
-//        iosArm64(),
-//    ).forEach {
-//        version = "1.0.0"
-////        it.binaries.framework {
-////            baseName = "shared"
-////            isStatic = true
-////
-////        }
-//    }
 
     sourceSets {
         val commonMain by getting {
@@ -81,11 +68,11 @@ kotlin {
                     api(core)
                     api(test)
                 }
-//                with(Deps.Firebase) {
-//                    api(authentication)
-//                    api(remoteConfig)
-//                    api(crashlytics)
-//                }
+                with(Deps.Firebase) {
+                    api(authentication)
+                    api(remoteConfig)
+                    api(crashlytics)
+                }
                 with(Deps.Kotlinx) {
                     api(coroutines)
                     api(dateTime)
@@ -123,8 +110,11 @@ kotlin {
                     api(android)
                 }
                 with(Deps.Firebase) {
-                   api(platform(andoridBom))
+                    api(platform(andoridBom))
                     api(auth)
+                }
+                with(Deps.Google) {
+                    api(andorid_play_services_auth)
                 }
             }
         }
@@ -157,6 +147,11 @@ buildkonfig {
 
     defaultConfigs {
         buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+        buildConfigField(
+            STRING,
+            "GOOGLE_AUTH_WEB_CLIENT_ID",
+            releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+        )
     }
     targetConfigs {
         create("ios") {
@@ -164,13 +159,18 @@ buildkonfig {
         }
     }
     targetConfigs("debug") {
-        
+
         val debugPropertiesFile = rootProject.file("debug.properties")
         val debugProperties = Properties()
         debugProperties.load(FileInputStream(debugPropertiesFile))
-        
+
         create("android") {
             buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
+            buildConfigField(
+                STRING,
+                "GOOGLE_AUTH_WEB_CLIENT_ID",
+                releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+            )
         }
         create("ios") {
             buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)

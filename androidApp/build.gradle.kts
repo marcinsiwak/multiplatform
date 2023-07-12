@@ -61,54 +61,35 @@ android {
                 storePassword = releaseKeystoreProp["storePassword"] as String
             }
         }
-
-        buildTypes {
-            release {
-                isMinifyEnabled = true
-                proguardFiles(
-                    getDefaultProguardFile("proguard-android.txt"),
-                    file("proguard-rules.pro")
-                )
-                signingConfig = signingConfigs.getByName("release")
-
-                val releasePropertiesFile = rootProject.file("androidApp/release.properties")
-                val releaseProperties = Properties()
-                releaseProperties.load(FileInputStream(releasePropertiesFile))
-
-                buildConfigField(
-                    "String",
-                    "GOOGLE_AUTH_WEB_CLIENT_ID",
-                    releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-                )
-            }
-            debug {
-                signingConfig = signingConfigs.getByName("debug")
-
-                val debugPropertiesFile = rootProject.file("androidApp/debug.properties")
-                val debugProperties = Properties()
-                debugProperties.load(FileInputStream(debugPropertiesFile))
-
-                buildConfigField(
-                    "String",
-                    "GOOGLE_AUTH_WEB_CLIENT_ID",
-                    debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-                )
-            }
-        }
-
     }
 
     val debugKeystorePropFile = rootProject.file("signing/debug.properties")
-    val debugKeystoreProp = Properties()
-    debugKeystoreProp.load(FileInputStream(debugKeystorePropFile))
+    if (debugKeystorePropFile.exists()) {
+        val debugKeystoreProp = Properties()
+        debugKeystoreProp.load(FileInputStream(debugKeystorePropFile))
 
-    signingConfigs {
-        maybeCreate("debug")
-        getByName("debug") {
-            keyAlias = debugKeystoreProp["keyAlias"] as String
-            keyPassword = debugKeystoreProp["keyPassword"] as String
-            storeFile = rootProject.file(debugKeystoreProp["storeFile"] as String)
-            storePassword = debugKeystoreProp["storePassword"] as String
+        signingConfigs {
+            maybeCreate("debug")
+            getByName("debug") {
+                keyAlias = debugKeystoreProp["keyAlias"] as String
+                keyPassword = debugKeystoreProp["keyPassword"] as String
+                storeFile = rootProject.file(debugKeystoreProp["storeFile"] as String)
+                storePassword = debugKeystoreProp["storePassword"] as String
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                file("proguard-rules.pro")
+            )
+            signingConfig = signingConfigs.getByName("release")
+        }
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 }
@@ -133,7 +114,6 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("com.google.accompanist:accompanist-navigation-material:0.25.0")
-    implementation("com.google.android.gms:play-services-auth:20.6.0")
 
     with(Deps.Koin) {
         implementation(core)

@@ -62,4 +62,8 @@ object Deps {
     object Napier {
         const val napier = "io.github.aakira:napier:2.6.1"
     }
+
+    object Google {
+        const val andorid_play_services_auth= "com.google.android.gms:play-services-auth:20.6.0"
+    }
 }

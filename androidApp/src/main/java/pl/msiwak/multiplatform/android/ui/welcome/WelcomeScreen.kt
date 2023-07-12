@@ -36,7 +36,7 @@ import pl.msiwak.multiplatform.android.extensions.findActivity
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.android.utils.auth.GoogleAuthOneTapConfiguration
+import pl.msiwak.multiplatform.utils.auth.GoogleAuthOneTapConfiguration
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
 
@@ -60,11 +60,10 @@ fun WelcomeScreen() {
             if (result.resultCode == Activity.RESULT_OK) {
                 val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
                 val idToken = credential.googleIdToken ?: return@rememberLauncherForActivityResult
-                viewModel.onGoogleLogin(idToken)
+                viewModel.onGoogleLogin(idToken, null)
             }
         }
     )
-
 
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(

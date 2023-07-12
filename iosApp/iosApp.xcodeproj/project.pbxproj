@@ -42,7 +42,6 @@
 		711E8BA32A575B6200151063 /* SummaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BA22A575B6200151063 /* SummaryScreen.swift */; };
 		711E8BA62A575B8400151063 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BA52A575B8400151063 /* Dimensions.swift */; };
 		711E8BA92A575BA200151063 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BA82A575BA200151063 /* WelcomeScreen.swift */; };
-		711E8BAD2A575BE900151063 /* GoogleAuthOneTapConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BAC2A575BE900151063 /* GoogleAuthOneTapConfiguration.swift */; };
 		711E8BAF2A575C0200151063 /* FocusedField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BAE2A575C0200151063 /* FocusedField.swift */; };
 		711E8BB22A575C2500151063 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB12A575C2500151063 /* DatePicker.swift */; };
 		711E8BB52A575E4800151063 /* Collector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB42A575E4800151063 /* Collector.swift */; };
@@ -102,7 +101,6 @@
 		711E8BA22A575B6200151063 /* SummaryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryScreen.swift; sourceTree = "<group>"; };
 		711E8BA52A575B8400151063 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
 		711E8BA82A575BA200151063 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
-		711E8BAC2A575BE900151063 /* GoogleAuthOneTapConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthOneTapConfiguration.swift; sourceTree = "<group>"; };
 		711E8BAE2A575C0200151063 /* FocusedField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedField.swift; sourceTree = "<group>"; };
 		711E8BB12A575C2500151063 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		711E8BB42A575E4800151063 /* Collector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collector.swift; sourceTree = "<group>"; };
@@ -293,18 +291,9 @@
 		711E8BAA2A575BCE00151063 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				711E8BAB2A575BD700151063 /* auth */,
 				711E8BAE2A575C0200151063 /* FocusedField.swift */,
 			);
 			path = utils;
-			sourceTree = "<group>";
-		};
-		711E8BAB2A575BD700151063 /* auth */ = {
-			isa = PBXGroup;
-			children = (
-				711E8BAC2A575BE900151063 /* GoogleAuthOneTapConfiguration.swift */,
-			);
-			path = auth;
 			sourceTree = "<group>";
 		};
 		711E8BB02A575C1600151063 /* widgets */ = {
@@ -482,7 +471,6 @@
 			files = (
 				711E8B812A5759F500151063 /* ResultInputView.swift in Sources */,
 				711E8B7B2A5759AE00151063 /* ListItemView.swift in Sources */,
-				711E8BAD2A575BE900151063 /* GoogleAuthOneTapConfiguration.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				711E8B7D2A5759CC00151063 /* NewResultView.swift in Sources */,
 				711E8BA62A575B8400151063 /* Dimensions.swift in Sources */,
@@ -649,6 +637,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 35C4Z35MDY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -656,7 +645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.multiplatform.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -670,6 +659,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 35C4Z35MDY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -677,7 +667,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.multiplatform.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

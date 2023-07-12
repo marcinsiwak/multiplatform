@@ -7,12 +7,6 @@ import shared
 @main
 struct iOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
-        
-    init() {
-        HelperKt.doInitKoin()
-        HelperKt.doInitNapier()
-       }
     
     var body: some Scene {
         WindowGroup {

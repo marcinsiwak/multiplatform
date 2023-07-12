@@ -1,5 +1,8 @@
 package pl.msiwak.multiplatform.helpers
 
+import cocoapods.GoogleSignIn.GIDSignIn
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.initialize
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.core.context.startKoin
@@ -9,6 +12,7 @@ import pl.msiwak.multiplatform.di.appModule
 import pl.msiwak.multiplatform.repository.VersionRepository
 import pl.msiwak.multiplatform.utils.KMMPreferences
 import platform.Foundation.NSBundle
+import platform.Foundation.NSURL
 import platform.darwin.NSObject
 
 fun initKoin() {
@@ -19,6 +23,14 @@ fun initKoin() {
 
 fun initNapier() {
     Napier.base(DebugAntilog())
+}
+
+fun initFirebase() {
+    Firebase.initialize()
+}
+
+fun initGIDSingIn(url: NSURL): Boolean {
+    return GIDSignIn.sharedInstance.handleURL(url)
 }
 
 val sharedPreferencesModule = module {
