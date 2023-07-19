@@ -48,6 +48,8 @@ class WelcomeScreenViewModel(
         }
     }
 
+    // TODO: Add Apple login
+
     fun onRegistrationClicked() {
         navigator.navigate(NavigationDirections.Registration)
     }

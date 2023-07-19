@@ -25,7 +25,6 @@ import pl.msiwak.multiplatform.android.ui.category.CategoryScreen
 import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
 import pl.msiwak.multiplatform.android.ui.forceUpdate.ForceUpdateScreen
 import pl.msiwak.multiplatform.android.ui.language.LanguageScreen
-import pl.msiwak.multiplatform.android.ui.login.LoginScreen
 import pl.msiwak.multiplatform.android.ui.register.RegisterScreen
 import pl.msiwak.multiplatform.android.ui.theme.BaseKmm_ProjectTheme
 import pl.msiwak.multiplatform.android.ui.units.UnitScreen
@@ -63,12 +62,10 @@ class MainActivity : ComponentActivity() {
                     }
                     NavHost(
                         navController = navController,
-                        startDestination = NavigationDirections.VerifyEmail.route
-//                        viewState.value.directions.route
+                        startDestination = viewState.value.directions.route
                     ) {
                         composable(NavigationDirections.Welcome.route) { WelcomeScreen() }
                         composable(NavigationDirections.Registration.route) { RegisterScreen() }
-                        composable(NavigationDirections.Login.route) { LoginScreen() }
                         composable(NavigationDirections.Dashboard.route) { DashboardScreen() }
                         composable(NavigationDirections.AddCategory.route) { AddCategoryScreen() }
                         composable(NavigationDirections.Language.route) { LanguageScreen() }

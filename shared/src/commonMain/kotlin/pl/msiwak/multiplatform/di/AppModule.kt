@@ -60,7 +60,6 @@ import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 import pl.msiwak.multiplatform.ui.language.LanguageViewModel
-import pl.msiwak.multiplatform.ui.login.LoginViewModel
 import pl.msiwak.multiplatform.ui.main.MainViewModel
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
@@ -114,7 +113,6 @@ val viewModelsModule = module {
     viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get()) }
-    viewModelDefinition { LoginViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get()) }
     viewModelDefinition { params ->

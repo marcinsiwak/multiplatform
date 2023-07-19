@@ -21,10 +21,6 @@ actual sealed class NavigationDirections : NavigationCommand {
         override val route: String = "registration"
     }
 
-    actual object Login : NavigationDirections() {
-        override val route: String = "login"
-    }
-
     actual object Dashboard : NavigationDirections() {
         override val route: String = "dashboard"
     }

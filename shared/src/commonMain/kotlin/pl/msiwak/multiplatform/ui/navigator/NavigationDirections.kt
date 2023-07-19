@@ -8,7 +8,6 @@ expect sealed class NavigationDirections : NavigationCommand {
     object NavigateUp : NavigationDirections
     object Welcome : NavigationDirections
     object Registration : NavigationDirections
-    object Login : NavigationDirections
     object Dashboard : NavigationDirections
     class AddExercise(id: Long = 0) : NavigationDirections
     class Category(id: Long = 0) : NavigationDirections
