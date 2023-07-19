@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = viewState.value.directions.route
                     ) {
-                        composable(NavigationDirections.Welcome.route) { WelcomeScreen() }
+                        composable(NavigationDirections.Welcome().route) { WelcomeScreen() }
                         composable(NavigationDirections.Registration.route) { RegisterScreen() }
                         composable(NavigationDirections.Dashboard.route) { DashboardScreen() }
                         composable(NavigationDirections.AddCategory.route) { AddCategoryScreen() }

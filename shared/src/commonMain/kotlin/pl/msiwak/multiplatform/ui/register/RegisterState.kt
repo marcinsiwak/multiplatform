@@ -7,4 +7,5 @@ data class RegisterState(
     val password: String = "",
     val loginErrorMessage: StringResource? = null,
     val passwordErrorMessage: StringResource? = null,
+    val isPasswordVisible: Boolean = false
 )

@@ -26,6 +26,6 @@ class VerifyEmailViewModel(
     }
 
     fun onLoginClicked() {
-        navigator.navigate(NavigationDirections.Welcome)
+        navigator.navigate(NavigationDirections.Welcome(true))
     }
 }

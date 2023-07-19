@@ -15,7 +15,7 @@ import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 
 @Composable
-fun MainButton(modifier: Modifier, onClick: () -> Unit, text: String) {
+fun MainButton(modifier: Modifier = Modifier, onClick: () -> Unit, text: String) {
     Button(
         modifier = modifier,
         onClick = onClick,

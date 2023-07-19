@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.ui.register
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.MR
@@ -20,7 +21,7 @@ class RegisterViewModel(
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(RegisterState())
-    val viewState: StateFlow<RegisterState> = _viewState
+    val viewState: StateFlow<RegisterState> = _viewState.asStateFlow()
 
     private val errorHandler = globalErrorHandler.handleError()
 
@@ -56,4 +57,7 @@ class RegisterViewModel(
         }
     }
 
+    fun onVisibilityClicked() {
+        _viewState.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
+    }
 }

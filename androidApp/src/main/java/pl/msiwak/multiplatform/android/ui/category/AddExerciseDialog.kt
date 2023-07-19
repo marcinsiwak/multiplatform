@@ -4,17 +4,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.components.MainButton
+import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 
 @Composable
@@ -25,8 +24,7 @@ fun AddExerciseDialog(
     onDialogClosed: () -> Unit = {}
 ) {
     AlertDialog(shape = RoundedCornerShape(MaterialTheme.dimens.space_16),
-        containerColor = Color.Gray,
-//        colorResource(MR.colors.gray.resourceId),
+        containerColor = colorResource(MR.colors.gray.resourceId),
         onDismissRequest = {
             onDialogClosed()
         },
@@ -47,18 +45,15 @@ fun AddExerciseDialog(
                 })
         },
         confirmButton = {
-            Button(modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    vertical = MaterialTheme.dimens.space_8,
-                    horizontal = MaterialTheme.dimens.space_16
-                ),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary,
-                    contentColor = MaterialTheme.colorScheme.primary
-                ),
-                onClick = { onAddExerciseClicked() }) {
-                Text(text = stringResource(MR.strings.add_new_exercise.resourceId))
-            }
+            SecondaryButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        vertical = MaterialTheme.dimens.space_8,
+                        horizontal = MaterialTheme.dimens.space_16
+                    ),
+                onClick = { onAddExerciseClicked() },
+                text = stringResource(MR.strings.add_new_exercise.resourceId)
+            )
         })
 }

@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.ui.welcome
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
@@ -52,5 +53,9 @@ class WelcomeScreenViewModel(
 
     fun onRegistrationClicked() {
         navigator.navigate(NavigationDirections.Registration)
+    }
+
+    fun onVisibilityClicked() {
+        _viewState.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
     }
 }

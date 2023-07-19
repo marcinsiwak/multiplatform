@@ -6,7 +6,7 @@ expect sealed class NavigationDirections : NavigationCommand {
     override val isInclusive: Boolean
 
     object NavigateUp : NavigationDirections
-    object Welcome : NavigationDirections
+    class Welcome(isInclusive: Boolean = false) : NavigationDirections
     object Registration : NavigationDirections
     object Dashboard : NavigationDirections
     class AddExercise(id: Long = 0) : NavigationDirections

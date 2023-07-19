@@ -34,7 +34,7 @@ class SettingsViewModel(
     fun onLogoutClicked() {
         viewModelScope.launch {
             logoutUseCase()
-            navigator.navigate(NavigationDirections.Welcome)
+            navigator.navigate(NavigationDirections.Welcome(true))
         }
     }
 }

@@ -25,6 +25,7 @@ fun InputView(
     backgroundColor: Color = Color.Transparent,
     errorMessage: String? = null,
     isPassword: Boolean = false,
+    isPasswordVisible: Boolean = false,
     hintText: String = "",
     readOnly: Boolean = false,
     errorsEnabled: Boolean = true,
@@ -55,7 +56,7 @@ fun InputView(
             },
             singleLine = true,
             readOnly = readOnly,
-            visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
+            visualTransformation = if (isPassword && !isPasswordVisible) PasswordVisualTransformation() else VisualTransformation.None
         )
     }
     if (errorsEnabled) {

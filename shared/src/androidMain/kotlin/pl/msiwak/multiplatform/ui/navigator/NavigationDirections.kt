@@ -12,7 +12,7 @@ actual sealed class NavigationDirections : NavigationCommand {
             get() = "navigateUp"
     }
 
-    actual object Welcome : NavigationDirections() {
+    actual class Welcome actual constructor(override val isInclusive: Boolean) : NavigationDirections() {
         override val route: String
             get() = "welcome"
     }
