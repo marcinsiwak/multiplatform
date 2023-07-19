@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.ui.register
 
-import dev.icerock.moko.resources.desc.desc
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -28,7 +27,7 @@ class RegisterViewModel(
     fun onLoginChanged(text: String) {
         val isLoginValid = validator.validateEmail(text)
         if (isLoginValid) {
-            _viewState.update {  it.copy(loginErrorMessage = null) }
+            _viewState.update { it.copy(loginErrorMessage = null) }
         } else {
             _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
         }
@@ -40,7 +39,7 @@ class RegisterViewModel(
         if (isPasswordValid) {
             _viewState.update { it.copy(passwordErrorMessage = null) }
         } else {
-            _viewState.update {  it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
+            _viewState.update { it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
         }
         _viewState.update { it.copy(password = text) }
     }
@@ -53,7 +52,7 @@ class RegisterViewModel(
                     viewState.value.password
                 )
             )
-            navigator.navigate(NavigationDirections.Dashboard)
+            navigator.navigate(NavigationDirections.VerifyEmail)
         }
     }
 

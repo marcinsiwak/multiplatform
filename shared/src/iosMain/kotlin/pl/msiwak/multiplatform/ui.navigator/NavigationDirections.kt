@@ -60,4 +60,10 @@ actual sealed class NavigationDirections : NavigationCommand {
         override val route: String
             get() = ""
     }
+
+    actual object VerifyEmail : NavigationDirections() {
+        override val route: String
+            get() = "registrationSuccess"
+    }
+
 }

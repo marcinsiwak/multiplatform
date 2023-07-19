@@ -29,6 +29,7 @@ import pl.msiwak.multiplatform.android.ui.login.LoginScreen
 import pl.msiwak.multiplatform.android.ui.register.RegisterScreen
 import pl.msiwak.multiplatform.android.ui.theme.BaseKmm_ProjectTheme
 import pl.msiwak.multiplatform.android.ui.units.UnitScreen
+import pl.msiwak.multiplatform.android.ui.verifyEmail.VerifyEmailScreen
 import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
 import pl.msiwak.multiplatform.ui.main.MainViewModel
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
@@ -72,6 +73,7 @@ class MainActivity : ComponentActivity() {
                         composable(NavigationDirections.Language.route) { LanguageScreen() }
                         composable(NavigationDirections.Unit.route) { UnitScreen() }
                         composable(NavigationDirections.ForceUpdate.route) { ForceUpdateScreen() }
+                        composable(NavigationDirections.VerifyEmail.route) { VerifyEmailScreen() }
                         composable(
                             NavigationDirections.AddExercise().route, arguments = listOf(
                                 navArgument(NavigationDirections.AddExercise.BUNDLE_ARG_ID) {

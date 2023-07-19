@@ -18,6 +18,7 @@ import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
 import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
+import pl.msiwak.multiplatform.domain.authorization.ResendVerificationEmailUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.GetMinAppCodeUseCase
@@ -66,6 +67,7 @@ import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
+import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 import pl.msiwak.multiplatform.utils.DateFormatter
 import pl.msiwak.multiplatform.utils.NumberFormatter
@@ -111,6 +113,7 @@ val toolsModule = module {
 val viewModelsModule = module {
     viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { VerifyEmailViewModel(get(), get()) }
     viewModelDefinition { LoginViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get()) }
@@ -177,6 +180,7 @@ val useCaseModule = module {
     factory { GetVersionNameUseCase(get()) }
     factory { GetUserUseCase(get()) }
     factory { ObserveAuthStateChangedUseCase(get(), get()) }
+    factory { ResendVerificationEmailUseCase(get()) }
 }
 
 val repositoryUseModule = module {

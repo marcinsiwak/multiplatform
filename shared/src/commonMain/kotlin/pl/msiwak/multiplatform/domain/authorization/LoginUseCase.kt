@@ -7,9 +7,14 @@ class LoginUseCase(
     private val authRepository: AuthRepository,
     private val sessionRepository: SessionRepository
 ) {
-    suspend operator fun invoke(params: Params) {
-        val token = authRepository.login(params.login, params.password)
-        token?.let { sessionRepository.saveToken(it) }
+    suspend operator fun invoke(params: Params): Boolean {
+        val result = authRepository.login(params.login, params.password)
+        val token = result?.user?.getIdTokenResult(true)?.token
+        val isEmailVerified = result?.user?.isEmailVerified ?: false
+        if (token != null && isEmailVerified) {
+            sessionRepository.saveToken(token)
+        }
+        return isEmailVerified
     }
 
     data class Params(val login: String, val password: String)

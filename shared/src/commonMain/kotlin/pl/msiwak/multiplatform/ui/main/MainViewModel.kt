@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.ui.main
 
-//import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

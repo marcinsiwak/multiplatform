@@ -13,8 +13,8 @@ class FirebaseAuthorization {
     private val auth = Firebase.auth
 
     suspend fun createNewUser(email: String, password: String) {
-
-        auth.createUserWithEmailAndPassword(email, password)
+        val result = auth.createUserWithEmailAndPassword(email, password)
+        result.user?.sendEmailVerification()
     }
 
     suspend fun loginUser(email: String, password: String): AuthResult {
@@ -36,6 +36,10 @@ class FirebaseAuthorization {
 
     suspend fun logoutUser() {
         auth.signOut()
+    }
+
+    suspend fun resendVerificationEmail() {
+        auth.currentUser?.sendEmailVerification()
     }
 
 }

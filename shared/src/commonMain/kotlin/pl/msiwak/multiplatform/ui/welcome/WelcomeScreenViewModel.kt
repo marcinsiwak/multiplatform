@@ -32,8 +32,12 @@ class WelcomeScreenViewModel(
 
     fun onLoginClicked() {
         viewModelScope.launch(errorHandler) {
-            loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
-            navigator.navigate(NavigationDirections.Dashboard)
+            val isUserVerified = loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
+            if(isUserVerified) {
+                navigator.navigate(NavigationDirections.Dashboard)
+            } else {
+                navigator.navigate(NavigationDirections.VerifyEmail)
+            }
         }
     }
 

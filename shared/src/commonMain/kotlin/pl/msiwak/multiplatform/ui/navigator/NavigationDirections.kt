@@ -17,4 +17,5 @@ expect sealed class NavigationDirections : NavigationCommand {
     object Unit: NavigationDirections
     object ForceUpdate : NavigationDirections
     object OpenStore : NavigationDirections
+    object VerifyEmail : NavigationDirections
 }
