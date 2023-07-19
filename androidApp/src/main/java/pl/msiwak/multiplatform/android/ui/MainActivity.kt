@@ -115,14 +115,19 @@ class MainActivity : ComponentActivity() {
 
     private fun openStore() {
         try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("$URI_MARKET$packageName")))
         } catch (e: ActivityNotFoundException) {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+                    Uri.parse("$URI_STORE$packageName")
                 )
             )
         }
+    }
+
+    companion object {
+        private const val URI_MARKET = "market://details?id="
+        private const val URI_STORE = "https://play.google.com/store/apps/details?id="
     }
 }
