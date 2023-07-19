@@ -33,12 +33,12 @@ fun RegisterScreen() {
     val state = viewModel.viewState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
-            contentScale = ContentScale.Crop,
-            contentDescription = null
-        )
+//        Image(
+//            modifier = Modifier.fillMaxSize(),
+//            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
+//            contentScale = ContentScale.Crop,
+//            contentDescription = null
+//        )
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -53,9 +53,9 @@ fun RegisterScreen() {
             verticalArrangement = Arrangement.Top
         ) {
             InputView(
-                modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_8),
+                modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
                 value = state.value.login,
-                errorMessage = state.value.loginErrorMessage,
+                errorMessage = state.value.loginErrorMessage?.resourceId?.let { stringResource(id = it) },
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
@@ -65,7 +65,7 @@ fun RegisterScreen() {
             InputView(
                 modifier = Modifier,
                 value = state.value.password,
-                errorMessage = state.value.passwordErrorMessage,
+                errorMessage = state.value.passwordErrorMessage?.resourceId?.let { stringResource(id = it) },
                 onValueChange = {
                     viewModel.onPasswordChanged(it)
                 },

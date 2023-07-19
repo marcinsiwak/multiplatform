@@ -32,6 +32,7 @@ import com.google.android.gms.auth.api.identity.SignInClient
 import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.MR
+import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.extensions.findActivity
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
@@ -86,7 +87,7 @@ fun WelcomeScreen() {
             verticalArrangement = Arrangement.Top
         ) {
             InputView(
-                modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_8),
+                modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
                 value = viewState.value.login,
                 onValueChange = {
                     viewModel.onLoginChanged(it)
@@ -107,14 +108,14 @@ fun WelcomeScreen() {
             MainButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = MaterialTheme.dimens.space_32),
+                    .padding(top = MaterialTheme.dimens.space_32),
                 onClick = { viewModel.onLoginClicked() },
                 text = stringResource(id = MR.strings.login.resourceId)
             )
             MainButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = MaterialTheme.dimens.space_32),
+                    .padding(top = MaterialTheme.dimens.space_24, bottom = MaterialTheme.dimens.space_64),
                 onClick = {
                     oneTapClient.beginSignIn(signInRequest)
                         .addOnSuccessListener { result ->
@@ -130,6 +131,7 @@ fun WelcomeScreen() {
                 },
                 text = stringResource(id = MR.strings.welcome_google_login.resourceId)
             )
+
             Text(
                 text = stringResource(MR.strings.welcome_no_account.resourceId),
                 color = MaterialTheme.colorScheme.secondary

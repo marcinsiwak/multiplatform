@@ -1,9 +1,11 @@
 package pl.msiwak.multiplatform.ui.register
 
+import dev.icerock.moko.resources.desc.desc
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
@@ -21,14 +23,14 @@ class RegisterViewModel(
     private val _viewState = MutableStateFlow(RegisterState())
     val viewState: StateFlow<RegisterState> = _viewState
 
-    val errorHandler = globalErrorHandler.handleError()
+    private val errorHandler = globalErrorHandler.handleError()
 
     fun onLoginChanged(text: String) {
         val isLoginValid = validator.validateEmail(text)
         if (isLoginValid) {
             _viewState.update {  it.copy(loginErrorMessage = null) }
         } else {
-            _viewState.update { it.copy(loginErrorMessage = "wrong format") }
+            _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
         }
         _viewState.update { it.copy(login = text) }
     }
@@ -38,7 +40,7 @@ class RegisterViewModel(
         if (isPasswordValid) {
             _viewState.update { it.copy(passwordErrorMessage = null) }
         } else {
-            _viewState.update {  it.copy(passwordErrorMessage = "wrong format") }
+            _viewState.update {  it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
         }
         _viewState.update { it.copy(password = text) }
     }

@@ -5,6 +5,7 @@ import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
@@ -32,14 +33,14 @@ class MainViewModel(
     private val errorHandler = globalErrorHandler.handleError()
 
     private val _viewState = MutableStateFlow(MainState())
-    val viewState: StateFlow<MainState> = _viewState
+    val viewState: StateFlow<MainState> = _viewState.asStateFlow()
 
     init {
         viewModelScope.launch(errorHandler) {
             observeAuthStateChangedUseCase()
         }
         viewModelScope.launch(errorHandler) {
-            _viewState.update { it.copy(isLoading = false) }
+            _viewState.update { it.copy(isLoading = true) }
             fetchRemoteConfigUseCase()
             StringDesc.localeType = StringDesc.LocaleType.Custom(getLanguageUseCase())
 

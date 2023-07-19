@@ -12,6 +12,7 @@
     <string name="login">Login</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="input_wrong_format">Wrong format</string>
 
     <string name="exercise">Exercise</string>
     <string name="exercise_name">Exercise name</string>

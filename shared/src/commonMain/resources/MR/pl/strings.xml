@@ -12,6 +12,7 @@
     <string name="login">Zaloguj</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="input_wrong_format">Wrong format</string>
 
     <string name="exercise">ćwiczenie</string>
     <string name="exercise_name">Nazwa ćwiczenia</string>
