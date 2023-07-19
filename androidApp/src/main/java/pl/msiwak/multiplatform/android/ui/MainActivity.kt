@@ -63,7 +63,8 @@ class MainActivity : ComponentActivity() {
                     }
                     NavHost(
                         navController = navController,
-                        startDestination = viewState.value.directions.route
+                        startDestination = NavigationDirections.VerifyEmail.route
+//                        viewState.value.directions.route
                     ) {
                         composable(NavigationDirections.Welcome.route) { WelcomeScreen() }
                         composable(NavigationDirections.Registration.route) { RegisterScreen() }
