@@ -44,7 +44,7 @@ class MainViewModel(
             StringDesc.localeType = StringDesc.LocaleType.Custom(getLanguageUseCase())
 
             if (!getUserTokenUseCase().isNullOrEmpty()) {
-                _viewState.update { it.copy(directions = NavigationDirections.Dashboard) }
+                _viewState.update { it.copy(directions = NavigationDirections.Dashboard(true)) }
             }
             if (getForceUpdateStateUseCase()) {
                 _viewState.update { it.copy(directions = NavigationDirections.ForceUpdate) }

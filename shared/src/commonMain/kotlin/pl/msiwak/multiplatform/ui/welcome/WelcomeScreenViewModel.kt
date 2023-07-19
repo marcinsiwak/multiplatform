@@ -35,7 +35,7 @@ class WelcomeScreenViewModel(
         viewModelScope.launch(errorHandler) {
             val isUserVerified = loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
             if(isUserVerified) {
-                navigator.navigate(NavigationDirections.Dashboard)
+                navigator.navigate(NavigationDirections.Dashboard(true))
             } else {
                 navigator.navigate(NavigationDirections.VerifyEmail)
             }
@@ -45,7 +45,7 @@ class WelcomeScreenViewModel(
     fun onGoogleLogin(idToken: String?, accessToken: String?) {
         viewModelScope.launch {
             googleLoginUseCase(idToken, accessToken)
-            navigator.navigate(NavigationDirections.Dashboard)
+            navigator.navigate(NavigationDirections.Dashboard(true))
         }
     }
 

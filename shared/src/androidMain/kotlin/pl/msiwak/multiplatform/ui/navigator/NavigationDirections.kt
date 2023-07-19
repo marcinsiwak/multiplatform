@@ -22,7 +22,7 @@ actual sealed class NavigationDirections : NavigationCommand {
             get() = "registration"
     }
 
-    actual object Dashboard : NavigationDirections() {
+    actual class Dashboard actual constructor(override val isInclusive: Boolean): NavigationDirections() {
         override val route: String
             get() = "dashboard"
     }

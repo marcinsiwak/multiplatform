@@ -22,8 +22,9 @@ actual sealed class NavigationDirections : NavigationCommand {
         override val route: String = "registration"
     }
 
-    actual object Dashboard : NavigationDirections() {
-        override val route: String = "dashboard"
+    actual class Dashboard actual constructor(override val isInclusive: Boolean): NavigationDirections() {
+        override val route: String
+            get() = "dashboard"
     }
 
     actual class AddExercise actual constructor(private val id: Long) : NavigationDirections() {

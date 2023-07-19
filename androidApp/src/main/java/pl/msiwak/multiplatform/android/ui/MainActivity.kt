@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(NavigationDirections.Welcome().route) { WelcomeScreen() }
                         composable(NavigationDirections.Registration.route) { RegisterScreen() }
-                        composable(NavigationDirections.Dashboard.route) { DashboardScreen() }
+                        composable(NavigationDirections.Dashboard().route) { DashboardScreen() }
                         composable(NavigationDirections.AddCategory.route) { AddCategoryScreen() }
                         composable(NavigationDirections.Language.route) { LanguageScreen() }
                         composable(NavigationDirections.Unit.route) { UnitScreen() }

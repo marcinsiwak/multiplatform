@@ -14,7 +14,7 @@ fun SecondaryButton(modifier: Modifier = Modifier, onClick: () -> Unit, text: St
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.tertiary,
-            contentColor = MaterialTheme.colorScheme.onSecondary,
+            contentColor = MaterialTheme.colorScheme.primary,
         )
     ) {
         Text(text = text)
