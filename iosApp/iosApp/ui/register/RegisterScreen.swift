@@ -3,37 +3,40 @@ import shared
 
 struct RegisterScreen: View {
     
-//    let authRepo: FirebaseAuthorization = FirebaseAuthorization()
-
-
-    @State var username: String = ""
-    @State var password: String = ""
+    let viewModel = RegisterDiHelper().getViewModel()
+    
+    @ObservedObject private var state: ObservableState<RegisterState>
+    
+    init() {
+        self.state = ObservableState<RegisterState>(value: viewModel.viewState.value as! RegisterState)
+        observeState()
+    }
+    
+    private func observeState() {
+        viewModel.viewState.collect(collector: Collector<RegisterState>{ state in
+            self.state.value = state
+            
+        }) { error in
+            print("Error ocurred during state collection")
+        }
+    }
 
      var body: some View {
          VStack(alignment: .leading) {
-             Text("Username")
-                 .font(.callout)
-                 .bold()
-             TextField("Enter username...", text: $username)
-                 .textFieldStyle(RoundedBorderTextFieldStyle())
-
-             Text("Password")
-                 .font(.callout)
-                 .bold()
-             TextField("Enter password...", text: $password)
-                 .textFieldStyle(RoundedBorderTextFieldStyle())
+             InputView(value: $state.value.login, trailingIcon: {}, onValueChange: { value in
+                 viewModel.onLoginChanged(text: value)
+             })
+             InputView(value: $state.value.password, isPassword: true, trailingIcon: {}, onValueChange: { value in
+                 viewModel.onPasswordChanged(text: value)
+             })
 
 
              Button("Register") {
-                 Task {
-                     do {
-//                         try await authRepo.createNewUser(email: username, password: password)
-                     } catch {
-                         print(error)
-                     }
-                 }
+                 viewModel.onRegisterClicked()
              }.padding(Dimensions.space_32)
          }.padding()
+             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+             .background(Color.black)
 
      }
     

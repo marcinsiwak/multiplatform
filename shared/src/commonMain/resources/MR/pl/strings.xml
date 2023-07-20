@@ -54,4 +54,10 @@
     <string name="welcome_create_account">Stwórz konto</string>
     <string name="welcome_google_login">Login with Google</string>
 
+    <string name="verify_title">Verify your account</string>
+    <string name="verify_description">We have sent you activation link. Please check your email and verify your account.</string>
+    <string name="verify_open_mail">Open mail</string>
+    <string name="verify_resend_mail">Resend mail</string>
+    <string name="verify_login">Login</string>
+
 </resources>
