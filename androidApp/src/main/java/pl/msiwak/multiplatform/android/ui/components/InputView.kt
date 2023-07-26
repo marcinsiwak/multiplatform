@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,11 +37,11 @@ fun InputView(
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 cursorColor = MaterialTheme.colorScheme.onPrimary,
                 containerColor = backgroundColor,
-                textColor = MaterialTheme.colorScheme.onPrimary,
-                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.tertiary,
-                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.tertiary
+                textColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
+                focusedBorderColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
+                unfocusedBorderColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.tertiary,
+                focusedLabelColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
+                unfocusedLabelColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.tertiary
             ),
             trailingIcon = trailingIcon,
             shape = RoundedCornerShape(MaterialTheme.dimens.space_12),
@@ -62,9 +63,11 @@ fun InputView(
     if (errorsEnabled) {
         Text(
             modifier = Modifier
-                .padding(bottom = MaterialTheme.dimens.space_4),
+                .fillMaxWidth()
+                .padding(vertical = MaterialTheme.dimens.space_8),
             text = errorMessage ?: "",
-            color = Color.Red
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.labelSmall,
         )
     }
 }

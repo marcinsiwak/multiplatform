@@ -60,4 +60,9 @@
     <string name="verify_resend_mail">Resend mail</string>
     <string name="verify_login">Login</string>
 
+    <string name="password_requirements_number">Included number</string>
+    <string name="password_requirements_letter">Included letter</string>
+    <string name="password_requirements_capital">Included capital letter</string>
+    <string name="password_requirements_special">Included special sign</string>
+    <string name="password_requirements_more_than_eight">Consist eight signs</string>
 </resources>

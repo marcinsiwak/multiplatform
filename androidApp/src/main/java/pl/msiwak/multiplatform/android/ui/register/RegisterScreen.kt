@@ -24,6 +24,7 @@ import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
+import pl.msiwak.multiplatform.android.ui.components.PasswordRequirements
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
@@ -31,7 +32,7 @@ import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 fun RegisterScreen() {
     val viewModel = koinViewModel<RegisterViewModel>()
 
-    val state = viewModel.viewState.collectAsState()
+    val viewState = viewModel.viewState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(
@@ -55,8 +56,8 @@ fun RegisterScreen() {
         ) {
             InputView(
                 modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
-                value = state.value.login,
-                errorMessage = state.value.loginErrorMessage?.resourceId?.let { stringResource(id = it) },
+                value = viewState.value.login,
+                errorMessage = viewState.value.loginErrorMessage?.resourceId?.let { stringResource(id = it) },
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
@@ -65,19 +66,19 @@ fun RegisterScreen() {
 
             InputView(
                 modifier = Modifier,
-                value = state.value.password,
-                errorMessage = state.value.passwordErrorMessage?.resourceId?.let { stringResource(id = it) },
+                value = viewState.value.password,
+                errorMessage = viewState.value.passwordErrorMessage?.resourceId?.let { stringResource(id = it) },
                 onValueChange = {
                     viewModel.onPasswordChanged(it)
                 },
                 isPassword = true,
-                isPasswordVisible = state.value.isPasswordVisible,
+                isPasswordVisible = viewState.value.isPasswordVisible,
                 trailingIcon = {
                     Icon(
                         modifier = Modifier
                             .clickable { viewModel.onVisibilityClicked() },
                         painter = painterResource(
-                            id = if (state.value.isPasswordVisible) {
+                            id = if (viewState.value.isPasswordVisible) {
                                 R.drawable.ic_invisible
                             } else {
                                 R.drawable.ic_visible
@@ -88,6 +89,9 @@ fun RegisterScreen() {
                 },
                 hintText = stringResource(MR.strings.password.resourceId)
             )
+
+            PasswordRequirements(requirements = viewState.value.passwordRequirements)
+
             MainButton(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -8,6 +8,8 @@ import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
+import pl.msiwak.multiplatform.data.common.PasswordRequirement
+import pl.msiwak.multiplatform.data.common.PasswordRequirementType
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
@@ -26,26 +28,73 @@ class RegisterViewModel(
     private val errorHandler = globalErrorHandler.handleError()
 
     fun onLoginChanged(text: String) {
-        val isLoginValid = validator.validateEmail(text)
-        if (isLoginValid) {
-            _viewState.update { it.copy(loginErrorMessage = null) }
-        } else {
-            _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
-        }
-        _viewState.update { it.copy(login = text) }
+        _viewState.update { it.copy(login = text, loginErrorMessage = null) }
     }
 
     fun onPasswordChanged(text: String) {
-        val isPasswordValid = validator.validatePassword(text)
+        _viewState.update {
+            it.copy(
+                password = text,
+                passwordErrorMessage = null,
+                passwordRequirements = getPasswordRequirementsState(text)
+            )
+        }
+    }
+
+    private fun getPasswordRequirementsState(text: String): List<PasswordRequirement> {
+        return viewState.value.passwordRequirements.map {
+
+            when (it.type) {
+                PasswordRequirementType.LENGTH -> it.copy(
+                    isCorrect = validator.isCorrectPasswordLength(
+                        text
+                    )
+                )
+
+                PasswordRequirementType.NUMBER -> it.copy(
+                    isCorrect = validator.hasPasswordNumber(
+                        text
+                    )
+                )
+
+                PasswordRequirementType.LETTER -> it.copy(
+                    isCorrect = validator.hasPasswordLetter(
+                        text
+                    )
+                )
+
+                PasswordRequirementType.CAPITAL -> it.copy(
+                    isCorrect = validator.hasPasswordCapitalLetter(
+                        text
+                    )
+                )
+
+                PasswordRequirementType.SPECIAL -> it.copy(
+                    isCorrect = validator.hasPasswordSpecialCharacter(
+                        text
+                    )
+                )
+            }
+        }
+    }
+
+    fun onRegisterClicked() {
+        val isPasswordValid = validator.validatePassword(viewState.value.password)
+        val isLoginValid = validator.validateEmail(viewState.value.login)
+
         if (isPasswordValid) {
             _viewState.update { it.copy(passwordErrorMessage = null) }
         } else {
             _viewState.update { it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
         }
-        _viewState.update { it.copy(password = text) }
-    }
+        if (isLoginValid) {
+            _viewState.update { it.copy(loginErrorMessage = null) }
+        } else {
+            _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
+        }
 
-    fun onRegisterClicked() {
+        if (!isPasswordValid || !isLoginValid) return
+
         viewModelScope.launch(errorHandler) {
             registerUserUseCase(
                 RegisterUserUseCase.Params(

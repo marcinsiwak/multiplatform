@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.domain.authorization
 
+import io.github.aakira.napier.Napier
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.SessionRepository
 
@@ -13,6 +14,7 @@ class LoginUseCase(
         val isEmailVerified = result?.user?.isEmailVerified ?: false
         if (token != null && isEmailVerified) {
             sessionRepository.saveToken(token)
+            Napier.e("OUTPUT: $token")
         }
         return isEmailVerified
     }
