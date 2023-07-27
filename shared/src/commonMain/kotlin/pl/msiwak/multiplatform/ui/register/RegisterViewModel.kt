@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.ui.register
 
+import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,7 +26,15 @@ class RegisterViewModel(
     private val _viewState = MutableStateFlow(RegisterState())
     val viewState: StateFlow<RegisterState> = _viewState.asStateFlow()
 
-    private val errorHandler = globalErrorHandler.handleError()
+    private val errorHandler = globalErrorHandler.handleError { throwable ->
+        when(throwable) {
+            is FirebaseAuthUserCollisionException -> {
+                navigator.navigate(NavigationDirections.VerifyEmail)
+                true
+            }
+            else -> false
+        }
+    }
 
     fun onLoginChanged(text: String) {
         _viewState.update { it.copy(login = text, loginErrorMessage = null) }

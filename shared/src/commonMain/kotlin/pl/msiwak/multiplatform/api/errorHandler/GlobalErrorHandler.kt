@@ -6,14 +6,18 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 
 class GlobalErrorHandler {
 
-    fun handleError() = CoroutineExceptionHandler { _, throwable: Throwable ->
-        when(throwable) {
-            is FirebaseAuthUserCollisionException -> {
-                Napier.e("Same user error: $throwable")
-            }
-            else -> {
-                Napier.e("Error: $throwable")
+    fun handleError(customHandle: (Throwable) -> Boolean = { _ -> false }) =
+        CoroutineExceptionHandler { _, throwable: Throwable ->
+            if (!customHandle(throwable)) {
+                when (throwable) {
+                    is FirebaseAuthUserCollisionException -> {
+                        Napier.e("Same user error: $throwable")
+                    }
+
+                    else -> {
+                        Napier.e("Error: $throwable")
+                    }
+                }
             }
         }
-    }
 }

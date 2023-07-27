@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,8 +11,8 @@ import pl.msiwak.multiplatform.MR
 fun PopupDialog(
     title: String = "",
     description: String = "",
-    confirmButtonTitle: String = "",
-    dismissButtonTitle: String = "",
+    confirmButtonTitle: String,
+    dismissButtonTitle: String? = null,
     onDialogClosed: () -> Unit = {},
     onConfirmClicked: () -> Unit = {},
     onDismissClicked: () -> Unit = {}
@@ -39,12 +38,14 @@ fun PopupDialog(
                     onConfirmClicked()
                 })
         },
-        dismissButton = {
-            SecondaryButton(
-                text = dismissButtonTitle,
-                onClick = {
-                    onDismissClicked()
-                })
-        }
+        dismissButton = if (dismissButtonTitle != null) {
+            {
+                SecondaryButton(
+                    text = dismissButtonTitle,
+                    onClick = {
+                        onDismissClicked()
+                    })
+            }
+        } else null
     )
 }

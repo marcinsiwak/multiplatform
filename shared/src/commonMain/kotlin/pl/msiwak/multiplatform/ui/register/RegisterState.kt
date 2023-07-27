@@ -16,5 +16,5 @@ data class RegisterState(
         PasswordRequirement(false, PasswordRequirementType.SPECIAL),
         PasswordRequirement(false, PasswordRequirementType.CAPITAL),
         PasswordRequirement(false, PasswordRequirementType.NUMBER),
-    )
+    ),
 )

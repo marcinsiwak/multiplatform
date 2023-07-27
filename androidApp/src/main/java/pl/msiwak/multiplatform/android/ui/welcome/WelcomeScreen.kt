@@ -39,6 +39,7 @@ import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.extensions.findActivity
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
+import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.auth.GoogleAuthOneTapConfiguration
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
@@ -69,6 +70,17 @@ fun WelcomeScreen() {
         }
     )
 
+    if (viewState.value.isErrorDialogVisible) {
+        PopupDialog(
+            title = "Auth failed",
+            description = "Email or password is invalid",
+            confirmButtonTitle = "OK",
+            onConfirmClicked = {
+                viewModel.onConfirmDialogButtonClicked()
+            }
+        )
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(
 //            modifier = Modifier.fillMaxSize(),
@@ -92,6 +104,7 @@ fun WelcomeScreen() {
             InputView(
                 modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
                 value = viewState.value.login,
+                errorMessage = viewState.value.authErrorMessage,
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
