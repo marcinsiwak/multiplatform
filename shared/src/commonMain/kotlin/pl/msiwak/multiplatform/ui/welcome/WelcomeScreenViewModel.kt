@@ -37,11 +37,11 @@ class WelcomeScreenViewModel(
     }
 
     fun onLoginChanged(text: String) {
-        _viewState.value = viewState.value.copy(login = text)
+        _viewState.value = viewState.value.copy(login = text, authErrorMessage = null)
     }
 
     fun onPasswordChanged(text: String) {
-        _viewState.value = viewState.value.copy(password = text)
+        _viewState.value = viewState.value.copy(password = text, authErrorMessage = null)
     }
 
     fun onLoginClicked() {

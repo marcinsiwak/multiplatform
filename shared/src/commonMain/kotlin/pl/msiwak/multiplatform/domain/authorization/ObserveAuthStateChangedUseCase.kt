@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.domain.authorization
 
+import io.github.aakira.napier.Napier
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.SessionRepository
 
@@ -10,7 +11,11 @@ class ObserveAuthStateChangedUseCase(
     suspend operator fun invoke() {
         authRepository.observeAuthStateChanged().collect {
             if (it != null && it.isEmailVerified) {
-                it.getIdToken(true)?.let { token -> sessionRepository.saveToken(token) }
+                it.getIdToken(true)?.let { token ->
+                    Napier.e("Output token: $token")
+                    // todo: REMOVE TOKEN LOGGER
+                    sessionRepository.saveToken(token)
+                }
             } else {
                 sessionRepository.clearToken()
             }
