@@ -1,11 +1,12 @@
 package pl.msiwak.multiplatform.api.data.user
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ApiUser(
-    val id: String,
-    val email: String,
-    val emailVerified: Boolean,
-    val username: String
+    @SerialName("id") val id: String,
+    @SerialName("email") val email: String,
+    @SerialName("emailVerified") val emailVerified: Boolean,
+    @SerialName("username") val username: String
 )

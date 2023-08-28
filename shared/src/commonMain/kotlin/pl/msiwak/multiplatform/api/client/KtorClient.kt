@@ -19,7 +19,7 @@ import pl.msiwak.multiplatform.utils.isDebug
 
 class KtorClient(private val sessionStore: SessionStore) {
     val httpClient = HttpClient(CIO) {
-        if (isDebug) {
+        if (BuildKonfig.IsDebug) {
             install(Logging) {
                 level = LogLevel.ALL
                 logger = object : Logger {

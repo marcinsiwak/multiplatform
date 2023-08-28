@@ -2,14 +2,16 @@ package pl.msiwak.multiplatform.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.withContext
+import pl.msiwak.multiplatform.api.data.user.ApiCategory
+import pl.msiwak.multiplatform.api.service.CategoryService
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 
 class CategoryRepository(
-    private val categoriesDao: CategoriesDao
+    private val categoriesDao: CategoriesDao,
+    private val categoryService: CategoryService
 ) {
 
     suspend fun getCategories(): List<CategoryData> = withContext(Dispatchers.Default) {
@@ -52,8 +54,14 @@ class CategoryRepository(
             categoriesDao.insertCategories(categories)
         }
 
-    suspend fun insertCategory(categories: CategoryData) = withContext(Dispatchers.Default) {
-        categoriesDao.insertCategory(categories)
+    suspend fun createCategory(category: CategoryData) = withContext(Dispatchers.Default) {
+        categoryService.createCategory(
+            ApiCategory(
+                name = category.name,
+                exerciseType = category.exerciseType.name,
+            )
+        )
+        categoriesDao.insertCategory(category)
     }
 
     suspend fun updateCategory(category: CategoryData) = withContext(Dispatchers.Default) {

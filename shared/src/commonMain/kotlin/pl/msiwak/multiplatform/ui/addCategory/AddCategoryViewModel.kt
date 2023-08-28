@@ -6,11 +6,11 @@ import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.entity.CategoryData
-import pl.msiwak.multiplatform.domain.summaries.InsertCategoryUseCase
+import pl.msiwak.multiplatform.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
 class AddCategoryViewModel(
-    private val insertCategoryUseCase: InsertCategoryUseCase,
+    private val createCategoryUseCase: CreateCategoryUseCase,
     private val navigator: Navigator
 ) : ViewModel() {
 
@@ -29,7 +29,7 @@ class AddCategoryViewModel(
         val name = _viewState.value.name
         val exerciseType = _viewState.value.exerciseType
         viewModelScope.launch {
-            insertCategoryUseCase(CategoryData(name = name, exerciseType = exerciseType))
+            createCategoryUseCase(CategoryData(name = name, exerciseType = exerciseType))
             navigator.navigateUp()
         }
     }

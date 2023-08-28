@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.domain.data.user
+package pl.msiwak.multiplatform.data.common
 
 data class User(
     val email: String,

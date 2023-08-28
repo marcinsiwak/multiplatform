@@ -2,9 +2,12 @@ package pl.msiwak.multiplatform.di
 
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.api.authorization.FirebaseAuthorization
+import pl.msiwak.multiplatform.api.client.CategoryClient
 import pl.msiwak.multiplatform.api.client.KtorClient
+import pl.msiwak.multiplatform.api.client.UserClient
 import pl.msiwak.multiplatform.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.api.remoteConfig.RemoteConfig
+import pl.msiwak.multiplatform.api.service.CategoryService
 import pl.msiwak.multiplatform.api.service.UserService
 import pl.msiwak.multiplatform.data.store.LanguageStore
 import pl.msiwak.multiplatform.data.store.SessionStore
@@ -35,7 +38,7 @@ import pl.msiwak.multiplatform.domain.summaries.GetExerciseDataUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertCategoryUseCase
+import pl.msiwak.multiplatform.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
@@ -81,7 +84,8 @@ fun appModule() = listOf(
     toolsModule,
     repositoryUseModule,
     storeModule,
-    serviceModule
+    serviceModule,
+    clientModule
 )
 
 val databaseModule = module {
@@ -153,7 +157,7 @@ val useCaseModule = module {
     factory { GetExercisesUseCase(get()) }
     factory { GetCategoriesUseCase(get()) }
     factory { InsertCategoriesUseCase(get()) }
-    factory { InsertCategoryUseCase(get()) }
+    factory { CreateCategoryUseCase(get()) }
     factory { UpdateCategoriesUseCase(get()) }
     factory { GetCategoryUseCase(get()) }
     factory { ObserveCategoryUseCase(get()) }
@@ -185,13 +189,19 @@ val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
     single { ExerciseRepository(get()) }
-    single { CategoryRepository(get()) }
+    single { CategoryRepository(get(), get()) }
     single { RemoteConfigRepository(get()) }
     single { VersionRepository(get()) }
     single { SessionRepository(get()) }
 }
 
 val serviceModule = module {
-    single { KtorClient(get()) }
     single { UserService(get()) }
+    single { CategoryService(get()) }
+}
+
+val clientModule = module {
+    single { KtorClient(get()) }
+    single { UserClient(get()) }
+    single { CategoryClient(get()) }
 }

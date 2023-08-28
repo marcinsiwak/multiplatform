@@ -1,4 +1,5 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
 import java.io.FileInputStream
 import java.util.Properties
 import pl.msiwak.multiplatfor.dependencies.Deps
@@ -144,13 +145,21 @@ buildkonfig {
 
     defaultConfigs {
         buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+        buildConfigField(BOOLEAN, "IsDebug", "false")
     }
     targetConfigs {
+
+        create("android") {
+            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+            buildConfigField(BOOLEAN, "IsDebug", "false")
+        }
+
         create("ios") {
             buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+            buildConfigField(BOOLEAN, "IsDebug", "false")
         }
     }
-    targetConfigs("debug") {
+    targetConfigs("dev") {
 
         val debugPropertiesFile = rootProject.file("debug.properties")
         val debugProperties = Properties()
@@ -158,9 +167,11 @@ buildkonfig {
 
         create("android") {
             buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
+            buildConfigField(BOOLEAN, "IsDebug", "true")
         }
         create("ios") {
             buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
+            buildConfigField(BOOLEAN, "IsDebug", "true")
         }
     }
 }

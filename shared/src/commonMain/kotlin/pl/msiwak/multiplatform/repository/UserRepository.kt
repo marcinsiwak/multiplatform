@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.api.service.UserService
-import pl.msiwak.multiplatform.domain.data.user.User
+import pl.msiwak.multiplatform.data.common.User
 
 class UserRepository(private val userService: UserService) {
 
