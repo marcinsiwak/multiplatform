@@ -31,7 +31,6 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.Category
 import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.data.entity.CategoryData
 
 @Composable
 fun CategoryItem(modifier: Modifier = Modifier, category: Category) {

@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.domain.summaries
 
 import pl.msiwak.multiplatform.data.common.UnitType
-import pl.msiwak.multiplatform.data.entity.ExerciseWithUnit
+import pl.msiwak.multiplatform.data.common.ExerciseWithUnit
 import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 
 class GetExerciseUseCase(
