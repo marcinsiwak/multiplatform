@@ -27,7 +27,7 @@ actual sealed class NavigationDirections : NavigationCommand {
             get() = "dashboard"
     }
 
-    actual class AddExercise actual constructor(val id: Long) : NavigationDirections() {
+    actual class AddExercise actual constructor(val id: String) : NavigationDirections() {
         override val route: String
             get() = "addExercise/{$BUNDLE_ARG_ID}"
         override val destination: String
@@ -38,7 +38,7 @@ actual sealed class NavigationDirections : NavigationCommand {
         }
     }
 
-    actual class Category actual constructor(val id: Long) : NavigationDirections() {
+    actual class Category actual constructor(val id: String) : NavigationDirections() {
         override val route: String
             get() = "category/{${BUNDLE_ARG_ID}}"
         override val destination: String

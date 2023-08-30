@@ -5,8 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.api.data.user.ApiCategory
 import pl.msiwak.multiplatform.api.service.CategoryService
-import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.data.entity.CategoryData
+import pl.msiwak.multiplatform.data.common.Category
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 
 class CategoryRepository(
@@ -14,61 +13,62 @@ class CategoryRepository(
     private val categoryService: CategoryService
 ) {
 
-    suspend fun getCategories(): List<CategoryData> = withContext(Dispatchers.Default) {
-        val categories = categoriesDao.getCategories()
-        return@withContext categories.ifEmpty {
-            insertCategories(
-                listOf(
-                    CategoryData(
-                        id = 1,
-                        "Gym",
-                        emptyList(),
-                        ExerciseType.GYM
-                    ), CategoryData(
-                        id = 2,
-                        "Running",
-                        emptyList(),
-                        ExerciseType.RUNNING
-                    )
-                )
-            )
-            val out = categoriesDao.getCategories()
-            out
-        }
+    suspend fun downloadCategories(): List<Category> = withContext(Dispatchers.Default) {
+        val categories = categoryService.downloadCategories()
+        categoriesDao.insertCategories(categories)
+        return@withContext categories
+//        categories.ifEmpty {
+//            insertCategories(
+//                listOf(
+//                    CategoryData(
+//                        id = 1,
+//                        "Gym",
+//                        emptyList(),
+//                        ExerciseType.GYM
+//                    ), CategoryData(
+//                        id = 2,
+//                        "Running",
+//                        emptyList(),
+//                        ExerciseType.RUNNING
+//                    )
+//                )
+//            )
+//            val out = categoriesDao.getCategories()
+//            out
+//        }
     }
 
-    suspend fun getCategory(id: Long): CategoryData = withContext(Dispatchers.Default) {
+    suspend fun getCategory(id: String): Category = withContext(Dispatchers.Default) {
         return@withContext categoriesDao.getCategory(id)
     }
 
-    fun observeCategory(id: Long): Flow<CategoryData> {
+    fun observeCategory(id: String): Flow<Category> {
         return categoriesDao.observeCategory(id)
     }
 
-    fun observeCategories(): Flow<List<CategoryData>> {
+    fun observeCategories(): Flow<List<Category>> {
         return categoriesDao.observeCategories()
     }
 
-    suspend fun insertCategories(categories: List<CategoryData>) =
+    suspend fun insertCategories(categories: List<Category>) =
         withContext(Dispatchers.Default) {
             categoriesDao.insertCategories(categories)
         }
 
-    suspend fun createCategory(category: CategoryData) = withContext(Dispatchers.Default) {
+    suspend fun createCategory(category: Category) = withContext(Dispatchers.Default) {
         categoryService.createCategory(
             ApiCategory(
                 name = category.name,
                 exerciseType = category.exerciseType.name,
             )
         )
-        categoriesDao.insertCategory(category)
     }
 
-    suspend fun updateCategory(category: CategoryData) = withContext(Dispatchers.Default) {
+    suspend fun updateCategory(category: Category) = withContext(Dispatchers.Default) {
         categoriesDao.updateCategory(category)
     }
 
-    suspend fun removeCategory(categoryId: Long) = withContext(Dispatchers.Default) {
+    suspend fun removeCategory(categoryId: String) = withContext(Dispatchers.Default) {
         categoriesDao.removeCategory(categoryId)
     }
 

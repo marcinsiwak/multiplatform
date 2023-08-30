@@ -1,14 +1,14 @@
 package pl.msiwak.multiplatform.domain.summaries
 
 import pl.msiwak.multiplatform.data.common.UnitType
-import pl.msiwak.multiplatform.data.entity.ExerciseDataWithUnit
+import pl.msiwak.multiplatform.data.entity.ExerciseWithUnit
 import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 
 class GetExerciseUseCase(
     private val getExerciseDataUseCase: GetExerciseDataUseCase,
     private val getUnitsUseCase: GetUnitsUseCase
 ) {
-    suspend operator fun invoke(id: Long): ExerciseDataWithUnit {
+    suspend operator fun invoke(id: String): ExerciseWithUnit {
         val exercise = getExerciseDataUseCase(id)
         val unitType = getUnitsUseCase()
         if (unitType == UnitType.IMPERIAL) {
@@ -17,9 +17,9 @@ class GetExerciseUseCase(
                     it.copy(result = it.result.times(exercise.exerciseType.convertValue))
                 }
             )
-            return ExerciseDataWithUnit(newExercise, exercise?.exerciseType?.unitImperial)
+            return ExerciseWithUnit(newExercise, exercise?.exerciseType?.unitImperial)
         }
 
-        return ExerciseDataWithUnit(exercise, exercise?.exerciseType?.unitMetric)
+        return ExerciseWithUnit(exercise, exercise?.exerciseType?.unitMetric)
     }
 }

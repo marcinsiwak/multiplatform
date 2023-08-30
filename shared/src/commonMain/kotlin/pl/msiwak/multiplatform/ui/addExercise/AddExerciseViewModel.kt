@@ -12,11 +12,11 @@ import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.ViewModel
 import pl.msiwak.multiplatform.data.common.DateFilterType
+import pl.msiwak.multiplatform.data.common.Exercise
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.FormattedResultData
 import pl.msiwak.multiplatform.data.common.ResultData
 import pl.msiwak.multiplatform.data.common.SortType
-import pl.msiwak.multiplatform.data.entity.ExerciseData
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
@@ -31,7 +31,7 @@ import pl.msiwak.multiplatform.utils.NUMBER_REGEX_DOT
 import pl.msiwak.multiplatform.utils.TIME_REGEX
 
 class AddExerciseViewModel(
-    id: Long,
+    id: String,
     private val updateExerciseUseCase: UpdateExerciseUseCase,
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
@@ -50,7 +50,7 @@ class AddExerciseViewModel(
 
     private val currentResults: MutableList<ResultData> = mutableListOf()
 
-    private val currentExerciseData = MutableStateFlow(ExerciseData())
+    private val currentExercise = MutableStateFlow(Exercise())
 
     private val exerciseId = id
 
@@ -61,15 +61,15 @@ class AddExerciseViewModel(
     init {
         viewModelScope.launch {
             val exerciseWithUnit = getExerciseUseCase(exerciseId)
-            currentExerciseData.value = exerciseWithUnit.exerciseData ?: ExerciseData()
-            currentResults.addAll(currentExerciseData.value.results)
-            val results = formatResultsUseCase(currentExerciseData.value.results)
-            exerciseName = currentExerciseData.value.exerciseTitle
+            currentExercise.value = exerciseWithUnit.exercise ?: Exercise()
+            currentResults.addAll(currentExercise.value.results)
+            val results = formatResultsUseCase(currentExercise.value.results)
+            exerciseName = currentExercise.value.exerciseTitle
             _viewState.value = _viewState.value.copy(
-                exerciseTitle = currentExerciseData.value.exerciseTitle,
-                exerciseType = currentExerciseData.value.exerciseType,
+                exerciseTitle = currentExercise.value.exerciseTitle,
+                exerciseType = currentExercise.value.exerciseType,
                 results = results,
-                resultDataTitles = setTableTitles(exerciseWithUnit.exerciseData?.exerciseType),
+                resultDataTitles = setTableTitles(exerciseWithUnit.exercise?.exerciseType),
                 unit = exerciseWithUnit.unit ?: "",
                 newResultData = _viewState.value.newResultData.copy(
                     date = formatDateUseCase(
@@ -93,7 +93,7 @@ class AddExerciseViewModel(
         viewModelScope.launch {
             val newTitle = viewState.value.exerciseTitle
             if (exerciseName != newTitle) {
-                updateExerciseUseCase(currentExerciseData.value.copy(exerciseTitle = newTitle))
+                updateExerciseUseCase(currentExercise.value.copy(exerciseTitle = newTitle))
             }
         }
     }
@@ -186,7 +186,7 @@ class AddExerciseViewModel(
     }
 
     private suspend fun saveResult() {
-        val newExercise = currentExerciseData.value.copy(
+        val newExercise = currentExercise.value.copy(
             results = currentResults
         )
         updateExerciseUseCase(newExercise)
@@ -236,7 +236,7 @@ class AddExerciseViewModel(
             exerciseToRemovePosition?.let {
                 currentResults.removeAt(it)
                 val results = formatResultsUseCase(currentResults)
-                val newExercise = currentExerciseData.value.copy(
+                val newExercise = currentExercise.value.copy(
                     results = currentResults
                 )
                 updateExerciseUseCase(newExercise)

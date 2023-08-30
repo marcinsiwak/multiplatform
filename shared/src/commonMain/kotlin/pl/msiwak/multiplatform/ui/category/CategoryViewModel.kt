@@ -1,12 +1,10 @@
 package pl.msiwak.multiplatform.ui.category
 
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
-import pl.msiwak.multiplatform.data.common.ExerciseShort
-import pl.msiwak.multiplatform.data.entity.ExerciseData
+import pl.msiwak.multiplatform.data.common.Exercise
 import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
@@ -15,7 +13,7 @@ import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
 class CategoryViewModel(
-    id: Long,
+    id: String,
     private val navigator: Navigator,
     private val getCategoryUseCase: GetCategoryUseCase,
     private val insertExerciseUseCase: InsertExerciseUseCase,
@@ -26,9 +24,9 @@ class CategoryViewModel(
     private val _viewState = MutableStateFlow(CategoryState())
     val viewState: StateFlow<CategoryState> = _viewState
 
-    private val categoryId: Long = id
+    private val categoryId: String = id
     private var exerciseToRemovePosition: Int? = null
-    private val exercises: MutableList<ExerciseShort> = mutableListOf()
+    private val exercises: MutableList<Exercise> = mutableListOf()
 
     init {
         viewModelScope.launch {
@@ -48,7 +46,7 @@ class CategoryViewModel(
         _viewState.value = _viewState.value.copy(isDialogVisible = true)
     }
 
-    fun onExerciseClicked(id: Long) {
+    fun onExerciseClicked(id: String) {
         navigator.navigate(NavigationDirections.AddExercise(id))
     }
 
@@ -61,14 +59,14 @@ class CategoryViewModel(
         viewModelScope.launch {
             val exerciseName = _viewState.value.newExerciseName
             val exerciseType = _viewState.value.exerciseType
-            val id = insertExerciseUseCase(
-                ExerciseData(
-                    categoryId = categoryId,
-                    exerciseTitle = exerciseName,
-                    exerciseType = exerciseType
-                )
-            )
-            navigator.navigate(NavigationDirections.AddExercise(id))
+//            val id = insertExerciseUseCase(
+//                Exercise(
+//                    categoryId = categoryId,
+//                    exerciseTitle = exerciseName,
+//                    exerciseType = exerciseType
+//                )
+//            )
+//            navigator.navigate(NavigationDirections.AddExercise(id))
         }
     }
 

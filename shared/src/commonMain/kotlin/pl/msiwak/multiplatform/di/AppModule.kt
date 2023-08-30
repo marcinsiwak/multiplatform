@@ -32,7 +32,7 @@ import pl.msiwak.multiplatform.domain.settings.SetUnitsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetCategoriesUseCase
+import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExerciseDataUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
@@ -50,6 +50,9 @@ import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
+import pl.msiwak.multiplatform.mapper.CategoryMapper
+import pl.msiwak.multiplatform.mapper.ExerciseMapper
+import pl.msiwak.multiplatform.mapper.UserMapper
 import pl.msiwak.multiplatform.repository.AuthRepository
 import pl.msiwak.multiplatform.repository.CategoryRepository
 import pl.msiwak.multiplatform.repository.ExerciseRepository
@@ -111,6 +114,9 @@ val toolsModule = module {
     factory { Validator() }
     factory { DateFormatter() }
     factory { NumberFormatter() }
+    factory { UserMapper() }
+    factory { ExerciseMapper() }
+    factory { CategoryMapper(get()) }
 }
 
 val viewModelsModule = module {
@@ -155,7 +161,7 @@ val useCaseModule = module {
     factory { SaveUserTokenUseCase(get()) }
     factory { GetUserTokenUseCase(get()) }
     factory { GetExercisesUseCase(get()) }
-    factory { GetCategoriesUseCase(get()) }
+    factory { DownloadCategoriesUseCase(get()) }
     factory { InsertCategoriesUseCase(get()) }
     factory { CreateCategoryUseCase(get()) }
     factory { UpdateCategoriesUseCase(get()) }
@@ -196,8 +202,8 @@ val repositoryUseModule = module {
 }
 
 val serviceModule = module {
-    single { UserService(get()) }
-    single { CategoryService(get()) }
+    single { UserService(get(), get()) }
+    single { CategoryService(get(), get()) }
 }
 
 val clientModule = module {

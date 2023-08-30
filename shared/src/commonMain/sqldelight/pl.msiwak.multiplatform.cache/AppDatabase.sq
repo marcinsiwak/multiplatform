@@ -1,11 +1,11 @@
 import kotlin.collections.List;
-import pl.msiwak.multiplatform.data.common.ExerciseShort;
+import pl.msiwak.multiplatform.data.common.Exercise;
 import pl.msiwak.multiplatform.data.common.ExerciseType;
 import pl.msiwak.multiplatform.data.common.ResultData;
 
 CREATE TABLE Exercise (
-    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    categoryId INTEGER NOT NULL,
+    id TEXT NOT NULL,
+    categoryId TEXT NOT NULL,
     exerciseTitle    TEXT NOT NULL,
     results     TEXT AS List<ResultData>    NOT NULL,
     exerciseType TEXT AS ExerciseType NOT NULL
@@ -16,8 +16,8 @@ INSERT OR REPLACE INTO Exercise(id, categoryId, exerciseTitle, results, exercise
 VALUES (?, ?,?,?, ?);
 
 insertExercise:
-INSERT INTO Exercise(categoryId, exerciseTitle, results, exerciseType)
-VALUES (?,?,?, ?);
+INSERT INTO Exercise(id, categoryId, exerciseTitle, results, exerciseType)
+VALUES (?, ?,?,?, ?);
 
 removeAllExercises:
 DELETE FROM Exercise;
@@ -37,9 +37,9 @@ selectLastInsertedRowId:
 SELECT last_insert_rowid();
 
 CREATE TABLE Category (
-    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT NOT NULL,
     name    TEXT NOT NULL,
-    exercises     TEXT AS List<ExerciseShort>    NOT NULL,
+    exercises     TEXT AS List<Exercise>    NOT NULL,
     exerciseType TEXT AS ExerciseType NOT NULL
 );
 

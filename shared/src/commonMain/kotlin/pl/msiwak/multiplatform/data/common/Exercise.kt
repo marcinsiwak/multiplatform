@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.data.common
 
-class Exercise(
+data class Exercise(
     val id: String = "",
     val categoryId: String = "",
     val exerciseTitle: String = "",

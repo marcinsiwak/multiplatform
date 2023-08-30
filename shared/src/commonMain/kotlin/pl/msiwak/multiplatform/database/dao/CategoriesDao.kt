@@ -5,31 +5,31 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import pl.msiwak.multiplatform.data.common.ExerciseShort
+import pl.msiwak.multiplatform.data.common.Category
+import pl.msiwak.multiplatform.data.common.Exercise
 import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.data.entity.CategoryData
 import pl.msiwak.multiplatform.database.Database
 
 class CategoriesDao(database: Database) {
 
     private val dbQuery = database.getDatabaseQueries()
 
-    fun getCategories(): List<CategoryData> {
-        return dbQuery.selectAllFromCategory(::mapCategory).executeAsList()
-    }
+//    fun getCategories(): List<Category> {
+//        return dbQuery.selectAllFromCategory(::mapCategory).executeAsList()
+//    }
 
-    fun getCategory(id: Long): CategoryData {
+    fun getCategory(id: String): Category {
         return getCategoryWithExercise(id)
     }
 
-    fun observeCategories(): Flow<List<CategoryData>> {
+    fun observeCategories(): Flow<List<Category>> {
         return dbQuery.selectAllCategoriesWithExercise().asFlow().map { query ->
             query.executeAsList().groupBy {
                 Triple(it.id, it.name, it.exerciseType)
             }.map { (category, rows) ->
                 val exercises = rows.filter { category.first == it.categoryId }
-                    .map { ExerciseShort(it.id_, it.exerciseTitle) }
-                CategoryData(category.first, category.second, exercises, category.third)
+                    .map { Exercise(it.id_, it.exerciseTitle) }
+                Category(category.first, category.second, category.third, exercises)
             }
         }.flatMapConcat {
             if (it.isEmpty()) {
@@ -40,14 +40,14 @@ class CategoriesDao(database: Database) {
         }
     }
 
-    fun observeCategory(id: Long): Flow<CategoryData> {
+    fun observeCategory(id: String): Flow<Category> {
         return dbQuery.selectCategoryWithExercise(id).asFlow().map { query ->
             query.executeAsList().groupBy {
                 Triple(it.id, it.name, it.exerciseType)
             }.map { (category, rows) ->
                 val exercises =
-                    rows.map { ExerciseShort(it.id_, it.exerciseTitle) }
-                CategoryData(category.first, category.second, exercises, category.third)
+                    rows.map { Exercise(it.id_, it.exerciseTitle) }
+                Category(category.first, category.second, category.third, exercises)
             }.firstOrNull()
         }.flatMapConcat {
             if (it == null) {
@@ -58,21 +58,21 @@ class CategoriesDao(database: Database) {
         }
     }
 
-    fun insertCategories(categories: List<CategoryData>) {
+    fun insertCategories(categories: List<Category>) {
         categories.forEach {
             with(it) {
-                dbQuery.insertCategory(
-                    id = null,
-                    name = name,
-                    exercises = exercises,
-                    exerciseType = exerciseType
-                )
+//                dbQuery.insertCategory(
+//                    id = null,
+//                    name = name,
+////                    exercises = exercises,
+//                    exerciseType = exerciseType
+//                )
             }
         }
     }
 
-    fun updateCategory(categoryData: CategoryData) {
-        with(categoryData) {
+    fun updateCategory(category: Category) {
+        with(category) {
             dbQuery.updateCategory(
                 id = id,
                 name = name,
@@ -82,22 +82,11 @@ class CategoriesDao(database: Database) {
         }
     }
 
-    fun insertCategory(categoryData: CategoryData) {
-        with(categoryData) {
-            dbQuery.insertCategory(
-                id = null,
-                name = name,
-                exercises = exercises,
-                exerciseType = exerciseType
-            )
-        }
-    }
-
-    fun removeCategory(categoryId: Long) {
+    fun removeCategory(categoryId: String) {
         dbQuery.removeCategory(categoryId)
     }
 
-    private fun getCategoryWithExercise(id: Long): CategoryData {
+    private fun getCategoryWithExercise(id: String): Category {
         val category = dbQuery.selectCategoryWithExercise(id).executeAsList()
         if (category.isEmpty()) {
             return dbQuery.selectFromCategory(id, ::mapCategory).executeAsOne()
@@ -106,29 +95,29 @@ class CategoriesDao(database: Database) {
             Triple(it.id, it.name, it.exerciseType)
         }.map { (category, rows) ->
             val exercises =
-                rows.map { ExerciseShort(it.id_, it.exerciseTitle) }
-            CategoryData(category.first, category.second, exercises, category.third)
-        }.firstOrNull() ?: CategoryData()
+                rows.map { Exercise(it.id_, it.exerciseTitle) }
+            Category(category.first, category.second, category.third, exercises)
+        }.firstOrNull() ?: Category()
     }
 
-    private fun getAllCategoriesWithExercise(): List<CategoryData> {
+    private fun getAllCategoriesWithExercise(): List<Category> {
         val category = dbQuery.selectAllCategoriesWithExercise().executeAsList()
         return category.groupBy {
             Triple(it.id, it.name, it.exerciseType)
         }.map { (category, rows) ->
             val exercises = rows.filter { category.first == it.categoryId }
-                .map { ExerciseShort(it.id_, it.exerciseTitle) }
-            CategoryData(category.first, category.second, exercises, category.third)
+                .map { Exercise(it.id_, it.exerciseTitle) }
+            Category(category.first, category.second, category.third, exercises)
         }
     }
 
     private fun mapCategory(
-        id: Long,
+        id: String,
         name: String,
-        exercises: List<ExerciseShort>,
+        exercises: List<Exercise>,
         exerciseType: ExerciseType
-    ): CategoryData {
-        return CategoryData(id, name, exercises, exerciseType)
+    ): Category {
+        return Category(id, name, exerciseType, exercises)
     }
 
 }

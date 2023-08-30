@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.database.dao
 
+import pl.msiwak.multiplatform.data.common.Exercise
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
-import pl.msiwak.multiplatform.data.entity.ExerciseData
 import pl.msiwak.multiplatform.database.Database
 
 class ExerciseDao(database: Database) {
@@ -13,49 +13,50 @@ class ExerciseDao(database: Database) {
         dbQuery.removeAllExercises()
     }
 
-    fun getExercise(id: Long): ExerciseData? {
+    fun getExercise(id: String): Exercise? {
         return dbQuery.selectFromExercise(id, ::mapExercise).executeAsOneOrNull()
     }
 
-    fun getAllExercises(): List<ExerciseData> {
+    fun getAllExercises(): List<Exercise> {
         return dbQuery.selectAllFromExercise(::mapExercise).executeAsList()
     }
 
-    fun insertExercises(Exercises: List<ExerciseData>) {
+    fun insertExercises(exercises: List<Exercise>) {
         dbQuery.transaction {
-            Exercises.forEach {
+            exercises.forEach {
                 insert(it)
             }
         }
     }
 
-    fun insertExercise(exerciseData: ExerciseData): Long  {
+    fun insertExercise(exercise: Exercise): Long {
         return dbQuery.transactionWithResult {
-            insert(exerciseData)
+            insert(exercise)
             getLastInsertedRowId()
         }
     }
 
-    private fun insert(exerciseData: ExerciseData) {
+    private fun insert(exercise: Exercise) {
         dbQuery.insertExercise(
-            categoryId = exerciseData.categoryId,
-            exerciseTitle = exerciseData.exerciseTitle,
-            results = exerciseData.results,
-            exerciseType = exerciseData.exerciseType,
+            id = exercise.id,
+            categoryId = exercise.categoryId,
+            exerciseTitle = exercise.exerciseTitle,
+            results = exercise.results,
+            exerciseType = exercise.exerciseType,
         )
     }
 
-    fun updateExercise(exerciseData: ExerciseData) {
+    fun updateExercise(exercise: Exercise) {
         dbQuery.updateExercise(
-            exerciseData.id,
-            exerciseData.categoryId,
-            exerciseData.exerciseTitle,
-            exerciseData.results,
-            exerciseData.exerciseType
+            exercise.id,
+            exercise.categoryId,
+            exercise.exerciseTitle,
+            exercise.results,
+            exercise.exerciseType
         )
     }
 
-    fun removeExercise(id: Long) {
+    fun removeExercise(id: String) {
         dbQuery.removeExercise(id)
     }
 
@@ -64,12 +65,12 @@ class ExerciseDao(database: Database) {
     }
 
     private fun mapExercise(
-        id: Long,
-        categoryId: Long,
+        id: String,
+        categoryId: String,
         exerciseTitle: String,
         results: List<ResultData>,
         exerciseType: ExerciseType
-    ): ExerciseData {
-        return ExerciseData(id, categoryId, exerciseTitle, results, exerciseType)
+    ): Exercise {
+        return Exercise(id, categoryId, exerciseTitle, results, exerciseType)
     }
 }

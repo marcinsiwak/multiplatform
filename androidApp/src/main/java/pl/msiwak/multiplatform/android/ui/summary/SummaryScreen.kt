@@ -45,7 +45,7 @@ fun SummaryScreen() {
                             .clickable {
                                 viewModel.onCategoryClicked(category.id)
                             },
-                        categoryData = category
+                        category = category
                     )
                 }
                 item {

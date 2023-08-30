@@ -4,13 +4,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.ViewModel
-import pl.msiwak.multiplatform.domain.summaries.GetCategoriesUseCase
+import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 
 class SummaryViewModel(
-    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val downloadCategoriesUseCase: DownloadCategoriesUseCase,
     private val observeCategoriesUseCase: ObserveCategoriesUseCase,
     private val navigator: Navigator
 ) : ViewModel() {
@@ -20,7 +20,7 @@ class SummaryViewModel(
 
     init {
         viewModelScope.launch {
-            val categories = getCategoriesUseCase()
+            downloadCategoriesUseCase()
             observeCategoriesUseCase().collect {
                 _viewState.value = _viewState.value.copy(categories = it)
             }
@@ -31,7 +31,7 @@ class SummaryViewModel(
         navigator.navigate(NavigationDirections.AddCategory)
     }
 
-    fun onCategoryClicked(id: Long) {
+    fun onCategoryClicked(id: String) {
         navigator.navigate(NavigationDirections.Category(id))
     }
 }

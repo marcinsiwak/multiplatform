@@ -97,9 +97,11 @@ fun CategoryScreen(id: Long) {
                 contentDescription = "category background")
             LazyColumn {
                 itemsIndexed(state.value.exerciseList) { index, item ->
-                    ListItemView(name = item.name,
+                    ListItemView(
+                        name = item.exerciseTitle,
                         onItemClick = { viewModel.onExerciseClicked(item.id) },
-                        onLongClick = { viewModel.onResultLongClicked(index) })
+                        onLongClick = { viewModel.onResultLongClicked(index) }
+                    )
                 }
             }
         }
