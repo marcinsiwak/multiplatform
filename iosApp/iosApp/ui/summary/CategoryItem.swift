@@ -1,14 +1,16 @@
 import SwiftUI
 import shared
 
+typealias Category = shared.Category
+
 struct CategoryItem: View {
-    let categoryData: CategoryData
+    let category: Category
     
     let backgroundImage: UIImage?
     
-    init(categoryData: CategoryData) {
-        self.categoryData = categoryData
-        switch(categoryData.exerciseType){
+    init(category: Category) {
+        self.category = category
+        switch(category.exerciseType){
         case ExerciseType.running:
             backgroundImage = MR.images().bg_running_field.toUIImage()
         case ExerciseType.gym:
@@ -21,7 +23,7 @@ struct CategoryItem: View {
         
     var body: some View {
         VStack(alignment: .leading) {
-            Text(categoryData.name)
+            Text(category.name)
                 .frame(alignment: .leading)
                 .padding(Dimensions.space_8)
                 .background(.black)
@@ -29,8 +31,8 @@ struct CategoryItem: View {
                 .foregroundColor(.white)
                 .font(.subheadline)
       
-            ForEach(categoryData.exercises) { item in
-                Text(item.name)
+            ForEach(category.exercises) { item in
+                Text(item.exerciseTitle)
                     .foregroundColor(.white)
                     .font(.subheadline)
             }.padding(.horizontal, Dimensions.space_8)
@@ -66,8 +68,8 @@ struct CategoryItem: View {
 
 //struct SummaryItem_Previews: PreviewProvider {
 //    static var previews: some View {
-//        CategoryItem(categoryData: nil)
+//        CategoryItem(category: nil)
 //    }
 //}
 
-extension ExerciseShort: Identifiable {}
+extension Exercise: Identifiable {}

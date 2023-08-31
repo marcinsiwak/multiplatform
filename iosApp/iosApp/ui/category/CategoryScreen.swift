@@ -2,11 +2,11 @@ import SwiftUI
 import shared
 
 struct CategoryScreen: View {
-    let id: Int64
+    let id: String
     let viewModel: CategoryViewModel
     @ObservedObject private var state: ObservableState<CategoryState>
 
-    init(id: Int64) {
+    init(id: String) {
         self.id = id
         self.viewModel = CategoryDiHelper(id: id).getCategoryViewModel()
         self.state = ObservableState<CategoryState>(value: viewModel.viewState.value as! CategoryState)
@@ -57,8 +57,8 @@ struct CategoryScreen: View {
                         .padding(EdgeInsets(top: Dimensions.space_12, leading: 0, bottom: 0, trailing: 0))
                         .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
                 }
-                ForEach(state.value.exerciseList) { item in
-                    ListItemView(title: item.name, onClicked: {
+                ForEach($state.value.exerciseList) { item in
+                    ListItemView(title: item.exerciseTitle.wrappedValue, onClicked: {
                         viewModel.onExerciseClicked(id: item.id)
                     })
                     .frame(height: Dimensions.space_64)
@@ -109,6 +109,6 @@ struct CategoryScreen: View {
 
 struct CategoryScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryScreen(id: 1)
+        CategoryScreen(id: "S")
     }
 }

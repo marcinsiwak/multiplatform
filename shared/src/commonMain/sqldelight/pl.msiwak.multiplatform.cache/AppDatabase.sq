@@ -3,7 +3,7 @@ import pl.msiwak.multiplatform.data.common.Exercise;
 import pl.msiwak.multiplatform.data.common.ExerciseType;
 import pl.msiwak.multiplatform.data.common.ResultData;
 
-CREATE TABLE Exercise (
+CREATE TABLE ExerciseDB (
     id TEXT NOT NULL,
     categoryId TEXT NOT NULL,
     exerciseTitle    TEXT NOT NULL,
@@ -12,31 +12,28 @@ CREATE TABLE Exercise (
 );
 
 updateExercise:
-INSERT OR REPLACE INTO Exercise(id, categoryId, exerciseTitle, results, exerciseType)
+INSERT OR REPLACE INTO ExerciseDB(id, categoryId, exerciseTitle, results, exerciseType)
 VALUES (?, ?,?,?, ?);
 
 insertExercise:
-INSERT INTO Exercise(id, categoryId, exerciseTitle, results, exerciseType)
+INSERT INTO ExerciseDB(id, categoryId, exerciseTitle, results, exerciseType)
 VALUES (?, ?,?,?, ?);
 
 removeAllExercises:
-DELETE FROM Exercise;
+DELETE FROM ExerciseDB;
 
 removeExercise:
-DELETE FROM Exercise
+DELETE FROM ExerciseDB
 WHERE id = ?;
 
 selectFromExercise:
-SELECT * FROM Exercise
+SELECT * FROM ExerciseDB
 WHERE id = ?;
 
 selectAllFromExercise:
-SELECT * FROM Exercise;
+SELECT * FROM ExerciseDB;
 
-selectLastInsertedRowId:
-SELECT last_insert_rowid();
-
-CREATE TABLE Category (
+CREATE TABLE CategoryDB (
     id TEXT NOT NULL,
     name    TEXT NOT NULL,
     exercises     TEXT AS List<Exercise>    NOT NULL,
@@ -44,33 +41,33 @@ CREATE TABLE Category (
 );
 
 updateCategory:
-INSERT OR REPLACE INTO Category(id, name, exercises, exerciseType)
+INSERT OR REPLACE INTO CategoryDB(id, name, exercises, exerciseType)
 VALUES (?, ?,?, ?);
 
 insertCategory:
-INSERT INTO Category(id, name, exercises, exerciseType)
+INSERT INTO CategoryDB(id, name, exercises, exerciseType)
 VALUES (?, ?,?, ?);
 
 removeAllCategories:
-DELETE FROM Category;
+DELETE FROM CategoryDB;
 
 removeCategory:
-DELETE FROM Category
+DELETE FROM CategoryDB
 WHERE id = ?;
 
 selectFromCategory:
-SELECT * FROM Category
+SELECT * FROM CategoryDB
 WHERE id = ?;
 
 selectAllFromCategory:
-SELECT * FROM Category;
+SELECT * FROM CategoryDB;
 
 selectCategoryWithExercise:
 SELECT *
-FROM Category
-INNER JOIN Exercise ON Category.id = Exercise.categoryId
-WHERE Category.id=?;
+FROM CategoryDB
+INNER JOIN ExerciseDB ON CategoryDB.id = ExerciseDB.categoryId
+WHERE CategoryDB.id=?;
 
 selectAllCategoriesWithExercise:
 SELECT *
-FROM Category JOIN Exercise;
+FROM CategoryDB JOIN ExerciseDB;

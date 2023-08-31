@@ -85,14 +85,14 @@ class MainActivity : ComponentActivity() {
                             AddExerciseScreen(id)
                         }
                         composable(
-                            NavigationDirections.Category().route, arguments = listOf(
-                                navArgument(NavigationDirections.Category.BUNDLE_ARG_ID) {
+                            NavigationDirections.CategoryDetails().route, arguments = listOf(
+                                navArgument(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID) {
                                     type = NavType.LongType
                                 },
                             )
                         ) { backStackEntry ->
                             val id =
-                                backStackEntry.arguments?.getLong(NavigationDirections.Category.BUNDLE_ARG_ID)
+                                backStackEntry.arguments?.getLong(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID)
                                     ?: 0
                             CategoryScreen(id)
                         }

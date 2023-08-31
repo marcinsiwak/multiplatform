@@ -27,13 +27,13 @@ actual sealed class NavigationDirections : NavigationCommand {
             get() = "dashboard"
     }
 
-    actual class AddExercise actual constructor(private val id: Long) : NavigationDirections() {
-        fun getExerciseId(): Long = id
+    actual class AddExercise actual constructor(private val id: String) : NavigationDirections() {
+        fun getExerciseId(): String = id
         override val route: String = "addExercise"
     }
 
-    actual class Category actual constructor(private val id: Long) : NavigationDirections() {
-        fun getCategoryId(): Long = id
+    actual class CategoryDetails actual constructor(private val id: String) : NavigationDirections() {
+        fun getCategoryId(): String = id
         override val route: String = "category"
     }
 

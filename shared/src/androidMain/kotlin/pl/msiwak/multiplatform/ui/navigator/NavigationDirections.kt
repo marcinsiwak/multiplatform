@@ -38,7 +38,7 @@ actual sealed class NavigationDirections : NavigationCommand {
         }
     }
 
-    actual class Category actual constructor(val id: String) : NavigationDirections() {
+    actual class CategoryDetails actual constructor(val id: String) : NavigationDirections() {
         override val route: String
             get() = "category/{${BUNDLE_ARG_ID}}"
         override val destination: String

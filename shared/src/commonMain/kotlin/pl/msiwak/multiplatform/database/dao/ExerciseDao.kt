@@ -4,6 +4,7 @@ import pl.msiwak.multiplatform.data.common.Exercise
 import pl.msiwak.multiplatform.data.common.ExerciseType
 import pl.msiwak.multiplatform.data.common.ResultData
 import pl.msiwak.multiplatform.database.Database
+import plmsiwakmultiplatformcache.AppDatabaseQueries
 
 class ExerciseDao(database: Database) {
 
@@ -29,10 +30,9 @@ class ExerciseDao(database: Database) {
         }
     }
 
-    fun insertExercise(exercise: Exercise): Long {
+    fun insertExercise(exercise: Exercise) {
         return dbQuery.transactionWithResult {
             insert(exercise)
-            getLastInsertedRowId()
         }
     }
 
@@ -58,10 +58,6 @@ class ExerciseDao(database: Database) {
 
     fun removeExercise(id: String) {
         dbQuery.removeExercise(id)
-    }
-
-    private fun getLastInsertedRowId(): Long {
-        return dbQuery.selectLastInsertedRowId().executeAsOne()
     }
 
     private fun mapExercise(

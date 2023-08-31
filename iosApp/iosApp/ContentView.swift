@@ -27,13 +27,13 @@ struct ContentView: View {
                 if(direction is NavigationDirections.Dashboard) {
                     DashboardScreen().navigationBarBackButtonHidden(true)
                 }
-                if(direction is NavigationDirections.Category) {
-                    let id = (direction as? NavigationDirections.Category)?.getCategoryId() ?? 0
+                if(direction is NavigationDirections.CategoryDetails) {
+                    let id = (direction as? NavigationDirections.CategoryDetails)?.getCategoryId() ?? ""
                     CategoryScreen(id: id)
                         .navigationBarTitleDisplayMode(.inline)
                 }
                 if(direction is NavigationDirections.AddExercise) {
-                    let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? 0
+                    let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? ""
                     AddExerciseScreen(id: id)
                     .navigationBarTitleDisplayMode(.inline)
                 }

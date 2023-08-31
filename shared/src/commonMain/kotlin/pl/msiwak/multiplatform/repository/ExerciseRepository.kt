@@ -9,9 +9,7 @@ class ExerciseRepository(
     private val exerciseDao: ExerciseDao
 ) {
 
-    suspend fun insertExercise(exercise: Exercise): Long = withContext(Dispatchers.Default) {
-        return@withContext exerciseDao.insertExercise(exercise)
-    }
+    suspend fun insertExercise(exercise: Exercise): Long = 0
 
     suspend fun insertExercises(summaries: List<Exercise>) = withContext(Dispatchers.Default) {
         exerciseDao.insertExercises(summaries)

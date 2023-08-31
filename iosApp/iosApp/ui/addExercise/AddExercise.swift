@@ -4,13 +4,13 @@ import shared
 
 struct AddExerciseScreen: View {
     
-    let id: Int64
+    let id: String
     let viewModel: AddExerciseViewModel
     @ObservedObject private var state: ObservableState<AddExerciseState>
     @ObservedObject private var focusedFieldPos: ObservableEvent<Int32?>
 
         
-    init(id: Int64) {
+    init(id: String) {
         self.id = id
         self.viewModel = AddExerciseDiHelper(id: id).getAddExerciseViewModel()
         self.state = ObservableState<AddExerciseState>(value: viewModel.viewState.value as! AddExerciseState)
@@ -131,6 +131,6 @@ struct AddExerciseScreen: View {
 
 struct AddExerciseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddExerciseScreen(id: 1)
+        AddExerciseScreen(id: "s")
     }
 }

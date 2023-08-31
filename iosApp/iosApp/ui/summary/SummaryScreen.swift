@@ -25,7 +25,7 @@ struct SummaryScreen: View {
         VStack(alignment: .leading, spacing: 0) {
             ScrollView {
                 ForEach(state.value.categories) { item in
-                    CategoryItem(categoryData: item)
+                    CategoryItem(category: item)
                         .onTapGesture {
                             viewModel.onCategoryClicked(id: item.id)
                         }
@@ -57,7 +57,7 @@ struct SummaryScreen: View {
      }
     
 }
-extension CategoryData: Identifiable {}
+extension Category: Identifiable {}
 
 //struct SummaryScreen_Previews: PreviewProvider {
 //    static var previews: some View {

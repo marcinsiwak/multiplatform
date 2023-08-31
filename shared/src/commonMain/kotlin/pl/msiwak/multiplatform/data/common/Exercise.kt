@@ -1,9 +1,10 @@
 package pl.msiwak.multiplatform.data.common
 
+@kotlinx.serialization.Serializable
 data class Exercise(
     val id: String = "",
     val categoryId: String = "",
-    val exerciseTitle: String = "",
+    var exerciseTitle: String = "",
     val results: List<ResultData> = emptyList(),
     val exerciseType: ExerciseType = ExerciseType.GYM
 )

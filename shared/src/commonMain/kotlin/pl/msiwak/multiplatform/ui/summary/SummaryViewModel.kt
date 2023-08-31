@@ -32,6 +32,6 @@ class SummaryViewModel(
     }
 
     fun onCategoryClicked(id: String) {
-        navigator.navigate(NavigationDirections.Category(id))
+        navigator.navigate(NavigationDirections.CategoryDetails(id))
     }
 }

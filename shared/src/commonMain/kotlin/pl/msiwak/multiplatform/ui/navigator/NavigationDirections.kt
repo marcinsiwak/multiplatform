@@ -10,7 +10,7 @@ expect sealed class NavigationDirections : NavigationCommand {
     object Registration : NavigationDirections
     class Dashboard(isInclusive: Boolean = false) : NavigationDirections
     class AddExercise(id: String = "") : NavigationDirections
-    class Category(id: String = "") : NavigationDirections
+    class CategoryDetails(id: String = "") : NavigationDirections
     object AddCategory : NavigationDirections
     object Language : NavigationDirections
     object Unit : NavigationDirections
