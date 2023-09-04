@@ -3,6 +3,7 @@ import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
 import java.io.FileInputStream
 import java.util.Properties
 import pl.msiwak.multiplatfor.dependencies.Deps
+import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
     kotlin("multiplatform")
@@ -50,8 +51,7 @@ kotlin {
             baseName = "shared"
 
 //            binaryOption("bundleVersion", "1")
-            export("dev.icerock.moko:resources:0.21.2")
-            export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
+            export(project(Modules.core))
 
         }
 
@@ -65,33 +65,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                with(Deps.Koin) {
-                    api(core)
-                    api(test)
-                }
-                with(Deps.Firebase) {
-                    api(authentication)
-                    api(remoteConfig)
-                    api(crashlytics)
-                }
-                with(Deps.Kotlinx) {
-                    api(coroutines)
-                    api(dateTime)
-                    api(serialization)
-                }
-                with(Deps.Ktor) {
-                    api(core)
-                    api(content_negation)
-                    api(serialization)
-                    api(cio)
-                    api(logger)
-                }
-                with(Deps.Napier) {
-                    api(napier)
-                }
-                with(Deps.SQLDelight) {
-                    api(coroutines)
-                }
+                api(project(Modules.core))
             }
         }
         val commonTest by getting {
@@ -99,23 +73,7 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                with(Deps.Koin) {
-                    api(android)
-                }
-                with(Deps.Ktor) {
-                    api(android)
-                }
-                with(Deps.SQLDelight) {
-                    api(android)
-                }
-                with(Deps.Firebase) {
-                    api(platform(andoridBom))
-                    api(auth)
-                }
-            }
-        }
+
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -124,14 +82,6 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                with(Deps.Ktor) {
-                    api(ios)
-                }
-                with(Deps.SQLDelight) {
-                    api(ios)
-                }
-            }
         }
     }
 }
@@ -189,7 +139,7 @@ android {
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("pl.msiwak.multiplatform")
+            packageName.set("pl.msiwak.multiplatform.shared")
         }
     }
 }

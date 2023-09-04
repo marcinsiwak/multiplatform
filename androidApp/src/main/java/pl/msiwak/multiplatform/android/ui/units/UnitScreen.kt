@@ -23,11 +23,11 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.ui.unit.UnitViewModel
+import pl.msiwak.multiplatform.core.ui.unit.UnitViewModel
 
 @Composable
 fun UnitScreen() {
-    val viewModel = koinViewModel<UnitViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.unit.UnitViewModel>()
     val state = viewModel.viewState.collectAsState()
 
     Column(

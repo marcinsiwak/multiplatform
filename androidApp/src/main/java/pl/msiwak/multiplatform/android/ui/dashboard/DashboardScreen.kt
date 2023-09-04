@@ -16,21 +16,21 @@ import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
 import pl.msiwak.multiplatform.android.ui.summary.SummaryScreen
-import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
-import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
+import pl.msiwak.multiplatform.core.ui.dashboard.DashboardViewModel
+import pl.msiwak.multiplatform.core.ui.navigator.DashboardNavigationDirections
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen() {
-    val viewModel = koinViewModel<DashboardViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.dashboard.DashboardViewModel>()
 
     val items = listOf(
-        DashboardNavigationDirections.Summary(
+        pl.msiwak.multiplatform.core.ui.navigator.DashboardNavigationDirections.Summary(
             R.drawable.ic_workout,
             stringResource(MR.strings.summary.resourceId)
         ),
 //        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(MR.strings.account)),
-        DashboardNavigationDirections.Settings(
+        pl.msiwak.multiplatform.core.ui.navigator.DashboardNavigationDirections.Settings(
             R.drawable.ic_settings,
             stringResource(MR.strings.settings.resourceId)
         )

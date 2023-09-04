@@ -25,13 +25,12 @@ import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.PasswordRequirements
-import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.ui.register.RegisterViewModel
+import pl.msiwak.multiplatform.core.ui.register.RegisterViewModel
 
 @Composable
 fun RegisterScreen() {
-    val viewModel = koinViewModel<RegisterViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.register.RegisterViewModel>()
 
     val viewState = viewModel.viewState.collectAsState()
 

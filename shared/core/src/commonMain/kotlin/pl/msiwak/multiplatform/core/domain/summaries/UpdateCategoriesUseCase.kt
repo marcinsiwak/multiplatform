@@ -1,0 +1,10 @@
+package pl.msiwak.multiplatform.core.domain.summaries
+
+import pl.msiwak.multiplatform.core.data.common.Category
+import pl.msiwak.multiplatform.core.repository.CategoryRepository
+
+class UpdateCategoriesUseCase(private val categoryRepository: CategoryRepository) {
+    suspend operator fun invoke(category: Category) {
+        return categoryRepository.updateCategory(category)
+    }
+}

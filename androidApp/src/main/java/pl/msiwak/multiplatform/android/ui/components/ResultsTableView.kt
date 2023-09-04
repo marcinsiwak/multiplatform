@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.android.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -22,24 +21,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.data.common.FormattedResultData
-import pl.msiwak.multiplatform.data.common.SortType
+import pl.msiwak.multiplatform.core.data.common.FormattedResultData
+import pl.msiwak.multiplatform.core.data.common.SortType
 
 @Composable
 fun ResultsTableView(
     modifier: Modifier = Modifier,
     resultDataTitles: List<String?> = emptyList(),
     unit: String = "",
-    results: List<FormattedResultData> = emptyList(),
+    results: List<pl.msiwak.multiplatform.core.data.common.FormattedResultData> = emptyList(),
     isNewResultEnabled: Boolean,
-    sortType: SortType? = null,
+    sortType: pl.msiwak.multiplatform.core.data.common.SortType? = null,
     exerciseType: ExerciseType,
-    newResultData: FormattedResultData = FormattedResultData(),
+    newResultData: pl.msiwak.multiplatform.core.data.common.FormattedResultData = pl.msiwak.multiplatform.core.data.common.FormattedResultData(),
     onAddNewResultClicked: () -> Unit = {},
     onLabelClicked: (Int) -> Unit = {},
     onResultValueChanged: (String) -> Unit = {},
@@ -80,8 +78,8 @@ fun ResultsTableView(
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
                 iconResId = when (sortType) {
-                    SortType.RESULT_INCREASING -> R.drawable.ic_arrow_up
-                    SortType.RESULT_DECREASING -> R.drawable.ic_arrow_down
+                    pl.msiwak.multiplatform.core.data.common.SortType.RESULT_INCREASING -> R.drawable.ic_arrow_up
+                    pl.msiwak.multiplatform.core.data.common.SortType.RESULT_DECREASING -> R.drawable.ic_arrow_down
                     else -> null
                 }
             )
@@ -93,8 +91,8 @@ fun ResultsTableView(
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
                 iconResId = when (sortType) {
-                    SortType.AMOUNT_INCREASING -> R.drawable.ic_arrow_up
-                    SortType.AMOUNT_DECREASING -> R.drawable.ic_arrow_down
+                    pl.msiwak.multiplatform.core.data.common.SortType.AMOUNT_INCREASING -> R.drawable.ic_arrow_up
+                    pl.msiwak.multiplatform.core.data.common.SortType.AMOUNT_DECREASING -> R.drawable.ic_arrow_down
                     else -> null
                 }
             )
@@ -106,8 +104,8 @@ fun ResultsTableView(
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
                 iconResId = when (sortType) {
-                    SortType.DATE_INCREASING -> R.drawable.ic_arrow_up
-                    SortType.DATE_DECREASING -> R.drawable.ic_arrow_down
+                    pl.msiwak.multiplatform.core.data.common.SortType.DATE_INCREASING -> R.drawable.ic_arrow_up
+                    pl.msiwak.multiplatform.core.data.common.SortType.DATE_DECREASING -> R.drawable.ic_arrow_down
                     else -> null
                 }
             )

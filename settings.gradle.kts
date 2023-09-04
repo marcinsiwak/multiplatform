@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "athletetrack"
 include(":androidApp")
 include(":shared")
+include(":shared:core")

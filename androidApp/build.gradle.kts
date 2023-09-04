@@ -117,6 +117,7 @@ android {
 
 dependencies {
     implementation(project(":shared"))
+    implementation(project(":shared:core"))
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
 

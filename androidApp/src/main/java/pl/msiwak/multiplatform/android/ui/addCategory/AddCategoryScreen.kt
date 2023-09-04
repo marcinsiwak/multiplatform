@@ -22,11 +22,11 @@ import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
+import pl.msiwak.multiplatform.core.ui.addCategory.AddCategoryViewModel
 
 @Composable
 fun AddCategoryScreen() {
-    val viewModel = koinViewModel<AddCategoryViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.addCategory.AddCategoryViewModel>()
     val state = viewModel.viewState.collectAsState()
 
     Box(

@@ -19,13 +19,13 @@ import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.data.common.FormattedResultData
+import pl.msiwak.multiplatform.core.data.common.FormattedResultData
 
 @Composable
 fun NewResultView(
     modifier: Modifier = Modifier,
     focusRequesters: List<FocusRequester>,
-    newResultData: FormattedResultData,
+    newResultData: pl.msiwak.multiplatform.core.data.common.FormattedResultData,
     exerciseType: ExerciseType,
     onResultValueChanged: (String) -> Unit,
     onAmountValueChanged: (String) -> Unit,

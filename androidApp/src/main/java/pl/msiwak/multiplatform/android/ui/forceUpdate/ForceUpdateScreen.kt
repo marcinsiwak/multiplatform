@@ -20,11 +20,12 @@ import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
+import pl.msiwak.multiplatform.core.ui.forceUpdate.ForceUpdateViewModel
 
 @Composable
 fun ForceUpdateScreen() {
-    val viewModel: ForceUpdateViewModel by KoinJavaComponent.inject(ForceUpdateViewModel::class.java)
+    val viewModel: pl.msiwak.multiplatform.core.ui.forceUpdate.ForceUpdateViewModel by KoinJavaComponent.inject(
+        pl.msiwak.multiplatform.core.ui.forceUpdate.ForceUpdateViewModel::class.java)
 
     Box(
         modifier = Modifier.fillMaxSize()

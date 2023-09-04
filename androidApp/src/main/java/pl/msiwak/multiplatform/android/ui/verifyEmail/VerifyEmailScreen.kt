@@ -20,19 +20,19 @@ import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailEvent
-import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
+import pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailEvent
+import pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailViewModel
 
 @Composable
 fun VerifyEmailScreen() {
-    val viewModel = koinViewModel<VerifyEmailViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailViewModel>()
 
     val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
         viewModel.viewEvent.collectLatest {
             when (it) {
-                VerifyEmailEvent.OpenMail -> context.openMailApp()
+                pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailEvent.OpenMail -> context.openMailApp()
             }
         }
     }

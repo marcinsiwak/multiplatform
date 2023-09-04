@@ -16,14 +16,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.ui.extensions.fittingTabIndicatorOffset
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.data.common.DateFilterType
+import pl.msiwak.multiplatform.core.data.common.DateFilterType
 
 @Composable
 fun ResultsTimeFilterView(
     modifier: Modifier = Modifier,
-    tabs: List<DateFilterType>,
+    tabs: List<pl.msiwak.multiplatform.core.data.common.DateFilterType>,
     selectedPos: Int = 0,
-    onTabClicked: (DateFilterType) -> Unit
+    onTabClicked: (pl.msiwak.multiplatform.core.data.common.DateFilterType) -> Unit
 ) {
     val density = LocalDensity.current
     val tabWidths = remember {

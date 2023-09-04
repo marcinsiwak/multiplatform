@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -24,11 +23,11 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
+import pl.msiwak.multiplatform.core.ui.summary.SummaryViewModel
 
 @Composable
 fun SummaryScreen() {
-    val viewModel = koinViewModel<SummaryViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.summary.SummaryViewModel>()
     val state = viewModel.viewState.collectAsState()
 
     Column(

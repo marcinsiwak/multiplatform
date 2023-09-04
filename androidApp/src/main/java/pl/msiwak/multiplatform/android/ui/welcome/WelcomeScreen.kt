@@ -42,12 +42,12 @@ import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.auth.GoogleAuthOneTapConfiguration
-import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
+import pl.msiwak.multiplatform.core.ui.welcome.WelcomeScreenViewModel
 
 
 @Composable
 fun WelcomeScreen() {
-    val viewModel = koinViewModel<WelcomeScreenViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.welcome.WelcomeScreenViewModel>()
 
     val viewState = viewModel.viewState.collectAsState()
     val context = LocalContext.current.findActivity()

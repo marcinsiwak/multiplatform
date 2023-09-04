@@ -36,11 +36,11 @@ import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.ui.category.CategoryViewModel
+import pl.msiwak.multiplatform.core.ui.category.CategoryViewModel
 
 @Composable
 fun CategoryScreen(id: Long) {
-    val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.category.CategoryViewModel> { parametersOf(id) }
     val state = viewModel.viewState.collectAsState()
 
     val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios

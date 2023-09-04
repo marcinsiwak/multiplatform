@@ -35,12 +35,12 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
+import pl.msiwak.multiplatform.core.ui.addExercise.AddExerciseEvent
+import pl.msiwak.multiplatform.core.ui.addExercise.AddExerciseViewModel
 
 @Composable
 fun AddExerciseScreen(id: Long) {
-    val viewModel = koinViewModel<AddExerciseViewModel> { parametersOf(id) }
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.addExercise.AddExerciseViewModel> { parametersOf(id) }
 
     val state = viewModel.viewState.collectAsState()
     val context = LocalContext.current
@@ -57,13 +57,13 @@ fun AddExerciseScreen(id: Long) {
     LaunchedEffect(viewModel) {
         viewModel.viewEvent.collectLatest { value ->
             when (value) {
-                AddExerciseEvent.OpenCalendar -> openCalendar(
+                pl.msiwak.multiplatform.core.ui.addExercise.AddExerciseEvent.OpenCalendar -> openCalendar(
                     context = context,
                     onValueChanged = {
                         viewModel.onDatePicked(it)
                     })
 
-                is AddExerciseEvent.FocusOnInput -> {
+                is pl.msiwak.multiplatform.core.ui.addExercise.AddExerciseEvent.FocusOnInput -> {
                     focusRequesters[value.pos].requestFocus()
                     Toast.makeText(context, "Wrong input value", Toast.LENGTH_SHORT).show()
                 }
