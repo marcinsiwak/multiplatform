@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.core.ui.language
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.core.domain.settings.SetLanguageUseCase
 

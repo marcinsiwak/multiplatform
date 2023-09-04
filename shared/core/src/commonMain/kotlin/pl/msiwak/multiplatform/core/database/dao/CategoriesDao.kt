@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import pl.msiwak.multiplatform.core.data.common.Category
-import pl.msiwak.multiplatform.data.common.Exercise
-import pl.msiwak.multiplatform.data.common.ExerciseType
+import pl.msiwak.multiplatform.core.data.common.Exercise
+import pl.msiwak.multiplatform.core.data.common.ExerciseType
 import pl.msiwak.multiplatform.core.database.Database
 
 class CategoriesDao(database: Database) {

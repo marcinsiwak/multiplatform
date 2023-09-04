@@ -10,12 +10,12 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.data.common.DateFilterType
-import pl.msiwak.multiplatform.data.common.Exercise
-import pl.msiwak.multiplatform.data.common.ExerciseType
+import pl.msiwak.multiplatform.core.data.common.Exercise
+import pl.msiwak.multiplatform.core.data.common.ExerciseType
 import pl.msiwak.multiplatform.core.data.common.FormattedResultData
-import pl.msiwak.multiplatform.data.common.ResultData
+import pl.msiwak.multiplatform.core.data.common.ResultData
 import pl.msiwak.multiplatform.core.data.common.SortType
 import pl.msiwak.multiplatform.core.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.FormatResultsUseCase

@@ -24,9 +24,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.core.data.common.FormattedResultData
-import pl.msiwak.multiplatform.core.data.common.SortType
+import pl.msiwak.multiplatform.core.data.common.ExerciseType
 
 @Composable
 fun ResultsTableView(

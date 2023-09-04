@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.core.data.store
 
 import pl.msiwak.multiplatform.core.data.common.UnitType
-import pl.msiwak.multiplatform.utils.KMMPreferences
+import pl.msiwak.multiplatform.core.utils.KMMPreferences
 
 class UnitStore(private val sharedKMMPreferences: KMMPreferences) {
     fun saveUnit(unit: UnitType) {

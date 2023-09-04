@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.core.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.core.domain.authorization.LoginUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
+import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 
 class WelcomeScreenViewModel(

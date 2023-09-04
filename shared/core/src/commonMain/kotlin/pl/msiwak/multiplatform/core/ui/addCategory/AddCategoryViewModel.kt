@@ -3,9 +3,9 @@ package pl.msiwak.multiplatform.core.ui.addCategory
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.data.common.Category
-import pl.msiwak.multiplatform.data.common.ExerciseType
+import pl.msiwak.multiplatform.core.data.common.ExerciseType
 import pl.msiwak.multiplatform.core.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 

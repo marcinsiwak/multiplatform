@@ -1,10 +1,9 @@
 package pl.msiwak.multiplatform.core.database
 
 import app.cash.sqldelight.ColumnAdapter
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import pl.msiwak.multiplatform.data.common.Exercise
+import pl.msiwak.multiplatform.core.data.common.Exercise
 
 val exerciseListAdapter = object : ColumnAdapter<List<Exercise>, String> {
     override fun decode(databaseValue: String): List<Exercise> {

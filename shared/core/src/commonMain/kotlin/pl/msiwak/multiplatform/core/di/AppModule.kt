@@ -29,16 +29,16 @@ import pl.msiwak.multiplatform.core.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.core.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.core.domain.settings.SetLanguageUseCase
 import pl.msiwak.multiplatform.core.domain.settings.SetUnitsUseCase
+import pl.msiwak.multiplatform.core.domain.summaries.CreateCategoryUseCase
+import pl.msiwak.multiplatform.core.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.FormatStringToDateUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.GetCategoryUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.GetExerciseDataUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.GetExerciseUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.GetExercisesUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.InsertCategoriesUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.InsertExerciseUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.InsertExercisesUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.ObserveCategoriesUseCase
@@ -59,7 +59,7 @@ import pl.msiwak.multiplatform.core.repository.ExerciseRepository
 import pl.msiwak.multiplatform.core.repository.RemoteConfigRepository
 import pl.msiwak.multiplatform.core.repository.SessionRepository
 import pl.msiwak.multiplatform.core.repository.UserRepository
-import pl.msiwak.multiplatform.repository.VersionRepository
+import pl.msiwak.multiplatform.core.repository.VersionRepository
 import pl.msiwak.multiplatform.core.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.core.ui.addExercise.AddExerciseViewModel
 import pl.msiwak.multiplatform.core.ui.category.CategoryViewModel

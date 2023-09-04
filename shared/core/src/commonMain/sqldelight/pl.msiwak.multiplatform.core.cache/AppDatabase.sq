@@ -1,7 +1,7 @@
 import kotlin.collections.List;
-import pl.msiwak.multiplatform.data.common.Exercise;
-import pl.msiwak.multiplatform.data.common.ExerciseType;
-import pl.msiwak.multiplatform.data.common.ResultData;
+import pl.msiwak.multiplatform.core.data.common.Exercise;
+import pl.msiwak.multiplatform.core.data.common.ExerciseType;
+import pl.msiwak.multiplatform.core.data.common.ResultData;
 
 CREATE TABLE ExerciseDB (
     id TEXT NOT NULL,

@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.core.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import pl.msiwak.multiplatform.data.common.Exercise
+import pl.msiwak.multiplatform.core.data.common.Exercise
 import pl.msiwak.multiplatform.core.database.dao.ExerciseDao
 
 class ExerciseRepository(

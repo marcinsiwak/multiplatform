@@ -1,9 +1,9 @@
 package pl.msiwak.multiplatform.core.mapper
 
 import pl.msiwak.multiplatform.core.api.data.user.ApiExercise
-import pl.msiwak.multiplatform.data.common.Exercise
+import pl.msiwak.multiplatform.core.data.common.Exercise
 
-class ExerciseMapper: Mapper<ApiExercise, Exercise>() {
+class ExerciseMapper : Mapper<ApiExercise, Exercise>() {
 
     override fun map(value: ApiExercise): Exercise {
         return Exercise(

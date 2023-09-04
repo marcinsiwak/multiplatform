@@ -12,7 +12,7 @@ import io.ktor.client.request.bearerAuth
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import pl.msiwak.multiplatform.BuildKonfig
+//import pl.msiwak.multiplatform.BuildKonfig
 import pl.msiwak.multiplatform.core.data.store.SessionStore
 
 class KtorClient(private val sessionStore: SessionStore) {
@@ -39,7 +39,7 @@ class KtorClient(private val sessionStore: SessionStore) {
             })
         }
         defaultRequest {
-            url(BuildKonfig.BASE_URL)
+//            url(BuildKonfig.BASE_URL)
             bearerAuth(sessionStore.getToken() ?: "")
 
         }

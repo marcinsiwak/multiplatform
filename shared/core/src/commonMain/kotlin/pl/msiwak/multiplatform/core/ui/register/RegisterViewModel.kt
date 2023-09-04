@@ -6,13 +6,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.MR
-import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.api.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.core.data.common.PasswordRequirement
 import pl.msiwak.multiplatform.core.data.common.PasswordRequirementType
 import pl.msiwak.multiplatform.core.domain.authorization.RegisterUserUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
+import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 import pl.msiwak.multiplatform.core.validators.Validator
 
@@ -27,11 +26,12 @@ class RegisterViewModel(
     val viewState: StateFlow<RegisterState> = _viewState.asStateFlow()
 
     private val errorHandler = globalErrorHandler.handleError { throwable ->
-        when(throwable) {
+        when (throwable) {
             is FirebaseAuthUserCollisionException -> {
                 navigator.navigate(NavigationDirections.VerifyEmail)
                 true
             }
+
             else -> false
         }
     }
@@ -94,12 +94,12 @@ class RegisterViewModel(
         if (isPasswordValid) {
             _viewState.update { it.copy(passwordErrorMessage = null) }
         } else {
-            _viewState.update { it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
+//            _viewState.update { it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
         }
         if (isLoginValid) {
             _viewState.update { it.copy(loginErrorMessage = null) }
         } else {
-            _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
+//            _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
         }
 
         if (!isPasswordValid || !isLoginValid) return

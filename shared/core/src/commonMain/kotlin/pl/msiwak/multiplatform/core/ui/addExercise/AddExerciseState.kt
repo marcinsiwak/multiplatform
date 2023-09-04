@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.core.ui.addExercise
 
 import pl.msiwak.multiplatform.core.data.common.DateFilterType
-import pl.msiwak.multiplatform.data.common.ExerciseType
+import pl.msiwak.multiplatform.core.data.common.ExerciseType
 import pl.msiwak.multiplatform.core.data.common.FormattedResultData
 import pl.msiwak.multiplatform.core.data.common.SortType
 import pl.msiwak.multiplatform.core.data.common.UnitType

@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.MR
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.data.common.ExerciseType
+import pl.msiwak.multiplatform.core.data.common.ExerciseType
 
 @Composable
 fun DropDownView(

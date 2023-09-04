@@ -3,13 +3,13 @@ package pl.msiwak.multiplatform.core.ui.category
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.ViewModel
-import pl.msiwak.multiplatform.data.common.Exercise
+import pl.msiwak.multiplatform.core.ViewModel
+import pl.msiwak.multiplatform.core.data.common.Exercise
 import pl.msiwak.multiplatform.core.domain.summaries.GetCategoryUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.InsertExerciseUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.RemoveExerciseUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
+import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 
 class CategoryViewModel(

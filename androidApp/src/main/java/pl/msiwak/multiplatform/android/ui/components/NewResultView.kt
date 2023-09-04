@@ -18,8 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.core.data.common.FormattedResultData
+import pl.msiwak.multiplatform.core.data.common.ExerciseType
 
 @Composable
 fun NewResultView(

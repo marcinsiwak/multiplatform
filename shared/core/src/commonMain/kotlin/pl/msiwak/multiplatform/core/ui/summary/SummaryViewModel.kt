@@ -3,10 +3,10 @@ package pl.msiwak.multiplatform.core.ui.summary
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.core.domain.summaries.ObserveCategoriesUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
+import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 
 class SummaryViewModel(

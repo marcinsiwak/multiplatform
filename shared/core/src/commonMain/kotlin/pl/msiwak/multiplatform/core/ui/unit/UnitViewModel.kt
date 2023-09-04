@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.core.ui.unit
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import pl.msiwak.multiplatform.ViewModel
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.core.domain.settings.SetUnitsUseCase
 

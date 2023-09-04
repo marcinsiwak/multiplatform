@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.core.database.dao
 
-import pl.msiwak.multiplatform.data.common.Exercise
-import pl.msiwak.multiplatform.data.common.ExerciseType
-import pl.msiwak.multiplatform.data.common.ResultData
+import pl.msiwak.multiplatform.core.data.common.Exercise
+import pl.msiwak.multiplatform.core.data.common.ExerciseType
+import pl.msiwak.multiplatform.core.data.common.ResultData
 import pl.msiwak.multiplatform.core.database.Database
 
 class ExerciseDao(database: Database) {

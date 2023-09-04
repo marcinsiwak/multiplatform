@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.core.database
 
-import pl.msiwak.multiplatform.AppDatabase
-import plmsiwakmultiplatformcache.CategoryDB
-import plmsiwakmultiplatformcache.ExerciseDB
+import pl.msiwak.multiplatform.shared.core.AppDatabase
+import plmsiwakmultiplatformcorecache.CategoryDB
+import plmsiwakmultiplatformcorecache.ExerciseDB
 
 class Database(databaseDriverFactory: DatabaseDriverFactory) {
 

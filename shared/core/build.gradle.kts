@@ -125,7 +125,7 @@ android {
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("pl.msiwak.multiplatform")
+            packageName.set("pl.msiwak.multiplatform.shared.core")
         }
     }
 }

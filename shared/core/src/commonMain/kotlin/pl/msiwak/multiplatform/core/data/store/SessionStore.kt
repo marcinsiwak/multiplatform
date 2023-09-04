@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.core.data.store
 
 import pl.msiwak.multiplatform.core.repository.AuthRepository
-import pl.msiwak.multiplatform.utils.KMMPreferences
+import pl.msiwak.multiplatform.core.utils.KMMPreferences
 
 class SessionStore(private val sharedPreferences: KMMPreferences) {
 
