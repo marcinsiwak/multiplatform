@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.core.data.store
 
-import pl.msiwak.multiplatform.core.data.common.UnitType
+import pl.msiwak.multiplatform.commonObject.UnitType
 import pl.msiwak.multiplatform.core.utils.KMMPreferences
 
 class UnitStore(private val sharedKMMPreferences: KMMPreferences) {

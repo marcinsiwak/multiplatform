@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.core.ui.language
 
-import pl.msiwak.multiplatform.core.data.common.Language
+import pl.msiwak.multiplatform.commonObject.Language
 
 data class LanguageState(
     val languages: List<Language> = listOf(

@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.core.domain.summaries
 
-import pl.msiwak.multiplatform.core.data.common.FormattedResultData
-import pl.msiwak.multiplatform.core.data.common.ResultData
+import pl.msiwak.multiplatform.commonObject.FormattedResultData
+import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.core.utils.DateFormatter
 import pl.msiwak.multiplatform.core.utils.NumberFormatter
 

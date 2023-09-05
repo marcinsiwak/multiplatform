@@ -16,10 +16,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.core.data.common.PasswordRequirement
+import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 
 @Composable
-fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<pl.msiwak.multiplatform.core.data.common.PasswordRequirement>) {
+fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<PasswordRequirement>) {
     Column(modifier = modifier) {
         Text(
             modifier = Modifier

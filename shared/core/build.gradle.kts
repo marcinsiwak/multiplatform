@@ -6,7 +6,6 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
-    id("app.cash.sqldelight") version "2.0.0-alpha05"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -33,6 +32,8 @@ kotlin {
             baseName = "core"
 
             export(project(Modules.commonResources))
+            export(project(Modules.commonObject))
+            export(project(Modules.database))
         }
     }
 
@@ -40,6 +41,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Modules.commonResources))
+                api(project(Modules.commonObject))
+                api(project(Modules.database))
 
                 with(Deps.Koin) {
                     api(core)
@@ -65,9 +68,6 @@ kotlin {
                 with(Deps.Napier) {
                     api(napier)
                 }
-                with(Deps.SQLDelight) {
-                    api(coroutines)
-                }
             }
         }
         val commonTest by getting {
@@ -84,9 +84,9 @@ kotlin {
                 with(Deps.Ktor) {
                     api(android)
                 }
-                with(Deps.SQLDelight) {
-                    api(android)
-                }
+//                with(Deps.SQLDelight) {
+//                    api(android)
+//                }
                 with(Deps.Firebase) {
                     api(platform(andoridBom))
                     api(auth)
@@ -98,9 +98,9 @@ kotlin {
                 with(Deps.Ktor) {
                     api(ios)
                 }
-                with(Deps.SQLDelight) {
-                    api(ios)
-                }
+//                with(Deps.SQLDelight) {
+//                    api(ios)
+//                }
             }
         }
     }
@@ -111,13 +111,5 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 24
-    }
-}
-
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("pl.msiwak.multiplatform.shared.core")
-        }
     }
 }

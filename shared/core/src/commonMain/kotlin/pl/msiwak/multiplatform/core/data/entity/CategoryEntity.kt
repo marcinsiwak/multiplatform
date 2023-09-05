@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.core.data.entity
 
-import pl.msiwak.multiplatform.core.data.common.ExerciseType
+import pl.msiwak.multiplatform.commonObject.ExerciseType
 
 data class CategoryEntity(
     val id: String = "",

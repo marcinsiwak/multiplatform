@@ -1,9 +1,9 @@
 package pl.msiwak.multiplatform.core.api.service
 
 import kotlinx.coroutines.flow.first
+import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.core.api.client.CategoryClient
 import pl.msiwak.multiplatform.core.api.data.user.ApiCategory
-import pl.msiwak.multiplatform.core.data.common.Category
 import pl.msiwak.multiplatform.core.mapper.CategoryMapper
 
 class CategoryService(

@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.core.domain.summaries
 
-import pl.msiwak.multiplatform.core.data.common.Exercise
-import pl.msiwak.multiplatform.core.data.common.UnitType
+import pl.msiwak.multiplatform.commonObject.Exercise
+import pl.msiwak.multiplatform.commonObject.UnitType
 import pl.msiwak.multiplatform.core.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.core.repository.ExerciseRepository
 

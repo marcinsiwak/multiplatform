@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.core.ui.register
 
 import dev.icerock.moko.resources.StringResource
-import pl.msiwak.multiplatform.core.data.common.PasswordRequirement
-import pl.msiwak.multiplatform.core.data.common.PasswordRequirementType
+import pl.msiwak.multiplatform.commonObject.PasswordRequirement
+import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
 
 data class RegisterState(
     var login: String = "",

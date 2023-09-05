@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.core.data.entity
 
-import pl.msiwak.multiplatform.core.data.common.ExerciseType
-import pl.msiwak.multiplatform.core.data.common.ResultData
+import pl.msiwak.multiplatform.commonObject.ExerciseType
+import pl.msiwak.multiplatform.commonObject.ResultData
 
 data class ExerciseEntity(
     val id: String = "",

@@ -12,9 +12,9 @@ import pl.msiwak.multiplatform.core.api.service.UserService
 import pl.msiwak.multiplatform.core.data.store.LanguageStore
 import pl.msiwak.multiplatform.core.data.store.SessionStore
 import pl.msiwak.multiplatform.core.data.store.UnitStore
-import pl.msiwak.multiplatform.core.database.Database
-import pl.msiwak.multiplatform.core.database.dao.CategoriesDao
-import pl.msiwak.multiplatform.core.database.dao.ExerciseDao
+import pl.msiwak.multiplatform.database.Database
+import pl.msiwak.multiplatform.database.dao.CategoriesDao
+import pl.msiwak.multiplatform.database.dao.ExerciseDao
 import pl.msiwak.multiplatform.core.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.core.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.core.domain.authorization.LoginUseCase

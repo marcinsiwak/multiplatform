@@ -10,19 +10,8 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
-    id("app.cash.sqldelight") version "2.0.0-alpha05"
-//    id("dev.icerock.mobile.multiplatform-resources")
     id("com.codingfeline.buildkonfig")
 }
-
-//dependencies {
-//    commonMainApi("dev.icerock.moko:resources:0.21.2")
-//}
-//
-//multiplatformResources {
-//    multiplatformResourcesPackage = "pl.msiwak.multiplatform" // required
-//    iosBaseLocalizationRegion = "en" // optional, default "en"
-//}
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -51,8 +40,10 @@ kotlin {
             baseName = "shared"
 
 //            binaryOption("bundleVersion", "1")
-            export(project(Modules.core))
+            export(project(Modules.commonObject))
             export(project(Modules.commonResources))
+            export(project(Modules.database))
+            export(project(Modules.core))
         }
 
         pod("FirebaseCore")
@@ -65,8 +56,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.core))
+                api(project(Modules.commonObject))
                 api(project(Modules.commonResources))
+                api(project(Modules.database))
+                api(project(Modules.core))
             }
         }
         val commonTest by getting {

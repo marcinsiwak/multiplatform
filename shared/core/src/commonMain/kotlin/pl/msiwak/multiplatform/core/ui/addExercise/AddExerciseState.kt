@@ -1,10 +1,10 @@
 package pl.msiwak.multiplatform.core.ui.addExercise
 
-import pl.msiwak.multiplatform.core.data.common.DateFilterType
-import pl.msiwak.multiplatform.core.data.common.ExerciseType
-import pl.msiwak.multiplatform.core.data.common.FormattedResultData
-import pl.msiwak.multiplatform.core.data.common.SortType
-import pl.msiwak.multiplatform.core.data.common.UnitType
+import pl.msiwak.multiplatform.commonObject.DateFilterType
+import pl.msiwak.multiplatform.commonObject.ExerciseType
+import pl.msiwak.multiplatform.commonObject.FormattedResultData
+import pl.msiwak.multiplatform.commonObject.SortType
+import pl.msiwak.multiplatform.commonObject.UnitType
 
 data class AddExerciseState(
     var exerciseTitle: String = "",

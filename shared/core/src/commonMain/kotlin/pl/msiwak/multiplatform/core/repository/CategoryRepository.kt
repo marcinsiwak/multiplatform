@@ -3,10 +3,10 @@ package pl.msiwak.multiplatform.core.repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.core.api.data.user.ApiCategory
 import pl.msiwak.multiplatform.core.api.service.CategoryService
-import pl.msiwak.multiplatform.core.data.common.Category
-import pl.msiwak.multiplatform.core.database.dao.CategoriesDao
+import pl.msiwak.multiplatform.database.dao.CategoriesDao
 
 class CategoryRepository(
     private val categoriesDao: CategoriesDao,

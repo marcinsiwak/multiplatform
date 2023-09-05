@@ -8,7 +8,6 @@ plugins {
 buildscript {
     val compose_version by extra("1.1.0-beta01")
     val kotlin_version by extra("1.8.10")
-    val sqlDelightVersion = "1.5.4"
 
     dependencies {
 //        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")

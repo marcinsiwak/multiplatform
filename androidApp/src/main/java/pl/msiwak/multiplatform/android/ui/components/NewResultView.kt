@@ -18,13 +18,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.core.data.common.ExerciseType
+import pl.msiwak.multiplatform.commonObject.ExerciseType
+import pl.msiwak.multiplatform.commonObject.FormattedResultData
 
 @Composable
 fun NewResultView(
     modifier: Modifier = Modifier,
     focusRequesters: List<FocusRequester>,
-    newResultData: pl.msiwak.multiplatform.core.data.common.FormattedResultData,
+    newResultData: FormattedResultData,
     exerciseType: ExerciseType,
     onResultValueChanged: (String) -> Unit,
     onAmountValueChanged: (String) -> Unit,

@@ -9,7 +9,7 @@ object Versions {
     const val koinVersion = "3.3.2"
     const val koinComposeVersion = "3.4.2"
     const val ktorVersion = "2.3.1"
-    const val sqlDelightVersion = "2.0.0-alpha05"
+    const val sqlDelightVersion = "2.0.0"
 }
 
 object Deps {

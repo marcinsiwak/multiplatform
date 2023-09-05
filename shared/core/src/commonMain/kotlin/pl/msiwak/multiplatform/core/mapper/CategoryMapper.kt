@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.core.mapper
 
+import pl.msiwak.multiplatform.commonObject.Category
+import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.core.api.data.user.ApiCategory
-import pl.msiwak.multiplatform.core.data.common.Category
-import pl.msiwak.multiplatform.core.data.common.ExerciseType
 
 class CategoryMapper(private val exerciseMapper: ExerciseMapper) : Mapper<ApiCategory, Category>() {
 
