@@ -17,3 +17,4 @@ rootProject.name = "athletetrack"
 include(":androidApp")
 include(":shared")
 include(":shared:core")
+include(":shared:common-resources")

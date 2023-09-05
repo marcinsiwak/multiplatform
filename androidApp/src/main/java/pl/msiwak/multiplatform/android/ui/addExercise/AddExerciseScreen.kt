@@ -27,7 +27,7 @@ import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import pl.msiwak.multiplatform.MR
+import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView

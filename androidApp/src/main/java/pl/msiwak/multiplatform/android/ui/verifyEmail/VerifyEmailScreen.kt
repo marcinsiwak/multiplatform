@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
+import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.android.extensions.openMailApp
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.SecondaryButton

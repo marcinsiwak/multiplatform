@@ -34,7 +34,7 @@ import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.MR
+import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.extensions.findActivity
 import pl.msiwak.multiplatform.android.ui.components.InputView

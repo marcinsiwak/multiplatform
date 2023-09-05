@@ -14,6 +14,7 @@ import pl.msiwak.multiplatform.core.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 import pl.msiwak.multiplatform.core.validators.Validator
+import pl.msiwak.multiplatform.commonResources.MR
 
 class RegisterViewModel(
     private val registerUserUseCase: RegisterUserUseCase,
@@ -94,12 +95,12 @@ class RegisterViewModel(
         if (isPasswordValid) {
             _viewState.update { it.copy(passwordErrorMessage = null) }
         } else {
-//            _viewState.update { it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
+            _viewState.update { it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
         }
         if (isLoginValid) {
             _viewState.update { it.copy(loginErrorMessage = null) }
         } else {
-//            _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
+            _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
         }
 
         if (!isPasswordValid || !isLoginValid) return

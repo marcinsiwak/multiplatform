@@ -52,7 +52,7 @@ kotlin {
 
 //            binaryOption("bundleVersion", "1")
             export(project(Modules.core))
-
+            export(project(Modules.commonResources))
         }
 
         pod("FirebaseCore")
@@ -66,6 +66,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Modules.core))
+                api(project(Modules.commonResources))
             }
         }
         val commonTest by getting {
