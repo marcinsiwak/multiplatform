@@ -40,25 +40,21 @@ kotlin {
             baseName = "shared"
 
 //            binaryOption("bundleVersion", "1")
-            export(project(Modules.commonObject))
-            export(project(Modules.commonResources))
-            export(project(Modules.database))
+//            export(project(Modules.commonObject))
+//            export(project(Modules.commonResources))
+//            export(project(Modules.database))
             export(project(Modules.core))
         }
 
-        pod("FirebaseCore")
-        pod("FirebaseAuth")
-        pod("FirebaseRemoteConfig")
-        pod("FirebaseCrashlytics")
-        pod("GoogleSignIn")
+
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonObject))
-                api(project(Modules.commonResources))
-                api(project(Modules.database))
+//                api(project(Modules.commonObject))
+//                api(project(Modules.commonResources))
+//                api(project(Modules.database))
                 api(project(Modules.core))
             }
         }
@@ -68,15 +64,15 @@ kotlin {
             }
         }
 
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
+//        val iosX64Main by getting
+//        val iosArm64Main by getting
+//        val iosSimulatorArm64Main by getting
+//        val iosMain by getting {
+//            dependsOn(commonMain)
+//            iosX64Main.dependsOn(this)
+//            iosArm64Main.dependsOn(this)
+//            iosSimulatorArm64Main.dependsOn(this)
+//        }
     }
 }
 
@@ -129,11 +125,3 @@ android {
         targetSdk = 33
     }
 }
-
-//sqldelight {
-//    databases {
-//        create("AppDatabase") {
-//            packageName.set("pl.msiwak.multiplatform.shared")
-//        }
-//    }
-//}

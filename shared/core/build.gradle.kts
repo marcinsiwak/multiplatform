@@ -34,6 +34,7 @@ kotlin {
             export(project(Modules.commonResources))
             export(project(Modules.commonObject))
             export(project(Modules.database))
+            export(project(Modules.utils))
         }
     }
 
@@ -43,16 +44,13 @@ kotlin {
                 api(project(Modules.commonResources))
                 api(project(Modules.commonObject))
                 api(project(Modules.database))
+                api(project(Modules.utils))
 
                 with(Deps.Koin) {
                     api(core)
                     api(test)
                 }
-                with(Deps.Firebase) {
-                    api(authentication)
-                    api(remoteConfig)
-                    api(crashlytics)
-                }
+
                 with(Deps.Kotlinx) {
                     api(coroutines)
                     api(dateTime)
@@ -93,7 +91,14 @@ kotlin {
                 }
             }
         }
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
         val iosMain by getting {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 with(Deps.Ktor) {
                     api(ios)

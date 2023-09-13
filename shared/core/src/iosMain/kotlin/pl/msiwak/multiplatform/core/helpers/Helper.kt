@@ -7,10 +7,10 @@ import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import pl.msiwak.multiplatform.core.di.appModule
 import pl.msiwak.multiplatform.database.DatabaseDriverFactory
-import pl.msiwak.multiplatform.di.appModule
 import pl.msiwak.multiplatform.core.repository.VersionRepository
-import pl.msiwak.multiplatform.utils.KMMPreferences
+import pl.msiwak.multiplatform.core.utils.KMMPreferences
 import platform.Foundation.NSBundle
 import platform.Foundation.NSURL
 import platform.darwin.NSObject
