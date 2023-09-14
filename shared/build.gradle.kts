@@ -46,6 +46,11 @@ kotlin {
             export(project(Modules.core))
         }
 
+//        pod("FirebaseCore")
+//        pod("FirebaseAuth")
+//        pod("FirebaseRemoteConfig")
+//        pod("FirebaseCrashlytics")
+//        pod("GoogleSignIn")
 
     }
 
@@ -56,23 +61,34 @@ kotlin {
 //                api(project(Modules.commonResources))
 //                api(project(Modules.database))
                 api(project(Modules.core))
+
             }
         }
+
+        val androidMain by getting {
+            dependencies {
+//                with(pl.msiwak.multiplatfor.dependencies.Deps.Firebase) {
+//                    api(platform(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.andoridBom))
+//                    api(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.auth)
+//                }
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
 
-//        val iosX64Main by getting
-//        val iosArm64Main by getting
-//        val iosSimulatorArm64Main by getting
-//        val iosMain by getting {
-//            dependsOn(commonMain)
-//            iosX64Main.dependsOn(this)
-//            iosArm64Main.dependsOn(this)
-//            iosSimulatorArm64Main.dependsOn(this)
-//        }
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by getting {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+        }
     }
 }
 

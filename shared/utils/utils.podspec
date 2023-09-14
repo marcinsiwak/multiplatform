@@ -9,11 +9,7 @@ Pod::Spec.new do |spec|
     spec.vendored_frameworks      = 'build/cocoapods/framework/utils.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
-    spec.dependency 'FirebaseAuth'
-    spec.dependency 'FirebaseCore'
-    spec.dependency 'FirebaseCrashlytics'
-    spec.dependency 'FirebaseRemoteConfig'
-    spec.dependency 'GoogleSignIn'
+                
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':shared:utils',

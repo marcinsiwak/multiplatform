@@ -50,7 +50,11 @@ kotlin {
                     api(core)
                     api(test)
                 }
-
+                with(Deps.Firebase) {
+                    implementation(authentication)
+                    implementation(remoteConfig)
+                    implementation(crashlytics)
+                }
                 with(Deps.Kotlinx) {
                     api(coroutines)
                     api(dateTime)

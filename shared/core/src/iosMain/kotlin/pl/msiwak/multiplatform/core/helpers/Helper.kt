@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.core.helpers
 
-import cocoapods.GoogleSignIn.GIDSignIn
+//import cocoapods.GoogleSignIn.GIDSignIn
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.initialize
 import io.github.aakira.napier.DebugAntilog
@@ -30,7 +30,8 @@ fun initFirebase() {
 }
 
 fun initGIDSingIn(url: NSURL): Boolean {
-    return GIDSignIn.sharedInstance.handleURL(url)
+//    return GIDSignIn.sharedInstance.handleURL(url)
+    return true
 }
 
 val sharedPreferencesModule = module {
