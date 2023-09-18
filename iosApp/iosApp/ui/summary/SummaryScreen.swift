@@ -9,6 +9,7 @@ struct SummaryScreen: View {
 
     init() {
         self.state = ObservableState<SummaryState>(value: viewModel.viewState.value as! SummaryState)
+        
         observeState()
     }
     

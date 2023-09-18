@@ -3,30 +3,30 @@ import shared
 
 struct VerifyEmailScreen: View {
     
-//    let viewModel = VerifyEmailDiHelper().getViewModel()
+    let viewModel = VerifyEmailDiHelper().getViewModel()
 
     
     var body: some View {
         
         VStack {
-//            Text(MR.strings().verify_title.desc().localized())
-//            Text(MR.strings().verify_description.desc().localized())
-//            
-//            Button(action: {
-//                viewModel.onOpenMailClicked()
-//            }) {
-//                Text(MR.strings().verify_open_mail.desc().localized())
-//            }
-//            Button(action: {
-//                viewModel.onResendMailClicked()
-//            }) {
-//                Text(MR.strings().verify_resend_mail.desc().localized())
-//            }
-//            Button(action: {
-//                viewModel.onLoginClicked()
-//            }) {
-//                Text(MR.strings().verify_login.desc().localized())
-//            }
+            Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_title).localized())
+            Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_description).localized())
+            
+            Button(action: {
+                viewModel.onOpenMailClicked()
+            }) {
+                Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_open_mail).localized())
+            }
+            Button(action: {
+                viewModel.onResendMailClicked()
+            }) {
+                Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_resend_mail).localized())
+            }
+            Button(action: {
+                viewModel.onLoginClicked()
+            }) {
+                Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_login).localized())
+            }
         }
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)

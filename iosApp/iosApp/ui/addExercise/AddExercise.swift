@@ -50,9 +50,9 @@ struct AddExerciseScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-//            Text(state.value.exerciseTitle)
-//                .padding(.horizontal, 8)
-//                .foregroundColor(.white)
+            Text(state.value.exerciseTitle)
+                .padding(.horizontal, 8)
+                .foregroundColor(.white)
             
             ResultsTimeFilterView(
                 tabs: state.value.filter,

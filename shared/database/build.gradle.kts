@@ -86,4 +86,5 @@ sqldelight {
             packageName.set("pl.msiwak.multiplatform.shared.database")
         }
     }
+    linkSqlite.set(true)
 }

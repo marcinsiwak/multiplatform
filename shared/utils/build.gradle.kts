@@ -29,6 +29,7 @@ kotlin {
 
         }
 
+        pod("GoogleSignIn")
     }
     
     sourceSets {

@@ -5,9 +5,6 @@ plugins {
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
-dependencies {
-    commonMainApi("dev.icerock.moko:resources:0.21.2")
-}
 
 multiplatformResources {
     multiplatformResourcesPackage = "pl.msiwak.multiplatform.commonResources" // required
@@ -31,6 +28,7 @@ kotlin {
 
     cocoapods {
         summary = "Some description for the Shared Module"
+        summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
@@ -45,13 +43,33 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
+               api("dev.icerock.moko:resources:0.21.2")
+               api("dev.icerock.moko:graphics:0.9.0")
+
             }
         }
+        val androidMain by getting {
+            dependencies {
+//                with(pl.msiwak.multiplatfor.dependencies.Deps.Firebase) {
+//                    api(platform(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.andoridBom))
+//                    api(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.auth)
+//                }
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
+        }
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by getting {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
         }
     }
 }

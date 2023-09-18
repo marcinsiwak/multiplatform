@@ -11,6 +11,7 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
     id("com.codingfeline.buildkonfig")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -24,6 +25,7 @@ kotlin {
             }
         }
     }
+
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -39,34 +41,40 @@ kotlin {
         framework {
             baseName = "shared"
 
+            compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
+
 //            binaryOption("bundleVersion", "1")
-//            export(project(Modules.commonObject))
-//            export(project(Modules.commonResources))
-//            export(project(Modules.database))
+            export("dev.icerock.moko:resources:0.21.2")
+            export("dev.icerock.moko:graphics:0.9.0")
             export(project(Modules.core))
+            export(project(Modules.commonObject))
+            export(project(Modules.commonResources))
+            export(project(Modules.database))
         }
 
-//        pod("FirebaseCore")
-//        pod("FirebaseAuth")
-//        pod("FirebaseRemoteConfig")
-//        pod("FirebaseCrashlytics")
-//        pod("GoogleSignIn")
+        pod("FirebaseCore", linkOnly = true)
+        pod("FirebaseAuth", linkOnly = true)
+        pod("FirebaseRemoteConfig", linkOnly = true)
+        pod("FirebaseCrashlytics", linkOnly = true)
+        pod("GoogleSignIn")
 
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                api(project(Modules.commonObject))
-//                api(project(Modules.commonResources))
-//                api(project(Modules.database))
+
                 api(project(Modules.core))
+                api(project(Modules.commonObject))
+                api(project(Modules.commonResources))
+                api(project(Modules.database))
 
             }
         }
 
         val androidMain by getting {
             dependencies {
+                dependsOn(commonMain)
 //                with(pl.msiwak.multiplatfor.dependencies.Deps.Firebase) {
 //                    api(platform(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.andoridBom))
 //                    api(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.auth)

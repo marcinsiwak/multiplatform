@@ -31,7 +31,7 @@ kotlin {
         framework {
             baseName = "core"
 
-            export(project(Modules.commonResources))
+//            export(project(Modules.commonResources))
             export(project(Modules.commonObject))
             export(project(Modules.database))
             export(project(Modules.utils))
@@ -41,10 +41,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonResources))
+
                 api(project(Modules.commonObject))
                 api(project(Modules.database))
                 api(project(Modules.utils))
+//                api(project(Modules.commonResources))
+                api("dev.icerock.moko:resources:0.21.2")
+                api("dev.icerock.moko:graphics:0.9.0")
 
                 with(Deps.Koin) {
                     api(core)

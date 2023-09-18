@@ -2,6 +2,8 @@ import SwiftUI
 import shared
 
 typealias Category = shared.Category
+typealias Exercise = shared.Exercise
+typealias ExerciseType = shared.ExerciseType
 
 struct CategoryItem: View {
     let category: Category
