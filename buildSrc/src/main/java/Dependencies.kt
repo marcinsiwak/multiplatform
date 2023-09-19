@@ -3,6 +3,8 @@ package pl.msiwak.multiplatfor.dependencies
 import pl.msiwak.multiplatfor.dependencies.Versions.koinComposeVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.koinVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.ktorVersion
+import pl.msiwak.multiplatfor.dependencies.Versions.mokoGraphicsVersion
+import pl.msiwak.multiplatfor.dependencies.Versions.mokoResourcesVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.sqlDelightVersion
 
 object Versions {
@@ -10,6 +12,8 @@ object Versions {
     const val koinComposeVersion = "3.4.2"
     const val ktorVersion = "2.3.1"
     const val sqlDelightVersion = "2.0.0"
+    const val mokoResourcesVersion = "0.21.2"
+    const val mokoGraphicsVersion = "0.9.0"
 }
 
 object Deps {
@@ -65,5 +69,10 @@ object Deps {
 
     object Google {
         const val andorid_play_services_auth= "com.google.android.gms:play-services-auth:20.6.0"
+    }
+
+    object MokoResources {
+        const val resources ="dev.icerock.moko:resources:$mokoResourcesVersion"
+        const val graphics = "dev.icerock.moko:graphics:$mokoGraphicsVersion"
     }
 }

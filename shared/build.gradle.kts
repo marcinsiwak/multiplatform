@@ -44,41 +44,38 @@ kotlin {
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
 
 //            binaryOption("bundleVersion", "1")
-            export("dev.icerock.moko:resources:0.21.2")
-            export("dev.icerock.moko:graphics:0.9.0")
+            export(Deps.MokoResources.resources)
+            export(Deps.MokoResources.graphics)
+
             export(project(Modules.core))
             export(project(Modules.commonObject))
             export(project(Modules.commonResources))
             export(project(Modules.database))
+            export(project(Modules.utils))
         }
 
         pod("FirebaseCore", linkOnly = true)
         pod("FirebaseAuth", linkOnly = true)
         pod("FirebaseRemoteConfig", linkOnly = true)
         pod("FirebaseCrashlytics", linkOnly = true)
-        pod("GoogleSignIn")
+        pod("GoogleSignIn", linkOnly = true)
 
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-
                 api(project(Modules.core))
                 api(project(Modules.commonObject))
                 api(project(Modules.commonResources))
                 api(project(Modules.database))
-
+                api(project(Modules.utils))
             }
         }
 
         val androidMain by getting {
             dependencies {
                 dependsOn(commonMain)
-//                with(pl.msiwak.multiplatfor.dependencies.Deps.Firebase) {
-//                    api(platform(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.andoridBom))
-//                    api(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.auth)
-//                }
             }
         }
 

@@ -1,3 +1,5 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -35,27 +37,21 @@ kotlin {
         framework {
             baseName = "commonResources"
 
-            export("dev.icerock.moko:resources:0.21.2")
-            export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
+            export(Deps.MokoResources.resources)
+            export(Deps.MokoResources.graphics)
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-               api("dev.icerock.moko:resources:0.21.2")
-               api("dev.icerock.moko:graphics:0.9.0")
-
+                with(Deps.MokoResources) {
+                    api(resources)
+                    api(graphics)
+                }
             }
         }
-        val androidMain by getting {
-            dependencies {
-//                with(pl.msiwak.multiplatfor.dependencies.Deps.Firebase) {
-//                    api(platform(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.andoridBom))
-//                    api(pl.msiwak.multiplatfor.dependencies.Deps.Firebase.auth)
-//                }
-            }
-        }
+        val androidMain by getting
 
         val commonTest by getting {
             dependencies {

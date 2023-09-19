@@ -1,3 +1,5 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -28,14 +30,27 @@ kotlin {
             baseName = "utils"
 
         }
-
         pod("GoogleSignIn")
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
+                with(Deps.Firebase) {
+                    api(authentication)
+                    api(remoteConfig)
+                    api(crashlytics)
+                }
+            }
+        }
 
+        val androidMain by getting {
+            dependencies {
+                dependsOn(commonMain)
+                with(Deps.Firebase) {
+                    api(platform(andoridBom))
+                    api(auth)
+                }
             }
         }
 

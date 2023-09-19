@@ -1,6 +1,5 @@
 import SwiftUI
 import shared
-import GoogleSignIn
 
 struct WelcomeScreen: View {
     @State private var login: String = ""

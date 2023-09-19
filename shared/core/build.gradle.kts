@@ -31,7 +31,6 @@ kotlin {
         framework {
             baseName = "core"
 
-//            export(project(Modules.commonResources))
             export(project(Modules.commonObject))
             export(project(Modules.database))
             export(project(Modules.utils))
@@ -45,19 +44,17 @@ kotlin {
                 api(project(Modules.commonObject))
                 api(project(Modules.database))
                 api(project(Modules.utils))
-//                api(project(Modules.commonResources))
-                api("dev.icerock.moko:resources:0.21.2")
-                api("dev.icerock.moko:graphics:0.9.0")
+
+                with(Deps.MokoResources) {
+                    api(resources)
+                    api(graphics)
+                }
 
                 with(Deps.Koin) {
                     api(core)
                     api(test)
                 }
-                with(Deps.Firebase) {
-                    implementation(authentication)
-                    implementation(remoteConfig)
-                    implementation(crashlytics)
-                }
+
                 with(Deps.Kotlinx) {
                     api(coroutines)
                     api(dateTime)
@@ -89,13 +86,6 @@ kotlin {
                 with(Deps.Ktor) {
                     api(android)
                 }
-//                with(Deps.SQLDelight) {
-//                    api(android)
-//                }
-                with(Deps.Firebase) {
-                    api(platform(andoridBom))
-                    api(auth)
-                }
             }
         }
         val iosX64Main by getting
@@ -110,9 +100,6 @@ kotlin {
                 with(Deps.Ktor) {
                     api(ios)
                 }
-//                with(Deps.SQLDelight) {
-//                    api(ios)
-//                }
             }
         }
     }
