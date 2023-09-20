@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.core.domain.version
 
-import pl.msiwak.multiplatform.core.repository.VersionRepository
+import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
 
 class GetCurrentAppCodeUseCase(private val versionRepository: VersionRepository) {
     operator fun invoke(): String {

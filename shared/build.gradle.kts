@@ -52,6 +52,7 @@ kotlin {
             export(project(Modules.commonResources))
             export(project(Modules.database))
             export(project(Modules.utils))
+            export(project(Modules.auth))
         }
 
         pod("FirebaseCore", linkOnly = true)
@@ -70,6 +71,7 @@ kotlin {
                 api(project(Modules.commonResources))
                 api(project(Modules.database))
                 api(project(Modules.utils))
+                api(project(Modules.auth))
             }
         }
 

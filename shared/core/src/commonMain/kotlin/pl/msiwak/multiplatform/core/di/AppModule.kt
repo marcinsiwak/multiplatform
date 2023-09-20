@@ -1,20 +1,9 @@
 package pl.msiwak.multiplatform.core.di
 
 import org.koin.dsl.module
-import pl.msiwak.multiplatform.core.api.authorization.FirebaseAuthorization
-import pl.msiwak.multiplatform.core.api.client.CategoryClient
-import pl.msiwak.multiplatform.core.api.client.KtorClient
-import pl.msiwak.multiplatform.core.api.client.UserClient
+import pl.msiwak.multiplatform.auth.FirebaseAuthorization
+import pl.msiwak.multiplatform.auth.SessionStore
 import pl.msiwak.multiplatform.core.api.errorHandler.GlobalErrorHandler
-import pl.msiwak.multiplatform.core.api.remoteConfig.RemoteConfig
-import pl.msiwak.multiplatform.core.api.service.CategoryService
-import pl.msiwak.multiplatform.core.api.service.UserService
-import pl.msiwak.multiplatform.core.data.store.LanguageStore
-import pl.msiwak.multiplatform.core.data.store.SessionStore
-import pl.msiwak.multiplatform.core.data.store.UnitStore
-import pl.msiwak.multiplatform.database.Database
-import pl.msiwak.multiplatform.database.dao.CategoriesDao
-import pl.msiwak.multiplatform.database.dao.ExerciseDao
 import pl.msiwak.multiplatform.core.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.core.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.core.domain.authorization.LoginUseCase
@@ -50,16 +39,6 @@ import pl.msiwak.multiplatform.core.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.core.domain.version.GetCurrentAppCodeUseCase
 import pl.msiwak.multiplatform.core.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.core.domain.version.GetVersionNameUseCase
-import pl.msiwak.multiplatform.core.mapper.CategoryMapper
-import pl.msiwak.multiplatform.core.mapper.ExerciseMapper
-import pl.msiwak.multiplatform.core.mapper.UserMapper
-import pl.msiwak.multiplatform.core.repository.AuthRepository
-import pl.msiwak.multiplatform.core.repository.CategoryRepository
-import pl.msiwak.multiplatform.core.repository.ExerciseRepository
-import pl.msiwak.multiplatform.core.repository.RemoteConfigRepository
-import pl.msiwak.multiplatform.core.repository.SessionRepository
-import pl.msiwak.multiplatform.core.repository.UserRepository
-import pl.msiwak.multiplatform.core.repository.VersionRepository
 import pl.msiwak.multiplatform.core.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.core.ui.addExercise.AddExerciseViewModel
 import pl.msiwak.multiplatform.core.ui.category.CategoryViewModel
@@ -74,9 +53,30 @@ import pl.msiwak.multiplatform.core.ui.summary.SummaryViewModel
 import pl.msiwak.multiplatform.core.ui.unit.UnitViewModel
 import pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailViewModel
 import pl.msiwak.multiplatform.core.ui.welcome.WelcomeScreenViewModel
-import pl.msiwak.multiplatform.core.utils.DateFormatter
-import pl.msiwak.multiplatform.core.utils.NumberFormatter
 import pl.msiwak.multiplatform.core.validators.Validator
+import pl.msiwak.multiplatform.data.local.store.LanguageStore
+import pl.msiwak.multiplatform.data.local.store.UnitStore
+import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
+import pl.msiwak.multiplatform.data.remote.repository.CategoryRepository
+import pl.msiwak.multiplatform.data.remote.repository.ExerciseRepository
+import pl.msiwak.multiplatform.data.remote.repository.RemoteConfigRepository
+import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
+import pl.msiwak.multiplatform.data.remote.repository.UserRepository
+import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
+import pl.msiwak.multiplatform.database.Database
+import pl.msiwak.multiplatform.database.dao.CategoriesDao
+import pl.msiwak.multiplatform.database.dao.ExerciseDao
+import pl.msiwak.multiplatform.network.client.CategoryClient
+import pl.msiwak.multiplatform.network.client.KtorClient
+import pl.msiwak.multiplatform.network.client.UserClient
+import pl.msiwak.multiplatform.network.mapper.CategoryMapper
+import pl.msiwak.multiplatform.network.mapper.ExerciseMapper
+import pl.msiwak.multiplatform.network.mapper.UserMapper
+import pl.msiwak.multiplatform.network.service.CategoryService
+import pl.msiwak.multiplatform.network.service.UserService
+import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
+import pl.msiwak.multiplatform.utils.DateFormatter
+import pl.msiwak.multiplatform.utils.NumberFormatter
 
 fun appModule() = listOf(
     platformModule,

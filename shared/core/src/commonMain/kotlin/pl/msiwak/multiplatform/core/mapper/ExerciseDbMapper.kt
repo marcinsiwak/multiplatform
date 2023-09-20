@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.core.mapper
 
-import pl.msiwak.multiplatform.core.api.data.user.ApiExercise
+import pl.msiwak.multiplatform.commonObject.base.Mapper
+import pl.msiwak.multiplatform.network.model.ApiExercise
 import pl.msiwak.multiplatform.core.data.entity.ExerciseEntity
 
 class ExerciseDbMapper() : Mapper<ApiExercise, ExerciseEntity>() {

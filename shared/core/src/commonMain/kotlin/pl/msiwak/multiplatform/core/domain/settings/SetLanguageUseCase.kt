@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.core.domain.settings
 
 import dev.icerock.moko.resources.desc.StringDesc
-import pl.msiwak.multiplatform.core.data.store.LanguageStore
+import pl.msiwak.multiplatform.data.local.store.LanguageStore
 
 class SetLanguageUseCase(private val store: LanguageStore) {
     operator fun invoke(languageCode: String) {

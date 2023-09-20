@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.core.domain.authorization
 
 import io.github.aakira.napier.Napier
-import pl.msiwak.multiplatform.core.repository.AuthRepository
-import pl.msiwak.multiplatform.core.repository.SessionRepository
+import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
+import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
 
 class ObserveAuthStateChangedUseCase(
     private val authRepository: AuthRepository,

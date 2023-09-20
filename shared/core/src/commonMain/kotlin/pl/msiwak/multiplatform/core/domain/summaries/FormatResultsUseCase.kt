@@ -2,8 +2,8 @@ package pl.msiwak.multiplatform.core.domain.summaries
 
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultData
-import pl.msiwak.multiplatform.core.utils.DateFormatter
-import pl.msiwak.multiplatform.core.utils.NumberFormatter
+import pl.msiwak.multiplatform.utils.DateFormatter
+import pl.msiwak.multiplatform.utils.NumberFormatter
 
 class FormatResultsUseCase(
     private val dateFormatter: DateFormatter,

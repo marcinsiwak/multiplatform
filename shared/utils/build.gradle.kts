@@ -38,21 +38,23 @@ kotlin {
             dependencies {
                 with(Deps.Firebase) {
                     api(authentication)
-                    api(remoteConfig)
                     api(crashlytics)
+                }
+                with(Deps.Kotlinx) {
+                    api(dateTime)
                 }
             }
         }
 
-        val androidMain by getting {
-            dependencies {
-                dependsOn(commonMain)
-                with(Deps.Firebase) {
-                    api(platform(andoridBom))
-                    api(auth)
-                }
-            }
-        }
+//        val androidMain by getting {
+//            dependencies {
+//                dependsOn(commonMain)
+//                with(Deps.Firebase) {
+//                    api(platform(andoridBom))
+//                    api(auth)
+//                }
+//            }
+//        }
 
         val commonTest by getting {
             dependencies {

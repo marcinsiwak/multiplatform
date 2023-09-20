@@ -25,10 +25,10 @@ import pl.msiwak.multiplatform.core.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.core.extensions.isNumber
 import pl.msiwak.multiplatform.core.extensions.isTime
 import pl.msiwak.multiplatform.core.extensions.safeToDouble
-import pl.msiwak.multiplatform.core.utils.DATE_REGEX
-import pl.msiwak.multiplatform.core.utils.NUMBER_REGEX_COMMA
-import pl.msiwak.multiplatform.core.utils.NUMBER_REGEX_DOT
-import pl.msiwak.multiplatform.core.utils.TIME_REGEX
+import pl.msiwak.multiplatform.utils.DATE_REGEX
+import pl.msiwak.multiplatform.utils.NUMBER_REGEX_COMMA
+import pl.msiwak.multiplatform.utils.NUMBER_REGEX_DOT
+import pl.msiwak.multiplatform.utils.TIME_REGEX
 
 class AddExerciseViewModel(
     id: String,

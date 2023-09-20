@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.core.domain.summaries
 
 import kotlinx.datetime.LocalDateTime
-import pl.msiwak.multiplatform.core.utils.DATE_FORMAT
-import pl.msiwak.multiplatform.core.utils.DateFormatter
+import pl.msiwak.multiplatform.utils.DATE_FORMAT
+import pl.msiwak.multiplatform.utils.DateFormatter
 
 class FormatStringToDateUseCase(private val dateFormatter: DateFormatter) {
     operator fun invoke(date: String): LocalDateTime {

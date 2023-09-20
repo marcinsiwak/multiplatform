@@ -34,6 +34,9 @@ kotlin {
             export(project(Modules.commonObject))
             export(project(Modules.database))
             export(project(Modules.utils))
+            export(project(Modules.auth))
+            export(project(Modules.network))
+            export(project(Modules.data))
         }
     }
 
@@ -44,6 +47,9 @@ kotlin {
                 api(project(Modules.commonObject))
                 api(project(Modules.database))
                 api(project(Modules.utils))
+                api(project(Modules.auth))
+                api(project(Modules.network))
+                api(project(Modules.data))
 
                 with(Deps.MokoResources) {
                     api(resources)
@@ -59,16 +65,6 @@ kotlin {
                     api(coroutines)
                     api(dateTime)
                     api(serialization)
-                }
-                with(Deps.Ktor) {
-                    api(core)
-                    api(content_negation)
-                    api(serialization)
-                    api(cio)
-                    api(logger)
-                }
-                with(Deps.Napier) {
-                    api(napier)
                 }
             }
         }

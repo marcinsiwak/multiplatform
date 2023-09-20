@@ -3,7 +3,7 @@ package pl.msiwak.multiplatform.core.domain.summaries
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.UnitType
 import pl.msiwak.multiplatform.core.domain.settings.GetUnitsUseCase
-import pl.msiwak.multiplatform.core.repository.ExerciseRepository
+import pl.msiwak.multiplatform.data.remote.repository.ExerciseRepository
 
 class UpdateExerciseUseCase(
     private val exerciseRepository: ExerciseRepository,
