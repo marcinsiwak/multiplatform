@@ -37,6 +37,7 @@ kotlin {
             export(project(Modules.auth))
             export(project(Modules.network))
             export(project(Modules.data))
+            export(project(Modules.domain))
         }
     }
 
@@ -50,6 +51,7 @@ kotlin {
                 api(project(Modules.auth))
                 api(project(Modules.network))
                 api(project(Modules.data))
+                api(project(Modules.domain))
 
                 with(Deps.MokoResources) {
                     api(resources)

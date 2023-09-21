@@ -5,10 +5,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.core.ViewModel
-import pl.msiwak.multiplatform.core.domain.summaries.GetCategoryUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.InsertExerciseUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.ObserveCategoryUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.RemoveExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
+import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
+import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 

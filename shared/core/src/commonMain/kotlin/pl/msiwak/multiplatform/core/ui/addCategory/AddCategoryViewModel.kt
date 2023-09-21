@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.core.ViewModel
-import pl.msiwak.multiplatform.core.domain.summaries.CreateCategoryUseCase
+import pl.msiwak.multiplatform.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 
 class AddCategoryViewModel(

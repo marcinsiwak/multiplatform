@@ -4,8 +4,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
-import pl.msiwak.multiplatform.core.domain.authorization.LogoutUseCase
-import pl.msiwak.multiplatform.core.domain.version.GetVersionNameUseCase
+import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
+import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 

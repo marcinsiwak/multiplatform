@@ -4,7 +4,7 @@ import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.api.errorHandler.GlobalErrorHandler
-import pl.msiwak.multiplatform.core.domain.user.GetUserUseCase
+import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 
 class DashboardViewModel(
     private val getUser: GetUserUseCase,

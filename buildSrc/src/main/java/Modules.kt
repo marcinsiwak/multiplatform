@@ -11,4 +11,5 @@ object Modules {
     const val network = "$shared:network"
     const val data = "$shared:data"
     const val remoteConfig = "$shared:remoteConfig"
+    const val domain = "$shared:domain"
 }

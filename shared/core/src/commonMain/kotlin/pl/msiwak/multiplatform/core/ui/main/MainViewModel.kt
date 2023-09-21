@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.api.errorHandler.GlobalErrorHandler
-import pl.msiwak.multiplatform.core.domain.authorization.GetUserTokenUseCase
-import pl.msiwak.multiplatform.core.domain.authorization.ObserveAuthStateChangedUseCase
-import pl.msiwak.multiplatform.core.domain.remoteConfig.FetchRemoteConfigUseCase
-import pl.msiwak.multiplatform.core.domain.settings.GetLanguageUseCase
-import pl.msiwak.multiplatform.core.domain.version.GetForceUpdateStateUseCase
+import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
+import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
+import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
+import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
+import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
 

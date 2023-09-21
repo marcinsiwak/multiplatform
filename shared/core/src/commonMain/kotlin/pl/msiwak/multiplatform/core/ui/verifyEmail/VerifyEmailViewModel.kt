@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
-import pl.msiwak.multiplatform.core.domain.authorization.ResendVerificationEmailUseCase
 import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.core.ui.navigator.Navigator
+import pl.msiwak.multiplatform.domain.authorization.ResendVerificationEmailUseCase
 
 class VerifyEmailViewModel(
     private val resendVerificationEmailUseCase: ResendVerificationEmailUseCase,

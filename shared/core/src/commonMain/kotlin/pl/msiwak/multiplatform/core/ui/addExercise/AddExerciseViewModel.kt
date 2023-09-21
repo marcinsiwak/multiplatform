@@ -17,11 +17,11 @@ import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.commonObject.SortType
-import pl.msiwak.multiplatform.core.domain.summaries.FormatDateUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.FormatResultsUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.FormatStringToDateUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.GetExerciseUseCase
-import pl.msiwak.multiplatform.core.domain.summaries.UpdateExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.core.extensions.isNumber
 import pl.msiwak.multiplatform.core.extensions.isTime
 import pl.msiwak.multiplatform.core.extensions.safeToDouble
