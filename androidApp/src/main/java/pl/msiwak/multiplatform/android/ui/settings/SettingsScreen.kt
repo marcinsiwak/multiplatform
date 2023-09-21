@@ -14,14 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.core.ui.settings.SettingsViewModel
+import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 
 @Composable
 fun SettingsScreen() {
-    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.settings.SettingsViewModel>()
+    val viewModel = koinViewModel<SettingsViewModel>()
     val state = viewModel.viewState.collectAsState()
 
     Box {

@@ -18,14 +18,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.core.ui.language.LanguageViewModel
+import pl.msiwak.multiplatform.commonResources.MR
 
 @Composable
 fun LanguageScreen() {
-    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.language.LanguageViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.ui.language.LanguageViewModel>()
     val state = viewModel.viewState.collectAsState()
 
     Column(

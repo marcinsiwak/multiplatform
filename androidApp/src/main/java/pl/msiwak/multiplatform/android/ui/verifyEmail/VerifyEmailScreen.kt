@@ -14,25 +14,23 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.android.extensions.openMailApp
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailEvent
-import pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailViewModel
+import pl.msiwak.multiplatform.commonResources.MR
 
 @Composable
 fun VerifyEmailScreen() {
-    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailViewModel>()
+    val viewModel = koinViewModel<pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel>()
 
     val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
         viewModel.viewEvent.collectLatest {
             when (it) {
-                pl.msiwak.multiplatform.core.ui.verifyEmail.VerifyEmailEvent.OpenMail -> context.openMailApp()
+                pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailEvent.OpenMail -> context.openMailApp()
             }
         }
     }

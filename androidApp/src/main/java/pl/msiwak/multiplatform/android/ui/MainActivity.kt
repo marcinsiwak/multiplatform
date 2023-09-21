@@ -30,11 +30,11 @@ import pl.msiwak.multiplatform.android.ui.theme.BaseKmm_ProjectTheme
 import pl.msiwak.multiplatform.android.ui.units.UnitScreen
 import pl.msiwak.multiplatform.android.ui.verifyEmail.VerifyEmailScreen
 import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
-import pl.msiwak.multiplatform.core.ui.navigator.NavigationDirections
+import pl.msiwak.multiplatform.ui.main.MainViewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: pl.msiwak.multiplatform.core.ui.main.MainViewModel by inject(pl.msiwak.multiplatform.core.ui.main.MainViewModel::class.java)
+    private val viewModel: MainViewModel by inject(MainViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +53,8 @@ class MainActivity : ComponentActivity() {
                     LaunchedEffect(key1 = true) {
                         viewModel.mainNavigator.commands.collect {
                             when (it) {
-                                is NavigationDirections.OpenStore -> openStore()
-                                NavigationDirections.NavigateUp -> navController.navigateUp()
+                                is pl.msiwak.multiplatform.ui.navigator.NavigationDirections.OpenStore -> openStore()
+                                pl.msiwak.multiplatform.ui.navigator.NavigationDirections.NavigateUp -> navController.navigateUp()
                                 else -> navigate(navController, it)
                             }
                         }
@@ -63,35 +63,37 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = viewState.value.directions.route
                     ) {
-                        composable(NavigationDirections.Welcome().route) { WelcomeScreen() }
-                        composable(NavigationDirections.Registration.route) { RegisterScreen() }
-                        composable(NavigationDirections.Dashboard().route) { DashboardScreen() }
-                        composable(NavigationDirections.AddCategory.route) { AddCategoryScreen() }
-                        composable(NavigationDirections.Language.route) { LanguageScreen() }
-                        composable(NavigationDirections.Unit.route) { UnitScreen() }
-                        composable(NavigationDirections.ForceUpdate.route) { ForceUpdateScreen() }
-                        composable(NavigationDirections.VerifyEmail.route) { VerifyEmailScreen() }
+                        composable(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.Welcome().route) { WelcomeScreen() }
+                        composable(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.Registration.route) { RegisterScreen() }
+                        composable(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.Dashboard().route) { DashboardScreen() }
+                        composable(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.AddCategory.route) { AddCategoryScreen() }
+                        composable(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.Language.route) { LanguageScreen() }
+                        composable(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.Unit.route) { UnitScreen() }
+                        composable(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.ForceUpdate.route) { ForceUpdateScreen() }
+                        composable(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.VerifyEmail.route) { VerifyEmailScreen() }
                         composable(
-                            NavigationDirections.AddExercise().route, arguments = listOf(
-                                navArgument(NavigationDirections.AddExercise.BUNDLE_ARG_ID) {
+                            pl.msiwak.multiplatform.ui.navigator.NavigationDirections.AddExercise().route,
+                            arguments = listOf(
+                                navArgument(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.AddExercise.BUNDLE_ARG_ID) {
                                     type = NavType.LongType
                                 },
                             )
                         ) { backStackEntry ->
                             val id =
-                                backStackEntry.arguments?.getLong(NavigationDirections.AddExercise.BUNDLE_ARG_ID)
+                                backStackEntry.arguments?.getLong(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.AddExercise.BUNDLE_ARG_ID)
                                     ?: 0
                             AddExerciseScreen(id)
                         }
                         composable(
-                            NavigationDirections.CategoryDetails().route, arguments = listOf(
-                                navArgument(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID) {
+                            pl.msiwak.multiplatform.ui.navigator.NavigationDirections.CategoryDetails().route,
+                            arguments = listOf(
+                                navArgument(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.CategoryDetails.BUNDLE_ARG_ID) {
                                     type = NavType.LongType
                                 },
                             )
                         ) { backStackEntry ->
                             val id =
-                                backStackEntry.arguments?.getLong(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID)
+                                backStackEntry.arguments?.getLong(pl.msiwak.multiplatform.ui.navigator.NavigationDirections.CategoryDetails.BUNDLE_ARG_ID)
                                     ?: 0
                             CategoryScreen(id)
                         }
@@ -101,7 +103,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun navigate(navController: NavController, command: NavigationDirections) {
+    private fun navigate(
+        navController: NavController,
+        command: pl.msiwak.multiplatform.ui.navigator.NavigationDirections
+    ) {
         if (command.isInclusive) {
             navController.navigate(route = command.destination) {
                 popUpTo(0)

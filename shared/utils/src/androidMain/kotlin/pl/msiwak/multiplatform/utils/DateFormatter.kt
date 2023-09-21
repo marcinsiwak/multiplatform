@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toLocalDateTime
-import org.koin.test.Simple
 
 actual class DateFormatter {
 

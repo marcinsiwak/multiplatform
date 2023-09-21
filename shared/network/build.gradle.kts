@@ -35,7 +35,7 @@ kotlin {
 
         }
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -53,6 +53,14 @@ kotlin {
 
                 with(Deps.Napier) {
                     api(napier)
+                }
+            }
+        }
+
+        val androidMain by getting {
+            dependencies {
+                with(Deps.Ktor) {
+                    api(android)
                 }
             }
         }

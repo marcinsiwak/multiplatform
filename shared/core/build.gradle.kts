@@ -57,33 +57,11 @@ kotlin {
                     api(resources)
                     api(graphics)
                 }
-
-                with(Deps.Koin) {
-                    api(core)
-                    api(test)
-                }
-
-                with(Deps.Kotlinx) {
-                    api(coroutines)
-                    api(dateTime)
-                    api(serialization)
-                }
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-            }
-        }
-
-        val androidMain by getting {
-            dependencies {
-                with(Deps.Koin) {
-                    api(android)
-                }
-                with(Deps.Ktor) {
-                    api(android)
-                }
             }
         }
         val iosX64Main by getting

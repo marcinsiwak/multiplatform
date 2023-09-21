@@ -15,10 +15,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import pl.msiwak.multiplatform.android.ui.extensions.topBorder
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.core.ui.navigator.DashboardNavigationDirections
 
 @Composable
-fun BottomNavigation(navController: NavController, items: List<pl.msiwak.multiplatform.core.ui.navigator.DashboardNavigationDirections>) {
+fun BottomNavigation(navController: NavController, items: List<pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections>) {
     NavigationBar(
         modifier = Modifier.topBorder(
             MaterialTheme.dimens.bottom_navigation_divider_width,

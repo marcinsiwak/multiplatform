@@ -22,11 +22,12 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 
 @Composable
 fun AddCategoryScreen() {
     val viewModel =
-        koinViewModel<pl.msiwak.multiplatform.core.ui.addCategory.AddCategoryViewModel>()
+        koinViewModel<AddCategoryViewModel>()
     val state = viewModel.viewState.collectAsState()
 
     Box(

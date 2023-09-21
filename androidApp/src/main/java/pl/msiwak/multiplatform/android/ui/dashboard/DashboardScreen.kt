@@ -11,26 +11,26 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
 import pl.msiwak.multiplatform.android.ui.summary.SummaryScreen
-import pl.msiwak.multiplatform.core.ui.dashboard.DashboardViewModel
-import pl.msiwak.multiplatform.core.ui.navigator.DashboardNavigationDirections
+import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
+import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen() {
-    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.dashboard.DashboardViewModel>()
+    val viewModel = koinViewModel<DashboardViewModel>()
 
     val items = listOf(
-        pl.msiwak.multiplatform.core.ui.navigator.DashboardNavigationDirections.Summary(
+        DashboardNavigationDirections.Summary(
             R.drawable.ic_workout,
             stringResource(MR.strings.summary.resourceId)
         ),
 //        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(MR.strings.account)),
-        pl.msiwak.multiplatform.core.ui.navigator.DashboardNavigationDirections.Settings(
+        DashboardNavigationDirections.Settings(
             R.drawable.ic_settings,
             stringResource(MR.strings.settings.resourceId)
         )

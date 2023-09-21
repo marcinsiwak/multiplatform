@@ -20,17 +20,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.PasswordRequirements
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.core.ui.register.RegisterViewModel
+import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
 @Composable
 fun RegisterScreen() {
-    val viewModel = koinViewModel<pl.msiwak.multiplatform.core.ui.register.RegisterViewModel>()
+    val viewModel = koinViewModel<RegisterViewModel>()
 
     val viewState = viewModel.viewState.collectAsState()
 

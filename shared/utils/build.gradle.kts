@@ -42,6 +42,10 @@ kotlin {
                 }
                 with(Deps.Kotlinx) {
                     api(dateTime)
+                    api(coroutines)
+                }
+                with(Deps.Napier) {
+                    api(napier)
                 }
             }
         }

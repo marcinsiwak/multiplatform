@@ -47,12 +47,13 @@ kotlin {
             export(Deps.MokoResources.resources)
             export(Deps.MokoResources.graphics)
 
-            export(project(Modules.core))
             export(project(Modules.commonObject))
             export(project(Modules.commonResources))
             export(project(Modules.database))
             export(project(Modules.utils))
             export(project(Modules.auth))
+            export(project(Modules.ui))
+            export(project(Modules.injector))
         }
 
         pod("FirebaseCore", linkOnly = true)
@@ -66,12 +67,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.core))
                 api(project(Modules.commonObject))
                 api(project(Modules.commonResources))
                 api(project(Modules.database))
                 api(project(Modules.utils))
                 api(project(Modules.auth))
+                api(project(Modules.ui))
+                api(project(Modules.injector))
             }
         }
 
