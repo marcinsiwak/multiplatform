@@ -14,4 +14,5 @@ object Modules {
     const val domain = "$shared:domain"
     const val injector = "$shared:injector"
     const val ui = "$shared:ui"
+    const val buildConfig = "$shared:buildConfig"
 }

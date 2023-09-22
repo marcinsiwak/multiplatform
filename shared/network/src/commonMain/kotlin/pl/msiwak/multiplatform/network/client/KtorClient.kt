@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.network.client
 
-//import pl.msiwak.multiplatform.BuildKonfig
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
@@ -14,10 +13,11 @@ import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import pl.msiwak.multiplatform.auth.SessionStore
+import pl.msiwak.multiplatform.buildconfig.BuildConfig
 
 class KtorClient(private val sessionStore: SessionStore) {
     val httpClient = HttpClient(CIO) {
-        if (true) {
+        if (BuildConfig.IsDebug) {
             install(Logging) {
                 level = LogLevel.ALL
                 logger = object : Logger {
@@ -39,7 +39,7 @@ class KtorClient(private val sessionStore: SessionStore) {
             })
         }
         defaultRequest {
-//            url(BuildKonfig.BASE_URL)
+            url(BuildConfig.BASE_URL)
             bearerAuth(sessionStore.getToken() ?: "")
 
         }

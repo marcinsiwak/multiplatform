@@ -1,7 +1,3 @@
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
-import java.io.FileInputStream
-import java.util.Properties
 import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
@@ -10,7 +6,6 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
-    id("com.codingfeline.buildkonfig")
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
@@ -91,46 +86,6 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
-        }
-    }
-}
-
-buildkonfig {
-    packageName = "pl.msiwak.multiplatform.shared.core"
-
-    val releasePropertiesFile = rootProject.file("release.properties")
-    val releaseProperties = Properties()
-    releaseProperties.load(FileInputStream(releasePropertiesFile))
-
-    defaultConfigs {
-        buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
-        buildConfigField(BOOLEAN, "IsDebug", "false")
-    }
-    targetConfigs {
-
-        create("android") {
-            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "false")
-        }
-
-        create("ios") {
-            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "false")
-        }
-    }
-    targetConfigs("dev") {
-
-        val debugPropertiesFile = rootProject.file("debug.properties")
-        val debugProperties = Properties()
-        debugProperties.load(FileInputStream(debugPropertiesFile))
-
-        create("android") {
-            buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "true")
-        }
-        create("ios") {
-            buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "true")
         }
     }
 }

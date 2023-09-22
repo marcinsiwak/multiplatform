@@ -1,5 +1,9 @@
 import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     kotlin("multiplatform")

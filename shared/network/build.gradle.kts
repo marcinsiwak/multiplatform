@@ -33,6 +33,7 @@ kotlin {
             export(project(Modules.commonObject))
             export(project(Modules.utils))
             export(project(Modules.auth))
+            export(project(Modules.buildConfig))
 
         }
     }
@@ -43,6 +44,7 @@ kotlin {
                 api(project(Modules.commonObject))
                 api(project(Modules.utils))
                 api(project(Modules.auth))
+                api(project(Modules.buildConfig))
 
                 with(Deps.Ktor) {
                     api(core)
