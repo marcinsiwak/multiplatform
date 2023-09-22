@@ -1,3 +1,5 @@
+import pl.msiwak.multiplatfor.dependencies.Modules
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -20,23 +22,21 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Domain Shared Module"
+        homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "domain"
 
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.data))
-
+            export(project(Modules.data))
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.data))
-
+                api(project(Modules.data))
             }
         }
         val commonTest by getting {

@@ -10,7 +10,6 @@ buildscript {
     val kotlin_version by extra("1.8.10")
 
     dependencies {
-//        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         classpath("com.android.tools.build:gradle:7.2.2")
         classpath("com.google.gms:google-services:4.3.13")
         classpath("dev.icerock.moko:resources-generator:0.21.2")

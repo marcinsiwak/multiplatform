@@ -1,3 +1,5 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -20,8 +22,8 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Remote config Shared Module"
+        homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
@@ -32,7 +34,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                with(pl.msiwak.multiplatfor.dependencies.Deps.Firebase) {
+                with(Deps.Firebase) {
                     api(remoteConfig)
                 }
             }

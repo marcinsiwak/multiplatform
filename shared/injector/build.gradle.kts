@@ -1,3 +1,6 @@
+import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatfor.dependencies.Deps
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -20,38 +23,38 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Injector Shared Module"
+        homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "injector"
 
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.domain))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.database))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.utils))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.ui))
+            export(project(Modules.domain))
+            export(project(Modules.database))
+            export(project(Modules.utils))
+            export(project(Modules.ui))
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.domain))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.database))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.utils))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.ui))
+                api(project(Modules.domain))
+                api(project(Modules.database))
+                api(project(Modules.utils))
+                api(project(Modules.ui))
 
-                with(pl.msiwak.multiplatfor.dependencies.Deps.Koin) {
-                    api(pl.msiwak.multiplatfor.dependencies.Deps.Koin.core)
-                    api(pl.msiwak.multiplatfor.dependencies.Deps.Koin.test)
+                with(Deps.Koin) {
+                    api(core)
+                    api(test)
                 }
             }
         }
         val androidMain by getting {
             dependencies {
-                with(pl.msiwak.multiplatfor.dependencies.Deps.Koin) {
-                    api(pl.msiwak.multiplatfor.dependencies.Deps.Koin.android)
+                with(Deps.Koin) {
+                    api(android)
                 }
             }
         }

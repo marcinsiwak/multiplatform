@@ -1,3 +1,6 @@
+import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatfor.dependencies.Deps
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -20,33 +23,33 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Data Shared Module"
+        homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "data"
 
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.utils))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.commonObject))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.auth))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.database))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.network))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.remoteConfig))
+            export(project(Modules.utils))
+            export(project(Modules.commonObject))
+            export(project(Modules.auth))
+            export(project(Modules.database))
+            export(project(Modules.network))
+            export(project(Modules.remoteConfig))
         }
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.utils))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.commonObject))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.auth))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.database))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.network))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.remoteConfig))
+                api(project(Modules.utils))
+                api(project(Modules.commonObject))
+                api(project(Modules.auth))
+                api(project(Modules.database))
+                api(project(Modules.network))
+                api(project(Modules.remoteConfig))
 
-                with(pl.msiwak.multiplatfor.dependencies.Deps.Kotlinx) {
+                with(Deps.Kotlinx) {
                     api(coroutines)
                     api(serialization)
                 }

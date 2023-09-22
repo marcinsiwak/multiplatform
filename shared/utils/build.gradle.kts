@@ -22,8 +22,8 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Utils Shared Module"
+        homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
@@ -32,7 +32,7 @@ kotlin {
         }
         pod("GoogleSignIn")
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -49,16 +49,6 @@ kotlin {
                 }
             }
         }
-
-//        val androidMain by getting {
-//            dependencies {
-//                dependsOn(commonMain)
-//                with(Deps.Firebase) {
-//                    api(platform(andoridBom))
-//                    api(auth)
-//                }
-//            }
-//        }
 
         val commonTest by getting {
             dependencies {

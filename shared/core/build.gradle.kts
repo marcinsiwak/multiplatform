@@ -24,19 +24,13 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Core Shared Module"
+        homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "core"
 
-            export(project(Modules.commonObject))
-            export(project(Modules.database))
-            export(project(Modules.utils))
-            export(project(Modules.auth))
-            export(project(Modules.network))
-            export(project(Modules.data))
             export(project(Modules.domain))
         }
     }
@@ -44,19 +38,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-
-                api(project(Modules.commonObject))
-                api(project(Modules.database))
-                api(project(Modules.utils))
-                api(project(Modules.auth))
-                api(project(Modules.network))
-                api(project(Modules.data))
                 api(project(Modules.domain))
-
-                with(Deps.MokoResources) {
-                    api(resources)
-                    api(graphics)
-                }
             }
         }
         val commonTest by getting {
@@ -72,11 +54,6 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                with(Deps.Ktor) {
-                    api(ios)
-                }
-            }
         }
     }
 }

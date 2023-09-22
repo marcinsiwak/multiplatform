@@ -1,4 +1,5 @@
 import pl.msiwak.multiplatfor.dependencies.Deps
+import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
     kotlin("multiplatform")
@@ -22,16 +23,16 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Network Shared Module"
+        homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "network"
 
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.commonObject))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.utils))
-            export(project(pl.msiwak.multiplatfor.dependencies.Modules.auth))
+            export(project(Modules.commonObject))
+            export(project(Modules.utils))
+            export(project(Modules.auth))
 
         }
     }
@@ -39,9 +40,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.commonObject))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.utils))
-                api(project(pl.msiwak.multiplatfor.dependencies.Modules.auth))
+                api(project(Modules.commonObject))
+                api(project(Modules.utils))
+                api(project(Modules.auth))
 
                 with(Deps.Ktor) {
                     api(core)
@@ -64,6 +65,22 @@ kotlin {
                 }
             }
         }
+
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by getting {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                with(Deps.Ktor) {
+                    api(ios)
+                }
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))

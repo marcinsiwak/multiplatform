@@ -31,8 +31,8 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Main Shared Module"
+        homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "16.2"
 
@@ -43,15 +43,11 @@ kotlin {
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
 
-//            binaryOption("bundleVersion", "1")
             export(Deps.MokoResources.resources)
             export(Deps.MokoResources.graphics)
-
             export(project(Modules.commonObject))
             export(project(Modules.commonResources))
-            export(project(Modules.database))
             export(project(Modules.utils))
-            export(project(Modules.auth))
             export(project(Modules.ui))
             export(project(Modules.injector))
         }
@@ -69,9 +65,7 @@ kotlin {
             dependencies {
                 api(project(Modules.commonObject))
                 api(project(Modules.commonResources))
-                api(project(Modules.database))
                 api(project(Modules.utils))
-                api(project(Modules.auth))
                 api(project(Modules.ui))
                 api(project(Modules.injector))
             }
