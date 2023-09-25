@@ -46,7 +46,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 @Composable
-fun BaseKmm_ProjectTheme(
+fun AppTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
