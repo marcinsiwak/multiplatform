@@ -1,3 +1,4 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
@@ -37,6 +38,11 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Modules.core))
+                api(project(Modules.buildConfig))
+
+                with(Deps.Napier) {
+                    api(napier)
+                }
             }
         }
         val commonTest by getting {

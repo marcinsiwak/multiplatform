@@ -36,7 +36,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = "1.5.0"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

@@ -50,7 +50,10 @@ kotlin {
                 }
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependsOn(commonMain)
+
+        }
 
         val commonTest by getting {
             dependencies {

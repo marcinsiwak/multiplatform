@@ -72,7 +72,7 @@ buildkonfig {
             buildConfigField(BOOLEAN, "IsDebug", "false")
         }
     }
-    targetConfigs("dev") {
+    targetConfigs("debug") {
 
         val debugPropertiesFile = rootProject.file("debug.properties")
         val debugProperties = Properties()
