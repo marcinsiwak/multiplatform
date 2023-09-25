@@ -9,7 +9,9 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.bearerAuth
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import pl.msiwak.multiplatform.auth.SessionStore
@@ -39,6 +41,7 @@ class KtorClient(private val sessionStore: SessionStore) {
             })
         }
         defaultRequest {
+            contentType(ContentType.Application.Json)
             url(BuildConfig.BASE_URL)
             bearerAuth(sessionStore.getToken() ?: "")
 

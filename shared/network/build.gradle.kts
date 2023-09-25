@@ -4,6 +4,7 @@ import pl.msiwak.multiplatfor.dependencies.Modules
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    kotlin("plugin.serialization") version "1.8.22"
     id("com.android.library")
 }
 
