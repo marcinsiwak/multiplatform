@@ -123,7 +123,7 @@ val viewModelsModule = module {
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { SummaryViewModel(get(), get(), get()) }
+    viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
             id = params.get(),

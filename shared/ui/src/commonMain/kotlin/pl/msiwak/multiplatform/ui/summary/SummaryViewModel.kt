@@ -8,18 +8,20 @@ import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class SummaryViewModel(
     private val downloadCategoriesUseCase: DownloadCategoriesUseCase,
     private val observeCategoriesUseCase: ObserveCategoriesUseCase,
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(SummaryState())
     val viewState: StateFlow<SummaryState> = _viewState
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(globalErrorHandler.handleError()) {
             downloadCategoriesUseCase()
             observeCategoriesUseCase().collect {
                 _viewState.value = _viewState.value.copy(categories = it)
