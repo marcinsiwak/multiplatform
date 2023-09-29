@@ -1,6 +1,8 @@
 package pl.msiwak.multiplatform.commonObject
 
-@kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Exercise(
     val id: String = "",
     val categoryId: String = "",

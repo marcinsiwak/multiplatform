@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 class ApiCategory(
     val categoryId: String = "",
     val name: String,
-    val exerciseType: String
+    val exerciseType: String,
+    val exercises: List<ApiExercise> = emptyList()
 )

@@ -1,10 +1,8 @@
 import pl.msiwak.multiplatfor.dependencies.Deps
-import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    kotlin("plugin.serialization") version "1.8.22"
     id("com.android.library")
 }
 
@@ -24,25 +22,20 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "CommonObject Shared Module"
-        homepage = "https://github.com/marcinsiwak/multiplatform"
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "commonObject"
-
-            export(project(Modules.commonResources))
+            baseName = "notifications"
         }
     }
-
+    
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonResources))
+                with(Deps.Firebase) {
 
-                with(Deps.Kotlinx) {
-                    api(dateTime)
-                    api(serialization)
                 }
             }
         }
@@ -55,7 +48,7 @@ kotlin {
 }
 
 android {
-    namespace = "pl.msiwak.multiplatform.commonObject"
+    namespace = "pl.msiwak.multiplatform.notifications"
     compileSdk = 33
     defaultConfig {
         minSdk = 24

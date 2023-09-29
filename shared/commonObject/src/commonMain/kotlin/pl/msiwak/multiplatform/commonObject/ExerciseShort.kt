@@ -1,4 +1,6 @@
 package pl.msiwak.multiplatform.commonObject
 
-@kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class ExerciseShort(val id: Long, val name: String)

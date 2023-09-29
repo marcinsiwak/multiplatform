@@ -61,12 +61,12 @@ class CategoriesDao(database: Database) {
     fun insertCategories(categories: List<Category>) {
         categories.forEach {
             with(it) {
-//                dbQuery.insertCategory(
-//                    id = null,
-//                    name = name,
-////                    exercises = exercises,
-//                    exerciseType = exerciseType
-//                )
+                dbQuery.insertCategory(
+                    id = id,
+                    name = name,
+                    exercises = exercises,
+                    exerciseType = exerciseType
+                )
             }
         }
     }

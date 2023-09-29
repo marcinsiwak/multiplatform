@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatfor.dependencies
 
+import pl.msiwak.multiplatfor.dependencies.Versions.firebaseGitliveVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.koinComposeVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.koinVersion
 import pl.msiwak.multiplatfor.dependencies.Versions.ktorVersion
@@ -14,6 +15,7 @@ object Versions {
     const val sqlDelightVersion = "2.0.0"
     const val mokoResourcesVersion = "0.21.2"
     const val mokoGraphicsVersion = "0.9.0"
+    const val firebaseGitliveVersion = "1.10.0"
 }
 
 object Deps {
@@ -27,9 +29,9 @@ object Deps {
     }
 
     object Firebase {
-        const val authentication = "dev.gitlive:firebase-auth:1.6.2"
-        const val remoteConfig = "dev.gitlive:firebase-config:1.8.0"
-        const val crashlytics = "dev.gitlive:firebase-crashlytics:1.8.0"
+        const val authentication = "dev.gitlive:firebase-auth:$firebaseGitliveVersion"
+        const val remoteConfig = "dev.gitlive:firebase-config:$firebaseGitliveVersion"
+        const val crashlytics = "dev.gitlive:firebase-crashlytics:$firebaseGitliveVersion"
 
         const val andoridBom = "com.google.firebase:firebase-bom:32.1.1"
         const val auth = "com.google.firebase:firebase-auth-ktx"
@@ -62,7 +64,6 @@ object Deps {
         const val coroutines = "app.cash.sqldelight:coroutines-extensions:$sqlDelightVersion"
     }
 
-    // todo change napier to timber when ready
     object Napier {
         const val napier = "io.github.aakira:napier:2.6.1"
     }

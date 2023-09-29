@@ -8,8 +8,9 @@ class ExerciseMapper : Mapper<ApiExercise, Exercise>() {
 
     override fun map(value: ApiExercise): Exercise {
         return Exercise(
-            value.exerciseId,
-            value.name
+            id = value.exerciseId,
+            categoryId = value.categoryId,
+            exerciseTitle = value.name
         )
     }
 }

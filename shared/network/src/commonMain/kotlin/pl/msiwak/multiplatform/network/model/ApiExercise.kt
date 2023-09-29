@@ -5,5 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 class ApiExercise(
     val exerciseId: String,
-    val name: String,
+    val categoryId: String,
+    val name: String
 )
