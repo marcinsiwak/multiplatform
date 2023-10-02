@@ -71,3 +71,6 @@ WHERE CategoryDB.id=?;
 selectAllCategoriesWithExercise:
 SELECT *
 FROM CategoryDB JOIN ExerciseDB;
+
+deleteCategories:
+DELETE FROM CategoryDB;

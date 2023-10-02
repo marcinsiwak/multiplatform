@@ -15,4 +15,5 @@ object Modules {
     const val injector = "$shared:injector"
     const val ui = "$shared:ui"
     const val buildConfig = "$shared:buildConfig"
+    const val notifications = "$shared:notifications"
 }

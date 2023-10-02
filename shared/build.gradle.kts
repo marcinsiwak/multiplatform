@@ -45,6 +45,7 @@ kotlin {
             export(project(Modules.utils))
             export(project(Modules.ui))
             export(project(Modules.injector))
+            export(project(Modules.notifications))
         }
 
         pod("FirebaseCore", linkOnly = true)
@@ -52,6 +53,7 @@ kotlin {
         pod("FirebaseRemoteConfig", linkOnly = true)
         pod("FirebaseCrashlytics", linkOnly = true)
         pod("GoogleSignIn", linkOnly = true)
+        pod("FirebaseMessaging", linkOnly = true)
 
     }
 
@@ -63,6 +65,7 @@ kotlin {
                 api(project(Modules.utils))
                 api(project(Modules.ui))
                 api(project(Modules.injector))
+                api(project(Modules.notifications))
             }
         }
 

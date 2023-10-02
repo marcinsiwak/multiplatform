@@ -51,10 +51,6 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 dependsOn(commonMain)
-                with(Deps.Firebase) {
-                    api(platform(andoridBom))
-                    api(auth)
-                }
             }
         }
         val commonTest by getting {

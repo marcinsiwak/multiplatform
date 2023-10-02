@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name="pl.msiwak.multiplatform.android.App"
@@ -12,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <service
-            android:name=".java.MyFirebaseMessagingService"
+            android:name="pl.msiwak.multiplatform.notifications.NotificationsService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

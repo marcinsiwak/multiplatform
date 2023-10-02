@@ -30,6 +30,7 @@ import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.units.UnitScreen
 import pl.msiwak.multiplatform.android.ui.verifyEmail.VerifyEmailScreen
 import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
+import pl.msiwak.multiplatform.notifications.NotificationsService
 import pl.msiwak.multiplatform.ui.main.MainViewModel
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 
@@ -39,6 +40,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        NotificationsService()
         setContent {
             val viewState = viewModel.viewState.collectAsState()
             installSplashScreen()
