@@ -39,7 +39,7 @@ import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
 @Composable
-fun CategoryScreen(id: Long) {
+fun CategoryScreen(id: String) {
     val viewModel =
         koinViewModel<CategoryViewModel> { parametersOf(id) }
     val state = viewModel.viewState.collectAsState()
@@ -149,5 +149,5 @@ fun CategoryScreen(id: Long) {
 @Preview
 @Composable
 fun CategoryScreenPreview() {
-    CategoryScreen(0)
+    CategoryScreen("0")
 }

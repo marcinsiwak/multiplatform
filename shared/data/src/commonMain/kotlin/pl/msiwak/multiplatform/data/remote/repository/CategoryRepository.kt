@@ -15,27 +15,8 @@ class CategoryRepository(
 
     suspend fun downloadCategories(): List<Category> = withContext(Dispatchers.Default) {
         val categories = categoryService.downloadCategories()
-        categoriesDao.insertCategories(categories)
+        categoriesDao.updateCategories(categories)
         return@withContext categories
-//        categories.ifEmpty {
-//            insertCategories(
-//                listOf(
-//                    CategoryData(
-//                        id = 1,
-//                        "Gym",
-//                        emptyList(),
-//                        ExerciseType.GYM
-//                    ), CategoryData(
-//                        id = 2,
-//                        "Running",
-//                        emptyList(),
-//                        ExerciseType.RUNNING
-//                    )
-//                )
-//            )
-//            val out = categoriesDao.getCategories()
-//            out
-//        }
     }
 
     suspend fun getCategory(id: String): Category = withContext(Dispatchers.Default) {

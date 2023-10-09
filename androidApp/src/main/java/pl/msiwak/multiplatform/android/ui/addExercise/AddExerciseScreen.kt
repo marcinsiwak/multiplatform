@@ -38,7 +38,7 @@ import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 
 @Composable
-fun AddExerciseScreen(id: Long) {
+fun AddExerciseScreen(id: String) {
     val viewModel = koinViewModel<AddExerciseViewModel> { parametersOf(id) }
 
     val state = viewModel.viewState.collectAsState()
@@ -189,5 +189,5 @@ fun AddExerciseScreen(id: Long) {
 @Preview
 @Composable
 fun AddExerciseScreenPreview() {
-    AddExerciseScreen(0)
+    AddExerciseScreen("0")
 }

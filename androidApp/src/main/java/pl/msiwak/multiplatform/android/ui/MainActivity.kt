@@ -79,26 +79,26 @@ class MainActivity : ComponentActivity() {
                             NavigationDirections.AddExercise().route,
                             arguments = listOf(
                                 navArgument(NavigationDirections.AddExercise.BUNDLE_ARG_ID) {
-                                    type = NavType.LongType
+                                    type = NavType.StringType
                                 },
                             )
                         ) { backStackEntry ->
                             val id =
-                                backStackEntry.arguments?.getLong(NavigationDirections.AddExercise.BUNDLE_ARG_ID)
-                                    ?: 0
+                                backStackEntry.arguments?.getString(NavigationDirections.AddExercise.BUNDLE_ARG_ID)
+                                    ?: ""
                             AddExerciseScreen(id)
                         }
                         composable(
                             NavigationDirections.CategoryDetails().route,
                             arguments = listOf(
                                 navArgument(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID) {
-                                    type = NavType.LongType
+                                    type = NavType.StringType
                                 },
                             )
                         ) { backStackEntry ->
                             val id =
-                                backStackEntry.arguments?.getLong(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID)
-                                    ?: 0
+                                backStackEntry.arguments?.getString(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID)
+                                    ?: ""
                             CategoryScreen(id)
                         }
                     }

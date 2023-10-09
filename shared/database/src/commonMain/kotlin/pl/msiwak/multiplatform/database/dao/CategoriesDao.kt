@@ -71,6 +71,19 @@ class CategoriesDao(database: Database) {
         }
     }
 
+    fun updateCategories(categories: List<Category>) {
+        categories.forEach {
+            with(it) {
+                dbQuery.updateCategory(
+                    id = id,
+                    name = name,
+                    exercises = exercises,
+                    exerciseType = exerciseType
+                )
+            }
+        }
+    }
+
     fun updateCategory(category: Category) {
         with(category) {
             dbQuery.updateCategory(
