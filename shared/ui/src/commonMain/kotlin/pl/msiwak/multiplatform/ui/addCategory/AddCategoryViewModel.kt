@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.ui.addCategory
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -14,9 +15,8 @@ class AddCategoryViewModel(
     private val navigator: Navigator
 ) : ViewModel() {
 
-    private val _viewState =
-        MutableStateFlow(pl.msiwak.multiplatform.ui.addCategory.AddCategoryState())
-    val viewState: StateFlow<pl.msiwak.multiplatform.ui.addCategory.AddCategoryState> = _viewState
+    private val _viewState = MutableStateFlow(AddCategoryState())
+    val viewState: StateFlow<AddCategoryState> = _viewState.asStateFlow()
 
     fun onTypePicked(exerciseType: ExerciseType) {
         _viewState.value = _viewState.value.copy(exerciseType = exerciseType)

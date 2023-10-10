@@ -4,6 +4,8 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
@@ -39,11 +41,11 @@ class AddExerciseViewModel(
     private val formatStringToDateUseCase: FormatStringToDateUseCase,
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(pl.msiwak.multiplatform.ui.addExercise.AddExerciseState())
-    val viewState: StateFlow<pl.msiwak.multiplatform.ui.addExercise.AddExerciseState> = _viewState
+    private val _viewState = MutableStateFlow(AddExerciseState())
+    val viewState: StateFlow<AddExerciseState> = _viewState.asStateFlow()
 
-    private val _viewEvent = MutableSharedFlow<pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent>(extraBufferCapacity = 1)
-    val viewEvent: SharedFlow<pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent> = _viewEvent
+    private val _viewEvent = MutableSharedFlow<AddExerciseEvent>(extraBufferCapacity = 1)
+    val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent.asSharedFlow()
 
     private var pickedDate: LocalDateTime =
         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
@@ -114,7 +116,7 @@ class AddExerciseViewModel(
 
         if (savedResult.isEmpty()) {
             _viewEvent.tryEmit(
-                pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent.FocusOnInput(
+                AddExerciseEvent.FocusOnInput(
                     1
                 )
             )
@@ -122,7 +124,7 @@ class AddExerciseViewModel(
         }
         if (savedAmount.isEmpty()) {
             _viewEvent.tryEmit(
-                pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent.FocusOnInput(
+                AddExerciseEvent.FocusOnInput(
                     2
                 )
             )
@@ -130,7 +132,7 @@ class AddExerciseViewModel(
         }
         if (savedDate.isEmpty()) {
             _viewEvent.tryEmit(
-                pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent.FocusOnInput(
+                AddExerciseEvent.FocusOnInput(
                     3
                 )
             )
@@ -141,7 +143,7 @@ class AddExerciseViewModel(
                 newResultData = _viewState.value.newResultData.copy(isDateError = true)
             )
             _viewEvent.tryEmit(
-                pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent.FocusOnInput(
+                AddExerciseEvent.FocusOnInput(
                     3
                 )
             )
@@ -159,7 +161,7 @@ class AddExerciseViewModel(
                 newResultData = _viewState.value.newResultData.copy(isResultError = true)
             )
             _viewEvent.tryEmit(
-                pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent.FocusOnInput(
+                AddExerciseEvent.FocusOnInput(
                     1
                 )
             )
@@ -176,7 +178,7 @@ class AddExerciseViewModel(
                 newResultData = _viewState.value.newResultData.copy(isAmountError = true)
             )
             _viewEvent.tryEmit(
-                pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent.FocusOnInput(
+                AddExerciseEvent.FocusOnInput(
                     2
                 )
             )
@@ -189,7 +191,7 @@ class AddExerciseViewModel(
                 newResultData = _viewState.value.newResultData.copy(isAmountError = true)
             )
             _viewEvent.tryEmit(
-                pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent.FocusOnInput(
+                AddExerciseEvent.FocusOnInput(
                     2
                 )
             )
@@ -221,7 +223,7 @@ class AddExerciseViewModel(
     }
 
     fun onDateClicked() {
-        _viewEvent.tryEmit(pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent.OpenCalendar)
+        _viewEvent.tryEmit(AddExerciseEvent.OpenCalendar)
     }
 
     fun onDatePicked(date: LocalDateTime) {

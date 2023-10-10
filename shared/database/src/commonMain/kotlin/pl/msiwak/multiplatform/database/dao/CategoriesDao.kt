@@ -99,6 +99,10 @@ class CategoriesDao(database: Database) {
         dbQuery.removeCategory(categoryId)
     }
 
+    fun removeAllCategories() {
+        dbQuery.removeAllCategories()
+    }
+
     private fun getCategoryWithExercise(id: String): Category {
         val category = dbQuery.selectCategoryWithExercise(id).executeAsList()
         if (category.isEmpty()) {

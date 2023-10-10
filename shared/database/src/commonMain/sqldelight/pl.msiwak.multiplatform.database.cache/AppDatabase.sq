@@ -4,7 +4,7 @@ import pl.msiwak.multiplatform.commonObject.ExerciseType;
 import pl.msiwak.multiplatform.commonObject.ResultData;
 
 CREATE TABLE ExerciseDB (
-    id TEXT NOT NULL,
+    id TEXT NOT NULL PRIMARY KEY,
     categoryId TEXT NOT NULL,
     exerciseTitle    TEXT NOT NULL,
     results     TEXT AS List<ResultData>    NOT NULL,
@@ -34,7 +34,7 @@ selectAllFromExercise:
 SELECT * FROM ExerciseDB;
 
 CREATE TABLE CategoryDB (
-    id TEXT NOT NULL,
+    id TEXT NOT NULL PRIMARY KEY,
     name    TEXT NOT NULL,
     exercises     TEXT AS List<Exercise>    NOT NULL,
     exerciseType TEXT AS ExerciseType NOT NULL

@@ -29,8 +29,10 @@ import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.domain.settings.SetLanguageUseCase
 import pl.msiwak.multiplatform.domain.settings.SetUnitsUseCase
+import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
+import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
@@ -43,6 +45,7 @@ import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
+import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
@@ -123,7 +126,7 @@ val viewModelsModule = module {
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { SummaryViewModel(get(), get(), get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
             id = params.get(),
@@ -131,12 +134,13 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
-            get()
+            get(),
         )
     }
     viewModelDefinition { params ->
         CategoryViewModel(
             id = params.get(),
+            get(),
             get(),
             get(),
             get(),
@@ -161,6 +165,7 @@ val useCaseModule = module {
     factory { GetUserTokenUseCase(get()) }
     factory { GetExercisesUseCase(get()) }
     factory { DownloadCategoriesUseCase(get()) }
+    factory { DownloadCategoryUseCase(get()) }
     factory { InsertCategoriesUseCase(get()) }
     factory { CreateCategoryUseCase(get()) }
     factory { UpdateCategoriesUseCase(get()) }
@@ -173,6 +178,7 @@ val useCaseModule = module {
     factory { GetExerciseDataUseCase(get()) }
     factory { GetExerciseUseCase(get(), get()) }
     factory { RemoveExerciseUseCase(get()) }
+    factory { RemoveCategoryUseCase(get()) }
     factory { FormatDateUseCase(get()) }
     factory { FormatResultsUseCase(get(), get()) }
     factory { FormatStringToDateUseCase(get()) }
@@ -188,6 +194,7 @@ val useCaseModule = module {
     factory { GetUserUseCase(get()) }
     factory { ObserveAuthStateChangedUseCase(get(), get()) }
     factory { ResendVerificationEmailUseCase(get()) }
+    factory { AddExerciseUseCase(get()) }
 }
 
 val repositoryUseModule = module {

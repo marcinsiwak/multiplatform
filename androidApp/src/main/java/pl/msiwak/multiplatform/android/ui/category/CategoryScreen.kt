@@ -40,8 +40,7 @@ import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
 @Composable
 fun CategoryScreen(id: String) {
-    val viewModel =
-        koinViewModel<CategoryViewModel> { parametersOf(id) }
+    val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
     val state = viewModel.viewState.collectAsState()
 
     val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
@@ -68,34 +67,40 @@ fun CategoryScreen(id: String) {
     ) {
 
         if (state.value.isDialogVisible) {
-            AddExerciseDialog(inputText = state.value.newExerciseName, onExerciseTitleChanged = {
-                viewModel.onAddExerciseNameChanged(it)
-            }, onAddExerciseClicked = {
-                viewModel.onAddExerciseClicked()
-            }, onDialogClosed = {
-                viewModel.onDialogClosed()
-            })
+            AddExerciseDialog(
+                inputText = state.value.newExerciseName,
+                onExerciseTitleChanged = {
+                    viewModel.onAddExerciseNameChanged(it)
+                }, onAddExerciseClicked = {
+                    viewModel.onAddExerciseClicked()
+                }, onDialogClosed = {
+                    viewModel.onDialogClosed()
+                }
+            )
         }
 
         Column {
             val shadowColor = MaterialTheme.color.ShadowColor
-            Image(modifier = Modifier
-                .drawWithCache {
-                    val gradient = Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, shadowColor),
-                        startY = size.height / 3,
-                        endY = size.height
-                    )
-                    onDrawWithContent {
-                        drawContent()
-                        drawRect(gradient, blendMode = BlendMode.Multiply)
+            Image(
+                modifier = Modifier
+                    .drawWithCache {
+                        val gradient = Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, shadowColor),
+                            startY = size.height / 3,
+                            endY = size.height
+                        )
+                        onDrawWithContent {
+                            drawContent()
+                            drawRect(gradient, blendMode = BlendMode.Multiply)
+                        }
                     }
-                }
-                .fillMaxWidth()
-                .height(MaterialTheme.dimens.space_264),
+                    .fillMaxWidth()
+                    .height(MaterialTheme.dimens.space_264),
                 painter = painterResource(id = backgroundId),
                 contentScale = ContentScale.Crop,
-                contentDescription = "category background")
+                contentDescription = null
+            )
+
             LazyColumn {
                 itemsIndexed(state.value.exerciseList) { index, item ->
                     ListItemView(

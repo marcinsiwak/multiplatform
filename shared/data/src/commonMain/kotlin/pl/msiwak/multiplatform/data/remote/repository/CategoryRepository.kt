@@ -4,8 +4,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.commonObject.Category
+import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
-import pl.msiwak.multiplatform.network.model.ApiCategory
+import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
+import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.service.CategoryService
 
 class CategoryRepository(
@@ -15,8 +17,15 @@ class CategoryRepository(
 
     suspend fun downloadCategories(): List<Category> = withContext(Dispatchers.Default) {
         val categories = categoryService.downloadCategories()
+        categoriesDao.removeAllCategories()
         categoriesDao.updateCategories(categories)
         return@withContext categories
+    }
+
+    suspend fun downloadCategory(id: String): Category = withContext(Dispatchers.Default) {
+        val category = categoryService.downloadCategory(id)
+        categoriesDao.updateCategory(category)
+        return@withContext category
     }
 
     suspend fun getCategory(id: String): Category = withContext(Dispatchers.Default) {
@@ -38,7 +47,7 @@ class CategoryRepository(
 
     suspend fun createCategory(category: Category) = withContext(Dispatchers.Default) {
         categoryService.createCategory(
-            ApiCategory(
+            ApiCategoryRequest(
                 name = category.name,
                 exerciseType = category.exerciseType.name,
             )
@@ -50,7 +59,21 @@ class CategoryRepository(
     }
 
     suspend fun removeCategory(categoryId: String) = withContext(Dispatchers.Default) {
+        categoryService.removeCategory(categoryId)
         categoriesDao.removeCategory(categoryId)
+    }
+
+    suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
+        categoryService.addExercise(
+            ApiExerciseRequest(
+                categoryId = exercise.categoryId,
+                name = exercise.exerciseTitle
+            )
+        )
+    }
+
+    suspend fun removeExercise(id: String) = withContext(Dispatchers.Default) {
+        categoryService.removeExercise(id)
     }
 
 }

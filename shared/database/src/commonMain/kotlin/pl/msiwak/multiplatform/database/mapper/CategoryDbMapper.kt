@@ -8,11 +8,12 @@ class CategoryDbMapper(private val exerciseMapper: ExerciseDbMapper) :
     Mapper<Category, CategoryEntity>() {
 
     override fun map(value: Category): CategoryEntity {
-//        val exercises = value.exercises.map { exerciseMapper(it) }
+        val exercises = value.exercises.map { exerciseMapper(it) }
         return CategoryEntity(
             id = value.id,
             name = value.name,
-            exerciseType = value.exerciseType
+            exerciseType = value.exerciseType,
+            exercises = exercises
         )
     }
 }

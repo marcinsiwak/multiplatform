@@ -66,4 +66,7 @@
     <string name="password_requirements_special">Included special sign</string>
     <string name="password_requirements_more_than_eight">Consist eight signs</string>
 
+    <string name="remove_category_dialog_title">Remove category</string>
+    <string name="remove_category_dialog_description">Do you want to remove this result?</string>
+
 </resources>

@@ -5,20 +5,23 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.core.ViewModel
+import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class CategoryViewModel(
     id: String,
     private val navigator: Navigator,
-    private val getCategoryUseCase: GetCategoryUseCase,
-    private val insertExerciseUseCase: InsertExerciseUseCase,
+    private val addExerciseUseCase: AddExerciseUseCase,
     private val removeExerciseUseCase: RemoveExerciseUseCase,
-    observeCategoryUseCase: ObserveCategoryUseCase
+    private val downloadCategoryUseCase: DownloadCategoryUseCase,
+    observeCategoryUseCase: ObserveCategoryUseCase,
+    globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(CategoryState())
@@ -29,8 +32,10 @@ class CategoryViewModel(
     private val exercises: MutableList<Exercise> = mutableListOf()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(globalErrorHandler.handleError()) {
+            downloadCategoryUseCase(categoryId)
             observeCategoryUseCase(categoryId).collect {
+                exercises.clear()
                 exercises.addAll(it.exercises)
                 _viewState.value =
                     _viewState.value.copy(
@@ -59,13 +64,14 @@ class CategoryViewModel(
         viewModelScope.launch {
             val exerciseName = _viewState.value.newExerciseName
             val exerciseType = _viewState.value.exerciseType
-//            val id = insertExerciseUseCase(
-//                Exercise(
-//                    categoryId = categoryId,
-//                    exerciseTitle = exerciseName,
-//                    exerciseType = exerciseType
-//                )
-//            )
+            addExerciseUseCase(
+                Exercise(
+                    categoryId = categoryId,
+                    exerciseTitle = exerciseName,
+                    exerciseType = exerciseType
+                )
+            )
+            //todo handle offline
 //            navigator.navigate(NavigationDirections.AddExercise(id))
         }
     }
@@ -81,7 +87,7 @@ class CategoryViewModel(
 
     fun onResultRemoved() {
         exerciseToRemovePosition?.let {
-            val id = exercises[it].id
+            val id = exercises[it].categoryId
             exercises.removeAt(it)
             _viewState.value = _viewState.value.copy(exerciseList = exercises)
 
