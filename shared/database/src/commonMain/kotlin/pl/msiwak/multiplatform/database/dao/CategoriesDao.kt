@@ -15,7 +15,9 @@ class CategoriesDao(database: Database) {
 
     fun observeCategories(): Flow<List<Category>> {
         return dbQuery.selectAllFromCategory(::mapCategory).asFlow().map {
-            it.executeAsList().sortedByDescending { category -> category.creationDate }
+            it.executeAsList().sortedByDescending { category ->
+                category.creationDate
+            }
         }
     }
 
@@ -91,6 +93,13 @@ class CategoriesDao(database: Database) {
 
     fun removeCategory(categoryId: String) {
         dbQuery.removeCategory(categoryId)
+    }
+
+    fun removeExercise(exercise: Exercise) {
+        val exercises = dbQuery.getCategoryExercises(exercise.categoryId).executeAsOne()
+        val newExercises = exercises.filter { it.id != exercise.id }
+
+        dbQuery.updateExercise(newExercises, exercise.categoryId)
     }
 
     fun removeAllCategories() {

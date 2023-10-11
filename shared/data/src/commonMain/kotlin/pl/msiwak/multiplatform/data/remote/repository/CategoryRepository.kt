@@ -66,11 +66,13 @@ class CategoryRepository(
                 name = exercise.exerciseTitle
             )
         )
-        categoriesDao.updateExercise(exercise)
+        val category = categoryService.downloadCategory(exercise.categoryId)
+        categoriesDao.updateCategory(category)
     }
 
-    suspend fun removeExercise(id: String) = withContext(Dispatchers.Default) {
-        categoryService.removeExercise(id)
+    suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
+        categoryService.removeExercise(exercise.id)
+        categoriesDao.removeExercise(exercise)
     }
 
 }

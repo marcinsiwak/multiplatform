@@ -95,12 +95,12 @@ class CategoryViewModel(
 
     fun onResultRemoved() {
         exerciseToRemovePosition?.let {
-            val id = exercises[it].categoryId
+            val exercise = exercises[it]
             exercises.removeAt(it)
             _viewState.value = _viewState.value.copy(exerciseList = exercises)
 
             viewModelScope.launch {
-                removeExerciseUseCase(id)
+                removeExerciseUseCase(exercise)
                 _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
             }
         }

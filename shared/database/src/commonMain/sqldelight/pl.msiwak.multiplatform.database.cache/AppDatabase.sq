@@ -22,9 +22,7 @@ import pl.msiwak.multiplatform.commonObject.ExerciseType;
 -- removeAllExercises:
 -- DELETE FROM ExerciseDB;
 --
--- removeExercise:
--- DELETE FROM ExerciseDB
--- WHERE id = ?;
+
 --
 -- selectFromExercise:
 -- SELECT * FROM ExerciseDB
