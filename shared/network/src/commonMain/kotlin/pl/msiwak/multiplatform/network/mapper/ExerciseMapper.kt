@@ -10,7 +10,8 @@ class ExerciseMapper : Mapper<ApiExercise, Exercise>() {
         return Exercise(
             id = value.exerciseId,
             categoryId = value.categoryId,
-            exerciseTitle = value.name
+            exerciseTitle = value.name,
+            creationDate = value.creationDate
         )
     }
 }

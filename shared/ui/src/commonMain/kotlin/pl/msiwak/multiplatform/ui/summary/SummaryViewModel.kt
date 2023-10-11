@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Category
-import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
@@ -15,7 +14,7 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class SummaryViewModel(
     private val downloadCategoriesUseCase: DownloadCategoriesUseCase,
-    private val observeCategoriesUseCase: ObserveCategoriesUseCase,
+    observeCategoriesUseCase: ObserveCategoriesUseCase,
     private val navigator: Navigator,
     private val globalErrorHandler: GlobalErrorHandler,
     private val removeCategoryUseCase: RemoveCategoryUseCase
@@ -27,14 +26,21 @@ class SummaryViewModel(
     private var categoryToRemovePosition: Int? = null
     private val categories: MutableList<Category> = mutableListOf()
 
-    fun onResume() {
-        viewModelScope.launch(globalErrorHandler.handleError()) {
-            downloadCategoriesUseCase()
+    private val errorHandler = globalErrorHandler.handleError()
+
+    init {
+        viewModelScope.launch(errorHandler) {
             observeCategoriesUseCase().collect {
                 categories.clear()
                 categories.addAll(it)
                 _viewState.value = _viewState.value.copy(categories = it)
             }
+        }
+    }
+
+    fun onResume() {
+        viewModelScope.launch(errorHandler) {
+            downloadCategoriesUseCase()
         }
     }
 

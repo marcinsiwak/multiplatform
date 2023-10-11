@@ -3,11 +3,11 @@ package pl.msiwak.multiplatform.ui.category
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
@@ -31,9 +31,10 @@ class CategoryViewModel(
     private var exerciseToRemovePosition: Int? = null
     private val exercises: MutableList<Exercise> = mutableListOf()
 
+    private val errorHandler = globalErrorHandler.handleError()
+
     init {
-        viewModelScope.launch(globalErrorHandler.handleError()) {
-            downloadCategoryUseCase(categoryId)
+        viewModelScope.launch(errorHandler) {
             observeCategoryUseCase(categoryId).collect {
                 exercises.clear()
                 exercises.addAll(it.exercises)
@@ -44,6 +45,12 @@ class CategoryViewModel(
                         exerciseList = it.exercises
                     )
             }
+        }
+    }
+
+    fun onResume() {
+        viewModelScope.launch(errorHandler) {
+            downloadCategoryUseCase(categoryId)
         }
     }
 
@@ -68,7 +75,8 @@ class CategoryViewModel(
                 Exercise(
                     categoryId = categoryId,
                     exerciseTitle = exerciseName,
-                    exerciseType = exerciseType
+                    exerciseType = exerciseType,
+                    creationDate = Clock.System.now()
                 )
             )
             //todo handle offline

@@ -28,16 +28,12 @@ class CategoryRepository(
         return@withContext category
     }
 
-    suspend fun getCategory(id: String): Category = withContext(Dispatchers.Default) {
-        return@withContext categoriesDao.getCategory(id)
+    suspend fun observeCategory(id: String): Flow<Category> = withContext(Dispatchers.Default) {
+        return@withContext categoriesDao.observeCategory(id)
     }
 
-    fun observeCategory(id: String): Flow<Category> {
-        return categoriesDao.observeCategory(id)
-    }
-
-    fun observeCategories(): Flow<List<Category>> {
-        return categoriesDao.observeCategories()
+    suspend fun observeCategories(): Flow<List<Category>> = withContext(Dispatchers.Default) {
+        return@withContext categoriesDao.observeCategories()
     }
 
     suspend fun insertCategories(categories: List<Category>) =
@@ -70,6 +66,7 @@ class CategoryRepository(
                 name = exercise.exerciseTitle
             )
         )
+        categoriesDao.updateExercise(exercise)
     }
 
     suspend fun removeExercise(id: String) = withContext(Dispatchers.Default) {

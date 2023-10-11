@@ -1,52 +1,62 @@
 import kotlin.collections.List;
+import kotlinx.datetime.Instant;
 import pl.msiwak.multiplatform.commonObject.Exercise;
 import pl.msiwak.multiplatform.commonObject.ExerciseType;
-import pl.msiwak.multiplatform.commonObject.ResultData;
 
-CREATE TABLE ExerciseDB (
-    id TEXT NOT NULL PRIMARY KEY,
-    categoryId TEXT NOT NULL,
-    exerciseTitle    TEXT NOT NULL,
-    results     TEXT AS List<ResultData>    NOT NULL,
-    exerciseType TEXT AS ExerciseType NOT NULL
-);
-
-updateExercise:
-INSERT OR REPLACE INTO ExerciseDB(id, categoryId, exerciseTitle, results, exerciseType)
-VALUES (?, ?,?,?, ?);
-
-insertExercise:
-INSERT INTO ExerciseDB(id, categoryId, exerciseTitle, results, exerciseType)
-VALUES (?, ?,?,?, ?);
-
-removeAllExercises:
-DELETE FROM ExerciseDB;
-
-removeExercise:
-DELETE FROM ExerciseDB
-WHERE id = ?;
-
-selectFromExercise:
-SELECT * FROM ExerciseDB
-WHERE id = ?;
-
-selectAllFromExercise:
-SELECT * FROM ExerciseDB;
+-- CREATE TABLE ExerciseDB (
+--     id TEXT NOT NULL PRIMARY KEY,
+--     categoryId TEXT NOT NULL,
+--     exerciseTitle    TEXT NOT NULL,
+--     results     TEXT AS List<ResultData>    NOT NULL,
+--     exerciseType TEXT AS ExerciseType NOT NULL,
+-- );
+--
+-- updateExercise:
+-- INSERT OR REPLACE INTO ExerciseDB(id, categoryId, exerciseTitle, results, exerciseType)
+-- VALUES (?, ?,?,?, ?);
+--
+-- insertExercise:
+-- INSERT INTO ExerciseDB(id, categoryId, exerciseTitle, results, exerciseType)
+-- VALUES (?, ?,?,?, ?);
+--
+-- removeAllExercises:
+-- DELETE FROM ExerciseDB;
+--
+-- removeExercise:
+-- DELETE FROM ExerciseDB
+-- WHERE id = ?;
+--
+-- selectFromExercise:
+-- SELECT * FROM ExerciseDB
+-- WHERE id = ?;
+--
+-- selectAllFromExercise:
+-- SELECT * FROM ExerciseDB;
 
 CREATE TABLE CategoryDB (
     id TEXT NOT NULL PRIMARY KEY,
     name    TEXT NOT NULL,
     exercises     TEXT AS List<Exercise>    NOT NULL,
-    exerciseType TEXT AS ExerciseType NOT NULL
+    exerciseType TEXT AS ExerciseType NOT NULL,
+    creationDate TEXT AS Instant NOT NULL
 );
 
 updateCategory:
-INSERT OR REPLACE INTO CategoryDB(id, name, exercises, exerciseType)
-VALUES (?, ?,?, ?);
+INSERT OR REPLACE INTO CategoryDB(id, name, exercises, exerciseType, creationDate)
+VALUES (?, ?,?, ?, ?);
 
 insertCategory:
-INSERT INTO CategoryDB(id, name, exercises, exerciseType)
-VALUES (?, ?,?, ?);
+INSERT INTO CategoryDB(id, name, exercises, exerciseType, creationDate)
+VALUES (?, ?,?, ?, ?);
+
+updateExercise:
+UPDATE CategoryDB
+SET exercises = ?
+WHERE id = ?;
+
+getCategoryExercises:
+SELECT exercises FROM CategoryDB
+WHERE id = ?;
 
 removeAllCategories:
 DELETE FROM CategoryDB;
@@ -65,12 +75,13 @@ SELECT * FROM CategoryDB;
 selectCategoryWithExercise:
 SELECT *
 FROM CategoryDB
-INNER JOIN ExerciseDB ON CategoryDB.id = ExerciseDB.categoryId
+-- INNER JOIN ExerciseDB ON CategoryDB.id = ExerciseDB.categoryId
 WHERE CategoryDB.id=?;
 
 selectAllCategoriesWithExercise:
 SELECT *
-FROM CategoryDB JOIN ExerciseDB;
+FROM CategoryDB;
+-- JOIN ExerciseDB;
 
 deleteCategories:
 DELETE FROM CategoryDB;

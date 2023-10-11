@@ -13,7 +13,8 @@ class CategoryMapper(private val exerciseMapper: ExerciseMapper) : Mapper<ApiCat
             id = value.categoryId,
             name = value.name,
             exerciseType = ExerciseType.valueOf(value.exerciseType),
-            exercises = exercises
+            exercises = exercises,
+            creationDate = value.creationDate
         )
     }
 }

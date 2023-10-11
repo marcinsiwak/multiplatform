@@ -7,14 +7,12 @@ import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
 import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
 import pl.msiwak.multiplatform.data.remote.repository.CategoryRepository
-import pl.msiwak.multiplatform.data.remote.repository.ExerciseRepository
 import pl.msiwak.multiplatform.data.remote.repository.RemoteConfigRepository
 import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
 import pl.msiwak.multiplatform.data.remote.repository.UserRepository
 import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
 import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
-import pl.msiwak.multiplatform.database.dao.ExerciseDao
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
@@ -36,13 +34,7 @@ import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetCategoryUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetExerciseDataUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertExerciseUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertExercisesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase
@@ -95,7 +87,6 @@ fun appModule() = listOf(
 
 val databaseModule = module {
     single { Database(get()) }
-    single { ExerciseDao(get()) }
     single { CategoriesDao(get()) }
 }
 
@@ -134,7 +125,6 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
-            get(),
         )
     }
     viewModelDefinition { params ->
@@ -163,20 +153,14 @@ val useCaseModule = module {
     factory { LogoutUseCase(get()) }
     factory { SaveUserTokenUseCase(get()) }
     factory { GetUserTokenUseCase(get()) }
-    factory { GetExercisesUseCase(get()) }
     factory { DownloadCategoriesUseCase(get()) }
     factory { DownloadCategoryUseCase(get()) }
     factory { InsertCategoriesUseCase(get()) }
     factory { CreateCategoryUseCase(get()) }
     factory { UpdateCategoriesUseCase(get()) }
-    factory { GetCategoryUseCase(get()) }
     factory { ObserveCategoryUseCase(get()) }
     factory { ObserveCategoriesUseCase(get()) }
-    factory { InsertExercisesUseCase(get()) }
-    factory { InsertExerciseUseCase(get()) }
-    factory { UpdateExerciseUseCase(get(), get()) }
-    factory { GetExerciseDataUseCase(get()) }
-    factory { GetExerciseUseCase(get(), get()) }
+    factory { UpdateExerciseUseCase(get()) }
     factory { RemoveExerciseUseCase(get()) }
     factory { RemoveCategoryUseCase(get()) }
     factory { FormatDateUseCase(get()) }
@@ -200,7 +184,6 @@ val useCaseModule = module {
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
-    single { ExerciseRepository(get()) }
     single { CategoryRepository(get(), get()) }
     single { RemoteConfigRepository(get()) }
     single { VersionRepository(get()) }

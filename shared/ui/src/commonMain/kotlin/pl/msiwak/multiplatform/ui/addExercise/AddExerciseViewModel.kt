@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -12,32 +11,30 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.commonObject.SortType
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
-import pl.msiwak.multiplatform.domain.summaries.GetExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
-import pl.msiwak.multiplatform.utils.extensions.isNumber
-import pl.msiwak.multiplatform.utils.extensions.isTime
-import pl.msiwak.multiplatform.utils.extensions.safeToDouble
 import pl.msiwak.multiplatform.utils.DATE_REGEX
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_COMMA
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_DOT
 import pl.msiwak.multiplatform.utils.TIME_REGEX
+import pl.msiwak.multiplatform.utils.extensions.isNumber
+import pl.msiwak.multiplatform.utils.extensions.isTime
+import pl.msiwak.multiplatform.utils.extensions.safeToDouble
 
 class AddExerciseViewModel(
     id: String,
     private val updateExerciseUseCase: UpdateExerciseUseCase,
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
-    private val getExerciseUseCase: GetExerciseUseCase,
     private val formatStringToDateUseCase: FormatStringToDateUseCase,
 ) : ViewModel() {
 
@@ -45,7 +42,7 @@ class AddExerciseViewModel(
     val viewState: StateFlow<AddExerciseState> = _viewState.asStateFlow()
 
     private val _viewEvent = MutableSharedFlow<AddExerciseEvent>(extraBufferCapacity = 1)
-    val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent.asSharedFlow()
+    val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent
 
     private var pickedDate: LocalDateTime =
         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
@@ -62,23 +59,23 @@ class AddExerciseViewModel(
 
     init {
         viewModelScope.launch {
-            val exerciseWithUnit = getExerciseUseCase(exerciseId)
-            currentExercise.value = exerciseWithUnit.exercise ?: Exercise()
-            currentResults.addAll(currentExercise.value.results)
-            val results = formatResultsUseCase(currentExercise.value.results)
-            exerciseName = currentExercise.value.exerciseTitle
-            _viewState.value = _viewState.value.copy(
-                exerciseTitle = currentExercise.value.exerciseTitle,
-                exerciseType = currentExercise.value.exerciseType,
-                results = results,
-                resultDataTitles = setTableTitles(exerciseWithUnit.exercise?.exerciseType),
-                unit = exerciseWithUnit.unit ?: "",
-                newResultData = _viewState.value.newResultData.copy(
-                    date = formatDateUseCase(
-                        Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-                    )
-                )
-            )
+//            val exerciseWithUnit = getExerciseUseCase(exerciseId)
+//            currentExercise.value = exerciseWithUnit.exercise ?: Exercise()
+//            currentResults.addAll(currentExercise.value.results)
+//            val results = formatResultsUseCase(currentExercise.value.results)
+//            exerciseName = currentExercise.value.exerciseTitle
+//            _viewState.value = _viewState.value.copy(
+//                exerciseTitle = currentExercise.value.exerciseTitle,
+//                exerciseType = currentExercise.value.exerciseType,
+//                results = results,
+//                resultDataTitles = setTableTitles(exerciseWithUnit.exercise?.exerciseType),
+//                unit = exerciseWithUnit.unit ?: "",
+//                newResultData = _viewState.value.newResultData.copy(
+//                    date = formatDateUseCase(
+//                        Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+//                    )
+//                )
+//            )
         }
     }
 
