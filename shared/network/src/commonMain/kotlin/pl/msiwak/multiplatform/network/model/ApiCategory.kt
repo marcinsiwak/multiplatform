@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.network.model
 
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
 @Serializable

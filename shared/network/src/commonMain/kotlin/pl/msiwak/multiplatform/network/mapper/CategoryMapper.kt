@@ -1,5 +1,7 @@
 package pl.msiwak.multiplatform.network.mapper
 
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.base.Mapper
@@ -14,7 +16,7 @@ class CategoryMapper(private val exerciseMapper: ExerciseMapper) : Mapper<ApiCat
             name = value.name,
             exerciseType = ExerciseType.valueOf(value.exerciseType),
             exercises = exercises,
-            creationDate = value.creationDate
+            creationDate = value.creationDate.toLocalDateTime(TimeZone.currentSystemDefault())
         )
     }
 }

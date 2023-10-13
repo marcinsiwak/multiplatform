@@ -2,6 +2,9 @@ package pl.msiwak.multiplatform.commonObject
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,5 +13,5 @@ data class Category(
     val name: String = "",
     val exerciseType: ExerciseType = ExerciseType.GYM,
     val exercises: List<Exercise> = emptyList(),
-    val creationDate: Instant = Clock.System.now()
+    val creationDate: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 )
