@@ -10,7 +10,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import pl.msiwak.multiplatform.network.model.ApiCategory
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
+import pl.msiwak.multiplatform.network.model.ApiExercise
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
+import pl.msiwak.multiplatform.network.model.ApiResultRequest
 
 class CategoryClient(private val ktorClient: KtorClient) {
 
@@ -30,6 +32,15 @@ class CategoryClient(private val ktorClient: KtorClient) {
         }
     }
 
+    suspend fun removeCategory(id: String) {
+        ktorClient.httpClient.delete("Exercises/Category/$id")
+    }
+
+    suspend fun downloadExercise(id: String): Flow<ApiExercise> {
+        val response: ApiExercise = ktorClient.httpClient.get("Exercises/Exercise/$id").body()
+        return flowOf(response)
+    }
+
     suspend fun addExercise(category: ApiExerciseRequest) {
         ktorClient.httpClient.post("Exercises/Exercise") {
             setBody(category)
@@ -40,7 +51,9 @@ class CategoryClient(private val ktorClient: KtorClient) {
         ktorClient.httpClient.delete("Exercises/Exercise/$id")
     }
 
-    suspend fun removeCategory(id: String) {
-        ktorClient.httpClient.delete("Exercises/Category/$id")
+    suspend fun addResult(result: ApiResultRequest) {
+        ktorClient.httpClient.post("Exercises/Result") {
+            setBody(result)
+        }
     }
 }

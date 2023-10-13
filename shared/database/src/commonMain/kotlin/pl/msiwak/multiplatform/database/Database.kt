@@ -10,12 +10,8 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         CategoryDBAdapter = CategoryDB.Adapter(
             exercisesAdapter = exerciseListAdapter,
             exerciseTypeAdapter = exerciseTypeAdapter,
-            creationDateAdapter = instantAdapter
-        ),
-//        ExerciseDBAdapter = ExerciseDB.Adapter(
-//            resultsAdapter = resultListAdapter,
-//            exerciseTypeAdapter = exerciseTypeAdapter
-//        )
+            creationDateAdapter = localDateTimeAdapter
+        )
     )
 
     fun getDatabaseQueries() = database.appDatabaseQueries

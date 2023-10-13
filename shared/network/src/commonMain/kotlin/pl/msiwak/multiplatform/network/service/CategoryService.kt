@@ -7,6 +7,7 @@ import pl.msiwak.multiplatform.network.client.CategoryClient
 import pl.msiwak.multiplatform.network.mapper.CategoryMapper
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
+import pl.msiwak.multiplatform.network.model.ApiResultRequest
 
 class CategoryService(
     private val categoryClient: CategoryClient,
@@ -35,11 +36,19 @@ class CategoryService(
         categoryClient.removeCategory(id)
     }
 
+    suspend fun downloadExercise(id: String) {
+        categoryClient.downloadExercise(id)
+    }
+
     suspend fun addExercise(exerciseRequest: ApiExerciseRequest) {
         categoryClient.addExercise(exerciseRequest)
     }
 
     suspend fun removeExercise(id: String) {
         categoryClient.removeExercise(id)
+    }
+
+    suspend fun addResult(result: ApiResultRequest) {
+        categoryClient.addResult(result)
     }
 }

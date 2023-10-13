@@ -1,8 +1,10 @@
 package pl.msiwak.multiplatform.database.dao
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -68,31 +70,16 @@ class CategoriesDao(database: Database) {
         }
     }
 
-    fun updateExercise(exercise: Exercise) {
-        val newExercises = mutableListOf<Exercise>()
-        val exercises = dbQuery.getCategoryExercises(exercise.categoryId).executeAsOne()
-        if (exercises.isEmpty()) {
-            dbQuery.updateExercise(listOf(exercise), exercise.categoryId)
-            return
-        }
-        if (exercises.any { it.id == exercise.id }) {
-            exercises.forEach {
-                if (it.id == exercise.id) {
-                    newExercises.add(exercise)
-                } else {
-                    newExercises.add(it)
-                }
-            }
-        } else {
-            newExercises.addAll(exercises)
-            newExercises.add(exercise)
-        }
-
-        dbQuery.updateExercise(newExercises, exercise.categoryId)
-    }
-
     fun removeCategory(categoryId: String) {
         dbQuery.removeCategory(categoryId)
+    }
+
+    fun updateExercise(exercise: Exercise) {
+//        dbQuery.updateExercise()
+    }
+
+    fun observeExercise(exerciseId: String): Flow<Exercise> {
+        return flowOf()
     }
 
     fun removeExercise(exercise: Exercise) {
@@ -111,7 +98,7 @@ class CategoriesDao(database: Database) {
         name: String,
         exercises: List<Exercise>,
         exerciseType: ExerciseType,
-        creationDate: Instant
+        creationDate: LocalDateTime
     ): Category {
         return Category(id, name, exerciseType, exercises, creationDate)
     }

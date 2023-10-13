@@ -28,9 +28,11 @@ import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.domain.settings.SetLanguageUseCase
 import pl.msiwak.multiplatform.domain.settings.SetUnitsUseCase
 import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.AddResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
+import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
@@ -50,6 +52,7 @@ import pl.msiwak.multiplatform.network.client.KtorClient
 import pl.msiwak.multiplatform.network.client.UserClient
 import pl.msiwak.multiplatform.network.mapper.CategoryMapper
 import pl.msiwak.multiplatform.network.mapper.ExerciseMapper
+import pl.msiwak.multiplatform.network.mapper.ResultMapper
 import pl.msiwak.multiplatform.network.mapper.UserMapper
 import pl.msiwak.multiplatform.network.service.CategoryService
 import pl.msiwak.multiplatform.network.service.UserService
@@ -109,6 +112,7 @@ val toolsModule = module {
     factory { NumberFormatter() }
     factory { UserMapper() }
     factory { ExerciseMapper() }
+    factory { ResultMapper() }
     factory { CategoryMapper(get()) }
 }
 
@@ -125,6 +129,7 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
+            get()
         )
     }
     viewModelDefinition { params ->
@@ -179,6 +184,8 @@ val useCaseModule = module {
     factory { ObserveAuthStateChangedUseCase(get(), get()) }
     factory { ResendVerificationEmailUseCase(get()) }
     factory { AddExerciseUseCase(get()) }
+    factory { AddResultUseCase(get()) }
+    factory { DownloadExerciseUseCase(get()) }
 }
 
 val repositoryUseModule = module {

@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -18,6 +19,8 @@ import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.commonObject.SortType
 import pl.msiwak.multiplatform.core.ViewModel
+import pl.msiwak.multiplatform.domain.summaries.AddResultUseCase
+import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
@@ -36,13 +39,15 @@ class AddExerciseViewModel(
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
     private val formatStringToDateUseCase: FormatStringToDateUseCase,
+    private val addResultUseCase: AddResultUseCase,
+    private val downloadExerciseUseCase: DownloadExerciseUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddExerciseState())
     val viewState: StateFlow<AddExerciseState> = _viewState.asStateFlow()
 
     private val _viewEvent = MutableSharedFlow<AddExerciseEvent>(extraBufferCapacity = 1)
-    val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent
+    val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent.asSharedFlow()
 
     private var pickedDate: LocalDateTime =
         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
@@ -59,6 +64,8 @@ class AddExerciseViewModel(
 
     init {
         viewModelScope.launch {
+            downloadExerciseUseCase(id)
+
 //            val exerciseWithUnit = getExerciseUseCase(exerciseId)
 //            currentExercise.value = exerciseWithUnit.exercise ?: Exercise()
 //            currentResults.addAll(currentExercise.value.results)
@@ -112,86 +119,39 @@ class AddExerciseViewModel(
         val savedDate = _viewState.value.newResultData.date
 
         if (savedResult.isEmpty()) {
-            _viewEvent.tryEmit(
-                AddExerciseEvent.FocusOnInput(
-                    1
-                )
-            )
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
             return
         }
         if (savedAmount.isEmpty()) {
-            _viewEvent.tryEmit(
-                AddExerciseEvent.FocusOnInput(
-                    2
-                )
-            )
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
         if (savedDate.isEmpty()) {
-            _viewEvent.tryEmit(
-                AddExerciseEvent.FocusOnInput(
-                    3
-                )
-            )
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
             return
         }
         if (!savedDate.matches(Regex(DATE_REGEX))) {
-            _viewState.value = _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(isDateError = true)
-            )
-            _viewEvent.tryEmit(
-                AddExerciseEvent.FocusOnInput(
-                    3
-                )
-            )
+            _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(isDateError = true))
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
             return
         }
 
-
-        if (!(savedResult.matches(Regex(NUMBER_REGEX_DOT)) || savedResult.matches(
-                Regex(
-                    NUMBER_REGEX_COMMA
-                )
-            ) && exerciseType == ExerciseType.GYM)
-        ) {
-            _viewState.value = _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(isResultError = true)
-            )
-            _viewEvent.tryEmit(
-                AddExerciseEvent.FocusOnInput(
-                    1
-                )
-            )
+        if (!(savedResult.matches(Regex(NUMBER_REGEX_DOT)) || savedResult.matches(Regex(NUMBER_REGEX_COMMA)) && exerciseType == ExerciseType.GYM)) {
+            _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(isResultError = true))
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
             return
         }
 
-        if (!(savedAmount.matches(Regex(NUMBER_REGEX_DOT)) || savedAmount.matches(
-                Regex(
-                    NUMBER_REGEX_DOT
-                )
-            )) && exerciseType == ExerciseType.GYM
-        ) {
-            _viewState.value = _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(isAmountError = true)
-            )
-            _viewEvent.tryEmit(
-                AddExerciseEvent.FocusOnInput(
-                    2
-                )
-            )
+        if (!(savedAmount.matches(Regex(NUMBER_REGEX_DOT)) || savedAmount.matches(Regex(NUMBER_REGEX_DOT))) && exerciseType == ExerciseType.GYM) {
+            _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(isAmountError = true))
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
 
         if (!(savedAmount.matches(Regex(TIME_REGEX))) && exerciseType == ExerciseType.RUNNING
         ) {
-            _viewState.value = _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(isAmountError = true)
-            )
-            _viewEvent.tryEmit(
-                AddExerciseEvent.FocusOnInput(
-                    2
-                )
-            )
+            _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(isAmountError = true))
+            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
 
@@ -226,8 +186,7 @@ class AddExerciseViewModel(
     fun onDatePicked(date: LocalDateTime) {
         val formattedDate = formatDateUseCase(date)
         pickedDate = date
-        _viewState.value =
-            _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(date = formattedDate))
+        _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(date = formattedDate))
     }
 
     fun onResultLongClicked(resultIndex: Int) {

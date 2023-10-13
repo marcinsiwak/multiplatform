@@ -3,11 +3,15 @@ package pl.msiwak.multiplatform.data.remote.repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
+import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
+import pl.msiwak.multiplatform.network.model.ApiResultRequest
 import pl.msiwak.multiplatform.network.service.CategoryService
 
 class CategoryRepository(
@@ -59,6 +63,14 @@ class CategoryRepository(
         categoriesDao.removeCategory(categoryId)
     }
 
+    suspend fun downloadExercise(exerciseId: String) = withContext(Dispatchers.Default) {
+        categoryService.downloadExercise(exerciseId)
+    }
+
+    suspend fun observeExercise(exerciseId: String): Flow<Exercise> = withContext(Dispatchers.Default) {
+        return@withContext categoriesDao.observeExercise(exerciseId)
+    }
+
     suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
         categoryService.addExercise(
             ApiExerciseRequest(
@@ -75,4 +87,9 @@ class CategoryRepository(
         categoriesDao.removeExercise(exercise)
     }
 
+    suspend fun addResult(result: ResultData) = withContext(Dispatchers.Default) {
+        categoryService.addResult(
+            ApiResultRequest(result.result, result.amount.toDouble(), result.date.toInstant(TimeZone.currentSystemDefault()))
+        )
+    }
 }

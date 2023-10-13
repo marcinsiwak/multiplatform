@@ -1,42 +1,32 @@
 import kotlin.collections.List;
-import kotlinx.datetime.Instant;
+import kotlinx.datetime.LocalDateTime;
 import pl.msiwak.multiplatform.commonObject.Exercise;
 import pl.msiwak.multiplatform.commonObject.ExerciseType;
 
--- CREATE TABLE ExerciseDB (
---     id TEXT NOT NULL PRIMARY KEY,
---     categoryId TEXT NOT NULL,
---     exerciseTitle    TEXT NOT NULL,
---     results     TEXT AS List<ResultData>    NOT NULL,
---     exerciseType TEXT AS ExerciseType NOT NULL,
--- );
---
--- updateExercise:
--- INSERT OR REPLACE INTO ExerciseDB(id, categoryId, exerciseTitle, results, exerciseType)
--- VALUES (?, ?,?,?, ?);
---
--- insertExercise:
--- INSERT INTO ExerciseDB(id, categoryId, exerciseTitle, results, exerciseType)
--- VALUES (?, ?,?,?, ?);
---
--- removeAllExercises:
--- DELETE FROM ExerciseDB;
---
+CREATE TABLE ExerciseDB (
+    id TEXT NOT NULL PRIMARY KEY,
+    categoryId TEXT NOT NULL,
+    exerciseTitle    TEXT NOT NULL,
+    exerciseType TEXT AS ExerciseType NOT NULL
+);
 
---
--- selectFromExercise:
--- SELECT * FROM ExerciseDB
--- WHERE id = ?;
---
--- selectAllFromExercise:
--- SELECT * FROM ExerciseDB;
+updateExercise:
+INSERT OR REPLACE INTO ExerciseDB(id, categoryId, exerciseTitle, exerciseType)
+VALUES (?, ?,?, ?);
+
+removeAllExercises:
+DELETE FROM ExerciseDB;
+
+selectFromExercise:
+SELECT * FROM ExerciseDB
+WHERE id = ?;
 
 CREATE TABLE CategoryDB (
     id TEXT NOT NULL PRIMARY KEY,
     name    TEXT NOT NULL,
     exercises     TEXT AS List<Exercise>    NOT NULL,
     exerciseType TEXT AS ExerciseType NOT NULL,
-    creationDate TEXT AS Instant NOT NULL
+    creationDate TEXT AS LocalDateTime NOT NULL
 );
 
 updateCategory:
