@@ -13,6 +13,7 @@ import pl.msiwak.multiplatform.data.remote.repository.UserRepository
 import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
 import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
+import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
@@ -91,6 +92,7 @@ fun appModule() = listOf(
 val databaseModule = module {
     single { Database(get()) }
     single { CategoriesDao(get()) }
+    single { ExercisesDao(get()) }
 }
 
 val storeModule = module {
@@ -125,6 +127,7 @@ val viewModelsModule = module {
     viewModelDefinition { params ->
         AddExerciseViewModel(
             id = params.get(),
+            get(),
             get(),
             get(),
             get(),
@@ -191,7 +194,7 @@ val useCaseModule = module {
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
-    single { CategoryRepository(get(), get()) }
+    single { CategoryRepository(get(), get(), get()) }
     single { RemoteConfigRepository(get()) }
     single { VersionRepository(get()) }
     single { SessionRepository(get()) }

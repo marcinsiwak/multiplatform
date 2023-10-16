@@ -4,6 +4,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
@@ -76,7 +78,7 @@ class CategoryViewModel(
                     categoryId = categoryId,
                     exerciseTitle = exerciseName,
                     exerciseType = exerciseType,
-                    creationDate = Clock.System.now()
+                    creationDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
                 )
             )
             //todo handle offline

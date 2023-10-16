@@ -1,50 +1,37 @@
 import kotlin.collections.List;
 import kotlinx.datetime.LocalDateTime;
-import pl.msiwak.multiplatform.commonObject.Exercise;
 import pl.msiwak.multiplatform.commonObject.ExerciseType;
+
+CREATE TABLE CategoryDB (
+    id TEXT NOT NULL PRIMARY KEY,
+    name    TEXT NOT NULL,
+    exerciseType TEXT AS ExerciseType NOT NULL,
+    creationDate TEXT AS LocalDateTime NOT NULL
+);
 
 CREATE TABLE ExerciseDB (
     id TEXT NOT NULL PRIMARY KEY,
     categoryId TEXT NOT NULL,
     exerciseTitle    TEXT NOT NULL,
-    exerciseType TEXT AS ExerciseType NOT NULL
-);
-
-updateExercise:
-INSERT OR REPLACE INTO ExerciseDB(id, categoryId, exerciseTitle, exerciseType)
-VALUES (?, ?,?, ?);
-
-removeAllExercises:
-DELETE FROM ExerciseDB;
-
-selectFromExercise:
-SELECT * FROM ExerciseDB
-WHERE id = ?;
-
-CREATE TABLE CategoryDB (
-    id TEXT NOT NULL PRIMARY KEY,
-    name    TEXT NOT NULL,
-    exercises     TEXT AS List<Exercise>    NOT NULL,
     exerciseType TEXT AS ExerciseType NOT NULL,
     creationDate TEXT AS LocalDateTime NOT NULL
 );
 
+CREATE TABLE ResultDB(
+    id TEXT NOT NULL PRIMARY KEY,
+    exerciseID TEXT NOT NULL,
+    result TEXT NOT NULL,
+    amount TEXT NOT NULL,
+    date TEXT AS LocalDateTime NOT NULL
+);
+
 updateCategory:
-INSERT OR REPLACE INTO CategoryDB(id, name, exercises, exerciseType, creationDate)
-VALUES (?, ?,?, ?, ?);
+INSERT OR REPLACE INTO CategoryDB(id, name, exerciseType, creationDate)
+VALUES (?, ?, ?, ?);
 
 insertCategory:
-INSERT INTO CategoryDB(id, name, exercises, exerciseType, creationDate)
-VALUES (?, ?,?, ?, ?);
-
-updateExercise:
-UPDATE CategoryDB
-SET exercises = ?
-WHERE id = ?;
-
-getCategoryExercises:
-SELECT exercises FROM CategoryDB
-WHERE id = ?;
+INSERT INTO CategoryDB(id, name, exerciseType, creationDate)
+VALUES (?, ?, ?, ?);
 
 removeAllCategories:
 DELETE FROM CategoryDB;
@@ -60,16 +47,26 @@ WHERE id = ?;
 selectAllFromCategory:
 SELECT * FROM CategoryDB;
 
-selectCategoryWithExercise:
-SELECT *
-FROM CategoryDB
--- INNER JOIN ExerciseDB ON CategoryDB.id = ExerciseDB.categoryId
-WHERE CategoryDB.id=?;
-
-selectAllCategoriesWithExercise:
-SELECT *
-FROM CategoryDB;
--- JOIN ExerciseDB;
-
 deleteCategories:
 DELETE FROM CategoryDB;
+
+updateExercise:
+INSERT OR REPLACE INTO ExerciseDB(id, categoryId, exerciseTitle, exerciseType, creationDate)
+VALUES (?, ?,?, ?, ?);
+
+removeAllExercises:
+DELETE FROM ExerciseDB;
+
+selectAllFromExercises:
+SELECT * FROM ExerciseDB;
+
+selectFromExercise:
+SELECT * FROM ExerciseDB
+WHERE id = ?;
+
+selectFromExerciseByCategory:
+SELECT * FROM ExerciseDB
+WHERE categoryId = ?;
+
+selectCategoriesWithExercises:
+SELECT * FROM CategoryDB LEFT JOIN ExerciseDB;

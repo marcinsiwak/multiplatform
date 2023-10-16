@@ -1,9 +1,7 @@
 package pl.msiwak.multiplatform.database.dao
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
@@ -16,17 +14,33 @@ class CategoriesDao(database: Database) {
     private val dbQuery = database.getDatabaseQueries()
 
     fun observeCategories(): Flow<List<Category>> {
-        return dbQuery.selectAllFromCategory(::mapCategory).asFlow().map {
-            it.executeAsList().sortedByDescending { category ->
-                category.creationDate
-            }
+        return dbQuery.selectAllFromCategory().asFlow().map {
+            it.executeAsList().map { category ->
+                val exercises =
+                    dbQuery.selectFromExerciseByCategory(category.id, ::mapExercise).executeAsList()
+                Category(
+                    id = category.id,
+                    name = category.name,
+                    exerciseType = category.exerciseType,
+                    exercises = exercises,
+                    creationDate = category.creationDate
+                )
+            }.sortedByDescending { category -> category.creationDate }
         }
     }
 
     fun observeCategory(id: String): Flow<Category> {
-        return dbQuery.selectFromCategory(id, ::mapCategory).asFlow().map {
+        return dbQuery.selectFromCategory(id).asFlow().map {
             val category = it.executeAsOne()
-            category.copy(exercises = category.exercises.sortedByDescending { exercise -> exercise.creationDate })
+            val exercises = dbQuery.selectFromExerciseByCategory(id, ::mapExercise).executeAsList()
+                .sortedByDescending { exercise -> exercise.creationDate }
+            Category(
+                id = category.id,
+                name = category.name,
+                exerciseType = category.exerciseType,
+                exercises = exercises,
+                creationDate = category.creationDate
+            )
         }
     }
 
@@ -36,7 +50,6 @@ class CategoriesDao(database: Database) {
                 dbQuery.insertCategory(
                     id = id,
                     name = name,
-                    exercises = exercises,
                     exerciseType = exerciseType,
                     creationDate = creationDate
                 )
@@ -50,7 +63,6 @@ class CategoriesDao(database: Database) {
                 dbQuery.updateCategory(
                     id = id,
                     name = name,
-                    exercises = exercises,
                     exerciseType = exerciseType,
                     creationDate = creationDate
                 )
@@ -63,7 +75,6 @@ class CategoriesDao(database: Database) {
             dbQuery.updateCategory(
                 id = id,
                 name = name,
-                exercises = exercises,
                 exerciseType = exerciseType,
                 creationDate = creationDate
             )
@@ -74,21 +85,6 @@ class CategoriesDao(database: Database) {
         dbQuery.removeCategory(categoryId)
     }
 
-    fun updateExercise(exercise: Exercise) {
-//        dbQuery.updateExercise()
-    }
-
-    fun observeExercise(exerciseId: String): Flow<Exercise> {
-        return flowOf()
-    }
-
-    fun removeExercise(exercise: Exercise) {
-        val exercises = dbQuery.getCategoryExercises(exercise.categoryId).executeAsOne()
-        val newExercises = exercises.filter { it.id != exercise.id }
-
-        dbQuery.updateExercise(newExercises, exercise.categoryId)
-    }
-
     fun removeAllCategories() {
         dbQuery.removeAllCategories()
     }
@@ -96,11 +92,20 @@ class CategoriesDao(database: Database) {
     private fun mapCategory(
         id: String,
         name: String,
-        exercises: List<Exercise>,
         exerciseType: ExerciseType,
-        creationDate: LocalDateTime
+        creationDate: LocalDateTime,
     ): Category {
-        return Category(id, name, exerciseType, exercises, creationDate)
+        return Category(id, name, exerciseType, emptyList(), creationDate)
+    }
+
+    private fun mapExercise(
+        id: String,
+        categoryId: String,
+        exerciseTitle: String,
+        exerciseType: ExerciseType,
+        creationDate: LocalDateTime,
+    ): Exercise {
+        return Exercise(id, categoryId, exerciseTitle, emptyList(), exerciseType, creationDate)
     }
 
 }

@@ -16,7 +16,7 @@ class SummaryViewModel(
     private val downloadCategoriesUseCase: DownloadCategoriesUseCase,
     observeCategoriesUseCase: ObserveCategoriesUseCase,
     private val navigator: Navigator,
-    private val globalErrorHandler: GlobalErrorHandler,
+    globalErrorHandler: GlobalErrorHandler,
     private val removeCategoryUseCase: RemoveCategoryUseCase
 ) : ViewModel() {
 

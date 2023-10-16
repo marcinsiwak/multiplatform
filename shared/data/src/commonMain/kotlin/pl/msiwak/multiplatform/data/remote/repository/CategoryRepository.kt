@@ -9,6 +9,7 @@ import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
+import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
@@ -16,6 +17,7 @@ import pl.msiwak.multiplatform.network.service.CategoryService
 
 class CategoryRepository(
     private val categoriesDao: CategoriesDao,
+    private val exercisesDao: ExercisesDao,
     private val categoryService: CategoryService
 ) {
 
@@ -29,6 +31,7 @@ class CategoryRepository(
     suspend fun downloadCategory(id: String): Category = withContext(Dispatchers.Default) {
         val category = categoryService.downloadCategory(id)
         categoriesDao.updateCategory(category)
+        exercisesDao.updateExercises(category.exercises)
         return@withContext category
     }
 
@@ -68,7 +71,7 @@ class CategoryRepository(
     }
 
     suspend fun observeExercise(exerciseId: String): Flow<Exercise> = withContext(Dispatchers.Default) {
-        return@withContext categoriesDao.observeExercise(exerciseId)
+        return@withContext exercisesDao.observeExercise(exerciseId)
     }
 
     suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
@@ -80,11 +83,12 @@ class CategoryRepository(
         )
         val category = categoryService.downloadCategory(exercise.categoryId)
         categoriesDao.updateCategory(category)
+        exercisesDao.updateExercises(category.exercises)
     }
 
     suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
         categoryService.removeExercise(exercise.id)
-        categoriesDao.removeExercise(exercise)
+        exercisesDao.removeExercise(exercise)
     }
 
     suspend fun addResult(result: ResultData) = withContext(Dispatchers.Default) {
