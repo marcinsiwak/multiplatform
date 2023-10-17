@@ -57,6 +57,10 @@ VALUES (?, ?,?, ?, ?);
 removeAllExercises:
 DELETE FROM ExerciseDB;
 
+removeExercise:
+DELETE FROM ExerciseDB
+WHERE id = ?;
+
 selectAllFromExercises:
 SELECT * FROM ExerciseDB;
 
@@ -67,6 +71,3 @@ WHERE id = ?;
 selectFromExerciseByCategory:
 SELECT * FROM ExerciseDB
 WHERE categoryId = ?;
-
-selectCategoriesWithExercises:
-SELECT * FROM CategoryDB LEFT JOIN ExerciseDB;

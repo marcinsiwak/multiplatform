@@ -24,6 +24,7 @@ class CategoryRepository(
     suspend fun downloadCategories(): List<Category> = withContext(Dispatchers.Default) {
         val categories = categoryService.downloadCategories()
         categoriesDao.removeAllCategories()
+        exercisesDao.removeAllExercises()
         categoriesDao.updateCategories(categories)
         val exercises = categories.map { it.exercises }.flatten()
         exercisesDao.updateExercises(exercises)
@@ -73,9 +74,10 @@ class CategoryRepository(
         exercisesDao.updateExercise(exercise)
     }
 
-    suspend fun observeExercise(exerciseId: String): Flow<Exercise> = withContext(Dispatchers.Default) {
-        return@withContext exercisesDao.observeExercise(exerciseId)
-    }
+    suspend fun observeExercise(exerciseId: String): Flow<Exercise> =
+        withContext(Dispatchers.Default) {
+            return@withContext exercisesDao.observeExercise(exerciseId)
+        }
 
     suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
         categoryService.addExercise(
@@ -84,9 +86,7 @@ class CategoryRepository(
                 name = exercise.exerciseTitle
             )
         )
-        val category = categoryService.downloadCategory(exercise.categoryId)
-        categoriesDao.updateCategory(category)
-        exercisesDao.updateExercises(category.exercises)
+        exercisesDao.updateExercise(exercise)
     }
 
     suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
@@ -96,7 +96,11 @@ class CategoryRepository(
 
     suspend fun addResult(result: ResultData) = withContext(Dispatchers.Default) {
         categoryService.addResult(
-            ApiResultRequest(result.result, result.amount.toDouble(), result.date.toInstant(TimeZone.currentSystemDefault()))
+            ApiResultRequest(
+                result.result,
+                result.amount.toDouble(),
+                result.date.toInstant(TimeZone.currentSystemDefault())
+            )
         )
     }
 }

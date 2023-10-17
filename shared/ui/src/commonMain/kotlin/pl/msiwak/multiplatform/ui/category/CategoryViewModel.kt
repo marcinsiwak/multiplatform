@@ -102,9 +102,9 @@ class CategoryViewModel(
         exerciseToRemovePosition?.let {
             val exercise = exercises[it]
             exercises.removeAt(it)
-            _viewState.value = _viewState.value.copy(exerciseList = exercises)
+//            _viewState.value = _viewState.value.copy(exerciseList = exercises)
 
-            viewModelScope.launch {
+            viewModelScope.launch(errorHandler) {
                 removeExerciseUseCase(exercise)
                 _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
             }

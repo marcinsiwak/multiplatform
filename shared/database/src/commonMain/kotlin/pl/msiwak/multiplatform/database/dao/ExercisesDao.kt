@@ -1,12 +1,12 @@
 package pl.msiwak.multiplatform.database.dao
 
+import app.cash.sqldelight.coroutines.asFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.database.Database
-import pl.msiwak.multiplatform.database.extension.asFlow
 
 class ExercisesDao(database: Database) {
 
@@ -39,11 +39,12 @@ class ExercisesDao(database: Database) {
             .map { it.executeAsOne() }
     }
 
+    fun removeAllExercises() {
+        dbQuery.removeAllExercises()
+    }
+
     fun removeExercise(exercise: Exercise) {
-//        val exercises = dbQuery.getCategoryExercises(exercise.categoryId).executeAsOne()
-//        val newExercises = exercises.filter { it.id != exercise.id }
-//
-//        dbQuery.updateExercise(newExercises, exercise.categoryId)
+        dbQuery.removeExercise(exercise.id)
     }
 
     private fun mapExercise(

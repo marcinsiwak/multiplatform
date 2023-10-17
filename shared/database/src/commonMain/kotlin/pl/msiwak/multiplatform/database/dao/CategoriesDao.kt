@@ -1,22 +1,59 @@
 package pl.msiwak.multiplatform.database.dao
 
+import app.cash.sqldelight.Query
+import app.cash.sqldelight.coroutines.asFlow
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.database.Database
-import pl.msiwak.multiplatform.database.extension.asFlow
+import plmsiwakmultiplatformdatabasecache.CategoryDB
 
 class CategoriesDao(database: Database) {
 
     private val dbQuery = database.getDatabaseQueries()
 
     fun observeCategories(): Flow<List<Category>> {
-        return dbQuery.selectAllFromCategory().asFlow().map {
-            it.executeAsList().map { category ->
-                val exercises = dbQuery.selectFromExerciseByCategory(category.id, ::mapExercise).executeAsList()
+        return dbQuery.selectAllFromCategory()
+            .asFlow()
+            .combine(
+                dbQuery.selectAllFromExercises(::mapExercise).asFlow()
+            ) { categoryQuery: Query<CategoryDB>, exerciseQuery: Query<Exercise> ->
+
+                val category = categoryQuery.executeAsList()
+                val exercises = exerciseQuery.executeAsList()
+                    .sortedByDescending { exercise -> exercise.creationDate }
+
+                Pair(category, exercises)
+            }
+            .map { (categories, exercises) ->
+                categories.map { category ->
+                    Category(
+                        id = category.id,
+                        name = category.name,
+                        exerciseType = category.exerciseType,
+                        exercises = exercises.filter { it.categoryId == category.id },
+                        creationDate = category.creationDate
+                    )
+                }.sortedByDescending { category -> category.creationDate }
+            }
+    }
+
+    fun observeCategory(id: String): Flow<Category> {
+        return dbQuery.selectFromCategory(id)
+            .asFlow()
+            .combine(
+                dbQuery.selectFromExerciseByCategory(id, ::mapExercise).asFlow()
+            ) { categoryQuery: Query<CategoryDB>, exerciseQuery: Query<Exercise> ->
+                val category = categoryQuery.executeAsOne()
+                val exercises = exerciseQuery.executeAsList()
+                    .sortedByDescending { exercise -> exercise.creationDate }
+
+                Pair(category, exercises)
+            }.map { (category, exercises) ->
                 Category(
                     id = category.id,
                     name = category.name,
@@ -24,23 +61,7 @@ class CategoriesDao(database: Database) {
                     exercises = exercises,
                     creationDate = category.creationDate
                 )
-            }.sortedByDescending { category -> category.creationDate }
-        }
-    }
-
-    fun observeCategory(id: String): Flow<Category> {
-        return dbQuery.selectFromCategory(id).asFlow().map {
-            val category = it.executeAsOne()
-            val exercises = dbQuery.selectFromExerciseByCategory(id, ::mapExercise).executeAsList()
-                .sortedByDescending { exercise -> exercise.creationDate }
-            Category(
-                id = category.id,
-                name = category.name,
-                exerciseType = category.exerciseType,
-                exercises = exercises,
-                creationDate = category.creationDate
-            )
-        }
+            }
     }
 
     fun insertCategories(categories: List<Category>) {
