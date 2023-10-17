@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.ui.category
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -37,15 +38,16 @@ class CategoryViewModel(
 
     init {
         viewModelScope.launch(errorHandler) {
-            observeCategoryUseCase(categoryId).collect {
+            observeCategoryUseCase(categoryId).collect { category ->
                 exercises.clear()
-                exercises.addAll(it.exercises)
-                _viewState.value =
-                    _viewState.value.copy(
-                        categoryName = it.name,
-                        exerciseType = it.exerciseType,
-                        exerciseList = it.exercises
+                exercises.addAll(category.exercises)
+                _viewState.update {
+                    it.copy(
+                        categoryName = category.name,
+                        exerciseType = category.exerciseType,
+                        exerciseList = category.exercises
                     )
+                }
             }
         }
     }
@@ -78,7 +80,8 @@ class CategoryViewModel(
                     categoryId = categoryId,
                     exerciseTitle = exerciseName,
                     exerciseType = exerciseType,
-                    creationDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                    creationDate = Clock.System.now()
+                        .toLocalDateTime(TimeZone.currentSystemDefault())
                 )
             )
             //todo handle offline

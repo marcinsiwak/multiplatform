@@ -40,6 +40,7 @@ import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
+import pl.msiwak.multiplatform.domain.summaries.ObserveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
@@ -132,6 +133,7 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
+            get(),
             get()
         )
     }
@@ -189,6 +191,7 @@ val useCaseModule = module {
     factory { AddExerciseUseCase(get()) }
     factory { AddResultUseCase(get()) }
     factory { DownloadExerciseUseCase(get()) }
+    factory { ObserveExerciseUseCase(get()) }
 }
 
 val repositoryUseModule = module {
@@ -202,7 +205,7 @@ val repositoryUseModule = module {
 
 val serviceModule = module {
     single { UserService(get(), get()) }
-    single { CategoryService(get(), get()) }
+    single { CategoryService(get(), get() ,get()) }
 }
 
 val clientModule = module {

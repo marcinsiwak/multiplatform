@@ -16,8 +16,7 @@ class CategoriesDao(database: Database) {
     fun observeCategories(): Flow<List<Category>> {
         return dbQuery.selectAllFromCategory().asFlow().map {
             it.executeAsList().map { category ->
-                val exercises =
-                    dbQuery.selectFromExerciseByCategory(category.id, ::mapExercise).executeAsList()
+                val exercises = dbQuery.selectFromExerciseByCategory(category.id, ::mapExercise).executeAsList()
                 Category(
                     id = category.id,
                     name = category.name,

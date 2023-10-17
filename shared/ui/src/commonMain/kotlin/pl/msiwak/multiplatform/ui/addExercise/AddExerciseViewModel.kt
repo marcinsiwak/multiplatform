@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
@@ -24,6 +26,7 @@ import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.ObserveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.utils.DATE_REGEX
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_COMMA
@@ -40,7 +43,8 @@ class AddExerciseViewModel(
     private val formatResultsUseCase: FormatResultsUseCase,
     private val formatStringToDateUseCase: FormatStringToDateUseCase,
     private val addResultUseCase: AddResultUseCase,
-    private val downloadExerciseUseCase: DownloadExerciseUseCase
+    private val downloadExerciseUseCase: DownloadExerciseUseCase,
+    private val observeExerciseUseCase: ObserveExerciseUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddExerciseState())
@@ -65,6 +69,9 @@ class AddExerciseViewModel(
     init {
         viewModelScope.launch {
             downloadExerciseUseCase(id)
+            observeExerciseUseCase(id).collect {
+                _viewState.update { it.copy(results = it.results) }
+            }
 
 //            val exerciseWithUnit = getExerciseUseCase(exerciseId)
 //            currentExercise.value = exerciseWithUnit.exercise ?: Exercise()

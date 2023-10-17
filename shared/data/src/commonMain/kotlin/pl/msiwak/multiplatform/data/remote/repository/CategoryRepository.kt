@@ -25,6 +25,8 @@ class CategoryRepository(
         val categories = categoryService.downloadCategories()
         categoriesDao.removeAllCategories()
         categoriesDao.updateCategories(categories)
+        val exercises = categories.map { it.exercises }.flatten()
+        exercisesDao.updateExercises(exercises)
         return@withContext categories
     }
 
@@ -67,7 +69,8 @@ class CategoryRepository(
     }
 
     suspend fun downloadExercise(exerciseId: String) = withContext(Dispatchers.Default) {
-        categoryService.downloadExercise(exerciseId)
+        val exercise = categoryService.downloadExercise(exerciseId)
+        exercisesDao.updateExercise(exercise)
     }
 
     suspend fun observeExercise(exerciseId: String): Flow<Exercise> = withContext(Dispatchers.Default) {
