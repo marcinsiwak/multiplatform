@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -15,7 +14,6 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.DateFilterType
-import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultData
@@ -27,24 +25,26 @@ import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveExerciseUseCase
-import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCase
 import pl.msiwak.multiplatform.utils.DATE_REGEX
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_COMMA
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_DOT
 import pl.msiwak.multiplatform.utils.TIME_REGEX
+import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.extensions.isNumber
 import pl.msiwak.multiplatform.utils.extensions.isTime
 import pl.msiwak.multiplatform.utils.extensions.safeToDouble
 
 class AddExerciseViewModel(
-    id: String,
-    private val updateExerciseUseCase: UpdateExerciseUseCase,
+    private val id: String,
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
     private val formatStringToDateUseCase: FormatStringToDateUseCase,
     private val addResultUseCase: AddResultUseCase,
+    private val removeResultUseCase: RemoveResultUseCase,
     private val downloadExerciseUseCase: DownloadExerciseUseCase,
-    private val observeExerciseUseCase: ObserveExerciseUseCase
+    private val observeExerciseUseCase: ObserveExerciseUseCase,
+    globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddExerciseState())
@@ -58,19 +58,24 @@ class AddExerciseViewModel(
 
     private val currentResults: MutableList<ResultData> = mutableListOf()
 
-    private val currentExercise = MutableStateFlow(Exercise())
-
-    private val exerciseId = id
-
     private var exerciseToRemovePosition: Int? = null
 
     private var exerciseName: String? = null
 
+    private val errorHandler = globalErrorHandler.handleError()
+
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             downloadExerciseUseCase(id)
-            observeExerciseUseCase(id).collect {
-                _viewState.update { it.copy(results = it.results) }
+            observeExerciseUseCase(id).collect { exercise ->
+                currentResults.clear()
+                currentResults.addAll(exercise.results)
+                _viewState.update {
+                    it.copy(
+                        results = formatResultsUseCase(exercise.results),
+                        resultDataTitles = setTableTitles(exercise.exerciseType)
+                    )
+                }
             }
 
 //            val exerciseWithUnit = getExerciseUseCase(exerciseId)
@@ -106,7 +111,7 @@ class AddExerciseViewModel(
         viewModelScope.launch {
             val newTitle = viewState.value.exerciseTitle
             if (exerciseName != newTitle) {
-                updateExerciseUseCase(currentExercise.value.copy(exerciseTitle = newTitle))
+//                updateExerciseUseCase(currentExercise.value.copy(exerciseTitle = newTitle))
             }
         }
     }
@@ -138,38 +143,56 @@ class AddExerciseViewModel(
             return
         }
         if (!savedDate.matches(Regex(DATE_REGEX))) {
-            _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(isDateError = true))
+            _viewState.value = _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(isDateError = true)
+            )
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
             return
         }
 
-        if (!(savedResult.matches(Regex(NUMBER_REGEX_DOT)) || savedResult.matches(Regex(NUMBER_REGEX_COMMA)) && exerciseType == ExerciseType.GYM)) {
-            _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(isResultError = true))
+        if (!(savedResult.matches(Regex(NUMBER_REGEX_DOT)) || savedResult.matches(
+                Regex(
+                    NUMBER_REGEX_COMMA
+                )
+            ) && exerciseType == ExerciseType.GYM)
+        ) {
+            _viewState.value = _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(isResultError = true)
+            )
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
             return
         }
 
-        if (!(savedAmount.matches(Regex(NUMBER_REGEX_DOT)) || savedAmount.matches(Regex(NUMBER_REGEX_DOT))) && exerciseType == ExerciseType.GYM) {
-            _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(isAmountError = true))
+        if (!(savedAmount.matches(Regex(NUMBER_REGEX_DOT)) || savedAmount.matches(
+                Regex(
+                    NUMBER_REGEX_DOT
+                )
+            )) && exerciseType == ExerciseType.GYM
+        ) {
+            _viewState.value = _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(isAmountError = true)
+            )
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
 
         if (!(savedAmount.matches(Regex(TIME_REGEX))) && exerciseType == ExerciseType.RUNNING
         ) {
-            _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(isAmountError = true))
+            _viewState.value = _viewState.value.copy(
+                newResultData = _viewState.value.newResultData.copy(isAmountError = true)
+            )
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
 
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             val data = ResultData(
-                savedResult.safeToDouble(),
-                savedAmount,
-                formatStringToDateUseCase(savedDate)
+                exerciseId = id,
+                result = savedResult.safeToDouble(),
+                amount = savedAmount,
+                date = formatStringToDateUseCase(savedDate)
             )
-            currentResults.add(0, data)
-            saveResult()
+            addResultUseCase(data)
 
             _viewState.value = _viewState.value.copy(
                 results = formatResultsUseCase(currentResults),
@@ -179,13 +202,6 @@ class AddExerciseViewModel(
         }
     }
 
-    private suspend fun saveResult() {
-        val newExercise = currentExercise.value.copy(
-            results = currentResults
-        )
-        updateExerciseUseCase(newExercise)
-    }
-
     fun onDateClicked() {
         _viewEvent.tryEmit(AddExerciseEvent.OpenCalendar)
     }
@@ -193,7 +209,8 @@ class AddExerciseViewModel(
     fun onDatePicked(date: LocalDateTime) {
         val formattedDate = formatDateUseCase(date)
         pickedDate = date
-        _viewState.value = _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(date = formattedDate))
+        _viewState.value =
+            _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(date = formattedDate))
     }
 
     fun onResultLongClicked(resultIndex: Int) {
@@ -227,13 +244,8 @@ class AddExerciseViewModel(
     fun onResultRemoved() {
         viewModelScope.launch {
             exerciseToRemovePosition?.let {
-                currentResults.removeAt(it)
-                val results = formatResultsUseCase(currentResults)
-                val newExercise = currentExercise.value.copy(
-                    results = currentResults
-                )
-                updateExerciseUseCase(newExercise)
-                _viewState.value = _viewState.value.copy(results = results)
+                val id = currentResults[it].id
+                removeResultUseCase(id)
             }
             _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
         }
@@ -242,7 +254,6 @@ class AddExerciseViewModel(
     fun onPopupDismissed() {
         _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
     }
-
 
     fun onResultValueChanged(text: String) {
         _viewState.value =

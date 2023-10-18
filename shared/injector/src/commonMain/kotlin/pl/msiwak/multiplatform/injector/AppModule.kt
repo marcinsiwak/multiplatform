@@ -14,6 +14,7 @@ import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
 import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
+import pl.msiwak.multiplatform.database.dao.ResultsDao
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
@@ -43,6 +44,7 @@ import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
@@ -94,6 +96,7 @@ val databaseModule = module {
     single { Database(get()) }
     single { CategoriesDao(get()) }
     single { ExercisesDao(get()) }
+    single { ResultsDao(get()) }
 }
 
 val storeModule = module {
@@ -114,7 +117,7 @@ val toolsModule = module {
     factory { DateFormatter() }
     factory { NumberFormatter() }
     factory { UserMapper() }
-    factory { ExerciseMapper() }
+    factory { ExerciseMapper(get()) }
     factory { ResultMapper() }
     factory { CategoryMapper(get()) }
 }
@@ -128,6 +131,7 @@ val viewModelsModule = module {
     viewModelDefinition { params ->
         AddExerciseViewModel(
             id = params.get(),
+            get(),
             get(),
             get(),
             get(),
@@ -190,6 +194,7 @@ val useCaseModule = module {
     factory { ResendVerificationEmailUseCase(get()) }
     factory { AddExerciseUseCase(get()) }
     factory { AddResultUseCase(get()) }
+    factory { RemoveResultUseCase(get()) }
     factory { DownloadExerciseUseCase(get()) }
     factory { ObserveExerciseUseCase(get()) }
 }
@@ -197,7 +202,7 @@ val useCaseModule = module {
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
-    single { CategoryRepository(get(), get(), get()) }
+    single { CategoryRepository(get(), get(), get(), get()) }
     single { RemoteConfigRepository(get()) }
     single { VersionRepository(get()) }
     single { SessionRepository(get()) }
@@ -205,7 +210,7 @@ val repositoryUseModule = module {
 
 val serviceModule = module {
     single { UserService(get(), get()) }
-    single { CategoryService(get(), get() ,get()) }
+    single { CategoryService(get(), get(), get(), get()) }
 }
 
 val clientModule = module {

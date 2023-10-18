@@ -71,3 +71,15 @@ WHERE id = ?;
 selectFromExerciseByCategory:
 SELECT * FROM ExerciseDB
 WHERE categoryId = ?;
+
+selectFromResultsByExercise:
+SELECT * FROM ResultDB
+WHERE exerciseID = ?;
+
+updateResult:
+INSERT OR REPLACE INTO ResultDB(id, exerciseID, result, amount, date)
+VALUES (?, ?,?, ?, ?);
+
+removeResult:
+DELETE FROM ResultDB
+WHERE ResultDB.id = ?;

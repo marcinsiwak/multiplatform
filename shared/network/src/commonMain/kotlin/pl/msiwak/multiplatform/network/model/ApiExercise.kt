@@ -8,5 +8,6 @@ class ApiExercise(
     val exerciseId: String,
     val categoryId: String,
     val name: String,
+    val results: List<ApiResult> = emptyList(),
     val creationDate: Instant
 )

@@ -26,8 +26,7 @@ import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 
 @Composable
 fun AddCategoryScreen() {
-    val viewModel =
-        koinViewModel<AddCategoryViewModel>()
+    val viewModel = koinViewModel<AddCategoryViewModel>()
     val state = viewModel.viewState.collectAsState()
 
     Box(

@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.data.remote.repository
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
@@ -10,6 +11,7 @@ import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
+import pl.msiwak.multiplatform.database.dao.ResultsDao
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
@@ -18,10 +20,11 @@ import pl.msiwak.multiplatform.network.service.CategoryService
 class CategoryRepository(
     private val categoriesDao: CategoriesDao,
     private val exercisesDao: ExercisesDao,
+    private val resultsDao: ResultsDao,
     private val categoryService: CategoryService
 ) {
 
-    suspend fun downloadCategories(): List<Category> = withContext(Dispatchers.Default) {
+    suspend fun downloadCategories(): List<Category> = withContext(Dispatchers.IO) {
         val categories = categoryService.downloadCategories()
         categoriesDao.removeAllCategories()
         exercisesDao.removeAllExercises()
@@ -31,27 +34,27 @@ class CategoryRepository(
         return@withContext categories
     }
 
-    suspend fun downloadCategory(id: String): Category = withContext(Dispatchers.Default) {
+    suspend fun downloadCategory(id: String): Category = withContext(Dispatchers.IO) {
         val category = categoryService.downloadCategory(id)
         categoriesDao.updateCategory(category)
         exercisesDao.updateExercises(category.exercises)
         return@withContext category
     }
 
-    suspend fun observeCategory(id: String): Flow<Category> = withContext(Dispatchers.Default) {
+    suspend fun observeCategory(id: String): Flow<Category> = withContext(Dispatchers.IO) {
         return@withContext categoriesDao.observeCategory(id)
     }
 
-    suspend fun observeCategories(): Flow<List<Category>> = withContext(Dispatchers.Default) {
+    suspend fun observeCategories(): Flow<List<Category>> = withContext(Dispatchers.IO) {
         return@withContext categoriesDao.observeCategories()
     }
 
     suspend fun insertCategories(categories: List<Category>) =
-        withContext(Dispatchers.Default) {
+        withContext(Dispatchers.IO) {
             categoriesDao.insertCategories(categories)
         }
 
-    suspend fun createCategory(category: Category) = withContext(Dispatchers.Default) {
+    suspend fun createCategory(category: Category) = withContext(Dispatchers.IO) {
         categoryService.createCategory(
             ApiCategoryRequest(
                 name = category.name,
@@ -60,47 +63,55 @@ class CategoryRepository(
         )
     }
 
-    suspend fun updateCategory(category: Category) = withContext(Dispatchers.Default) {
+    suspend fun updateCategory(category: Category) = withContext(Dispatchers.IO) {
         categoriesDao.updateCategory(category)
     }
 
-    suspend fun removeCategory(categoryId: String) = withContext(Dispatchers.Default) {
+    suspend fun removeCategory(categoryId: String) = withContext(Dispatchers.IO) {
         categoryService.removeCategory(categoryId)
         categoriesDao.removeCategory(categoryId)
     }
 
-    suspend fun downloadExercise(exerciseId: String) = withContext(Dispatchers.Default) {
+    suspend fun downloadExercise(exerciseId: String) = withContext(Dispatchers.IO) {
         val exercise = categoryService.downloadExercise(exerciseId)
         exercisesDao.updateExercise(exercise)
+        resultsDao.updateResults(exercise.results)
     }
 
     suspend fun observeExercise(exerciseId: String): Flow<Exercise> =
-        withContext(Dispatchers.Default) {
+        withContext(Dispatchers.IO) {
             return@withContext exercisesDao.observeExercise(exerciseId)
         }
 
-    suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
-        categoryService.addExercise(
+    suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
+        val exerciseResponse = categoryService.addExercise(
             ApiExerciseRequest(
                 categoryId = exercise.categoryId,
                 name = exercise.exerciseTitle
             )
         )
-        exercisesDao.updateExercise(exercise)
+        exercisesDao.updateExercise(exerciseResponse)
     }
 
-    suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.Default) {
+    suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
         categoryService.removeExercise(exercise.id)
         exercisesDao.removeExercise(exercise)
     }
 
-    suspend fun addResult(result: ResultData) = withContext(Dispatchers.Default) {
-        categoryService.addResult(
+    suspend fun addResult(result: ResultData) = withContext(Dispatchers.IO) {
+        val newResult = categoryService.addResult(
             ApiResultRequest(
+                result.exerciseId,
                 result.result,
                 result.amount.toDouble(),
                 result.date.toInstant(TimeZone.currentSystemDefault())
             )
         )
+        resultsDao.updateResult(newResult)
+    }
+
+    suspend fun removeResult(id: String) = withContext(Dispatchers.IO) {
+        categoryService.removeResult(id)
+        resultsDao.removeResult(id)
     }
 }

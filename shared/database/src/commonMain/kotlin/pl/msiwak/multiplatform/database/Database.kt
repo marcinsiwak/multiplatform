@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.database
 import pl.msiwak.multiplatform.shared.database.AppDatabase
 import plmsiwakmultiplatformdatabasecache.CategoryDB
 import plmsiwakmultiplatformdatabasecache.ExerciseDB
+import plmsiwakmultiplatformdatabasecache.ResultDB
 
 class Database(databaseDriverFactory: DatabaseDriverFactory) {
 
@@ -15,6 +16,9 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         ExerciseDBAdapter = ExerciseDB.Adapter(
             exerciseTypeAdapter = exerciseTypeAdapter,
             creationDateAdapter = localDateTimeAdapter
+        ),
+        ResultDBAdapter = ResultDB.Adapter(
+            dateAdapter = localDateTimeAdapter
         )
     )
 

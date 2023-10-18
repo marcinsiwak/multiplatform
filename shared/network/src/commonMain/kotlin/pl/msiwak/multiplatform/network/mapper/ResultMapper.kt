@@ -10,6 +10,8 @@ class ResultMapper : Mapper<ApiResult, ResultData>() {
 
     override fun map(value: ApiResult): ResultData {
         return ResultData(
+            id = value.id,
+            exerciseId = value.exerciseId,
             result = value.result,
             amount = value.amount.toString(),
             date = value.date.toLocalDateTime(TimeZone.currentSystemDefault())

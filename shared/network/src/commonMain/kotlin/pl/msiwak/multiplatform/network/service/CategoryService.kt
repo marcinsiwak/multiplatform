@@ -4,9 +4,11 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
+import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.network.client.CategoryClient
 import pl.msiwak.multiplatform.network.mapper.CategoryMapper
 import pl.msiwak.multiplatform.network.mapper.ExerciseMapper
+import pl.msiwak.multiplatform.network.mapper.ResultMapper
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
@@ -14,7 +16,8 @@ import pl.msiwak.multiplatform.network.model.ApiResultRequest
 class CategoryService(
     private val categoryClient: CategoryClient,
     private val categoryMapper: CategoryMapper,
-    private val exerciseMapper: ExerciseMapper
+    private val exerciseMapper: ExerciseMapper,
+    private val resultMapper: ResultMapper
 ) {
 
     suspend fun downloadCategories(): List<Category> {
@@ -45,15 +48,23 @@ class CategoryService(
             .first()
     }
 
-    suspend fun addExercise(exerciseRequest: ApiExerciseRequest) {
-        categoryClient.addExercise(exerciseRequest)
+    suspend fun addExercise(exerciseRequest: ApiExerciseRequest): Exercise {
+        return categoryClient.addExercise(exerciseRequest)
+            .map { exerciseMapper(it) }
+            .first()
     }
 
     suspend fun removeExercise(id: String) {
         categoryClient.removeExercise(id)
     }
 
-    suspend fun addResult(result: ApiResultRequest) {
-        categoryClient.addResult(result)
+    suspend fun addResult(result: ApiResultRequest): ResultData {
+        return categoryClient.addResult(result)
+            .map { resultMapper(it) }
+            .first()
+    }
+
+    suspend fun removeResult(id: String) {
+        categoryClient.removeResult(id)
     }
 }
