@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -17,22 +18,30 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.extensions.openMailApp
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
+import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailEvent
+import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
 
 @Composable
 fun VerifyEmailScreen() {
-    val viewModel = koinViewModel<pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel>()
+    val viewModel = koinViewModel<VerifyEmailViewModel>()
+    val viewState = viewModel.viewState.collectAsState()
 
     val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
         viewModel.viewEvent.collectLatest {
             when (it) {
-                pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailEvent.OpenMail -> context.openMailApp()
+                VerifyEmailEvent.OpenMail -> context.openMailApp()
             }
         }
+    }
+
+    if (viewState.value.isLoading) {
+        Loader()
     }
 
     Column(

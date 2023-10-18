@@ -5,5 +5,6 @@ data class WelcomeState(
     var password: String = "",
     val authErrorMessage: String? = null,
     val isPasswordVisible: Boolean = false,
-    val isErrorDialogVisible: Boolean = false
+    val isErrorDialogVisible: Boolean = false,
+    val isLoading: Boolean = false
 )

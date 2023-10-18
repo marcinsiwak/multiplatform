@@ -66,7 +66,9 @@ class AddExerciseViewModel(
 
     init {
         viewModelScope.launch(errorHandler) {
+            _viewState.update { it.copy(isLoading = true) }
             downloadExerciseUseCase(id)
+            _viewState.update { it.copy(isLoading = false) }
             observeExerciseUseCase(id).collect { exercise ->
                 currentResults.clear()
                 currentResults.addAll(exercise.results)
@@ -117,11 +119,11 @@ class AddExerciseViewModel(
     }
 
     fun onExerciseTitleChanged(title: String) {
-        _viewState.value = _viewState.value.copy(exerciseTitle = title)
+        _viewState.update { it.copy(exerciseTitle = title) }
     }
 
     fun onAddNewResultClicked() {
-        _viewState.value = _viewState.value.copy(isResultFieldEnabled = true)
+        _viewState.update { it.copy(isResultFieldEnabled = true) }
     }
 
     fun onSaveResultClicked() {

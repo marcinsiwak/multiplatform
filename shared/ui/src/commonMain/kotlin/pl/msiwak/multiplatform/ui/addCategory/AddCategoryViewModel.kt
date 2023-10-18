@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.ui.addCategory
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -30,7 +31,9 @@ class AddCategoryViewModel(
         val name = _viewState.value.name
         val exerciseType = _viewState.value.exerciseType
         viewModelScope.launch {
+            _viewState.update { it.copy(isLoading = true) }
             createCategoryUseCase(Category(name = name, exerciseType = exerciseType))
+            _viewState.update { it.copy(isLoading = false) }
             navigator.navigateUp()
         }
     }

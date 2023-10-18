@@ -4,5 +4,6 @@ import pl.msiwak.multiplatform.commonObject.ExerciseType
 
 data class AddCategoryState(
     var name: String = "",
-    var exerciseType: ExerciseType = ExerciseType.GYM
+    var exerciseType: ExerciseType = ExerciseType.GYM,
+    val isLoading: Boolean = false
 )

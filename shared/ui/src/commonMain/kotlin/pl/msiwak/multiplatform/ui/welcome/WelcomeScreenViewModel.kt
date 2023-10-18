@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
-import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
@@ -37,17 +37,20 @@ class WelcomeScreenViewModel(
     }
 
     fun onLoginChanged(text: String) {
-        _viewState.value = viewState.value.copy(login = text, authErrorMessage = null)
+        _viewState.update { it.copy(login = text, authErrorMessage = null) }
     }
 
     fun onPasswordChanged(text: String) {
-        _viewState.value = viewState.value.copy(password = text, authErrorMessage = null)
+        _viewState.update { it.copy(password = text, authErrorMessage = null) }
     }
 
     fun onLoginClicked() {
         viewModelScope.launch(errorHandler) {
+            _viewState.update { it.copy(isLoading = true) }
             val isUserVerified =
                 loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
+            _viewState.update { it.copy(isLoading = false) }
+
             if (isUserVerified) {
                 navigator.navigate(NavigationDirections.Dashboard(true))
             } else {
@@ -58,7 +61,9 @@ class WelcomeScreenViewModel(
 
     fun onGoogleLogin(idToken: String?, accessToken: String?) {
         viewModelScope.launch {
+            _viewState.update { it.copy(isLoading = true) }
             googleLoginUseCase(idToken, accessToken)
+            _viewState.update { it.copy(isLoading = false) }
             navigator.navigate(NavigationDirections.Dashboard(true))
         }
     }

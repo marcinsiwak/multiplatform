@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.android.ui.summary
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
@@ -29,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.R
-import pl.msiwak.multiplatform.android.ui.category.AddExerciseDialog
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
+import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.commonResources.MR
@@ -40,7 +38,7 @@ import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 @Composable
 fun SummaryScreen() {
     val viewModel = koinViewModel<SummaryViewModel>()
-    val state = viewModel.viewState.collectAsState()
+    val viewState = viewModel.viewState.collectAsState()
 
     OnLifecycleEvent { _, event ->
         when (event) {
@@ -49,7 +47,7 @@ fun SummaryScreen() {
         }
     }
 
-    if (state.value.isRemoveCategoryDialogVisible) {
+    if (viewState.value.isRemoveCategoryDialogVisible) {
         PopupDialog(
             title = stringResource(MR.strings.remove_category_dialog_title.resourceId),
             description = stringResource(MR.strings.remove_category_dialog_description.resourceId),
@@ -64,6 +62,10 @@ fun SummaryScreen() {
         )
     }
 
+    if (viewState.value.isLoading){
+        Loader()
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -71,7 +73,7 @@ fun SummaryScreen() {
             modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
             horizontalAlignment = Alignment.CenterHorizontally,
             content = {
-                itemsIndexed(state.value.categories) { index, category ->
+                itemsIndexed(viewState.value.categories) { index, category ->
                     CategoryItem(
                         modifier = Modifier
                             .padding(vertical = MaterialTheme.dimens.space_8)

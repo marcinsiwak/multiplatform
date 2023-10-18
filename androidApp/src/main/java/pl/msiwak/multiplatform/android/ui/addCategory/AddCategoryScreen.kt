@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
+import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -27,7 +28,11 @@ import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 @Composable
 fun AddCategoryScreen() {
     val viewModel = koinViewModel<AddCategoryViewModel>()
-    val state = viewModel.viewState.collectAsState()
+    val viewState = viewModel.viewState.collectAsState()
+
+    if (viewState.value.isLoading) {
+        Loader()
+    }
 
     Box(
         modifier = Modifier
@@ -38,14 +43,14 @@ fun AddCategoryScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.dimens.space_8),
-                value = state.value.name,
+                value = viewState.value.name,
                 onValueChange = {
                     viewModel.onCategoryNameChanged(it)
                 },
                 hintText = stringResource(id = MR.strings.category_name.resourceId)
             )
             DropDownView(
-                currentValue = state.value.exerciseType.name,
+                currentValue = viewState.value.exerciseType.name,
                 items = ExerciseType.values().toList(),
                 onItemPicked = {
                     viewModel.onTypePicked(it)

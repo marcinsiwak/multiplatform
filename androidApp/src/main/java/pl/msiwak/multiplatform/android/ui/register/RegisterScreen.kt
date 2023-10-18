@@ -24,6 +24,7 @@ import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.PasswordRequirements
+import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
@@ -33,6 +34,10 @@ fun RegisterScreen() {
     val viewModel = koinViewModel<RegisterViewModel>()
 
     val viewState = viewModel.viewState.collectAsState()
+
+    if (viewState.value.isLoading) {
+        Loader()
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(
@@ -57,7 +62,11 @@ fun RegisterScreen() {
             InputView(
                 modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
                 value = viewState.value.login,
-                errorMessage = viewState.value.loginErrorMessage?.resourceId?.let { stringResource(id = it) },
+                errorMessage = viewState.value.loginErrorMessage?.resourceId?.let {
+                    stringResource(
+                        id = it
+                    )
+                },
                 onValueChange = {
                     viewModel.onLoginChanged(it)
                 },
@@ -67,7 +76,11 @@ fun RegisterScreen() {
             InputView(
                 modifier = Modifier,
                 value = viewState.value.password,
-                errorMessage = viewState.value.passwordErrorMessage?.resourceId?.let { stringResource(id = it) },
+                errorMessage = viewState.value.passwordErrorMessage?.resourceId?.let {
+                    stringResource(
+                        id = it
+                    )
+                },
                 onValueChange = {
                     viewModel.onPasswordChanged(it)
                 },

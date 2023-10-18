@@ -24,5 +24,6 @@ data class AddExerciseState(
     val unitType: UnitType = UnitType.METRIC,
     val unit: String = "kg",
     val resultDataTitles: List<String> = emptyList(),
-    val sortType: SortType? = null
+    val sortType: SortType? = null,
+    val isLoading: Boolean = false
 )

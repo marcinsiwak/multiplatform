@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,7 +21,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
@@ -41,8 +39,8 @@ import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 @Composable
 fun AddExerciseScreen(id: String) {
     val viewModel = koinViewModel<AddExerciseViewModel> { parametersOf(id) }
+    val viewState = viewModel.viewState.collectAsState()
 
-    val state = viewModel.viewState.collectAsState()
     val context = LocalContext.current
 
     val focusRequesters = List(4) { remember { FocusRequester() } }
@@ -71,7 +69,7 @@ fun AddExerciseScreen(id: String) {
         }
     }
 
-    if (state.value.isRemoveExerciseDialogVisible) {
+    if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
             title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
             description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
@@ -98,7 +96,7 @@ fun AddExerciseScreen(id: String) {
                     end = MaterialTheme.dimens.space_24
                 )
                 .padding(vertical = MaterialTheme.dimens.space_16),
-            text = state.value.exerciseTitle,
+            text = viewState.value.exerciseTitle,
             fontSize = MaterialTheme.font.font_24,
             color = MaterialTheme.colorScheme.onPrimary,
         )
@@ -107,8 +105,8 @@ fun AddExerciseScreen(id: String) {
             modifier = Modifier
                 .wrapContentWidth()
                 .padding(bottom = MaterialTheme.dimens.space_16),
-            tabs = state.value.filter,
-            selectedPos = state.value.selectedFilterPosition,
+            tabs = viewState.value.filter,
+            selectedPos = viewState.value.selectedFilterPosition,
             onTabClicked = {
                 viewModel.onTabClicked(it)
             }
@@ -118,7 +116,7 @@ fun AddExerciseScreen(id: String) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
         ) {
-            if (!state.value.isResultFieldEnabled) {
+            if (!viewState.value.isResultFieldEnabled) {
                 Button(
                     modifier = Modifier
                         .padding(bottom = MaterialTheme.dimens.space_16)
@@ -154,14 +152,14 @@ fun AddExerciseScreen(id: String) {
 
         ResultsTableView(
             modifier = Modifier,
-            resultDataTitles = state.value.resultDataTitles,
-            unit = state.value.unit,
-            results = state.value.results,
-            exerciseType = state.value.exerciseType,
-            sortType = state.value.sortType,
+            resultDataTitles = viewState.value.resultDataTitles,
+            unit = viewState.value.unit,
+            results = viewState.value.results,
+            exerciseType = viewState.value.exerciseType,
+            sortType = viewState.value.sortType,
             focusRequesters = focusRequesters,
-            isNewResultEnabled = state.value.isResultFieldEnabled,
-            newResultData = state.value.newResultData,
+            isNewResultEnabled = viewState.value.isResultFieldEnabled,
+            newResultData = viewState.value.newResultData,
             onAddNewResultClicked = {
                 viewModel.onAddNewResultClicked()
             },

@@ -106,12 +106,14 @@ class RegisterViewModel(
         if (!isPasswordValid || !isLoginValid) return
 
         viewModelScope.launch(errorHandler) {
+            _viewState.update { it.copy(isLoading = true) }
             registerUserUseCase(
                 RegisterUserUseCase.Params(
                     viewState.value.login,
                     viewState.value.password
                 )
             )
+            _viewState.update { it.copy(isLoading = false) }
             navigator.navigate(NavigationDirections.VerifyEmail)
         }
     }

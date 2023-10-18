@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.ui.summary
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.core.ViewModel
@@ -24,23 +25,25 @@ class SummaryViewModel(
     val viewState: StateFlow<SummaryState> = _viewState
 
     private var categoryToRemovePosition: Int? = null
-    private val categories: MutableList<Category> = mutableListOf()
+    private val currentCategories: MutableList<Category> = mutableListOf()
 
     private val errorHandler = globalErrorHandler.handleError()
 
     init {
         viewModelScope.launch(errorHandler) {
-            observeCategoriesUseCase().collect {
-                categories.clear()
-                categories.addAll(it)
-                _viewState.value = _viewState.value.copy(categories = it)
+            observeCategoriesUseCase().collect { categories ->
+                currentCategories.clear()
+                currentCategories.addAll(categories)
+                _viewState.update { it.copy(categories = categories) }
             }
         }
     }
 
     fun onResume() {
         viewModelScope.launch(errorHandler) {
+            _viewState.update { it.copy(isLoading = true) }
             downloadCategoriesUseCase()
+            _viewState.update { it.copy(isLoading = false) }
         }
     }
 
@@ -54,23 +57,25 @@ class SummaryViewModel(
 
     fun onCategoryLongClicked(categoryIndex: Int) {
         categoryToRemovePosition = categoryIndex
-        _viewState.value = _viewState.value.copy(isRemoveCategoryDialogVisible = true)
+        _viewState.update { it.copy(isRemoveCategoryDialogVisible = true) }
     }
 
     fun onCategoryRemoved() {
-        categoryToRemovePosition?.let {
-            val id = categories[it].id
-            categories.removeAt(it)
-            _viewState.value = _viewState.value.copy(categories = categories)
+        viewModelScope.launch {
+            _viewState.update { it.copy(isLoading = true) }
+            categoryToRemovePosition?.let { pos ->
+                val id = currentCategories[pos].id
+                currentCategories.removeAt(pos)
+                _viewState.update { it.copy(categories = currentCategories) }
 
-            viewModelScope.launch {
                 removeCategoryUseCase(id)
-                _viewState.value = _viewState.value.copy(isRemoveCategoryDialogVisible = false)
+                _viewState.update { it.copy(isRemoveCategoryDialogVisible = false) }
             }
+            _viewState.update { it.copy(isLoading = false) }
         }
     }
 
     fun onPopupDismissed() {
-        _viewState.value = _viewState.value.copy(isRemoveCategoryDialogVisible = false)
+        _viewState.update { it.copy(isRemoveCategoryDialogVisible = false) }
     }
 }

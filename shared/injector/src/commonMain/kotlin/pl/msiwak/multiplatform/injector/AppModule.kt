@@ -125,7 +125,7 @@ val toolsModule = module {
 val viewModelsModule = module {
     viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { VerifyEmailViewModel(get(), get()) }
+    viewModelDefinition { VerifyEmailViewModel(get(), get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get(), get()) }
     viewModelDefinition { params ->

@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.utils
 
 import kotlinx.datetime.LocalDateTime
 
-expect class DateFormatter {
+expect class DateFormatter() {
     fun formatDate(
         date: LocalDateTime,
         format: String = DATE_FORMAT

@@ -32,6 +32,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
+import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
@@ -43,9 +44,9 @@ import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 @Composable
 fun CategoryScreen(id: String) {
     val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
-    val state = viewModel.viewState.collectAsState()
+    val viewState = viewModel.viewState.collectAsState()
 
-    val backgroundId = when (state.value.exerciseType) { //todo maybe share with ios
+    val backgroundId = when (viewState.value.exerciseType) { //todo maybe share with ios
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
 //        ExerciseType.OTHER -> null
@@ -58,7 +59,7 @@ fun CategoryScreen(id: String) {
         }
     }
 
-    if (state.value.isRemoveExerciseDialogVisible) {
+    if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
             description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
             confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
@@ -71,13 +72,17 @@ fun CategoryScreen(id: String) {
             })
     }
 
+    if(viewState.value.isLoading) {
+        Loader()
+    }
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        if (state.value.isDialogVisible) {
+        if (viewState.value.isDialogVisible) {
             AddExerciseDialog(
-                inputText = state.value.newExerciseName,
+                inputText = viewState.value.newExerciseName,
                 onExerciseTitleChanged = {
                     viewModel.onAddExerciseNameChanged(it)
                 }, onAddExerciseClicked = {
@@ -111,7 +116,7 @@ fun CategoryScreen(id: String) {
             )
 
             LazyColumn {
-                itemsIndexed(state.value.exerciseList) { index, item ->
+                itemsIndexed(viewState.value.exerciseList) { index, item ->
                     ListItemView(
                         name = item.exerciseTitle,
                         onItemClick = { viewModel.onExerciseClicked(item.id) },
@@ -153,7 +158,7 @@ fun CategoryScreen(id: String) {
                     horizontal = MaterialTheme.dimens.space_12,
                     vertical = MaterialTheme.dimens.space_8
                 ),
-            text = state.value.categoryName,
+            text = viewState.value.categoryName,
             fontSize = MaterialTheme.font.font_14,
             color = MaterialTheme.colorScheme.onPrimary
         )

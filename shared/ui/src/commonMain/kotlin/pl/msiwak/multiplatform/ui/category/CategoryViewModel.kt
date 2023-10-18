@@ -54,12 +54,14 @@ class CategoryViewModel(
 
     fun onResume() {
         viewModelScope.launch(errorHandler) {
+            _viewState.update { it.copy(isLoading = true) }
             downloadCategoryUseCase(categoryId)
+            _viewState.update { it.copy(isLoading = false) }
         }
     }
 
     fun onAddNewExerciseClicked() {
-        _viewState.value = _viewState.value.copy(isDialogVisible = true)
+        _viewState.update { it.copy(isDialogVisible = true) }
     }
 
     fun onExerciseClicked(id: String) {
@@ -67,15 +69,16 @@ class CategoryViewModel(
     }
 
     fun onAddExerciseNameChanged(name: String) {
-        _viewState.value = _viewState.value.copy(newExerciseName = name)
+        _viewState.update { it.copy(newExerciseName = name) }
     }
 
     fun onAddExerciseClicked() {
-        _viewState.value = _viewState.value.copy(isDialogVisible = false)
-        viewModelScope.launch {
+        _viewState.update { it.copy(isDialogVisible = false, isLoading = true) }
+
+        viewModelScope.launch(errorHandler) {
             val exerciseName = _viewState.value.newExerciseName
             val exerciseType = _viewState.value.exerciseType
-            addExerciseUseCase(
+            val id = addExerciseUseCase(
                 Exercise(
                     categoryId = categoryId,
                     exerciseTitle = exerciseName,
@@ -84,34 +87,35 @@ class CategoryViewModel(
                         .toLocalDateTime(TimeZone.currentSystemDefault())
                 )
             )
-            //todo handle offline
-//            navigator.navigate(NavigationDirections.AddExercise(id))
+            _viewState.update { it.copy(isLoading = false) }
+            navigator.navigate(NavigationDirections.AddExercise(id))
         }
     }
 
     fun onDialogClosed() {
-        _viewState.value = _viewState.value.copy(isDialogVisible = false)
+        _viewState.update { it.copy(isDialogVisible = false) }
     }
 
     fun onResultLongClicked(resultIndex: Int) {
         exerciseToRemovePosition = resultIndex
-        _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = true)
+        _viewState.update { it.copy(isRemoveExerciseDialogVisible = true) }
     }
 
     fun onResultRemoved() {
-        exerciseToRemovePosition?.let {
-            val exercise = exercises[it]
-            exercises.removeAt(it)
-//            _viewState.value = _viewState.value.copy(exerciseList = exercises)
+        viewModelScope.launch(errorHandler) {
+            _viewState.update { it.copy(isLoading = true) }
 
-            viewModelScope.launch(errorHandler) {
+            exerciseToRemovePosition?.let { pos ->
+                val exercise = exercises[pos]
+                exercises.removeAt(pos)
+
                 removeExerciseUseCase(exercise)
-                _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
+                _viewState.update { it.copy(isRemoveExerciseDialogVisible = false, isLoading = false) }
             }
         }
     }
 
     fun onPopupDismissed() {
-        _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = false)
+        _viewState.update { it.copy(isRemoveExerciseDialogVisible = false) }
     }
 }

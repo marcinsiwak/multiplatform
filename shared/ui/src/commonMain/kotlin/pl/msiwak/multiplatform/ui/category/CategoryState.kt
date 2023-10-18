@@ -9,5 +9,6 @@ data class CategoryState(
     var exerciseList: List<Exercise> = emptyList(),
     var isDialogVisible: Boolean = false,
     var newExerciseName: String = "",
-    val isRemoveExerciseDialogVisible: Boolean = false
+    val isRemoveExerciseDialogVisible: Boolean = false,
+    val isLoading: Boolean = false
 )

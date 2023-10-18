@@ -91,6 +91,7 @@ class CategoryRepository(
             )
         )
         exercisesDao.updateExercise(exerciseResponse)
+        return@withContext exerciseResponse.id
     }
 
     suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
