@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.android.ui.addExercise
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,11 +26,11 @@ import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
+import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
 import pl.msiwak.multiplatform.commonResources.MR
@@ -88,19 +89,29 @@ fun AddExerciseScreen(id: String) {
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top
     ) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = MaterialTheme.dimens.space_12,
-                    end = MaterialTheme.dimens.space_24
-                )
-                .padding(vertical = MaterialTheme.dimens.space_16),
-            text = viewState.value.exerciseTitle,
-            fontSize = MaterialTheme.font.font_24,
-            color = MaterialTheme.colorScheme.onPrimary,
-        )
-
+        if (viewState.value.isEditNameEnabled) {
+            InputView(
+                value = viewState.value.exerciseTitle,
+                onValueChange = {
+                    viewModel.onExerciseTitleChanged(it)
+                }
+            )
+        } else {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.dimens.space_12,
+                        end = MaterialTheme.dimens.space_24
+                    )
+                    .padding(vertical = MaterialTheme.dimens.space_16)
+                    .clickable { viewModel.onTitleClicked() },
+                text = viewState.value.exerciseTitle,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        }
+        
         ResultsTimeFilterView(
             modifier = Modifier
                 .wrapContentWidth()
@@ -130,6 +141,7 @@ fun AddExerciseScreen(id: String) {
                     }) {
                     Text(
                         text = stringResource(MR.strings.add_new_result.resourceId),
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
             } else
@@ -146,6 +158,7 @@ fun AddExerciseScreen(id: String) {
                     }) {
                     Text(
                         text = stringResource(MR.strings.add_result_save.resourceId),
+                        style = MaterialTheme.typography.bodyLarge
                     )
                 }
         }

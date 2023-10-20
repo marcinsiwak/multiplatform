@@ -58,9 +58,7 @@ fun ResultsTableView(
 
     Column(
         modifier = modifier
-//            .background(colorResource(id = MR.colors.gray_two.resourceId))
     ) {
-        // todo results type from database
         Row(
             modifier = Modifier
 //                .background(color = colorResource(id = MR.colors.gray.resourceId))
