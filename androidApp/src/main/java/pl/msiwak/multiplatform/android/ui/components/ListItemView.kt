@@ -23,6 +23,7 @@ import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.commonResources.MR
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -63,7 +64,7 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                 .weight(0.2f)
                 .padding(MaterialTheme.dimens.space_16),
             tint = MaterialTheme.colorScheme.tertiary,
-            painter = painterResource(id = R.drawable.ic_arrow_right),
+            painter = painterResource(id =  MR.images.ic_arrow_right.drawableResId),
             contentDescription = null
         )
     }

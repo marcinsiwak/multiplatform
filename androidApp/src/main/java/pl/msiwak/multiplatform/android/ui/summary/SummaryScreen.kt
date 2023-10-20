@@ -98,7 +98,7 @@ fun SummaryScreen() {
                         Row {
                             Icon(
                                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                                painter = painterResource(id = R.drawable.ic_add),
+                                painter = painterResource(id = MR.images.ic_add.drawableResId),
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 contentDescription = null
                             )

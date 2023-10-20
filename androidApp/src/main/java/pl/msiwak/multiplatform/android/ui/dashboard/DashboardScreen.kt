@@ -19,19 +19,18 @@ import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
 import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen() {
     val viewModel = koinViewModel<DashboardViewModel>()
 
     val items = listOf(
         DashboardNavigationDirections.Summary(
-            R.drawable.ic_workout,
+            MR.images.ic_workout.drawableResId,
             stringResource(MR.strings.summary.resourceId)
         ),
 //        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(MR.strings.account)),
         DashboardNavigationDirections.Settings(
-            R.drawable.ic_settings,
+            MR.images.ic_settings.drawableResId,
             stringResource(MR.strings.settings.resourceId)
         )
     )

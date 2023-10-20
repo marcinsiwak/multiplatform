@@ -67,46 +67,47 @@ fun ResultsTableView(
                 .padding(vertical = MaterialTheme.dimens.space_8),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            TextWithDrawableView(
-                modifier = Modifier
-                    .width(MaterialTheme.dimens.first_list_item_size)
-                    .offset(x = MaterialTheme.dimens.space_8)
-                    .clickable { onLabelClicked(0) },
-                text = resultDataTitles.getOrNull(0)?.plus(" [$unit]") ?: "",
-                color = MaterialTheme.colorScheme.onPrimary,
-                textAlign = TextAlign.Center,
-                iconResId = when (sortType) {
-                    SortType.RESULT_INCREASING -> R.drawable.ic_arrow_up
-                    SortType.RESULT_DECREASING -> R.drawable.ic_arrow_down
-                    else -> null
-                }
-            )
-            TextWithDrawableView(
-                modifier = Modifier
-                    .width(MaterialTheme.dimens.second_list_item_size)
-                    .clickable { onLabelClicked(1) },
-                text = resultDataTitles.getOrNull(1) ?: "",
-                color = MaterialTheme.colorScheme.onPrimary,
-                textAlign = TextAlign.Center,
-                iconResId = when (sortType) {
-                    SortType.AMOUNT_INCREASING -> R.drawable.ic_arrow_up
-                    SortType.AMOUNT_DECREASING -> R.drawable.ic_arrow_down
-                    else -> null
-                }
-            )
-            TextWithDrawableView(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onLabelClicked(2) },
-                text = resultDataTitles.getOrNull(2) ?: "",
-                color = MaterialTheme.colorScheme.onPrimary,
-                textAlign = TextAlign.Center,
-                iconResId = when (sortType) {
-                    SortType.DATE_INCREASING -> R.drawable.ic_arrow_up
-                    SortType.DATE_DECREASING -> R.drawable.ic_arrow_down
-                    else -> null
-                }
-            )
+
+//            TextWithDrawableView(
+//                modifier = Modifier
+//                    .width(MaterialTheme.dimens.first_list_item_size)
+//                    .offset(x = MaterialTheme.dimens.space_8)
+//                    .clickable { onLabelClicked(0) },
+//                text = resultDataTitles.getOrNull(0)?.plus(" [$unit]") ?: "",
+//                color = MaterialTheme.colorScheme.onPrimary,
+//                textAlign = TextAlign.Center,
+//                iconResId = when (sortType) {
+//                    SortType.RESULT_INCREASING -> R.drawable.ic_arrow_up
+//                    SortType.RESULT_DECREASING -> R.drawable.ic_arrow_down
+//                    else -> null
+//                }
+//            )
+//            TextWithDrawableView(
+//                modifier = Modifier
+//                    .width(MaterialTheme.dimens.second_list_item_size)
+//                    .clickable { onLabelClicked(1) },
+//                text = resultDataTitles.getOrNull(1) ?: "",
+//                color = MaterialTheme.colorScheme.onPrimary,
+//                textAlign = TextAlign.Center,
+//                iconResId = when (sortType) {
+//                    SortType.AMOUNT_INCREASING -> R.drawable.ic_arrow_up
+//                    SortType.AMOUNT_DECREASING -> R.drawable.ic_arrow_down
+//                    else -> null
+//                }
+//            )
+//            TextWithDrawableView(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .clickable { onLabelClicked(2) },
+//                text = resultDataTitles.getOrNull(2) ?: "",
+//                color = MaterialTheme.colorScheme.onPrimary,
+//                textAlign = TextAlign.Center,
+//                iconResId = when (sortType) {
+//                    SortType.DATE_INCREASING -> R.drawable.ic_arrow_up
+//                    SortType.DATE_DECREASING -> R.drawable.ic_arrow_down
+//                    else -> null
+//                }
+//            )
         }
         LazyColumn(
             modifier = Modifier.fillMaxHeight(),

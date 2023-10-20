@@ -13,7 +13,7 @@ object Versions {
     const val koinComposeVersion = "3.4.2"
     const val ktorVersion = "2.3.1"
     const val sqlDelightVersion = "2.0.0"
-    const val mokoResourcesVersion = "0.21.2"
+    const val mokoResourcesVersion = "0.23.0"
     const val mokoGraphicsVersion = "0.9.0"
     const val firebaseGitliveVersion = "1.10.0"
 }

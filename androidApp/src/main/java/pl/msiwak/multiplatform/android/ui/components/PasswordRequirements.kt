@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
+import pl.msiwak.multiplatform.commonResources.MR
 
 @Composable
 fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<PasswordRequirement>) {
@@ -35,14 +36,14 @@ fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<Passw
                 if (it.isCorrect) {
                     Icon(
                         modifier = Modifier.size(MaterialTheme.dimens.requirements_icon_size),
-                        painter = painterResource(id = R.drawable.ic_correct),
+                        painter = painterResource(id = MR.images.ic_correct.drawableResId),
                         tint = Color.Green,
                         contentDescription = null
                     )
                 } else {
                     Icon(
                         modifier = Modifier.size(MaterialTheme.dimens.requirements_icon_size),
-                        painter = painterResource(id = R.drawable.ic_wrong),
+                        painter = painterResource(id = MR.images.ic_wrong.drawableResId),
                         tint = Color.Red,
                         contentDescription = null
                     )

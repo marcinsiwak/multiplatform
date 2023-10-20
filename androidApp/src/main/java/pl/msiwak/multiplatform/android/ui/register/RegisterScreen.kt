@@ -92,9 +92,9 @@ fun RegisterScreen() {
                             .clickable { viewModel.onVisibilityClicked() },
                         painter = painterResource(
                             id = if (viewState.value.isPasswordVisible) {
-                                R.drawable.ic_invisible
+                                MR.images.ic_invisible.drawableResId
                             } else {
-                                R.drawable.ic_visible
+                                MR.images.ic_visible.drawableResId
                             }
                         ),
                         contentDescription = null
