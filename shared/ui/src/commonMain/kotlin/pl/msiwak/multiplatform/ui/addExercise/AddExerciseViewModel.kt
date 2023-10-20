@@ -14,9 +14,11 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.DateFilterType
+import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultData
+import pl.msiwak.multiplatform.commonObject.ResultTableItemData
 import pl.msiwak.multiplatform.commonObject.SortType
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.AddResultUseCase
@@ -26,6 +28,7 @@ import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCase
+import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseNameUseCase
 import pl.msiwak.multiplatform.utils.DATE_REGEX
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_COMMA
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_DOT
@@ -44,6 +47,7 @@ class AddExerciseViewModel(
     private val removeResultUseCase: RemoveResultUseCase,
     private val downloadExerciseUseCase: DownloadExerciseUseCase,
     private val observeExerciseUseCase: ObserveExerciseUseCase,
+    private val updateExerciseNameUseCase: UpdateExerciseNameUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -60,7 +64,7 @@ class AddExerciseViewModel(
 
     private var exerciseToRemovePosition: Int? = null
 
-    private var exerciseName: String? = null
+    private var currentExercise: Exercise? = null
 
     private val errorHandler = globalErrorHandler.handleError()
 
@@ -69,34 +73,20 @@ class AddExerciseViewModel(
             _viewState.update { it.copy(isLoading = true) }
             downloadExerciseUseCase(id)
             _viewState.update { it.copy(isLoading = false) }
+        }
+        viewModelScope.launch(errorHandler) {
             observeExerciseUseCase(id).collect { exercise ->
                 currentResults.clear()
                 currentResults.addAll(exercise.results)
+                currentExercise = exercise
                 _viewState.update {
                     it.copy(
+                        exerciseTitle = exercise.exerciseTitle,
                         results = formatResultsUseCase(exercise.results),
                         resultDataTitles = setTableTitles(exercise.exerciseType)
                     )
                 }
             }
-
-//            val exerciseWithUnit = getExerciseUseCase(exerciseId)
-//            currentExercise.value = exerciseWithUnit.exercise ?: Exercise()
-//            currentResults.addAll(currentExercise.value.results)
-//            val results = formatResultsUseCase(currentExercise.value.results)
-//            exerciseName = currentExercise.value.exerciseTitle
-//            _viewState.value = _viewState.value.copy(
-//                exerciseTitle = currentExercise.value.exerciseTitle,
-//                exerciseType = currentExercise.value.exerciseType,
-//                results = results,
-//                resultDataTitles = setTableTitles(exerciseWithUnit.exercise?.exerciseType),
-//                unit = exerciseWithUnit.unit ?: "",
-//                newResultData = _viewState.value.newResultData.copy(
-//                    date = formatDateUseCase(
-//                        Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-//                    )
-//                )
-//            )
         }
     }
 
@@ -110,12 +100,16 @@ class AddExerciseViewModel(
     }
 
     fun onPause() {
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             val newTitle = viewState.value.exerciseTitle
-            if (exerciseName != newTitle) {
-//                updateExerciseUseCase(currentExercise.value.copy(exerciseTitle = newTitle))
+            if (currentExercise != null && currentExercise?.exerciseTitle != newTitle) {
+                updateExerciseNameUseCase(currentExercise!!.copy(exerciseTitle = newTitle))
             }
         }
+    }
+
+    fun onTitleClicked() {
+        _viewState.update { it.copy(isEditNameEnabled = true) }
     }
 
     fun onExerciseTitleChanged(title: String) {

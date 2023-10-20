@@ -46,7 +46,7 @@ import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
-import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseUseCase
+import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseNameUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
@@ -138,6 +138,7 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
+            get(),
             get()
         )
     }
@@ -174,7 +175,7 @@ val useCaseModule = module {
     factory { UpdateCategoriesUseCase(get()) }
     factory { ObserveCategoryUseCase(get()) }
     factory { ObserveCategoriesUseCase(get()) }
-    factory { UpdateExerciseUseCase(get()) }
+    factory { UpdateExerciseNameUseCase(get()) }
     factory { RemoveExerciseUseCase(get()) }
     factory { RemoveCategoryUseCase(get()) }
     factory { FormatDateUseCase(get()) }

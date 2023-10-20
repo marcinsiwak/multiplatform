@@ -77,6 +77,6 @@ fun InputView(
 
 @Preview
 @Composable
-fun InputViewPreview() {
+private fun InputViewPreview() {
     InputView(modifier = Modifier, value = "", onValueChange = {})
 }

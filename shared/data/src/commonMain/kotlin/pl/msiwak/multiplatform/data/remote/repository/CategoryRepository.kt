@@ -15,6 +15,7 @@ import pl.msiwak.multiplatform.database.dao.ResultsDao
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
+import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 import pl.msiwak.multiplatform.network.service.CategoryService
 
 class CategoryRepository(
@@ -92,6 +93,10 @@ class CategoryRepository(
         )
         exercisesDao.updateExercise(exerciseResponse)
         return@withContext exerciseResponse.id
+    }
+
+    suspend fun updateExerciseName(exercise: Exercise) = withContext(Dispatchers.IO) {
+        categoryService.updateExerciseName(ApiUpdateExerciseNameRequest(exercise.id, exercise.exerciseTitle))
     }
 
     suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.IO) {

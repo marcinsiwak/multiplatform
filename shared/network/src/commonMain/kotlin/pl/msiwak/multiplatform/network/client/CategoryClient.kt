@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.network.client
 import io.ktor.client.call.body
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
+import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +14,7 @@ import pl.msiwak.multiplatform.network.model.ApiExercise
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.model.ApiResult
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
+import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 
 class CategoryClient(private val ktorClient: KtorClient) {
 
@@ -46,6 +48,12 @@ class CategoryClient(private val ktorClient: KtorClient) {
             setBody(exercise)
         }.body()
         return flowOf(response)
+    }
+
+    suspend fun updateExerciseName(updateExerciseNameRequest: ApiUpdateExerciseNameRequest) {
+        ktorClient.httpClient.patch("Exercises/Exercise/Name") {
+            setBody(updateExerciseNameRequest)
+        }
     }
 
     suspend fun removeExercise(id: String) {

@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.network.client
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -12,6 +13,7 @@ import io.ktor.client.request.bearerAuth
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
+import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import pl.msiwak.multiplatform.auth.SessionStore
@@ -44,7 +46,16 @@ class KtorClient(private val sessionStore: SessionStore) {
             contentType(ContentType.Application.Json)
             url(BuildConfig.BASE_URL)
             bearerAuth(sessionStore.getToken() ?: "")
+        }
 
+        HttpResponseValidator {
+            validateResponse {
+                if (!it.status.isSuccess()) {
+                    Napier.e("HTTP Client Error: ${it.status}")
+                } else {
+                    Napier.v("HTTP Client: ${it.status}")
+                }
+            }
         }
     }
 }

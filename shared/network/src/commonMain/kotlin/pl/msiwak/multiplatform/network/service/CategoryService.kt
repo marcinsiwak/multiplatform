@@ -12,6 +12,7 @@ import pl.msiwak.multiplatform.network.mapper.ResultMapper
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
+import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 
 class CategoryService(
     private val categoryClient: CategoryClient,
@@ -52,6 +53,10 @@ class CategoryService(
         return categoryClient.addExercise(exerciseRequest)
             .map { exerciseMapper(it) }
             .first()
+    }
+
+    suspend fun updateExerciseName(updateExerciseNameRequest: ApiUpdateExerciseNameRequest) {
+        return categoryClient.updateExerciseName(updateExerciseNameRequest)
     }
 
     suspend fun removeExercise(id: String) {
