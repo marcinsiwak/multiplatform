@@ -124,7 +124,8 @@ fun ResultsTableView(
                             onDateValueChanged(it)
                         }, onDateClicked = {
                             onDateClicked()
-                        })
+                        }
+                    )
                 }
             }
             itemsIndexed(results) { pos, item ->
