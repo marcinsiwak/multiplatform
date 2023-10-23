@@ -2,7 +2,6 @@ package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,11 +43,11 @@ fun ResultView(
                     .padding(
                         vertical = MaterialTheme.dimens.space_16,
                         horizontal = MaterialTheme.dimens.space_24
-                        ),
+                    ),
                 text = it,
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center
-                )
+            )
         }
     }
 }

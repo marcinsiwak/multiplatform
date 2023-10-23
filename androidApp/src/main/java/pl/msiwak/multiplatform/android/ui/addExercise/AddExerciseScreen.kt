@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
@@ -30,6 +31,7 @@ import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
+import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
@@ -43,7 +45,7 @@ fun AddExerciseScreen(id: String) {
     val viewState = viewModel.viewState.collectAsState()
 
     val context = LocalContext.current
-
+    val focusManager = LocalFocusManager.current
     val focusRequesters = List(4) { remember { FocusRequester() } }
 
     OnLifecycleEvent { _, event ->
@@ -56,11 +58,15 @@ fun AddExerciseScreen(id: String) {
     LaunchedEffect(Unit) {
         viewModel.viewEvent.collectLatest { value ->
             when (value) {
-                AddExerciseEvent.OpenCalendar -> openCalendar(
-                    context = context,
-                    onValueChanged = {
-                        viewModel.onDatePicked(it)
-                    })
+                AddExerciseEvent.OpenCalendar -> {
+                    focusManager.clearFocus()
+                    openCalendar(
+                        context = context,
+                        onValueChanged = {
+                            viewModel.onDatePicked(it)
+                        }
+                    )
+                }
 
                 is AddExerciseEvent.FocusOnInput -> {
                     focusRequesters[value.pos].requestFocus()
@@ -83,6 +89,10 @@ fun AddExerciseScreen(id: String) {
                 viewModel.onPopupDismissed()
             }
         )
+    }
+
+    if (viewState.value.isLoading) {
+        Loader()
     }
 
     Column(
@@ -111,7 +121,7 @@ fun AddExerciseScreen(id: String) {
                 color = MaterialTheme.colorScheme.onPrimary
             )
         }
-        
+
         ResultsTimeFilterView(
             modifier = Modifier
                 .wrapContentWidth()

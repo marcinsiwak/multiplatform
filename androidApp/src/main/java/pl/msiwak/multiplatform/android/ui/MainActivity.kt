@@ -83,9 +83,9 @@ class MainActivity : ComponentActivity() {
                                 },
                             )
                         ) { backStackEntry ->
-                            val id =
-                                backStackEntry.arguments?.getString(NavigationDirections.AddExercise.BUNDLE_ARG_ID)
-                                    ?: ""
+                            val id = backStackEntry
+                                .arguments
+                                ?.getString(NavigationDirections.AddExercise.BUNDLE_ARG_ID) ?: ""
                             AddExerciseScreen(id)
                         }
                         composable(
@@ -96,9 +96,10 @@ class MainActivity : ComponentActivity() {
                                 },
                             )
                         ) { backStackEntry ->
-                            val id =
-                                backStackEntry.arguments?.getString(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID)
-                                    ?: ""
+                            val id = backStackEntry
+                                .arguments
+                                ?.getString(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID)
+                                ?: ""
                             CategoryScreen(id)
                         }
                     }
@@ -115,7 +116,6 @@ class MainActivity : ComponentActivity() {
             navController.navigate(route = command.destination) {
                 popUpTo(0)
             }
-
         } else {
             navController.navigate(route = command.destination)
         }

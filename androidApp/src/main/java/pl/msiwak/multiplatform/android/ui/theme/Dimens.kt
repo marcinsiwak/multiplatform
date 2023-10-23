@@ -33,9 +33,11 @@ data class Dimensions(
     val bottom_navigation_elevation: Dp = 10.dp,
     val bottom_navigation_divider_width: Dp = 2.dp,
     val border_width: Dp = 2.dp,
+    val results_divider_height: Dp = 1.dp,
     val requirements_icon_size: Dp = 16.dp,
     val loader_size: Dp = 64.dp,
-    val result_item_width: Dp = 124.dp
+    val result_item_width: Dp = 124.dp,
+    val result_item_input_width: Dp = 116.dp,
 )
 
 val MaterialTheme.dimens: Dimensions

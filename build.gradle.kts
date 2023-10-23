@@ -7,7 +7,6 @@ plugins {
 }
 
 buildscript {
-    val compose_version by extra("1.1.0-beta01")
 
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.2")

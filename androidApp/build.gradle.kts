@@ -120,7 +120,7 @@ dependencies {
     implementation(project(":shared:core"))
     implementation("androidx.appcompat:appcompat:1.6.1")
 
-    val composeBom = platform("androidx.compose:compose-bom:2023.08.00")
+    val composeBom = platform("androidx.compose:compose-bom:2023.10.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
     implementation("androidx.compose.material3:material3")
