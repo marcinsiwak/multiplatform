@@ -166,10 +166,8 @@ fun AddExerciseScreen(id: String) {
         ResultsTableView(
             modifier = Modifier,
             resultDataTitles = viewState.value.resultDataTitles,
-            unit = viewState.value.unit,
             results = viewState.value.results,
             exerciseType = viewState.value.exerciseType,
-            sortType = viewState.value.sortType,
             focusRequesters = focusRequesters,
             isNewResultEnabled = viewState.value.isResultFieldEnabled,
             newResultData = viewState.value.newResultData,

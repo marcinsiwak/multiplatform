@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.ui.addExercise
 import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
+import pl.msiwak.multiplatform.commonObject.ResultTableItemData
 import pl.msiwak.multiplatform.commonObject.SortType
 import pl.msiwak.multiplatform.commonObject.UnitType
 
@@ -23,8 +24,7 @@ data class AddExerciseState(
     val selectedFilterPosition: Int = 0,
     val unitType: UnitType = UnitType.METRIC,
     val unit: String = "kg",
-    val resultDataTitles: List<String> = emptyList(),
-    val sortType: SortType? = null,
+    val resultDataTitles: List<ResultTableItemData> = emptyList(),
     val isLoading: Boolean = false,
     val isEditNameEnabled: Boolean = false
 )

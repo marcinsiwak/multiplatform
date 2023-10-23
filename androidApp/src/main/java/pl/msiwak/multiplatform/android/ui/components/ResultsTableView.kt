@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -21,21 +22,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.TextAlign
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
+import pl.msiwak.multiplatform.commonObject.ResultTableItemData
 import pl.msiwak.multiplatform.commonObject.SortType
+import pl.msiwak.multiplatform.commonResources.MR
 
 @Composable
 fun ResultsTableView(
     modifier: Modifier = Modifier,
-    resultDataTitles: List<String?> = emptyList(),
-    unit: String = "",
+    resultDataTitles: List<ResultTableItemData> = emptyList(),
     results: List<FormattedResultData> = emptyList(),
     isNewResultEnabled: Boolean,
-    sortType: SortType? = null,
     exerciseType: ExerciseType,
     newResultData: FormattedResultData = FormattedResultData(),
     onAddNewResultClicked: () -> Unit = {},
@@ -68,46 +69,26 @@ fun ResultsTableView(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-//            TextWithDrawableView(
-//                modifier = Modifier
-//                    .width(MaterialTheme.dimens.first_list_item_size)
-//                    .offset(x = MaterialTheme.dimens.space_8)
-//                    .clickable { onLabelClicked(0) },
-//                text = resultDataTitles.getOrNull(0)?.plus(" [$unit]") ?: "",
-//                color = MaterialTheme.colorScheme.onPrimary,
-//                textAlign = TextAlign.Center,
-//                iconResId = when (sortType) {
-//                    SortType.RESULT_INCREASING -> R.drawable.ic_arrow_up
-//                    SortType.RESULT_DECREASING -> R.drawable.ic_arrow_down
-//                    else -> null
-//                }
-//            )
-//            TextWithDrawableView(
-//                modifier = Modifier
-//                    .width(MaterialTheme.dimens.second_list_item_size)
-//                    .clickable { onLabelClicked(1) },
-//                text = resultDataTitles.getOrNull(1) ?: "",
-//                color = MaterialTheme.colorScheme.onPrimary,
-//                textAlign = TextAlign.Center,
-//                iconResId = when (sortType) {
-//                    SortType.AMOUNT_INCREASING -> R.drawable.ic_arrow_up
-//                    SortType.AMOUNT_DECREASING -> R.drawable.ic_arrow_down
-//                    else -> null
-//                }
-//            )
-//            TextWithDrawableView(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .clickable { onLabelClicked(2) },
-//                text = resultDataTitles.getOrNull(2) ?: "",
-//                color = MaterialTheme.colorScheme.onPrimary,
-//                textAlign = TextAlign.Center,
-//                iconResId = when (sortType) {
-//                    SortType.DATE_INCREASING -> R.drawable.ic_arrow_up
-//                    SortType.DATE_DECREASING -> R.drawable.ic_arrow_down
-//                    else -> null
-//                }
-//            )
+            resultDataTitles.forEachIndexed { index, item ->
+                TextWithDrawableView(
+                    modifier = Modifier
+                        .clickable { onLabelClicked(index) }
+                        .width(MaterialTheme.dimens.result_item_width)
+                        .padding(horizontal = MaterialTheme.dimens.space_24)
+                        .onGloballyPositioned {
+
+                        },
+                    text = item.text,
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    textAlign = TextAlign.Center,
+                    iconResId = when (item.isArrowUp) {
+                        true -> MR.images.ic_arrow_up.drawableResId
+                        false -> MR.images.ic_arrow_down.drawableResId
+                        null -> null
+                    }
+                )
+            }
+
         }
         LazyColumn(
             modifier = Modifier.fillMaxHeight(),
@@ -148,12 +129,11 @@ fun ResultsTableView(
             }
             itemsIndexed(results) { pos, item ->
                 ResultView(
-                    result = item.result,
-                    amount = item.amount,
-                    date = item.date,
+                    details = listOf(item.result, item.amount, item.date),
                     onResultLongClick = {
                         onResultLongClick(pos)
-                    })
+                    }
+                )
             }
         }
     }

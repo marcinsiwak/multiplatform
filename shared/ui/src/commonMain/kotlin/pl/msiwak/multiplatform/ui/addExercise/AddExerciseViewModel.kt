@@ -66,6 +66,8 @@ class AddExerciseViewModel(
 
     private var currentExercise: Exercise? = null
 
+    private var sortType: SortType = SortType.DATE_DECREASING
+
     private val errorHandler = globalErrorHandler.handleError()
 
     init {
@@ -90,12 +92,25 @@ class AddExerciseViewModel(
         }
     }
 
-    private fun setTableTitles(exerciseType: ExerciseType?): List<String> {
+    private fun setTableTitles(exerciseType: ExerciseType?): List<ResultTableItemData> {
         return when (exerciseType) {
-            ExerciseType.RUNNING -> listOf("Distance", "Time", "Date")
-            ExerciseType.GYM -> listOf("Weight", "Reps", "Date")
-//            ExerciseType.OTHER -> emptyList()
-            else -> listOf("Distance", "Time", "Date")
+            ExerciseType.RUNNING -> listOf(
+                ResultTableItemData("Distance"),
+                ResultTableItemData("Time"),
+                ResultTableItemData("Date")
+            )
+
+            ExerciseType.GYM -> listOf(
+                ResultTableItemData("Weight"),
+                ResultTableItemData("Reps"),
+                ResultTableItemData("Date")
+            )
+
+            else -> listOf(
+                ResultTableItemData("Distance"),
+                ResultTableItemData("Time"),
+                ResultTableItemData("Date")
+            )
         }
     }
 
@@ -215,26 +230,9 @@ class AddExerciseViewModel(
     }
 
     fun onLabelClicked(labelPosition: Int) {
-        val currentSortType = _viewState.value.sortType
-        val sortType = when {
-            labelPosition == 0 && currentSortType != SortType.RESULT_DECREASING -> SortType.RESULT_DECREASING
-            labelPosition == 0 && currentSortType != SortType.RESULT_INCREASING -> SortType.RESULT_INCREASING
-            labelPosition == 1 && currentSortType != SortType.AMOUNT_DECREASING -> SortType.AMOUNT_DECREASING
-            labelPosition == 1 && currentSortType != SortType.AMOUNT_INCREASING -> SortType.AMOUNT_INCREASING
-            labelPosition == 2 && currentSortType != SortType.DATE_DECREASING -> SortType.DATE_DECREASING
-            labelPosition == 2 && currentSortType != SortType.DATE_INCREASING -> SortType.DATE_INCREASING
-            else -> SortType.DATE_DECREASING
-        }
-        _viewState.value = _viewState.value.copy(sortType = sortType)
-        when (sortType) {
-            SortType.RESULT_INCREASING -> currentResults.sortBy { it.result }
-            SortType.AMOUNT_INCREASING -> currentResults.sortBy { it.amount }
-            SortType.DATE_INCREASING -> currentResults.sortBy { it.date }
-            SortType.RESULT_DECREASING -> currentResults.sortByDescending { it.result }
-            SortType.AMOUNT_DECREASING -> currentResults.sortByDescending { it.amount }
-            SortType.DATE_DECREASING -> currentResults.sortByDescending { it.date }
-        }
-        _viewState.value = _viewState.value.copy(results = formatResultsUseCase(currentResults))
+        sortResults(labelPosition)
+
+        _viewState.update { it.copy(resultDataTitles = setTitlesArrow(labelPosition), results = formatResultsUseCase(currentResults)) }
     }
 
     fun onResultRemoved() {
@@ -325,5 +323,36 @@ class AddExerciseViewModel(
             diff in 0..previousDaysCount
         })
         _viewState.value = _viewState.value.copy(results = newResults)
+    }
+
+    private fun sortResults(labelPosition: Int) {
+        sortType = when {
+            labelPosition == 0 && sortType != SortType.RESULT_DECREASING -> SortType.RESULT_DECREASING
+            labelPosition == 0 && sortType != SortType.RESULT_INCREASING -> SortType.RESULT_INCREASING
+            labelPosition == 1 && sortType != SortType.AMOUNT_DECREASING -> SortType.AMOUNT_DECREASING
+            labelPosition == 1 && sortType != SortType.AMOUNT_INCREASING -> SortType.AMOUNT_INCREASING
+            labelPosition == 2 && sortType != SortType.DATE_DECREASING -> SortType.DATE_DECREASING
+            labelPosition == 2 && sortType != SortType.DATE_INCREASING -> SortType.DATE_INCREASING
+            else -> SortType.DATE_DECREASING
+        }
+
+        when (sortType) {
+            SortType.RESULT_INCREASING -> currentResults.sortBy { it.result }
+            SortType.AMOUNT_INCREASING -> currentResults.sortBy { it.amount }
+            SortType.DATE_INCREASING -> currentResults.sortBy { it.date }
+            SortType.RESULT_DECREASING -> currentResults.sortByDescending { it.result }
+            SortType.AMOUNT_DECREASING -> currentResults.sortByDescending { it.amount }
+            SortType.DATE_DECREASING -> currentResults.sortByDescending { it.date }
+        }
+    }
+
+    private fun setTitlesArrow(labelPosition: Int): List<ResultTableItemData> {
+        return viewState.value.resultDataTitles.mapIndexed { index, item ->
+            if (index == labelPosition) {
+                item.copy(isArrowUp = item.isArrowUp?.not() ?: true)
+            } else {
+                item.copy(isArrowUp = null)
+            }
+        }
     }
 }

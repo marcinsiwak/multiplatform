@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,9 +21,7 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ResultView(
-    result: String,
-    amount: String,
-    date: String,
+    details: List<String>,
     onResultLongClick: () -> Unit = {},
 ) {
     Row(
@@ -35,46 +34,21 @@ fun ResultView(
                 onLongClick = {
                     onResultLongClick()
                 })
-            .bottomBorder(1.dp, MaterialTheme.colorScheme.tertiary),
+            .bottomBorder(1.dp, MaterialTheme.colorScheme.tertiary)
     ) {
-        Text(
-            modifier = Modifier
-                .width(MaterialTheme.dimens.first_list_item_size)
-                .padding(vertical = MaterialTheme.dimens.space_16),
-            text = result,
-            color = MaterialTheme.colorScheme.onPrimary,
-            textAlign = TextAlign.Center,
 
-            )
-//        Divider(
-//            color = Color.LightGray,
-//            modifier = Modifier
-//                .fillMaxHeight()
-//                .width(MaterialTheme.dimens.space_1)
-//        )
-        Text(
-            modifier = Modifier
-                .width(MaterialTheme.dimens.second_list_item_size)
-                .padding(vertical = MaterialTheme.dimens.space_16),
-            text = amount,
-            color = MaterialTheme.colorScheme.onPrimary,
-            textAlign = TextAlign.Center,
-
-            )
-//        Divider(
-//            color = Color.LightGray,
-//            modifier = Modifier
-//                .fillMaxHeight()
-//                .width(MaterialTheme.dimens.space_1)
-//        )
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = MaterialTheme.dimens.space_16),
-            text = date,
-            color = MaterialTheme.colorScheme.onPrimary,
-            textAlign = TextAlign.Center,
-
-            )
+        details.forEach {
+            Text(
+                modifier = Modifier
+                    .width(MaterialTheme.dimens.result_item_width)
+                    .padding(
+                        vertical = MaterialTheme.dimens.space_16,
+                        horizontal = MaterialTheme.dimens.space_24
+                        ),
+                text = it,
+                color = MaterialTheme.colorScheme.onPrimary,
+                textAlign = TextAlign.Center
+                )
+        }
     }
 }
