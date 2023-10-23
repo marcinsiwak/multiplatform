@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
+import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
@@ -17,6 +18,7 @@ class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
     private val googleLoginUseCase: GoogleLoginUseCase,
     private val navigator: Navigator,
+    private val setOfflineModeUseCase: SetOfflineModeUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -69,6 +71,13 @@ class WelcomeScreenViewModel(
     }
 
     // TODO: Add Apple login
+
+    fun onOfflineModeClicked() {
+        viewModelScope.launch {
+            setOfflineModeUseCase(true)
+            navigator.navigate(NavigationDirections.Dashboard(true))
+        }
+    }
 
     fun onRegistrationClicked() {
         navigator.navigate(NavigationDirections.Registration)

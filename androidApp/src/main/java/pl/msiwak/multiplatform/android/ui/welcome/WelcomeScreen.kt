@@ -165,6 +165,14 @@ fun WelcomeScreen() {
                 text = stringResource(id = MR.strings.welcome_google_login.resourceId)
             )
 
+            MainButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = MaterialTheme.dimens.space_32),
+                onClick = { viewModel.onOfflineModeClicked() },
+                text = stringResource(id = MR.strings.login.resourceId)
+            )
+
             Text(
                 text = stringResource(MR.strings.welcome_no_account.resourceId),
                 color = MaterialTheme.colorScheme.secondary

@@ -83,3 +83,7 @@ VALUES (?, ?,?, ?, ?);
 removeResult:
 DELETE FROM ResultDB
 WHERE ResultDB.id = ?;
+
+lastInsertRowId:
+SELECT last_insert_rowid()
+;

@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import pl.msiwak.multiplatform.auth.SessionStore
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ResultData
@@ -22,7 +23,8 @@ class CategoryRepository(
     private val categoriesDao: CategoriesDao,
     private val exercisesDao: ExercisesDao,
     private val resultsDao: ResultsDao,
-    private val categoryService: CategoryService
+    private val categoryService: CategoryService,
+    private val sessionStore: SessionStore
 ) {
 
     suspend fun downloadCategories(): List<Category> = withContext(Dispatchers.IO) {
@@ -85,22 +87,26 @@ class CategoryRepository(
         }
 
     suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
-        val exerciseResponse = categoryService.addExercise(
-            ApiExerciseRequest(
-                categoryId = exercise.categoryId,
-                name = exercise.exerciseTitle
+        if (!sessionStore.getOfflineSession()) {
+            val exerciseResponse = categoryService.addExercise(
+                ApiExerciseRequest(
+                    categoryId = exercise.categoryId,
+                    name = exercise.exerciseTitle
+                )
             )
-        )
-        exercisesDao.updateExercise(exerciseResponse)
-        return@withContext exerciseResponse.id
+            exercisesDao.updateExercise(exerciseResponse)
+            return@withContext exerciseResponse.id
+        }
+        exercisesDao.updateExercise(exercise)
+        return@withContext ""
     }
 
     suspend fun updateExerciseName(exercise: Exercise) = withContext(Dispatchers.IO) {
-        categoryService.updateExerciseName(ApiUpdateExerciseNameRequest(exercise.id, exercise.exerciseTitle))
+        categoryService.updateExerciseName(ApiUpdateExerciseNameRequest(exercise.id ?: "", exercise.exerciseTitle))
     }
 
     suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
-        categoryService.removeExercise(exercise.id)
+        categoryService.removeExercise(exercise.id ?: "")
         exercisesDao.removeExercise(exercise)
     }
 

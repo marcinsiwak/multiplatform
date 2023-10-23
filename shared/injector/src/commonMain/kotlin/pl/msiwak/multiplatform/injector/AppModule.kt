@@ -23,6 +23,7 @@ import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCa
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.ResendVerificationEmailUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
+import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.GetMinAppCodeUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
@@ -126,7 +127,7 @@ val viewModelsModule = module {
     viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
@@ -198,12 +199,13 @@ val useCaseModule = module {
     factory { RemoveResultUseCase(get()) }
     factory { DownloadExerciseUseCase(get()) }
     factory { ObserveExerciseUseCase(get()) }
+    factory { SetOfflineModeUseCase(get()) }
 }
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
-    single { CategoryRepository(get(), get(), get(), get()) }
+    single { CategoryRepository(get(), get(), get(), get(), get()) }
     single { RemoteConfigRepository(get()) }
     single { VersionRepository(get()) }
     single { SessionRepository(get()) }

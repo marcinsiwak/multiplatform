@@ -53,6 +53,7 @@
     <string name="welcome_no_account">Don\'t have an account?</string>
     <string name="welcome_create_account">Create account</string>
     <string name="welcome_google_login">Login with Google</string>
+    <string name="welcome_offline_mode">Offline mode</string>
 
     <string name="verify_title">Verify your account</string>
     <string name="verify_description">We have sent you activation link. Please check your email and verify your account.</string>

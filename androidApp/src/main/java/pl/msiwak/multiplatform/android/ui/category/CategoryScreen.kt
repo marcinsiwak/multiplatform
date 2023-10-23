@@ -119,7 +119,7 @@ fun CategoryScreen(id: String) {
                 itemsIndexed(viewState.value.exerciseList) { index, item ->
                     ListItemView(
                         name = item.exerciseTitle,
-                        onItemClick = { viewModel.onExerciseClicked(item.id) },
+                        onItemClick = { viewModel.onExerciseClicked(item.id?: "") },
                         onLongClick = { viewModel.onResultLongClicked(index) }
                     )
                 }
