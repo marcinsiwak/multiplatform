@@ -26,4 +26,8 @@ class ResultsDao(database: Database) {
     fun removeResult(id: String) {
         dbQuery.removeResult(id)
     }
+
+    fun removeAllResult() {
+        dbQuery.removeAllCategories()
+    }
 }

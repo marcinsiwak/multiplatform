@@ -11,7 +11,7 @@ import pl.msiwak.multiplatfor.dependencies.Versions.sqlDelightVersion
 object Versions {
     const val koinVersion = "3.3.2"
     const val koinComposeVersion = "3.4.2"
-    const val ktorVersion = "2.3.1"
+    const val ktorVersion = "2.3.5"
     const val sqlDelightVersion = "2.0.0"
     const val mokoResourcesVersion = "0.23.0"
     const val mokoGraphicsVersion = "0.9.0"

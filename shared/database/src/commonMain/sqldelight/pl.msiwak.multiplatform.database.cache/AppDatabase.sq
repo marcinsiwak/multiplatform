@@ -84,6 +84,5 @@ removeResult:
 DELETE FROM ResultDB
 WHERE ResultDB.id = ?;
 
-lastInsertRowId:
-SELECT last_insert_rowid()
-;
+removeAllResults:
+DELETE FROM ResultDB;

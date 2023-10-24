@@ -16,7 +16,6 @@ class KMMPreferences(private val context: KMMContext) {
 
     fun getInt(key: String, default: Int): Int = context.getInt(key, default)
 
-
     fun getString(key: String): String? = context.getString(key)
 
 

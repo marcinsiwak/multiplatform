@@ -10,6 +10,7 @@ import pl.msiwak.multiplatform.auth.SessionStore
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ResultData
+import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.database.dao.ResultsDao
@@ -24,24 +25,25 @@ class CategoryRepository(
     private val exercisesDao: ExercisesDao,
     private val resultsDao: ResultsDao,
     private val categoryService: CategoryService,
-    private val sessionStore: SessionStore
+    private val sessionStore: SessionStore,
+    private val offlineStore: OfflineStore
 ) {
 
-    suspend fun downloadCategories(): List<Category> = withContext(Dispatchers.IO) {
+    suspend fun downloadCategories() = withContext(Dispatchers.IO) {
+        if (sessionStore.getIsOfflineSession()) return@withContext
         val categories = categoryService.downloadCategories()
         categoriesDao.removeAllCategories()
         exercisesDao.removeAllExercises()
         categoriesDao.updateCategories(categories)
         val exercises = categories.map { it.exercises }.flatten()
         exercisesDao.updateExercises(exercises)
-        return@withContext categories
     }
 
-    suspend fun downloadCategory(id: String): Category = withContext(Dispatchers.IO) {
+    suspend fun downloadCategory(id: String) = withContext(Dispatchers.IO) {
+        if (sessionStore.getIsOfflineSession()) return@withContext
         val category = categoryService.downloadCategory(id)
         categoriesDao.updateCategory(category)
         exercisesDao.updateExercises(category.exercises)
-        return@withContext category
     }
 
     suspend fun observeCategory(id: String): Flow<Category> = withContext(Dispatchers.IO) {
@@ -52,42 +54,39 @@ class CategoryRepository(
         return@withContext categoriesDao.observeCategories()
     }
 
-    suspend fun insertCategories(categories: List<Category>) =
-        withContext(Dispatchers.IO) {
-            categoriesDao.insertCategories(categories)
-        }
-
     suspend fun createCategory(category: Category) = withContext(Dispatchers.IO) {
-        categoryService.createCategory(
-            ApiCategoryRequest(
-                name = category.name,
-                exerciseType = category.exerciseType.name,
+        if (!sessionStore.getIsOfflineSession()) {
+            categoryService.createCategory(
+                ApiCategoryRequest(
+                    name = category.name,
+                    exerciseType = category.exerciseType.name,
+                )
             )
-        )
-    }
-
-    suspend fun updateCategory(category: Category) = withContext(Dispatchers.IO) {
-        categoriesDao.updateCategory(category)
+            return@withContext
+        }
+        categoriesDao.updateCategory(category.copy(id = offlineStore.getCategoryLastId()))
     }
 
     suspend fun removeCategory(categoryId: String) = withContext(Dispatchers.IO) {
-        categoryService.removeCategory(categoryId)
+        if (!sessionStore.getIsOfflineSession()) {
+            categoryService.removeCategory(categoryId)
+        }
         categoriesDao.removeCategory(categoryId)
     }
 
     suspend fun downloadExercise(exerciseId: String) = withContext(Dispatchers.IO) {
+        if (sessionStore.getIsOfflineSession()) return@withContext
         val exercise = categoryService.downloadExercise(exerciseId)
         exercisesDao.updateExercise(exercise)
         resultsDao.updateResults(exercise.results)
     }
 
-    suspend fun observeExercise(exerciseId: String): Flow<Exercise> =
-        withContext(Dispatchers.IO) {
-            return@withContext exercisesDao.observeExercise(exerciseId)
-        }
+    suspend fun observeExercise(exerciseId: String): Flow<Exercise> = withContext(Dispatchers.IO) {
+        return@withContext exercisesDao.observeExercise(exerciseId)
+    }
 
     suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
-        if (!sessionStore.getOfflineSession()) {
+        if (!sessionStore.getIsOfflineSession()) {
             val exerciseResponse = categoryService.addExercise(
                 ApiExerciseRequest(
                     categoryId = exercise.categoryId,
@@ -97,33 +96,57 @@ class CategoryRepository(
             exercisesDao.updateExercise(exerciseResponse)
             return@withContext exerciseResponse.id
         }
-        exercisesDao.updateExercise(exercise)
-        return@withContext ""
+        val lastId = offlineStore.getExerciseLastId()
+        exercisesDao.updateExercise(exercise.copy(id = lastId))
+        return@withContext lastId
     }
 
     suspend fun updateExerciseName(exercise: Exercise) = withContext(Dispatchers.IO) {
-        categoryService.updateExerciseName(ApiUpdateExerciseNameRequest(exercise.id ?: "", exercise.exerciseTitle))
+        if (!sessionStore.getIsOfflineSession()) {
+            categoryService.updateExerciseName(
+                ApiUpdateExerciseNameRequest(
+                    exerciseId = exercise.id,
+                    name = exercise.exerciseTitle
+                )
+            )
+            return@withContext
+        }
+        exercisesDao.updateExercise(exercise)
     }
 
     suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
-        categoryService.removeExercise(exercise.id ?: "")
+        if (!sessionStore.getIsOfflineSession()) {
+            categoryService.removeExercise(exercise.id)
+        }
         exercisesDao.removeExercise(exercise)
     }
 
     suspend fun addResult(result: ResultData) = withContext(Dispatchers.IO) {
-        val newResult = categoryService.addResult(
-            ApiResultRequest(
-                result.exerciseId,
-                result.result,
-                result.amount.toDouble(),
-                result.date.toInstant(TimeZone.currentSystemDefault())
+        if (!sessionStore.getIsOfflineSession()) {
+            val newResult = categoryService.addResult(
+                ApiResultRequest(
+                    result.exerciseId,
+                    result.result,
+                    result.amount.toDouble(),
+                    result.date.toInstant(TimeZone.currentSystemDefault())
+                )
             )
-        )
-        resultsDao.updateResult(newResult)
+            resultsDao.updateResult(newResult)
+            return@withContext
+        }
+        resultsDao.updateResult(result.copy(id = offlineStore.getResultLastId()))
     }
 
     suspend fun removeResult(id: String) = withContext(Dispatchers.IO) {
-        categoryService.removeResult(id)
+        if (!sessionStore.getIsOfflineSession()) {
+            categoryService.removeResult(id)
+        }
         resultsDao.removeResult(id)
+    }
+
+    suspend fun clearDatabase() = withContext(Dispatchers.IO) {
+        categoriesDao.removeAllCategories()
+        exercisesDao.removeAllExercises()
+        resultsDao.removeAllResult()
     }
 }

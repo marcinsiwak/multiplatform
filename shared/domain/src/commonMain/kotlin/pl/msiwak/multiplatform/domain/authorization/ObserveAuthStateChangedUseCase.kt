@@ -15,6 +15,7 @@ class ObserveAuthStateChangedUseCase(
                     Napier.e("Output token: $token")
                     // todo: REMOVE TOKEN LOGGER
                     sessionRepository.saveToken(token)
+                    sessionRepository.setOfflineSession(false)
                 }
             } else {
                 sessionRepository.clearToken()

@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.core.ViewModel
+import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase

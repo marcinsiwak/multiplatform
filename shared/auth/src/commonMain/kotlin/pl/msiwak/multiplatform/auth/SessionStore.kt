@@ -20,7 +20,7 @@ class SessionStore(private val sharedPreferences: KMMPreferences) {
         sharedPreferences.put(PREFS_OFFLINE_KEY, isOfflineSession)
     }
 
-    fun getOfflineSession(): Boolean {
+    fun getIsOfflineSession(): Boolean {
         return sharedPreferences.getBool(PREFS_OFFLINE_KEY, false)
     }
 
