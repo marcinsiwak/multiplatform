@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.network.service
 
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import pl.msiwak.multiplatform.commonObject.Category
@@ -12,6 +13,7 @@ import pl.msiwak.multiplatform.network.mapper.ResultMapper
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
+import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
 import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 
 class CategoryService(
@@ -21,18 +23,18 @@ class CategoryService(
     private val resultMapper: ResultMapper
 ) {
 
-    suspend fun downloadCategories(): List<Category> {
+    suspend fun downloadCategories(): Flow<List<Category>> {
         return categoryClient.downloadCategories()
-            .first()
             .map { category ->
-                categoryMapper(category)
+                category.map {
+                    categoryMapper(it)
+                }
             }
     }
 
-    suspend fun downloadCategory(id: String): Category {
+    suspend fun downloadCategory(id: String): Flow<Category> {
         return categoryClient.downloadCategory(id)
             .map { categoryMapper(it) }
-            .first()
     }
 
     suspend fun createCategory(category: ApiCategoryRequest) {
@@ -43,16 +45,14 @@ class CategoryService(
         categoryClient.removeCategory(id)
     }
 
-    suspend fun downloadExercise(id: String): Exercise {
+    suspend fun downloadExercise(id: String): Flow<Exercise> {
         return categoryClient.downloadExercise(id)
             .map { exerciseMapper(it) }
-            .first()
     }
 
-    suspend fun addExercise(exerciseRequest: ApiExerciseRequest): Exercise {
+    suspend fun addExercise(exerciseRequest: ApiExerciseRequest): Flow<Exercise> {
         return categoryClient.addExercise(exerciseRequest)
             .map { exerciseMapper(it) }
-            .first()
     }
 
     suspend fun updateExerciseName(updateExerciseNameRequest: ApiUpdateExerciseNameRequest) {
@@ -63,13 +63,16 @@ class CategoryService(
         categoryClient.removeExercise(id)
     }
 
-    suspend fun addResult(result: ApiResultRequest): ResultData {
+    suspend fun addResult(result: ApiResultRequest): Flow<ResultData> {
         return categoryClient.addResult(result)
             .map { resultMapper(it) }
-            .first()
     }
 
     suspend fun removeResult(id: String) {
         categoryClient.removeResult(id)
+    }
+
+    suspend fun startInitialSynchronization(synchronizationRequest: ApiSynchronizationRequest) {
+        categoryClient.startInitialSynchronization(synchronizationRequest)
     }
 }

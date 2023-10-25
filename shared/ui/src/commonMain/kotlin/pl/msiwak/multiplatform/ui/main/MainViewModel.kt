@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
+import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
@@ -24,7 +25,8 @@ class MainViewModel(
     getForceUpdateStateUseCase: GetForceUpdateStateUseCase,
     globalErrorHandler: GlobalErrorHandler,
     getUserTokenUseCase: GetUserTokenUseCase,
-    observeAuthStateChangedUseCase: ObserveAuthStateChangedUseCase
+    observeAuthStateChangedUseCase: ObserveAuthStateChangedUseCase,
+    getIsOfflineModeUseCase: GetIsOfflineModeUseCase
 ) : ViewModel() {
 
     val mainNavigator = navigator
@@ -51,6 +53,11 @@ class MainViewModel(
             }
             delay(500)
             _viewState.update { it.copy(isLoading = false) }
+        }
+        viewModelScope.launch {
+            if (getIsOfflineModeUseCase()){
+                _viewState.update { it.copy(directions = NavigationDirections.Dashboard(true)) }
+            }
         }
     }
 }

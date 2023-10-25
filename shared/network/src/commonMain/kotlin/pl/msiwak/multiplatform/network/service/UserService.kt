@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.network.service
 
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import pl.msiwak.multiplatform.commonObject.User
@@ -11,7 +12,7 @@ class UserService(
     private val mapper: UserMapper
 ) {
 
-    suspend fun getUser(): User {
-        return client.getUser().map { mapper(it) }.first()
+    suspend fun getUser(): Flow<User> {
+        return client.getUser().map { mapper(it) }
     }
 }

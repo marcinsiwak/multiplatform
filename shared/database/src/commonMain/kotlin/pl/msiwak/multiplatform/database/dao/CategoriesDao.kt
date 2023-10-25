@@ -16,6 +16,10 @@ class CategoriesDao(database: Database) {
 
     private val dbQuery = database.getDatabaseQueries()
 
+    fun getAllCategories(): List<Category> {
+        return dbQuery.selectAllFromCategory(::mapCategory).executeAsList()
+    }
+
     fun observeCategories(): Flow<List<Category>> {
         return dbQuery.selectAllFromCategory()
             .asFlow()

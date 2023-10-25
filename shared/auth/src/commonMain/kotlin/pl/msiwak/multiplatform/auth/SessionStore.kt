@@ -16,7 +16,16 @@ class SessionStore(private val sharedPreferences: KMMPreferences) {
         return sharedPreferences.getString(PREFS_TOKEN_KEY)
     }
 
+    fun setOfflineSession(isOfflineSession: Boolean) {
+        sharedPreferences.put(PREFS_OFFLINE_KEY, isOfflineSession)
+    }
+
+    fun getIsOfflineSession(): Boolean {
+        return sharedPreferences.getBool(PREFS_OFFLINE_KEY, false)
+    }
+
     companion object {
         const val PREFS_TOKEN_KEY = "PREFS_TOKEN_KEY"
+        const val PREFS_OFFLINE_KEY = "PREFS_OFFLINE_KEY"
     }
 }

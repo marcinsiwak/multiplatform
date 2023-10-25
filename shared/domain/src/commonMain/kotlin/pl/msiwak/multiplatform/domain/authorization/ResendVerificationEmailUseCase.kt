@@ -1,9 +1,9 @@
 package pl.msiwak.multiplatform.domain.authorization
 
-import pl.msiwak.multiplatform.auth.FirebaseAuthorization
+import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
 
-class ResendVerificationEmailUseCase(private val firebaseAuthorization: FirebaseAuthorization) {
+class ResendVerificationEmailUseCase(private val authRepository: AuthRepository) {
     suspend operator fun invoke() {
-        firebaseAuthorization.resendVerificationEmail()
+        authRepository.resendVerificationEmail()
     }
 }

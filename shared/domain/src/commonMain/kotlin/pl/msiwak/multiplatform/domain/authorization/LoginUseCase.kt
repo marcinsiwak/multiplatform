@@ -14,6 +14,7 @@ class LoginUseCase(
         val isEmailVerified = result?.user?.isEmailVerified ?: false
         if (token != null && isEmailVerified) {
             sessionRepository.saveToken(token)
+            sessionRepository.setOfflineSession(false)
             Napier.e("OUTPUT: $token")
         }
         return isEmailVerified

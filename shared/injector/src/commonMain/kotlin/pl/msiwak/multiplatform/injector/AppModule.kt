@@ -4,6 +4,7 @@ import org.koin.dsl.module
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.auth.SessionStore
 import pl.msiwak.multiplatform.data.local.store.LanguageStore
+import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
 import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
 import pl.msiwak.multiplatform.data.remote.repository.CategoryRepository
@@ -15,6 +16,7 @@ import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.database.dao.ResultsDao
+import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
@@ -23,6 +25,9 @@ import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCa
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.ResendVerificationEmailUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
+import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
+import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
+import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.GetMinAppCodeUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
@@ -38,14 +43,12 @@ import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
-import pl.msiwak.multiplatform.domain.summaries.InsertCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCase
-import pl.msiwak.multiplatform.domain.summaries.UpdateCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseNameUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
@@ -102,6 +105,7 @@ val databaseModule = module {
 val storeModule = module {
     single { LanguageStore(get()) }
     single { UnitStore(get()) }
+    single { OfflineStore(get()) }
     single { SessionStore(get()) }
 }
 
@@ -123,10 +127,10 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
@@ -154,25 +158,23 @@ val viewModelsModule = module {
         )
     }
     viewModelDefinition { AddCategoryViewModel(get(), get()) }
-    viewModelDefinition { SettingsViewModel(get(), get(), get()) }
+    viewModelDefinition { SettingsViewModel(get(), get(), get(), get()) }
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel(get()) }
-    viewModelDefinition { DashboardViewModel(get(), get()) }
+    viewModelDefinition { DashboardViewModel(get(), get(), get(), get()) }
 }
 
 val useCaseModule = module {
     factory { RegisterUserUseCase(get()) }
     factory { LoginUseCase(get(), get()) }
     factory { GoogleLoginUseCase(get(), get()) }
-    factory { LogoutUseCase(get()) }
+    factory { LogoutUseCase(get(), get()) }
     factory { SaveUserTokenUseCase(get()) }
     factory { GetUserTokenUseCase(get()) }
     factory { DownloadCategoriesUseCase(get()) }
     factory { DownloadCategoryUseCase(get()) }
-    factory { InsertCategoriesUseCase(get()) }
     factory { CreateCategoryUseCase(get()) }
-    factory { UpdateCategoriesUseCase(get()) }
     factory { ObserveCategoryUseCase(get()) }
     factory { ObserveCategoriesUseCase(get()) }
     factory { UpdateExerciseNameUseCase(get()) }
@@ -198,12 +200,16 @@ val useCaseModule = module {
     factory { RemoveResultUseCase(get()) }
     factory { DownloadExerciseUseCase(get()) }
     factory { ObserveExerciseUseCase(get()) }
+    factory { SetOfflineModeUseCase(get()) }
+    factory { GetIsOfflineModeUseCase(get()) }
+    factory { SynchronizeDatabaseUseCase(get()) }
+    factory { CheckIfSynchronizationIsPossibleUseCase(get()) }
 }
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
-    single { CategoryRepository(get(), get(), get(), get()) }
+    single { CategoryRepository(get(), get(), get(), get(), get(), get()) }
     single { RemoteConfigRepository(get()) }
     single { VersionRepository(get()) }
     single { SessionRepository(get()) }

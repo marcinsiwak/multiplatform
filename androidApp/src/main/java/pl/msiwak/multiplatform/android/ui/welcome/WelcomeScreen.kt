@@ -34,11 +34,11 @@ import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.extensions.findActivity
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
+import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.auth.GoogleAuthOneTapConfiguration
 import pl.msiwak.multiplatform.commonResources.MR
@@ -76,6 +76,21 @@ fun WelcomeScreen() {
             confirmButtonTitle = "OK",
             onConfirmClicked = {
                 viewModel.onConfirmDialogButtonClicked()
+            }
+        )
+    }
+
+    if (viewState.value.isSynchronizationDialogVisible) {
+        PopupDialog(
+            title = "Do you want to synchronize your data",
+            description = "Your data will be moved to remote database",
+            confirmButtonTitle = "Confirm",
+            dismissButtonTitle = "Deny",
+            onConfirmClicked = {
+                viewModel.onConfirmSynchronizationClicked()
+            },
+            onDismissClicked = {
+                viewModel.onDismissSynchronizationClicked()
             }
         )
     }
@@ -135,19 +150,20 @@ fun WelcomeScreen() {
                 isPassword = true,
                 hintText = stringResource(MR.strings.password.resourceId)
             )
+
             MainButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimens.space_32),
+                    .padding(top = MaterialTheme.dimens.space_24),
                 onClick = { viewModel.onLoginClicked() },
                 text = stringResource(id = MR.strings.login.resourceId)
             )
+
             MainButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        top = MaterialTheme.dimens.space_24,
-                        bottom = MaterialTheme.dimens.space_64
+                        top = MaterialTheme.dimens.space_16
                     ),
                 onClick = {
                     oneTapClient.beginSignIn(signInRequest)
@@ -163,6 +179,17 @@ fun WelcomeScreen() {
                         }
                 },
                 text = stringResource(id = MR.strings.welcome_google_login.resourceId)
+            )
+
+            SecondaryButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = MaterialTheme.dimens.space_16,
+                        bottom = MaterialTheme.dimens.space_16
+                    ),
+                onClick = { viewModel.onOfflineModeClicked() },
+                text = stringResource(id = MR.strings.welcome_offline_mode.resourceId)
             )
 
             Text(

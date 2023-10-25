@@ -7,8 +7,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
+import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
+import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
+import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
@@ -17,6 +20,9 @@ class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
     private val googleLoginUseCase: GoogleLoginUseCase,
     private val navigator: Navigator,
+    private val setOfflineModeUseCase: SetOfflineModeUseCase,
+    private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
+    private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -50,9 +56,14 @@ class WelcomeScreenViewModel(
             val isUserVerified =
                 loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
             _viewState.update { it.copy(isLoading = false) }
+            val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
 
             if (isUserVerified) {
-                navigator.navigate(NavigationDirections.Dashboard(true))
+                if (isSynchronizationPossible) {
+                    _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
+                } else {
+                    navigator.navigate(NavigationDirections.Dashboard(true))
+                }
             } else {
                 navigator.navigate(NavigationDirections.VerifyEmail)
             }
@@ -70,6 +81,13 @@ class WelcomeScreenViewModel(
 
     // TODO: Add Apple login
 
+    fun onOfflineModeClicked() {
+        viewModelScope.launch {
+            setOfflineModeUseCase(true)
+            navigator.navigate(NavigationDirections.Dashboard(true))
+        }
+    }
+
     fun onRegistrationClicked() {
         navigator.navigate(NavigationDirections.Registration)
     }
@@ -80,5 +98,19 @@ class WelcomeScreenViewModel(
 
     fun onConfirmDialogButtonClicked() {
         _viewState.update { it.copy(isErrorDialogVisible = false) }
+    }
+
+    fun onConfirmSynchronizationClicked() {
+        _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
+        viewModelScope.launch {
+            _viewState.update { it.copy(isLoading = true) }
+            synchronizeDatabaseUseCase()
+            navigator.navigate(NavigationDirections.Dashboard(true))
+            _viewState.update { it.copy(isLoading = false) }
+        }
+    }
+
+    fun onDismissSynchronizationClicked() {
+        _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
     }
 }

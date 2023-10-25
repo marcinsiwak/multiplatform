@@ -18,4 +18,12 @@ class SessionRepository(private val sessionStore: SessionStore) {
     suspend fun getToken(): String? = withContext(Dispatchers.IO) {
         return@withContext sessionStore.getToken()
     }
+
+    suspend fun setOfflineSession(isOfflineSession: Boolean) = withContext(Dispatchers.IO) {
+        sessionStore.setOfflineSession(isOfflineSession)
+    }
+
+    suspend fun getIsOfflineSession() = withContext(Dispatchers.IO) {
+        sessionStore.getIsOfflineSession()
+    }
 }

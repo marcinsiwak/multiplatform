@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.ui.category
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -28,7 +29,7 @@ class CategoryViewModel(
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(CategoryState())
-    val viewState: StateFlow<CategoryState> = _viewState
+    val viewState: StateFlow<CategoryState> = _viewState.asStateFlow()
 
     private val categoryId: String = id
     private var exerciseToRemovePosition: Int? = null

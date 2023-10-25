@@ -22,7 +22,7 @@ import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 @Composable
 fun SettingsScreen() {
     val viewModel = koinViewModel<SettingsViewModel>()
-    val state = viewModel.viewState.collectAsState()
+    val viewState = viewModel.viewState.collectAsState()
 
     Box {
         Column(
@@ -56,20 +56,22 @@ fun SettingsScreen() {
                     text = stringResource(MR.strings.settings_language.resourceId)
                 )
             }
-            SettingsItem(
-                modifier = Modifier
-                    .padding(top = MaterialTheme.dimens.space_8)
-                    .clickable {
-                        viewModel.onLogoutClicked()
-                    },
-                text = stringResource(MR.strings.settings_logout.resourceId)
-            )
+            if (viewState.value.isLogoutButtonVisible) {
+                SettingsItem(
+                    modifier = Modifier
+                        .padding(top = MaterialTheme.dimens.space_8)
+                        .clickable {
+                            viewModel.onLogoutClicked()
+                        },
+                    text = stringResource(MR.strings.settings_logout.resourceId)
+                )
+            }
         }
         Text(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(vertical = MaterialTheme.dimens.space_16),
-            text = state.value.versionName,
+            text = viewState.value.versionName,
             color = MaterialTheme.colorScheme.secondary
         )
     }
