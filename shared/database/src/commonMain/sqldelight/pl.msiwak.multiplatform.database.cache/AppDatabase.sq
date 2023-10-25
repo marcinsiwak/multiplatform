@@ -76,6 +76,9 @@ selectFromResultsByExercise:
 SELECT * FROM ResultDB
 WHERE exerciseID = ?;
 
+selectAllFromResult:
+SELECT * FROM ResultDB;
+
 updateResult:
 INSERT OR REPLACE INTO ResultDB(id, exerciseID, result, amount, date)
 VALUES (?, ?,?, ?, ?);

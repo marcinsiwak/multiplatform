@@ -18,6 +18,7 @@ class ObserveAuthStateChangedUseCase(
                     sessionRepository.setOfflineSession(false)
                 }
             } else {
+                sessionRepository.setOfflineSession(true)
                 sessionRepository.clearToken()
             }
         }

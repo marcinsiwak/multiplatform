@@ -29,6 +29,7 @@ val ColorBackground = Color.White
 data class OwnColorPalette(
     val ShadowColor: Color = Color.DarkGray,
     val ExerciseColor: Color = Color.LightGray,
+    val BannerColor: Color = Color.LightGray
 )
 
 private val OwnDarkColorPalette = OwnColorPalette(

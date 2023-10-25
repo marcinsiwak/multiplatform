@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.data.remote.repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
@@ -15,8 +16,12 @@ import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.database.dao.ResultsDao
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
+import pl.msiwak.multiplatform.network.model.ApiCategorySyncRequest
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
+import pl.msiwak.multiplatform.network.model.ApiExerciseSyncRequest
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
+import pl.msiwak.multiplatform.network.model.ApiResultSyncRequest
+import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
 import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 import pl.msiwak.multiplatform.network.service.CategoryService
 
@@ -31,7 +36,7 @@ class CategoryRepository(
 
     suspend fun downloadCategories() = withContext(Dispatchers.IO) {
         if (sessionStore.getIsOfflineSession()) return@withContext
-        val categories = categoryService.downloadCategories()
+        val categories = categoryService.downloadCategories().first()
         categoriesDao.removeAllCategories()
         exercisesDao.removeAllExercises()
         categoriesDao.updateCategories(categories)
@@ -41,7 +46,7 @@ class CategoryRepository(
 
     suspend fun downloadCategory(id: String) = withContext(Dispatchers.IO) {
         if (sessionStore.getIsOfflineSession()) return@withContext
-        val category = categoryService.downloadCategory(id)
+        val category = categoryService.downloadCategory(id).first()
         categoriesDao.updateCategory(category)
         exercisesDao.updateExercises(category.exercises)
     }
@@ -76,7 +81,7 @@ class CategoryRepository(
 
     suspend fun downloadExercise(exerciseId: String) = withContext(Dispatchers.IO) {
         if (sessionStore.getIsOfflineSession()) return@withContext
-        val exercise = categoryService.downloadExercise(exerciseId)
+        val exercise = categoryService.downloadExercise(exerciseId).first()
         exercisesDao.updateExercise(exercise)
         resultsDao.updateResults(exercise.results)
     }
@@ -92,7 +97,7 @@ class CategoryRepository(
                     categoryId = exercise.categoryId,
                     name = exercise.exerciseTitle
                 )
-            )
+            ).first()
             exercisesDao.updateExercise(exerciseResponse)
             return@withContext exerciseResponse.id
         }
@@ -130,7 +135,7 @@ class CategoryRepository(
                     result.amount.toDouble(),
                     result.date.toInstant(TimeZone.currentSystemDefault())
                 )
-            )
+            ).first()
             resultsDao.updateResult(newResult)
             return@withContext
         }
@@ -148,5 +153,56 @@ class CategoryRepository(
         categoriesDao.removeAllCategories()
         exercisesDao.removeAllExercises()
         resultsDao.removeAllResult()
+    }
+
+    suspend fun checkIfSynchronizationIsPossible() = withContext(Dispatchers.IO) {
+        val categories = categoriesDao.getAllCategories()
+        if (categories.isEmpty()) {
+            return@withContext false
+        }
+        return@withContext true
+    }
+
+    suspend fun startInitialSynchronization() = withContext(Dispatchers.IO) {
+        val categories = categoriesDao.getAllCategories()
+        if (categories.isEmpty()) {
+            return@withContext
+        }
+        val exercises = exercisesDao.getAllCategories()
+        val results = resultsDao.getAllResults()
+
+        val apiCategories = categories.map { category ->
+            ApiCategorySyncRequest(
+                id = category.id,
+                name = category.name,
+                exerciseType = category.exerciseType.name,
+            )
+        }
+
+        val apiExercises = exercises.map { exercise ->
+            ApiExerciseSyncRequest(
+                id = exercise.id,
+                categoryId = exercise.categoryId,
+                name = exercise.exerciseTitle
+            )
+        }
+
+        val apiResults = results.map { result ->
+            ApiResultSyncRequest(
+                id = result.id,
+                exerciseId = result.exerciseId,
+                result = result.result,
+                amount = result.amount.toDouble(),
+                date = result.date.toInstant(TimeZone.currentSystemDefault())
+            )
+        }
+
+        categoryService.startInitialSynchronization(
+            ApiSynchronizationRequest(
+                apiCategoriesRequest = apiCategories,
+                apiExercisesRequest = apiExercises,
+                apiResultsRequest = apiResults
+            )
+        )
     }
 }

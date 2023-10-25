@@ -6,5 +6,6 @@ data class WelcomeState(
     val authErrorMessage: String? = null,
     val isPasswordVisible: Boolean = false,
     val isErrorDialogVisible: Boolean = false,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isSynchronizationDialogVisible: Boolean = false
 )

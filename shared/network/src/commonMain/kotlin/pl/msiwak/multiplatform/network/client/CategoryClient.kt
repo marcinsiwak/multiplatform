@@ -7,6 +7,7 @@ import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import pl.msiwak.multiplatform.network.model.ApiCategory
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
@@ -14,6 +15,7 @@ import pl.msiwak.multiplatform.network.model.ApiExercise
 import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
 import pl.msiwak.multiplatform.network.model.ApiResult
 import pl.msiwak.multiplatform.network.model.ApiResultRequest
+import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
 import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 
 class CategoryClient(private val ktorClient: KtorClient) {
@@ -38,9 +40,9 @@ class CategoryClient(private val ktorClient: KtorClient) {
         ktorClient.httpClient.delete("Exercises/Category/$id")
     }
 
-    suspend fun downloadExercise(id: String): Flow<ApiExercise> {
+    suspend fun downloadExercise(id: String): Flow<ApiExercise> = flow {
         val response: ApiExercise = ktorClient.httpClient.get("Exercises/Exercise/$id").body()
-        return flowOf(response)
+        emit(response)
     }
 
     suspend fun addExercise(exercise: ApiExerciseRequest): Flow<ApiExercise> {
@@ -69,5 +71,11 @@ class CategoryClient(private val ktorClient: KtorClient) {
 
     suspend fun removeResult(id: String) {
         ktorClient.httpClient.delete("Exercises/Result/$id")
+    }
+
+    suspend fun startInitialSynchronization(synchronizationRequest: ApiSynchronizationRequest) {
+        ktorClient.httpClient.post("Exercises/Synchronization") {
+            setBody(synchronizationRequest)
+        }
     }
 }

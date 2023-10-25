@@ -80,6 +80,21 @@ fun WelcomeScreen() {
         )
     }
 
+    if (viewState.value.isSynchronizationDialogVisible) {
+        PopupDialog(
+            title = "Do you want to synchronize your data",
+            description = "Your data will be moved to remote database",
+            confirmButtonTitle = "Confirm",
+            dismissButtonTitle = "Deny",
+            onConfirmClicked = {
+                viewModel.onConfirmSynchronizationClicked()
+            },
+            onDismissClicked = {
+                viewModel.onDismissSynchronizationClicked()
+            }
+        )
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(
 //            modifier = Modifier.fillMaxSize(),

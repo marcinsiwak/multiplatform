@@ -1,11 +1,16 @@
 package pl.msiwak.multiplatform.database.dao
 
+import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.database.Database
 
 class ResultsDao(database: Database) {
 
     private val dbQuery = database.getDatabaseQueries()
+
+    fun getAllResults(): List<ResultData> {
+        return dbQuery.selectAllFromResult(::mapResult).executeAsList()
+    }
 
     fun updateResults(results: List<ResultData>) {
         results.forEach {
@@ -29,5 +34,15 @@ class ResultsDao(database: Database) {
 
     fun removeAllResult() {
         dbQuery.removeAllCategories()
+    }
+
+    private fun mapResult(
+        id: String,
+        exerciseId: String,
+        result: String,
+        amount: String,
+        date: LocalDateTime,
+    ): ResultData {
+        return ResultData(id, exerciseId, result.toDouble(), amount, date)
     }
 }

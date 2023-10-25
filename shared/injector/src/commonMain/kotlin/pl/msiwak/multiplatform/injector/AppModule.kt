@@ -16,6 +16,7 @@ import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.database.dao.ResultsDao
+import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
@@ -24,6 +25,7 @@ import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCa
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.domain.authorization.ResendVerificationEmailUseCase
 import pl.msiwak.multiplatform.domain.authorization.SaveUserTokenUseCase
+import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
@@ -125,10 +127,10 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
@@ -156,11 +158,11 @@ val viewModelsModule = module {
         )
     }
     viewModelDefinition { AddCategoryViewModel(get(), get()) }
-    viewModelDefinition { SettingsViewModel(get(), get(), get()) }
+    viewModelDefinition { SettingsViewModel(get(), get(), get(), get()) }
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel(get()) }
-    viewModelDefinition { DashboardViewModel(get(), get()) }
+    viewModelDefinition { DashboardViewModel(get(), get(), get(), get()) }
 }
 
 val useCaseModule = module {
@@ -200,6 +202,8 @@ val useCaseModule = module {
     factory { ObserveExerciseUseCase(get()) }
     factory { SetOfflineModeUseCase(get()) }
     factory { GetIsOfflineModeUseCase(get()) }
+    factory { SynchronizeDatabaseUseCase(get()) }
+    factory { CheckIfSynchronizationIsPossibleUseCase(get()) }
 }
 
 val repositoryUseModule = module {
