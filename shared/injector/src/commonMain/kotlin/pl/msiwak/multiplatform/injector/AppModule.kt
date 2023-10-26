@@ -143,6 +143,7 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
+            get(),
             get()
         )
     }
@@ -181,7 +182,7 @@ val useCaseModule = module {
     factory { RemoveExerciseUseCase(get()) }
     factory { RemoveCategoryUseCase(get()) }
     factory { FormatDateUseCase(get()) }
-    factory { FormatResultsUseCase(get(), get()) }
+    factory { FormatResultsUseCase(get(), get(), get()) }
     factory { FormatStringToDateUseCase(get()) }
     factory { SetLanguageUseCase(get()) }
     factory { GetLanguageUseCase(get()) }
@@ -196,7 +197,7 @@ val useCaseModule = module {
     factory { ObserveAuthStateChangedUseCase(get(), get()) }
     factory { ResendVerificationEmailUseCase(get()) }
     factory { AddExerciseUseCase(get()) }
-    factory { AddResultUseCase(get()) }
+    factory { AddResultUseCase(get(), get()) }
     factory { RemoveResultUseCase(get()) }
     factory { DownloadExerciseUseCase(get()) }
     factory { ObserveExerciseUseCase(get()) }

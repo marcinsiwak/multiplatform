@@ -21,6 +21,7 @@ import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.commonObject.ResultTableItemData
 import pl.msiwak.multiplatform.commonObject.SortType
 import pl.msiwak.multiplatform.core.ViewModel
+import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.domain.summaries.AddResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
@@ -48,6 +49,7 @@ class AddExerciseViewModel(
     private val downloadExerciseUseCase: DownloadExerciseUseCase,
     private val observeExerciseUseCase: ObserveExerciseUseCase,
     private val updateExerciseNameUseCase: UpdateExerciseNameUseCase,
+    private val getUnitsUseCase: GetUnitsUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -65,6 +67,7 @@ class AddExerciseViewModel(
     private var exerciseToRemovePosition: Int? = null
 
     private var currentExercise: Exercise? = null
+    private var currentExerciseType: ExerciseType = ExerciseType.GYM
 
     private var sortType: SortType = SortType.DATE_DECREASING
 
@@ -81,34 +84,36 @@ class AddExerciseViewModel(
                 currentResults.clear()
                 currentResults.addAll(exercise.results)
                 currentExercise = exercise
+                currentExerciseType = exercise.exerciseType
                 _viewState.update {
                     it.copy(
                         exerciseTitle = exercise.exerciseTitle,
-                        results = formatResultsUseCase(exercise.results),
-                        resultDataTitles = setTableTitles(exercise.exerciseType)
+                        results = formatResultsUseCase(
+                            FormatResultsUseCase.Params(
+                                exercise.results,
+                                exercise.exerciseType
+                            )
+                        ),
+                        resultDataTitles = setTableTitles(exercise.exerciseType),
+                        exerciseType = exercise.exerciseType
                     )
                 }
             }
         }
     }
 
-    private fun setTableTitles(exerciseType: ExerciseType?): List<ResultTableItemData> {
+    private fun setTableTitles(exerciseType: ExerciseType): List<ResultTableItemData> {
+        val unit = getUnitsUseCase()
         return when (exerciseType) {
             ExerciseType.RUNNING -> listOf(
-                ResultTableItemData("Distance"),
+                ResultTableItemData("Distance [${exerciseType.getUnit(unit)}]"),
                 ResultTableItemData("Time"),
                 ResultTableItemData("Date")
             )
 
             ExerciseType.GYM -> listOf(
-                ResultTableItemData("Weight"),
+                ResultTableItemData("Weight [${exerciseType.getUnit(unit)}]"),
                 ResultTableItemData("Reps"),
-                ResultTableItemData("Date")
-            )
-
-            else -> listOf(
-                ResultTableItemData("Distance"),
-                ResultTableItemData("Time"),
                 ResultTableItemData("Date")
             )
         }
@@ -203,10 +208,15 @@ class AddExerciseViewModel(
                 amount = savedAmount,
                 date = formatStringToDateUseCase(savedDate)
             )
-            addResultUseCase(data)
+            addResultUseCase(AddResultUseCase.Params(data, currentExerciseType))
 
             _viewState.value = _viewState.value.copy(
-                results = formatResultsUseCase(currentResults),
+                results = formatResultsUseCase(
+                    FormatResultsUseCase.Params(
+                        currentResults,
+                        currentExerciseType
+                    )
+                ),
                 isResultFieldEnabled = false,
                 newResultData = FormattedResultData(date = _viewState.value.newResultData.date)
             )
@@ -232,7 +242,17 @@ class AddExerciseViewModel(
     fun onLabelClicked(labelPosition: Int) {
         sortResults(labelPosition)
 
-        _viewState.update { it.copy(resultDataTitles = setTitlesArrow(labelPosition), results = formatResultsUseCase(currentResults)) }
+        _viewState.update {
+            it.copy(
+                resultDataTitles = setTitlesArrow(labelPosition),
+                results = formatResultsUseCase(
+                    FormatResultsUseCase.Params(
+                        currentResults,
+                        currentExerciseType
+                    )
+                )
+            )
+        }
     }
 
     fun onResultRemoved() {
@@ -303,25 +323,33 @@ class AddExerciseViewModel(
     }
 
     private fun filterAll() {
-        val newResults = formatResultsUseCase(currentResults)
-        _viewState.value = _viewState.value.copy(results = newResults)
+        val newResults = formatResultsUseCase(
+            FormatResultsUseCase.Params(
+                currentResults,
+                currentExerciseType
+            )
+        )
+        _viewState.update { it.copy(results = newResults) }
     }
 
     private fun filterDay() {
         val currentDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-        val newResults = formatResultsUseCase(currentResults.filter {
+        val filteredResults = currentResults.filter {
             it.date.dayOfYear == currentDate.dayOfYear
-        })
+        }
+        val newResults =
+            formatResultsUseCase(FormatResultsUseCase.Params(filteredResults, currentExerciseType))
         _viewState.value = _viewState.value.copy(results = newResults)
     }
 
     private fun filter(previousDaysCount: Int) {
         val currentDate = Clock.System.now()
-        val newResults = formatResultsUseCase(currentResults.filter {
+        val filteredResults = currentResults.filter {
             val diff =
                 currentDate.minus(it.date.toInstant(TimeZone.currentSystemDefault())).inWholeDays
             diff in 0..previousDaysCount
-        })
+        }
+        val newResults = formatResultsUseCase(FormatResultsUseCase.Params(filteredResults, currentExerciseType))
         _viewState.value = _viewState.value.copy(results = newResults)
     }
 

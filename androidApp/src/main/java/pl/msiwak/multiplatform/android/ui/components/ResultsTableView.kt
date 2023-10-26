@@ -71,10 +71,7 @@ fun ResultsTableView(
                     modifier = Modifier
                         .clickable { onLabelClicked(index) }
                         .width(MaterialTheme.dimens.result_item_width)
-                        .padding(horizontal = MaterialTheme.dimens.space_24)
-                        .onGloballyPositioned {
-
-                        },
+                        .padding(horizontal = MaterialTheme.dimens.space_24),
                     text = item.text,
                     color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
