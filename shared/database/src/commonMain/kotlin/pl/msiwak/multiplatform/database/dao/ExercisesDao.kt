@@ -49,7 +49,7 @@ class ExercisesDao(database: Database) {
             ) { exerciseQuery: Query<Exercise>, resultQuery: Query<ResultData> ->
 
                 val exercise = exerciseQuery.executeAsOne()
-                val results = resultQuery.executeAsList()
+                val results = resultQuery.executeAsList().sortedByDescending { it.date }
 
                 Pair(exercise, results)
             }.map { (exercise, results) ->

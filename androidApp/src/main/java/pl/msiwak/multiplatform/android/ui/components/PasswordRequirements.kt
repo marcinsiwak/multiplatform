@@ -25,7 +25,7 @@ fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<Passw
         Text(
             modifier = Modifier
                 .padding(vertical = MaterialTheme.dimens.space_4),
-            text = "Password requirements:",
+            text = stringResource(id = MR.strings.password_requirements.resourceId),
             style = MaterialTheme.typography.labelLarge,
         )
         requirements.forEach {

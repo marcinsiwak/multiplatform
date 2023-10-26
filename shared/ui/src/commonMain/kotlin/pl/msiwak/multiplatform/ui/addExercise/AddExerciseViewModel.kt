@@ -95,7 +95,8 @@ class AddExerciseViewModel(
                             )
                         ),
                         resultDataTitles = setTableTitles(exercise.exerciseType),
-                        exerciseType = exercise.exerciseType
+                        exerciseType = exercise.exerciseType,
+                        newResultData = it.newResultData.copy(date = formatDateUseCase(pickedDate))
                     )
                 }
             }
@@ -138,6 +139,7 @@ class AddExerciseViewModel(
 
     fun onAddNewResultClicked() {
         _viewState.update { it.copy(isResultFieldEnabled = true) }
+        pickedDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
     }
 
     fun onSaveResultClicked() {
@@ -206,7 +208,7 @@ class AddExerciseViewModel(
                 exerciseId = id,
                 result = savedResult.safeToDouble(),
                 amount = savedAmount,
-                date = formatStringToDateUseCase(savedDate)
+                date = pickedDate
             )
             addResultUseCase(AddResultUseCase.Params(data, currentExerciseType))
 
@@ -230,13 +232,12 @@ class AddExerciseViewModel(
     fun onDatePicked(date: LocalDateTime) {
         val formattedDate = formatDateUseCase(date)
         pickedDate = date
-        _viewState.value =
-            _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(date = formattedDate))
+        _viewState.update { it.copy(newResultData = it.newResultData.copy(date = formattedDate)) }
     }
 
     fun onResultLongClicked(resultIndex: Int) {
         exerciseToRemovePosition = resultIndex
-        _viewState.value = _viewState.value.copy(isRemoveExerciseDialogVisible = true)
+        _viewState.update { it.copy(isRemoveExerciseDialogVisible = true) }
     }
 
     fun onLabelClicked(labelPosition: Int) {
@@ -349,7 +350,8 @@ class AddExerciseViewModel(
                 currentDate.minus(it.date.toInstant(TimeZone.currentSystemDefault())).inWholeDays
             diff in 0..previousDaysCount
         }
-        val newResults = formatResultsUseCase(FormatResultsUseCase.Params(filteredResults, currentExerciseType))
+        val newResults =
+            formatResultsUseCase(FormatResultsUseCase.Params(filteredResults, currentExerciseType))
         _viewState.value = _viewState.value.copy(results = newResults)
     }
 

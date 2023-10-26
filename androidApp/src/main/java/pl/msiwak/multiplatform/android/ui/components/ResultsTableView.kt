@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -99,7 +100,7 @@ fun ResultsTableView(
                             },
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.onPrimary,
-                        text = "Add first result"
+                        text = stringResource(id = MR.strings.add_new_result.resourceId)
                     )
                 }
             }

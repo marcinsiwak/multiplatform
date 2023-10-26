@@ -70,7 +70,8 @@ fun AddExerciseScreen(id: String) {
 
                 is AddExerciseEvent.FocusOnInput -> {
                     focusRequesters[value.pos].requestFocus()
-                    Toast.makeText(context, "Wrong input value", Toast.LENGTH_SHORT).show()
+                    val errorMsg = context.getString(MR.strings.input_wrong_format.resourceId)
+                    Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
                 }
             }
         }

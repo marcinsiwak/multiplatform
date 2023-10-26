@@ -13,12 +13,18 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="input_wrong_format">Wrong format</string>
+    <string name="ok">Ok</string>
+    <string name="confirm">Confirm</string>
+    <string name="deny">Deny</string>
 
     <string name="exercise">Exercise</string>
     <string name="exercise_name">Exercise name</string>
     <string name="exercise_type">Exercise type</string>
     <string name="add_new_exercise">Add new exercise</string>
+    <string name="add_exercise">Add exercise</string>
+    <string name="add_new_exercise_error">Wrong input value</string>
 
+    <string name="add_category">Add category</string>
     <string name="category_name">Category name</string>
     <string name="category">Category</string>
 
@@ -27,6 +33,7 @@
     <string name="remove_result_dialog_description">Do you want to remove this result</string>
 
     <string name="add_result_save">Save result</string>
+    <string name="add_first_result">Add first result</string>
 
     <string name="remove_result_dialog_title">Remove result</string>
     <string name="remove_result_dialog_description">Do you want to remove this result</string>
@@ -61,6 +68,7 @@
     <string name="verify_resend_mail">Resend mail</string>
     <string name="verify_login">Login</string>
 
+    <string name="password_requirements">Password requirements:</string>
     <string name="password_requirements_number">Included number</string>
     <string name="password_requirements_letter">Included letter</string>
     <string name="password_requirements_capital">Included capital letter</string>
@@ -69,5 +77,14 @@
 
     <string name="remove_category_dialog_title">Remove category</string>
     <string name="remove_category_dialog_description">Do you want to remove this result?</string>
+
+    <string name="auth_failed_title">Auth failed</string>
+    <string name="auth_failed_description">Email or password is invalid</string>
+
+    <string name="synchronization_dialog_title">Do you want to synchronize your data</string>
+    <string name="synchronization_dialog_description">Your data will be moved to remote database</string>
+
+    <string name="offline_mode_title">You are in a offline mode</string>
+    <string name="offline_mode_sing_up_in">Sign in/up</string>
 
 </resources>
