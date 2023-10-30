@@ -26,30 +26,28 @@ import pl.msiwak.multiplatform.domain.summaries.AddResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
-import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseNameUseCase
 import pl.msiwak.multiplatform.utils.DATE_REGEX
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_COMMA
 import pl.msiwak.multiplatform.utils.NUMBER_REGEX_DOT
-import pl.msiwak.multiplatform.utils.TIME_REGEX
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.extensions.isNumber
 import pl.msiwak.multiplatform.utils.extensions.isTime
-import pl.msiwak.multiplatform.utils.extensions.safeToDouble
 
 class AddExerciseViewModel(
     private val id: String,
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
-    private val formatStringToDateUseCase: FormatStringToDateUseCase,
     private val addResultUseCase: AddResultUseCase,
     private val removeResultUseCase: RemoveResultUseCase,
     private val downloadExerciseUseCase: DownloadExerciseUseCase,
     private val observeExerciseUseCase: ObserveExerciseUseCase,
     private val updateExerciseNameUseCase: UpdateExerciseNameUseCase,
     private val getUnitsUseCase: GetUnitsUseCase,
+    private val formatRunningAmountUseCase: FormatRunningAmountUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -194,7 +192,7 @@ class AddExerciseViewModel(
             return
         }
 
-        if (!(savedAmount.matches(Regex(TIME_REGEX))) && exerciseType == ExerciseType.RUNNING
+        if (savedAmount.isEmpty() && exerciseType == ExerciseType.RUNNING
         ) {
             _viewState.value = _viewState.value.copy(
                 newResultData = _viewState.value.newResultData.copy(isAmountError = true)
@@ -206,27 +204,60 @@ class AddExerciseViewModel(
         viewModelScope.launch(errorHandler) {
             val data = ResultData(
                 exerciseId = id,
-                result = savedResult.safeToDouble(),
+                result = savedResult,
                 amount = savedAmount,
                 date = pickedDate
             )
             addResultUseCase(AddResultUseCase.Params(data, currentExerciseType))
 
-            _viewState.value = _viewState.value.copy(
-                results = formatResultsUseCase(
-                    FormatResultsUseCase.Params(
-                        currentResults,
-                        currentExerciseType
-                    )
-                ),
-                isResultFieldEnabled = false,
-                newResultData = FormattedResultData(date = _viewState.value.newResultData.date)
-            )
+            _viewState.update {
+                it.copy(
+                    results = formatResultsUseCase(
+                        FormatResultsUseCase.Params(
+                            currentResults,
+                            currentExerciseType
+                        )
+                    ),
+                    isResultFieldEnabled = false,
+                    newResultData = FormattedResultData(date = _viewState.value.newResultData.date)
+                )
+            }
         }
     }
 
     fun onDateClicked() {
         _viewEvent.tryEmit(AddExerciseEvent.OpenCalendar)
+    }
+
+    fun onAmountClicked() {
+        _viewState.update { it.copy(isTimeInputDialogVisible = true) }
+    }
+
+    fun onDismissAmountDialog() {
+        _viewState.update { it.copy(isTimeInputDialogVisible = false) }
+    }
+
+    fun onConfirmRunningAmount(
+        hours: String,
+        minutes: String,
+        seconds: String,
+        milliseconds: String
+    ) {
+        _viewState.update {
+            it.copy(
+                isTimeInputDialogVisible = false,
+                newResultData = it.newResultData.copy(
+                    amount = formatRunningAmountUseCase(
+                        FormatRunningAmountUseCase.Params(
+                            hours,
+                            minutes,
+                            seconds,
+                            milliseconds
+                        )
+                    )
+                )
+            )
+        }
     }
 
     fun onDatePicked(date: LocalDateTime) {
@@ -283,24 +314,21 @@ class AddExerciseViewModel(
     fun onAmountValueChanged(text: String) {
         val amount = text.filter {
             if (_viewState.value.exerciseType == ExerciseType.RUNNING) {
+                if (text.length >= 8) {
+                    return
+                }
                 it.isTime()
             } else {
                 it.isNumber()
             }
         }
-        _viewState.value =
-            _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(
-                    amount = amount,
-                    isAmountError = false
-                )
-            )
+        _viewState.update {
+            it.copy(newResultData = it.newResultData.copy(amount = amount, isAmountError = false))
+        }
     }
 
     fun onDateValueChanged(text: String) {
-        _viewState.value =
-            _viewState.value.copy(newResultData = _viewState.value.newResultData.copy(date = text))
-
+        _viewState.update { it.copy(newResultData = _viewState.value.newResultData.copy(date = text)) }
     }
 
     fun onTabClicked(item: DateFilterType) {
@@ -310,7 +338,7 @@ class AddExerciseViewModel(
                 filterResults(dateFilter)
             }
         }
-        _viewState.value = viewState.value.copy(selectedFilterPosition = pos)
+        _viewState.update { it.copy(selectedFilterPosition = pos) }
     }
 
     private fun filterResults(dateFilter: DateFilterType) {

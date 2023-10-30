@@ -132,7 +132,7 @@ class CategoryRepository(
                 ApiResultRequest(
                     result.exerciseId,
                     result.result,
-                    result.amount.toDouble(),
+                    result.amount,
                     result.date.toInstant(TimeZone.currentSystemDefault())
                 )
             ).first()
@@ -192,7 +192,7 @@ class CategoryRepository(
                 id = result.id,
                 exerciseId = result.exerciseId,
                 result = result.result,
-                amount = result.amount.toDouble(),
+                amount = result.amount,
                 date = result.date.toInstant(TimeZone.currentSystemDefault())
             )
         }

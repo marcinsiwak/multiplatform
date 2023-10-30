@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 class ApiResultSyncRequest(
     val id: String,
     val exerciseId: String,
-    val result: Double,
-    val amount: Double,
+    val result: String,
+    val amount: String,
     val date: Instant
 )

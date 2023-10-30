@@ -42,6 +42,9 @@ import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountToMillisecondsUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatMillisecondsToRunningAmountUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
@@ -205,6 +208,9 @@ val useCaseModule = module {
     factory { GetIsOfflineModeUseCase(get()) }
     factory { SynchronizeDatabaseUseCase(get()) }
     factory { CheckIfSynchronizationIsPossibleUseCase(get()) }
+    factory { FormatMillisecondsToRunningAmountUseCase() }
+    factory { FormatRunningAmountToMillisecondsUseCase() }
+    factory { FormatRunningAmountUseCase() }
 }
 
 val repositoryUseModule = module {

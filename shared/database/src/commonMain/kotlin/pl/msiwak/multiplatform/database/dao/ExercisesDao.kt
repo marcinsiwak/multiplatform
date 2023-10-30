@@ -79,7 +79,7 @@ class ExercisesDao(database: Database) {
         amount: String,
         date: LocalDateTime,
     ): ResultData {
-        return ResultData(id, exerciseId, result.toDouble(), amount, date)
+        return ResultData(id, exerciseId, result, amount, date)
     }
 
     private fun mapExercise(

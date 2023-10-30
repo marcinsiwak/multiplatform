@@ -23,12 +23,11 @@ fun ResultInputView(
     onValueChange: (String) -> Unit,
     backgroundColor: Color = Color.Transparent,
     isError: Boolean = false,
-    isPassword: Boolean = false,
     hintText: String = "",
     readOnly: Boolean = false,
     textAlign: TextAlign = TextAlign.Center,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-    trailingIcon: @Composable (() -> Unit)? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onViewClicked: () -> Unit = {}
 ) {
     TextField(
@@ -61,6 +60,6 @@ fun ResultInputView(
         singleLine = true,
         readOnly = readOnly,
         keyboardOptions = keyboardOptions,
-        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
+        visualTransformation = visualTransformation
     )
 }

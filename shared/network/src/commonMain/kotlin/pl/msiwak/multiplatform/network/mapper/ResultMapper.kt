@@ -13,7 +13,7 @@ class ResultMapper : Mapper<ApiResult, ResultData>() {
             id = value.id,
             exerciseId = value.exerciseId,
             result = value.result,
-            amount = value.amount.toString(),
+            amount = value.amount,
             date = value.date.toLocalDateTime(TimeZone.currentSystemDefault())
         )
     }

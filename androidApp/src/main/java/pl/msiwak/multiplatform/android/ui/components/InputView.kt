@@ -18,7 +18,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputView(
     modifier: Modifier = Modifier,

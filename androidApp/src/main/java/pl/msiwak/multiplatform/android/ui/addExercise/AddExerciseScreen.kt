@@ -31,6 +31,7 @@ import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
+import pl.msiwak.multiplatform.android.ui.components.RunningTimeInputDialog
 import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
@@ -94,6 +95,18 @@ fun AddExerciseScreen(id: String) {
 
     if (viewState.value.isLoading) {
         Loader()
+    }
+
+    if (viewState.value.isTimeInputDialogVisible) {
+        focusManager.clearFocus()
+        RunningTimeInputDialog(
+            onConfirm = { hours: String, minutes: String, seconds: String, milliseconds: String ->
+                 viewModel.onConfirmRunningAmount(hours, minutes, seconds, milliseconds)
+            },
+            onDismiss = {
+                viewModel.onDismissAmountDialog()
+            }
+        )
     }
 
     Column(
@@ -197,6 +210,8 @@ fun AddExerciseScreen(id: String) {
                 viewModel.onResultLongClicked(pos)
             }, onLabelClicked = { pos ->
                 viewModel.onLabelClicked(pos)
+            }, onAmountClicked = {
+                viewModel.onAmountClicked()
             })
     }
 }

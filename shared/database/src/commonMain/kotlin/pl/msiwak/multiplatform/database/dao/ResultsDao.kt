@@ -22,7 +22,7 @@ class ResultsDao(database: Database) {
         dbQuery.updateResult(
             id = result.id,
             exerciseID = result.exerciseId,
-            result = result.result.toString(),
+            result = result.result,
             amount = result.amount,
             date = result.date
         )
@@ -43,6 +43,6 @@ class ResultsDao(database: Database) {
         amount: String,
         date: LocalDateTime,
     ): ResultData {
-        return ResultData(id, exerciseId, result.toDouble(), amount, date)
+        return ResultData(id, exerciseId, result, amount, date)
     }
 }

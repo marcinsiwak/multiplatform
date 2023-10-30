@@ -17,9 +17,9 @@ class FormatResultsUseCase(
         val unit = getUnitsUseCase()
         return params.results.map {
             val calculatedResult = if (unit == UnitType.IMPERIAL) {
-                it.result * params.exerciseType.convertValue
+                it.result.toDouble() * params.exerciseType.convertValue
             } else {
-                it.result
+                it.result.toDouble()
             }
             FormattedResultData(
                 numberFormatter.formatNumber(calculatedResult),

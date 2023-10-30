@@ -43,6 +43,7 @@ fun ResultsTableView(
     onAmountValueChanged: (String) -> Unit = {},
     onDateValueChanged: (String) -> Unit = {},
     onDateClicked: () -> Unit = {},
+    onAmountClicked: () -> Unit = {},
     onResultLongClick: (Int) -> Unit = {},
     focusRequesters: List<FocusRequester>
 ) {
@@ -119,6 +120,9 @@ fun ResultsTableView(
                             onDateValueChanged(it)
                         }, onDateClicked = {
                             onDateClicked()
+                        },
+                        onAmountClicked = {
+                            onAmountClicked()
                         }
                     )
                 }

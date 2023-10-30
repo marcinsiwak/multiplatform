@@ -6,16 +6,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -30,7 +26,8 @@ fun NewResultView(
     onResultValueChanged: (String) -> Unit,
     onAmountValueChanged: (String) -> Unit,
     onDateValueChanged: (String) -> Unit,
-    onDateClicked: () -> Unit
+    onDateClicked: () -> Unit,
+    onAmountClicked: () -> Unit
 ) {
 
     Row(
@@ -61,18 +58,17 @@ fun NewResultView(
             modifier = Modifier
                 .focusRequester(focusRequesters[2])
                 .width(MaterialTheme.dimens.result_item_input_width)
-                .padding(horizontal = MaterialTheme.dimens.space_16),
+                .onFocusChanged {
+                    if (exerciseType == ExerciseType.RUNNING && it.hasFocus) {
+                        onAmountClicked()
+                    }
+                },
             value = newResultData.amount,
             onValueChange = {
                 onAmountValueChanged(it)
             },
             isError = newResultData.isAmountError,
-            keyboardOptions = if (exerciseType == ExerciseType.GYM) {
-                KeyboardOptions(keyboardType = KeyboardType.Decimal)
-            } else {
-                KeyboardOptions(keyboardType = KeyboardType.Text)
-            },
-            hintText = if (exerciseType == ExerciseType.GYM) "10" else "00:00.000"
+            hintText = if (exerciseType == ExerciseType.GYM) "10" else "00:00:00.000"
         )
         ResultInputView(
             modifier = Modifier
