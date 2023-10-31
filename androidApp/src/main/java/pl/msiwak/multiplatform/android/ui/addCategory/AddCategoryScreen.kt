@@ -72,7 +72,7 @@ fun AddCategoryScreen() {
         ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(id = MR.strings.offline_mode_title.resourceId),
+                text = stringResource(id = MR.strings.add_category.resourceId),
                 fontSize = MaterialTheme.font.font_16
             )
         }
