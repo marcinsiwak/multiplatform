@@ -85,4 +85,11 @@
 
     <string name="offline_mode_title">Jesteś w trybie offline</string>
     <string name="offline_mode_sing_up_in">Logowanie/Rejestracja</string>
+
+    <string name="hours">Godziny</string>
+    <string name="minutes">Minuty</string>
+    <string name="seconds">Sekundy</string>
+    <string name="milliseconds">Milisekundy</string>
+
+    <string name="running_time_input_insert_result">Wprowadź swój wynik</string>
 </resources>

@@ -1,18 +1,32 @@
 package pl.msiwak.multiplatform.domain.summaries
 
 class FormatRunningAmountToMillisecondsUseCase {
-    operator fun invoke(params: Params): String {
-        val hoursMillis = params.hours.toInt() * 3600000
-        val minutesMillis = params.minutes.toInt() * 60000
-        val secondsMillis = params.seconds.toInt() * 1000
-        val milliseconds = params.milliseconds.toInt()
-        return (hoursMillis + minutesMillis + secondsMillis + milliseconds).toString()
-    }
+    operator fun invoke(amount: String): Int {
+        val hoursMillis: Int
+        val minutesMillis: Int
+        val secondsMillis: Int
+        val milliseconds: Int
+        when (amount.length) {
+            12 -> {
+                hoursMillis = amount.substring(0,2).toInt() * 3600000
+                minutesMillis = amount.substring(3,5).toInt() * 60000
+                secondsMillis = amount.substring(6,8).toInt() * 1000
+                milliseconds = amount.substring(9,amount.length).toInt()
+            }
+            9 -> {
+                hoursMillis = 0
+                minutesMillis = amount.substring(0,2).toInt() * 60000
+                secondsMillis = amount.substring(3,5).toInt() * 1000
+                milliseconds = amount.substring(6,amount.length).toInt()
+            }
+            else -> {
+                hoursMillis = 0
+                minutesMillis = 0
+                secondsMillis = amount.substring(0,2).toInt() * 1000
+                milliseconds = amount.substring(3,amount.length).toInt()
+            }
+        }
 
-    data class Params(
-        val hours: String,
-        val minutes: String,
-        val seconds: String,
-        val milliseconds: String
-    )
+        return hoursMillis + minutesMillis + secondsMillis + milliseconds
+    }
 }

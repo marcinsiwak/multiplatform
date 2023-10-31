@@ -87,4 +87,11 @@
     <string name="offline_mode_title">You are in a offline mode</string>
     <string name="offline_mode_sing_up_in">Sign in/up</string>
 
+    <string name="hours">Hours</string>
+    <string name="minutes">Minutes</string>
+    <string name="seconds">Seconds</string>
+    <string name="milliseconds">Milliseconds</string>
+
+    <string name="running_time_input_insert_result">Insert your result</string>
+
 </resources>

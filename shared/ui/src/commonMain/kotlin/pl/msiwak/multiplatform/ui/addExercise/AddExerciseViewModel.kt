@@ -26,6 +26,7 @@ import pl.msiwak.multiplatform.domain.summaries.AddResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountToMillisecondsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCase
@@ -48,6 +49,7 @@ class AddExerciseViewModel(
     private val updateExerciseNameUseCase: UpdateExerciseNameUseCase,
     private val getUnitsUseCase: GetUnitsUseCase,
     private val formatRunningAmountUseCase: FormatRunningAmountUseCase,
+    private val formatRunningAmountToMillisecondsUseCase: FormatRunningAmountToMillisecondsUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -395,11 +397,24 @@ class AddExerciseViewModel(
         }
 
         when (sortType) {
-            SortType.RESULT_INCREASING -> currentResults.sortBy { it.result }
-            SortType.AMOUNT_INCREASING -> currentResults.sortBy { it.amount }
+            SortType.RESULT_INCREASING -> currentResults.sortBy { it.result.toDouble() }
+            SortType.AMOUNT_INCREASING -> {
+                if (currentExerciseType == ExerciseType.RUNNING) {
+                    currentResults.sortBy { formatRunningAmountToMillisecondsUseCase(it.amount) }
+                } else {
+                    currentResults.sortBy { it.amount.toDouble() }
+                }
+            }
+
             SortType.DATE_INCREASING -> currentResults.sortBy { it.date }
-            SortType.RESULT_DECREASING -> currentResults.sortByDescending { it.result }
-            SortType.AMOUNT_DECREASING -> currentResults.sortByDescending { it.amount }
+            SortType.RESULT_DECREASING -> currentResults.sortByDescending { it.result.toDouble() }
+            SortType.AMOUNT_DECREASING -> {
+                if (currentExerciseType == ExerciseType.RUNNING) {
+                    currentResults.sortByDescending { formatRunningAmountToMillisecondsUseCase(it.amount) }
+                } else {
+                    currentResults.sortByDescending { it.amount.toDouble() }
+                }
+            }
             SortType.DATE_DECREASING -> currentResults.sortByDescending { it.date }
         }
     }
