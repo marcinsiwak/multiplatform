@@ -27,5 +27,5 @@ data class AddExerciseState(
     val resultDataTitles: List<ResultTableItemData> = emptyList(),
     val isLoading: Boolean = false,
     val isEditNameEnabled: Boolean = false,
-    val isTimeInputDialogVisible: Boolean = false
+    var isTimeInputDialogVisible: Boolean = false
 )

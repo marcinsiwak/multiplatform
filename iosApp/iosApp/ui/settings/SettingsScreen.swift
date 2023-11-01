@@ -29,7 +29,7 @@ struct SettingsScreen: View {
                 .padding()
             
             SettingsItem(
-                title: "",
+                title: MR.strings().settings_logout.desc().localized(),
                 onItemClicked: {
                     viewModel.onLogoutClicked()
                 }

@@ -32,5 +32,6 @@ struct Dimensions {
     static let button_corner: CGFloat = 8
     static let input_view_corner: CGFloat = 12
     static let result_input_view_height: CGFloat = 100
+    static let result_input_view_width: CGFloat = 86
     static let results_min_height: CGFloat = 200
 }

@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.commonObject
 
 data class FormattedResultData(
-    val result: String = "",
-    val amount: String = "",
+    var result: String = "",
+    var amount: String = "",
     val date: String = "",
     val isResultError: Boolean = false,
     val isAmountError: Boolean = false,

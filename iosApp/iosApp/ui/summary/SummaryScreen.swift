@@ -6,7 +6,6 @@ struct SummaryScreen: View {
     @ObservedObject private var state: ObservableState<SummaryState>
     
 
-
     init() {
         self.state = ObservableState<SummaryState>(value: viewModel.viewState.value as! SummaryState)
         
@@ -50,12 +49,15 @@ struct SummaryScreen: View {
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         .padding(.horizontal, Dimensions.space_8)
         .background(.black)
+        .onAppear {
+            viewModel.onResume()
+        }
     
     }
 
     private func onStateReceived(state: SummaryState) {
         self.state.value = state
-     }
+    }
     
 }
 extension Category: Identifiable {}

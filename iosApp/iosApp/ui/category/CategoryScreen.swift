@@ -77,7 +77,7 @@ struct CategoryScreen: View {
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
             .background(.black)
-            .customDialog(isPresented: $state.value.isDialogVisible, onDismiss: {
+            .showDialog(isPresented: $state.value.isDialogVisible, onDismiss: {
                 viewModel.onDialogClosed()
             }) {
                 VStack {

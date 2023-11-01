@@ -9,6 +9,11 @@ struct AddExerciseScreen: View {
     @ObservedObject private var state: ObservableState<AddExerciseState>
     @ObservedObject private var focusedFieldPos: ObservableEvent<Int32?>
 
+    @State private var hours: String = ""
+    @State private var minutes: String = ""
+    @State private var seconds: String = ""
+    @State private var milliseconds: String = ""
+
         
     init(id: String) {
         self.id = id
@@ -71,7 +76,7 @@ struct AddExerciseScreen: View {
                         Text(MR.strings().add_new_result.desc().localized())
                             .padding()
                             .foregroundColor(.black)
-                            .background(Color.gray.opacity(0.2))
+                            .background(Color.gray.opacity(0.4))
                             .cornerRadius(Dimensions.button_corner)
                     }
                 )
@@ -85,7 +90,7 @@ struct AddExerciseScreen: View {
                         Text(MR.strings().add_result_save.desc().localized())
                             .padding()
                             .foregroundColor(.black)
-                            .background(Color.gray.opacity(0.2))
+                            .background(Color.gray.opacity(0.4))
                             .cornerRadius(Dimensions.button_corner)
                     }
                 )
@@ -99,7 +104,6 @@ struct AddExerciseScreen: View {
                 unit: state.value.unit,
                 results: state.value.results,
                 exerciseType: state.value.exerciseType,
-                sortType: state.value.sortType,
                 isNewResultEnabled: state.value.isResultFieldEnabled,
                 newResultData: state.value.newResultData,
                 focusedFieldPos: focusedFieldPos,
@@ -115,6 +119,8 @@ struct AddExerciseScreen: View {
                 viewModel.onDatePicked(date: date)
             }, onDateClicked: {
                 viewModel.onDateClicked()
+            }, onAmountClicked: {
+                viewModel.onAmountClicked()
             }, onResultLongClick: { index in
                 let newIndex = Int32(index)
                 viewModel.onResultLongClicked(resultIndex: newIndex)
@@ -126,6 +132,71 @@ struct AddExerciseScreen: View {
             viewModel.onPause()
         }
         .navigationTitle(Text(state.value.exerciseTitle))
+        .showDialog(isPresented: $state.value.isTimeInputDialogVisible, onDismiss: {
+            viewModel.onDismissAmountDialog()
+        }) {
+            VStack {
+                Text(MR.strings().running_time_input_insert_result.desc().localized())
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                    .padding()
+                
+                HStack {
+                    
+                    TextField(MR.strings().hours.desc().localized(), text: $hours)
+                        .padding()
+//                        .background(backgroundColor)
+                        .cornerRadius(Dimensions.input_view_corner)
+                        .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.black, lineWidth: 1))
+                        .padding()
+                        .foregroundColor(.white)
+                        .keyboardType(.decimalPad)
+                    
+                    TextField(MR.strings().minutes.desc().localized(), text: $minutes)
+                        .padding()
+//                        .background(backgroundColor)
+                        .cornerRadius(Dimensions.input_view_corner)
+                        .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.black, lineWidth: 1))
+                        .padding()
+                        .foregroundColor(.white)
+                        .keyboardType(.decimalPad)
+                }
+                
+                HStack {
+                    TextField(MR.strings().seconds.desc().localized(), text: $seconds)
+                        .padding()
+//                        .background(backgroundColor)
+                        .cornerRadius(Dimensions.input_view_corner)
+                        .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.black, lineWidth: 1))
+                        .padding()
+                        .foregroundColor(.white)
+                        .keyboardType(.decimalPad)
+                    
+                    TextField(MR.strings().milliseconds.desc().localized(), text: $milliseconds)
+                        .padding()
+//                        .background(backgroundColor)
+                        .cornerRadius(Dimensions.input_view_corner)
+                        .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.black, lineWidth: 1))
+                        .padding()
+                        .foregroundColor(.white)
+                        .keyboardType(.decimalPad)
+                }
+                
+                
+                Button(action: {
+                    viewModel.onConfirmRunningAmount(hours: hours, minutes: minutes, seconds: seconds, milliseconds: milliseconds)
+                }, label: {
+                    Text(MR.strings().confirm.desc().localized())
+                        .padding(Dimensions.space_16)
+                        .foregroundColor(Color.black)
+                        .background(Color.gray)
+                        .clipShape(RoundedCorner())
+                        .frame(maxWidth: .infinity, alignment: .center)
+                })
+                .padding()
+            }
+        }
     }
 }
 

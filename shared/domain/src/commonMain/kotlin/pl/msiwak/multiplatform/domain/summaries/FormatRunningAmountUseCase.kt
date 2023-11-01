@@ -27,10 +27,11 @@ class FormatRunningAmountUseCase {
     }
 
     private fun formatOneDigit(input: String): String {
-        return if (input.length == 1) {
-            "0$input"
+        val newInput = input.ifEmpty { "0" }
+        return if (newInput.length == 1) {
+            "0$newInput"
         } else {
-            input
+            newInput
         }
     }
 

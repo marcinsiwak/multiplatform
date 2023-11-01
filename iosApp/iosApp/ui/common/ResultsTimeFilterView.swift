@@ -24,7 +24,7 @@ struct ResultsTimeFilterView: View {
         VStack {
             Picker("Sort type", selection: $selectedItem) {
                 ForEach(tabs, id: \.self) { tab in
-                    Text("tab.nameResourceId.desc().localized()")
+                    Text(tab.nameResourceId.desc().localized())
                 }
             }
             .pickerStyle(.segmented)
