@@ -55,7 +55,7 @@ struct CategoryScreen: View {
                         .frame(height: Dimensions.space_264)
                         .foregroundColor(.clear)
                         .padding(EdgeInsets(top: Dimensions.space_12, leading: 0, bottom: 0, trailing: 0))
-                        .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
+                        .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .colorPrimary]), startPoint: .top, endPoint: .bottom))
                 }
                 ForEach($state.value.exerciseList) { item in
                     ListItemView(title: item.exerciseTitle.wrappedValue, onClicked: {
@@ -69,20 +69,20 @@ struct CategoryScreen: View {
                 }, label: {
                     Text(MR.strings().add_new_result.desc().localized())
                         .padding(Dimensions.space_16)
-                        .foregroundColor(Color.black)
-                        .background(Color.gray)
+                        .foregroundColor(Color.colorPrimary)
+                        .background(Color.colorTertiary)
                         .clipShape(RoundedCorner())
                         .frame(maxWidth: .infinity, alignment: .center)
                 })
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-            .background(.black)
+            .background(Color.colorPrimary)
             .showDialog(isPresented: $state.value.isDialogVisible, onDismiss: {
                 viewModel.onDialogClosed()
             }) {
                 VStack {
                     Text(MR.strings().exercise_name.desc().localized())
-                        .foregroundColor(.white)
+                        .foregroundColor(.onPrimary)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding()
                     InputView(value: $state.value.newExerciseName, trailingIcon: {}, onValueChange: { text in
@@ -95,8 +95,8 @@ struct CategoryScreen: View {
                     }, label: {
                         Text(MR.strings().add_new_exercise.desc().localized())
                             .padding(Dimensions.space_16)
-                            .foregroundColor(Color.black)
-                            .background(Color.gray)
+                            .foregroundColor(Color.colorPrimary)
+                            .background(Color.colorTertiary)
                             .clipShape(RoundedCorner())
                             .frame(maxWidth: .infinity, alignment: .center)
                     })

@@ -62,8 +62,8 @@ struct AddCategoryScreen: View {
                     label: {
                         Text(MR.strings().summary_add_category.desc().localized())
                             .padding(Dimensions.space_16)
-                            .foregroundColor(Color.black)
-                            .background(Color.gray)
+                            .foregroundColor(Color.onTertiary)
+                            .background(Color.colorTertiary)
                             .clipShape(RoundedCorner())
                             .frame(maxWidth: .infinity, alignment: .center)
                     }

@@ -57,7 +57,7 @@ struct AddExerciseScreen: View {
         VStack(alignment: .leading, spacing: 0) {
             Text(state.value.exerciseTitle)
                 .padding(.horizontal, 8)
-                .foregroundColor(.white)
+                .foregroundColor(.onPrimary)
             
             ResultsTimeFilterView(
                 tabs: state.value.filter,
@@ -75,8 +75,8 @@ struct AddExerciseScreen: View {
                     }, label: {
                         Text(MR.strings().add_new_result.desc().localized())
                             .padding()
-                            .foregroundColor(.black)
-                            .background(Color.gray.opacity(0.4))
+                            .foregroundColor(.onTertiary)
+                            .background(Color.colorTertiary)
                             .cornerRadius(Dimensions.button_corner)
                     }
                 )
@@ -89,8 +89,8 @@ struct AddExerciseScreen: View {
                     }, label: {
                         Text(MR.strings().add_result_save.desc().localized())
                             .padding()
-                            .foregroundColor(.black)
-                            .background(Color.gray.opacity(0.4))
+                            .foregroundColor(.onTertiary)
+                            .background(Color.colorTertiary)
                             .cornerRadius(Dimensions.button_corner)
                     }
                 )
@@ -150,16 +150,16 @@ struct AddExerciseScreen: View {
                         .cornerRadius(Dimensions.input_view_corner)
                         .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.black, lineWidth: 1))
                         .padding()
-                        .foregroundColor(.white)
+                        .foregroundColor(.onPrimary)
                         .keyboardType(.decimalPad)
                     
                     TextField(MR.strings().minutes.desc().localized(), text: $minutes)
                         .padding()
 //                        .background(backgroundColor)
                         .cornerRadius(Dimensions.input_view_corner)
-                        .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.black, lineWidth: 1))
+                        .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.primary, lineWidth: 1))
                         .padding()
-                        .foregroundColor(.white)
+                        .foregroundColor(.onPrimary)
                         .keyboardType(.decimalPad)
                 }
                 
@@ -170,16 +170,16 @@ struct AddExerciseScreen: View {
                         .cornerRadius(Dimensions.input_view_corner)
                         .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.black, lineWidth: 1))
                         .padding()
-                        .foregroundColor(.white)
+                        .foregroundColor(.onPrimary)
                         .keyboardType(.decimalPad)
                     
                     TextField(MR.strings().milliseconds.desc().localized(), text: $milliseconds)
                         .padding()
 //                        .background(backgroundColor)
                         .cornerRadius(Dimensions.input_view_corner)
-                        .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.black, lineWidth: 1))
+                        .overlay(RoundedRectangle(cornerRadius: Dimensions.input_view_corner).stroke(Color.primary, lineWidth: 1))
                         .padding()
-                        .foregroundColor(.white)
+                        .foregroundColor(.onPrimary)
                         .keyboardType(.decimalPad)
                 }
                 
@@ -189,13 +189,15 @@ struct AddExerciseScreen: View {
                 }, label: {
                     Text(MR.strings().confirm.desc().localized())
                         .padding(Dimensions.space_16)
-                        .foregroundColor(Color.black)
-                        .background(Color.gray)
+                        .foregroundColor(Color.onTertiary)
+                        .background(Color.colorTertiary)
                         .clipShape(RoundedCorner())
                         .frame(maxWidth: .infinity, alignment: .center)
                 })
                 .padding()
             }
+        }.onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
 }

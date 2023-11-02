@@ -28,14 +28,14 @@ struct CategoryItem: View {
             Text(category.name)
                 .frame(alignment: .leading)
                 .padding(Dimensions.space_8)
-                .background(.black)
+                .background(Color.colorPrimary)
                 .cornerRadius(Dimensions.button_corner, corners: [.topLeft, .bottomRight])
-                .foregroundColor(.white)
+                .foregroundColor(.onPrimary)
                 .font(.subheadline)
       
             ForEach(category.exercises) { item in
                 Text(item.exerciseTitle)
-                    .foregroundColor(.white)
+                    .foregroundColor(.onPrimary)
                     .font(.subheadline)
             }.padding(.horizontal, Dimensions.space_8)
             
@@ -55,13 +55,13 @@ struct CategoryItem: View {
                     .frame(height: Dimensions.space_164)
                     .foregroundColor(.clear)
                     .padding(EdgeInsets(top: Dimensions.space_24, leading: 0, bottom: 0, trailing: 0))
-                    .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .black]), startPoint: .top, endPoint: .bottom))
+                    .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .colorPrimary]), startPoint: .top, endPoint: .bottom))
             }
         )
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.white, lineWidth: 1)
+                .stroke(.tertiary, lineWidth: 1)
         )
         
     }

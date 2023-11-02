@@ -16,9 +16,6 @@ struct ResultInputView: View {
         self.onValueChange = onValueChange
         self.hasFocus = hasFocus
         self.value = initValue
-        
-        print("STATE33:", initValue)
-
     }
 
     var body: some View {
@@ -31,7 +28,7 @@ struct ResultInputView: View {
             )
             .multilineTextAlignment(.center)
             .focused($hasFocus)
-            .foregroundColor(.white)
+            .foregroundColor(.onPrimary)
             .frame(height: Dimensions.space_40)
             .onChange(of: initValue, perform: { text in
                 value = text
@@ -40,7 +37,7 @@ struct ResultInputView: View {
             Divider()
                 .frame(height: Dimensions.space_1)
                 .padding(.horizontal, Dimensions.space_32)
-                .background(isError ? Color.red: Color.white)
+                .background(isError ? Color.error: Color.onPrimary)
             }
     }
 }

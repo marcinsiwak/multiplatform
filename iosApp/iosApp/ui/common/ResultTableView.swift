@@ -33,10 +33,10 @@ struct ResultsTableView: View {
                         text: item?.text ?? "",
                         iconResId: item?.isArrowUp == true ? "chevron.up" :
                             item?.isArrowUp == false ? "chevron.down" : nil,
-                        color: Color.white
+                        color: Color.onPrimary
                     )
                         .padding(.horizontal, Dimensions.space_16)
-                        .foregroundColor(.white)
+                        .foregroundColor(.onPrimary)
                         .onTapGesture {
                             onLabelClicked(index)
                         }
@@ -44,7 +44,7 @@ struct ResultsTableView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, Dimensions.space_8)
-            .background(.black)
+            .background(Color.colorPrimary)
 
             // Results
             ScrollView {
@@ -62,12 +62,12 @@ struct ResultsTableView: View {
                     .listRowSeparator(.hidden)
                     
                     Divider()
-                        .background(.gray)
+                        .background(.tertiary)
                 }
                 
                 if results.isEmpty && !isNewResultEnabled {
                     Button(action: onAddNewResultClicked) {
-                        Text("Add first result")
+                        Text(MR.strings().add_first_result.desc().localized())
                     }
                     .frame(maxWidth: .infinity, minHeight: Dimensions.results_min_height)
                     .listRowSeparator(.hidden)
@@ -84,13 +84,13 @@ struct ResultsTableView: View {
                     .listRowSeparator(.hidden)
                     
                     Divider()
-                        .background(.gray)
+                        .background(.tertiary)
                 }
                 
 
                 if !results.isEmpty && !isNewResultEnabled {
                     Button(action: onAddNewResultClicked) {
-                        Text("Add new result")
+                        Text(MR.strings().add_new_result.desc().localized())
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
@@ -99,7 +99,7 @@ struct ResultsTableView: View {
             }
             .listRowSeparator(.hidden)
             .listStyle(PlainListStyle())
-            .background(.black)
+            .background(Color.colorPrimary)
             .scrollContentBackground(.hidden)
         }
     }

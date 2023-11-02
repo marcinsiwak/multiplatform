@@ -36,7 +36,7 @@ struct RegisterScreen: View {
              }.padding(Dimensions.space_32)
          }.padding()
              .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-             .background(Color.black)
+             .background(Color.colorPrimary)
 
      }
     

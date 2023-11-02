@@ -37,9 +37,9 @@ struct SummaryScreen: View {
                 }, label: {
                     HStack {
                         Image(systemName: "plus.circle")
-                            .tint(.gray)
+                            .tint(Color.colorTertiary)
                         Text(MR.strings().summary_add_category.desc().localized())
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color.colorTertiary)
                     }
                     .padding(.vertical, Dimensions.space_24)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -48,7 +48,7 @@ struct SummaryScreen: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         .padding(.horizontal, Dimensions.space_8)
-        .background(.black)
+        .background(Color.colorPrimary)
         .onAppear {
             viewModel.onResume()
         }

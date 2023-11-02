@@ -25,7 +25,7 @@ struct SettingsScreen: View {
         VStack(alignment: .leading, spacing: 0) {
             Text("")
                 .font(.largeTitle)
-                .foregroundColor(.white)
+                .foregroundColor(.onPrimary)
                 .padding()
             
             SettingsItem(
@@ -37,7 +37,7 @@ struct SettingsScreen: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         .padding(.horizontal, Dimensions.space_8)
-        .background(.black)
+        .background(Color.colorPrimary)
     }
 }
 
