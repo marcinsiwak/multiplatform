@@ -12,16 +12,17 @@ plugins {
 kotlin {
     targetHierarchy.default()
 
-    android {
+    androidTarget() {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
+    
     iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+iosArm64()
+iosSimulatorArm64()
 
     cocoapods {
         summary = "CommonObject Shared Module"
@@ -56,8 +57,9 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.commonObject"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         minSdk = 24
     }
+
 }

@@ -12,10 +12,10 @@ plugins {
 kotlin {
     targetHierarchy.default()
 
-    android {
+    androidTarget() {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
@@ -94,7 +94,7 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.network"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         minSdk = 24
     }
