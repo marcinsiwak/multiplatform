@@ -32,7 +32,7 @@ jobs:
     - name: Prepare release keystore
       run: |
           echo "${{ secrets.SIGNING_RELEASE }}" > release.jks.asc
-          gpg -d --passphrase "${{ secrets.SIGNING_RELEASE }}" --batch release.jks.asc > signing/release.jks
+          gpg -d --passphrase "${{ secrets.SIGNING_RELEASE }}" --batch release.jks.asc > release.jks
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
