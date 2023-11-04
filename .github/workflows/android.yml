@@ -23,16 +23,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
-
-    - name: Prepare signing config
-      env:
-        SIGNING_RELEASE_PROPERTIES: ${{ secrets.SIGNING_RELEASE_PROPERTIES }}
-      run: echo "$SIGNING_RELEASE_PROPERTIES" > ./release.properties
-
-    - name: Prepare release keystore
-      run: |
-          echo "${{ secrets.SIGNING_RELEASE }}" > release.jks.asc
-          gpg -d --passphrase "${{ secrets.SIGNING_RELEASE }}" --batch release.jks.asc > release.jks
+    - uses: r0adkll/sign-android-release@v1
+      name: Sign app APK
+      id: sign_app
+      with:
+          signingKeyBase64: ${{ secrets.SIGNING_RELEASE }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
