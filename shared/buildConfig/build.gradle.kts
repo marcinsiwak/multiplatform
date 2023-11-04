@@ -17,11 +17,11 @@ kotlin {
     androidTarget() {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
             }
         }
     }
-jvmToolchain(11)
+jvmToolchain(17)
     
 
     iosX64()
