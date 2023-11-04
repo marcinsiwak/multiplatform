@@ -21,6 +21,7 @@ kotlin {
             }
         }
     }
+jvmToolchain(11)
     
 
     iosX64()
