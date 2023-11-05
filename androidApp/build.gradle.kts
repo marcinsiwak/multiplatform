@@ -47,33 +47,47 @@ android {
     }
 
     val releaseKeystorePropFile = rootProject.file("signing/release.properties")
-    val releaseKeystoreProp = Properties()
-    releaseKeystoreProp.load(FileInputStream(releaseKeystorePropFile))
 
-    signingConfigs {
-        maybeCreate("release")
-        getByName("release") {
-            keyAlias = releaseKeystoreProp["keyAlias"] as String
-            keyPassword = releaseKeystoreProp["keyPassword"] as String
-            storeFile = rootProject.file(releaseKeystoreProp["storeFile"] as String)
-            storePassword = releaseKeystoreProp["storePassword"] as String
+    if (releaseKeystorePropFile.exists()) {
+        val releaseKeystoreProp = Properties()
+        releaseKeystoreProp.load(FileInputStream(releaseKeystorePropFile))
+
+        signingConfigs {
+            maybeCreate("release")
+            getByName("release") {
+                keyAlias = releaseKeystoreProp["keyAlias"] as String
+                keyPassword = releaseKeystoreProp["keyPassword"] as String
+                storeFile = rootProject.file("signing/release.jks")
+                storePassword = releaseKeystoreProp["storePassword"] as String
+            }
+        }
+    } else {
+        signingConfigs {
+            maybeCreate("release")
+            getByName("release") {
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+                storeFile = rootProject.file("signing/release.jks")
+                storePassword = System.getenv("KEY_STORE_PASSWORD")
+            }
         }
     }
 
     val debugKeystorePropFile = rootProject.file("signing/debug.properties")
-    val debugKeystoreProp = Properties()
-    debugKeystoreProp.load(FileInputStream(debugKeystorePropFile))
+    if (debugKeystorePropFile.exists()) {
+        val debugKeystoreProp = Properties()
+        debugKeystoreProp.load(FileInputStream(debugKeystorePropFile))
 
-    signingConfigs {
-        maybeCreate("debug")
-        getByName("debug") {
-            keyAlias = debugKeystoreProp["keyAlias"] as String
-            keyPassword = debugKeystoreProp["keyPassword"] as String
-            storeFile = rootProject.file(debugKeystoreProp["storeFile"] as String)
-            storePassword = debugKeystoreProp["storePassword"] as String
+        signingConfigs {
+            maybeCreate("debug")
+            getByName("debug") {
+                keyAlias = debugKeystoreProp["keyAlias"] as String
+                keyPassword = debugKeystoreProp["keyPassword"] as String
+                storeFile = file("signing/debug.jks")
+                storePassword = debugKeystoreProp["storePassword"] as String
+            }
         }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = true

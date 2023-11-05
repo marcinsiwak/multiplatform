@@ -32,7 +32,7 @@ jobs:
       uses: timheuer/base64-to-file@v1.2
       with:
         fileName: 'release.jks'
-        fileDir: '/home/runner/work/multiplatform/signing/'
+        fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
         encodedString: ${{ secrets.SIGNING_RELEASE }}
 
     - name: Build APK
