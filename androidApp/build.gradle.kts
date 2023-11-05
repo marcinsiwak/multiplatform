@@ -98,14 +98,22 @@ android {
             signingConfig = signingConfigs.getByName("release")
 
             val releasePropertiesFile = rootProject.file("androidApp/release.properties")
-            val releaseProperties = Properties()
-            releaseProperties.load(FileInputStream(releasePropertiesFile))
+            if (releasePropertiesFile.exists()) {
+                val releaseProperties = Properties()
+                releaseProperties.load(FileInputStream(releasePropertiesFile))
 
-            buildConfigField(
-                "String",
-                "GOOGLE_AUTH_WEB_CLIENT_ID",
-                releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-            )
+                buildConfigField(
+                    "String",
+                    "GOOGLE_AUTH_WEB_CLIENT_ID",
+                    releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                )
+            } else {
+                buildConfigField(
+                    "String",
+                    "GOOGLE_AUTH_WEB_CLIENT_ID",
+                    System.getenv("GOOGLE_AUTH_WEB_CLIENT_ID")
+                )
+            }
         }
         debug {
 
