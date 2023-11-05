@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v3
     - run: echo "The ${{ github.repository }} repository has been cloned."
     - run: echo "Setting up JDK" 
-    - name: set up JDK 11
+    - name: set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
@@ -26,24 +26,18 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - run: echo "Building Debug APK."
 
     - name: Decode Keystore
       id: decode_keystore
       uses: timheuer/base64-to-file@v1.2
       with:
         fileName: 'release.jks'
-        fileDir: '/home/runner/work/multiplatform/multiplatform/app/keystore/'
+        fileDir: '/home/runner/work/multiplatform/signing/'
         encodedString: ${{ secrets.SIGNING_RELEASE }}
 
     - name: Build APK
-      run: ./gradlew :app:assembleRelease
+      run: ./gradlew assembleRelease
       env:
         SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
         SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         SIGNING_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-
-    - name: Build with Gradle
-      run: ./gradlew assembleDebug
-    - run: echo "Build status report=${{ job.status }}."
-
