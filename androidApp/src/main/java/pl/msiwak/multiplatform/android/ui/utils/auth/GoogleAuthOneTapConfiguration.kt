@@ -9,7 +9,7 @@ class GoogleAuthOneTapConfiguration {
         .setGoogleIdTokenRequestOptions(
             BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                 .setSupported(true)
-                .setServerClientId(BuildConfig.GOOGLE_AUTH_WEB_CLIENT_ID)
+                .setServerClientId(BuildConfig.AUTH_WEB_CLIENT_ID)
                 .setFilterByAuthorizedAccounts(false)
                 .build())
         .build()
