@@ -27,7 +27,7 @@ jobs:
     - name: Update release.properties
       env:
         GOOGLE_AUTH_WEB_CLIENT_ID: ${{ secrets.GOOGLE_AUTH_WEB_CLIENT_ID }}
-      run: echo GOOGLE_AUTH_WEB_CLIENT_ID="GOOGLE_AUTH_WEB_CLIENT_ID" > ./release.properties
+      run: echo GOOGLE_AUTH_WEB_CLIENT_ID="GOOGLE_AUTH_WEB_CLIENT_ID" > ./androidApp/release.properties
 
     - name: Update debug.properties
       env:
