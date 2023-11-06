@@ -103,7 +103,7 @@ android {
 
             buildConfigField(
                 "String",
-                "AUTH_WEB_CLIENT_ID",
+                "GOOGLE_AUTH_WEB_CLIENT_ID",
                 releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
             )
         }
@@ -116,7 +116,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
             buildConfigField(
                 "String",
-                "AUTH_WEB_CLIENT_ID",
+                "GOOGLE_AUTH_WEB_CLIENT_ID",
                 debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
             )
         }
