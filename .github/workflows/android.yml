@@ -27,12 +27,12 @@ jobs:
     - name: Update production.properties
       env:
         GOOGLE_AUTH_WEB_CLIENT_ID: ${{ secrets.GOOGLE_AUTH_WEB_CLIENT_ID }}
-      run: echo GOOGLE_AUTH_WEB_CLIENT_ID="GOOGLE_AUTH_WEB_CLIENT_ID" > ./production.properties
+      run: echo GOOGLE_AUTH_WEB_CLIENT_ID="GOOGLE_AUTH_WEB_CLIENT_ID" > ./androidApp/production.properties
 
     - name: Update debug.properties
       env:
         GOOGLE_AUTH_WEB_CLIENT_ID: ${{ secrets.GOOGLE_AUTH_WEB_CLIENT_ID }}
-      run: echo GOOGLE_AUTH_WEB_CLIENT_ID="GOOGLE_AUTH_WEB_CLIENT_ID" > ./debug.properties
+      run: echo GOOGLE_AUTH_WEB_CLIENT_ID="GOOGLE_AUTH_WEB_CLIENT_ID" > ./androidApp/debug.properties
 
     - name: Decode Keystore
       id: decode_keystore
