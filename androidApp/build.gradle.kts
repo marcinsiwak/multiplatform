@@ -97,45 +97,28 @@ android {
             )
             signingConfig = signingConfigs.getByName("release")
 
-            val googleAuthWebClientId = System.getenv("GOOGLE_AUTH_WEB_CLIENT_ID")
             val releasePropertiesFile = rootProject.file("androidApp/release.properties")
-            if (releasePropertiesFile.exists()) {
-                val releaseProperties = Properties()
-                releaseProperties.load(FileInputStream(releasePropertiesFile))
+            val releaseProperties = Properties()
+            releaseProperties.load(FileInputStream(releasePropertiesFile))
 
-                buildConfigField(
-                    "String",
-                    "GOOGLE_AUTH_WEB_CLIENT_ID",
-                    releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-                )
-            } else {
-                buildConfigField(
-                    "String",
-                    "GOOGLE_AUTH_WEB_CLIENT_ID",
-                    googleAuthWebClientId
-                )
-            }
+            buildConfigField(
+                "String",
+                "GOOGLE_AUTH_WEB_CLIENT_ID",
+                releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+            )
         }
         debug {
-            signingConfig = signingConfigs.getByName("debug")
 
             val debugPropertiesFile = rootProject.file("androidApp/debug.properties")
-            if(debugPropertiesFile.exists()) {
-                val debugProperties = Properties()
-                debugProperties.load(FileInputStream(debugPropertiesFile))
+            val debugProperties = Properties()
+            debugProperties.load(FileInputStream(debugPropertiesFile))
 
-                buildConfigField(
-                    "String",
-                    "GOOGLE_AUTH_WEB_CLIENT_ID",
-                    debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-                )
-            } else {
-                buildConfigField(
-                    "String",
-                    "GOOGLE_AUTH_WEB_CLIENT_ID",
-                    System.getenv("GOOGLE_AUTH_WEB_CLIENT_ID")
-                )
-            }
+            signingConfig = signingConfigs.getByName("debug")
+            buildConfigField(
+                "String",
+                "GOOGLE_AUTH_WEB_CLIENT_ID",
+                debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+            )
         }
     }
 }
