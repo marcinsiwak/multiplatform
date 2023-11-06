@@ -34,6 +34,16 @@ jobs:
         GOOGLE_AUTH_WEB_CLIENT_ID: ${{ secrets.GOOGLE_AUTH_WEB_CLIENT_ID }}
       run: echo GOOGLE_AUTH_WEB_CLIENT_ID="GOOGLE_AUTH_WEB_CLIENT_ID" > ./androidApp/debug.properties
 
+    - name: Update release.properties
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+      run: echo BASE_URL="BASE_URL" > ./release.properties
+
+    - name: Update debug.properties
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+      run: echo BASE_URL="BASE_URL" > ./debug.properties
+
     - name: Decode Keystore
       id: decode_keystore
       uses: timheuer/base64-to-file@v1.2
