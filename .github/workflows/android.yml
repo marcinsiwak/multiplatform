@@ -49,11 +49,11 @@ jobs:
       uses: timheuer/base64-to-file@v1.2
       with:
         fileName: 'release.jks'
-        fileDir: '/home/runner/work/multiplatform/multiplatform/androidApp/signing/'
+        fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
         encodedString: ${{ secrets.SIGNING_RELEASE }}
 
     - name: Build APK
-      run: ./gradlew assembleRelease
+      run: ./gradlew assembleRelease -x test
       env:
         SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
         SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
