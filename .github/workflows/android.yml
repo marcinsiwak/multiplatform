@@ -63,6 +63,6 @@ jobs:
     - name: Build APK
       run: ./gradlew :androidApp:assembleRelease -x test
       env:
-        SIGNING_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        SIGNING_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
