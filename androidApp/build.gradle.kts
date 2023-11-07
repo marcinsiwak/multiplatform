@@ -67,7 +67,7 @@ android {
             getByName("release") {
                 keyAlias = System.getenv("KEY_ALIAS")
                 keyPassword = System.getenv("KEY_PASSWORD")
-                storeFile = rootProject.file("signing/release.jks")
+                storeFile = file(System.getenv("SIGNING_RELEASE"))
                 storePassword = System.getenv("KEY_STORE_PASSWORD")
             }
         }
