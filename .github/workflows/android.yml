@@ -53,7 +53,7 @@ jobs:
         encodedString: ${{ secrets.SIGNING_RELEASE }}
 
     - name: Decode debug Keystore
-      id: decode_keystore
+      id: decode_keystore_debug
       uses: timheuer/base64-to-file@v1.2
       with:
         fileName: 'debug.jks'
