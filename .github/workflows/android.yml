@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-12
 
     steps:
     - uses: actions/checkout@v3
@@ -51,6 +51,14 @@ jobs:
         fileName: 'release.jks'
         fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
         encodedString: ${{ secrets.SIGNING_RELEASE }}
+
+    - name: Decode debug Keystore
+      id: decode_keystore
+      uses: timheuer/base64-to-file@v1.2
+      with:
+        fileName: 'debug.jks'
+        fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
+        encodedString: ${{ secrets.SIGNING_DEBUG }}
 
     - name: Build APK
       run: ./gradlew :androidApp:assembleRelease -x test
