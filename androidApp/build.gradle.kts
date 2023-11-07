@@ -87,6 +87,16 @@ android {
                 storePassword = debugKeystoreProp["storePassword"] as String
             }
         }
+    } else {
+        signingConfigs {
+            maybeCreate("debug")
+            getByName("debug") {
+                keyAlias = System.getenv("KEY_ALIAS_DEBUG")
+                keyPassword = System.getenv("KEY_PASSWORD_DEBUG")
+                storeFile = rootProject.file("signing/debug.jks")
+                storePassword = System.getenv("KEY_STORE_PASSWORD_DEBUG")
+            }
+        }
     }
     buildTypes {
         release {
