@@ -7,7 +7,7 @@ on:
     branches: [ "develop", "master" ]
 
 jobs:
-  build:
+  Android:
 
     runs-on: ubuntu-latest
 
@@ -66,3 +66,33 @@ jobs:
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+
+  iOS:
+
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Setting up JDK"
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - run: ./gradlew :shared:generateDummyFramework
+      - name: Set up cocoapods
+        uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          version: latest
+
+      - name: Install Dependencies
+        run: |
+          cd iosApp
+          pod install --verbose
+
+      - run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose
