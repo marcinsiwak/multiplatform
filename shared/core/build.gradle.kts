@@ -16,13 +16,14 @@ plugins {
 kotlin {
     targetHierarchy.default()
 
-    android {
+    androidTarget() {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "17"
             }
         }
     }
+jvmToolchain(17)
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -64,7 +65,7 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.core"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         minSdk = 24
     }
