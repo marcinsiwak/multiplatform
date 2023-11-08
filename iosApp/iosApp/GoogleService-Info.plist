@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>607279059338-18rnfh9m3nefhtdj8j783u0n9ovn9cqb.apps.googleusercontent.com</string>
+	<string>607279059338-ldhf7gjg8vrgadbqd0ou2ol45ujf113h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.607279059338-18rnfh9m3nefhtdj8j783u0n9ovn9cqb</string>
+	<string>com.googleusercontent.apps.607279059338-ldhf7gjg8vrgadbqd0ou2ol45ujf113h</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>607279059338-301abm12p5s9hpue4lq6cguuc9h1sdka.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>pl.msiwak.multiplatform.ios</string>
+	<string>pl.msiwak.athletetrack.ios</string>
 	<key>PROJECT_ID</key>
 	<string>sportplatform-b5318</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:607279059338:ios:bc6ba205b213ed16cb3873</string>
+	<string>1:607279059338:ios:4a16abc9bfbf0fcacb3873</string>
 </dict>
 </plist>

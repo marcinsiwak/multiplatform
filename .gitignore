@@ -14,3 +14,4 @@ androidApp/release.properties
 androidApp/debug.properties
 /debug.properties
 /release.properties
+/androidApp/google-services.json
