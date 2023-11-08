@@ -7,7 +7,7 @@
 */build
 /captures
 .externalNativeBuild
-.cxx
+.cxx\
 local.properties
 /signing
 androidApp/release.properties
