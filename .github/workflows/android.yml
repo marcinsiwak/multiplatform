@@ -102,9 +102,4 @@ jobs:
         with:
           version: latest
 
-      - name: Install Dependencies
-        run: |
-          cd iosApp
-          pod install --verbose
-
       - run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose

@@ -14,8 +14,3 @@ androidApp/release.properties
 androidApp/debug.properties
 /debug.properties
 /release.properties
-iosApp/Podfile.lock
-iosApp/Pods/*
-iosApp/iosApp.xcworkspace/*
-iosApp/iosApp.xcodeproj/*
-!iosApp/iosApp.xcodeproj/project.pbxproj

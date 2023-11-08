@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "714CCE80-0370-443E-9DC6-BC6F260B7F18"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2287E2E9-A371-4068-A3DD-2BBAD616CBEB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/welcome/WelcomeScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "loginUsingGoogle()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8320C814-AE68-4A2A-949B-3AE41F8B840D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/welcome/WelcomeScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "loginUsingGoogle()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8320C814-AE68-4A2A-949B-3AE41F8B840D - 65dd53da3b47d34b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.WelcomeScreen.loginUsingGoogle() -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/msiwak/StudioProjects/multiplatform/iosApp/iosApp/ui/welcome/WelcomeScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  uuid = "8320C814-AE68-4A2A-949B-3AE41F8B840D - 65dd53da3b47d34b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.WelcomeScreen.loginUsingGoogle() -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/msiwak/StudioProjects/multiplatform/iosApp/iosApp/ui/welcome/WelcomeScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "312">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6872D09F-DA7F-4D75-A5FD-3B1917412924"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/welcome/WelcomeScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "loginUsingGoogle()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "088216A2-384E-4DB5-989F-0048FED3D34D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/welcome/WelcomeScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "660CB98A-B39F-4748-9636-CA035FB3647D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/welcome/WelcomeScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E6F92F34-EB5C-4B11-A73B-F90C6032ACC5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/welcome/WelcomeScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54BFF7ED-E678-401E-ABF3-477D07A9C381"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/summary/SummaryScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "54BFF7ED-E678-401E-ABF3-477D07A9C381 - d5187ebeed03ba27"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;__C.SharedCategory&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.ScrollView&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;__C.SharedCategory&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0&gt;)&gt;&gt; in iosApp.SummaryScreen.body.getter : some"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/msiwak/StudioProjects/multiplatform/iosApp/iosApp/ui/summary/SummaryScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "512">
+               </Location>
+               <Location
+                  uuid = "54BFF7ED-E678-401E-ABF3-477D07A9C381 - 8bffd52be308a320"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.SharedCategory) -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;__C.SharedCategory&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.ScrollView&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;__C.SharedCategory&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0&gt;)&gt;&gt; in iosApp.SummaryScreen.body.getter : some"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/msiwak/StudioProjects/multiplatform/iosApp/iosApp/ui/summary/SummaryScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "456">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6DFB9275-1948-4CAF-9E05-82C2E91D1A99"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/summary/SummaryScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "onStateReceived(state:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A8F1A05-93A0-4D9C-982C-D179226460AC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/summary/SummaryScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B05D4E8-0DE0-466D-8A9E-F29EBF445C73"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/summary/SummaryScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "1B05D4E8-0DE0-466D-8A9E-F29EBF445C73 - bef9fc0f3fb52d63"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;__C.SharedCategory&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.ScrollView&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;__C.SharedCategory&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0&gt;)&gt;&gt; in iosApp.SummaryScreen.body.getter : some"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/msiwak/StudioProjects/multiplatform/iosApp/iosApp/ui/summary/SummaryScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "1B05D4E8-0DE0-466D-8A9E-F29EBF445C73 - a5b1f406637ef2b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.tint(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt; in closure #3 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;__C.SharedCategory&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.ScrollView&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;__C.SharedCategory&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0&gt;)&gt;&gt; in iosApp.SummaryScreen.body.getter : some"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/msiwak/StudioProjects/multiplatform/iosApp/iosApp/ui/summary/SummaryScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1A656A17-4E36-4F4F-B248-2FC048278A53"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/common/ResultTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B491DC0E-B4C3-4E24-A1ED-9C05763D3AE9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/common/ResultTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C2951C81-D9FD-468C-9FBB-AE71E44EFE9A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/common/ResultTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ED22ADA5-9E81-47F2-890D-59529BEFF509"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/common/ResultTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A291F461-FEF4-49D3-83E3-DE286D1DB934"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/common/ResultTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12473BBD-0498-4D31-AE87-9AC1FB76495C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/addExercise/AddExercise.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7673A5F0-AE1E-4CE6-955F-65AE8785B12D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/common/NewResultView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7E06605B-AD57-4C69-B56D-5AE372E1C936"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/ui/common/NewResultView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "init(focusedFieldPos:newResultData:exerciseType:onResultValueChanged:onAmountValueChanged:onDatePicked:onDateClicked:onAmountClicked:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
