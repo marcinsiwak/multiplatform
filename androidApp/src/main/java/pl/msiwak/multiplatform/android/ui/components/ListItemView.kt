@@ -57,7 +57,7 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                 ),
             text = name,
             fontSize = MaterialTheme.font.font_20,
-            color = MaterialTheme.color.ExerciseColor
+            color = MaterialTheme.colorScheme.onPrimary
         )
         Icon(
             modifier = Modifier

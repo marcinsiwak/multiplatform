@@ -42,6 +42,9 @@ import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountToMillisecondsUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatMillisecondsToRunningAmountUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
@@ -143,6 +146,8 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
+            get(),
+            get(),
             get()
         )
     }
@@ -181,7 +186,7 @@ val useCaseModule = module {
     factory { RemoveExerciseUseCase(get()) }
     factory { RemoveCategoryUseCase(get()) }
     factory { FormatDateUseCase(get()) }
-    factory { FormatResultsUseCase(get(), get()) }
+    factory { FormatResultsUseCase(get(), get(), get()) }
     factory { FormatStringToDateUseCase(get()) }
     factory { SetLanguageUseCase(get()) }
     factory { GetLanguageUseCase(get()) }
@@ -196,7 +201,7 @@ val useCaseModule = module {
     factory { ObserveAuthStateChangedUseCase(get(), get()) }
     factory { ResendVerificationEmailUseCase(get()) }
     factory { AddExerciseUseCase(get()) }
-    factory { AddResultUseCase(get()) }
+    factory { AddResultUseCase(get(), get()) }
     factory { RemoveResultUseCase(get()) }
     factory { DownloadExerciseUseCase(get()) }
     factory { ObserveExerciseUseCase(get()) }
@@ -204,6 +209,9 @@ val useCaseModule = module {
     factory { GetIsOfflineModeUseCase(get()) }
     factory { SynchronizeDatabaseUseCase(get()) }
     factory { CheckIfSynchronizationIsPossibleUseCase(get()) }
+    factory { FormatMillisecondsToRunningAmountUseCase() }
+    factory { FormatRunningAmountToMillisecondsUseCase() }
+    factory { FormatRunningAmountUseCase() }
 }
 
 val repositoryUseModule = module {

@@ -20,8 +20,18 @@ struct NewResultView: View {
     var onAmountValueChanged: (String) -> Void
     var onDatePicked: (Kotlinx_datetimeLocalDateTime) -> Void
     var onDateClicked: () -> Void
+    var onAmountClicked: () -> Void
 
-    init(focusedFieldPos: ObservableEvent<Int32?>, newResultData: FormattedResultData, exerciseType: ExerciseType, onResultValueChanged: @escaping (String) -> Void, onAmountValueChanged: @escaping (String) -> Void, onDatePicked: @escaping (Kotlinx_datetimeLocalDateTime) -> Void, onDateClicked: @escaping () -> Void) {
+    init(
+        focusedFieldPos: ObservableEvent<Int32?>,
+        newResultData: FormattedResultData,
+        exerciseType: ExerciseType,
+        onResultValueChanged: @escaping (String) -> Void,
+        onAmountValueChanged: @escaping (String) -> Void,
+        onDatePicked: @escaping (Kotlinx_datetimeLocalDateTime) -> Void,
+        onDateClicked: @escaping () -> Void,
+        onAmountClicked: @escaping () -> Void
+    ) {
         self.focusedFieldPos = focusedFieldPos
         self.newResultData = newResultData
         self.exerciseType = exerciseType
@@ -29,6 +39,11 @@ struct NewResultView: View {
         self.onAmountValueChanged = onAmountValueChanged
         self.onDatePicked = onDatePicked
         self.onDateClicked = onDateClicked
+        self.onAmountClicked = onAmountClicked
+        self._amount = State(initialValue: newResultData.amount)
+        self._result = State(initialValue: newResultData.result)
+        print("STATE22:", amount)
+
     }
     
     var body: some View {
@@ -37,25 +52,32 @@ struct NewResultView: View {
             spacing: Dimensions.space_24
         ) {
             ResultInputView(
-                value: $result,
+                initValue: newResultData.result,
                 hintText: "100",
                 isError: newResultData.isResultError,
                 onValueChange: { text in onResultValueChanged(text)},
-                hasFocus: $isResultFieldFocused
+                hasFocus: isResultFieldFocused
             )
-            .frame(width: Dimensions.result_input_view_height)
+            .frame(width: Dimensions.result_input_view_width)
             .keyboardType(.decimalPad)
+            .padding(.leading, 24)
             
             
             ResultInputView(
-                value: $amount,
-                hintText: exerciseType == .gym ? "10" : "00:00.000" ,
+                initValue: newResultData.amount,
+                hintText: exerciseType == .gym ? "10" : "00:00:00.000" ,
                 isError: newResultData.isAmountError,
                 onValueChange: onAmountValueChanged,
-                hasFocus: $isAmountFieldFocused
+                hasFocus: isAmountFieldFocused
             )
-            .frame(width: Dimensions.result_input_view_height)
-            .keyboardType(exerciseType == .gym ? .decimalPad : .default)
+            .frame(width: 116)
+            .keyboardType(.decimalPad)
+            .padding(.leading, 16)
+            .onTapGesture {
+                if (exerciseType == ExerciseType.running) {
+                    onAmountClicked()
+                }
+            }
             
             DatePicker("", selection: $selectedDate, displayedComponents: .date)
 //                .labelsHidden()

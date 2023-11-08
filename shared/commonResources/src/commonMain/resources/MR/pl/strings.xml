@@ -12,14 +12,20 @@
     <string name="login">Zaloguj</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
-    <string name="input_wrong_format">Wrong format</string>
+    <string name="input_wrong_format">Niepoprawny format</string>
+    <string name="ok">Ok</string>
+    <string name="confirm">Ok</string>
+    <string name="deny">Anuluj</string>
 
     <string name="exercise">ćwiczenie</string>
     <string name="exercise_name">Nazwa ćwiczenia</string>
     <string name="exercise_type">Kategoria ćwiczenia</string>
     <string name="add_new_exercise">Dodaj nowe ćwiczenie</string>
+    <string name="add_exercise">Dodaj ćwiczenie</string>
+    <string name="add_new_exercise_error">Niepoprawnie wprowadzona wartość</string>
 
-    <string name="category_name">Nazwa Kategorii</string>
+    <string name="add_category">Dodaj kategorię</string>
+    <string name="category_name">Nazwa kategorii</string>
     <string name="category">Kategoria</string>
 
     <string name="add_new_result">Dodaj nowy wynik</string>
@@ -27,9 +33,10 @@
     <string name="remove_result_dialog_description">Czy na pewno chcesz usunąć ten wynik?</string>
 
     <string name="add_result_save">Zapisz wynik</string>
+    <string name="add_first_result">Dodaj pierwszy wynik</string>
 
-    <string name="remove_result_dialog_title">Remove result</string>
-    <string name="remove_result_dialog_description">Do you want to remove this result</string>
+    <string name="remove_result_dialog_title">Usuń wynik</string>
+    <string name="remove_result_dialog_description">Czy chcesz usunąć ten wynik?</string>
 
     <string name="settings">Ustawienia</string>
     <string name="settings_language">Język</string>
@@ -46,27 +53,43 @@
 
     <string name="exercise_change_unit">Zmień na: %s</string>
 
-    <string name="force_update_title">Update required</string>
-    <string name="force_update_description">We have added some functionalities which require update of app.</string>
-    <string name="force_update_update">Update</string>
+    <string name="force_update_title">Aktualizacja wymagana</string>
+    <string name="force_update_description">Dodaliśmy kilka funcjonalności, które wymagają aktualizacji.</string>
+    <string name="force_update_update">Aktualizuj</string>
 
     <string name="welcome_no_account">Nie masz konta?</string>
     <string name="welcome_create_account">Stwórz konto</string>
-    <string name="welcome_google_login">Login with Google</string>
-    <string name="welcome_offline_mode">Offline mode</string>
+    <string name="welcome_google_login">Zaloguj przez Google</string>
+    <string name="welcome_offline_mode">Tryb offline</string>
 
-    <string name="verify_title">Verify your account</string>
-    <string name="verify_description">We have sent you activation link. Please check your email and verify your account.</string>
-    <string name="verify_open_mail">Open mail</string>
-    <string name="verify_resend_mail">Resend mail</string>
-    <string name="verify_login">Login</string>
+    <string name="verify_title">Zweryfikuj swoje konto</string>
+    <string name="verify_description">Wysłano link aktywacyjny. Sprawdź swoją pocztę i potwierdź stworzenie konta.</string>
+    <string name="verify_open_mail">Otwórz pocztę</string>
+    <string name="verify_resend_mail">Wyślij ponownie</string>
+    <string name="verify_login">Zaloguj</string>
 
-    <string name="password_requirements_number">Included number</string>
-    <string name="password_requirements_letter">Included letter</string>
-    <string name="password_requirements_capital">Included capital letter</string>
-    <string name="password_requirements_special">Included special sign</string>
-    <string name="password_requirements_more_than_eight">Consist eight signs</string>
+    <string name="password_requirements_number">Zawiera numer</string>
+    <string name="password_requirements_letter">Zawiera literę</string>
+    <string name="password_requirements_capital">Zawiera dużą letter</string>
+    <string name="password_requirements_special">Zawiera znak specjalny</string>
+    <string name="password_requirements_more_than_eight">Zawiera minimum 8 znaków</string>
 
-    <string name="remove_category_dialog_title">Remove category</string>
-    <string name="remove_category_dialog_description">Do you want to remove this result?</string>
+    <string name="remove_category_dialog_title">Usuń kategorię</string>
+    <string name="remove_category_dialog_description">Czy chcesz usunąć kategorię?</string>
+
+    <string name="auth_failed_title">Autoryzacja się nie udała</string>
+    <string name="auth_failed_description">Email lub hasło jest niepoprawne</string>
+
+    <string name="synchronization_dialog_title">Czy chcesz zsynchronizować swoje dane?</string>
+    <string name="synchronization_dialog_description">Twoje dane zostaną przeniesione do bazy danych</string>
+
+    <string name="offline_mode_title">Jesteś w trybie offline</string>
+    <string name="offline_mode_sing_up_in">Logowanie/Rejestracja</string>
+
+    <string name="hours">Godziny</string>
+    <string name="minutes">Minuty</string>
+    <string name="seconds">Sekundy</string>
+    <string name="milliseconds">Milisekundy</string>
+
+    <string name="running_time_input_insert_result">Wprowadź swój wynik</string>
 </resources>

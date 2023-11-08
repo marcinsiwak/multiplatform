@@ -2,11 +2,10 @@ import SwiftUI
 import shared
 
 struct ResultsTableView: View {
-    let resultDataTitles: [String?]
+    let resultDataTitles: [ResultTableItemData?]
     let unit: String
     let results: [FormattedResultData]
     let exerciseType: ExerciseType
-    let sortType: SortType?
     let isNewResultEnabled: Bool
     let newResultData: FormattedResultData
     @ObservedObject var focusedFieldPos: ObservableEvent<Int32?>
@@ -16,6 +15,7 @@ struct ResultsTableView: View {
     let onAmountValueChanged: (String) -> Void
     let onDatePicked: (Kotlinx_datetimeLocalDateTime) -> Void
     let onDateClicked: () -> Void
+    let onAmountClicked: () -> Void
     let onResultLongClick: (Int) -> Void
 
     
@@ -27,46 +27,27 @@ struct ResultsTableView: View {
             HStack(
                 spacing: Dimensions.space_24
             ) {
-                TextWithDrawableView(
-                    text: resultDataTitles[safe: 0] ?? "",
-                    iconResId: sortType == .resultIncreasing ? "chevron.up" :
-                            sortType == .resultDecreasing ? "chevron.down" : nil,
-                    color: Color.white
-                )
-                    .padding(.horizontal, Dimensions.space_16)
-                    .foregroundColor(.white)
-                    .onTapGesture {
-                        onLabelClicked(0)
-                    }
-                TextWithDrawableView(
-                    text: resultDataTitles[safe: 1] ?? "",
-                    iconResId: sortType == .amountIncreasing ? "chevron.up" :
-                        sortType == .amountDecreasing ? "chevron.down" : nil,
-                    color: Color.white
-                )
-                    .padding(.horizontal, Dimensions.space_16)
-                    .foregroundColor(.white)
-                    .onTapGesture {
-                        onLabelClicked(1)
-                    }
-                TextWithDrawableView(
-                    text: resultDataTitles[safe: 2] ?? "",
-                    iconResId: sortType == .dateIncreasing ? "chevron.up" :
-                        sortType == .dateDecreasing ? "chevron.down" : nil,
-                    color: Color.white
-                )
-                    .padding(.horizontal, Dimensions.space_16)
-                    .foregroundColor(.white)
-                    .onTapGesture {
-                        onLabelClicked(2)
-                    }
+                
+                ForEach(Array(resultDataTitles.enumerated()), id: \.1) { index, item in
+                    TextWithDrawableView(
+                        text: item?.text ?? "",
+                        iconResId: item?.isArrowUp == true ? "chevron.up" :
+                            item?.isArrowUp == false ? "chevron.down" : nil,
+                        color: Color.onPrimary
+                    )
+                        .padding(.horizontal, Dimensions.space_16)
+                        .foregroundColor(.onPrimary)
+                        .onTapGesture {
+                            onLabelClicked(index)
+                        }
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, Dimensions.space_8)
-            .background(.gray)
+            .background(Color.colorPrimary)
 
             // Results
-            List {
+            ScrollView {
                 if isNewResultEnabled {
                     NewResultView(
                         focusedFieldPos: focusedFieldPos,
@@ -75,17 +56,21 @@ struct ResultsTableView: View {
                         onResultValueChanged: { onResultValueChanged($0) },
                         onAmountValueChanged: { onAmountValueChanged($0) },
                         onDatePicked: { onDatePicked($0) },
-                        onDateClicked: onDateClicked
+                        onDateClicked: onDateClicked,
+                        onAmountClicked: onAmountClicked
                     )
-                    .listRowBackground(Color.black)
+                    .listRowSeparator(.hidden)
+                    
+                    Divider()
+                        .background(.tertiary)
                 }
                 
                 if results.isEmpty && !isNewResultEnabled {
                     Button(action: onAddNewResultClicked) {
-                        Text("Add first result")
+                        Text(MR.strings().add_first_result.desc().localized())
                     }
                     .frame(maxWidth: .infinity, minHeight: Dimensions.results_min_height)
-                    .listRowBackground(Color.black)
+                    .listRowSeparator(.hidden)
                 }
                 
                 ForEach(results.indices, id: \.self) { index in
@@ -96,19 +81,25 @@ struct ResultsTableView: View {
                         date: item.date,
                         onResultLongClick: { onResultLongClick(index) }
                     )
+                    .listRowSeparator(.hidden)
+                    
+                    Divider()
+                        .background(.tertiary)
                 }
-                .listRowBackground(Color.black)
+                
 
                 if !results.isEmpty && !isNewResultEnabled {
                     Button(action: onAddNewResultClicked) {
-                        Text("Add new result")
+                        Text(MR.strings().add_new_result.desc().localized())
                     }
                     .frame(maxWidth: .infinity)
-                    .listRowBackground(Color.black)
+                    .padding(.vertical, 16)
+                    .listRowSeparator(.hidden)
                 }
             }
+            .listRowSeparator(.hidden)
             .listStyle(PlainListStyle())
-            .background(.black)
+            .background(Color.colorPrimary)
             .scrollContentBackground(.hidden)
         }
     }
@@ -116,6 +107,8 @@ struct ResultsTableView: View {
 
 //struct ResultTableView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ResultTableView()
+//        ResultsTableView()
 //    }
 //}
+
+extension ResultTableItemData: Identifiable {}

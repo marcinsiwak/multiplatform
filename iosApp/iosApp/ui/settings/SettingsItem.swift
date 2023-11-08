@@ -9,9 +9,9 @@ struct SettingsItem: View {
         VStack {
             Text(title)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(.white)
+                .foregroundColor(.onPrimary)
             Divider()
-                .background(.gray)
+                .background(.tertiary)
         }
         .onTapGesture {
             onItemClicked()

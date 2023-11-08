@@ -71,9 +71,9 @@ fun WelcomeScreen() {
 
     if (viewState.value.isErrorDialogVisible) {
         PopupDialog(
-            title = "Auth failed",
-            description = "Email or password is invalid",
-            confirmButtonTitle = "OK",
+            title = stringResource(id = MR.strings.auth_failed_title.resourceId),
+            description = stringResource(id = MR.strings.auth_failed_description.resourceId),
+            confirmButtonTitle = stringResource(id = MR.strings.confirm.resourceId),
             onConfirmClicked = {
                 viewModel.onConfirmDialogButtonClicked()
             }
@@ -82,10 +82,10 @@ fun WelcomeScreen() {
 
     if (viewState.value.isSynchronizationDialogVisible) {
         PopupDialog(
-            title = "Do you want to synchronize your data",
-            description = "Your data will be moved to remote database",
-            confirmButtonTitle = "Confirm",
-            dismissButtonTitle = "Deny",
+            title = stringResource(id = MR.strings.synchronization_dialog_title.resourceId),
+            description = stringResource(id = MR.strings.synchronization_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(id = MR.strings.confirm.resourceId),
+            dismissButtonTitle = stringResource(id = MR.strings.deny.resourceId),
             onConfirmClicked = {
                 viewModel.onConfirmSynchronizationClicked()
             },

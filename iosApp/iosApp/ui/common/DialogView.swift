@@ -40,7 +40,7 @@ struct DialogView<DialogContent: View>: ViewModifier {
 }
 
 extension View {
-  func customDialog<DialogContent: View>(
+  func showDialog<DialogContent: View>(
     isPresented: Binding<Bool>,
     onDismiss: (() -> Void)?,
     @ViewBuilder dialogContent: @escaping () -> DialogContent

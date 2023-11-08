@@ -1,62 +1,32 @@
 package pl.msiwak.multiplatform.android.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import pl.msiwak.multiplatform.commonResources.MR
 
-
-private val LightColorScheme = lightColorScheme(
-    primary = ColorPrimary,
-    onPrimary = ColorOnPrimary,
-    secondary = ColorSecondary,
-    onSecondary = ColorOnSecondary,
-    tertiary = ColorTertiary,
-    onTertiary = ColorOnTertiary,
-    surface = ColorSurface,
-    onSurface = ColorOnSurface,
-    background = ColorBackground,
-    error = Color.Red,
-)
-
-private val DarkColorScheme = darkColorScheme(
-    primary = ColorPrimaryDark,
-    onPrimary = ColorOnPrimaryDark,
-    secondary = ColorSecondaryDark,
-    onSecondary = ColorOnSecondaryDark,
-    tertiary = ColorTertiaryDark,
-    onTertiary = ColorOnTertiaryDark,
-    surface = ColorSurfaceDark,
-    onSurface = ColorOnSurfaceDark,
-    background = ColorBackgroundDark,
-    error = Color.Red
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+@Composable
+private fun appColorScheme() = lightColorScheme(
+    primary = colorResource(id = MR.colors.colorPrimary.resourceId),
+    onPrimary = colorResource(id = MR.colors.colorOnPrimary.resourceId),
+    secondary = colorResource(id = MR.colors.colorSecondary.resourceId),
+    onSecondary = colorResource(id = MR.colors.colorOnSecondary.resourceId),
+    tertiary = colorResource(id = MR.colors.colorTertiary.resourceId),
+    onTertiary = colorResource(id = MR.colors.colorOnTertiary.resourceId),
+    surface = colorResource(id = MR.colors.colorSurface.resourceId),
+    onSurface = colorResource(id = MR.colors.colorOnSurface.resourceId),
+    background = colorResource(id = MR.colors.background.resourceId),
+    error = colorResource(id = MR.colors.colorError.resourceId),
+    onError = colorResource(id = MR.colors.colorOnError.resourceId),
 )
 
 @Composable
 fun AppTheme(
-    isDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        isDarkTheme -> DarkColorScheme
-        else -> {
-//            LightColorScheme light mode looks terrible
-            DarkColorScheme
-        }
-    }
+    val colorScheme = appColorScheme()
 
     CompositionLocalProvider(LocalOwnColorScheme provides OwnColorScheme(true)) {
         MaterialTheme(

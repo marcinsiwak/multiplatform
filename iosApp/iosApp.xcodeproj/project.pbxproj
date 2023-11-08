@@ -19,12 +19,10 @@
 		711E8B6A2A5758C600151063 /* AddCategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B692A5758C600151063 /* AddCategoryScreen.swift */; };
 		711E8B6E2A57593D00151063 /* AddExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B6D2A57593D00151063 /* AddExercise.swift */; };
 		711E8B712A57595D00151063 /* CategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B702A57595D00151063 /* CategoryScreen.swift */; };
-		711E8B742A57597C00151063 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B732A57597C00151063 /* CustomDatePicker.swift */; };
 		711E8B762A57598B00151063 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B752A57598B00151063 /* DialogView.swift */; };
 		711E8B782A57599900151063 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B772A57599900151063 /* InputView.swift */; };
 		711E8B7B2A5759AE00151063 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B7A2A5759AE00151063 /* ListItemView.swift */; };
 		711E8B7D2A5759CC00151063 /* NewResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B7C2A5759CC00151063 /* NewResultView.swift */; };
-		711E8B7F2A5759DF00151063 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B7E2A5759DF00151063 /* Popup.swift */; };
 		711E8B812A5759F500151063 /* ResultInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B802A5759F500151063 /* ResultInputView.swift */; };
 		711E8B832A575A0900151063 /* ResultsTimeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B822A575A0900151063 /* ResultsTimeFilterView.swift */; };
 		711E8B852A575A1C00151063 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B842A575A1C00151063 /* ResultsView.swift */; };
@@ -46,8 +44,9 @@
 		711E8BB52A575E4800151063 /* Collector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB42A575E4800151063 /* Collector.swift */; };
 		711E8BB72A575E6700151063 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB62A575E6700151063 /* Array.swift */; };
 		711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB82A575EE700151063 /* AppDelegate.swift */; };
-		711E8BBB2A5ECC8A00151063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 711E8BBA2A5ECC8A00151063 /* GoogleService-Info.plist */; };
 		711E8BBE2A682AFC00151063 /* VerifyEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BBD2A682AFC00151063 /* VerifyEmailScreen.swift */; };
+		71A5EF3C2AF3D3F000E373DF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5EF3B2AF3D3F000E373DF /* Theme.swift */; };
+		71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */; };
 		71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -79,12 +78,10 @@
 		711E8B692A5758C600151063 /* AddCategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryScreen.swift; sourceTree = "<group>"; };
 		711E8B6D2A57593D00151063 /* AddExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercise.swift; sourceTree = "<group>"; };
 		711E8B702A57595D00151063 /* CategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryScreen.swift; sourceTree = "<group>"; };
-		711E8B732A57597C00151063 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		711E8B752A57598B00151063 /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		711E8B772A57599900151063 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		711E8B7A2A5759AE00151063 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		711E8B7C2A5759CC00151063 /* NewResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewResultView.swift; sourceTree = "<group>"; };
-		711E8B7E2A5759DF00151063 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		711E8B802A5759F500151063 /* ResultInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInputView.swift; sourceTree = "<group>"; };
 		711E8B822A575A0900151063 /* ResultsTimeFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTimeFilterView.swift; sourceTree = "<group>"; };
 		711E8B842A575A1C00151063 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
@@ -106,8 +103,9 @@
 		711E8BB42A575E4800151063 /* Collector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collector.swift; sourceTree = "<group>"; };
 		711E8BB62A575E6700151063 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		711E8BB82A575EE700151063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		711E8BBA2A5ECC8A00151063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		711E8BBD2A682AFC00151063 /* VerifyEmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailScreen.swift; sourceTree = "<group>"; };
+		71A5EF3B2AF3D3F000E373DF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		74DA36D12685A7143467F9F1 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -209,12 +207,10 @@
 		711E8B722A57596700151063 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				711E8B732A57597C00151063 /* CustomDatePicker.swift */,
 				711E8B752A57598B00151063 /* DialogView.swift */,
 				711E8B772A57599900151063 /* InputView.swift */,
 				711E8B7A2A5759AE00151063 /* ListItemView.swift */,
 				711E8B7C2A5759CC00151063 /* NewResultView.swift */,
-				711E8B7E2A5759DF00151063 /* Popup.swift */,
 				711E8B802A5759F500151063 /* ResultInputView.swift */,
 				711E8B822A575A0900151063 /* ResultsTimeFilterView.swift */,
 				711E8B842A575A1C00151063 /* ResultsView.swift */,
@@ -345,7 +341,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				711E8BBA2A5ECC8A00151063 /* GoogleService-Info.plist */,
+				71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */,
 				711E8BB32A575E3300151063 /* extensions */,
 				711E8BB02A575C1600151063 /* widgets */,
 				711E8BAA2A575BCE00151063 /* utils */,
@@ -360,6 +356,7 @@
 				711E8B642A57583700151063 /* IosNavigationCommand.swift */,
 				711E8B662A57584D00151063 /* NavigationCommand.swift */,
 				711E8BB82A575EE700151063 /* AppDelegate.swift */,
+				71A5EF3B2AF3D3F000E373DF /* Theme.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -427,7 +424,7 @@
 			files = (
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
-				711E8BBB2A5ECC8A00151063 /* GoogleService-Info.plist in Resources */,
+				71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,8 +494,8 @@
 				711E8B892A575A4500151063 /* TextWithDrawableView.swift in Sources */,
 				711E8B5D2A57575C00151063 /* ObservableEvent.swift in Sources */,
 				711E8B762A57598B00151063 /* DialogView.swift in Sources */,
+				71A5EF3C2AF3D3F000E373DF /* Theme.swift in Sources */,
 				711E8B992A575AF900151063 /* RegisterScreen.swift in Sources */,
-				711E8B7F2A5759DF00151063 /* Popup.swift in Sources */,
 				711E8B632A57582300151063 /* Extension.swift in Sources */,
 				711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */,
 				711E8BA92A575BA200151063 /* WelcomeScreen.swift in Sources */,
@@ -513,7 +510,6 @@
 				711E8B872A575A3000151063 /* ResultTableView.swift in Sources */,
 				711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */,
 				711E8B652A57583700151063 /* IosNavigationCommand.swift in Sources */,
-				711E8B742A57597C00151063 /* CustomDatePicker.swift in Sources */,
 				711E8B6A2A5758C600151063 /* AddCategoryScreen.swift in Sources */,
 				711E8B5F2A57577E00151063 /* ObservableState.swift in Sources */,
 				711E8BA12A575B4F00151063 /* CategoryItem.swift in Sources */,
@@ -657,7 +653,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.multiplatform.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.athletetrack.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -679,7 +675,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.multiplatform.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.athletetrack.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

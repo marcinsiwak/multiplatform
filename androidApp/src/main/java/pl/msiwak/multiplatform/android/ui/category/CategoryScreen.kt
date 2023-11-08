@@ -139,7 +139,7 @@ fun CategoryScreen(id: String) {
             onClick = { viewModel.onAddNewExerciseClicked() }) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = "Add exercise",
+                text = stringResource(id = MR.strings.add_exercise.resourceId),
                 fontSize = MaterialTheme.font.font_16
             )
         }

@@ -11,7 +11,7 @@ struct DashboardScreen: View {
                 .tabItem {
                     //                Image(systemName: "phone.fill")
                     Text("Summary")
-                        .foregroundColor(.white)
+                        .foregroundColor(.onPrimary)
                 }
 //            Text("Account")
 //                .tabItem {
@@ -22,10 +22,10 @@ struct DashboardScreen: View {
                 .tabItem {
                     //                Image(systemName: "tv.fill")
                     Text("Settings")
-                        .foregroundColor(.white)
+                        .foregroundColor(.onPrimary)
                 }
         }
-        .accentColor(.white)
+        .accentColor(.onPrimary)
     
     }
 }

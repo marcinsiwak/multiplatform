@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -42,6 +43,7 @@ fun ResultsTableView(
     onAmountValueChanged: (String) -> Unit = {},
     onDateValueChanged: (String) -> Unit = {},
     onDateClicked: () -> Unit = {},
+    onAmountClicked: () -> Unit = {},
     onResultLongClick: (Int) -> Unit = {},
     focusRequesters: List<FocusRequester>
 ) {
@@ -71,10 +73,7 @@ fun ResultsTableView(
                     modifier = Modifier
                         .clickable { onLabelClicked(index) }
                         .width(MaterialTheme.dimens.result_item_width)
-                        .padding(horizontal = MaterialTheme.dimens.space_24)
-                        .onGloballyPositioned {
-
-                        },
+                        .padding(horizontal = MaterialTheme.dimens.space_24),
                     text = item.text,
                     color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
@@ -102,7 +101,7 @@ fun ResultsTableView(
                             },
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.onPrimary,
-                        text = "Add first result"
+                        text = stringResource(id = MR.strings.add_new_result.resourceId)
                     )
                 }
             }
@@ -121,6 +120,9 @@ fun ResultsTableView(
                             onDateValueChanged(it)
                         }, onDateClicked = {
                             onDateClicked()
+                        },
+                        onAmountClicked = {
+                            onAmountClicked()
                         }
                     )
                 }

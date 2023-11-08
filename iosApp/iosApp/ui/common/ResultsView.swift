@@ -10,15 +10,15 @@ struct ResultView: View {
         HStack(spacing: 0) {
             Text(result)
                 .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
+                .foregroundColor(.onPrimary)
                 .padding(Dimensions.space_8)
             Text(amount)
                 .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
+                .foregroundColor(.onPrimary)
                 .padding(Dimensions.space_8)
             Text(date)
                 .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
+                .foregroundColor(.onPrimary)
                 .padding()
         }
         .contentShape(Rectangle())

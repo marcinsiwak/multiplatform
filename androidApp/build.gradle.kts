@@ -39,11 +39,11 @@ android {
         kotlinCompilerExtensionVersion = "1.5.0"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     val releaseKeystorePropFile = rootProject.file("signing/release.properties")
@@ -57,11 +57,20 @@ android {
             getByName("release") {
                 keyAlias = releaseKeystoreProp["keyAlias"] as String
                 keyPassword = releaseKeystoreProp["keyPassword"] as String
-                storeFile = rootProject.file(releaseKeystoreProp["storeFile"] as String)
+                storeFile = rootProject.file("signing/release.jks")
                 storePassword = releaseKeystoreProp["storePassword"] as String
             }
         }
-
+    } else {
+        signingConfigs {
+            maybeCreate("release")
+            getByName("release") {
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+                storeFile = rootProject.file("signing/release.jks")
+                storePassword = System.getenv("KEY_STORE_PASSWORD")
+            }
+        }
     }
 
     val debugKeystorePropFile = rootProject.file("signing/debug.properties")
@@ -74,12 +83,21 @@ android {
             getByName("debug") {
                 keyAlias = debugKeystoreProp["keyAlias"] as String
                 keyPassword = debugKeystoreProp["keyPassword"] as String
-                storeFile = rootProject.file(debugKeystoreProp["storeFile"] as String)
+                storeFile = rootProject.file("signing/debug.jks")
                 storePassword = debugKeystoreProp["storePassword"] as String
             }
         }
+    } else {
+        signingConfigs {
+            maybeCreate("debug")
+            getByName("debug") {
+                keyAlias = System.getenv("KEY_ALIAS_DEBUG")
+                keyPassword = System.getenv("KEY_PASSWORD_DEBUG")
+                storeFile = rootProject.file("signing/debug.jks")
+                storePassword = System.getenv("KEY_STORE_PASSWORD_DEBUG")
+            }
+        }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = true

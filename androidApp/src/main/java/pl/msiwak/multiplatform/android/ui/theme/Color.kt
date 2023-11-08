@@ -6,35 +6,12 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-val ColorPrimaryDark = Color.Black
-val ColorOnPrimaryDark = Color.White
-val ColorSecondaryDark = Color.DarkGray
-val ColorOnSecondaryDark = Color.White
-val ColorTertiaryDark = Color.Gray
-val ColorOnTertiaryDark = Color.Black
-val ColorSurfaceDark = Color.Black
-val ColorOnSurfaceDark = Color.DarkGray
-val ColorBackgroundDark = Color.Black
-
-val ColorPrimary = Color.White
-val ColorOnPrimary = Color.Black
-val ColorSecondary = Color.LightGray
-val ColorOnSecondary = Color.Black
-val ColorTertiary = Color.Gray
-val ColorOnTertiary = Color.Black
-val ColorSurface = Color.White
-val ColorOnSurface = Color.Black
-val ColorBackground = Color.White
-
 data class OwnColorPalette(
-    val ShadowColor: Color = Color.DarkGray,
-    val ExerciseColor: Color = Color.LightGray,
-    val BannerColor: Color = Color.LightGray
+    val ShadowColor: Color = Color.DarkGray
 )
 
 private val OwnDarkColorPalette = OwnColorPalette(
     ShadowColor = Color.Black,
-    ExerciseColor = Color.LightGray,
 )
 
 val LocalOwnColorScheme = compositionLocalOf { OwnColorPalette() }

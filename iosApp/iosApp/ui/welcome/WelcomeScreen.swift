@@ -49,7 +49,7 @@ struct WelcomeScreen: View {
             }
 
             Text(MR.strings().welcome_no_account.desc().localized())
-                .foregroundColor(Color.secondary)
+                .foregroundColor(Color.colorSecondary)
 
             Button(action: {
                 viewModel.onRegistrationClicked()
@@ -59,7 +59,7 @@ struct WelcomeScreen: View {
         }
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-        .background(Color.black)
+        .background(Color.colorPrimary)
     }
     
     func loginUsingGoogle() {

@@ -22,7 +22,7 @@ fun AddExerciseDialog(
     onAddExerciseClicked: () -> Unit,
     onDialogClosed: () -> Unit = {}
 ) {
-    AlertDialog(shape = RoundedCornerShape(MaterialTheme.dimens.space_16),
+    AlertDialog(shape = RoundedCornerShape(MaterialTheme.dimens.dialog_corners),
         containerColor = colorResource(MR.colors.gray.resourceId),
         onDismissRequest = {
             onDialogClosed()

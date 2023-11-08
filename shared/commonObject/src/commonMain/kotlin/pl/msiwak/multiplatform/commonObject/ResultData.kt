@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 data class ResultData(
     val id: String = "",
     val exerciseId: String = "",
-    val result: Double,
+    val result: String,
     val amount: String,
     val date: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 )

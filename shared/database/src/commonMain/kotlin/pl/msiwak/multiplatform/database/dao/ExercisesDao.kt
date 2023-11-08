@@ -49,7 +49,7 @@ class ExercisesDao(database: Database) {
             ) { exerciseQuery: Query<Exercise>, resultQuery: Query<ResultData> ->
 
                 val exercise = exerciseQuery.executeAsOne()
-                val results = resultQuery.executeAsList()
+                val results = resultQuery.executeAsList().sortedByDescending { it.date }
 
                 Pair(exercise, results)
             }.map { (exercise, results) ->
@@ -79,7 +79,7 @@ class ExercisesDao(database: Database) {
         amount: String,
         date: LocalDateTime,
     ): ResultData {
-        return ResultData(id, exerciseId, result.toDouble(), amount, date)
+        return ResultData(id, exerciseId, result, amount, date)
     }
 
     private fun mapExercise(
