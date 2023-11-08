@@ -100,7 +100,7 @@ jobs:
       - name: Set up cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
         with:
-          podfile-path: iosApp/Podfile.lock
+          version: latest
 
       - name: Install Dependencies
         run: |
