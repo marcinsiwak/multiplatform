@@ -50,7 +50,7 @@ fun VerifyEmailScreen() {
             .padding(
                 vertical = MaterialTheme.dimens.space_32,
                 horizontal = MaterialTheme.dimens.space_16
-            ),
+            )
     ) {
         Text(
             modifier = Modifier.padding(MaterialTheme.dimens.space_8),
@@ -70,13 +70,13 @@ fun VerifyEmailScreen() {
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
             onClick = { viewModel.onOpenMailClicked() },
-            text = stringResource(id = MR.strings.verify_open_mail.resourceId),
+            text = stringResource(id = MR.strings.verify_open_mail.resourceId)
         )
 
         SecondaryButton(
             modifier = Modifier.fillMaxWidth(),
             onClick = { viewModel.onResendMailClicked() },
-            text = stringResource(id = MR.strings.verify_resend_mail.resourceId),
+            text = stringResource(id = MR.strings.verify_resend_mail.resourceId)
         )
 
         MainButton(
@@ -84,7 +84,7 @@ fun VerifyEmailScreen() {
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
             onClick = { viewModel.onLoginClicked() },
-            text = stringResource(id = MR.strings.verify_login.resourceId),
+            text = stringResource(id = MR.strings.verify_login.resourceId)
         )
     }
 }

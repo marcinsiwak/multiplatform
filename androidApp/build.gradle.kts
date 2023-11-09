@@ -1,11 +1,12 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
 import java.io.FileInputStream
 import java.util.Properties
-import pl.msiwak.multiplatfor.dependencies.Deps
 
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("org.jlleitschuh.gradle.ktlint")
     kotlin("android")
 }
 
@@ -162,5 +163,4 @@ dependencies {
     with(Deps.Google) {
         api(andorid_play_services_auth)
     }
-
 }

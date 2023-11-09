@@ -20,7 +20,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.PasswordRequirements
@@ -54,7 +53,7 @@ fun RegisterScreen() {
                 .padding(
                     start = MaterialTheme.dimens.space_36,
                     end = MaterialTheme.dimens.space_36,
-                    top = MaterialTheme.dimens.space_164,
+                    top = MaterialTheme.dimens.space_164
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top

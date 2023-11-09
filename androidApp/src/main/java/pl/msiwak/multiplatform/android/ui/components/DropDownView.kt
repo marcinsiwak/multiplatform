@@ -31,7 +31,7 @@ fun DropDownView(
     modifier: Modifier = Modifier,
     currentValue: String,
     items: List<ExerciseType>,
-    onItemPicked: (ExerciseType) -> Unit = {},
+    onItemPicked: (ExerciseType) -> Unit = {}
 ) {
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -65,7 +65,8 @@ fun DropDownView(
             onDismissRequest = {
                 expand = false
                 focusManager.clearFocus()
-            }) {
+            }
+        ) {
             items.forEach { exercise ->
                 DropdownMenuItem(
                     text = { Text(text = exercise.name) },
@@ -73,7 +74,8 @@ fun DropDownView(
                         onItemPicked(exercise)
                         expand = false
                         focusManager.clearFocus()
-                    })
+                    }
+                )
             }
         }
     }

@@ -48,7 +48,6 @@ fun BottomNavigation(navController: NavController, items: List<pl.msiwak.multipl
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {
-
                         navController.graph.startDestinationRoute?.let { screen_route ->
                             popUpTo(screen_route) {
                                 saveState = true

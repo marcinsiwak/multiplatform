@@ -29,7 +29,6 @@ fun NewResultView(
     onDateClicked: () -> Unit,
     onAmountClicked: () -> Unit
 ) {
-
     Row(
         modifier = modifier
             .height(IntrinsicSize.Min)
@@ -40,7 +39,6 @@ fun NewResultView(
             .padding(bottom = MaterialTheme.dimens.space_16)
             .fillMaxWidth()
     ) {
-
         ResultInputView(
             modifier = Modifier
                 .focusRequester(focusRequesters[1])

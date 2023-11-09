@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(
                                 navArgument(NavigationDirections.AddExercise.BUNDLE_ARG_ID) {
                                     type = NavType.StringType
-                                },
+                                }
                             )
                         ) { backStackEntry ->
                             val id = backStackEntry
@@ -93,7 +93,7 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(
                                 navArgument(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID) {
                                     type = NavType.StringType
-                                },
+                                }
                             )
                         ) { backStackEntry ->
                             val id = backStackEntry

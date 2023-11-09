@@ -46,7 +46,7 @@ fun CategoryScreen(id: String) {
     val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
     val viewState = viewModel.viewState.collectAsState()
 
-    val backgroundId = when (viewState.value.exerciseType) { //todo maybe share with ios
+    val backgroundId = when (viewState.value.exerciseType) {
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
 //        ExerciseType.OTHER -> null
@@ -60,7 +60,8 @@ fun CategoryScreen(id: String) {
     }
 
     if (viewState.value.isRemoveExerciseDialogVisible) {
-        PopupDialog(title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
+        PopupDialog(
+            title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
             description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
             confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
             dismissButtonTitle = stringResource(MR.strings.no.resourceId),
@@ -69,25 +70,27 @@ fun CategoryScreen(id: String) {
             },
             onDismissClicked = {
                 viewModel.onPopupDismissed()
-            })
+            }
+        )
     }
 
-    if(viewState.value.isLoading) {
+    if (viewState.value.isLoading) {
         Loader()
     }
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-
         if (viewState.value.isDialogVisible) {
             AddExerciseDialog(
                 inputText = viewState.value.newExerciseName,
                 onExerciseTitleChanged = {
                     viewModel.onAddExerciseNameChanged(it)
-                }, onAddExerciseClicked = {
+                },
+                onAddExerciseClicked = {
                     viewModel.onAddExerciseClicked()
-                }, onDialogClosed = {
+                },
+                onDialogClosed = {
                     viewModel.onDialogClosed()
                 }
             )
@@ -119,24 +122,26 @@ fun CategoryScreen(id: String) {
                 itemsIndexed(viewState.value.exerciseList) { index, item ->
                     ListItemView(
                         name = item.exerciseTitle,
-                        onItemClick = { viewModel.onExerciseClicked(item.id?: "") },
+                        onItemClick = { viewModel.onExerciseClicked(item.id) },
                         onLongClick = { viewModel.onResultLongClicked(index) }
                     )
                 }
             }
         }
-        Button(modifier = Modifier
-            .fillMaxWidth()
-            .align(Alignment.BottomCenter)
-            .padding(
-                vertical = MaterialTheme.dimens.space_16,
-                horizontal = MaterialTheme.dimens.space_80
-            ),
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(
+                    vertical = MaterialTheme.dimens.space_16,
+                    horizontal = MaterialTheme.dimens.space_80
+                ),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.tertiary,
                 contentColor = MaterialTheme.colorScheme.primary
             ),
-            onClick = { viewModel.onAddNewExerciseClicked() }) {
+            onClick = { viewModel.onAddNewExerciseClicked() }
+        ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
                 text = stringResource(id = MR.strings.add_exercise.resourceId),

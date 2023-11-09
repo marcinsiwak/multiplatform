@@ -101,7 +101,7 @@ fun AddExerciseScreen(id: String) {
         focusManager.clearFocus()
         RunningTimeInputDialog(
             onConfirm = { hours: String, minutes: String, seconds: String, milliseconds: String ->
-                 viewModel.onConfirmRunningAmount(hours, minutes, seconds, milliseconds)
+                viewModel.onConfirmRunningAmount(hours, minutes, seconds, milliseconds)
             },
             onDismiss = {
                 viewModel.onDismissAmountDialog()
@@ -162,13 +162,14 @@ fun AddExerciseScreen(id: String) {
                     ),
                     onClick = {
                         viewModel.onAddNewResultClicked()
-                    }) {
+                    }
+                ) {
                     Text(
                         text = stringResource(MR.strings.add_new_result.resourceId),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
-            } else
+            } else {
                 Button(
                     modifier = Modifier
                         .padding(bottom = MaterialTheme.dimens.space_16)
@@ -179,12 +180,14 @@ fun AddExerciseScreen(id: String) {
                     ),
                     onClick = {
                         viewModel.onSaveResultClicked()
-                    }) {
+                    }
+                ) {
                     Text(
                         text = stringResource(MR.strings.add_result_save.resourceId),
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
+            }
         }
 
         ResultsTableView(
@@ -200,19 +203,26 @@ fun AddExerciseScreen(id: String) {
             },
             onResultValueChanged = {
                 viewModel.onResultValueChanged(it)
-            }, onAmountValueChanged = {
+            },
+            onAmountValueChanged = {
                 viewModel.onAmountValueChanged(it)
-            }, onDateValueChanged = {
+            },
+            onDateValueChanged = {
                 viewModel.onDateValueChanged(it)
-            }, onDateClicked = {
+            },
+            onDateClicked = {
                 viewModel.onDateClicked()
-            }, onResultLongClick = { pos ->
+            },
+            onResultLongClick = { pos ->
                 viewModel.onResultLongClicked(pos)
-            }, onLabelClicked = { pos ->
+            },
+            onLabelClicked = { pos ->
                 viewModel.onLabelClicked(pos)
-            }, onAmountClicked = {
+            },
+            onAmountClicked = {
                 viewModel.onAmountClicked()
-            })
+            }
+        )
     }
 }
 

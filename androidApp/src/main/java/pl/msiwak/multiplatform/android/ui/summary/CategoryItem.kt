@@ -37,20 +37,21 @@ fun CategoryItem(
     modifier: Modifier = Modifier,
     category: Category
 ) {
-    val backgroundId = when (category.exerciseType) { //todo maybe share with ios
+    val backgroundId = when (category.exerciseType) {
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
 //        ExerciseType.OTHER -> null
     }
+
     Box(
         modifier = modifier
             .background(
                 color = MaterialTheme.color.ShadowColor,
-                shape = RoundedCornerShape(MaterialTheme.dimens.space_12),
+                shape = RoundedCornerShape(MaterialTheme.dimens.space_12)
             )
             .shadow(
                 elevation = MaterialTheme.dimens.space_2,
-                shape = RoundedCornerShape(MaterialTheme.dimens.space_8),
+                shape = RoundedCornerShape(MaterialTheme.dimens.space_8)
             )
             .border(
                 MaterialTheme.dimens.space_2,
@@ -58,7 +59,7 @@ fun CategoryItem(
                 RoundedCornerShape(MaterialTheme.dimens.space_8)
             )
             .height(MaterialTheme.dimens.space_164)
-            .fillMaxWidth(),
+            .fillMaxWidth()
     ) {
         Image(
             modifier = Modifier
@@ -94,7 +95,6 @@ fun CategoryItem(
                 modifier
                     .fillMaxHeight()
             ) {
-
                 items(category.exercises) {
                     Text(
                         modifier = Modifier
@@ -104,7 +104,7 @@ fun CategoryItem(
                         text = it.exerciseTitle,
                         fontSize = MaterialTheme.font.font_12,
                         fontStyle = FontStyle.Italic,
-                        color = MaterialTheme.colorScheme.onPrimary,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }

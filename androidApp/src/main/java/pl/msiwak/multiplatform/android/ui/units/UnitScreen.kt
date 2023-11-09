@@ -18,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import java.util.Locale
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonResources.MR
+import java.util.Locale
 
 @Composable
 fun UnitScreen() {
@@ -67,6 +67,5 @@ fun UnitScreen() {
                 }
             }
         }
-
     }
 }

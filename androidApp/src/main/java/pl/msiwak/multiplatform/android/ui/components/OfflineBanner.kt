@@ -38,7 +38,6 @@ fun OfflineBanner(
             color = MaterialTheme.colorScheme.onTertiary
         )
 
-
         Spacer(modifier = Modifier.weight(1f))
 
         Row(

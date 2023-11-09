@@ -20,7 +20,7 @@ fun SettingsItem(modifier: Modifier = Modifier, text: String) {
             ),
             text = text,
             fontSize = MaterialTheme.font.font_16,
-            color = MaterialTheme.colorScheme.onPrimary,
+            color = MaterialTheme.colorScheme.onPrimary
         )
         Divider(
             modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
