@@ -15,3 +15,7 @@ androidApp/debug.properties
 /debug.properties
 /release.properties
 /androidApp/google-services.json
+iosApp/Pods/*
+iosApp/iosApp.xcworkspace/*
+iosApp/iosApp.xcodeproj/*
+!iosApp/iosApp.xcodeproj/project.pbxproj
