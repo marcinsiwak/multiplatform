@@ -104,3 +104,5 @@ android {
         targetSdk = 33
     }
 }
+
+apply(from = "$rootDir/extras/ktlint.gradle")
