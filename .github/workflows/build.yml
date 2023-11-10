@@ -40,6 +40,15 @@ jobs:
           echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/debug.properties
           echo BASE_URL="BASE_URL" > ./debug.properties
 
+      - name: Run ktlintCheck
+        run: ./gradlew ktlintCheck
+
+      - name: Run detekt
+        run: ./gradlew detekt
+
+      - name: Run tests
+        run: ./gradlew test
+
       - name: Decode Keystore
         id: decode_keystore
         uses: timheuer/base64-to-file@v1.2

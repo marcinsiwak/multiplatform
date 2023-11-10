@@ -5,6 +5,7 @@ plugins {
     kotlin("multiplatform").version("1.9.0").apply(false)
     kotlin("plugin.serialization") version "1.8.22"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
+    id("io.gitlab.arturbosch.detekt") version "1.19.0"
 }
 
 buildscript {
@@ -15,6 +16,11 @@ buildscript {
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.5")
         classpath("com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.14.0")
     }
+}
+
+subprojects {
+    apply(from = "$rootDir/extras/ktlint.gradle")
+    apply(from = "$rootDir/extras/detekt.gradle")
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
