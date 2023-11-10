@@ -11,7 +11,7 @@ data class OwnColorPalette(
 )
 
 private val OwnDarkColorPalette = OwnColorPalette(
-    ShadowColor = Color.Black,
+    ShadowColor = Color.Black
 )
 
 val LocalOwnColorScheme = compositionLocalOf { OwnColorPalette() }

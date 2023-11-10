@@ -7,6 +7,7 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
     id("dev.icerock.mobile.multiplatform-resources")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -103,3 +104,5 @@ android {
         targetSdk = 33
     }
 }
+
+apply(from = "$rootDir/extras/ktlint.gradle")

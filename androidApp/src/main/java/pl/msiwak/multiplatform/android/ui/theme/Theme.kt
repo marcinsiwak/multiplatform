@@ -19,7 +19,7 @@ private fun appColorScheme() = lightColorScheme(
     onSurface = colorResource(id = MR.colors.colorOnSurface.resourceId),
     background = colorResource(id = MR.colors.background.resourceId),
     error = colorResource(id = MR.colors.colorError.resourceId),
-    onError = colorResource(id = MR.colors.colorOnError.resourceId),
+    onError = colorResource(id = MR.colors.colorOnError.resourceId)
 )
 
 @Composable
@@ -35,5 +35,4 @@ fun AppTheme(
             content = content
         )
     }
-
 }

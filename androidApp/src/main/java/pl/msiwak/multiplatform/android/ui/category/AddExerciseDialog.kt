@@ -22,7 +22,8 @@ fun AddExerciseDialog(
     onAddExerciseClicked: () -> Unit,
     onDialogClosed: () -> Unit = {}
 ) {
-    AlertDialog(shape = RoundedCornerShape(MaterialTheme.dimens.dialog_corners),
+    AlertDialog(
+        shape = RoundedCornerShape(MaterialTheme.dimens.dialog_corners),
         containerColor = colorResource(MR.colors.gray.resourceId),
         onDismissRequest = {
             onDialogClosed()
@@ -41,7 +42,8 @@ fun AddExerciseDialog(
                 value = inputText,
                 onValueChange = {
                     onExerciseTitleChanged(it)
-                })
+                }
+            )
         },
         confirmButton = {
             SecondaryButton(
@@ -54,5 +56,6 @@ fun AddExerciseDialog(
                 onClick = { onAddExerciseClicked() },
                 text = stringResource(MR.strings.add_new_exercise.resourceId)
             )
-        })
+        }
+    )
 }

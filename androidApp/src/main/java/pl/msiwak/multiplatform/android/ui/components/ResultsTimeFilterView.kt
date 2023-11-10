@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.android.ui.components
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -60,7 +59,8 @@ fun ResultsTimeFilterView(
                     selected = true,
                     onClick = {
                         onTabClicked(item)
-                    }) {
+                    }
+                ) {
                     Text(
                         text = stringResource(item.nameResourceId.resourceId),
                         color = MaterialTheme.colorScheme.onPrimary,
@@ -68,8 +68,10 @@ fun ResultsTimeFilterView(
                         onTextLayout = { textLayoutResult ->
                             tabWidths[index] =
                                 with(density) { textLayoutResult.size.width.toDp() }
-                        })
+                        }
+                    )
                 }
             }
-        })
+        }
+    )
 }

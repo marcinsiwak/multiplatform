@@ -11,6 +11,7 @@ class GoogleAuthOneTapConfiguration {
                 .setSupported(true)
                 .setServerClientId(BuildConfig.GOOGLE_AUTH_WEB_CLIENT_ID)
                 .setFilterByAuthorizedAccounts(false)
-                .build())
+                .build()
+        )
         .build()
 }

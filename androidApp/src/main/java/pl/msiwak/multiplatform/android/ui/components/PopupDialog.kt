@@ -36,7 +36,8 @@ fun PopupDialog(
                 text = confirmButtonTitle,
                 onClick = {
                     onConfirmClicked()
-                })
+                }
+            )
         },
         dismissButton = if (dismissButtonTitle != null) {
             {
@@ -44,8 +45,11 @@ fun PopupDialog(
                     text = dismissButtonTitle,
                     onClick = {
                         onDismissClicked()
-                    })
+                    }
+                )
             }
-        } else null
+        } else {
+            null
+        }
     )
 }

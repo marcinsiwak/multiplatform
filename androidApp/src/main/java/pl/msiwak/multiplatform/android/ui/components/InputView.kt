@@ -4,12 +4,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,7 +41,7 @@ fun InputView(
                 focusedBorderColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
                 unfocusedBorderColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.tertiary,
                 focusedLabelColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.tertiary,
+                unfocusedLabelColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.tertiary
             ),
             trailingIcon = trailingIcon,
             shape = RoundedCornerShape(MaterialTheme.dimens.space_12),
@@ -54,7 +52,7 @@ fun InputView(
             label = {
                 Text(
                     text = hintText,
-                    maxLines = 1,
+                    maxLines = 1
                 )
             },
             singleLine = true,
@@ -69,7 +67,7 @@ fun InputView(
                 .padding(vertical = MaterialTheme.dimens.space_8),
             text = errorMessage ?: "",
             color = MaterialTheme.colorScheme.error,
-            style = MaterialTheme.typography.labelSmall,
+            style = MaterialTheme.typography.labelSmall
         )
     }
 }

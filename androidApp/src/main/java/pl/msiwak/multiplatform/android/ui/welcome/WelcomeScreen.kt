@@ -42,12 +42,11 @@ import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.auth.GoogleAuthOneTapConfiguration
 import pl.msiwak.multiplatform.commonResources.MR
-
+import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
 @Composable
 fun WelcomeScreen() {
-    val viewModel = koinViewModel<pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel>()
-
+    val viewModel = koinViewModel<WelcomeScreenViewModel>()
     val viewState = viewModel.viewState.collectAsState()
     val context = LocalContext.current.findActivity()
 
@@ -110,7 +109,7 @@ fun WelcomeScreen() {
                 .padding(
                     start = MaterialTheme.dimens.space_36,
                     end = MaterialTheme.dimens.space_36,
-                    top = MaterialTheme.dimens.space_164,
+                    top = MaterialTheme.dimens.space_164
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
@@ -201,7 +200,7 @@ fun WelcomeScreen() {
                     viewModel.onRegistrationClicked()
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent,
+                    containerColor = Color.Transparent
                 )
             ) {
                 Text(text = stringResource(MR.strings.welcome_create_account.resourceId))

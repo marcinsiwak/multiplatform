@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonResources.MR
@@ -26,7 +25,7 @@ fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<Passw
             modifier = Modifier
                 .padding(vertical = MaterialTheme.dimens.space_4),
             text = stringResource(id = MR.strings.password_requirements.resourceId),
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.labelLarge
         )
         requirements.forEach {
             Row(
@@ -52,7 +51,7 @@ fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<Passw
                     modifier = Modifier
                         .padding(horizontal = MaterialTheme.dimens.space_8),
                     text = stringResource(id = it.type.stringResource.resourceId),
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.labelSmall
                 )
             }
         }

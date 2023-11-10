@@ -25,7 +25,7 @@ fun Loader() {
         CircularProgressIndicator(
             modifier = Modifier.width(MaterialTheme.dimens.loader_size),
             color = MaterialTheme.colorScheme.onTertiary,
-            trackColor = MaterialTheme.colorScheme.tertiary,
+            trackColor = MaterialTheme.colorScheme.tertiary
         )
     }
 }

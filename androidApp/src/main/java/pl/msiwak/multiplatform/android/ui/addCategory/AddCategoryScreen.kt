@@ -54,7 +54,8 @@ fun AddCategoryScreen() {
                 items = ExerciseType.values().toList(),
                 onItemPicked = {
                     viewModel.onTypePicked(it)
-                })
+                }
+            )
         }
         Button(
             modifier = Modifier

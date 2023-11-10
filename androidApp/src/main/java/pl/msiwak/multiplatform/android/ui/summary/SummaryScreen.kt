@@ -26,7 +26,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.dimens
@@ -62,7 +61,7 @@ fun SummaryScreen() {
         )
     }
 
-    if (viewState.value.isLoading){
+    if (viewState.value.isLoading) {
         Loader()
     }
 
@@ -84,7 +83,7 @@ fun SummaryScreen() {
                                 interactionSource = remember { MutableInteractionSource() },
                                 indication = rememberRipple(
                                     color = Color.LightGray
-                                ),
+                                )
                             ),
                         category = category
                     )
@@ -110,7 +109,8 @@ fun SummaryScreen() {
                         }
                     }
                 }
-            })
+            }
+        )
     }
 }
 

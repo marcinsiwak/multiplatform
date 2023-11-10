@@ -154,7 +154,7 @@ fun RunningTimeInputDialog(
                             milliseconds.value
                         )
                     }
-                },
+                }
             )
         }
     }
@@ -187,7 +187,7 @@ private fun RowScope.RunningTimeInputView(
             focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
             unfocusedBorderColor = MaterialTheme.colorScheme.tertiary,
             focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-            unfocusedLabelColor = MaterialTheme.colorScheme.tertiary,
+            unfocusedLabelColor = MaterialTheme.colorScheme.tertiary
         ),
         placeholder = placeholder,
         label = label
