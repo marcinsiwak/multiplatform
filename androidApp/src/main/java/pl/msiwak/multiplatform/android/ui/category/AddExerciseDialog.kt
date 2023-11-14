@@ -12,6 +12,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.MR
@@ -64,5 +65,7 @@ fun AddExerciseDialog(
 @DarkLightPreview
 @Composable
 fun AddExerciseDialogPreview() {
-    AddExerciseDialog()
+    AppTheme {
+        AddExerciseDialog()
+    }
 }

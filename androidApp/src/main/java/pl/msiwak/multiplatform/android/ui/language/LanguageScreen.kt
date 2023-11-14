@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonResources.MR
@@ -83,5 +84,7 @@ fun LanguageScreenContent(
 @Preview
 @Composable
 fun LanguageScreenPreview() {
-    LanguageScreenContent(MutableStateFlow(LanguageState()).collectAsState())
+    AppTheme {
+        LanguageScreenContent(MutableStateFlow(LanguageState()).collectAsState())
+    }
 }

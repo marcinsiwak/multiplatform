@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.MainButton
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
@@ -75,5 +76,7 @@ fun ForceUpdateScreenContent(
 @DarkLightPreview
 @Composable
 fun ForceUpdateScreenPreview() {
-    ForceUpdateScreenContent()
+    AppTheme {
+        ForceUpdateScreenContent()
+    }
 }

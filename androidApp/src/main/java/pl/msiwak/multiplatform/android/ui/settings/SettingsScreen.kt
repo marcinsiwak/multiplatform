@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonResources.MR
@@ -99,5 +100,7 @@ fun SettingsScreenContent(
 @Preview
 @Composable
 fun SettingsScreenPreview() {
-    SettingsScreenContent(MutableStateFlow(SettingsState()).collectAsState())
+    AppTheme {
+        SettingsScreenContent(MutableStateFlow(SettingsState()).collectAsState())
+    }
 }

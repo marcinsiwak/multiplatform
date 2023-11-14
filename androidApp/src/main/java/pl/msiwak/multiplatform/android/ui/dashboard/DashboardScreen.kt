@@ -10,7 +10,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,9 +20,9 @@ import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.components.OfflineBanner
 import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
 import pl.msiwak.multiplatform.android.ui.summary.SummaryScreen
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.MR
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseState
 import pl.msiwak.multiplatform.ui.dashboard.DashboardState
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
 import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
@@ -87,9 +86,11 @@ fun DashboardScreenContent(
 @DarkLightPreview
 @Composable
 fun DashboardScreenPreview() {
-    DashboardScreenContent(
-        items = listOf(),
-        viewState = MutableStateFlow(DashboardState()).collectAsState(),
-        navController = NavHostController(LocalContext.current)
-    )
+    AppTheme {
+        DashboardScreenContent(
+            items = listOf(),
+            viewState = MutableStateFlow(DashboardState()).collectAsState(),
+            navController = NavHostController(LocalContext.current)
+        )
+    }
 }

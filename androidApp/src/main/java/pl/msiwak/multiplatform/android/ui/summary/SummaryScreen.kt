@@ -16,6 +16,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,12 +26,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.loader.Loader
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.summary.SummaryState
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -46,18 +50,34 @@ fun SummaryScreen() {
         }
     }
 
+    SummaryScreenContent(
+        viewState = viewState,
+        onCategoryRemoved = viewModel::onCategoryRemoved,
+        onPopupDismissed = viewModel::onPopupDismissed,
+        onCategoryClicked = viewModel::onCategoryClicked,
+        onCategoryLongClicked = viewModel::onCategoryLongClicked,
+        onAddCategoryClicked = viewModel::onAddCategoryClicked
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun SummaryScreenContent(
+    viewState: State<SummaryState>,
+    onCategoryRemoved: () -> Unit = {},
+    onPopupDismissed: () -> Unit = {},
+    onCategoryClicked: (String) -> Unit = {},
+    onCategoryLongClicked: (Int) -> Unit = {},
+    onAddCategoryClicked: () -> Unit = {}
+) {
     if (viewState.value.isRemoveCategoryDialogVisible) {
         PopupDialog(
             title = stringResource(MR.strings.remove_category_dialog_title.resourceId),
             description = stringResource(MR.strings.remove_category_dialog_description.resourceId),
             confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
             dismissButtonTitle = stringResource(MR.strings.no.resourceId),
-            onConfirmClicked = {
-                viewModel.onCategoryRemoved()
-            },
-            onDismissClicked = {
-                viewModel.onPopupDismissed()
-            }
+            onConfirmClicked = onCategoryRemoved,
+            onDismissClicked = onPopupDismissed
         )
     }
 
@@ -78,8 +98,8 @@ fun SummaryScreen() {
                             .padding(vertical = MaterialTheme.dimens.space_8)
                             .combinedClickable(
                                 enabled = true,
-                                onClick = { viewModel.onCategoryClicked(category.id) },
-                                onLongClick = { viewModel.onCategoryLongClicked(index) },
+                                onClick = { onCategoryClicked(category.id) },
+                                onLongClick = { onCategoryLongClicked(index) },
                                 interactionSource = remember { MutableInteractionSource() },
                                 indication = rememberRipple(
                                     color = Color.LightGray
@@ -92,7 +112,7 @@ fun SummaryScreen() {
                     Button(
                         modifier = Modifier.padding(MaterialTheme.dimens.space_16),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                        onClick = { viewModel.onAddCategoryClicked() }
+                        onClick = { onAddCategoryClicked() }
                     ) {
                         Row {
                             Icon(
@@ -117,5 +137,7 @@ fun SummaryScreen() {
 @Preview
 @Composable
 fun SummaryScreenPreview() {
-    SummaryScreen()
+    AppTheme {
+        SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState())
+    }
 }
