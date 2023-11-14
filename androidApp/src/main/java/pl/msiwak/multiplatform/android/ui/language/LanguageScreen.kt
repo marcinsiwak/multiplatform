@@ -11,22 +11,36 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.language.LanguageState
 
 @Composable
 fun LanguageScreen() {
     val viewModel = koinViewModel<pl.msiwak.multiplatform.ui.language.LanguageViewModel>()
-    val state = viewModel.viewState.collectAsState()
+    val viewState = viewModel.viewState.collectAsState()
 
+    LanguageScreenContent(
+        viewState = viewState,
+        onLanguageChanged = viewModel::onLanguageChanged
+    )
+}
+
+@Composable
+fun LanguageScreenContent(
+    viewState: State<LanguageState>,
+    onLanguageChanged: (Int) -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,12 +56,12 @@ fun LanguageScreen() {
         )
 
         LazyColumn {
-            itemsIndexed(state.value.languages) { index, item ->
+            itemsIndexed(viewState.value.languages) { index, item ->
                 Row {
                     RadioButton(
                         selected = item.isSelected,
                         onClick = {
-                            viewModel.onLanguageChanged(index)
+                            onLanguageChanged(index)
                         },
                         colors = RadioButtonDefaults.colors(
                             selectedColor = MaterialTheme.colorScheme.onPrimary,
@@ -69,5 +83,5 @@ fun LanguageScreen() {
 @Preview
 @Composable
 fun LanguageScreenPreview() {
-    LanguageScreen()
+    LanguageScreenContent(MutableStateFlow(LanguageState()).collectAsState())
 }

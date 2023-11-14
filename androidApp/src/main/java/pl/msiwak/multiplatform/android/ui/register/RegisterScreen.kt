@@ -13,12 +13,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
@@ -26,6 +28,7 @@ import pl.msiwak.multiplatform.android.ui.components.PasswordRequirements
 import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.register.RegisterState
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
 @Composable
@@ -34,6 +37,23 @@ fun RegisterScreen() {
 
     val viewState = viewModel.viewState.collectAsState()
 
+    RegisterScreenContent(
+        viewState = viewState,
+        onLoginChanged = viewModel::onLoginChanged,
+        onPasswordChanged = viewModel::onPasswordChanged,
+        onVisibilityClicked = viewModel::onVisibilityClicked,
+        onRegisterClicked = viewModel::onRegisterClicked
+    )
+}
+
+@Composable
+fun RegisterScreenContent(
+    viewState: State<RegisterState>,
+    onLoginChanged: (String) -> Unit = { _ -> },
+    onPasswordChanged: (String) -> Unit = { _ -> },
+    onVisibilityClicked: () -> Unit = {},
+    onRegisterClicked: () -> Unit = {},
+) {
     if (viewState.value.isLoading) {
         Loader()
     }
@@ -66,9 +86,7 @@ fun RegisterScreen() {
                         id = it
                     )
                 },
-                onValueChange = {
-                    viewModel.onLoginChanged(it)
-                },
+                onValueChange = onLoginChanged,
                 hintText = stringResource(MR.strings.email.resourceId)
             )
 
@@ -80,15 +98,13 @@ fun RegisterScreen() {
                         id = it
                     )
                 },
-                onValueChange = {
-                    viewModel.onPasswordChanged(it)
-                },
+                onValueChange = onPasswordChanged,
                 isPassword = true,
                 isPasswordVisible = viewState.value.isPasswordVisible,
                 trailingIcon = {
                     Icon(
                         modifier = Modifier
-                            .clickable { viewModel.onVisibilityClicked() },
+                            .clickable { onVisibilityClicked() },
                         painter = painterResource(
                             id = if (viewState.value.isPasswordVisible) {
                                 MR.images.ic_invisible.drawableResId
@@ -109,7 +125,7 @@ fun RegisterScreen() {
                     .fillMaxWidth()
                     .padding(vertical = MaterialTheme.dimens.space_32),
                 onClick = {
-                    viewModel.onRegisterClicked()
+                    onRegisterClicked()
                 },
                 text = stringResource(MR.strings.register.resourceId)
             )
@@ -120,5 +136,5 @@ fun RegisterScreen() {
 @Preview
 @Composable
 fun RegisterScreenPreview() {
-    RegisterScreen()
+    RegisterScreenContent(MutableStateFlow(RegisterState()).collectAsState())
 }

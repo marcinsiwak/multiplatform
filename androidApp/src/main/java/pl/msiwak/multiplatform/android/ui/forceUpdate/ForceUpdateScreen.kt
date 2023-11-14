@@ -15,17 +15,27 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import org.koin.java.KoinJavaComponent
+import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 
 @Composable
 fun ForceUpdateScreen() {
-    val viewModel: ForceUpdateViewModel by KoinJavaComponent.inject(ForceUpdateViewModel::class.java)
+    val viewModel = koinViewModel<ForceUpdateViewModel>()
 
+    ForceUpdateScreenContent(
+        onUpdateClicked = viewModel::onUpdateClicked
+    )
+}
+
+@Composable
+fun ForceUpdateScreenContent(
+    onUpdateClicked: () -> Unit = {}
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -56,14 +66,14 @@ fun ForceUpdateScreen() {
                     vertical = MaterialTheme.dimens.space_16,
                     horizontal = MaterialTheme.dimens.space_80
                 ),
-            onClick = { viewModel.onUpdateClicked() },
+            onClick = onUpdateClicked,
             text = stringResource(id = MR.strings.force_update_update.resourceId)
         )
     }
 }
 
-@Preview
+@DarkLightPreview
 @Composable
 fun ForceUpdateScreenPreview() {
-    ForceUpdateScreen()
+    ForceUpdateScreenContent()
 }

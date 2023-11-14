@@ -15,15 +15,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -33,11 +35,15 @@ import pl.msiwak.multiplatform.android.ui.components.ResultsTableView
 import pl.msiwak.multiplatform.android.ui.components.ResultsTimeFilterView
 import pl.msiwak.multiplatform.android.ui.components.RunningTimeInputDialog
 import pl.msiwak.multiplatform.android.ui.loader.Loader
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
+import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
+import pl.msiwak.multiplatform.ui.addExercise.AddExerciseState
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 
 @Composable
@@ -78,6 +84,51 @@ fun AddExerciseScreen(id: String) {
         }
     }
 
+    AddExerciseScreenContent(
+        viewState = viewState,
+        focusManager = focusManager,
+        focusRequesters = focusRequesters,
+        onResultRemoved = viewModel::onResultRemoved,
+        onPopupDismissed = viewModel::onPopupDismissed,
+        onConfirmRunningAmount = viewModel::onConfirmRunningAmount,
+        onDismissAmountDialog = viewModel::onDismissAmountDialog,
+        onExerciseTitleChanged = viewModel::onExerciseTitleChanged,
+        onTitleClicked = viewModel::onTitleClicked,
+        onTabClicked = viewModel::onTabClicked,
+        onSaveResultClicked = viewModel::onSaveResultClicked,
+        onAddNewResultClicked = viewModel::onAddNewResultClicked,
+        onResultValueChanged = viewModel::onResultValueChanged,
+        onAmountValueChanged = viewModel::onAmountValueChanged,
+        onDateValueChanged = viewModel::onDateValueChanged,
+        onDateClicked = viewModel::onDateClicked,
+        onResultLongClicked = viewModel::onResultLongClicked,
+        onLabelClicked = viewModel::onLabelClicked,
+        onAmountClicked = viewModel::onAmountClicked
+    )
+}
+
+@Composable
+fun AddExerciseScreenContent(
+    viewState: State<AddExerciseState>,
+    focusManager: FocusManager,
+    focusRequesters: List<FocusRequester>,
+    onResultRemoved: () -> Unit = {},
+    onPopupDismissed: () -> Unit = {},
+    onConfirmRunningAmount: (String, String, String, String) -> Unit = { _, _, _, _ -> },
+    onDismissAmountDialog: () -> Unit = {},
+    onExerciseTitleChanged: (String) -> Unit = {},
+    onTitleClicked: () -> Unit = {},
+    onTabClicked: (DateFilterType) -> Unit = {},
+    onSaveResultClicked: () -> Unit = {},
+    onAddNewResultClicked: () -> Unit = {},
+    onResultValueChanged: (String) -> Unit = {},
+    onAmountValueChanged: (String) -> Unit = {},
+    onDateValueChanged: (String) -> Unit = {},
+    onDateClicked: () -> Unit = {},
+    onResultLongClicked: (Int) -> Unit = {},
+    onLabelClicked: (Int) -> Unit = {},
+    onAmountClicked: () -> Unit = {},
+) {
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
             title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
@@ -85,10 +136,10 @@ fun AddExerciseScreen(id: String) {
             confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
             dismissButtonTitle = stringResource(MR.strings.no.resourceId),
             onConfirmClicked = {
-                viewModel.onResultRemoved()
+                onResultRemoved()
             },
             onDismissClicked = {
-                viewModel.onPopupDismissed()
+                onPopupDismissed()
             }
         )
     }
@@ -101,10 +152,10 @@ fun AddExerciseScreen(id: String) {
         focusManager.clearFocus()
         RunningTimeInputDialog(
             onConfirm = { hours: String, minutes: String, seconds: String, milliseconds: String ->
-                viewModel.onConfirmRunningAmount(hours, minutes, seconds, milliseconds)
+                onConfirmRunningAmount(hours, minutes, seconds, milliseconds)
             },
             onDismiss = {
-                viewModel.onDismissAmountDialog()
+                onDismissAmountDialog()
             }
         )
     }
@@ -117,7 +168,7 @@ fun AddExerciseScreen(id: String) {
             InputView(
                 value = viewState.value.exerciseTitle,
                 onValueChange = {
-                    viewModel.onExerciseTitleChanged(it)
+                    onExerciseTitleChanged(it)
                 }
             )
         } else {
@@ -129,7 +180,7 @@ fun AddExerciseScreen(id: String) {
                         end = MaterialTheme.dimens.space_24
                     )
                     .padding(vertical = MaterialTheme.dimens.space_16)
-                    .clickable { viewModel.onTitleClicked() },
+                    .clickable { onTitleClicked() },
                 text = viewState.value.exerciseTitle,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onPrimary
@@ -143,7 +194,7 @@ fun AddExerciseScreen(id: String) {
             tabs = viewState.value.filter,
             selectedPos = viewState.value.selectedFilterPosition,
             onTabClicked = {
-                viewModel.onTabClicked(it)
+                onTabClicked(it)
             }
         )
 
@@ -161,7 +212,7 @@ fun AddExerciseScreen(id: String) {
                         contentColor = MaterialTheme.colorScheme.primary
                     ),
                     onClick = {
-                        viewModel.onAddNewResultClicked()
+                        onAddNewResultClicked()
                     }
                 ) {
                     Text(
@@ -179,7 +230,7 @@ fun AddExerciseScreen(id: String) {
                         contentColor = MaterialTheme.colorScheme.primary
                     ),
                     onClick = {
-                        viewModel.onSaveResultClicked()
+                        onSaveResultClicked()
                     }
                 ) {
                     Text(
@@ -198,36 +249,26 @@ fun AddExerciseScreen(id: String) {
             focusRequesters = focusRequesters,
             isNewResultEnabled = viewState.value.isResultFieldEnabled,
             newResultData = viewState.value.newResultData,
-            onAddNewResultClicked = {
-                viewModel.onAddNewResultClicked()
-            },
-            onResultValueChanged = {
-                viewModel.onResultValueChanged(it)
-            },
-            onAmountValueChanged = {
-                viewModel.onAmountValueChanged(it)
-            },
-            onDateValueChanged = {
-                viewModel.onDateValueChanged(it)
-            },
-            onDateClicked = {
-                viewModel.onDateClicked()
-            },
-            onResultLongClick = { pos ->
-                viewModel.onResultLongClicked(pos)
-            },
-            onLabelClicked = { pos ->
-                viewModel.onLabelClicked(pos)
-            },
-            onAmountClicked = {
-                viewModel.onAmountClicked()
-            }
+            onAddNewResultClicked = onAddNewResultClicked::invoke,
+            onResultValueChanged = onResultValueChanged::invoke,
+            onAmountValueChanged = onAmountValueChanged::invoke,
+            onDateValueChanged = onDateValueChanged::invoke,
+            onDateClicked = onDateClicked::invoke,
+            onResultLongClick = onResultLongClicked::invoke,
+            onLabelClicked = onLabelClicked::invoke,
+            onAmountClicked = onAmountClicked::invoke
         )
     }
 }
 
-@Preview
+@DarkLightPreview
 @Composable
 fun AddExerciseScreenPreview() {
-    AddExerciseScreen("0")
+    AppTheme {
+        AddExerciseScreenContent(
+            viewState = MutableStateFlow(AddExerciseState()).collectAsState(),
+            focusManager = LocalFocusManager.current,
+            focusRequesters = listOf()
+        )
+    }
 }
