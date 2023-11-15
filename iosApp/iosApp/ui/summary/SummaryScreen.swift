@@ -62,8 +62,8 @@ struct SummaryScreen: View {
 }
 extension Category: Identifiable {}
 
-//struct SummaryScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SummaryScreen()
-//    }
-//}
+struct SummaryScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        SummaryScreen()
+    }
+}

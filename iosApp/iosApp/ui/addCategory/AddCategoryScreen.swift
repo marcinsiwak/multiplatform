@@ -76,9 +76,8 @@ struct AddCategoryScreen: View {
     }
 }
 
-
-//struct AddCategoryScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddCategoryScreen()
-//    }
-//}
+struct AddCategoryScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        AddCategoryScreen()
+    }
+}
