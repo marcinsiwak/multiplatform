@@ -25,6 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
@@ -115,5 +116,7 @@ fun CategoryItem(
 @Preview
 @Composable
 fun CategoryItemPreview() {
-    CategoryItem(category = Category())
+    AppTheme {
+        CategoryItem(category = Category())
+    }
 }

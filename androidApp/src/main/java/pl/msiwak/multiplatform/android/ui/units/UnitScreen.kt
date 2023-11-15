@@ -12,23 +12,39 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import java.util.Locale
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.MR
-import java.util.Locale
+import pl.msiwak.multiplatform.ui.unit.UnitState
 
 @Composable
 fun UnitScreen() {
     val viewModel = koinViewModel<pl.msiwak.multiplatform.ui.unit.UnitViewModel>()
-    val state = viewModel.viewState.collectAsState()
+    val viewState = viewModel.viewState.collectAsState()
 
+    UnitScreenContent(
+        viewState = viewState,
+        onUnitTypeChanged = viewModel::onUnitTypeChanged
+    )
+}
+
+@Composable
+fun UnitScreenContent(
+    viewState: State<UnitState>,
+    onUnitTypeChanged: (Int) -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45,12 +61,12 @@ fun UnitScreen() {
         )
 
         LazyColumn {
-            itemsIndexed(state.value.unitItemList) { index, item ->
+            itemsIndexed(viewState.value.unitItemList) { index, item ->
                 Row {
                     RadioButton(
                         selected = item.isSelected,
                         onClick = {
-                            viewModel.onUnitTypeChanged(index)
+                            onUnitTypeChanged(index)
                         },
                         colors = RadioButtonDefaults.colors(
                             selectedColor = MaterialTheme.colorScheme.onPrimary,
@@ -67,5 +83,13 @@ fun UnitScreen() {
                 }
             }
         }
+    }
+}
+
+@DarkLightPreview
+@Composable
+fun UnitScreenPreview() {
+    AppTheme {
+        UnitScreenContent(MutableStateFlow(UnitState()).collectAsState())
     }
 }
