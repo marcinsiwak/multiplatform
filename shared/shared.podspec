@@ -14,6 +14,7 @@ Pod::Spec.new do |spec|
     spec.dependency 'FirebaseCrashlytics'
     spec.dependency 'FirebaseMessaging'
     spec.dependency 'FirebaseRemoteConfig'
+    spec.dependency 'Google-Mobile-Ads-SDK'
     spec.dependency 'GoogleSignIn'
                 
     spec.pod_target_xcconfig = {

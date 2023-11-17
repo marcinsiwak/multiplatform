@@ -1,15 +1,15 @@
 import Foundation
 import SwiftUI
 import shared
-//import GoogleSignIn
-
+import GoogleMobileAds
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         HelperKt.doInitKoin()
         HelperKt.doInitNapier()
         HelperKt.doInitFirebase()
-        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+
 
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(

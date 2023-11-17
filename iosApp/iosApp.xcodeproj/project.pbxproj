@@ -45,6 +45,10 @@
 		711E8BB72A575E6700151063 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB62A575E6700151063 /* Array.swift */; };
 		711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB82A575EE700151063 /* AppDelegate.swift */; };
 		711E8BBE2A682AFC00151063 /* VerifyEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BBD2A682AFC00151063 /* VerifyEmailScreen.swift */; };
+		7132D0542B07A97200BC2C99 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0532B07A97200BC2C99 /* BannerAd.swift */; };
+		7132D0572B07AA2300BC2C99 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0562B07AA2300BC2C99 /* BannerViewController.swift */; };
+		7132D0592B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0582B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift */; };
+		7132D05D2B07C8E400BC2C99 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D05C2B07C8E400BC2C99 /* BannerView.swift */; };
 		71A5EF3C2AF3D3F000E373DF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5EF3B2AF3D3F000E373DF /* Theme.swift */; };
 		71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */; };
 		71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */; };
@@ -104,6 +108,10 @@
 		711E8BB62A575E6700151063 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		711E8BB82A575EE700151063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		711E8BBD2A682AFC00151063 /* VerifyEmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailScreen.swift; sourceTree = "<group>"; };
+		7132D0532B07A97200BC2C99 /* BannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
+		7132D0562B07AA2300BC2C99 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		7132D0582B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewControllerWidthDelegate.swift; sourceTree = "<group>"; };
+		7132D05C2B07C8E400BC2C99 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		71A5EF3B2AF3D3F000E373DF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		74DA36D12685A7143467F9F1 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -207,6 +215,7 @@
 		711E8B722A57596700151063 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				7132D0552B07A9F500BC2C99 /* admobBanner */,
 				711E8B752A57598B00151063 /* DialogView.swift */,
 				711E8B772A57599900151063 /* InputView.swift */,
 				711E8B7A2A5759AE00151063 /* ListItemView.swift */,
@@ -318,6 +327,17 @@
 				711E8BBD2A682AFC00151063 /* VerifyEmailScreen.swift */,
 			);
 			path = verifyEmail;
+			sourceTree = "<group>";
+		};
+		7132D0552B07A9F500BC2C99 /* admobBanner */ = {
+			isa = PBXGroup;
+			children = (
+				7132D0532B07A97200BC2C99 /* BannerAd.swift */,
+				7132D0562B07AA2300BC2C99 /* BannerViewController.swift */,
+				7132D0582B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift */,
+				7132D05C2B07C8E400BC2C99 /* BannerView.swift */,
+			);
+			path = admobBanner;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -487,9 +507,11 @@
 				711E8BA32A575B6200151063 /* SummaryScreen.swift in Sources */,
 				711E8BB72A575E6700151063 /* Array.swift in Sources */,
 				711E8B672A57584D00151063 /* NavigationCommand.swift in Sources */,
+				7132D0572B07AA2300BC2C99 /* BannerViewController.swift in Sources */,
 				711E8B612A57579300151063 /* ValueObserver.swift in Sources */,
 				711E8B8F2A575A8D00151063 /* ArrayExtensions.swift in Sources */,
 				711E8B8C2A575A6100151063 /* DashboardScreen.swift in Sources */,
+				7132D05D2B07C8E400BC2C99 /* BannerView.swift in Sources */,
 				711E8B9C2A575B1F00151063 /* SettingsItem.swift in Sources */,
 				711E8B892A575A4500151063 /* TextWithDrawableView.swift in Sources */,
 				711E8B5D2A57575C00151063 /* ObservableEvent.swift in Sources */,
@@ -501,6 +523,7 @@
 				711E8BA92A575BA200151063 /* WelcomeScreen.swift in Sources */,
 				711E8B832A575A0900151063 /* ResultsTimeFilterView.swift in Sources */,
 				711E8BBE2A682AFC00151063 /* VerifyEmailScreen.swift in Sources */,
+				7132D0542B07A97200BC2C99 /* BannerAd.swift in Sources */,
 				711E8B9E2A575B3100151063 /* SettingsScreen.swift in Sources */,
 				711E8B6E2A57593D00151063 /* AddExercise.swift in Sources */,
 				711E8B852A575A1C00151063 /* ResultsView.swift in Sources */,
@@ -509,6 +532,7 @@
 				711E8B912A575A9F00151063 /* ViewExtensions.swift in Sources */,
 				711E8B872A575A3000151063 /* ResultTableView.swift in Sources */,
 				711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */,
+				7132D0592B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift in Sources */,
 				711E8B652A57583700151063 /* IosNavigationCommand.swift in Sources */,
 				711E8B6A2A5758C600151063 /* AddCategoryScreen.swift in Sources */,
 				711E8B5F2A57577E00151063 /* ObservableState.swift in Sources */,
@@ -642,6 +666,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74DA36D12685A7143467F9F1 /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
@@ -664,6 +689,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0B32D50A8A5B3B208BF18584 /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
