@@ -34,4 +34,5 @@ struct Dimensions {
     static let result_input_view_height: CGFloat = 100
     static let result_input_view_width: CGFloat = 86
     static let results_min_height: CGFloat = 200
+    static let banner_height: CGFloat = 64
 }

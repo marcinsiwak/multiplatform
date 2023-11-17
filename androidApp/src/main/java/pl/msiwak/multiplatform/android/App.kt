@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.android
 
 import android.app.Application
+import com.google.android.gms.ads.MobileAds
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.android.ext.koin.androidContext
@@ -16,6 +17,7 @@ class App : Application() {
         super.onCreate()
 
         Napier.base(DebugAntilog())
+        MobileAds.initialize(this)
 
         startKoin {
             modules(appModule() + sharedPreferencesModule + androidDatabaseModule + androidRepositoryModule)

@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.android.ui.components.AdmobBanner
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
@@ -88,6 +89,7 @@ fun SummaryScreenContent(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        AdmobBanner(modifier = Modifier.padding(bottom = MaterialTheme.dimens.space_8))
         LazyColumn(
             modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
             horizontalAlignment = Alignment.CenterHorizontally,

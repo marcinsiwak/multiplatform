@@ -56,6 +56,7 @@ kotlin {
         pod("FirebaseCrashlytics", linkOnly = true)
         pod("GoogleSignIn", linkOnly = true)
         pod("FirebaseMessaging", linkOnly = true)
+        pod("Google-Mobile-Ads-SDK", linkOnly = true)
 
     }
 

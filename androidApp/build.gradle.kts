@@ -162,5 +162,6 @@ dependencies {
     }
     with(Deps.Google) {
         api(andorid_play_services_auth)
+        api(andorid_play_services_ads)
     }
 }

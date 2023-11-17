@@ -23,6 +23,7 @@ struct SummaryScreen: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
+            BannerView()
             ScrollView {
                 ForEach(state.value.categories) { item in
                     CategoryItem(category: item)
