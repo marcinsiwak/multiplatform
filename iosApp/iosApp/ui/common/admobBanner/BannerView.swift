@@ -13,8 +13,8 @@ struct BannerView: View {
                 setFrame()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                    setFrame()
-                }
+                setFrame()
+            }
     }
     
     func setFrame() {
