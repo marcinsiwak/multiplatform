@@ -72,10 +72,15 @@ class WelcomeScreenViewModel(
 
     fun onGoogleLogin(idToken: String?, accessToken: String?) {
         viewModelScope.launch {
+            val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
             _viewState.update { it.copy(isLoading = true) }
             googleLoginUseCase(idToken, accessToken)
+            if (isSynchronizationPossible) {
+                _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
+            } else {
+                navigator.navigate(NavigationDirections.Dashboard(true))
+            }
             _viewState.update { it.copy(isLoading = false) }
-            navigator.navigate(NavigationDirections.Dashboard(true))
         }
     }
 
