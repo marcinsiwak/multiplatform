@@ -47,6 +47,14 @@ struct WelcomeScreen: View {
             }) {
                 Text(MR.strings().welcome_google_login.desc().localized())
             }
+            
+        
+            Button(action: {
+                viewModel.onOfflineModeClicked()
+            }) {
+                Text(MR.strings().welcome_offline_mode.desc().localized())
+            }
+
 
             Text(MR.strings().welcome_no_account.desc().localized())
                 .foregroundColor(Color.colorSecondary)
@@ -57,6 +65,26 @@ struct WelcomeScreen: View {
                 Text(MR.strings().welcome_create_account.desc().localized())
             }
         }
+        .showDialog(
+            isPresented: $state.value.isSynchronizationDialogVisible,
+            onDismiss: {
+                viewModel.onDismissSynchronizationClicked()
+            },
+            dialogContent: {
+                MainDialogContent(
+                    title: MR.strings().synchronization_dialog_title.desc().localized(),
+                    description: MR.strings().synchronization_dialog_description.desc().localized(),
+                    confirmButtonText: MR.strings().confirm.desc().localized(),
+                    dismissButtonText: MR.strings().deny.desc().localized(),
+                    confirmButtonClicked: {
+                        viewModel.onConfirmSynchronizationClicked()
+                    },
+                    dismissButtonClicked: {
+                        viewModel.onDismissSynchronizationClicked()
+                    }
+                )
+            }
+        )
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
         .background(Color.colorPrimary)

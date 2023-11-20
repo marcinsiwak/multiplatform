@@ -49,6 +49,8 @@
 		7132D0572B07AA2300BC2C99 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0562B07AA2300BC2C99 /* BannerViewController.swift */; };
 		7132D0592B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0582B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift */; };
 		7132D05D2B07C8E400BC2C99 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D05C2B07C8E400BC2C99 /* BannerView.swift */; };
+		7132D05F2B0A975000BC2C99 /* OfflineBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D05E2B0A975000BC2C99 /* OfflineBanner.swift */; };
+		7132D0612B0A99E200BC2C99 /* MainDialogContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0602B0A99E200BC2C99 /* MainDialogContent.swift */; };
 		71A5EF3C2AF3D3F000E373DF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5EF3B2AF3D3F000E373DF /* Theme.swift */; };
 		71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */; };
 		71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */; };
@@ -112,6 +114,8 @@
 		7132D0562B07AA2300BC2C99 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
 		7132D0582B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewControllerWidthDelegate.swift; sourceTree = "<group>"; };
 		7132D05C2B07C8E400BC2C99 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		7132D05E2B0A975000BC2C99 /* OfflineBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBanner.swift; sourceTree = "<group>"; };
+		7132D0602B0A99E200BC2C99 /* MainDialogContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDialogContent.swift; sourceTree = "<group>"; };
 		71A5EF3B2AF3D3F000E373DF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		74DA36D12685A7143467F9F1 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 				711E8B842A575A1C00151063 /* ResultsView.swift */,
 				711E8B862A575A3000151063 /* ResultTableView.swift */,
 				711E8B882A575A4500151063 /* TextWithDrawableView.swift */,
+				7132D05E2B0A975000BC2C99 /* OfflineBanner.swift */,
+				7132D0602B0A99E200BC2C99 /* MainDialogContent.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -499,10 +505,12 @@
 			files = (
 				711E8B812A5759F500151063 /* ResultInputView.swift in Sources */,
 				711E8B7B2A5759AE00151063 /* ListItemView.swift in Sources */,
+				7132D0612B0A99E200BC2C99 /* MainDialogContent.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				711E8B7D2A5759CC00151063 /* NewResultView.swift in Sources */,
 				711E8BA62A575B8400151063 /* Dimensions.swift in Sources */,
 				711E8B782A57599900151063 /* InputView.swift in Sources */,
+				7132D05F2B0A975000BC2C99 /* OfflineBanner.swift in Sources */,
 				711E8BAF2A575C0200151063 /* FocusedField.swift in Sources */,
 				711E8BA32A575B6200151063 /* SummaryScreen.swift in Sources */,
 				711E8BB72A575E6700151063 /* Array.swift in Sources */,

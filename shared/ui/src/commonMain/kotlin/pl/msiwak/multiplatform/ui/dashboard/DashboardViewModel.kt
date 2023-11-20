@@ -23,11 +23,13 @@ class DashboardViewModel(
     private val _viewState = MutableStateFlow(DashboardState())
     val viewState: StateFlow<DashboardState> = _viewState.asStateFlow()
 
+    private val errorHandler = globalErrorHandler.handleError()
+
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isOfflineBannerVisible = getIsOfflineModeUseCase()) }
         }
-        viewModelScope.launch(globalErrorHandler.handleError()) {
+        viewModelScope.launch(errorHandler) {
             val user = getUser()
             Napier.e("OUTPUT, ${user.email}")
         }
