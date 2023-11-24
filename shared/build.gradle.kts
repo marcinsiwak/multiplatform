@@ -32,6 +32,7 @@ kotlin {
         homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "16.2"
+//        noPodspec()
 
         podfile = project.file("../iosApp/Podfile")
 
@@ -49,6 +50,10 @@ kotlin {
             export(project(Modules.injector))
             export(project(Modules.notifications))
         }
+
+        xcodeConfigurationToNativeBuildType["productionRelease"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
         pod("FirebaseCore", linkOnly = true)
         pod("FirebaseAuth", linkOnly = true)
@@ -95,6 +100,24 @@ kotlin {
         }
     }
 }
+
+//val podspec by tasks.existing(org.jetbrains.kotlin.gradle.tasks.PodspecTask::class) {
+//    doLast {
+//        val outputFile = outputs.files.singleFile
+//        val text = outputFile.readText()
+//        val newText = text
+//            // Workaround: https://youtrack.jetbrains.com/issue/KT-42023
+//            .replace("spec.pod_target_xcconfig = {",
+//                """
+//          spec.pod_target_xcconfig = {
+//            'KOTLIN_CONFIGURATION' => 'productionRelease',
+//            'KOTLIN_CONFIGURATION[config=Debug]' => 'Debug',
+//        """.trimIndent()
+//            )
+//            .replace("\$CONFIGURATION", "\$KOTLIN_CONFIGURATION")
+//        outputFile.writeText(newText)
+//    }
+//}
 
 android {
     namespace = "pl.msiwak.multiplatform.android"

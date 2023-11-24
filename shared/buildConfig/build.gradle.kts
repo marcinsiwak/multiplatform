@@ -36,8 +36,12 @@ iosSimulatorArm64()
         framework {
             baseName = "buildConfig"
         }
+
+        xcodeConfigurationToNativeBuildType["productionRelease"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -63,8 +67,8 @@ buildkonfig {
         buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
         buildConfigField(BOOLEAN, "IsDebug", "false")
     }
-    targetConfigs {
 
+    targetConfigs {
         create("android") {
             buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
@@ -75,18 +79,31 @@ buildkonfig {
             buildConfigField(BOOLEAN, "IsDebug", "false")
         }
     }
-    targetConfigs("debug") {
 
-        val debugPropertiesFile = rootProject.file("debug.properties")
-        val debugProperties = Properties()
-        debugProperties.load(FileInputStream(debugPropertiesFile))
+    targetConfigs("productionDebug") {
 
         create("android") {
-            buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
         create("ios") {
-            buildConfigField(STRING, "BASE_URL", debugProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+            buildConfigField(BOOLEAN, "IsDebug", "true")
+        }
+    }
+
+    targetConfigs("stagingDebug") {
+
+        val stagingPropertiesFile = rootProject.file("staging.properties")
+        val stagingProperties = Properties()
+        stagingProperties.load(FileInputStream(stagingPropertiesFile))
+
+        create("android") {
+            buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
+            buildConfigField(BOOLEAN, "IsDebug", "true")
+        }
+        create("ios") {
+            buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
     }

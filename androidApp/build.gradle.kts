@@ -19,6 +19,8 @@ val versionCode =
 
 val appVersionCode: Int = Integer.valueOf(System.getenv("BUILD_NUMBER") ?: "$versionCode")
 
+apply(from = "$rootDir/gradle/buildVariants.gradle")
+
 android {
     namespace = "pl.msiwak.multiplatform.android"
     compileSdk = 34
@@ -74,7 +76,7 @@ android {
         }
     }
 
-    val debugKeystorePropFile = rootProject.file("signing/debug.properties")
+    val debugKeystorePropFile = rootProject.file("signing/staging.properties")
     if (debugKeystorePropFile.exists()) {
         val debugKeystoreProp = Properties()
         debugKeystoreProp.load(FileInputStream(debugKeystorePropFile))
@@ -102,6 +104,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),
                 file("proguard-rules.pro")
@@ -119,17 +122,24 @@ android {
             )
         }
         debug {
+            applicationIdSuffix = ".debug"
 
-            val debugPropertiesFile = rootProject.file("androidApp/debug.properties")
-            val debugProperties = Properties()
-            debugProperties.load(FileInputStream(debugPropertiesFile))
+            val stagingPropertiesFile = rootProject.file("androidApp/staging.properties")
+            val stagingProperties = Properties()
+            stagingProperties.load(FileInputStream(stagingPropertiesFile))
 
             signingConfig = signingConfigs.getByName("debug")
             buildConfigField(
                 "String",
                 "GOOGLE_AUTH_WEB_CLIENT_ID",
-                debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                stagingProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
             )
+        }
+    }
+
+    productFlavors {
+        getByName("staging") {
+            applicationIdSuffix = ".staging"
         }
     }
 }
