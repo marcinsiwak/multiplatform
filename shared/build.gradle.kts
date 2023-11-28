@@ -38,6 +38,7 @@ kotlin {
 
         framework {
             baseName = "shared"
+            linkerOpts += "-ld64"
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
 
@@ -59,7 +60,7 @@ kotlin {
         pod("FirebaseAuth", linkOnly = true)
         pod("FirebaseRemoteConfig", linkOnly = true)
         pod("FirebaseCrashlytics", linkOnly = true)
-        pod("GoogleSignIn", linkOnly = true)
+//        pod("GoogleSignIn", linkOnly = true)
         pod("FirebaseMessaging", linkOnly = true)
         pod("Google-Mobile-Ads-SDK", linkOnly = true)
 

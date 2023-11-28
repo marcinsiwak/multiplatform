@@ -36,7 +36,7 @@ jvmToolchain(17)
         xcodeConfigurationToNativeBuildType["productionDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
         xcodeConfigurationToNativeBuildType["stagingDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
-        pod("GoogleSignIn")
+//        pod("GoogleSignIn")
     }
 
     sourceSets {
