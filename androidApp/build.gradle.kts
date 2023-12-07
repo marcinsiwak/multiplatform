@@ -76,7 +76,7 @@ android {
         }
     }
 
-    val debugKeystorePropFile = rootProject.file("signing/staging.properties")
+    val debugKeystorePropFile = rootProject.file("signing/debug.properties")
     if (debugKeystorePropFile.exists()) {
         val debugKeystoreProp = Properties()
         debugKeystoreProp.load(FileInputStream(debugKeystorePropFile))

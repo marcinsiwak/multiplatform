@@ -7,6 +7,8 @@ plugins {
     id("com.android.library")
 }
 
+apply(from = "$rootDir/gradle/buildVariants.gradle")
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     targetHierarchy.default()

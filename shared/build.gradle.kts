@@ -10,6 +10,8 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
 }
 
+apply(from = "$rootDir/gradle/buildVariants.gradle")
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     targetHierarchy.default()
@@ -36,11 +38,20 @@ kotlin {
 
         podfile = project.file("../iosApp/Podfile")
 
+//        project.extra["buildkonfig.flavor"] = flavour
+//
+//        // Print a message for verification
+//        println("Custom property set to: $flavour")
+
         framework {
             baseName = "shared"
             linkerOpts += "-ld64"
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
+            compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
+            compilation.project.properties.forEach {
+                println("My properties: ${it.key}, ${it.value}")
+            }
 
             export(Deps.MokoResources.resources)
             export(Deps.MokoResources.graphics)
@@ -117,6 +128,17 @@ kotlin {
 //            )
 //            .replace("\$CONFIGURATION", "\$KOTLIN_CONFIGURATION")
 //        outputFile.writeText(newText)
+//    }
+//}
+
+//tasks.register("setBuildKonfig") {
+//    doLast {
+//        // Set a project property
+//        val flavour = project.findProperty("kmmflavour") as String?
+//        project.extra["buildkonfig.flavor"] = flavour
+//
+//        // Print a message for verification
+//        println("Custom property set to: $flavour")
 //    }
 //}
 

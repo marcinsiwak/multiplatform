@@ -12,6 +12,8 @@ plugins {
     kotlin("plugin.serialization") version "1.8.22"
 }
 
+apply(from = "$rootDir/gradle/buildVariants.gradle")
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     targetHierarchy.default()

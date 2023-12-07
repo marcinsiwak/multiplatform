@@ -45,6 +45,7 @@ class KtorClient(private val sessionStore: SessionStore) {
         defaultRequest {
             contentType(ContentType.Application.Json)
             url(BuildConfig.BASE_URL)
+            Napier.e("BuildKonfig flavour is: ${BuildConfig.buildFlavour}")
             bearerAuth(sessionStore.getToken() ?: "")
         }
 
