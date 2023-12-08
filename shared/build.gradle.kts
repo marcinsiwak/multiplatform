@@ -34,14 +34,8 @@ kotlin {
         homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "16.2"
-//        noPodspec()
 
         podfile = project.file("../iosApp/Podfile")
-
-//        project.extra["buildkonfig.flavor"] = flavour
-//
-//        // Print a message for verification
-//        println("Custom property set to: $flavour")
 
         framework {
             baseName = "shared"
@@ -112,35 +106,6 @@ kotlin {
         }
     }
 }
-
-//val podspec by tasks.existing(org.jetbrains.kotlin.gradle.tasks.PodspecTask::class) {
-//    doLast {
-//        val outputFile = outputs.files.singleFile
-//        val text = outputFile.readText()
-//        val newText = text
-//            // Workaround: https://youtrack.jetbrains.com/issue/KT-42023
-//            .replace("spec.pod_target_xcconfig = {",
-//                """
-//          spec.pod_target_xcconfig = {
-//            'KOTLIN_CONFIGURATION' => 'productionRelease',
-//            'KOTLIN_CONFIGURATION[config=Debug]' => 'Debug',
-//        """.trimIndent()
-//            )
-//            .replace("\$CONFIGURATION", "\$KOTLIN_CONFIGURATION")
-//        outputFile.writeText(newText)
-//    }
-//}
-
-//tasks.register("setBuildKonfig") {
-//    doLast {
-//        // Set a project property
-//        val flavour = project.findProperty("kmmflavour") as String?
-//        project.extra["buildkonfig.flavor"] = flavour
-//
-//        // Print a message for verification
-//        println("Custom property set to: $flavour")
-//    }
-//}
 
 android {
     namespace = "pl.msiwak.multiplatform.android"

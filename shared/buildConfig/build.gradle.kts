@@ -1,9 +1,11 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
 import java.io.FileInputStream
 import java.util.Properties
 import java.util.regex.Pattern
 import org.gradle.configurationcache.extensions.capitalized
+import org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin
 
 plugins {
     kotlin("multiplatform")
@@ -31,17 +33,6 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    var variant = getCurrentVariant()
-    var flavor = getCurrentFlavor()
-
-    println("Setting buildkonfig.flavor to: ${variant}")
-    println("Setting buildkonfig.flavor to: ${flavor}")
-
-    val kmmFlavor = flavor.plus(variant.capitalized())
-    println("Setting buildkonfig.flavor to: ${kmmFlavor}")
-    
-    project.setProperty("buildkonfig.flavor", kmmFlavor)
-
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -49,8 +40,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "buildConfig"
-//            val flavour = project.findProperty("kmmflavour") as String?
-//            compilation.project.setProperty("buildkonfig.flavor", flavour)
         }
 
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -145,7 +134,7 @@ fun getCurrentVariant(): String {
     val matcher = pattern.matcher(tskReqStr)
 
     return if (matcher.find()) {
-        matcher.group(2)?.toLowerCase() ?: ""
+        matcher.group(2)?.lowercase() ?: ""
     } else {
         println("NO MATCH FOUND")
         ""
@@ -165,24 +154,35 @@ fun getCurrentFlavor(): String {
     val matcher = pattern.matcher(tskReqStr)
 
     return if (matcher.find()) {
-        matcher.group(1)?.toLowerCase() ?: ""
+        matcher.group(1)?.lowercase() ?: ""
     } else {
         println("NO MATCH FOUND")
         ""
     }
 }
 
-//tasks.register("setupBuildkonfig") {
-//    doLast {
-//        val flavor = project.findProperty("kmmflavour").toString()
-//        project.setProperty("buildkonfig.flavor", flavor)
-//
-//        println("Setting buildkonfig.flavor to: $flavor")
-//    }
-//}
-//tasks.named("build") {
-//    dependsOn("setupBuildkonfig")
-//}
+tasks.create("setupBuildkonfigIos") {
+    doLast {
+        val flavour = project.findProperty("kmmflavour") as String?
+        project.extra["buildkonfig.flavor"] = flavour
+    }
+}
+
+tasks.create("setupBuildkonfig") {
+    val variant = getCurrentVariant()
+    val flavor = getCurrentFlavor()
+    val kmmFlavor = flavor.plus(variant.capitalized())
+
+    if (kmmFlavor.isEmpty()) {
+        val iosVariant = project.findProperty(KotlinCocoapodsPlugin.CONFIGURATION_PROPERTY)
+
+        project.setProperty("buildkonfig.flavor", iosVariant)
+    } else {
+        project.setProperty("buildkonfig.flavor", kmmFlavor)
+    }
+}
+
+tasks.preBuild.dependsOn("setupBuildkonfig")
 
 android {
     namespace = "pl.msiwak.multiplatform.buildconfig"
@@ -190,5 +190,4 @@ android {
     defaultConfig {
         minSdk = 24
     }
-
 }
