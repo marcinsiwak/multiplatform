@@ -39,13 +39,12 @@ kotlin {
 
         framework {
             baseName = "shared"
-            linkerOpts += "-ld64"
+            if (System.getenv("XCODE_VERSION_MAJOR") == "1500") {
+                linkerOpts += "-ld64"
+            }
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
-            compilation.project.properties.forEach {
-                println("My properties: ${it.key}, ${it.value}")
-            }
 
             export(Deps.MokoResources.resources)
             export(Deps.MokoResources.graphics)
