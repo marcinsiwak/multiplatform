@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
     spec.dependency 'FirebaseCrashlytics'
     spec.dependency 'FirebaseMessaging'
     spec.dependency 'FirebaseRemoteConfig'
-    spec.dependency 'GoogleSignIn'
+    spec.dependency 'Google-Mobile-Ads-SDK'
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':shared',

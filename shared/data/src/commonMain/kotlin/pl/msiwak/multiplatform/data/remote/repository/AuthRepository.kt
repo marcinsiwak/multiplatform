@@ -12,14 +12,13 @@ class AuthRepository(
     private val firebaseAuthorization: FirebaseAuthorization
 ) {
 
-    suspend fun login(login: String, password: String): AuthResult? = withContext(Dispatchers.IO) {
+    suspend fun login(login: String, password: String): AuthResult = withContext(Dispatchers.IO) {
         return@withContext firebaseAuthorization.loginUser(login, password)
     }
 
-    suspend fun loginWithGoogle(googleToken: String?, accessToken: String?): String? =
+    suspend fun loginWithGoogle(googleToken: String?, accessToken: String?): AuthResult? =
         withContext(Dispatchers.IO) {
-            val result = firebaseAuthorization.loginWithGoogle(googleToken, accessToken)
-            return@withContext result.user?.getIdTokenResult(true)?.token
+            return@withContext firebaseAuthorization.loginWithGoogle(googleToken, accessToken)
         }
 
     suspend fun observeAuthStateChanged(): Flow<FirebaseUser?> = withContext(Dispatchers.IO) {

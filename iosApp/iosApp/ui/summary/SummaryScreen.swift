@@ -23,6 +23,7 @@ struct SummaryScreen: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
+            BannerView()
             ScrollView {
                 ForEach(state.value.categories) { item in
                     CategoryItem(category: item)
@@ -62,8 +63,8 @@ struct SummaryScreen: View {
 }
 extension Category: Identifiable {}
 
-//struct SummaryScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SummaryScreen()
-//    }
-//}
+struct SummaryScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        SummaryScreen()
+    }
+}

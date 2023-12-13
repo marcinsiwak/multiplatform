@@ -9,21 +9,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.extensions.openMailApp
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
 import pl.msiwak.multiplatform.android.ui.loader.Loader
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailEvent
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
+import pl.msiwak.multiplatform.ui.verifyEmail.VerifyState
 
 @Composable
 fun VerifyEmailScreen() {
@@ -40,6 +45,21 @@ fun VerifyEmailScreen() {
         }
     }
 
+    VerifyEmailScreenContent(
+        viewState = viewState,
+        onOpenMailClicked = viewModel::onOpenMailClicked,
+        onResendMailClicked = viewModel::onResendMailClicked,
+        onLoginClicked = viewModel::onLoginClicked
+    )
+}
+
+@Composable
+fun VerifyEmailScreenContent(
+    viewState: State<VerifyState>,
+    onOpenMailClicked: () -> Unit = {},
+    onResendMailClicked: () -> Unit = {},
+    onLoginClicked: () -> Unit = {}
+) {
     if (viewState.value.isLoading) {
         Loader()
     }
@@ -69,13 +89,13 @@ fun VerifyEmailScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
-            onClick = { viewModel.onOpenMailClicked() },
+            onClick = { onOpenMailClicked() },
             text = stringResource(id = MR.strings.verify_open_mail.resourceId)
         )
 
         SecondaryButton(
             modifier = Modifier.fillMaxWidth(),
-            onClick = { viewModel.onResendMailClicked() },
+            onClick = { onResendMailClicked() },
             text = stringResource(id = MR.strings.verify_resend_mail.resourceId)
         )
 
@@ -83,8 +103,16 @@ fun VerifyEmailScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
-            onClick = { viewModel.onLoginClicked() },
+            onClick = { onLoginClicked() },
             text = stringResource(id = MR.strings.verify_login.resourceId)
         )
+    }
+}
+
+@DarkLightPreview
+@Composable
+fun VerifyEmailScreenPreview() {
+    AppTheme {
+        VerifyEmailScreenContent(MutableStateFlow(VerifyState()).collectAsState())
     }
 }

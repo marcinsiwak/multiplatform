@@ -19,6 +19,8 @@ val versionCode =
 
 val appVersionCode: Int = Integer.valueOf(System.getenv("BUILD_NUMBER") ?: "$versionCode")
 
+apply(from = "$rootDir/gradle/buildVariants.gradle")
+
 android {
     namespace = "pl.msiwak.multiplatform.android"
     compileSdk = 34
@@ -102,6 +104,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),
                 file("proguard-rules.pro")
@@ -119,17 +122,24 @@ android {
             )
         }
         debug {
+            applicationIdSuffix = ".debug"
 
-            val debugPropertiesFile = rootProject.file("androidApp/debug.properties")
-            val debugProperties = Properties()
-            debugProperties.load(FileInputStream(debugPropertiesFile))
+            val stagingPropertiesFile = rootProject.file("androidApp/staging.properties")
+            val stagingProperties = Properties()
+            stagingProperties.load(FileInputStream(stagingPropertiesFile))
 
             signingConfig = signingConfigs.getByName("debug")
             buildConfigField(
                 "String",
                 "GOOGLE_AUTH_WEB_CLIENT_ID",
-                debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                stagingProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
             )
+        }
+    }
+
+    productFlavors {
+        getByName("staging") {
+            applicationIdSuffix = ".staging"
         }
     }
 }
@@ -143,8 +153,8 @@ dependencies {
     implementation(composeBom)
     androidTestImplementation(composeBom)
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
+    implementation("androidx.compose.ui:ui-tooling:1.5.4")
     implementation("androidx.compose.ui:ui")
 
     implementation("androidx.core:core-splashscreen:1.0.1")
@@ -162,5 +172,6 @@ dependencies {
     }
     with(Deps.Google) {
         api(andorid_play_services_auth)
+        api(andorid_play_services_ads)
     }
 }

@@ -11,8 +11,8 @@
 local.properties
 /signing
 androidApp/release.properties
-androidApp/debug.properties
-/debug.properties
+androidApp/staging.properties
+/staging.properties
 /release.properties
 /androidApp/google-services.json
 iosApp/Pods/*

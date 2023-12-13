@@ -10,19 +10,24 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.loader.Loader
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.addCategory.AddCategoryState
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 
 @Composable
@@ -30,6 +35,21 @@ fun AddCategoryScreen() {
     val viewModel = koinViewModel<AddCategoryViewModel>()
     val viewState = viewModel.viewState.collectAsState()
 
+    AddCategoryScreenContent(
+        viewState = viewState,
+        onCategoryNameChanged = viewModel::onCategoryNameChanged,
+        onTypePicked = viewModel::onTypePicked,
+        onSaveCategoryClicked = viewModel::onSaveCategoryClicked
+    )
+}
+
+@Composable
+fun AddCategoryScreenContent(
+    viewState: State<AddCategoryState>,
+    onCategoryNameChanged: (String) -> Unit = {},
+    onTypePicked: (ExerciseType) -> Unit = {},
+    onSaveCategoryClicked: () -> Unit = {}
+) {
     if (viewState.value.isLoading) {
         Loader()
     }
@@ -45,7 +65,7 @@ fun AddCategoryScreen() {
                     .padding(MaterialTheme.dimens.space_8),
                 value = viewState.value.name,
                 onValueChange = {
-                    viewModel.onCategoryNameChanged(it)
+                    onCategoryNameChanged(it)
                 },
                 hintText = stringResource(id = MR.strings.category_name.resourceId)
             )
@@ -53,7 +73,7 @@ fun AddCategoryScreen() {
                 currentValue = viewState.value.exerciseType.name,
                 items = ExerciseType.values().toList(),
                 onItemPicked = {
-                    viewModel.onTypePicked(it)
+                    onTypePicked(it)
                 }
             )
         }
@@ -69,7 +89,7 @@ fun AddCategoryScreen() {
                 containerColor = MaterialTheme.colorScheme.tertiary,
                 contentColor = MaterialTheme.colorScheme.primary
             ),
-            onClick = { viewModel.onSaveCategoryClicked() }
+            onClick = { onSaveCategoryClicked() }
         ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
@@ -80,8 +100,12 @@ fun AddCategoryScreen() {
     }
 }
 
-@Preview
+@DarkLightPreview
 @Composable
 fun AddCategoryScreenPreview() {
-    AddCategoryScreen()
+    AppTheme {
+        AddCategoryScreenContent(
+            viewState = MutableStateFlow(AddCategoryState()).collectAsState()
+        )
+    }
 }
