@@ -272,5 +272,3 @@ fun AddExerciseScreenPreview() {
         )
     }
 }
-
-
