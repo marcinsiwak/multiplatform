@@ -15,7 +15,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView

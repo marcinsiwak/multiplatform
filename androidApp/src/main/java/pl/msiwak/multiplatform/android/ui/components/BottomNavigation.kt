@@ -17,7 +17,10 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 
 @Composable
-fun BottomNavigation(navController: NavController, items: List<pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections>) {
+fun BottomNavigation(
+    navController: NavController,
+    items: List<pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections>
+) {
     NavigationBar(
         modifier = Modifier.topBorder(
             MaterialTheme.dimens.bottom_navigation_divider_width,
