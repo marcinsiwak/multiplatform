@@ -7,7 +7,6 @@ import dev.gitlive.firebase.auth.GoogleAuthProvider
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.flow.Flow
 
-
 class FirebaseAuthorization {
 
     private val auth = Firebase.auth
@@ -41,5 +40,4 @@ class FirebaseAuthorization {
     suspend fun resendVerificationEmail() {
         auth.currentUser?.sendEmailVerification()
     }
-
 }
