@@ -127,7 +127,7 @@ fun AddExerciseScreenContent(
     onDateClicked: () -> Unit = {},
     onResultLongClicked: (Int) -> Unit = {},
     onLabelClicked: (Int) -> Unit = {},
-    onAmountClicked: () -> Unit = {},
+    onAmountClicked: () -> Unit = {}
 ) {
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
