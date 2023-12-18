@@ -26,7 +26,7 @@ subprojects {
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     filter {
         exclude { element ->
-            element.file.path.contains("build")
+            element.file.path.contains("build/")
         }
         include("**/kotlin/**")
     }
