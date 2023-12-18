@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import java.util.Locale
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
@@ -28,6 +27,7 @@ import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.ui.unit.UnitState
+import java.util.Locale
 
 @Composable
 fun UnitScreen() {

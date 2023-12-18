@@ -12,6 +12,15 @@ plugins {
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    filter {
+        exclude { element ->
+            element.file.path.contains("generated/")
+        }
+        include("**/kotlin/**")
+    }
+}
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     targetHierarchy.default()
@@ -67,7 +76,6 @@ kotlin {
 //        pod("GoogleSignIn", linkOnly = true)
         pod("FirebaseMessaging", linkOnly = true)
         pod("Google-Mobile-Ads-SDK", linkOnly = true)
-
     }
 
     sourceSets {

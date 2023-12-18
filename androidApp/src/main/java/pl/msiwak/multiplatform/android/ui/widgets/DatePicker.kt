@@ -2,9 +2,9 @@ package pl.msiwak.multiplatform.android.ui.widgets
 
 import android.app.DatePickerDialog
 import android.content.Context
+import kotlinx.datetime.LocalDateTime
 import java.util.Calendar
 import java.util.Date
-import kotlinx.datetime.LocalDateTime
 
 fun openCalendar(
     context: Context,
