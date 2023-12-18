@@ -7,7 +7,6 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
     id("dev.icerock.mobile.multiplatform-resources")
-    id("org.jlleitschuh.gradle.ktlint")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -105,15 +104,6 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
         }
-    }
-}
-
-configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-    filter {
-        exclude { element ->
-            element.file.path.contains("build")
-        }
-        include("**/kotlin/**")
     }
 }
 
