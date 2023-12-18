@@ -75,7 +75,7 @@ fun InputView(
 
 @Preview
 @Composable
-private fun InputViewPreview() {
+fun InputViewPreview() {
     AppTheme {
         InputView(modifier = Modifier, value = "", onValueChange = {})
     }

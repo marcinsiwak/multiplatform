@@ -12,7 +12,8 @@ actual sealed class NavigationDirections : NavigationCommand {
             get() = "navigateUp"
     }
 
-    actual class Welcome actual constructor(override val isInclusive: Boolean) : NavigationDirections() {
+    actual class Welcome actual constructor(override val isInclusive: Boolean) :
+        NavigationDirections() {
         override val route: String
             get() = "welcome"
     }
@@ -22,7 +23,8 @@ actual sealed class NavigationDirections : NavigationCommand {
             get() = "registration"
     }
 
-    actual class Dashboard actual constructor(override val isInclusive: Boolean): NavigationDirections() {
+    actual class Dashboard actual constructor(override val isInclusive: Boolean) :
+        NavigationDirections() {
         override val route: String
             get() = "dashboard"
     }
@@ -81,5 +83,4 @@ actual sealed class NavigationDirections : NavigationCommand {
         override val route: String
             get() = "registrationSuccess"
     }
-
 }

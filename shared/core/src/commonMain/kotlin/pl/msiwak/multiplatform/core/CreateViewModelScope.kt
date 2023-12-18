@@ -1,9 +1,9 @@
 package pl.msiwak.multiplatform.core
 
-import kotlin.native.concurrent.ThreadLocal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlin.native.concurrent.ThreadLocal
 
 @ThreadLocal
 var createViewModelScope: () -> CoroutineScope = {

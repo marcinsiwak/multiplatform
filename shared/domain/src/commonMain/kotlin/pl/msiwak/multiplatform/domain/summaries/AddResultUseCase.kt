@@ -12,7 +12,7 @@ class AddResultUseCase(
 ) {
     suspend operator fun invoke(params: Params) {
         val unit = getUnitsUseCase()
-        val formattedResult =  if (unit == UnitType.IMPERIAL) {
+        val formattedResult = if (unit == UnitType.IMPERIAL) {
             params.result.copy(result = (params.result.result.toDouble() / params.exerciseType.convertValue).toString())
         } else {
             params.result

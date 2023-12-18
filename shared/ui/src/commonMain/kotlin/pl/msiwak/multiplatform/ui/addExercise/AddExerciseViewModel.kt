@@ -161,44 +161,25 @@ class AddExerciseViewModel(
             return
         }
         if (!savedDate.matches(Regex(DATE_REGEX))) {
-            _viewState.value = _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(isDateError = true)
-            )
+            _viewState.update { it.copy(newResultData = it.newResultData.copy(isDateError = true)) }
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
             return
         }
 
-        if (!(savedResult.matches(Regex(NUMBER_REGEX_DOT)) || savedResult.matches(
-                Regex(
-                    NUMBER_REGEX_COMMA
-                )
-            ) && exerciseType == ExerciseType.GYM)
-        ) {
-            _viewState.value = _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(isResultError = true)
-            )
+        if (!isInputGymCorrect(savedResult, exerciseType)) {
+            _viewState.update { it.copy(newResultData = it.newResultData.copy(isResultError = true)) }
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
             return
         }
 
-        if (!(savedAmount.matches(Regex(NUMBER_REGEX_DOT)) || savedAmount.matches(
-                Regex(
-                    NUMBER_REGEX_DOT
-                )
-            )) && exerciseType == ExerciseType.GYM
-        ) {
-            _viewState.value = _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(isAmountError = true)
-            )
+        if (!isInputGymCorrect(savedResult, exerciseType)) {
+            _viewState.update { it.copy(newResultData = it.newResultData.copy(isAmountError = true)) }
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
 
-        if (savedAmount.isEmpty() && exerciseType == ExerciseType.RUNNING
-        ) {
-            _viewState.value = _viewState.value.copy(
-                newResultData = _viewState.value.newResultData.copy(isAmountError = true)
-            )
+        if (savedAmount.isEmpty() && exerciseType == ExerciseType.RUNNING) {
+            _viewState.update { it.copy(newResultData = it.newResultData.copy(isAmountError = true)) }
             _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
             return
         }
@@ -225,6 +206,17 @@ class AddExerciseViewModel(
                 )
             }
         }
+    }
+
+    private fun isCorrectRegex(input: String, regex: Regex): Boolean {
+        return input.matches(regex)
+    }
+
+    private fun isInputGymCorrect(savedResult: String, exerciseType: ExerciseType): Boolean {
+        return isCorrectRegex(savedResult, Regex(NUMBER_REGEX_DOT)) || isCorrectRegex(
+            savedResult,
+            Regex(NUMBER_REGEX_COMMA)
+        ) && exerciseType == ExerciseType.GYM
     }
 
     fun onDateClicked() {
@@ -415,6 +407,7 @@ class AddExerciseViewModel(
                     currentResults.sortByDescending { it.amount.toDouble() }
                 }
             }
+
             SortType.DATE_DECREASING -> currentResults.sortByDescending { it.date }
         }
     }

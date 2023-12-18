@@ -8,7 +8,7 @@ actual class NumberFormatter actual constructor() {
         val formatter = NSNumberFormatter()
         formatter.minimumFractionDigits = 0u
         formatter.maximumFractionDigits = 2u
-        formatter.numberStyle = 1u //Decimal
+        formatter.numberStyle = 1u // Decimal
         return formatter.stringFromNumber(NSNumber(number))!!
     }
 }

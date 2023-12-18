@@ -34,13 +34,14 @@ class KtorClient(private val sessionStore: SessionStore) {
         }
 
         install(ContentNegotiation) {
-            json(Json {
-                prettyPrint = true
-                isLenient = true
-                encodeDefaults = true
-                ignoreUnknownKeys = true
-
-            })
+            json(
+                Json {
+                    prettyPrint = true
+                    isLenient = true
+                    encodeDefaults = true
+                    ignoreUnknownKeys = true
+                }
+            )
         }
         defaultRequest {
             contentType(ContentType.Application.Json)

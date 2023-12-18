@@ -11,7 +11,7 @@ plugins {
 kotlin {
     targetHierarchy.default()
 
-    androidTarget() {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "17"

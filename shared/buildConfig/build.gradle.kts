@@ -126,10 +126,11 @@ fun getCurrentVariant(): String {
     val gradle: Gradle = gradle
     val tskReqStr: String = gradle.startParameter.taskRequests.toString()
 
-    val pattern: Pattern = if (tskReqStr.contains("assemble"))
+    val pattern: Pattern = if (tskReqStr.contains("assemble")) {
         Pattern.compile("assemble(\\w+)(Release|Debug)")
-    else
+    } else {
         Pattern.compile("generate(\\w+)(Release|Debug)")
+    }
 
     val matcher = pattern.matcher(tskReqStr)
 

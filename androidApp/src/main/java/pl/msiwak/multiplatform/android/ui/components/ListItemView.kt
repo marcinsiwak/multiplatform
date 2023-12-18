@@ -24,6 +24,7 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonResources.MR
 
+@Suppress("MagicNumber")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> Unit = {}) {

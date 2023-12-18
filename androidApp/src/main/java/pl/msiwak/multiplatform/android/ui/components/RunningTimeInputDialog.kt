@@ -25,6 +25,10 @@ import androidx.compose.ui.window.Dialog
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonResources.MR
 
+private const val MILLISECONDS_DIGITS_AMOUNT = 3
+private const val MINUTE_IN_SECONDS = 60
+private const val HOUR_IN_MINUTES = 60
+
 @Composable
 fun RunningTimeInputDialog(
     onConfirm: (String, String, String, String) -> Unit,
@@ -116,7 +120,7 @@ fun RunningTimeInputDialog(
                 RunningTimeInputView(
                     value = milliseconds.value,
                     onValueChange = {
-                        if (it.length > 3) return@RunningTimeInputView
+                        if (it.length > MILLISECONDS_DIGITS_AMOUNT) return@RunningTimeInputView
 
                         milliseconds.value = it.filter { word -> word.isDigit() }
                     },
@@ -145,8 +149,8 @@ fun RunningTimeInputDialog(
                         milliseconds.value = "0"
                     }
                     when {
-                        minutes.value.toInt() > 60 -> isMinutesError.value = true
-                        seconds.value.toInt() > 60 -> isSecondsError.value = true
+                        minutes.value.toInt() > HOUR_IN_MINUTES -> isMinutesError.value = true
+                        seconds.value.toInt() > MINUTE_IN_SECONDS -> isSecondsError.value = true
                         else -> onConfirm(
                             hours.value,
                             minutes.value,

@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.utils
 
-//import cocoapods.FirebaseCore.FIRApp
-//import cocoapods.GoogleSignIn.GIDConfiguration
-//import cocoapods.GoogleSignIn.GIDSignIn
+// import cocoapods.FirebaseCore.FIRApp
+// import cocoapods.GoogleSignIn.GIDConfiguration
+// import cocoapods.GoogleSignIn.GIDSignIn
 
 class GoogleAuthOneTapConfiguration {
     fun setConfig() {

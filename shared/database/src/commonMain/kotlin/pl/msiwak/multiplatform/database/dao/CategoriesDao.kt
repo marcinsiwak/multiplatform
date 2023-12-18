@@ -117,7 +117,7 @@ class CategoriesDao(database: Database) {
         id: String,
         name: String,
         exerciseType: ExerciseType,
-        creationDate: LocalDateTime,
+        creationDate: LocalDateTime
     ): Category {
         return Category(id, name, exerciseType, emptyList(), creationDate)
     }
@@ -127,9 +127,8 @@ class CategoriesDao(database: Database) {
         categoryId: String,
         exerciseTitle: String,
         exerciseType: ExerciseType,
-        creationDate: LocalDateTime,
+        creationDate: LocalDateTime
     ): Exercise {
         return Exercise(id, categoryId, exerciseTitle, emptyList(), exerciseType, creationDate)
     }
-
 }

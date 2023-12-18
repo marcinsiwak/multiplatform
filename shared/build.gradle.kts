@@ -15,7 +15,7 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 kotlin {
     targetHierarchy.default()
 
-    androidTarget() {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "17"

@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 
 private val LocalDim = staticCompositionLocalOf { Dimensions() }
 
+@Suppress("ConstructorParameterNaming")
 data class Dimensions(
     val space_0: Dp = 0.dp,
     val space_1: Dp = 1.dp,

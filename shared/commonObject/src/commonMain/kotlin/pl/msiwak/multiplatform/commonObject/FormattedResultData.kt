@@ -6,5 +6,5 @@ data class FormattedResultData(
     val date: String = "",
     val isResultError: Boolean = false,
     val isAmountError: Boolean = false,
-    val isDateError: Boolean = false,
+    val isDateError: Boolean = false
 )

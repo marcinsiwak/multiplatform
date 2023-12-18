@@ -55,7 +55,7 @@ class MainViewModel(
             _viewState.update { it.copy(isLoading = false) }
         }
         viewModelScope.launch {
-            if (getIsOfflineModeUseCase()){
+            if (getIsOfflineModeUseCase()) {
                 _viewState.update { it.copy(directions = NavigationDirections.Dashboard(true)) }
             }
         }

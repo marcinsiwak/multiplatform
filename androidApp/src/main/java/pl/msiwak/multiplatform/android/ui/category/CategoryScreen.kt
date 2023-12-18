@@ -78,6 +78,7 @@ fun CategoryScreen(id: String) {
     )
 }
 
+@Suppress("MagicNumber")
 @Composable
 fun CategoryScreenContent(
     viewState: State<CategoryState>,
