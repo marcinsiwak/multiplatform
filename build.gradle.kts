@@ -19,14 +19,14 @@ buildscript {
 }
 
 subprojects {
-    apply(from = "$rootDir/extras/ktlint.gradle")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(from = "$rootDir/extras/detekt.gradle")
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     filter {
         exclude { element ->
-            element.file.path.contains("build/")
+            element.file.path.contains("generated/")
         }
         include("**/kotlin/**")
     }
