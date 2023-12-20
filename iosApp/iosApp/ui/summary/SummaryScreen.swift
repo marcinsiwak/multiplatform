@@ -1,10 +1,9 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct SummaryScreen: View {
     let viewModel = SummaryDiHelper().getSummaryViewModel()
     @ObservedObject private var state: ObservableState<SummaryState>
-    
 
     init() {
         self.state = ObservableState<SummaryState>(value: viewModel.viewState.value as! SummaryState)
@@ -13,10 +12,9 @@ struct SummaryScreen: View {
     }
     
     private func observeState() {
-        viewModel.viewState.collect(collector: Collector<SummaryState>{
-            state in onStateReceived(state: state)
-            
-        }) { error in
+        viewModel.viewState.collect(collector: Collector<SummaryState> { state in
+            onStateReceived(state: state)
+        }) { _ in
             print("Error ocurred during state collection")
         }
     }
@@ -53,14 +51,13 @@ struct SummaryScreen: View {
         .onAppear {
             viewModel.onResume()
         }
-    
     }
 
     private func onStateReceived(state: SummaryState) {
         self.state.value = state
     }
-    
 }
+
 extension Category: Identifiable {}
 
 struct SummaryScreen_Previews: PreviewProvider {

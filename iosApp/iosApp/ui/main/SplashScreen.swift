@@ -1,5 +1,4 @@
-import SwiftUI
-import shared
+import sharedimport SwiftUI
 
 struct SplashScreen: View {
     private let navigate: (NavigationDirections) -> Void
@@ -20,30 +19,27 @@ struct SplashScreen: View {
     }
     
     private func observeState() {
-        viewModel.viewState.collect(collector: Collector<MainState>{ state in
+        viewModel.viewState.collect(collector: Collector<MainState> { state in
             self.state.value = state
-            if(!state.isLoading) {
+            if (!state.isLoading) {
                 navigate(state.directions)
             }
-            
-        }) { error in
+        }) { _ in
             print("Error ocurred during state collection")
         }
-        
     }
     
     private func observeNavigator() {
-        viewModel.mainNavigator.commands.collect(collector: Collector<NavigationDirections>{
+        viewModel.mainNavigator.commands.collect(collector: Collector<NavigationDirections> {
             command in onCommandReceived(command: command)
-            
-        }) { error in
+        }) { _ in
             print("Error ocurred during navigator collection")
         }
     }
     
     private func onCommandReceived(command: NavigationDirections) {
         print(command.destination)
-        if(command is NavigationDirections.NavigateUp){
+        if (command is NavigationDirections.NavigateUp) {
             navigateBack()
         } else {
             navigate(command)
@@ -51,7 +47,6 @@ struct SplashScreen: View {
      }
     
     var body: some View {
-        
             VStack(alignment: .leading) {
                 Color.black.ignoresSafeArea()
 //                Image()

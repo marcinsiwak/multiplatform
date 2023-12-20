@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 typealias Category = shared.Category
 typealias Exercise = shared.Exercise
@@ -12,7 +12,7 @@ struct CategoryItem: View {
     
     init(category: Category) {
         self.category = category
-        switch(category.exerciseType){
+        switch(category.exerciseType) {
         case ExerciseType.running:
             backgroundImage = MR.images().bg_running_field.toUIImage()
         case ExerciseType.gym:
@@ -55,7 +55,14 @@ struct CategoryItem: View {
                     .frame(height: Dimensions.space_164)
                     .foregroundColor(.clear)
                     .padding(EdgeInsets(top: Dimensions.space_24, leading: 0, bottom: 0, trailing: 0))
-                    .background(LinearGradient(gradient: Gradient(colors: [.clear, .clear, .colorPrimary]), startPoint: .top, endPoint: .bottom))
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(
+                                colors: [.clear, .clear, .colorPrimary]
+                            ), 
+                            startPoint: .top, endPoint: .bottom
+                        )
+                    )
             }
         )
         .cornerRadius(8)
@@ -63,15 +70,13 @@ struct CategoryItem: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.tertiary, lineWidth: 1)
         )
-        
     }
-    
 }
 
-//struct SummaryItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CategoryItem(category: nil)
-//    }
-//}
+// struct SummaryItem_Previews: PreviewProvider {
+//     static var previews: some View {
+//         CategoryItem(category: nil)
+//     }
+// }
 
 extension Exercise: Identifiable {}

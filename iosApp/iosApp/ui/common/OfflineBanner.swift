@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct OfflineBanner: View {
     let onSignInUpClicked: () -> Void

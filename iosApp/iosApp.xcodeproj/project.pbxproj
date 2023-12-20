@@ -357,6 +357,7 @@
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
+				71D05C9F2B32D7EF00994291 /* .swiftlint.yml */,
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
 				06078FB97135FCA559854360 /* Pods */,
@@ -391,7 +392,6 @@
 				711E8B662A57584D00151063 /* NavigationCommand.swift */,
 				711E8BB82A575EE700151063 /* AppDelegate.swift */,
 				71A5EF3B2AF3D3F000E373DF /* Theme.swift */,
-				71D05C9F2B32D7EF00994291 /* .swiftlint.yml */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";

@@ -1,7 +1,7 @@
 import shared
 
-class Collector<T> : Kotlinx_coroutines_coreFlowCollector {
-    let block:(T) -> Void
+class Collector<T>: Kotlinx_coroutines_coreFlowCollector {
+    let block: (T) -> Void
 
     init(block: @escaping (T) -> Void) {
         self.block = block
@@ -14,5 +14,4 @@ class Collector<T> : Kotlinx_coroutines_coreFlowCollector {
             }
         }
     }
-    
 }

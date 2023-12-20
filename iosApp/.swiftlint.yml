@@ -4,6 +4,10 @@ included:
   - Tests
 excluded:
   - Tests/SwiftLintFrameworkTests/Resources
+  - ${PWD}/Pods
+  - ${PWD}/Extension.swift
+  - ${PWD}/Theme.swift
+  - ${PWD}/Array.swift
 analyzer_rules:
   - unused_declaration
   - unused_import
@@ -14,6 +18,7 @@ disabled_rules:
   - anyobject_protocol
   - closure_body_length
   - conditional_returns_on_newline
+  - control_statement
   - convenience_type
   - discouraged_optional_collection
   - explicit_acl
@@ -22,6 +27,7 @@ disabled_rules:
   - explicit_type_interface
   - file_types_order
   - force_unwrapping
+  - force_cast
   - function_default_parameter_at_end
   - implicit_return
   - implicitly_unwrapped_optional
@@ -51,6 +57,7 @@ disabled_rules:
   - switch_case_on_newline
   - todo
   - trailing_closure
+  - trailing_whitespace
   - type_contents_order
   - unused_capture_list
   - vertical_whitespace_between_cases

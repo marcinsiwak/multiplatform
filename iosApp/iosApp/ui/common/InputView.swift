@@ -2,12 +2,12 @@ import SwiftUI
 
 struct InputView<TrailingIcon: View>: View {
     @Binding var value: String
-    var backgroundColor: Color = Color.black
+    var backgroundColor = Color.black
     var errorMessage: String? = nil
-    var isPassword: Bool = false
-    var hintText: String = ""
-    var readOnly: Bool = false
-    var errorsEnabled: Bool = false
+    var isPassword = false
+    var hintText = ""
+    var readOnly = false
+    var errorsEnabled = false
     @ViewBuilder let trailingIcon: () -> TrailingIcon
     var onValueChange: (String) -> Void
 
@@ -35,8 +35,8 @@ struct InputView<TrailingIcon: View>: View {
     }
 }
 
-//struct InputView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        InputView()
-//    }
-//}
+// struct InputView_Previews: PreviewProvider {
+//     static var previews: some View {
+//         InputView()
+//     }
+// }

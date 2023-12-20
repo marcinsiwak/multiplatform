@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 @main
 struct iOSApp: App {
@@ -14,7 +14,6 @@ struct iOSApp: App {
                 }
         }
     }
-    
 }
 
 extension UINavigationController {
@@ -23,5 +22,4 @@ extension UINavigationController {
     super.viewWillLayoutSubviews()
     navigationBar.topItem?.backButtonDisplayMode = .minimal
   }
-
 }
