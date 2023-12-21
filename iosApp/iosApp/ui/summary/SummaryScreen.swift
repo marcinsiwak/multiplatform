@@ -6,8 +6,9 @@ struct SummaryScreen: View {
     @ObservedObject private var state: ObservableState<SummaryState>
 
     init() {
+        // swiftlint:disable force_cast
         self.state = ObservableState<SummaryState>(value: viewModel.viewState.value as! SummaryState)
-        
+        // swiftlint:disable force_cast
         observeState()
     }
     

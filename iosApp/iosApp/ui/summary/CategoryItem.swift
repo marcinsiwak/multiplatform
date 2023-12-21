@@ -12,7 +12,7 @@ struct CategoryItem: View {
     
     init(category: Category) {
         self.category = category
-        switch(category.exerciseType) {
+        switch category.exerciseType {
         case ExerciseType.running:
             backgroundImage = MR.images().bg_running_field.toUIImage()
         case ExerciseType.gym:
@@ -22,7 +22,7 @@ struct CategoryItem: View {
             backgroundImage = MR.images().bg_gym.toUIImage()
         }
     }
-        
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(category.name)
@@ -32,13 +32,13 @@ struct CategoryItem: View {
                 .cornerRadius(Dimensions.button_corner, corners: [.topLeft, .bottomRight])
                 .foregroundColor(.onPrimary)
                 .font(.subheadline)
-      
+
             ForEach(category.exercises) { item in
                 Text(item.exerciseTitle)
                     .foregroundColor(.onPrimary)
                     .font(.subheadline)
             }.padding(.horizontal, Dimensions.space_8)
-            
+
             HStack {
                 Spacer()
             }
@@ -59,7 +59,7 @@ struct CategoryItem: View {
                         LinearGradient(
                             gradient: Gradient(
                                 colors: [.clear, .clear, .colorPrimary]
-                            ), 
+                                ),
                             startPoint: .top, endPoint: .bottom
                         )
                     )

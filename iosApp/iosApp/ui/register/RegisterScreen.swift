@@ -7,7 +7,10 @@ struct RegisterScreen: View {
     @ObservedObject private var state: ObservableState<RegisterState>
     
     init() {
+        // swiftlint:disable force_cast
         self.state = ObservableState<RegisterState>(value: viewModel.viewState.value as! RegisterState)
+        // swiftlint:disable force_cast
+
         observeState()
     }
     

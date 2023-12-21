@@ -11,7 +11,9 @@ struct SplashScreen: View {
         navigate: @escaping (NavigationDirections) -> Void,
         navigateBack: @escaping () -> Void
     ) {
+        // swiftlint:disable force_cast
         self.state = ObservableState<MainState>(value: viewModel.viewState.value as! MainState)
+        // swiftlint:enable force_cast
         self.navigate = navigate
         self.navigateBack = navigateBack
         observeState()

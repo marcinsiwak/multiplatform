@@ -18,7 +18,9 @@ struct AddExerciseScreen: View {
     init(id: String) {
         self.id = id
         self.viewModel = AddExerciseDiHelper(id: id).getAddExerciseViewModel()
+        // swiftlint:disable force_cast
         self.state = ObservableState<AddExerciseState>(value: viewModel.viewState.value as! AddExerciseState)
+        // swiftlint:enable force_cast
         self.focusedFieldPos = ObservableEvent(value: 0)
         observeState()
         observeEvents()
