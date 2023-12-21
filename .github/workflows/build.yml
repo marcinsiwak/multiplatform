@@ -90,8 +90,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
-      - run: swiftlint
+      - run: |
+          brew install swiftlint
+          swiftlint
 
       - name: Update release.properties
         env:
