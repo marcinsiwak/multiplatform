@@ -89,10 +89,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: GitHub Action for SwiftLint
-      - run: |
-          brew install swiftlint
-          swiftlint
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
 
       - name: Update release.properties
         env:
@@ -109,6 +108,11 @@ jobs:
         run: |
           echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
+
+      - name: GitHub Action for SwiftLint
+        run: |
+          brew install swiftlint
+          swiftlint
 
       - run: ./gradlew :shared:generateDummyFramework
       - name: Set up cocoapods
