@@ -1,4 +1,5 @@
-import sharedimport SwiftUI
+import shared
+import SwiftUI
 
 struct SplashScreen: View {
     private let navigate: (NavigationDirections) -> Void
