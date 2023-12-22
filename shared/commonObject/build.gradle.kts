@@ -19,11 +19,11 @@ kotlin {
             }
         }
     }
-jvmToolchain(17)
-    
+    jvmToolchain(17)
+
     iosX64()
-iosArm64()
-iosSimulatorArm64()
+    iosArm64()
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "CommonObject Shared Module"
@@ -35,9 +35,12 @@ iosSimulatorArm64()
 
             export(project(Modules.commonResources))
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {
@@ -65,5 +68,4 @@ android {
     defaultConfig {
         minSdk = 24
     }
-
 }

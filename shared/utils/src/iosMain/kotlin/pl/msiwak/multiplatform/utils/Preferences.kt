@@ -2,7 +2,6 @@ package pl.msiwak.multiplatform.utils
 
 import platform.Foundation.NSUserDefaults
 
-
 actual fun KMMContext.putInt(key: String, value: Int) {
     NSUserDefaults.standardUserDefaults.setInteger(value.toLong(), key)
 }

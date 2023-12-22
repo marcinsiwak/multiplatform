@@ -17,6 +17,10 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 
+private const val RESULT_ITEM_POSITION = 1
+private const val AMOUNT_ITEM_POSITION = 2
+private const val DATE_ITEM_POSITION = 3
+
 @Composable
 fun NewResultView(
     modifier: Modifier = Modifier,
@@ -41,7 +45,7 @@ fun NewResultView(
     ) {
         ResultInputView(
             modifier = Modifier
-                .focusRequester(focusRequesters[1])
+                .focusRequester(focusRequesters[RESULT_ITEM_POSITION])
                 .width(MaterialTheme.dimens.result_item_input_width)
                 .padding(horizontal = MaterialTheme.dimens.space_16),
             value = newResultData.result,
@@ -54,7 +58,7 @@ fun NewResultView(
 
         ResultInputView(
             modifier = Modifier
-                .focusRequester(focusRequesters[2])
+                .focusRequester(focusRequesters[AMOUNT_ITEM_POSITION])
                 .width(MaterialTheme.dimens.result_item_input_width)
                 .onFocusChanged {
                     if (exerciseType == ExerciseType.RUNNING && it.hasFocus) {
@@ -70,7 +74,7 @@ fun NewResultView(
         )
         ResultInputView(
             modifier = Modifier
-                .focusRequester(focusRequesters[3])
+                .focusRequester(focusRequesters[DATE_ITEM_POSITION])
                 .width(IntrinsicSize.Max)
                 .onFocusChanged {
                     if (it.hasFocus) {
@@ -83,10 +87,7 @@ fun NewResultView(
                 onDateValueChanged(it)
             },
             isError = newResultData.isDateError,
-            hintText = "01.01.2023",
-            onViewClicked = {
-                onDateClicked()
-            }
+            hintText = "01.01.2023"
         )
     }
 }

@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.core
 
-
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel

@@ -23,5 +23,4 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
     )
 
     fun getDatabaseQueries() = database.appDatabaseQueries
-
 }

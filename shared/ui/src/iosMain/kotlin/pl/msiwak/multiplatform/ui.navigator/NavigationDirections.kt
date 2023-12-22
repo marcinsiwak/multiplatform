@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.ui.navigator
 
-
 actual sealed class NavigationDirections : NavigationCommand {
     actual override val destination: String
         get() = route
@@ -13,7 +12,8 @@ actual sealed class NavigationDirections : NavigationCommand {
             get() = "navigateUp"
     }
 
-    actual class Welcome actual constructor(override val isInclusive: Boolean) : NavigationDirections() {
+    actual class Welcome actual constructor(override val isInclusive: Boolean) :
+        NavigationDirections() {
         override val route: String
             get() = "welcome"
     }
@@ -22,7 +22,8 @@ actual sealed class NavigationDirections : NavigationCommand {
         override val route: String = "registration"
     }
 
-    actual class Dashboard actual constructor(override val isInclusive: Boolean): NavigationDirections() {
+    actual class Dashboard actual constructor(override val isInclusive: Boolean) :
+        NavigationDirections() {
         override val route: String
             get() = "dashboard"
     }
@@ -32,7 +33,8 @@ actual sealed class NavigationDirections : NavigationCommand {
         override val route: String = "addExercise"
     }
 
-    actual class CategoryDetails actual constructor(private val id: String) : NavigationDirections() {
+    actual class CategoryDetails actual constructor(private val id: String) :
+        NavigationDirections() {
         fun getCategoryId(): String = id
         override val route: String = "category"
     }
@@ -63,5 +65,4 @@ actual sealed class NavigationDirections : NavigationCommand {
         override val route: String
             get() = "registrationSuccess"
     }
-
 }

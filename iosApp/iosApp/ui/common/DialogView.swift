@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct DialogView<DialogContent: View>: ViewModifier {
     @Binding var isPresented: Bool // set this to show/hide the dialog

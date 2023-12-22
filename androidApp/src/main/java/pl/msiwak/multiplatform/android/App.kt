@@ -12,7 +12,6 @@ import pl.msiwak.multiplatform.android.di.sharedPreferencesModule
 import pl.msiwak.multiplatform.injector.appModule
 
 class App : Application() {
-
     override fun onCreate() {
         super.onCreate()
 

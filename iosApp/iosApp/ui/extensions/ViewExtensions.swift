@@ -43,11 +43,13 @@ struct Ripple: ViewModifier {
     let color: Color
 
     @State private var scale: CGFloat = 0.5
-    
+
     @State private var animationPosition: CGFloat = 0.0
+    // swiftlint:disable identifier_name
     @State private var x: CGFloat = 0.0
     @State private var y: CGFloat = 0.0
-    
+    // swiftlint:enable identifier_name
+
     @State private var opacityFraction: CGFloat = 0.0
     
     let timeInterval: TimeInterval = 0.5

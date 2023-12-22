@@ -27,7 +27,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
@@ -43,7 +42,6 @@ import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.MR
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseState
 import pl.msiwak.multiplatform.ui.category.CategoryState
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
@@ -80,6 +78,7 @@ fun CategoryScreen(id: String) {
     )
 }
 
+@Suppress("MagicNumber")
 @Composable
 fun CategoryScreenContent(
     viewState: State<CategoryState>,

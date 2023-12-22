@@ -38,7 +38,6 @@ kotlin {
             export(project(Modules.utils))
             export(project(Modules.auth))
             export(project(Modules.buildConfig))
-
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE

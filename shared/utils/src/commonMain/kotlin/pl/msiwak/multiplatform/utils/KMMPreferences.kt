@@ -18,7 +18,6 @@ class KMMPreferences(private val context: KMMContext) {
 
     fun getString(key: String): String? = context.getString(key)
 
-
     fun getBool(key: String, default: Boolean): Boolean =
         context.getBool(key, default)
 }

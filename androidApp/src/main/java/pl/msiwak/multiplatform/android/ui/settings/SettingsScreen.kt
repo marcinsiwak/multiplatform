@@ -20,7 +20,6 @@ import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonResources.MR
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseState
 import pl.msiwak.multiplatform.ui.settings.SettingsState
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 

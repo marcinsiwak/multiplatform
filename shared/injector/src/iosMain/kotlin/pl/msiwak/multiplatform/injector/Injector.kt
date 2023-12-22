@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.injector
 
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.definition.Definition
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
@@ -9,5 +8,5 @@ import pl.msiwak.multiplatform.core.ViewModel
 
 actual inline fun <reified T : ViewModel> Module.viewModelDefinition(
     qualifier: Qualifier?,
-    noinline definition: Definition<T>,
-): KoinDefinition<T> = viewModel(qualifier = qualifier, definition = definition)
+    noinline definition: Definition<T>
+): KoinDefinition<T> = factory(qualifier = qualifier, definition = definition)

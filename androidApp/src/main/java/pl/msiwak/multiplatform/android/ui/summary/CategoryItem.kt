@@ -33,6 +33,7 @@ import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.MR
 
+@Suppress("MagicNumber")
 @Composable
 fun CategoryItem(
     modifier: Modifier = Modifier,

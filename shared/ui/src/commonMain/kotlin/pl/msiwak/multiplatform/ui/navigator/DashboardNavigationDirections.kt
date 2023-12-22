@@ -18,5 +18,4 @@ sealed class DashboardNavigationDirections(val icon: Int, val title: String) : N
     class Settings(icon: Int, title: String) : DashboardNavigationDirections(icon, title) {
         override val route: String = "settings"
     }
-
 }

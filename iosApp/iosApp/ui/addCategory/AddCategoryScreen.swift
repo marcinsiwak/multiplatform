@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct AddCategoryScreen: View {
     let viewModel = AddCategoryDiHelper().getViewModel()
@@ -11,7 +11,9 @@ struct AddCategoryScreen: View {
     @ObservedObject private var state: ObservableState<AddCategoryState>
     
     init() {
+        // swiftlint:disable force_cast
         self.state = ObservableState<AddCategoryState>(value: viewModel.viewState.value as! AddCategoryState)
+        // swiftlint:enable force_cast
         observeState()
     }
     

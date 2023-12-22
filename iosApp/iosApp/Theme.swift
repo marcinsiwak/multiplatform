@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 extension SwiftUI.Color {
     static let colorPrimary = Color(MR.colors().colorPrimary.getUIColor())

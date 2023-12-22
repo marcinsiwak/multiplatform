@@ -1,5 +1,5 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
 import pl.msiwak.multiplatfor.dependencies.Deps
+import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
     kotlin("multiplatform")
@@ -20,7 +20,7 @@ kotlin {
             }
         }
     }
-jvmToolchain(17)
+    jvmToolchain(17)
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -38,11 +38,13 @@ jvmToolchain(17)
             export(project(Modules.utils))
             export(project(Modules.ui))
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
-    
     sourceSets {
         val commonMain by getting {
             dependencies {

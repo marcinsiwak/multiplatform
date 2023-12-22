@@ -6,5 +6,5 @@ data class LanguageState(
     val languages: List<Language> = listOf(
         Language("English", "en", false),
         Language(name = "Polski", "pl", false)
-    ),
+    )
 )

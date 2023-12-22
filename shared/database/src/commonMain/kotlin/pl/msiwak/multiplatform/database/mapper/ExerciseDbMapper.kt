@@ -9,7 +9,7 @@ class ExerciseDbMapper() : Mapper<Exercise, ExerciseEntity>() {
     override fun map(value: Exercise): ExerciseEntity {
         return ExerciseEntity(
             id = value.id,
-            exerciseTitle = value.exerciseTitle,
+            exerciseTitle = value.exerciseTitle
         )
     }
 }

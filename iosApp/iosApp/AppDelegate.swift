@@ -1,15 +1,16 @@
 import Foundation
-import SwiftUI
-import shared
 import GoogleMobileAds
+import shared
+import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         HelperKt.doInitKoin()
         HelperKt.doInitNapier()
         HelperKt.doInitFirebase()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-
 
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
@@ -22,7 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
             navigationBarAppearance.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor : UIColor.white
+                NSAttributedString.Key.foregroundColor: UIColor.white
             ]
             navigationBarAppearance.backgroundColor = UIColor.black
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
@@ -38,7 +39,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         return true
     }
-    
+
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {

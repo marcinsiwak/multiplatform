@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.utils
 
-
-const val APPLICATION_SHARED_PREFS = "application_shared_prefs"
+private const val APPLICATION_SHARED_PREFS = "application_shared_prefs"
 
 actual fun KMMContext.putInt(key: String, value: Int) {
     getSharedPreferencesEditor().putInt(key, value).apply()
@@ -28,7 +27,8 @@ actual fun KMMContext.getBool(key: String, default: Boolean): Boolean {
 }
 
 private fun KMMContext.getSharedPreferences() = getSharedPreferences(
-    APPLICATION_SHARED_PREFS, android.content.Context.MODE_PRIVATE
+    APPLICATION_SHARED_PREFS,
+    android.content.Context.MODE_PRIVATE
 )
 
 private fun KMMContext.getSharedPreferencesEditor() = getSharedPreferences().edit()

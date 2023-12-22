@@ -4,7 +4,8 @@ plugins {
     kotlin("android").version("1.9.0").apply(false)
     kotlin("multiplatform").version("1.9.0").apply(false)
     kotlin("plugin.serialization") version "1.8.22"
-    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
+    id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
+    id("io.gitlab.arturbosch.detekt") version "1.19.0"
 }
 
 buildscript {
@@ -17,12 +18,23 @@ buildscript {
     }
 }
 
-configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-    filter {
-        exclude { element ->
-            element.file.path.contains("generated/")
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(from = "$rootDir/extras/detekt.gradle")
+
+    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+        filter {
+            exclude { element ->
+                element.file.path.contains("generated/")
+            }
+            exclude { element ->
+                element.file.path.contains("buildkonfig/")
+            }
+            exclude { element ->
+                element.file.path.contains("Buildkonfig/")
+            }
+            include("**/kotlin/**")
         }
-        include("**/kotlin/**")
     }
 }
 

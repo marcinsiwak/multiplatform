@@ -41,7 +41,7 @@ class ResultsDao(database: Database) {
         exerciseId: String,
         result: String,
         amount: String,
-        date: LocalDateTime,
+        date: LocalDateTime
     ): ResultData {
         return ResultData(id, exerciseId, result, amount, date)
     }

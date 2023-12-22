@@ -1,11 +1,11 @@
 import com.android.build.gradle.internal.tasks.factory.dependsOn
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.gradle.configurationcache.extensions.capitalized
+import org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin
 import java.io.FileInputStream
 import java.util.Properties
 import java.util.regex.Pattern
-import org.gradle.configurationcache.extensions.capitalized
-import org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin
 
 plugins {
     kotlin("multiplatform")
@@ -53,7 +53,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
+                // put your multiplatform dependencies here
             }
         }
         val commonTest by getting {
@@ -126,10 +126,11 @@ fun getCurrentVariant(): String {
     val gradle: Gradle = gradle
     val tskReqStr: String = gradle.startParameter.taskRequests.toString()
 
-    val pattern: Pattern = if (tskReqStr.contains("assemble"))
+    val pattern: Pattern = if (tskReqStr.contains("assemble")) {
         Pattern.compile("assemble(\\w+)(Release|Debug)")
-    else
+    } else {
         Pattern.compile("generate(\\w+)(Release|Debug)")
+    }
 
     val matcher = pattern.matcher(tskReqStr)
 

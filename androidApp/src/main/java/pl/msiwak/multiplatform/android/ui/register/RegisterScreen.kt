@@ -53,7 +53,7 @@ fun RegisterScreenContent(
     onLoginChanged: (String) -> Unit = { _ -> },
     onPasswordChanged: (String) -> Unit = { _ -> },
     onVisibilityClicked: () -> Unit = {},
-    onRegisterClicked: () -> Unit = {},
+    onRegisterClicked: () -> Unit = {}
 ) {
     if (viewState.value.isLoading) {
         Loader()

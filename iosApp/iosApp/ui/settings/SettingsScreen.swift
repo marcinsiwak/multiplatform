@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct SettingsScreen: View {
     
@@ -8,7 +8,9 @@ struct SettingsScreen: View {
     @ObservedObject private var state: ObservableState<SettingsState>
 
     init() {
+        // swiftlint:disable force_cast
         self.state = ObservableState<SettingsState>(value: viewModel.viewState.value as! SettingsState)
+        // swiftlint:enable force_cast
         observeState()
     }
     

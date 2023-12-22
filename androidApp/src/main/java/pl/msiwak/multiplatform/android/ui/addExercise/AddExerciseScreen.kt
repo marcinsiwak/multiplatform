@@ -46,6 +46,8 @@ import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseState
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
 
+private const val FOCUS_REQUESTERS_AMOUNT = 4
+
 @Composable
 fun AddExerciseScreen(id: String) {
     val viewModel = koinViewModel<AddExerciseViewModel> { parametersOf(id) }
@@ -53,7 +55,7 @@ fun AddExerciseScreen(id: String) {
 
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
-    val focusRequesters = List(4) { remember { FocusRequester() } }
+    val focusRequesters = List(FOCUS_REQUESTERS_AMOUNT) { remember { FocusRequester() } }
 
     OnLifecycleEvent { _, event ->
         when (event) {
@@ -127,7 +129,7 @@ fun AddExerciseScreenContent(
     onDateClicked: () -> Unit = {},
     onResultLongClicked: (Int) -> Unit = {},
     onLabelClicked: (Int) -> Unit = {},
-    onAmountClicked: () -> Unit = {},
+    onAmountClicked: () -> Unit = {}
 ) {
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(

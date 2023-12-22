@@ -6,6 +6,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 
+@Suppress("ConstructorParameterNaming")
 data class OwnColorPalette(
     val ShadowColor: Color = Color.DarkGray
 )

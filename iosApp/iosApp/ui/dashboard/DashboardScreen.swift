@@ -6,22 +6,24 @@ struct DashboardScreen: View {
     @ObservedObject private var state: ObservableState<DashboardState>
 
     init() {
+        // swiftlint:disable force_cast
         self.state = ObservableState<DashboardState>(value: viewModel.viewState.value as! DashboardState)
-        
+        // swiftlint:enable force_cast
+
         observeState()
     }
     
     private func observeState() {
         viewModel.viewState.collect(collector: Collector<DashboardState>{
             state in self.state.value = state
-            
-        }) { error in
+
+        }) { _ in
             print("Error ocurred during state collection")
         }
     }
-    
+
     var body: some View {
-                    
+
         ZStack {
             TabView {
                 ZStack {
@@ -38,7 +40,7 @@ struct DashboardScreen: View {
                     Text("Summary")
                         .foregroundColor(.onPrimary)
                 }
-                
+
                 //            Text("Account")
                 //                .tabItem {
                 //                    //                Image(systemName: "tv.fill")

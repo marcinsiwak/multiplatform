@@ -19,19 +19,25 @@ fun openCalendar(
     val currentMinute = calendar.get(Calendar.MINUTE)
     val currentSecond = calendar.get(Calendar.SECOND)
 
-    val dialog = DatePickerDialog(context, { _, year, month, day ->
-        onValueChanged(
-            LocalDateTime(
-                year,
-                month + 1,
-                day,
-                currentHour,
-                currentMinute,
-                currentSecond
+    val dialog = DatePickerDialog(
+        context,
+        { _, year, month, day ->
+            onValueChanged(
+                LocalDateTime(
+                    year,
+                    month + 1,
+                    day,
+                    currentHour,
+                    currentMinute,
+                    currentSecond
+                )
             )
-        )
-        onCancelled()
-    }, currentYear, currentMonth, currentDay)
+            onCancelled()
+        },
+        currentYear,
+        currentMonth,
+        currentDay
+    )
     dialog.datePicker.maxDate = Date().time
     dialog.setOnCancelListener {
         onCancelled()

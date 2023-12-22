@@ -77,7 +77,7 @@ class ExercisesDao(database: Database) {
         exerciseId: String,
         result: String,
         amount: String,
-        date: LocalDateTime,
+        date: LocalDateTime
     ): ResultData {
         return ResultData(id, exerciseId, result, amount, date)
     }
@@ -87,7 +87,7 @@ class ExercisesDao(database: Database) {
         categoryId: String,
         exerciseTitle: String,
         exerciseType: ExerciseType,
-        creationDate: LocalDateTime,
+        creationDate: LocalDateTime
     ): Exercise {
         return Exercise(id, categoryId, exerciseTitle, emptyList(), exerciseType, creationDate)
     }

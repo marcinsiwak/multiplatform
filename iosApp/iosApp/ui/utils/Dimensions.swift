@@ -1,5 +1,6 @@
 import Foundation
 
+// swiftlint:disable identifier_name
 struct Dimensions {
     static let space_1: CGFloat = 1
     static let space_2: CGFloat = 2
@@ -36,3 +37,4 @@ struct Dimensions {
     static let results_min_height: CGFloat = 200
     static let banner_height: CGFloat = 64
 }
+// swiftlint:enable identifier_name

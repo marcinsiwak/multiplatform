@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct ResultsTableView: View {
     let resultDataTitles: [ResultTableItemData?]

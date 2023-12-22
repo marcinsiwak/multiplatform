@@ -25,8 +25,7 @@ fun ResultInputView(
     readOnly: Boolean = false,
     textAlign: TextAlign = TextAlign.Center,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    onViewClicked: () -> Unit = {}
+    visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
     TextField(
         modifier = modifier,

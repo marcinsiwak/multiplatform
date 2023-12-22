@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.ui.navigator
 
-
 expect sealed class NavigationDirections : NavigationCommand {
     override val destination: String
     override val isInclusive: Boolean

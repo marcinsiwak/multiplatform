@@ -6,15 +6,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.core.ViewModel
-import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
+import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.validators.Validator
-import pl.msiwak.multiplatform.commonResources.MR
 
 class RegisterViewModel(
     private val registerUserUseCase: RegisterUserUseCase,
@@ -53,7 +53,6 @@ class RegisterViewModel(
 
     private fun getPasswordRequirementsState(text: String): List<PasswordRequirement> {
         return viewState.value.passwordRequirements.map {
-
             when (it.type) {
                 PasswordRequirementType.LENGTH -> it.copy(
                     isCorrect = validator.isCorrectPasswordLength(

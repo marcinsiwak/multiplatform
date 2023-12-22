@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 // import GoogleSignIn
 
 struct WelcomeScreen: View {
@@ -13,7 +13,9 @@ struct WelcomeScreen: View {
 
     init() {
         GoogleAuthOneTapConfiguration().setConfig()
+        // swiftlint:disable force_cast
         self.state = ObservableState<WelcomeState>(value: viewModel.viewState.value as! WelcomeState)
+        // swiftlint:enable force_cast
         observeState()
     }
     
