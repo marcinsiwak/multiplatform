@@ -7,6 +7,7 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
+    id("com.google.firebase.appdistribution")
     kotlin("android")
 }
 
@@ -32,6 +33,16 @@ android {
         versionName = "$versionMajor.$versionMinor.$versionPatch ($appVersionCode)"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        val firebaseServiceCredentialsFile = rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
+
+        if (firebaseServiceCredentialsFile.exists()) {
+            configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
+                artifactType = "APK"
+                groups = "main"
+                releaseNotes = "Release notes for demo version"
+                serviceCredentialsFile = firebaseServiceCredentialsFile.path
+            }
         }
     }
     buildFeatures {
@@ -111,14 +122,14 @@ android {
             )
             signingConfig = signingConfigs.getByName("release")
 
-            val releasePropertiesFile = rootProject.file("androidApp/release.properties")
-            val releaseProperties = Properties()
-            releaseProperties.load(FileInputStream(releasePropertiesFile))
+            val productionPropertiesFile = rootProject.file("androidApp/production.properties")
+            val productionProperties = Properties()
+            productionProperties.load(FileInputStream(productionPropertiesFile))
 
             buildConfigField(
                 "String",
                 "GOOGLE_AUTH_WEB_CLIENT_ID",
-                releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
             )
         }
         debug {

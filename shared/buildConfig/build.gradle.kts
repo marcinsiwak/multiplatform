@@ -67,26 +67,26 @@ kotlin {
 buildkonfig {
     packageName = "pl.msiwak.multiplatform.shared.buildConfig"
 
-    val releasePropertiesFile = rootProject.file("release.properties")
-    val releaseProperties = Properties()
-    releaseProperties.load(FileInputStream(releasePropertiesFile))
+    val productionPropertiesFile = rootProject.file("production.properties")
+    val productionProperties = Properties()
+    productionProperties.load(FileInputStream(productionPropertiesFile))
 
     defaultConfigs {
         buildConfigField(STRING, "BUILD_FLAVOUR", "default")
-        buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+        buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
         buildConfigField(BOOLEAN, "IsDebug", "false")
     }
 
     targetConfigs {
         create("android") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseAndroid")
-            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
         }
 
         create("ios") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseIos")
-            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
         }
     }
@@ -94,12 +94,12 @@ buildkonfig {
     targetConfigs("productionDebug") {
         create("android") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugAndroid")
-            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
         create("ios") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugIos")
-            buildConfigField(STRING, "BASE_URL", releaseProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
     }
