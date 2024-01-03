@@ -173,9 +173,9 @@ jobs:
       - name: Build productionDebug APK
         run: ./gradlew :androidApp:assembleProductionDebug
         env:
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS_DEBUG }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD_DEBUG }}
-          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
+          KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
+          KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
+          KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
 
       - name: Decode app distribution service credentials file
         id: decode_service_credentials
