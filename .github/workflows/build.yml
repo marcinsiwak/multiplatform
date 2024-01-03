@@ -249,5 +249,3 @@ jobs:
 #          cd iosApp
 #          pod install --verbose
 #      - run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2" -verbose
-
-
