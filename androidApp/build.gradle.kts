@@ -40,7 +40,7 @@ android {
             configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
                 artifactType = "APK"
                 groups = "main"
-                releaseNotes = "Release notes for demo version"
+                releaseNotes = "Version for tests"
                 serviceCredentialsFile = firebaseServiceCredentialsFile.path
             }
         }

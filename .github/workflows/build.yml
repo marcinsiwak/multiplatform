@@ -228,7 +228,7 @@ jobs:
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Build stagingDebug APK
-        run: ./gradlew :androidApp:assembleProductionDebug
+        run: ./gradlew :androidApp:assembleStagingDebug
         env:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
