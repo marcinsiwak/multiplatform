@@ -187,6 +187,10 @@ jobs:
 
       - name: Distribute app
         run: ./gradlew assembleProductionDebug appDistributionUploadProductionDebug
+        env:
+          KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
+          KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
+          KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
 
 
 #  Push-iOS:
