@@ -186,7 +186,7 @@ jobs:
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
-        run: ./gradlew assembleRelease appDistributionUploadProductionDebug
+        run: ./gradlew assembleProductionDebug appDistributionUploadProductionDebug
 
 
 #  Push-iOS:
