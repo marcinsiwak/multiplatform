@@ -213,59 +213,58 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Update production.properties
-        env:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
-          BASE_URL: ${{ secrets.BASE_URL }}
-        run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
-          echo BASE_URL="BASE_URL" > ./production.properties
-
-      - name: Update staging.properties
-        env:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
-          BASE_URL: ${{ secrets.BASE_URL }}
-        run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
-          echo BASE_URL="BASE_URL" > ./staging.properties
-
-      - name: Decode debug Keystore
-        id: decode_keystore_debug
-        uses: timheuer/base64-to-file@v1.2
-        with:
-          fileName: 'debug.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
-          encodedString: ${{ secrets.SIGNING_DEBUG }}
-
-      - name: Build stagingDebug APK
-        run: |
-          ./gradlew :androidApp:assembleStagingDebug
-        env:
-          KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
-          KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
-          KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
-          BUILD_NUMBER: ${{ vars.BUILD_NUMBER_STAGING_DEBUG }}
-
-      - name: Decode app distribution service credentials file
-        id: decode_service_credentials
-        uses: timheuer/base64-to-file@v1.2
-        with:
-          fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/androidApp/'
-          encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
-
-      - name: Distribute app
-        run: ./gradlew assembleStagingDebug appDistributionUploadStagingDebug
-        env:
-          KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
-          KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
-          KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
-          BUILD_NUMBER: ${{ vars.BUILD_NUMBER_STAGING_DEBUG }}
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#
+#      - name: Update production.properties
+#        env:
+#          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
+#          BASE_URL: ${{ secrets.BASE_URL }}
+#        run: |
+#          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+#          echo BASE_URL="BASE_URL" > ./production.properties
+#
+#      - name: Update staging.properties
+#        env:
+#          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
+#          BASE_URL: ${{ secrets.BASE_URL }}
+#        run: |
+#          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
+#          echo BASE_URL="BASE_URL" > ./staging.properties
+#
+#      - name: Decode debug Keystore
+#        id: decode_keystore_debug
+#        uses: timheuer/base64-to-file@v1.2
+#        with:
+#          fileName: 'debug.jks'
+#          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
+#          encodedString: ${{ secrets.SIGNING_DEBUG }}
+#
+#      - name: Build stagingDebug APK
+#        run: |
+#          ./gradlew :androidApp:assembleStagingDebug
+#        env:
+#          KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
+#          KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
+#          KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
+#          BUILD_NUMBER: ${{ vars.BUILD_NUMBER_STAGING_DEBUG }}
+#
+#      - name: Decode app distribution service credentials file
+#        id: decode_service_credentials
+#        uses: timheuer/base64-to-file@v1.2
+#        with:
+#          fileName: 'sportplatform-b5318-816058b49361.json'
+#          fileDir: '/home/runner/work/multiplatform/multiplatform/androidApp/'
+#          encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
+#
+#      - name: Distribute app
+#        run: ./gradlew assembleStagingDebug appDistributionUploadStagingDebug
+#        env:
+#          KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
+#          KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
+#          KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
+#          BUILD_NUMBER: ${{ vars.BUILD_NUMBER_STAGING_DEBUG }}
 
       - name: Update BUILD_NUMBER_STAGING_DEBUG variable
         run: |
           echo "BUILD_NUMBER_STAGING_DEBUG=$((BUILD_NUMBER_STAGING_DEBUG + 1))" >> $GITHUB_ENV
-          run: echo $BUILD_NUMBER_STAGING_DEBUG
