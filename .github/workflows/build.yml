@@ -267,5 +267,5 @@ jobs:
 
       - name: Update BUILD_NUMBER_STAGING_DEBUG variable
         run: |
-          echo ::set-env name=BUILD_NUMBER_STAGING_DEBUG::$(($BUILD_NUMBER_STAGING_DEBUG + 1))
+          echo "BUILD_NUMBER_STAGING_DEBUG=$(($BUILD_NUMBER_STAGING_DEBUG + 1))" >> $$BUILD_NUMBER_STAGING_DEBUG
           run: echo $BUILD_NUMBER_STAGING_DEBUG
