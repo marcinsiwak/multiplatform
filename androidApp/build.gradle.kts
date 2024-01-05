@@ -1,6 +1,8 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import java.io.FileInputStream
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Properties
+import pl.msiwak.multiplatfor.dependencies.Deps
 
 plugins {
     id("com.android.application")
@@ -30,19 +32,21 @@ android {
         minSdk = 27
         targetSdk = 34
         versionCode = appVersionCode
-        versionName = "$versionMajor.$versionMinor.$versionPatch ($appVersionCode)"
         vectorDrawables {
             useSupportLibrary = true
         }
         val firebaseServiceCredentialsFile = rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
 
         if (firebaseServiceCredentialsFile.exists()) {
+            versionName = "$versionMajor.$versionMinor.$versionPatch (${getDate()})"
             configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
                 artifactType = "APK"
                 groups = "main"
                 releaseNotes = "Version for tests"
                 serviceCredentialsFile = firebaseServiceCredentialsFile.path
             }
+        } else {
+            versionName = "$versionMajor.$versionMinor.$versionPatch ($versionCode)"
         }
     }
     buildFeatures {
@@ -153,6 +157,12 @@ android {
             applicationIdSuffix = ".staging"
         }
     }
+}
+
+fun getDate(): String {
+    val currentDateTime = LocalDateTime.now()
+    val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
+    return currentDateTime.format(formatter)
 }
 
 dependencies {
