@@ -247,7 +247,7 @@ jobs:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
           KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
-          BUILD_NUMBER: ${{ env.BUILD_NUMBER_STAGING_DEBUG }}
+          BUILD_NUMBER: ${{ vars.BUILD_NUMBER_STAGING_DEBUG }}
 
       - name: Decode app distribution service credentials file
         id: decode_service_credentials
@@ -263,7 +263,7 @@ jobs:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
           KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
-          BUILD_NUMBER: ${{ env.BUILD_NUMBER_STAGING_DEBUG }}
+          BUILD_NUMBER: ${{ vars.BUILD_NUMBER_STAGING_DEBUG }}
 
       - name: Update BUILD_NUMBER_STAGING_DEBUG variable
         run: echo "BUILD_NUMBER_STAGING_DEBUG=$((BUILD_NUMBER_STAGING_DEBUG + 1))" >> $GITHUB_ENV
