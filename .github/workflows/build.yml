@@ -267,5 +267,5 @@ jobs:
 
       - name: Update BUILD_NUMBER_STAGING_DEBUG variable
         run: |
-          echo "BUILD_NUMBER_STAGING_DEBUG=$(($BUILD_NUMBER_STAGING_DEBUG + 1))" >> $$BUILD_NUMBER_STAGING_DEBUG
+          echo "BUILD_NUMBER_STAGING_DEBUG=$(($BUILD_NUMBER_STAGING_DEBUG + 1))" >> $GITHUB_ENV
           run: echo $BUILD_NUMBER_STAGING_DEBUG
