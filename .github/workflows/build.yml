@@ -192,6 +192,9 @@ jobs:
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
           KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
 
+      - name: Update BUILD_NUMBER_PRODUCTION_DEBUG variable
+        run: echo "BUILD_NUMBER_PRODUCTION_DEBUG=$((BUILD_NUMBER_PRODUCTION_DEBUG + 1))" >> $GITHUB_ENV
+
   Distribute-Android-StagingDebug:
 #    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop'}}
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false && (contains(github.event.pull_request.labels.*.name, 'KMP') || contains(github.event.pull_request.labels.*.name, 'Android'))) }}
@@ -256,3 +259,6 @@ jobs:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
           KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
+
+      - name: Update BUILD_NUMBER_STAGING_DEBUG variable
+        run: echo "BUILD_NUMBER_STAGING_DEBUG=$((BUILD_NUMBER_STAGING_DEBUG + 1))" >> $GITHUB_ENV
