@@ -1,8 +1,8 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
 import java.io.FileInputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Properties
-import pl.msiwak.multiplatfor.dependencies.Deps
 
 plugins {
     id("com.android.application")
@@ -35,7 +35,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        val firebaseServiceCredentialsFile = rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
+        val firebaseServiceCredentialsFile =
+            rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
 
         if (firebaseServiceCredentialsFile.exists()) {
             versionName = "$versionMajor.$versionMinor.$versionPatch (${getDate()})"
