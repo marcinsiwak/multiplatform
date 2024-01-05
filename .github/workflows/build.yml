@@ -211,6 +211,14 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Update production.properties
+        env:
+          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+        run: |
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo BASE_URL="BASE_URL" > ./production.properties
+
       - name: Update staging.properties
         env:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
