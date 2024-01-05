@@ -241,7 +241,7 @@ jobs:
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Build stagingDebug APK
-        run:
+        run: |
           export BUILD_NUMBER=${BUILD_NUMBER_STAGING_DEBUG}
           ./gradlew :androidApp:assembleStagingDebug
         env:
