@@ -87,6 +87,25 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - uses: actions/github-script@v6
+        id: get_issue_number
+        with:
+          script: |
+            if (context.issue.number) {
+              // Return issue number if present
+              return context.issue.number;
+            } else {
+              // Otherwise return issue number from commit
+              return (
+                await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                  commit_sha: context.sha,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                })
+              ).data[0].number;
+            }
+          result-encoding: string
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
@@ -142,6 +161,25 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - uses: actions/github-script@v6
+        id: get_issue_number
+        with:
+          script: |
+            if (context.issue.number) {
+              // Return issue number if present
+              return context.issue.number;
+            } else {
+              // Otherwise return issue number from commit
+              return (
+                await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                  commit_sha: context.sha,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                })
+              ).data[0].number;
+            }
+          result-encoding: string
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -175,7 +213,7 @@ jobs:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
           KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
-          BUILD_NUMBER: ${{ github.event.number }}
+          BUILD_NUMBER: ${{steps.get_issue_number.outputs.result}}
 
       - name: Decode app distribution service credentials file
         id: decode_service_credentials
@@ -191,7 +229,7 @@ jobs:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
           KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
-          BUILD_NUMBER: ${{ github.event.number }}
+          BUILD_NUMBER: ${{steps.get_issue_number.outputs.result}}
 
   Distribute-Android-StagingDebug:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop'}}
@@ -242,7 +280,7 @@ jobs:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
           KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
-          BUILD_NUMBER: ${{ github.event.number }}
+          BUILD_NUMBER: ${{steps.get_issue_number.outputs.result}}
 
       - name: Decode app distribution service credentials file
         id: decode_service_credentials
@@ -258,4 +296,4 @@ jobs:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
           KEY_STORE_PASSWORD_DEBUG: ${{ secrets.KEY_STORE_PASSWORD_DEBUG }}
-          BUILD_NUMBER: ${{ github.event.number }}
+          BUILD_NUMBER: ${{steps.get_issue_number.outputs.result}}
