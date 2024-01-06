@@ -13,7 +13,7 @@ local.properties
 androidApp/release.properties
 androidApp/staging.properties
 /staging.properties
-/release.properties
+/production.properties
 /androidApp/google-services.json
 iosApp/Pods/*
 iosApp/iosApp.xcworkspace/*
