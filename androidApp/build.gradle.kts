@@ -111,7 +111,7 @@ android {
             )
             signingConfig = signingConfigs.getByName("release")
 
-            val releasePropertiesFile = rootProject.file("androidApp/release.properties")
+            val releasePropertiesFile = rootProject.file("androidApp/production.properties")
             val releaseProperties = Properties()
             releaseProperties.load(FileInputStream(releasePropertiesFile))
 
