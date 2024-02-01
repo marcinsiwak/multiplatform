@@ -15,8 +15,8 @@ fun AdmobBanner(modifier: Modifier = Modifier) {
         factory = { context ->
             AdView(context).apply {
                 setAdSize(AdSize.BANNER)
-                // todo change debug adUnitId to prod (ca-app-pub-3940256099942544/6300978111 is testing id)
-                adUnitId = "ca-app-pub-3940256099942544/6300978111"
+                adUnitId = "ca-app-pub-3676765754881099/6629172316"
+                // todo change for testing to ca-app-pub-3940256099942544/6300978111
                 loadAd(AdRequest.Builder().build())
             }
         }
