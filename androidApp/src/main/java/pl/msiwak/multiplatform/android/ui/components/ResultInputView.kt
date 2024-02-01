@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import pl.msiwak.multiplatform.android.ui.theme.color
 
 @Composable
 fun ResultInputView(
@@ -49,7 +50,7 @@ fun ResultInputView(
                     .fillMaxWidth(),
                 text = hintText,
                 maxLines = 1,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.color.HintColor,
                 textAlign = TextAlign.Center
             )
         },

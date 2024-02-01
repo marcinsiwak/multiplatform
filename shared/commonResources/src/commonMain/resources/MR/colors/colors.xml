@@ -48,4 +48,8 @@
         <light>#000000</light>
         <dark>#000000</dark>
     </color>
+    <color name="colorHint">
+        <light>#808080</light>
+        <dark>#808080</dark>
+    </color>
 </resources>
