@@ -13,7 +13,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import pl.msiwak.multiplatform.android.R
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonResources.MR
 
@@ -37,7 +36,7 @@ fun TextWithDrawableView(
             ),
             text = text,
             color = color,
-            textAlign = textAlign,
+            textAlign = textAlign
         )
         val iconAlpha = if (iconResId != null) 1f else 0f
         Icon(
@@ -47,6 +46,5 @@ fun TextWithDrawableView(
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onPrimary
         )
-
     }
 }

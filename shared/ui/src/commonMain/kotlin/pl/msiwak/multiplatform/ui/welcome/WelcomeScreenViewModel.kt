@@ -71,11 +71,16 @@ class WelcomeScreenViewModel(
     }
 
     fun onGoogleLogin(idToken: String?, accessToken: String?) {
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
+            val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
             _viewState.update { it.copy(isLoading = true) }
             googleLoginUseCase(idToken, accessToken)
+            if (isSynchronizationPossible) {
+                _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
+            } else {
+                navigator.navigate(NavigationDirections.Dashboard(true))
+            }
             _viewState.update { it.copy(isLoading = false) }
-            navigator.navigate(NavigationDirections.Dashboard(true))
         }
     }
 
@@ -102,7 +107,7 @@ class WelcomeScreenViewModel(
 
     fun onConfirmSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             synchronizeDatabaseUseCase()
             navigator.navigate(NavigationDirections.Dashboard(true))

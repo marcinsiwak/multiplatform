@@ -11,7 +11,19 @@ func openCalendar(
     let currentHour = calendar.component(.hour, from: Date())
     let currentMinute = calendar.component(.minute, from: Date())
 
-    let dialog = DatePicker("Select a date", selection: .constant(calendar.date(from: DateComponents(year: currentYear, month: currentMonth, day: currentDay, hour: currentHour, minute: currentMinute)) ?? Date()), displayedComponents: [.date, .hourAndMinute])
+    let dialog = DatePicker(
+        "Select a date",
+        selection: .constant(
+            calendar.date(
+                from: DateComponents(
+                    year: currentYear,
+                    month: currentMonth,
+                    day: currentDay,
+                    hour: currentHour,
+                    minute: currentMinute
+                )
+            ) ?? Date()
+        ), displayedComponents: [.date, .hourAndMinute])
         dialog.datePickerStyle(.wheel)
 //        dialog.onChange(of: dialog.selection) { date in
 //            onValueChanged(date)

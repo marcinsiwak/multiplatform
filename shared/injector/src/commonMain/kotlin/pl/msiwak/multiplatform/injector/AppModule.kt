@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.injector
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.auth.SessionStore
+import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
@@ -41,9 +42,9 @@ import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatDateUseCase
+import pl.msiwak.multiplatform.domain.summaries.FormatMillisecondsToRunningAmountUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatResultsUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountToMillisecondsUseCase
-import pl.msiwak.multiplatform.domain.summaries.FormatMillisecondsToRunningAmountUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
@@ -168,6 +169,7 @@ val viewModelsModule = module {
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel(get()) }
     viewModelDefinition { DashboardViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { ViewModel() }
 }
 
 val useCaseModule = module {

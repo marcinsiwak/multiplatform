@@ -2,7 +2,7 @@ import shared
 
 class IosNavigationCommand: ObservableObject {
     @Published var command: NavigationCommand
-    
+
     init(command: NavigationCommand) {
         self.command = command
     }

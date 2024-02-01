@@ -20,7 +20,7 @@ fun MainButton(modifier: Modifier = Modifier, onClick: () -> Unit, text: String)
             MaterialTheme.colorScheme.onPrimary
         ),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
+            containerColor = MaterialTheme.colorScheme.primary
         )
     ) {
         Row {

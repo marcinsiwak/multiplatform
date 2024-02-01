@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.ui.theme.dimens
@@ -67,7 +66,6 @@ fun ResultsTableView(
                 .padding(vertical = MaterialTheme.dimens.space_8),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             resultDataTitles.forEachIndexed { index, item ->
                 TextWithDrawableView(
                     modifier = Modifier
@@ -84,8 +82,8 @@ fun ResultsTableView(
                     }
                 )
             }
-
         }
+
         LazyColumn(
             modifier = Modifier.fillMaxHeight(),
             state = listState

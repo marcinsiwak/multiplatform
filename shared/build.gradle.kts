@@ -9,11 +9,13 @@ plugins {
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
+apply(from = "$rootDir/gradle/buildVariants.gradle")
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     targetHierarchy.default()
 
-    androidTarget() {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "17"
@@ -36,8 +38,12 @@ kotlin {
 
         framework {
             baseName = "shared"
+            if (System.getenv("XCODE_VERSION_MAJOR") == "1500") {
+                linkerOpts += "-ld64"
+            }
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
+            compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
 
             export(Deps.MokoResources.resources)
             export(Deps.MokoResources.graphics)
@@ -49,13 +55,20 @@ kotlin {
             export(project(Modules.notifications))
         }
 
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+
         pod("FirebaseCore", linkOnly = true)
         pod("FirebaseAuth", linkOnly = true)
         pod("FirebaseRemoteConfig", linkOnly = true)
         pod("FirebaseCrashlytics", linkOnly = true)
-        pod("GoogleSignIn", linkOnly = true)
+//        pod("GoogleSignIn", linkOnly = true)
         pod("FirebaseMessaging", linkOnly = true)
-
+        pod("Google-Mobile-Ads-SDK", linkOnly = true)
     }
 
     sourceSets {

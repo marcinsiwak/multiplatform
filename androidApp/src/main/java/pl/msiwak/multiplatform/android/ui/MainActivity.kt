@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import io.github.aakira.napier.Napier
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.android.ui.addCategory.AddCategoryScreen
 import pl.msiwak.multiplatform.android.ui.addExercise.AddExerciseScreen
@@ -34,6 +35,7 @@ import pl.msiwak.multiplatform.notifications.NotificationsService
 import pl.msiwak.multiplatform.ui.main.MainViewModel
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 
+@Suppress("LongMethod")
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by inject(MainViewModel::class.java)
@@ -80,7 +82,7 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(
                                 navArgument(NavigationDirections.AddExercise.BUNDLE_ARG_ID) {
                                     type = NavType.StringType
-                                },
+                                }
                             )
                         ) { backStackEntry ->
                             val id = backStackEntry
@@ -93,7 +95,7 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(
                                 navArgument(NavigationDirections.CategoryDetails.BUNDLE_ARG_ID) {
                                     type = NavType.StringType
-                                },
+                                }
                             )
                         ) { backStackEntry ->
                             val id = backStackEntry
@@ -125,6 +127,7 @@ class MainActivity : ComponentActivity() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("$URI_MARKET$packageName")))
         } catch (e: ActivityNotFoundException) {
+            Napier.e("Error: $e")
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,

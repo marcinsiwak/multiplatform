@@ -1,10 +1,8 @@
-import SwiftUI
 import shared
-//import Firebase
-
-
+import SwiftUI
 
 @main
+// swiftlint:disable type_name
 struct iOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
@@ -17,8 +15,8 @@ struct iOSApp: App {
                 }
         }
     }
-    
 }
+// swiftlint:enable type_name
 
 extension UINavigationController {
 
@@ -26,5 +24,4 @@ extension UINavigationController {
     super.viewWillLayoutSubviews()
     navigationBar.topItem?.backButtonDisplayMode = .minimal
   }
-
 }

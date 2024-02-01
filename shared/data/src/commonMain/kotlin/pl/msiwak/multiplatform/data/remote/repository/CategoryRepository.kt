@@ -64,7 +64,7 @@ class CategoryRepository(
             categoryService.createCategory(
                 ApiCategoryRequest(
                     name = category.name,
-                    exerciseType = category.exerciseType.name,
+                    exerciseType = category.exerciseType.name
                 )
             )
             return@withContext
@@ -175,7 +175,7 @@ class CategoryRepository(
             ApiCategorySyncRequest(
                 id = category.id,
                 name = category.name,
-                exerciseType = category.exerciseType.name,
+                exerciseType = category.exerciseType.name
             )
         }
 

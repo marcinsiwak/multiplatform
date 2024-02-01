@@ -15,7 +15,7 @@ data class RegisterState(
         PasswordRequirement(false, PasswordRequirementType.LETTER),
         PasswordRequirement(false, PasswordRequirementType.SPECIAL),
         PasswordRequirement(false, PasswordRequirementType.CAPITAL),
-        PasswordRequirement(false, PasswordRequirementType.NUMBER),
+        PasswordRequirement(false, PasswordRequirementType.NUMBER)
     ),
     val isLoading: Boolean = false
 )

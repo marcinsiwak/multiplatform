@@ -8,5 +8,5 @@ enum class PasswordRequirementType(val stringResource: StringResource) {
     NUMBER(MR.strings.password_requirements_number),
     LETTER(MR.strings.password_requirements_letter),
     CAPITAL(MR.strings.password_requirements_capital),
-    SPECIAL(MR.strings.password_requirements_special),
+    SPECIAL(MR.strings.password_requirements_special)
 }

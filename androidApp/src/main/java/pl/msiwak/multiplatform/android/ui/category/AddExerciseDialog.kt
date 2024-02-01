@@ -12,17 +12,20 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.MR
 
 @Composable
 fun AddExerciseDialog(
     inputText: String = "",
-    onExerciseTitleChanged: (String) -> Unit,
-    onAddExerciseClicked: () -> Unit,
+    onExerciseTitleChanged: (String) -> Unit = { _ -> },
+    onAddExerciseClicked: () -> Unit = {},
     onDialogClosed: () -> Unit = {}
 ) {
-    AlertDialog(shape = RoundedCornerShape(MaterialTheme.dimens.dialog_corners),
+    AlertDialog(
+        shape = RoundedCornerShape(MaterialTheme.dimens.dialog_corners),
         containerColor = colorResource(MR.colors.gray.resourceId),
         onDismissRequest = {
             onDialogClosed()
@@ -41,7 +44,8 @@ fun AddExerciseDialog(
                 value = inputText,
                 onValueChange = {
                     onExerciseTitleChanged(it)
-                })
+                }
+            )
         },
         confirmButton = {
             SecondaryButton(
@@ -54,5 +58,14 @@ fun AddExerciseDialog(
                 onClick = { onAddExerciseClicked() },
                 text = stringResource(MR.strings.add_new_exercise.resourceId)
             )
-        })
+        }
+    )
+}
+
+@DarkLightPreview
+@Composable
+fun AddExerciseDialogPreview() {
+    AppTheme {
+        AddExerciseDialog()
+    }
 }

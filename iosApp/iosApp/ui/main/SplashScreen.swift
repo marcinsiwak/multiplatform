@@ -1,5 +1,5 @@
-import SwiftUI
 import shared
+import SwiftUI
 
 struct SplashScreen: View {
     private let navigate: (NavigationDirections) -> Void
@@ -12,7 +12,9 @@ struct SplashScreen: View {
         navigate: @escaping (NavigationDirections) -> Void,
         navigateBack: @escaping () -> Void
     ) {
+        // swiftlint:disable force_cast
         self.state = ObservableState<MainState>(value: viewModel.viewState.value as! MainState)
+        // swiftlint:enable force_cast
         self.navigate = navigate
         self.navigateBack = navigateBack
         observeState()
@@ -20,30 +22,27 @@ struct SplashScreen: View {
     }
     
     private func observeState() {
-        viewModel.viewState.collect(collector: Collector<MainState>{ state in
+        viewModel.viewState.collect(collector: Collector<MainState> { state in
             self.state.value = state
-            if(!state.isLoading) {
+            if (!state.isLoading) {
                 navigate(state.directions)
             }
-            
-        }) { error in
+        }) { _ in
             print("Error ocurred during state collection")
         }
-        
     }
     
     private func observeNavigator() {
-        viewModel.mainNavigator.commands.collect(collector: Collector<NavigationDirections>{
+        viewModel.mainNavigator.commands.collect(collector: Collector<NavigationDirections> {
             command in onCommandReceived(command: command)
-            
-        }) { error in
+        }) { _ in
             print("Error ocurred during navigator collection")
         }
     }
     
     private func onCommandReceived(command: NavigationDirections) {
         print(command.destination)
-        if(command is NavigationDirections.NavigateUp){
+        if (command is NavigationDirections.NavigateUp) {
             navigateBack()
         } else {
             navigate(command)
@@ -51,7 +50,6 @@ struct SplashScreen: View {
      }
     
     var body: some View {
-        
             VStack(alignment: .leading) {
                 Color.black.ignoresSafeArea()
 //                Image()
@@ -62,3 +60,8 @@ struct SplashScreen: View {
     }
 }
 
+struct SplashScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        SplashScreen(navigate: { _ in  }, navigateBack: {})
+    }
+}

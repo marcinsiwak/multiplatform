@@ -7,5 +7,5 @@ data class WelcomeState(
     val isPasswordVisible: Boolean = false,
     val isErrorDialogVisible: Boolean = false,
     val isLoading: Boolean = false,
-    val isSynchronizationDialogVisible: Boolean = false
+    var isSynchronizationDialogVisible: Boolean = false
 )

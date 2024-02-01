@@ -16,6 +16,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,19 +27,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.loader.Loader
+import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.color
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.ui.category.CategoryState
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
 @Composable
@@ -46,7 +50,7 @@ fun CategoryScreen(id: String) {
     val viewModel = koinViewModel<CategoryViewModel> { parametersOf(id) }
     val viewState = viewModel.viewState.collectAsState()
 
-    val backgroundId = when (viewState.value.exerciseType) { //todo maybe share with ios
+    val backgroundId = when (viewState.value.exerciseType) {
         ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
         ExerciseType.GYM -> MR.images.bg_gym.drawableResId
 //        ExerciseType.OTHER -> null
@@ -59,37 +63,59 @@ fun CategoryScreen(id: String) {
         }
     }
 
+    CategoryScreenContent(
+        viewState = viewState,
+        backgroundId = backgroundId,
+        onConfirmClicked = viewModel::onResultRemoved,
+        onDismissClicked = viewModel::onPopupDismissed,
+        onExerciseTitleChanged = viewModel::onAddExerciseNameChanged,
+        onAddExerciseClicked = viewModel::onAddExerciseClicked,
+        onDialogClosed = viewModel::onDialogClosed,
+        onItemClick = viewModel::onExerciseClicked,
+        onLongClick = viewModel::onResultLongClicked,
+        onClick = viewModel::onAddNewExerciseClicked
+
+    )
+}
+
+@Suppress("MagicNumber")
+@Composable
+fun CategoryScreenContent(
+    viewState: State<CategoryState>,
+    backgroundId: Int,
+    onConfirmClicked: () -> Unit = {},
+    onDismissClicked: () -> Unit = {},
+    onExerciseTitleChanged: (String) -> Unit = {},
+    onAddExerciseClicked: () -> Unit = {},
+    onDialogClosed: () -> Unit = {},
+    onItemClick: (String) -> Unit = {},
+    onLongClick: (Int) -> Unit = {},
+    onClick: () -> Unit = {}
+) {
     if (viewState.value.isRemoveExerciseDialogVisible) {
-        PopupDialog(title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
+        PopupDialog(
+            title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
             description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
             confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
             dismissButtonTitle = stringResource(MR.strings.no.resourceId),
-            onConfirmClicked = {
-                viewModel.onResultRemoved()
-            },
-            onDismissClicked = {
-                viewModel.onPopupDismissed()
-            })
+            onConfirmClicked = onConfirmClicked,
+            onDismissClicked = onDismissClicked
+        )
     }
 
-    if(viewState.value.isLoading) {
+    if (viewState.value.isLoading) {
         Loader()
     }
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-
         if (viewState.value.isDialogVisible) {
             AddExerciseDialog(
                 inputText = viewState.value.newExerciseName,
-                onExerciseTitleChanged = {
-                    viewModel.onAddExerciseNameChanged(it)
-                }, onAddExerciseClicked = {
-                    viewModel.onAddExerciseClicked()
-                }, onDialogClosed = {
-                    viewModel.onDialogClosed()
-                }
+                onExerciseTitleChanged = onExerciseTitleChanged,
+                onAddExerciseClicked = onAddExerciseClicked,
+                onDialogClosed = onDialogClosed
             )
         }
 
@@ -119,24 +145,26 @@ fun CategoryScreen(id: String) {
                 itemsIndexed(viewState.value.exerciseList) { index, item ->
                     ListItemView(
                         name = item.exerciseTitle,
-                        onItemClick = { viewModel.onExerciseClicked(item.id?: "") },
-                        onLongClick = { viewModel.onResultLongClicked(index) }
+                        onItemClick = { onItemClick(item.id) },
+                        onLongClick = { onLongClick(index) }
                     )
                 }
             }
         }
-        Button(modifier = Modifier
-            .fillMaxWidth()
-            .align(Alignment.BottomCenter)
-            .padding(
-                vertical = MaterialTheme.dimens.space_16,
-                horizontal = MaterialTheme.dimens.space_80
-            ),
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(
+                    vertical = MaterialTheme.dimens.space_16,
+                    horizontal = MaterialTheme.dimens.space_80
+                ),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.tertiary,
                 contentColor = MaterialTheme.colorScheme.primary
             ),
-            onClick = { viewModel.onAddNewExerciseClicked() }) {
+            onClick = onClick
+        ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
                 text = stringResource(id = MR.strings.add_exercise.resourceId),
@@ -165,8 +193,13 @@ fun CategoryScreen(id: String) {
     }
 }
 
-@Preview
+@DarkLightPreview
 @Composable
 fun CategoryScreenPreview() {
-    CategoryScreen("0")
+    AppTheme {
+        CategoryScreenContent(
+            viewState = MutableStateFlow(CategoryState()).collectAsState(),
+            backgroundId = MR.images.bg_gym.drawableResId
+        )
+    }
 }

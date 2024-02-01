@@ -1,11 +1,9 @@
-import SwiftUI
 import shared
-
+import SwiftUI
 
 struct ContentView: View {
-    @State private var route : [NavigationDirections] = []
+    @State private var route: [NavigationDirections] = []
     private let viewModel: MainViewModel = MainDiHelper().getMainViewModel()
-    
 
     var body: some View {
         NavigationStack(path: $route) {
@@ -17,27 +15,27 @@ struct ContentView: View {
                     route.removeLast()
                 }
             ).navigationDestination(for: NavigationDirections.self) { direction in
-                if(direction is NavigationDirections.Welcome) {
+                if direction is NavigationDirections.Welcome {
                     WelcomeScreen()
                         .navigationBarBackButtonHidden(true)
                 }
-                if(direction is NavigationDirections.Registration) {
+                if direction is NavigationDirections.Registration {
                     RegisterScreen()
                 }
-                if(direction is NavigationDirections.Dashboard) {
+                if direction is NavigationDirections.Dashboard {
                     DashboardScreen().navigationBarBackButtonHidden(true)
                 }
-                if(direction is NavigationDirections.CategoryDetails) {
+                if direction is NavigationDirections.CategoryDetails {
                     let id = (direction as? NavigationDirections.CategoryDetails)?.getCategoryId() ?? ""
                     CategoryScreen(id: id)
                         .navigationBarTitleDisplayMode(.inline)
                 }
-                if(direction is NavigationDirections.AddExercise) {
+                if direction is NavigationDirections.AddExercise {
                     let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? ""
                     AddExerciseScreen(id: id)
                     .navigationBarTitleDisplayMode(.inline)
                 }
-                if(direction is NavigationDirections.AddCategory) {
+                if direction is NavigationDirections.AddCategory {
                     AddCategoryScreen()
                         .navigationBarTitleDisplayMode(.inline)
                 }
@@ -47,11 +45,8 @@ struct ContentView: View {
     }
 }
 
-
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
-
+// struct ContentView_Previews: PreviewProvider {
+//     static var previews: some View {
+//         ContentView()
+//     }
+// }

@@ -5,12 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 private val LocalDim = staticCompositionLocalOf { Dimensions() }
 
+@Suppress("ConstructorParameterNaming")
 data class Dimensions(
     val space_0: Dp = 0.dp,
     val space_1: Dp = 1.dp,

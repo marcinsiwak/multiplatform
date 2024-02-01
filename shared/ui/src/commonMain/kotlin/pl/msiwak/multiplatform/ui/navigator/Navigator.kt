@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 class Navigator {
     private val _commands = MutableSharedFlow<NavigationDirections>(
         replay = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
     val commands: SharedFlow<NavigationDirections> = _commands.asSharedFlow()
     fun navigate(directions: NavigationDirections) {

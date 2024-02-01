@@ -9,13 +9,14 @@ import androidx.compose.ui.unit.sp
 
 val LocalFont = staticCompositionLocalOf { FontSize() }
 
+@Suppress("ConstructorParameterNaming")
 data class FontSize(
     val font_8: TextUnit = 8.sp,
     val font_12: TextUnit = 12.sp,
     val font_14: TextUnit = 14.sp,
     val font_16: TextUnit = 16.sp,
     val font_20: TextUnit = 20.sp,
-    val font_24: TextUnit = 24.sp,
+    val font_24: TextUnit = 24.sp
 )
 
 val MaterialTheme.font: FontSize

@@ -1,11 +1,13 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
 import pl.msiwak.multiplatfor.dependencies.Deps
+import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
 }
+
+apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -18,7 +20,7 @@ kotlin {
             }
         }
     }
-jvmToolchain(17)
+    jvmToolchain(17)
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -38,6 +40,12 @@ jvmToolchain(17)
             export(project(Modules.network))
             export(project(Modules.remoteConfig))
         }
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {
@@ -54,7 +62,6 @@ jvmToolchain(17)
                     api(coroutines)
                     api(serialization)
                 }
-
             }
         }
         val commonTest by getting {

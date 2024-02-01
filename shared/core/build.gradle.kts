@@ -1,9 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
-import java.io.FileInputStream
-import java.util.Properties
 
 plugins {
     kotlin("multiplatform")
@@ -11,6 +6,8 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version "1.8.22"
 }
+
+apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -23,7 +20,7 @@ kotlin {
             }
         }
     }
-jvmToolchain(17)
+    jvmToolchain(17)
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -38,6 +35,12 @@ jvmToolchain(17)
 
             export(project(Modules.domain))
         }
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {

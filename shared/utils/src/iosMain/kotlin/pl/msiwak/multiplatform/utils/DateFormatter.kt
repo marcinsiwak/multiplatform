@@ -13,7 +13,6 @@ actual class DateFormatter {
         date: LocalDateTime,
         format: String
     ): String {
-
         val dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = format
         val nsDate = date.toInstant(TimeZone.currentSystemDefault()).toNSDate()

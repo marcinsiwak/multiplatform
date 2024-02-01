@@ -11,7 +11,11 @@
 local.properties
 /signing
 androidApp/release.properties
-androidApp/debug.properties
-/debug.properties
-/release.properties
+androidApp/staging.properties
+/staging.properties
+/production.properties
 /androidApp/google-services.json
+iosApp/Pods/*
+iosApp/iosApp.xcworkspace/*
+iosApp/iosApp.xcodeproj/*
+!iosApp/iosApp.xcodeproj/project.pbxproj

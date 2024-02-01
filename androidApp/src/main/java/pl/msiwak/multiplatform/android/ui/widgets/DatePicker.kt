@@ -2,9 +2,9 @@ package pl.msiwak.multiplatform.android.ui.widgets
 
 import android.app.DatePickerDialog
 import android.content.Context
+import kotlinx.datetime.LocalDateTime
 import java.util.Calendar
 import java.util.Date
-import kotlinx.datetime.LocalDateTime
 
 fun openCalendar(
     context: Context,
@@ -19,10 +19,25 @@ fun openCalendar(
     val currentMinute = calendar.get(Calendar.MINUTE)
     val currentSecond = calendar.get(Calendar.SECOND)
 
-    val dialog = DatePickerDialog(context, { _, year, month, day ->
-        onValueChanged(LocalDateTime(year, month + 1, day, currentHour, currentMinute, currentSecond))
-        onCancelled()
-    }, currentYear, currentMonth, currentDay)
+    val dialog = DatePickerDialog(
+        context,
+        { _, year, month, day ->
+            onValueChanged(
+                LocalDateTime(
+                    year,
+                    month + 1,
+                    day,
+                    currentHour,
+                    currentMinute,
+                    currentSecond
+                )
+            )
+            onCancelled()
+        },
+        currentYear,
+        currentMonth,
+        currentDay
+    )
     dialog.datePicker.maxDate = Date().time
     dialog.setOnCancelListener {
         onCancelled()

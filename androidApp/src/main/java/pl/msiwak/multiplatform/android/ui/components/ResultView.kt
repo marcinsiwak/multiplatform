@@ -21,7 +21,7 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 @Composable
 fun ResultView(
     details: List<String>,
-    onResultLongClick: () -> Unit = {},
+    onResultLongClick: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier
@@ -32,10 +32,10 @@ fun ResultView(
                 onClick = {},
                 onLongClick = {
                     onResultLongClick()
-                })
+                }
+            )
             .bottomBorder(1.dp, MaterialTheme.colorScheme.tertiary)
     ) {
-
         details.forEach {
             Text(
                 modifier = Modifier

@@ -5,7 +5,6 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.utils.KMMPreferences
 
-
 val sharedPreferencesModule = module {
     single { getSharedPrefs(androidApplication()) }
 }

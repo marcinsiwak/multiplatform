@@ -17,7 +17,7 @@ kotlin {
             }
         }
     }
-jvmToolchain(17)
+    jvmToolchain(17)
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -31,10 +31,16 @@ jvmToolchain(17)
             baseName = "notifications"
         }
 
-        pod("FirebaseMessaging")
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
+        pod("FirebaseMessaging")
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {

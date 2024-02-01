@@ -4,7 +4,6 @@ import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultTableItemData
-import pl.msiwak.multiplatform.commonObject.SortType
 import pl.msiwak.multiplatform.commonObject.UnitType
 
 data class AddExerciseState(

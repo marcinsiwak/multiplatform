@@ -69,6 +69,7 @@ object Deps {
 
     object Google {
         const val andorid_play_services_auth= "com.google.android.gms:play-services-auth:20.6.0"
+        const val andorid_play_services_ads= "com.google.android.gms:play-services-ads:22.5.0"
     }
 
     object MokoResources {

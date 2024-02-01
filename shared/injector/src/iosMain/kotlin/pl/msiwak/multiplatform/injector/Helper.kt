@@ -1,14 +1,14 @@
 package pl.msiwak.multiplatform.injector
 
-import cocoapods.GoogleSignIn.GIDSignIn
+// import cocoapods.GoogleSignIn.GIDSignIn
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.initialize
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
-import pl.msiwak.multiplatform.database.DatabaseDriverFactory
 import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
+import pl.msiwak.multiplatform.database.DatabaseDriverFactory
 import pl.msiwak.multiplatform.utils.KMMPreferences
 import platform.Foundation.NSBundle
 import platform.Foundation.NSURL
@@ -29,7 +29,8 @@ fun initFirebase() {
 }
 
 fun initGIDSingIn(url: NSURL): Boolean {
-    return GIDSignIn.sharedInstance.handleURL(url)
+//    return GIDSignIn.sharedInstance.handleURL(url)
+    return false
 }
 
 val sharedPreferencesModule = module {

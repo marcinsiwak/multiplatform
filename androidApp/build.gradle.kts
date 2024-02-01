@@ -1,22 +1,26 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
 import java.io.FileInputStream
 import java.util.Properties
-import pl.msiwak.multiplatfor.dependencies.Deps
 
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
+    id("com.google.firebase.appdistribution")
     kotlin("android")
 }
 
-val versionMajor = 0
+val versionMajor = 1
 val versionMinor = 0
-val versionPatch = 3
+val versionPatch = 0
 val versionBuild = 0
 val versionCode =
     1_000_000 * versionMajor + 10_000 * versionMinor + 100 * versionPatch + versionBuild
 
 val appVersionCode: Int = Integer.valueOf(System.getenv("BUILD_NUMBER") ?: "$versionCode")
+
+apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 android {
     namespace = "pl.msiwak.multiplatform.android"
@@ -29,6 +33,16 @@ android {
         versionName = "$versionMajor.$versionMinor.$versionPatch ($appVersionCode)"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        val firebaseServiceCredentialsFile = rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
+
+        if (firebaseServiceCredentialsFile.exists()) {
+            configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
+                artifactType = "APK"
+                groups = "main"
+                releaseNotes = "Version for tests"
+                serviceCredentialsFile = firebaseServiceCredentialsFile.path
+            }
         }
     }
     buildFeatures {
@@ -101,34 +115,42 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),
                 file("proguard-rules.pro")
             )
             signingConfig = signingConfigs.getByName("release")
 
-            val releasePropertiesFile = rootProject.file("androidApp/release.properties")
-            val releaseProperties = Properties()
-            releaseProperties.load(FileInputStream(releasePropertiesFile))
+            val productionPropertiesFile = rootProject.file("androidApp/production.properties")
+            val productionProperties = Properties()
+            productionProperties.load(FileInputStream(productionPropertiesFile))
 
             buildConfigField(
                 "String",
                 "GOOGLE_AUTH_WEB_CLIENT_ID",
-                releaseProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
             )
         }
         debug {
+            applicationIdSuffix = ".debug"
 
-            val debugPropertiesFile = rootProject.file("androidApp/debug.properties")
-            val debugProperties = Properties()
-            debugProperties.load(FileInputStream(debugPropertiesFile))
+            val stagingPropertiesFile = rootProject.file("androidApp/staging.properties")
+            val stagingProperties = Properties()
+            stagingProperties.load(FileInputStream(stagingPropertiesFile))
 
             signingConfig = signingConfigs.getByName("debug")
             buildConfigField(
                 "String",
                 "GOOGLE_AUTH_WEB_CLIENT_ID",
-                debugProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                stagingProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
             )
+        }
+    }
+
+    productFlavors {
+        getByName("staging") {
+            applicationIdSuffix = ".staging"
         }
     }
 }
@@ -142,8 +164,8 @@ dependencies {
     implementation(composeBom)
     androidTestImplementation(composeBom)
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
+    implementation("androidx.compose.ui:ui-tooling:1.5.4")
     implementation("androidx.compose.ui:ui")
 
     implementation("androidx.core:core-splashscreen:1.0.1")
@@ -161,6 +183,6 @@ dependencies {
     }
     with(Deps.Google) {
         api(andorid_play_services_auth)
+        api(andorid_play_services_ads)
     }
-
 }
