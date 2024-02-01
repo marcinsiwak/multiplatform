@@ -64,7 +64,7 @@ fun DashboardScreenContent(
     Scaffold(
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
-                if (viewState.value.isOfflineBannerVisible) {
+                if (viewState.value.isOfflineBannerVisible && false) {
                     OfflineBanner(onSignInUpClicked = onSignInUpClicked)
                 }
                 BottomNavigation(navController = navController, items = items)

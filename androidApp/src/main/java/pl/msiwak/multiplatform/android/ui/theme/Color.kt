@@ -8,7 +8,8 @@ import androidx.compose.ui.graphics.Color
 
 @Suppress("ConstructorParameterNaming")
 data class OwnColorPalette(
-    val ShadowColor: Color = Color.DarkGray
+    val ShadowColor: Color = Color.DarkGray,
+    val HintColor: Color = Color.Gray
 )
 
 private val OwnDarkColorPalette = OwnColorPalette(
