@@ -37,6 +37,18 @@ kotlin {
             export(project(Modules.database))
             export(project(Modules.utils))
             export(project(Modules.ui))
+            export(project(Modules.uiWelcome))
+            export(project(Modules.uiAddCategory))
+            export(project(Modules.uiAddExercise))
+            export(project(Modules.uiCategory))
+            export(project(Modules.uiDashboard))
+            export(project(Modules.uiForceUpdate))
+            export(project(Modules.uiLanguage))
+            export(project(Modules.uiRegister))
+            export(project(Modules.uiSettings))
+            export(project(Modules.uiSummary))
+            export(project(Modules.uiUnit))
+            export(project(Modules.uiVerifyEmail))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -52,6 +64,18 @@ kotlin {
                 api(project(Modules.database))
                 api(project(Modules.utils))
                 api(project(Modules.ui))
+                api(project(Modules.uiWelcome))
+                api(project(Modules.uiAddCategory))
+                api(project(Modules.uiAddExercise))
+                api(project(Modules.uiCategory))
+                api(project(Modules.uiDashboard))
+                api(project(Modules.uiForceUpdate))
+                api(project(Modules.uiLanguage))
+                api(project(Modules.uiRegister))
+                api(project(Modules.uiSettings))
+                api(project(Modules.uiSummary))
+                api(project(Modules.uiUnit))
+                api(project(Modules.uiVerifyEmail))
 
                 with(Deps.Koin) {
                     api(core)

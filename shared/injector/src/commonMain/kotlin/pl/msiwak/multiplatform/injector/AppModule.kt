@@ -81,11 +81,11 @@ import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
-import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 import pl.msiwak.multiplatform.utils.DateFormatter
 import pl.msiwak.multiplatform.utils.NumberFormatter
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.validators.Validator
+import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
 fun appModule() = listOf(
     apiModule,
