@@ -50,7 +50,7 @@ kotlin {
             export(project(Modules.commonObject))
             export(project(Modules.commonResources))
             export(project(Modules.utils))
-            export(project(Modules.ui))
+            export(project(Modules.navigator))
             export(project(Modules.injector))
             export(project(Modules.notifications))
         }
@@ -77,7 +77,7 @@ kotlin {
                 api(project(Modules.commonObject))
                 api(project(Modules.commonResources))
                 api(project(Modules.utils))
-                api(project(Modules.ui))
+                api(project(Modules.navigator))
                 api(project(Modules.injector))
                 api(project(Modules.notifications))
             }

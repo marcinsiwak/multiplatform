@@ -13,7 +13,7 @@ object Modules {
     const val remoteConfig = "$shared:remoteConfig"
     const val domain = "$shared:domain"
     const val injector = "$shared:injector"
-    const val ui = "$shared:ui"
+    const val navigator = "$shared:navigator"
     const val uiWelcome = "$shared:ui-welcome"
     const val uiAddCategory = "$shared:ui-addCategory"
     const val uiAddExercise = "$shared:ui-addExercise"

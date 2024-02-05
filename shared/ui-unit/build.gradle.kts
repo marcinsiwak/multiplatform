@@ -33,7 +33,7 @@ kotlin {
         framework {
             baseName = "ui-unit"
 
-            export(project(Modules.ui))
+            export(project(Modules.navigator))
             export(project(Modules.domain))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =

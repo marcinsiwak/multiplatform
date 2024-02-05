@@ -34,7 +34,7 @@ kotlin {
             baseName = "core"
 
             export(project(Modules.domain))
-            export(project(Modules.ui))
+            export(project(Modules.navigator))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -48,7 +48,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Modules.domain))
-                api(project(Modules.ui))
+                api(project(Modules.navigator))
             }
         }
         val commonTest by getting {
