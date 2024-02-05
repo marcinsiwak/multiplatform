@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.main
+package pl.msiwak.multiplatform.core.main
 
 import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.delay

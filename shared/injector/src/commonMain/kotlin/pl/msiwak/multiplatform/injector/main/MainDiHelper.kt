@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.injector.main
 
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import pl.msiwak.multiplatform.ui.main.MainViewModel
+import pl.msiwak.multiplatform.core.main.MainViewModel
 
 class MainDiHelper : KoinComponent {
     private val mainVM: MainViewModel by inject()

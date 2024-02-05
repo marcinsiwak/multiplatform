@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.main
+package pl.msiwak.multiplatform.core.main
 
 import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 

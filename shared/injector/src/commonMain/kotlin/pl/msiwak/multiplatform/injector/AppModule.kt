@@ -74,7 +74,7 @@ import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 import pl.msiwak.multiplatform.ui.language.LanguageViewModel
-import pl.msiwak.multiplatform.ui.main.MainViewModel
+import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.ui.navigator.Navigator
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel

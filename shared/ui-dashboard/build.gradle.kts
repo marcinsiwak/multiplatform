@@ -47,7 +47,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.ui))
+                api(project(Modules.core))
                 api(project(Modules.domain))
             }
         }

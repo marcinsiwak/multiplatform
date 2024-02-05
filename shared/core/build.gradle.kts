@@ -34,6 +34,7 @@ kotlin {
             baseName = "core"
 
             export(project(Modules.domain))
+            export(project(Modules.ui))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -47,6 +48,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(Modules.domain))
+                api(project(Modules.ui))
             }
         }
         val commonTest by getting {

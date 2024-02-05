@@ -33,7 +33,6 @@ kotlin {
         framework {
             baseName = "ui"
 
-            export(project(Modules.core))
         }
 
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -47,8 +46,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.core))
                 api(project(Modules.buildConfig))
+
+                with(Deps.Kotlinx) {
+                    api(coroutines)
+                    api(serialization)
+                }
 
                 with(Deps.Napier) {
                     api(napier)
