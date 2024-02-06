@@ -39,6 +39,7 @@ kotlin {
             export(project(Modules.core))
             export(project(Modules.utils))
             export(project(Modules.commonResources))
+            export(project(Modules.commonObject))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -56,6 +57,7 @@ kotlin {
                 implementation(project(Modules.navigator))
                 implementation(project(Modules.utils))
                 implementation(project(Modules.commonResources))
+                implementation(project(Modules.commonObject))
 
                 with(Deps.Kotlinx) {
                     api(coroutines)

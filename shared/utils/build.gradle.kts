@@ -45,8 +45,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 with(Deps.Firebase) {
-                    api(authentication)
-                    api(crashlytics)
+                    implementation(authentication)
+                    implementation(crashlytics)
                 }
                 with(Deps.Kotlinx) {
                     api(dateTime)
@@ -55,6 +55,13 @@ kotlin {
                 with(Deps.Napier) {
                     api(napier)
                 }
+            }
+        }
+
+        val androidMain by getting {
+            dependencies {
+
+                api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
             }
         }
 

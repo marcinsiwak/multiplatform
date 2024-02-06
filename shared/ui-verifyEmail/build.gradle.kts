@@ -39,6 +39,7 @@ kotlin {
             export(project(Modules.core))
             export(project(Modules.utils))
             export(project(Modules.commonResources))
+            export(project(Modules.commonObject))
             export(project(Modules.commonResources))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -57,6 +58,7 @@ kotlin {
                 implementation(project(Modules.navigator))
                 implementation(project(Modules.utils))
                 implementation(project(Modules.commonResources))
+                implementation(project(Modules.commonObject))
 
                 with(Deps.Kotlinx) {
                     api(coroutines)

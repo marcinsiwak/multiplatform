@@ -52,7 +52,7 @@ kotlin {
             dependencies {
                 implementation(project(Modules.domain))
                 implementation(project(Modules.data))
-                api(project(Modules.commonObject))
+                implementation(project(Modules.commonObject))
                 implementation(project(Modules.commonResources))
                 implementation(project(Modules.utils))
 

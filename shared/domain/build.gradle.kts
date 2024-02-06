@@ -50,7 +50,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(Modules.data))
-                api(project(Modules.commonObject))
+                implementation(project(Modules.commonObject))
                 implementation(project(Modules.commonResources))
                 implementation(project(Modules.utils))
 

@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.database.mapper
 
 import pl.msiwak.multiplatform.commonObject.Category
-import pl.msiwak.multiplatform.commonObject.base.Mapper
 import pl.msiwak.multiplatform.database.model.CategoryEntity
 
 class CategoryDbMapper(private val exerciseMapper: ExerciseDbMapper) :

@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.commonObject.base
+package pl.msiwak.multiplatform.database.mapper
 
 abstract class Mapper<T, S> {
 
