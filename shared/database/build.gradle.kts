@@ -43,7 +43,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonObject))
+                implementation(project(Modules.commonObject))
 
                 with(Deps.SQLDelight) {
                     api(coroutines)

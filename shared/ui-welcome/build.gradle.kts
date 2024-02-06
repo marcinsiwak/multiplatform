@@ -1,3 +1,4 @@
+import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
@@ -35,6 +36,9 @@ kotlin {
 
             export(project(Modules.navigator))
             export(project(Modules.domain))
+            export(project(Modules.core))
+            export(project(Modules.utils))
+            export(project(Modules.commonResources))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -47,8 +51,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.core))
-                api(project(Modules.domain))
+                implementation(project(Modules.core))
+                implementation(project(Modules.domain))
+                implementation(project(Modules.navigator))
+                implementation(project(Modules.utils))
+                implementation(project(Modules.commonResources))
+
+                with(Deps.Kotlinx) {
+                    api(coroutines)
+                }
             }
         }
         val commonTest by getting {

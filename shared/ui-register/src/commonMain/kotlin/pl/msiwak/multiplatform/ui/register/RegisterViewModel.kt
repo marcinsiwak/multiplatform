@@ -11,8 +11,8 @@ import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
 import pl.msiwak.multiplatform.commonResources.MR
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
-import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.navigator.NavigationDirections
+import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.validators.Validator
 

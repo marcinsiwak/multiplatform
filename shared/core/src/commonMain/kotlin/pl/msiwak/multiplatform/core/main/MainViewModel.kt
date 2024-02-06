@@ -14,8 +14,8 @@ import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
-import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.navigator.NavigationDirections
+import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class MainViewModel(

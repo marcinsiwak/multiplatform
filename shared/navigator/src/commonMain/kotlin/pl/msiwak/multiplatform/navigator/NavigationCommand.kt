@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.navigator
+package pl.msiwak.multiplatform.navigator
 
 interface NavigationCommand {
     val route: String

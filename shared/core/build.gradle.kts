@@ -47,8 +47,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.domain))
-                api(project(Modules.navigator))
+                implementation(project(Modules.domain))
+                implementation(project(Modules.navigator))
+                implementation(project(Modules.utils))
+                implementation(project(Modules.commonResources))
             }
         }
         val commonTest by getting {

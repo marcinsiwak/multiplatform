@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.navigator
+package pl.msiwak.multiplatform.navigator
 
 actual sealed class NavigationDirections : NavigationCommand {
     actual override val destination: String

@@ -9,7 +9,7 @@ import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.CreateCategoryUseCase
-import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.navigator.Navigator
 
 class AddCategoryViewModel(
     private val createCategoryUseCase: CreateCategoryUseCase,

@@ -50,10 +50,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonObject))
-                api(project(Modules.utils))
-                api(project(Modules.auth))
-                api(project(Modules.buildConfig))
+                implementation(project(Modules.commonObject))
+                implementation(project(Modules.utils))
+                implementation(project(Modules.auth))
+                implementation(project(Modules.buildConfig))
 
                 with(Deps.Ktor) {
                     api(core)

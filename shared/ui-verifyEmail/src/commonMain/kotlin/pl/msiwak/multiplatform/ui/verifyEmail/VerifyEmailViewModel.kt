@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.ResendVerificationEmailUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
-import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.navigator.NavigationDirections
+import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class VerifyEmailViewModel(

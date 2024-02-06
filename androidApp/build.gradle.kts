@@ -157,7 +157,6 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation(project(":shared:core"))
     implementation("androidx.appcompat:appcompat:1.6.1")
 
     val composeBom = platform("androidx.compose:compose-bom:2023.10.00")

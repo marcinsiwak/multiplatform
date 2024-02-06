@@ -14,8 +14,8 @@ import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
-import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.navigator.NavigationDirections
+import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class CategoryViewModel(

@@ -8,8 +8,8 @@ import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
 import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
-import pl.msiwak.multiplatform.ui.navigator.Navigator
+import pl.msiwak.multiplatform.navigator.NavigationDirections
+import pl.msiwak.multiplatform.navigator.Navigator
 
 class SettingsViewModel(
     private val navigator: Navigator,

@@ -4,6 +4,7 @@ import org.koin.dsl.module
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.auth.SessionStore
 import pl.msiwak.multiplatform.core.ViewModel
+import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
@@ -58,6 +59,7 @@ import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
+import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.network.client.CategoryClient
 import pl.msiwak.multiplatform.network.client.KtorClient
 import pl.msiwak.multiplatform.network.client.UserClient
@@ -74,18 +76,16 @@ import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 import pl.msiwak.multiplatform.ui.language.LanguageViewModel
-import pl.msiwak.multiplatform.core.main.MainViewModel
-import pl.msiwak.multiplatform.ui.navigator.Navigator
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
+import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 import pl.msiwak.multiplatform.utils.DateFormatter
 import pl.msiwak.multiplatform.utils.NumberFormatter
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.validators.Validator
-import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 
 fun appModule() = listOf(
     apiModule,

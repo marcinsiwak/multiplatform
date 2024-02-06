@@ -26,13 +26,12 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "UI Shared Module"
+        summary = "Navigator Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "ui"
-
+            baseName = "navigator"
         }
 
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -46,7 +45,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.buildConfig))
+                implementation(project(Modules.buildConfig))
 
                 with(Deps.Kotlinx) {
                     api(coroutines)
@@ -67,7 +66,7 @@ kotlin {
 }
 
 android {
-    namespace = "pl.msiwak.multiplatform.ui"
+    namespace = "pl.msiwak.multiplatform.navigator"
     compileSdk = 34
     defaultConfig {
         minSdk = 24

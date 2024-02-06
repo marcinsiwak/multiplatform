@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.navigator
+package pl.msiwak.multiplatform.navigator
 
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow

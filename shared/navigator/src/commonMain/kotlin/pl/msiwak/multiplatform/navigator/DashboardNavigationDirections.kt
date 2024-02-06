@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.navigator
+package pl.msiwak.multiplatform.navigator
 
 sealed class DashboardNavigationDirections(val icon: Int, val title: String) : NavigationCommand {
     override val destination: String
