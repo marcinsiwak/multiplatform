@@ -26,7 +26,7 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Domain Implemenation Shared Module"
+        summary = "Domain Implementation Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
