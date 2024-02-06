@@ -12,6 +12,7 @@ object Modules {
     const val data = "$shared:data"
     const val remoteConfig = "$shared:remoteConfig"
     const val domain = "$shared:domain"
+    const val domainImpl = "$shared:domain-impl"
     const val injector = "$shared:injector"
     const val navigator = "$shared:navigator"
     const val uiWelcome = "$shared:ui-welcome"

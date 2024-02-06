@@ -1,7 +1,5 @@
 package pl.msiwak.multiplatform.domain.authorization
 
-import pl.msiwak.multiplatform.data.remote.repository.CategoryRepository
-
-class CheckIfSynchronizationIsPossibleUseCase(private val categoryRepository: CategoryRepository) {
-    suspend operator fun invoke() = categoryRepository.checkIfSynchronizationIsPossible()
+interface CheckIfSynchronizationIsPossibleUseCase {
+    suspend operator fun invoke(): Boolean
 }

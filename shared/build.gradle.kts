@@ -58,6 +58,7 @@ kotlin {
             export(project(Modules.data))
             export(project(Modules.remoteConfig))
             export(project(Modules.domain))
+            export(project(Modules.domainImpl))
             export(project(Modules.injector))
             export(project(Modules.navigator))
             export(project(Modules.uiWelcome))
@@ -105,6 +106,7 @@ kotlin {
                 api(project(Modules.data))
                 api(project(Modules.remoteConfig))
                 api(project(Modules.domain))
+                api(project(Modules.domainImpl))
                 api(project(Modules.injector))
                 api(project(Modules.navigator))
                 api(project(Modules.uiWelcome))
@@ -120,6 +122,7 @@ kotlin {
                 api(project(Modules.uiUnit))
                 api(project(Modules.uiVerifyEmail))
                 api(project(Modules.buildConfig))
+                api(project(Modules.notifications))
                 api(project(Modules.notifications))
 
                 with(Deps.Napier) {

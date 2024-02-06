@@ -34,6 +34,7 @@ kotlin {
             baseName = "injector"
 
             export(project(Modules.domain))
+            export(project(Modules.domainImpl))
             export(project(Modules.database))
             export(project(Modules.utils))
             export(project(Modules.navigator))
@@ -66,6 +67,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(Modules.domain))
+                implementation(project(Modules.domainImpl))
                 implementation(project(Modules.database))
                 implementation(project(Modules.utils))
                 implementation(project(Modules.navigator))
