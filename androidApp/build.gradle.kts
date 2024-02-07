@@ -175,6 +175,10 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.3")
     implementation("com.google.accompanist:accompanist-navigation-material:0.25.0")
 
+    api("com.google.firebase:firebase-common:20.4.2")
+    api("com.google.firebase:firebase-auth:22.3.1")
+    api("com.google.firebase:firebase-config:21.6.0")
+
     with(Deps.Koin) {
         implementation(core)
         implementation(android)
