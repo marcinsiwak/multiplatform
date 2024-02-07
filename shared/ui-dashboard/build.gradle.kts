@@ -59,10 +59,6 @@ kotlin {
                 implementation(project(Modules.commonResources))
                 implementation(project(Modules.commonObject))
 
-                with(Deps.Kotlinx) {
-                    implementation(coroutines)
-                }
-
                 with(Deps.Napier) {
                     implementation(napier)
                 }

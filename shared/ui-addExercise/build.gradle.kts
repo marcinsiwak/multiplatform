@@ -58,10 +58,6 @@ kotlin {
                 implementation(project(Modules.utils))
                 implementation(project(Modules.commonResources))
                 implementation(project(Modules.commonObject))
-
-                with(Deps.Kotlinx) {
-                    api(coroutines)
-                }
             }
         }
         val commonTest by getting {
