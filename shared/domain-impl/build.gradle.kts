@@ -57,7 +57,7 @@ kotlin {
                 implementation(project(Modules.utils))
 
                 with(Deps.Napier) {
-                    api(napier)
+                    implementation(napier)
                 }
             }
         }

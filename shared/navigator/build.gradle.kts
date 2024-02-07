@@ -45,15 +45,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(Modules.buildConfig))
-
                 with(Deps.Kotlinx) {
-                    api(coroutines)
-                    api(serialization)
-                }
-
-                with(Deps.Napier) {
-                    api(napier)
+                    implementation(coroutines)
                 }
             }
         }

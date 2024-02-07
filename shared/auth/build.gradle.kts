@@ -44,10 +44,10 @@ kotlin {
                 implementation(project(Modules.utils))
 
                 with(Deps.Firebase) {
-                    api(authentication)
+                    implementation(authentication)
                 }
                 with(Deps.Kotlinx) {
-                    api(coroutines)
+                    implementation(coroutines)
                 }
             }
         }

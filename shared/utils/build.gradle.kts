@@ -53,7 +53,7 @@ kotlin {
                     api(coroutines)
                 }
                 with(Deps.Napier) {
-                    api(napier)
+                    implementation(napier)
                 }
             }
         }

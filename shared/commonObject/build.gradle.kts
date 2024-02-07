@@ -50,7 +50,7 @@ kotlin {
 
                 with(Deps.Kotlinx) {
                     api(dateTime)
-                    api(serialization)
+                    implementation(serialization)
                 }
 
                 with(Deps.Firebase) {

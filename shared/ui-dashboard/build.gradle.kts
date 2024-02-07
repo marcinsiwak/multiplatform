@@ -60,7 +60,11 @@ kotlin {
                 implementation(project(Modules.commonObject))
 
                 with(Deps.Kotlinx) {
-                    api(coroutines)
+                    implementation(coroutines)
+                }
+
+                with(Deps.Napier) {
+                    implementation(napier)
                 }
             }
         }

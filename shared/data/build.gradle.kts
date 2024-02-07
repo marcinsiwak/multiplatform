@@ -59,8 +59,8 @@ kotlin {
                 implementation(project(Modules.remoteConfig))
 
                 with(Deps.Kotlinx) {
-                    api(coroutines)
-                    api(serialization)
+                    implementation(coroutines)
+                    implementation(serialization)
                 }
             }
         }

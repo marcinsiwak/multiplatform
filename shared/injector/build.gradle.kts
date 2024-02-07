@@ -90,15 +90,15 @@ kotlin {
                 implementation(project(Modules.remoteConfig))
 
                 with(Deps.Koin) {
-                    api(core)
-                    api(test)
+                    implementation(core)
+                    implementation(test)
                 }
             }
         }
         val androidMain by getting {
             dependencies {
                 with(Deps.Koin) {
-                    api(android)
+                    implementation(android)
                 }
             }
         }

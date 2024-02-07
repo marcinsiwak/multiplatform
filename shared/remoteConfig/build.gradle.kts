@@ -1,4 +1,5 @@
 import pl.msiwak.multiplatfor.dependencies.Deps
+import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
     kotlin("multiplatform")
@@ -42,7 +43,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 with(Deps.Firebase) {
-                    api(remoteConfig)
+                    implementation(remoteConfig)
                 }
             }
         }
