@@ -123,7 +123,6 @@ kotlin {
                 api(project(Modules.uiVerifyEmail))
                 api(project(Modules.buildConfig))
                 api(project(Modules.notifications))
-                api(project(Modules.notifications))
 
                 with(Deps.Napier) {
                     api(napier)

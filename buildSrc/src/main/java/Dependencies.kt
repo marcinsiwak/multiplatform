@@ -39,6 +39,7 @@ object Deps {
 
     object Kotlinx {
         const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
         const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.0" //todo add zones to datetime https://github.com/Kotlin/kotlinx-datetime
         const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0"
