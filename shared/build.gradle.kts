@@ -59,7 +59,6 @@ kotlin {
             export(project(Modules.remoteConfig))
             export(project(Modules.domain))
             export(project(Modules.domainImpl))
-            export(project(Modules.injector))
             export(project(Modules.navigator))
             export(project(Modules.uiWelcome))
             export(project(Modules.uiAddCategory))
@@ -107,7 +106,6 @@ kotlin {
                 api(project(Modules.remoteConfig))
                 api(project(Modules.domain))
                 api(project(Modules.domainImpl))
-                api(project(Modules.injector))
                 api(project(Modules.navigator))
                 api(project(Modules.uiWelcome))
                 api(project(Modules.uiAddCategory))
@@ -127,12 +125,20 @@ kotlin {
                 with(Deps.Napier) {
                     api(napier)
                 }
+
+                with(Deps.Koin) {
+                    implementation(core)
+                    implementation(test)
+                }
             }
         }
 
         val androidMain by getting {
             dependencies {
                 dependsOn(commonMain)
+                with(Deps.Koin) {
+                    implementation(android)
+                }
             }
         }
 
