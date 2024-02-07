@@ -16,15 +16,11 @@ buildscript {
         classpath("dev.icerock.moko:resources-generator:0.23.0")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.5")
         classpath("com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.14.0")
-        classpath("com.vanniktech:gradle-dependency-graph-generator-plugin:0.8.0")
-
     }
 }
 
-
 subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
-    apply(plugin = "com.vanniktech.dependency.graph.generator")
     apply(from = "$rootDir/extras/detekt.gradle")
 
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
