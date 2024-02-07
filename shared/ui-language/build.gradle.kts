@@ -1,4 +1,3 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
