@@ -47,11 +47,32 @@ kotlin {
 
             export(Deps.MokoResources.resources)
             export(Deps.MokoResources.graphics)
-            export(project(Modules.commonObject))
+
+            export(project(Modules.core))
             export(project(Modules.commonResources))
+            export(project(Modules.commonObject))
+            export(project(Modules.database))
             export(project(Modules.utils))
-            export(project(Modules.ui))
-            export(project(Modules.injector))
+            export(project(Modules.auth))
+            export(project(Modules.network))
+            export(project(Modules.data))
+            export(project(Modules.remoteConfig))
+            export(project(Modules.domain))
+            export(project(Modules.domainImpl))
+            export(project(Modules.navigator))
+            export(project(Modules.uiWelcome))
+            export(project(Modules.uiAddCategory))
+            export(project(Modules.uiAddExercise))
+            export(project(Modules.uiCategory))
+            export(project(Modules.uiDashboard))
+            export(project(Modules.uiForceUpdate))
+            export(project(Modules.uiLanguage))
+            export(project(Modules.uiRegister))
+            export(project(Modules.uiSettings))
+            export(project(Modules.uiSummary))
+            export(project(Modules.uiUnit))
+            export(project(Modules.uiVerifyEmail))
+            export(project(Modules.buildConfig))
             export(project(Modules.notifications))
         }
 
@@ -74,18 +95,50 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonObject))
+                api(project(Modules.core))
                 api(project(Modules.commonResources))
+                api(project(Modules.commonObject))
+                api(project(Modules.database))
                 api(project(Modules.utils))
-                api(project(Modules.ui))
-                api(project(Modules.injector))
+                api(project(Modules.auth))
+                api(project(Modules.network))
+                api(project(Modules.data))
+                api(project(Modules.remoteConfig))
+                api(project(Modules.domain))
+                api(project(Modules.domainImpl))
+                api(project(Modules.navigator))
+                api(project(Modules.uiWelcome))
+                api(project(Modules.uiAddCategory))
+                api(project(Modules.uiAddExercise))
+                api(project(Modules.uiCategory))
+                api(project(Modules.uiDashboard))
+                api(project(Modules.uiForceUpdate))
+                api(project(Modules.uiLanguage))
+                api(project(Modules.uiRegister))
+                api(project(Modules.uiSettings))
+                api(project(Modules.uiSummary))
+                api(project(Modules.uiUnit))
+                api(project(Modules.uiVerifyEmail))
+                api(project(Modules.buildConfig))
                 api(project(Modules.notifications))
+
+                with(Deps.Napier) {
+                    api(napier)
+                }
+
+                with(Deps.Koin) {
+                    implementation(core)
+                    implementation(test)
+                }
             }
         }
 
         val androidMain by getting {
             dependencies {
                 dependsOn(commonMain)
+                with(Deps.Koin) {
+                    implementation(android)
+                }
             }
         }
 

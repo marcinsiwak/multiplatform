@@ -45,16 +45,21 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 with(Deps.Firebase) {
-                    api(authentication)
-                    api(crashlytics)
+                    implementation(authentication)
+                    implementation(crashlytics)
                 }
                 with(Deps.Kotlinx) {
                     api(dateTime)
                     api(coroutines)
                 }
                 with(Deps.Napier) {
-                    api(napier)
+                    implementation(napier)
                 }
+            }
+        }
+
+        val androidMain by getting {
+            dependencies {
             }
         }
 

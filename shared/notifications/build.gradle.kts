@@ -45,7 +45,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 with(Deps.Napier) {
-                    api(napier)
+                    implementation(napier)
                 }
             }
         }

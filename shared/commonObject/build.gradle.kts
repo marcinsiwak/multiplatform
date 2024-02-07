@@ -46,11 +46,16 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonResources))
+                implementation(project(Modules.commonResources))
 
                 with(Deps.Kotlinx) {
                     api(dateTime)
-                    api(serialization)
+                    implementation(serialization)
+                }
+
+                with(Deps.Firebase) {
+                    api(authentication)
+                    api(remoteConfig)
                 }
             }
         }

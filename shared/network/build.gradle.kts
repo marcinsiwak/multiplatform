@@ -35,9 +35,8 @@ kotlin {
             baseName = "network"
 
             export(project(Modules.commonObject))
-            export(project(Modules.utils))
-            export(project(Modules.auth))
             export(project(Modules.buildConfig))
+            export(project(Modules.auth))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -50,21 +49,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonObject))
-                api(project(Modules.utils))
-                api(project(Modules.auth))
-                api(project(Modules.buildConfig))
+                implementation(project(Modules.commonObject))
+                implementation(project(Modules.buildConfig))
+                implementation(project(Modules.auth))
 
                 with(Deps.Ktor) {
-                    api(core)
-                    api(content_negation)
-                    api(serialization)
-                    api(cio)
-                    api(logger)
+                    implementation(core)
+                    implementation(content_negation)
+                    implementation(serialization)
+                    implementation(cio)
+                    implementation(logger)
                 }
 
                 with(Deps.Napier) {
-                    api(napier)
+                    implementation(napier)
                 }
             }
         }
@@ -72,7 +70,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 with(Deps.Ktor) {
-                    api(android)
+                    implementation(android)
                 }
             }
         }

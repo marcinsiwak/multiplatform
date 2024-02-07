@@ -12,6 +12,10 @@ class AuthRepository(
     private val firebaseAuthorization: FirebaseAuthorization
 ) {
 
+    suspend fun createNewUser(email: String, password: String) = withContext(Dispatchers.IO) {
+        return@withContext firebaseAuthorization.createNewUser(email, password)
+    }
+
     suspend fun login(login: String, password: String): AuthResult = withContext(Dispatchers.IO) {
         return@withContext firebaseAuthorization.loginUser(login, password)
     }

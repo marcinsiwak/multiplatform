@@ -3,7 +3,6 @@ package pl.msiwak.multiplatform.network.mapper
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.ResultData
-import pl.msiwak.multiplatform.commonObject.base.Mapper
 import pl.msiwak.multiplatform.network.model.ApiResult
 
 class ResultMapper : Mapper<ApiResult, ResultData>() {

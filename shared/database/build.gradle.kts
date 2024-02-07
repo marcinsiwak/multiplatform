@@ -43,29 +43,29 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.commonObject))
+                implementation(project(Modules.commonObject))
 
                 with(Deps.SQLDelight) {
-                    api(coroutines)
+                    implementation(coroutines)
                 }
                 with(Deps.Kotlinx) {
-                    api(coroutines)
-                    api(dateTime)
-                    api(serialization)
+                    implementation(coroutines)
+                    implementation(dateTime)
+                    implementation(serialization)
                 }
             }
         }
         val androidMain by getting {
             dependencies {
                 with(Deps.SQLDelight) {
-                    api(android)
+                    implementation(android)
                 }
             }
         }
         val iosMain by getting {
             dependencies {
                 with(Deps.SQLDelight) {
-                    api(ios)
+                    implementation(ios)
                 }
             }
         }

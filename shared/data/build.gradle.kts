@@ -51,16 +51,16 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.utils))
-                api(project(Modules.commonObject))
-                api(project(Modules.auth))
-                api(project(Modules.database))
-                api(project(Modules.network))
-                api(project(Modules.remoteConfig))
+                implementation(project(Modules.utils))
+                implementation(project(Modules.commonObject))
+                implementation(project(Modules.auth))
+                implementation(project(Modules.database))
+                implementation(project(Modules.network))
+                implementation(project(Modules.remoteConfig))
 
                 with(Deps.Kotlinx) {
-                    api(coroutines)
-                    api(serialization)
+                    implementation(coroutines)
+                    implementation(serialization)
                 }
             }
         }

@@ -9,7 +9,7 @@ import org.koin.core.context.GlobalContext.startKoin
 import pl.msiwak.multiplatform.android.di.androidDatabaseModule
 import pl.msiwak.multiplatform.android.di.androidRepositoryModule
 import pl.msiwak.multiplatform.android.di.sharedPreferencesModule
-import pl.msiwak.multiplatform.injector.appModule
+import pl.msiwak.multiplatform.shared.appModule
 
 class App : Application() {
     override fun onCreate() {

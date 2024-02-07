@@ -23,9 +23,9 @@ import pl.msiwak.multiplatform.android.ui.summary.SummaryScreen
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.navigator.DashboardNavigationDirections
 import pl.msiwak.multiplatform.ui.dashboard.DashboardState
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
-import pl.msiwak.multiplatform.ui.navigator.DashboardNavigationDirections
 
 @Composable
 fun DashboardScreen() {

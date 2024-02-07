@@ -31,9 +31,9 @@ import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.units.UnitScreen
 import pl.msiwak.multiplatform.android.ui.verifyEmail.VerifyEmailScreen
 import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
+import pl.msiwak.multiplatform.core.main.MainViewModel
+import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.notifications.NotificationsService
-import pl.msiwak.multiplatform.ui.main.MainViewModel
-import pl.msiwak.multiplatform.ui.navigator.NavigationDirections
 
 @Suppress("LongMethod")
 class MainActivity : ComponentActivity() {

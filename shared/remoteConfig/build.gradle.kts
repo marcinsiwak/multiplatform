@@ -42,7 +42,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 with(Deps.Firebase) {
-                    api(remoteConfig)
+                    implementation(remoteConfig)
                 }
             }
         }
