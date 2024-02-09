@@ -1,9 +1,7 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
-
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -42,16 +40,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            with(Deps.Napier) {
-                implementation(napier)
-            }
+            implementation(libs.napier)
         }
 
         androidMain.dependencies {
-            with(Deps.Firebase) {
-                implementation(platform(andoridBom))
-                implementation(messaging)
-            }
+            implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+            implementation(libs.firebase.andorid.messaging)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

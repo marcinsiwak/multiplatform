@@ -1,4 +1,3 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -34,7 +33,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        val firebaseServiceCredentialsFile = rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
+        val firebaseServiceCredentialsFile =
+            rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
 
         if (firebaseServiceCredentialsFile.exists()) {
             configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
@@ -159,13 +159,16 @@ dependencies {
     implementation(project(":shared"))
     implementation("androidx.appcompat:appcompat:1.6.1")
 
-    val composeBom = platform("androidx.compose:compose-bom:2023.10.00")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
-    implementation("androidx.compose.ui:ui-tooling:1.5.4")
-    implementation("androidx.compose.ui:ui")
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.androidx.activity.compose)
+    debugImplementation(libs.compose.ui.tooling)
+
+//    val composeBom = platform("androidx.compose:compose-bom:2023.10.00")
+//    implementation(composeBom)
+//    androidTestImplementation(composeBom)
+
 
     implementation("androidx.core:core-splashscreen:1.0.1")
 
@@ -179,13 +182,10 @@ dependencies {
     api("com.google.firebase:firebase-auth:22.3.1")
     api("com.google.firebase:firebase-config:21.6.0")
 
-    with(Deps.Koin) {
-        implementation(core)
-        implementation(android)
-        implementation(compose)
-    }
-    with(Deps.Google) {
-        api(andorid_play_services_auth)
-        api(andorid_play_services_ads)
-    }
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+
+    api(libs.google.android.playservices.auth)
+    api(libs.google.android.playservices.ads)
 }

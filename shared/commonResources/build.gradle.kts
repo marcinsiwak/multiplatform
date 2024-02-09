@@ -1,9 +1,7 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
-
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
@@ -14,7 +12,6 @@ multiplatformResources {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
 
     androidTarget() {
         compilations.all {
@@ -36,8 +33,8 @@ kotlin {
         framework {
             baseName = "commonResources"
 
-            export(Deps.MokoResources.resources)
-            export(Deps.MokoResources.graphics)
+            export(libs.moko.resources)
+            export(libs.moko.graphics)
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -49,10 +46,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            with(Deps.MokoResources) {
-                api(resources)
-                api(graphics)
-            }
+            api(libs.moko.resources)
+            api(libs.moko.graphics)
         }
 
         getByName("androidMain").dependsOn(commonMain.get())

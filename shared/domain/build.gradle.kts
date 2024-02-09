@@ -1,10 +1,9 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -52,9 +51,7 @@ kotlin {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.utils))
 
-            with(Deps.Napier) {
-                implementation(napier)
-            }
+            implementation(libs.napier)
         }
 
         commonTest.dependencies {

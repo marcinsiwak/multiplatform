@@ -1,9 +1,7 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
-
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -42,9 +40,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            with(Deps.Kotlinx) {
-                implementation(coroutines)
-            }
+            implementation(libs.kotlinx.coroutines)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

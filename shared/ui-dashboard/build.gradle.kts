@@ -1,10 +1,9 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization") version "1.8.22"
 }
 
@@ -12,7 +11,7 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    
+
 
     androidTarget() {
         compilations.all {
@@ -59,9 +58,7 @@ kotlin {
                 implementation(project(Modules.commonResources))
                 implementation(project(Modules.commonObject))
 
-                with(Deps.Napier) {
-                    implementation(napier)
-                }
+                implementation(libs.napier)
             }
         }
         commonTest.dependencies {

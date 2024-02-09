@@ -1,9 +1,7 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
-
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -39,9 +37,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            with(Deps.Firebase) {
-                implementation(remoteConfig)
-            }
+            implementation(libs.firebase.gitlive.remoteConfig)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

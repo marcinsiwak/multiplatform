@@ -1,11 +1,10 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization") version "1.8.22"
-    id("com.android.library")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -52,29 +51,21 @@ kotlin {
             implementation(project(Modules.buildConfig))
             implementation(project(Modules.auth))
 
-            with(Deps.Ktor) {
-                implementation(core)
-                implementation(content_negation)
-                implementation(serialization)
-                implementation(cio)
-                implementation(logger)
-            }
+            implementation(libs.ktor.core)
+            implementation(libs.ktor.contentNegation)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.cio)
+            implementation(libs.ktor.logger)
 
-            with(Deps.Napier) {
-                implementation(napier)
-            }
+            implementation(libs.napier)
         }
 
         androidMain.dependencies {
-            with(Deps.Ktor) {
-                implementation(android)
-            }
+            implementation(libs.ktor.android)
         }
 
         iosMain.dependencies {
-            with(Deps.Ktor) {
-                api(ios)
-            }
+            api(libs.ktor.ios)
         }
 
         commonTest.dependencies {

@@ -8,9 +8,9 @@ import java.util.Properties
 import java.util.regex.Pattern
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
     id("com.codingfeline.buildkonfig")
 }
 

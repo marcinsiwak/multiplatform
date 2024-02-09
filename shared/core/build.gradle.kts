@@ -1,10 +1,9 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization") version "1.8.22"
 }
 
@@ -52,16 +51,13 @@ kotlin {
             implementation(project(Modules.utils))
             implementation(project(Modules.domain))
             implementation(project(Modules.commonResources))
-            with(Deps.Kotlinx) {
-                implementation(coroutines)
-            }
+
+            implementation(libs.kotlinx.coroutines)
         }
 
 
         androidMain.dependencies {
-            with(Deps.Kotlinx) {
-                implementation(viewModel)
-            }
+            implementation(libs.kotlinx.viewModel)
         }
 
         commonTest.dependencies {

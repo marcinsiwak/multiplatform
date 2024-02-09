@@ -5,6 +5,22 @@ compose = "1.5.4"
 compose-compiler = "1.5.4"
 compose-material3 = "1.1.2"
 androidx-activityCompose = "1.8.0"
+koin = "3.3.2"
+koin-compose = "3.4.2"
+ktor = "2.3.5"
+sqlDelight = "2.0.0"
+moko-resources = "0.23.0"
+moko-graphics = "0.9.0"
+firebaseGitlive = "1.10.0"
+firebase-android-bom = "32.3.1"
+kotlinx-lifecycle = "2.3.1"
+kotlinx-viewModel = "2.6.1"
+kotlinx-coroutines = "1.6.4"
+kotlinx-dateTime = "0.4.0"
+kotlinx-serialization = "1.5.0"
+napier = "2.6.1"
+google-playservices-auth = "20.6.0"
+google-playservices-ads = "22.5.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -14,6 +30,37 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
+koin-navigation = { module = "io.insert-koin:koin-androidx-navigation", version.ref = "koin"}
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-compose"}
+firebase-gitlive-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseGitlive"}
+firebase-gitlive-remoteConfig = { module = "dev.gitlive:firebase-config", version.ref = "firebaseGitlive"}
+firebase-gitlive-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebaseGitlive"}
+firebase-andorid-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom"}
+firebase-andorid-messaging = { module = "com.google.firebase:firebase-messaging-ktx"}
+kotlinx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "kotlinx-lifecycle"}
+kotlinx-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "kotlinx-viewModel"}
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines"}
+kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-dateTime"}
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor"}
+ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor"}
+ktor-ios = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor"}
+ktor-contentNegation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor"}
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor"}
+ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor"}
+ktor-logger = { module = "io.ktor:ktor-client-logging", version.ref = "ktor"}
+sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight"}
+sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight"}
+sqlDelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight"}
+sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight"}
+napier = { module = "io.github.aakira:napier", version.ref = "napier"}
+google-android-playservices-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-playservices-auth"}
+google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
+moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources"}
+moko-graphics = { module = "dev.icerock.moko:graphics", version.ref = "moko-graphics"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

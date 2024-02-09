@@ -1,14 +1,11 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
-
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
 
     androidTarget() {
         compilations.all {
@@ -43,17 +40,11 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            with(Deps.Firebase) {
-                implementation(authentication)
-                implementation(crashlytics)
-            }
-            with(Deps.Kotlinx) {
-                api(dateTime)
-                api(coroutines)
-            }
-            with(Deps.Napier) {
-                implementation(napier)
-            }
+            implementation(libs.firebase.gitlive.auth)
+            implementation(libs.firebase.gitlive.crashlytics)
+            api(libs.kotlinx.dateTime)
+            api(libs.kotlinx.coroutines)
+            implementation(libs.napier)
         }
 
         commonTest.dependencies {

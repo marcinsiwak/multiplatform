@@ -1,17 +1,16 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
     id("app.cash.sqldelight") version "2.0.1"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
 
-    android {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "17"
@@ -34,44 +33,33 @@ kotlin {
 
             export(project(Modules.commonObject))
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(Modules.commonObject))
+        commonMain.dependencies {
+            implementation(project(Modules.commonObject))
 
-                with(Deps.SQLDelight) {
-                    implementation(coroutines)
-                }
-                with(Deps.Kotlinx) {
-                    implementation(coroutines)
-                    implementation(dateTime)
-                    implementation(serialization)
-                }
-            }
+            implementation(libs.sqlDelight.coroutines)
+            implementation(libs.kotlinx.coroutines)
+            implementation(libs.kotlinx.dateTime)
+            implementation(libs.kotlinx.serialization)
         }
-        val androidMain by getting {
-            dependencies {
-                with(Deps.SQLDelight) {
-                    implementation(android)
-                }
-            }
+        androidMain.dependencies {
+            implementation(libs.sqlDelight.android)
         }
-//        val iosMain by getting {
-//            dependencies {
-//                with(Deps.SQLDelight) {
-//                    implementation(ios)
-//                }
-//            }
-//        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+
+        iosMain.dependencies {
+            implementation(libs.sqlDelight.ios)
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

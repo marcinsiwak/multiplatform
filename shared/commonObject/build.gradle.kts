@@ -1,11 +1,10 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization") version "1.8.22"
-    id("com.android.library")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -44,18 +43,14 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-                implementation(project(Modules.commonResources))
+            implementation(project(Modules.commonResources))
 
-                with(Deps.Kotlinx) {
-                    api(dateTime)
-                    implementation(serialization)
-                }
+            api(libs.kotlinx.dateTime)
+            implementation(libs.kotlinx.serialization)
 
-                with(Deps.Firebase) {
-                    api(authentication)
-                    api(remoteConfig)
-                }
-            }
+            api(libs.firebase.gitlive.auth)
+            api(libs.firebase.gitlive.remoteConfig)
+        }
 
 
         commonTest.dependencies {

@@ -1,4 +1,3 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
@@ -43,8 +42,8 @@ kotlin {
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
 
-            export(Deps.MokoResources.resources)
-            export(Deps.MokoResources.graphics)
+            export(libs.moko.resources)
+            export(libs.moko.graphics)
 
             export(project(Modules.core))
             export(project(Modules.commonResources))
@@ -120,14 +119,10 @@ kotlin {
             api(project(Modules.buildConfig))
             api(project(Modules.notifications))
 
-            with(Deps.Napier) {
-                api(napier)
-            }
+            api(libs.napier)
 
-            with(Deps.Koin) {
-                implementation(core)
-                implementation(test)
-            }
+            implementation(libs.koin.core)
+            implementation(libs.koin.test)
         }
 
         getByName("androidMain").dependsOn(commonMain.get())
@@ -136,9 +131,7 @@ kotlin {
         getByName("iosSimulatorArm64Main").dependsOn(commonMain.get())
 
         androidMain.dependencies {
-            with(Deps.Koin) {
-                implementation(android)
-            }
+            implementation(libs.koin.android)
         }
 
         commonTest.dependencies {

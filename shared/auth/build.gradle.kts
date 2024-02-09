@@ -1,10 +1,9 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -44,12 +43,8 @@ kotlin {
         commonMain.dependencies {
             implementation(project(Modules.utils))
 
-            with(Deps.Firebase) {
-                implementation(authentication)
-            }
-            with(Deps.Kotlinx) {
-                implementation(coroutines)
-            }
+            implementation(libs.firebase.gitlive.auth)
+            implementation(libs.kotlinx.coroutines)
         }
 
         commonTest.dependencies {
