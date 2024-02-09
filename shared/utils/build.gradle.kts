@@ -8,7 +8,7 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+
 
     androidTarget() {
         compilations.all {
@@ -42,31 +42,22 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                with(Deps.Firebase) {
-                    implementation(authentication)
-                    implementation(crashlytics)
-                }
-                with(Deps.Kotlinx) {
-                    api(dateTime)
-                    api(coroutines)
-                }
-                with(Deps.Napier) {
-                    implementation(napier)
-                }
+        commonMain.dependencies {
+            with(Deps.Firebase) {
+                implementation(authentication)
+                implementation(crashlytics)
+            }
+            with(Deps.Kotlinx) {
+                api(dateTime)
+                api(coroutines)
+            }
+            with(Deps.Napier) {
+                implementation(napier)
             }
         }
 
-        val androidMain by getting {
-            dependencies {
-            }
-        }
-
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

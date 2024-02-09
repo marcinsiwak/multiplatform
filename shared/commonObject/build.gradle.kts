@@ -10,7 +10,6 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 
     androidTarget() {
         compilations.all {
@@ -44,8 +43,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
+        commonMain.dependencies {
                 implementation(project(Modules.commonResources))
 
                 with(Deps.Kotlinx) {
@@ -58,11 +56,10 @@ kotlin {
                     api(remoteConfig)
                 }
             }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

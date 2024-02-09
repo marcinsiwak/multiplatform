@@ -12,7 +12,7 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+
 
     androidTarget() {
         compilations.all {
@@ -47,53 +47,38 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(Modules.commonObject))
-                implementation(project(Modules.buildConfig))
-                implementation(project(Modules.auth))
+        commonMain.dependencies {
+            implementation(project(Modules.commonObject))
+            implementation(project(Modules.buildConfig))
+            implementation(project(Modules.auth))
 
-                with(Deps.Ktor) {
-                    implementation(core)
-                    implementation(content_negation)
-                    implementation(serialization)
-                    implementation(cio)
-                    implementation(logger)
-                }
+            with(Deps.Ktor) {
+                implementation(core)
+                implementation(content_negation)
+                implementation(serialization)
+                implementation(cio)
+                implementation(logger)
+            }
 
-                with(Deps.Napier) {
-                    implementation(napier)
-                }
+            with(Deps.Napier) {
+                implementation(napier)
             }
         }
 
-        val androidMain by getting {
-            dependencies {
-                with(Deps.Ktor) {
-                    implementation(android)
-                }
+        androidMain.dependencies {
+            with(Deps.Ktor) {
+                implementation(android)
             }
         }
 
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                with(Deps.Ktor) {
-                    api(ios)
-                }
+        iosMain.dependencies {
+            with(Deps.Ktor) {
+                api(ios)
             }
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

@@ -8,7 +8,6 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 
     androidTarget() {
         compilations.all {
@@ -42,37 +41,20 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                with(Deps.Napier) {
-                    implementation(napier)
-                }
+        commonMain.dependencies {
+            with(Deps.Napier) {
+                implementation(napier)
             }
         }
 
-        val androidMain by getting {
-            dependencies {
-                with(Deps.Firebase) {
-                    implementation(platform(andoridBom))
-                    implementation(messaging)
-                }
+        androidMain.dependencies {
+            with(Deps.Firebase) {
+                implementation(platform(andoridBom))
+                implementation(messaging)
             }
         }
-
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
-
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

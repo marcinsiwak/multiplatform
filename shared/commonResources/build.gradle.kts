@@ -14,7 +14,7 @@ multiplatformResources {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+
 
     androidTarget() {
         compilations.all {
@@ -48,32 +48,22 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                with(Deps.MokoResources) {
-                    api(resources)
-                    api(graphics)
-                }
+        commonMain.dependencies {
+            with(Deps.MokoResources) {
+                api(resources)
+                api(graphics)
             }
-        }
-        val androidMain by getting {
-            dependsOn(commonMain)
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        getByName("androidMain").dependsOn(commonMain.get())
+        getByName("iosArm64Main").dependsOn(commonMain.get())
+        getByName("iosX64Main").dependsOn(commonMain.get())
+        getByName("iosSimulatorArm64Main").dependsOn(commonMain.get())
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
+
     }
 }
 

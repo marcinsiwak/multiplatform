@@ -2,18 +2,16 @@ import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization") version "1.8.22"
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 
     androidTarget {
         compilations.all {
@@ -93,69 +91,58 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                api(project(Modules.core))
-                api(project(Modules.commonResources))
-                api(project(Modules.commonObject))
-                api(project(Modules.database))
-                api(project(Modules.utils))
-                api(project(Modules.auth))
-                api(project(Modules.network))
-                api(project(Modules.data))
-                api(project(Modules.remoteConfig))
-                api(project(Modules.domain))
-                api(project(Modules.domainImpl))
-                api(project(Modules.navigator))
-                api(project(Modules.uiWelcome))
-                api(project(Modules.uiAddCategory))
-                api(project(Modules.uiAddExercise))
-                api(project(Modules.uiCategory))
-                api(project(Modules.uiDashboard))
-                api(project(Modules.uiForceUpdate))
-                api(project(Modules.uiLanguage))
-                api(project(Modules.uiRegister))
-                api(project(Modules.uiSettings))
-                api(project(Modules.uiSummary))
-                api(project(Modules.uiUnit))
-                api(project(Modules.uiVerifyEmail))
-                api(project(Modules.buildConfig))
-                api(project(Modules.notifications))
 
-                with(Deps.Napier) {
-                    api(napier)
-                }
+        commonMain.dependencies {
+            api(project(Modules.core))
+            api(project(Modules.commonResources))
+            api(project(Modules.commonObject))
+            api(project(Modules.database))
+            api(project(Modules.utils))
+            api(project(Modules.auth))
+            api(project(Modules.network))
+            api(project(Modules.data))
+            api(project(Modules.remoteConfig))
+            api(project(Modules.domain))
+            api(project(Modules.domainImpl))
+            api(project(Modules.navigator))
+            api(project(Modules.uiWelcome))
+            api(project(Modules.uiAddCategory))
+            api(project(Modules.uiAddExercise))
+            api(project(Modules.uiCategory))
+            api(project(Modules.uiDashboard))
+            api(project(Modules.uiForceUpdate))
+            api(project(Modules.uiLanguage))
+            api(project(Modules.uiRegister))
+            api(project(Modules.uiSettings))
+            api(project(Modules.uiSummary))
+            api(project(Modules.uiUnit))
+            api(project(Modules.uiVerifyEmail))
+            api(project(Modules.buildConfig))
+            api(project(Modules.notifications))
 
-                with(Deps.Koin) {
-                    implementation(core)
-                    implementation(test)
-                }
+            with(Deps.Napier) {
+                api(napier)
+            }
+
+            with(Deps.Koin) {
+                implementation(core)
+                implementation(test)
             }
         }
 
-        val androidMain by getting {
-            dependencies {
-                dependsOn(commonMain)
-                with(Deps.Koin) {
-                    implementation(android)
-                }
+        getByName("androidMain").dependsOn(commonMain.get())
+        getByName("iosArm64Main").dependsOn(commonMain.get())
+        getByName("iosX64Main").dependsOn(commonMain.get())
+        getByName("iosSimulatorArm64Main").dependsOn(commonMain.get())
+
+        androidMain.dependencies {
+            with(Deps.Koin) {
+                implementation(android)
             }
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
-
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

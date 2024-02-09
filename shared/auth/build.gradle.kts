@@ -9,7 +9,6 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 
     androidTarget {
         compilations.all {
@@ -34,32 +33,27 @@ kotlin {
 
             export(project(Modules.utils))
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(Modules.utils))
+        commonMain.dependencies {
+            implementation(project(Modules.utils))
 
-                with(Deps.Firebase) {
-                    implementation(authentication)
-                }
-                with(Deps.Kotlinx) {
-                    implementation(coroutines)
-                }
+            with(Deps.Firebase) {
+                implementation(authentication)
+            }
+            with(Deps.Kotlinx) {
+                implementation(coroutines)
             }
         }
-        val androidMain by getting {
-            dependencies {
-                dependsOn(commonMain)
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

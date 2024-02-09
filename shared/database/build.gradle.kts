@@ -5,12 +5,11 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
-    id("app.cash.sqldelight") version "2.0.0"
+    id("app.cash.sqldelight") version "2.0.1"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 
     android {
         compilations.all {
@@ -62,13 +61,13 @@ kotlin {
                 }
             }
         }
-        val iosMain by getting {
-            dependencies {
-                with(Deps.SQLDelight) {
-                    implementation(ios)
-                }
-            }
-        }
+//        val iosMain by getting {
+//            dependencies {
+//                with(Deps.SQLDelight) {
+//                    implementation(ios)
+//                }
+//            }
+//        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))

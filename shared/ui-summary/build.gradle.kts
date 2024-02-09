@@ -11,7 +11,7 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+    
 
     androidTarget() {
         compilations.all {
@@ -49,8 +49,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
+        commonMain.dependencies {
                 implementation(project(Modules.core))
                 implementation(project(Modules.domain))
                 implementation(project(Modules.navigator))
@@ -58,21 +57,11 @@ kotlin {
                 implementation(project(Modules.commonResources))
                 implementation(project(Modules.commonObject))
             }
+        
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
+
     }
 }
 

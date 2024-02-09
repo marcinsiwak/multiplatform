@@ -1,8 +1,9 @@
 plugins {
-    id("com.android.application").version("8.2.2").apply(false)
-    id("com.android.library").version("8.2.2").apply(false)
-    kotlin("android").version("1.9.0").apply(false)
-    kotlin("multiplatform").version("1.9.0").apply(false)
+    alias(libs.plugins.androidApplication).apply(false)
+    alias(libs.plugins.androidLibrary).apply(false)
+    alias(libs.plugins.kotlinAndroid).apply(false)
+    alias(libs.plugins.kotlinMultiplatform).apply(false)
+    alias(libs.plugins.kotlinCocoapods).apply(false)
     kotlin("plugin.serialization") version "1.8.22"
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("io.gitlab.arturbosch.detekt") version "1.19.0"
@@ -11,7 +12,6 @@ plugins {
 
 buildscript {
     dependencies {
-        classpath("com.android.tools.build:gradle:8.2.2")
         classpath("com.google.gms:google-services:4.4.0")
         classpath("dev.icerock.moko:resources-generator:0.23.0")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.9")
