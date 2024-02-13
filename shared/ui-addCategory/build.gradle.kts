@@ -12,7 +12,7 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
 
-    androidTarget() {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "17"
