@@ -157,7 +157,7 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation(libs.androidx.appcompat)
 
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
@@ -165,21 +165,17 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     debugImplementation(libs.compose.ui.tooling)
 
-//    val composeBom = platform("androidx.compose:compose-bom:2023.10.00")
-//    implementation(composeBom)
-//    androidTestImplementation(composeBom)
+    implementation(libs.androidx.core.splashscreen)
 
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
 
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.accompanist.navigation.material)
 
-    implementation("androidx.navigation:navigation-compose:2.7.3")
-    implementation("com.google.accompanist:accompanist-navigation-material:0.25.0")
-
-    api("com.google.firebase:firebase-common:20.4.2")
-    api("com.google.firebase:firebase-auth:22.3.1")
-    api("com.google.firebase:firebase-config:21.6.0")
+    api(libs.firebase.common)
+    api(libs.firebase.auth)
+    api(libs.firebase.config)
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)

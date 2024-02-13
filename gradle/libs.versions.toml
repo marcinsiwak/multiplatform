@@ -1,6 +1,13 @@
 [versions]
+accompanistNavigationMaterial = "0.25.0"
+activityCompose = "1.7.2"
 agp = "8.2.2"
+appcompat = "1.6.1"
 buildkonfigGradlePlugin = "0.14.0"
+coreSplashscreen = "1.0.1"
+firebaseAuth = "22.3.1"
+firebaseCommon = "20.4.2"
+firebaseConfig = "21.6.1"
 firebaseCrashlyticsGradle = "2.9.9"
 googleServices = "4.4.0"
 kotlin = "1.9.22"
@@ -11,6 +18,8 @@ androidx-activityCompose = "1.8.0"
 koin = "3.3.2"
 koin-compose = "3.4.2"
 ktor = "2.3.5"
+lifecycleRuntimeKtx = "2.6.2"
+navigationCompose = "2.7.7"
 resourcesGenerator = "0.23.0"
 sqlDelight = "2.0.1"
 moko-resources = "0.24.0-alpha-4"
@@ -31,11 +40,19 @@ firebase-appDistribution = "4.0.1"
 lifecycleViewmodelCompose = "2.7.0"
 
 [libraries]
+accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
+firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
+firebase-common = { module = "com.google.firebase:firebase-common", version.ref = "firebaseCommon" }
+firebase-config = { module = "com.google.firebase:firebase-config", version.ref = "firebaseConfig" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
