@@ -12,7 +12,6 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
 
-
     androidTarget() {
         compilations.all {
             kotlinOptions {
