@@ -25,7 +25,7 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryState
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 
@@ -66,7 +66,7 @@ fun AddCategoryScreenContent(
                 onValueChange = {
                     onCategoryNameChanged(it)
                 },
-                hintText = stringResource(id = MR.strings.category_name.resourceId)
+                hintText = stringResource(id = SR.strings.category_name.resourceId)
             )
             DropDownView(
                 currentValue = viewState.value.exerciseType.name,
@@ -92,7 +92,7 @@ fun AddCategoryScreenContent(
         ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(id = MR.strings.add_category.resourceId),
+                text = stringResource(id = SR.strings.add_category.resourceId),
                 fontSize = MaterialTheme.font.font_16
             )
         }

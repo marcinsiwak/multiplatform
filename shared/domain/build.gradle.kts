@@ -1,17 +1,15 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 
     androidTarget() {
         compilations.all {
@@ -47,22 +45,17 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(Modules.data))
-                implementation(project(Modules.commonObject))
-                implementation(project(Modules.commonResources))
-                implementation(project(Modules.utils))
+        commonMain.dependencies {
+            implementation(project(Modules.data))
+            implementation(project(Modules.commonObject))
+            implementation(project(Modules.commonResources))
+            implementation(project(Modules.utils))
 
-                with(Deps.Napier) {
-                    implementation(napier)
-                }
-            }
+            implementation(libs.napier)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

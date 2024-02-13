@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.navigator.NavigationDirections
@@ -94,12 +94,12 @@ class RegisterViewModel(
         if (isPasswordValid) {
             _viewState.update { it.copy(passwordErrorMessage = null) }
         } else {
-            _viewState.update { it.copy(passwordErrorMessage = MR.strings.input_wrong_format) }
+            _viewState.update { it.copy(passwordErrorMessage = SR.strings.input_wrong_format) }
         }
         if (isLoginValid) {
             _viewState.update { it.copy(loginErrorMessage = null) }
         } else {
-            _viewState.update { it.copy(loginErrorMessage = MR.strings.input_wrong_format) }
+            _viewState.update { it.copy(loginErrorMessage = SR.strings.input_wrong_format) }
         }
 
         if (!isPasswordValid || !isLoginValid) return

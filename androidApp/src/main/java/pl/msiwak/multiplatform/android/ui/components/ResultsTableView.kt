@@ -26,7 +26,7 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultTableItemData
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 
 @Composable
 fun ResultsTableView(
@@ -60,7 +60,7 @@ fun ResultsTableView(
     ) {
         Row(
             modifier = Modifier
-//                .background(color = colorResource(id = MR.colors.gray.resourceId))
+//                .background(color = colorResource(id = SR.colors.gray.resourceId))
                 .height(IntrinsicSize.Min)
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
@@ -76,8 +76,8 @@ fun ResultsTableView(
                     color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
                     iconResId = when (item.isArrowUp) {
-                        true -> MR.images.ic_arrow_up.drawableResId
-                        false -> MR.images.ic_arrow_down.drawableResId
+                        true -> SR.images.ic_arrow_up.drawableResId
+                        false -> SR.images.ic_arrow_down.drawableResId
                         null -> null
                     }
                 )
@@ -99,7 +99,7 @@ fun ResultsTableView(
                             },
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.onPrimary,
-                        text = stringResource(id = MR.strings.add_new_result.resourceId)
+                        text = stringResource(id = SR.strings.add_new_result.resourceId)
                     )
                 }
             }

@@ -1,18 +1,16 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
-    kotlin("plugin.serialization") version "1.8.22"
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.serialization)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 
     androidTarget() {
         compilations.all {
@@ -48,37 +46,21 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(Modules.navigator))
-                implementation(project(Modules.utils))
-                implementation(project(Modules.domain))
-                implementation(project(Modules.commonResources))
-                with(Deps.Kotlinx) {
-                    implementation(coroutines)
-                }
-            }
+        commonMain.dependencies {
+            implementation(project(Modules.navigator))
+            implementation(project(Modules.utils))
+            implementation(project(Modules.domain))
+            implementation(project(Modules.commonResources))
+
+            implementation(libs.kotlinx.coroutines)
         }
-        val androidMain by getting {
-            dependencies {
-                with(Deps.Kotlinx) {
-                    implementation(viewModel)
-                }
-            }
+
+        androidMain.dependencies {
+            implementation(libs.kotlinx.viewModel)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

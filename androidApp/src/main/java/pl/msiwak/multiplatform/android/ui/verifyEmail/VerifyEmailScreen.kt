@@ -25,7 +25,7 @@ import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailEvent
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyState
@@ -74,12 +74,12 @@ fun VerifyEmailScreenContent(
     ) {
         Text(
             modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-            text = stringResource(id = MR.strings.verify_title.resourceId),
+            text = stringResource(id = SR.strings.verify_title.resourceId),
             fontSize = MaterialTheme.font.font_24
         )
         Text(
             modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-            text = stringResource(id = MR.strings.verify_description.resourceId),
+            text = stringResource(id = SR.strings.verify_description.resourceId),
             fontSize = MaterialTheme.font.font_16
         )
 
@@ -90,13 +90,13 @@ fun VerifyEmailScreenContent(
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
             onClick = { onOpenMailClicked() },
-            text = stringResource(id = MR.strings.verify_open_mail.resourceId)
+            text = stringResource(id = SR.strings.verify_open_mail.resourceId)
         )
 
         SecondaryButton(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onResendMailClicked() },
-            text = stringResource(id = MR.strings.verify_resend_mail.resourceId)
+            text = stringResource(id = SR.strings.verify_resend_mail.resourceId)
         )
 
         MainButton(
@@ -104,7 +104,7 @@ fun VerifyEmailScreenContent(
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
             onClick = { onLoginClicked() },
-            text = stringResource(id = MR.strings.verify_login.resourceId)
+            text = stringResource(id = SR.strings.verify_login.resourceId)
         )
     }
 }

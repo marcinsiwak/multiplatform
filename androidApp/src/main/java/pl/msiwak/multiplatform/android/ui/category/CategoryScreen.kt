@@ -41,7 +41,7 @@ import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.category.CategoryState
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 
@@ -51,8 +51,8 @@ fun CategoryScreen(id: String) {
     val viewState = viewModel.viewState.collectAsState()
 
     val backgroundId = when (viewState.value.exerciseType) {
-        ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
-        ExerciseType.GYM -> MR.images.bg_gym.drawableResId
+        ExerciseType.RUNNING -> SR.images.bg_running_field.drawableResId
+        ExerciseType.GYM -> SR.images.bg_gym.drawableResId
 //        ExerciseType.OTHER -> null
     }
 
@@ -94,10 +94,10 @@ fun CategoryScreenContent(
 ) {
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
-            description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
-            confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
-            dismissButtonTitle = stringResource(MR.strings.no.resourceId),
+            title = stringResource(SR.strings.remove_result_dialog_title.resourceId),
+            description = stringResource(SR.strings.remove_result_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(SR.strings.yes.resourceId),
+            dismissButtonTitle = stringResource(SR.strings.no.resourceId),
             onConfirmClicked = onConfirmClicked,
             onDismissClicked = onDismissClicked
         )
@@ -167,7 +167,7 @@ fun CategoryScreenContent(
         ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(id = MR.strings.add_exercise.resourceId),
+                text = stringResource(id = SR.strings.add_exercise.resourceId),
                 fontSize = MaterialTheme.font.font_16
             )
         }
@@ -199,7 +199,7 @@ fun CategoryScreenPreview() {
     AppTheme {
         CategoryScreenContent(
             viewState = MutableStateFlow(CategoryState()).collectAsState(),
-            backgroundId = MR.images.bg_gym.drawableResId
+            backgroundId = SR.images.bg_gym.drawableResId
         )
     }
 }

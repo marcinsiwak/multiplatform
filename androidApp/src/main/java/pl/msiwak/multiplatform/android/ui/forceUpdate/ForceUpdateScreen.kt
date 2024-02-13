@@ -20,7 +20,7 @@ import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 
 @Composable
@@ -41,19 +41,19 @@ fun ForceUpdateScreenContent(
     ) {
         Column {
             Image(
-                painter = painterResource(id = MR.images.bg_force_update.drawableResId),
+                painter = painterResource(id = SR.images.bg_force_update.drawableResId),
                 contentScale = ContentScale.FillWidth,
                 contentDescription = null
             )
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_16),
-                text = stringResource(MR.strings.force_update_title.resourceId),
+                text = stringResource(SR.strings.force_update_title.resourceId),
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = MaterialTheme.font.font_24
             )
             Text(
                 modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
-                text = stringResource(MR.strings.force_update_description.resourceId),
+                text = stringResource(SR.strings.force_update_description.resourceId),
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = MaterialTheme.font.font_16
             )
@@ -67,7 +67,7 @@ fun ForceUpdateScreenContent(
                     horizontal = MaterialTheme.dimens.space_80
                 ),
             onClick = onUpdateClicked,
-            text = stringResource(id = MR.strings.force_update_update.resourceId)
+            text = stringResource(id = SR.strings.force_update_update.resourceId)
         )
     }
 }

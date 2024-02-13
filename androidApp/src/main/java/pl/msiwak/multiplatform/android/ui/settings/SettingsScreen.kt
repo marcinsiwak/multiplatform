@@ -19,7 +19,7 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.settings.SettingsState
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 
@@ -52,7 +52,7 @@ fun SettingsScreenContent(
                     vertical = MaterialTheme.dimens.space_16,
                     horizontal = MaterialTheme.dimens.space_24
                 ),
-                text = stringResource(MR.strings.settings.resourceId),
+                text = stringResource(SR.strings.settings.resourceId),
                 fontSize = MaterialTheme.font.font_24,
                 color = MaterialTheme.colorScheme.onPrimary
             )
@@ -62,7 +62,7 @@ fun SettingsScreenContent(
                     .clickable {
                         onUnitClicked()
                     },
-                text = stringResource(MR.strings.settings_unit.resourceId)
+                text = stringResource(SR.strings.settings_unit.resourceId)
             )
             val isLanguageEnabled = false
             if (isLanguageEnabled) {
@@ -72,7 +72,7 @@ fun SettingsScreenContent(
                         .clickable {
                             onLanguageClicked()
                         },
-                    text = stringResource(MR.strings.settings_language.resourceId)
+                    text = stringResource(SR.strings.settings_language.resourceId)
                 )
             }
             if (viewState.value.isLogoutButtonVisible) {
@@ -82,7 +82,7 @@ fun SettingsScreenContent(
                         .clickable {
                             onLogoutClicked()
                         },
-                    text = stringResource(MR.strings.settings_logout.resourceId)
+                    text = stringResource(SR.strings.settings_logout.resourceId)
                 )
             }
         }

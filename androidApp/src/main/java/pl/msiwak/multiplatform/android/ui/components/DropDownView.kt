@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 
 @Composable
 fun DropDownView(
@@ -48,7 +48,7 @@ fun DropDownView(
                 },
             value = currentValue,
             onValueChange = {},
-            hintText = stringResource(MR.strings.category.resourceId),
+            hintText = stringResource(SR.strings.category.resourceId),
             readOnly = true,
             errorsEnabled = false,
             trailingIcon = {

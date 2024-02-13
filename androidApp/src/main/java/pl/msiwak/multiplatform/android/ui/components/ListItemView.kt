@@ -22,7 +22,7 @@ import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 
 @Suppress("MagicNumber")
 @OptIn(ExperimentalFoundationApi::class)
@@ -64,7 +64,7 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                 .weight(0.2f)
                 .padding(MaterialTheme.dimens.space_16),
             tint = MaterialTheme.colorScheme.tertiary,
-            painter = painterResource(id = MR.images.ic_arrow_right.drawableResId),
+            painter = painterResource(id = SR.images.ic_arrow_right.drawableResId),
             contentDescription = null
         )
     }

@@ -1,18 +1,16 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    kotlin("plugin.serialization") version "1.8.22"
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.serialization)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 
     androidTarget() {
         compilations.all {
@@ -47,53 +45,30 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(Modules.commonObject))
-                implementation(project(Modules.buildConfig))
-                implementation(project(Modules.auth))
+        commonMain.dependencies {
+            implementation(project(Modules.commonObject))
+            implementation(project(Modules.buildConfig))
+            implementation(project(Modules.auth))
 
-                with(Deps.Ktor) {
-                    implementation(core)
-                    implementation(content_negation)
-                    implementation(serialization)
-                    implementation(cio)
-                    implementation(logger)
-                }
+            implementation(libs.ktor.core)
+            implementation(libs.ktor.contentNegation)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.cio)
+            implementation(libs.ktor.logger)
 
-                with(Deps.Napier) {
-                    implementation(napier)
-                }
-            }
+            implementation(libs.napier)
         }
 
-        val androidMain by getting {
-            dependencies {
-                with(Deps.Ktor) {
-                    implementation(android)
-                }
-            }
+        androidMain.dependencies {
+            implementation(libs.ktor.android)
         }
 
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                with(Deps.Ktor) {
-                    api(ios)
-                }
-            }
+        iosMain.dependencies {
+            api(libs.ktor.ios)
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

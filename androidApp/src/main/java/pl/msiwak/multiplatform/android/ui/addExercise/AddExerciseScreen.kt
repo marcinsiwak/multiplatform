@@ -41,7 +41,7 @@ import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.android.ui.widgets.openCalendar
 import pl.msiwak.multiplatform.commonObject.DateFilterType
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseEvent
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseState
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
@@ -79,7 +79,7 @@ fun AddExerciseScreen(id: String) {
 
                 is AddExerciseEvent.FocusOnInput -> {
                     focusRequesters[value.pos].requestFocus()
-                    val errorMsg = context.getString(MR.strings.input_wrong_format.resourceId)
+                    val errorMsg = context.getString(SR.strings.input_wrong_format.resourceId)
                     Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -133,10 +133,10 @@ fun AddExerciseScreenContent(
 ) {
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = stringResource(MR.strings.remove_result_dialog_title.resourceId),
-            description = stringResource(MR.strings.remove_result_dialog_description.resourceId),
-            confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
-            dismissButtonTitle = stringResource(MR.strings.no.resourceId),
+            title = stringResource(SR.strings.remove_result_dialog_title.resourceId),
+            description = stringResource(SR.strings.remove_result_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(SR.strings.yes.resourceId),
+            dismissButtonTitle = stringResource(SR.strings.no.resourceId),
             onConfirmClicked = {
                 onResultRemoved()
             },
@@ -218,7 +218,7 @@ fun AddExerciseScreenContent(
                     }
                 ) {
                     Text(
-                        text = stringResource(MR.strings.add_new_result.resourceId),
+                        text = stringResource(SR.strings.add_new_result.resourceId),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
@@ -236,7 +236,7 @@ fun AddExerciseScreenContent(
                     }
                 ) {
                     Text(
-                        text = stringResource(MR.strings.add_result_save.resourceId),
+                        text = stringResource(SR.strings.add_result_save.resourceId),
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }

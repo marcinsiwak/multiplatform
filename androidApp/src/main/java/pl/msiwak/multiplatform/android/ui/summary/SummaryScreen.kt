@@ -34,7 +34,7 @@ import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.summary.SummaryState
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
 
@@ -73,10 +73,10 @@ fun SummaryScreenContent(
 ) {
     if (viewState.value.isRemoveCategoryDialogVisible) {
         PopupDialog(
-            title = stringResource(MR.strings.remove_category_dialog_title.resourceId),
-            description = stringResource(MR.strings.remove_category_dialog_description.resourceId),
-            confirmButtonTitle = stringResource(MR.strings.yes.resourceId),
-            dismissButtonTitle = stringResource(MR.strings.no.resourceId),
+            title = stringResource(SR.strings.remove_category_dialog_title.resourceId),
+            description = stringResource(SR.strings.remove_category_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(SR.strings.yes.resourceId),
+            dismissButtonTitle = stringResource(SR.strings.no.resourceId),
             onConfirmClicked = onCategoryRemoved,
             onDismissClicked = onPopupDismissed
         )
@@ -119,13 +119,13 @@ fun SummaryScreenContent(
                         Row {
                             Icon(
                                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                                painter = painterResource(id = MR.images.ic_add.drawableResId),
+                                painter = painterResource(id = SR.images.ic_add.drawableResId),
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 contentDescription = null
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = stringResource(MR.strings.summary_add_category.resourceId),
+                                text = stringResource(SR.strings.summary_add_category.resourceId),
                                 color = MaterialTheme.colorScheme.tertiary
                             )
                         }

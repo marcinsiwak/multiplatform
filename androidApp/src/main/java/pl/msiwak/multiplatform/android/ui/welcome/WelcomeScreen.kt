@@ -44,7 +44,7 @@ import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.android.ui.utils.auth.GoogleAuthOneTapConfiguration
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 import pl.msiwak.multiplatform.ui.welcome.WelcomeState
 
@@ -116,9 +116,9 @@ fun WelcomeScreenContent(
 ) {
     if (viewState.value.isErrorDialogVisible) {
         PopupDialog(
-            title = stringResource(id = MR.strings.auth_failed_title.resourceId),
-            description = stringResource(id = MR.strings.auth_failed_description.resourceId),
-            confirmButtonTitle = stringResource(id = MR.strings.confirm.resourceId),
+            title = stringResource(id = SR.strings.auth_failed_title.resourceId),
+            description = stringResource(id = SR.strings.auth_failed_description.resourceId),
+            confirmButtonTitle = stringResource(id = SR.strings.confirm.resourceId),
             onConfirmClicked = {
                 onConfirmDialogButtonClicked()
             }
@@ -127,10 +127,10 @@ fun WelcomeScreenContent(
 
     if (viewState.value.isSynchronizationDialogVisible) {
         PopupDialog(
-            title = stringResource(id = MR.strings.synchronization_dialog_title.resourceId),
-            description = stringResource(id = MR.strings.synchronization_dialog_description.resourceId),
-            confirmButtonTitle = stringResource(id = MR.strings.confirm.resourceId),
-            dismissButtonTitle = stringResource(id = MR.strings.deny.resourceId),
+            title = stringResource(id = SR.strings.synchronization_dialog_title.resourceId),
+            description = stringResource(id = SR.strings.synchronization_dialog_description.resourceId),
+            confirmButtonTitle = stringResource(id = SR.strings.confirm.resourceId),
+            dismissButtonTitle = stringResource(id = SR.strings.deny.resourceId),
             onConfirmClicked = {
                 onConfirmSynchronizationClicked()
             },
@@ -143,7 +143,7 @@ fun WelcomeScreenContent(
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(
 //            modifier = Modifier.fillMaxSize(),
-//            painter = painterResource(id = MR.images.bg_welcome_screen.drawableResId),
+//            painter = painterResource(id = SR.images.bg_welcome_screen.drawableResId),
 //            contentScale = ContentScale.Crop,
 //            contentDescription = "Welcome screen"
 //        )
@@ -167,7 +167,7 @@ fun WelcomeScreenContent(
                 onValueChange = {
                     onLoginChanged(it)
                 },
-                hintText = stringResource(MR.strings.email.resourceId)
+                hintText = stringResource(SR.strings.email.resourceId)
             )
 
             InputView(
@@ -184,16 +184,16 @@ fun WelcomeScreenContent(
                             .clickable { onVisibilityClicked() },
                         painter = painterResource(
                             id = if (viewState.value.isPasswordVisible) {
-                                MR.images.ic_invisible.drawableResId
+                                SR.images.ic_invisible.drawableResId
                             } else {
-                                MR.images.ic_visible.drawableResId
+                                SR.images.ic_visible.drawableResId
                             }
                         ),
                         contentDescription = null
                     )
                 },
                 isPassword = true,
-                hintText = stringResource(MR.strings.password.resourceId)
+                hintText = stringResource(SR.strings.password.resourceId)
             )
 
             MainButton(
@@ -201,7 +201,7 @@ fun WelcomeScreenContent(
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimens.space_24),
                 onClick = { onLoginClicked() },
-                text = stringResource(id = MR.strings.login.resourceId)
+                text = stringResource(id = SR.strings.login.resourceId)
             )
 
             MainButton(
@@ -213,7 +213,7 @@ fun WelcomeScreenContent(
                 onClick = {
                     onGoogleLoginClicked()
                 },
-                text = stringResource(id = MR.strings.welcome_google_login.resourceId)
+                text = stringResource(id = SR.strings.welcome_google_login.resourceId)
             )
 
             SecondaryButton(
@@ -224,11 +224,11 @@ fun WelcomeScreenContent(
                         bottom = MaterialTheme.dimens.space_16
                     ),
                 onClick = { onOfflineModeClicked() },
-                text = stringResource(id = MR.strings.welcome_offline_mode.resourceId)
+                text = stringResource(id = SR.strings.welcome_offline_mode.resourceId)
             )
 
             Text(
-                text = stringResource(MR.strings.welcome_no_account.resourceId),
+                text = stringResource(SR.strings.welcome_no_account.resourceId),
                 color = MaterialTheme.colorScheme.secondary
             )
             Button(
@@ -239,7 +239,7 @@ fun WelcomeScreenContent(
                     containerColor = Color.Transparent
                 )
             ) {
-                Text(text = stringResource(MR.strings.welcome_create_account.resourceId))
+                Text(text = stringResource(SR.strings.welcome_create_account.resourceId))
             }
         }
     }

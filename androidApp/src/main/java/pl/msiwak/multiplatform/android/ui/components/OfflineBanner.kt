@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 
 @Composable
 fun OfflineBanner(
@@ -32,7 +32,7 @@ fun OfflineBanner(
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.dimens.space_8),
-            text = stringResource(id = MR.strings.offline_mode_title.resourceId),
+            text = stringResource(id = SR.strings.offline_mode_title.resourceId),
             style = MaterialTheme.typography.labelSmall,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onTertiary
@@ -48,14 +48,14 @@ fun OfflineBanner(
         ) {
             Text(
                 modifier = Modifier,
-                text = stringResource(id = MR.strings.offline_mode_sing_up_in.resourceId),
+                text = stringResource(id = SR.strings.offline_mode_sing_up_in.resourceId),
                 style = MaterialTheme.typography.labelSmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onTertiary
             )
 
             Icon(
-                painter = painterResource(id = MR.images.ic_arrow_right.drawableResId),
+                painter = painterResource(id = SR.images.ic_arrow_right.drawableResId),
                 tint = MaterialTheme.colorScheme.onTertiary,
                 contentDescription = null
             )

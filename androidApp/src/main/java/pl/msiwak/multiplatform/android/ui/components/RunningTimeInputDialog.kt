@@ -23,7 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.window.Dialog
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 
 private const val MILLISECONDS_DIGITS_AMOUNT = 3
 private const val MINUTE_IN_SECONDS = 60
@@ -50,7 +50,7 @@ fun RunningTimeInputDialog(
         Column(
             modifier = Modifier
                 .background(
-                    colorResource(MR.colors.gray.resourceId),
+                    colorResource(SR.colors.gray.resourceId),
                     RoundedCornerShape(MaterialTheme.dimens.dialog_corners)
                 )
                 .padding(MaterialTheme.dimens.space_16),
@@ -58,7 +58,7 @@ fun RunningTimeInputDialog(
         ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(id = MR.strings.running_time_input_insert_result.resourceId),
+                text = stringResource(id = SR.strings.running_time_input_insert_result.resourceId),
                 style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center
             )
@@ -77,7 +77,7 @@ fun RunningTimeInputDialog(
                         Text("0")
                     },
                     label = {
-                        Text(stringResource(id = MR.strings.hours.resourceId))
+                        Text(stringResource(id = SR.strings.hours.resourceId))
                     }
                 )
 
@@ -94,7 +94,7 @@ fun RunningTimeInputDialog(
                         Text("0")
                     },
                     label = {
-                        Text(stringResource(id = MR.strings.minutes.resourceId))
+                        Text(stringResource(id = SR.strings.minutes.resourceId))
                     }
                 )
             }
@@ -114,7 +114,7 @@ fun RunningTimeInputDialog(
                         Text("0")
                     },
                     label = {
-                        Text(stringResource(id = MR.strings.seconds.resourceId))
+                        Text(stringResource(id = SR.strings.seconds.resourceId))
                     }
                 )
                 RunningTimeInputView(
@@ -128,13 +128,13 @@ fun RunningTimeInputDialog(
                         Text("0")
                     },
                     label = {
-                        Text(stringResource(id = MR.strings.milliseconds.resourceId))
+                        Text(stringResource(id = SR.strings.milliseconds.resourceId))
                     }
                 )
             }
             SecondaryButton(
                 modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_8),
-                text = stringResource(id = MR.strings.confirm.resourceId),
+                text = stringResource(id = SR.strings.confirm.resourceId),
                 onClick = {
                     if (hours.value.isEmpty()) {
                         hours.value = "0"

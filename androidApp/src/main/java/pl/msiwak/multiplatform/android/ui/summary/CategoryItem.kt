@@ -31,7 +31,7 @@ import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 
 @Suppress("MagicNumber")
 @Composable
@@ -40,8 +40,8 @@ fun CategoryItem(
     category: Category
 ) {
     val backgroundId = when (category.exerciseType) {
-        ExerciseType.RUNNING -> MR.images.bg_running_field.drawableResId
-        ExerciseType.GYM -> MR.images.bg_gym.drawableResId
+        ExerciseType.RUNNING -> SR.images.bg_running_field.drawableResId
+        ExerciseType.GYM -> SR.images.bg_gym.drawableResId
 //        ExerciseType.OTHER -> null
     }
 
