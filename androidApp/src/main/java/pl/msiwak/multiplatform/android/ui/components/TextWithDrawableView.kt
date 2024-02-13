@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 
 @Composable
 fun TextWithDrawableView(
@@ -42,7 +42,7 @@ fun TextWithDrawableView(
         Icon(
             modifier = Modifier
                 .alpha(iconAlpha),
-            painter = painterResource(id = iconResId ?: MR.images.ic_arrow_down.drawableResId),
+            painter = painterResource(id = iconResId ?: SR.images.ic_arrow_down.drawableResId),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onPrimary
         )

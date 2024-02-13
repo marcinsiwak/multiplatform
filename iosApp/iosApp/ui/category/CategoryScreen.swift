@@ -33,12 +33,12 @@ struct CategoryScreen: View {
     private func selectBackgroundImage() -> UIImage {
         switch(self.state.value.exerciseType){
         case ExerciseType.running:
-            return MR.images().bg_running_field.toUIImage()!
+            return SR.images().bg_running_field.toUIImage()!
         case ExerciseType.gym:
-            return MR.images().bg_gym.toUIImage()!
+            return SR.images().bg_gym.toUIImage()!
     //        ExerciseType.OTHER -> null
         default:
-            return MR.images().bg_gym.toUIImage()!
+            return SR.images().bg_gym.toUIImage()!
         }
     }
     
@@ -69,7 +69,7 @@ struct CategoryScreen: View {
                 Button(action: {
                     viewModel.onAddNewExerciseClicked()
                 }, label: {
-                    Text(MR.strings().add_new_result.desc().localized())
+                    Text(SR.strings().add_new_result.desc().localized())
                         .padding(Dimensions.space_16)
                         .foregroundColor(Color.colorPrimary)
                         .background(Color.colorTertiary)
@@ -83,7 +83,7 @@ struct CategoryScreen: View {
                 viewModel.onDialogClosed()
             }) {
                 VStack {
-                    Text(MR.strings().exercise_name.desc().localized())
+                    Text(SR.strings().exercise_name.desc().localized())
                         .foregroundColor(.onPrimary)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding()
@@ -95,7 +95,7 @@ struct CategoryScreen: View {
                     Button(action: {
                         viewModel.onAddExerciseClicked()
                     }, label: {
-                        Text(MR.strings().add_new_exercise.desc().localized())
+                        Text(SR.strings().add_new_exercise.desc().localized())
                             .padding(Dimensions.space_16)
                             .foregroundColor(Color.colorPrimary)
                             .background(Color.colorTertiary)

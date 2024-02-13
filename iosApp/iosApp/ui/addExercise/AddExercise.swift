@@ -75,7 +75,7 @@ struct AddExerciseScreen: View {
                 Button(action: {
                         viewModel.onAddNewResultClicked()
                     }, label: {
-                        Text(MR.strings().add_new_result.desc().localized())
+                        Text(SR.strings().add_new_result.desc().localized())
                             .padding()
                             .foregroundColor(.onTertiary)
                             .background(Color.colorTertiary)
@@ -89,7 +89,7 @@ struct AddExerciseScreen: View {
                 Button(action: {
                         viewModel.onSaveResultClicked()
                     }, label: {
-                        Text(MR.strings().add_result_save.desc().localized())
+                        Text(SR.strings().add_result_save.desc().localized())
                             .padding()
                             .foregroundColor(.onTertiary)
                             .background(Color.colorTertiary)
@@ -138,7 +138,7 @@ struct AddExerciseScreen: View {
             viewModel.onDismissAmountDialog()
         }) {
             VStack {
-                Text(MR.strings().running_time_input_insert_result.desc().localized())
+                Text(SR.strings().running_time_input_insert_result.desc().localized())
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
@@ -146,7 +146,7 @@ struct AddExerciseScreen: View {
                 
                 HStack {
                     
-                    TextField(MR.strings().hours.desc().localized(), text: $hours)
+                    TextField(SR.strings().hours.desc().localized(), text: $hours)
                         .padding()
 //                        .background(backgroundColor)
                         .cornerRadius(Dimensions.input_view_corner)
@@ -155,7 +155,7 @@ struct AddExerciseScreen: View {
                         .foregroundColor(.onPrimary)
                         .keyboardType(.decimalPad)
                     
-                    TextField(MR.strings().minutes.desc().localized(), text: $minutes)
+                    TextField(SR.strings().minutes.desc().localized(), text: $minutes)
                         .padding()
 //                        .background(backgroundColor)
                         .cornerRadius(Dimensions.input_view_corner)
@@ -166,7 +166,7 @@ struct AddExerciseScreen: View {
                 }
                 
                 HStack {
-                    TextField(MR.strings().seconds.desc().localized(), text: $seconds)
+                    TextField(SR.strings().seconds.desc().localized(), text: $seconds)
                         .padding()
 //                        .background(backgroundColor)
                         .cornerRadius(Dimensions.input_view_corner)
@@ -175,7 +175,7 @@ struct AddExerciseScreen: View {
                         .foregroundColor(.onPrimary)
                         .keyboardType(.decimalPad)
                     
-                    TextField(MR.strings().milliseconds.desc().localized(), text: $milliseconds)
+                    TextField(SR.strings().milliseconds.desc().localized(), text: $milliseconds)
                         .padding()
 //                        .background(backgroundColor)
                         .cornerRadius(Dimensions.input_view_corner)
@@ -189,7 +189,7 @@ struct AddExerciseScreen: View {
                 Button(action: {
                     viewModel.onConfirmRunningAmount(hours: hours, minutes: minutes, seconds: seconds, milliseconds: milliseconds)
                 }, label: {
-                    Text(MR.strings().confirm.desc().localized())
+                    Text(SR.strings().confirm.desc().localized())
                         .padding(Dimensions.space_16)
                         .foregroundColor(Color.onTertiary)
                         .background(Color.colorTertiary)

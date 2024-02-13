@@ -8,6 +8,7 @@ plugins {
 multiplatformResources {
     multiplatformResourcesPackage = "pl.msiwak.multiplatform.commonResources" // required
     iosBaseLocalizationRegion = "en" // optional, default "en"
+    multiplatformResourcesClassName = "SR"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -45,15 +46,15 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            api(libs.moko.resources)
-            api(libs.moko.graphics)
-        }
-
         getByName("androidMain").dependsOn(commonMain.get())
         getByName("iosArm64Main").dependsOn(commonMain.get())
         getByName("iosX64Main").dependsOn(commonMain.get())
         getByName("iosSimulatorArm64Main").dependsOn(commonMain.get())
+
+        commonMain.dependencies {
+            api(libs.moko.resources)
+            api(libs.moko.graphics)
+        }
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)

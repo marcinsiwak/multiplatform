@@ -9,23 +9,23 @@ struct VerifyEmailScreen: View {
     var body: some View {
         
         VStack {
-            Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_title).localized())
-            Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_description).localized())
+            Text(ResourcesHelper().getMyString(stringId: SR.strings().verify_title).localized())
+            Text(ResourcesHelper().getMyString(stringId: SR.strings().verify_description).localized())
             
             Button(action: {
                 viewModel.onOpenMailClicked()
             }) {
-                Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_open_mail).localized())
+                Text(ResourcesHelper().getMyString(stringId: SR.strings().verify_open_mail).localized())
             }
             Button(action: {
                 viewModel.onResendMailClicked()
             }) {
-                Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_resend_mail).localized())
+                Text(ResourcesHelper().getMyString(stringId: SR.strings().verify_resend_mail).localized())
             }
             Button(action: {
                 viewModel.onLoginClicked()
             }) {
-                Text(ResourcesHelper().getMyString(stringId: MR.strings().verify_login).localized())
+                Text(ResourcesHelper().getMyString(stringId: SR.strings().verify_login).localized())
             }
         }
         .padding()

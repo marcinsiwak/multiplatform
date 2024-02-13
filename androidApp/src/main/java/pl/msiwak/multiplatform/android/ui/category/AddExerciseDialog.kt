@@ -15,7 +15,7 @@ import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 
 @Composable
 fun AddExerciseDialog(
@@ -26,13 +26,13 @@ fun AddExerciseDialog(
 ) {
     AlertDialog(
         shape = RoundedCornerShape(MaterialTheme.dimens.dialog_corners),
-        containerColor = colorResource(MR.colors.gray.resourceId),
+        containerColor = colorResource(SR.colors.gray.resourceId),
         onDismissRequest = {
             onDialogClosed()
         },
         title = {
             Text(
-                text = stringResource(MR.strings.exercise_name.resourceId),
+                text = stringResource(SR.strings.exercise_name.resourceId),
                 color = MaterialTheme.colorScheme.onPrimary
             )
         },
@@ -56,7 +56,7 @@ fun AddExerciseDialog(
                         horizontal = MaterialTheme.dimens.space_16
                     ),
                 onClick = { onAddExerciseClicked() },
-                text = stringResource(MR.strings.add_new_exercise.resourceId)
+                text = stringResource(SR.strings.add_new_exercise.resourceId)
             )
         }
     )

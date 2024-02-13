@@ -1,5 +1,8 @@
 [versions]
 agp = "8.2.2"
+buildkonfigGradlePlugin = "0.14.0"
+firebaseCrashlyticsGradle = "2.9.9"
+googleServices = "4.4.0"
 kotlin = "1.9.22"
 compose = "1.5.4"
 compose-compiler = "1.5.4"
@@ -8,8 +11,9 @@ androidx-activityCompose = "1.8.0"
 koin = "3.3.2"
 koin-compose = "3.4.2"
 ktor = "2.3.5"
-sqlDelight = "2.0.0"
-moko-resources = "0.23.0"
+resourcesGenerator = "0.23.0"
+sqlDelight = "2.0.1"
+moko-resources = "0.24.0-alpha-4"
 moko-graphics = "0.9.0"
 firebaseGitlive = "1.10.0"
 firebase-android-bom = "32.3.1"
@@ -21,8 +25,15 @@ kotlinx-serialization = "1.5.0"
 napier = "2.6.1"
 google-playservices-auth = "20.6.0"
 google-playservices-ads = "22.5.0"
+ktlint = "11.5.1"
+detekt = "1.19.0"
+firebase-appDistribution = "4.0.1"
+lifecycleViewmodelCompose = "2.7.0"
 
 [libraries]
+buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
+firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
+google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
@@ -52,6 +63,7 @@ ktor-contentNegation = { module = "io.ktor:ktor-client-content-negotiation", ver
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor"}
 ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor"}
 ktor-logger = { module = "io.ktor:ktor-client-logging", version.ref = "ktor"}
+resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "resourcesGenerator" }
 sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight"}
 sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight"}
 sqlDelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight"}
@@ -61,6 +73,7 @@ google-android-playservices-auth = { module = "com.google.android.gms:play-servi
 google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources"}
 moko-graphics = { module = "dev.icerock.moko:graphics", version.ref = "moko-graphics"}
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -68,3 +81,8 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appDistribution" }

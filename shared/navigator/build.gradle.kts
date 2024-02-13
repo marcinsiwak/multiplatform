@@ -42,6 +42,9 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines)
         }
+        iosMain.dependencies {
+            implementation("co.touchlab:stately-common:2.0.6")
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }

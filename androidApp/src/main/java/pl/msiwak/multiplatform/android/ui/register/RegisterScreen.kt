@@ -28,7 +28,7 @@ import pl.msiwak.multiplatform.android.ui.components.PasswordRequirements
 import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.register.RegisterState
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
 
@@ -62,7 +62,7 @@ fun RegisterScreenContent(
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(
 //            modifier = Modifier.fillMaxSize(),
-//            painter = painterResource(id = MR.images.bg_running_field.drawableResId),
+//            painter = painterResource(id = SR.images.bg_running_field.drawableResId),
 //            contentScale = ContentScale.Crop,
 //            contentDescription = null
 //        )
@@ -88,7 +88,7 @@ fun RegisterScreenContent(
                     )
                 },
                 onValueChange = onLoginChanged,
-                hintText = stringResource(MR.strings.email.resourceId)
+                hintText = stringResource(SR.strings.email.resourceId)
             )
 
             InputView(
@@ -108,15 +108,15 @@ fun RegisterScreenContent(
                             .clickable { onVisibilityClicked() },
                         painter = painterResource(
                             id = if (viewState.value.isPasswordVisible) {
-                                MR.images.ic_invisible.drawableResId
+                                SR.images.ic_invisible.drawableResId
                             } else {
-                                MR.images.ic_visible.drawableResId
+                                SR.images.ic_visible.drawableResId
                             }
                         ),
                         contentDescription = null
                     )
                 },
-                hintText = stringResource(MR.strings.password.resourceId)
+                hintText = stringResource(SR.strings.password.resourceId)
             )
 
             PasswordRequirements(requirements = viewState.value.passwordRequirements)
@@ -128,7 +128,7 @@ fun RegisterScreenContent(
                 onClick = {
                     onRegisterClicked()
                 },
-                text = stringResource(MR.strings.register.resourceId)
+                text = stringResource(SR.strings.register.resourceId)
             )
         }
     }

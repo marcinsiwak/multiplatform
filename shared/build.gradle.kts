@@ -4,13 +4,14 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
-    kotlin("plugin.serialization") version "1.8.22"
+    alias(libs.plugins.serialization)
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 kotlin {
+    targetHierarchy.default()
 
     androidTarget {
         compilations.all {
@@ -125,13 +126,11 @@ kotlin {
             implementation(libs.koin.test)
         }
 
-        getByName("androidMain").dependsOn(commonMain.get())
-        getByName("iosArm64Main").dependsOn(commonMain.get())
-        getByName("iosX64Main").dependsOn(commonMain.get())
-        getByName("iosSimulatorArm64Main").dependsOn(commonMain.get())
-
-        androidMain.dependencies {
-            implementation(libs.koin.android)
+        androidMain {
+            dependsOn(commonMain.get())
+            dependencies {
+                implementation(libs.koin.android)
+            }
         }
 
         commonTest.dependencies {

@@ -22,7 +22,7 @@ import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
 import pl.msiwak.multiplatform.android.ui.summary.SummaryScreen
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.navigator.DashboardNavigationDirections
 import pl.msiwak.multiplatform.ui.dashboard.DashboardState
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
@@ -36,13 +36,13 @@ fun DashboardScreen() {
 
     val items = listOf(
         DashboardNavigationDirections.Summary(
-            MR.images.ic_workout.drawableResId,
-            stringResource(MR.strings.summary.resourceId)
+            SR.images.ic_workout.drawableResId,
+            stringResource(SR.strings.summary.resourceId)
         ),
-//        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(MR.strings.account)),
+//        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(SR.strings.account)),
         DashboardNavigationDirections.Settings(
-            MR.images.ic_settings.drawableResId,
-            stringResource(MR.strings.settings.resourceId)
+            SR.images.ic_settings.drawableResId,
+            stringResource(SR.strings.settings.resourceId)
         )
     )
 

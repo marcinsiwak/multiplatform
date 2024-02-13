@@ -62,7 +62,7 @@ struct AddCategoryScreen: View {
                         dismiss()
                     },
                     label: {
-                        Text(MR.strings().summary_add_category.desc().localized())
+                        Text(SR.strings().summary_add_category.desc().localized())
                             .padding(Dimensions.space_16)
                             .foregroundColor(Color.onTertiary)
                             .background(Color.colorTertiary)

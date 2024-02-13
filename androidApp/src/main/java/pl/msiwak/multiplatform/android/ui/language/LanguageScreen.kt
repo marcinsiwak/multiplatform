@@ -23,7 +23,7 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.theme.dimens
 import pl.msiwak.multiplatform.android.ui.theme.font
-import pl.msiwak.multiplatform.commonResources.MR
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.language.LanguageState
 
 @Composable
@@ -51,7 +51,7 @@ fun LanguageScreenContent(
                 vertical = MaterialTheme.dimens.space_16,
                 horizontal = MaterialTheme.dimens.space_24
             ),
-            text = stringResource(MR.strings.language.resourceId),
+            text = stringResource(SR.strings.language.resourceId),
             fontSize = MaterialTheme.font.font_24,
             color = MaterialTheme.colorScheme.onPrimary
         )

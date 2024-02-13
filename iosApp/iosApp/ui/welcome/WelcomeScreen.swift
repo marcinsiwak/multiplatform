@@ -41,30 +41,30 @@ struct WelcomeScreen: View {
             Button(action: {
                 viewModel.onLoginClicked()
             }) {
-                Text(MR.strings().login.desc().localized())
+                Text(SR.strings().login.desc().localized())
             }
         
             Button(action: {
                 loginUsingGoogle()
             }) {
-                Text(MR.strings().welcome_google_login.desc().localized())
+                Text(SR.strings().welcome_google_login.desc().localized())
             }
             
         
             Button(action: {
                 viewModel.onOfflineModeClicked()
             }) {
-                Text(MR.strings().welcome_offline_mode.desc().localized())
+                Text(SR.strings().welcome_offline_mode.desc().localized())
             }
 
 
-            Text(MR.strings().welcome_no_account.desc().localized())
+            Text(SR.strings().welcome_no_account.desc().localized())
                 .foregroundColor(Color.colorSecondary)
 
             Button(action: {
                 viewModel.onRegistrationClicked()
             }) {
-                Text(MR.strings().welcome_create_account.desc().localized())
+                Text(SR.strings().welcome_create_account.desc().localized())
             }
         }
         .showDialog(
@@ -74,10 +74,10 @@ struct WelcomeScreen: View {
             },
             dialogContent: {
                 MainDialogContent(
-                    title: MR.strings().synchronization_dialog_title.desc().localized(),
-                    description: MR.strings().synchronization_dialog_description.desc().localized(),
-                    confirmButtonText: MR.strings().confirm.desc().localized(),
-                    dismissButtonText: MR.strings().deny.desc().localized(),
+                    title: SR.strings().synchronization_dialog_title.desc().localized(),
+                    description: SR.strings().synchronization_dialog_description.desc().localized(),
+                    confirmButtonText: SR.strings().confirm.desc().localized(),
+                    dismissButtonText: SR.strings().deny.desc().localized(),
                     confirmButtonClicked: {
                         viewModel.onConfirmSynchronizationClicked()
                     },
