@@ -52,7 +52,6 @@ kotlin {
             api(libs.firebase.gitlive.remoteConfig)
         }
 
-
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
