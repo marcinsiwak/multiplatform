@@ -48,17 +48,15 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(Modules.core))
-                implementation(project(Modules.domain))
-                implementation(project(Modules.navigator))
-                implementation(project(Modules.utils))
-                implementation(project(Modules.commonResources))
-                implementation(project(Modules.commonObject))
+        commonMain.dependencies {
+            implementation(project(Modules.core))
+            implementation(project(Modules.domain))
+            implementation(project(Modules.navigator))
+            implementation(project(Modules.utils))
+            implementation(project(Modules.commonResources))
+            implementation(project(Modules.commonObject))
 
-                implementation(libs.napier)
-            }
+            implementation(libs.napier)
         }
 
         commonTest.dependencies {

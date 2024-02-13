@@ -11,9 +11,8 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    
 
-    androidTarget() {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "17"
@@ -50,18 +49,17 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-                implementation(project(Modules.core))
-                implementation(project(Modules.domain))
-                implementation(project(Modules.navigator))
-                implementation(project(Modules.utils))
-                implementation(project(Modules.commonResources))
-                implementation(project(Modules.commonObject))
-            }
-        
+            implementation(project(Modules.core))
+            implementation(project(Modules.domain))
+            implementation(project(Modules.navigator))
+            implementation(project(Modules.utils))
+            implementation(project(Modules.commonResources))
+            implementation(project(Modules.commonObject))
+        }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-
     }
 }
 
