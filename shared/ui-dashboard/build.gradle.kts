@@ -60,10 +60,10 @@ kotlin {
                 implementation(libs.napier)
             }
         }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-
     }
 }
 
