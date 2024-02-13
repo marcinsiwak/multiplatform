@@ -10,10 +10,12 @@ import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.navigator.Navigator
+import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class AddCategoryViewModel(
     private val createCategoryUseCase: CreateCategoryUseCase,
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    private val globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddCategoryState())
@@ -30,7 +32,7 @@ class AddCategoryViewModel(
     fun onSaveCategoryClicked() {
         val name = _viewState.value.name
         val exerciseType = _viewState.value.exerciseType
-        viewModelScope.launch {
+        viewModelScope.launch(globalErrorHandler.handleError()) {
             _viewState.update { it.copy(isLoading = true) }
             createCategoryUseCase(Category(name = name, exerciseType = exerciseType))
             _viewState.update { it.copy(isLoading = false) }

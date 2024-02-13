@@ -204,7 +204,7 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition { AddCategoryViewModel(get(), get()) }
+    viewModelDefinition { AddCategoryViewModel(get(), get(), get()) }
     viewModelDefinition { SettingsViewModel(get(), get(), get(), get()) }
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }

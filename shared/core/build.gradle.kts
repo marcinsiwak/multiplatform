@@ -55,7 +55,6 @@ kotlin {
             implementation(libs.kotlinx.coroutines)
         }
 
-
         androidMain.dependencies {
             implementation(libs.kotlinx.viewModel)
         }
