@@ -4,5 +4,5 @@ import pl.msiwak.multiplatform.navigator.NavigationDirections
 
 data class MainState(
     val isLoading: Boolean = true,
-    val directions: NavigationDirections = NavigationDirections.Dashboard() // todo when login will be available
+    val directions: NavigationDirections = NavigationDirections.Welcome() // todo when login will be available
 )
