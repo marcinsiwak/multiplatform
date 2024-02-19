@@ -11,9 +11,9 @@ firebaseConfig = "21.6.1"
 firebaseCrashlyticsGradle = "2.9.9"
 googleServices = "4.4.0"
 kotlin = "1.9.22"
-compose = "1.5.4"
+compose = "1.6.1"
 compose-compiler = "1.5.4"
-compose-material3 = "1.1.2"
+compose-material3 = "1.2.0"
 androidx-activityCompose = "1.8.0"
 koin = "3.3.2"
 koin-compose = "3.4.2"
@@ -38,6 +38,8 @@ ktlint = "11.5.1"
 detekt = "1.19.0"
 firebase-appDistribution = "4.0.1"
 lifecycleViewmodelCompose = "2.7.0"
+compose-components-resources = "1.4.0"
+compose-multiplatform = "1.5.12"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
@@ -56,7 +58,6 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
@@ -103,3 +104,4 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref 
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appDistribution" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods).apply(false)
     alias(libs.plugins.serialization).apply(false)
     alias(libs.plugins.firebase.appdistribution).apply(false)
+    alias(libs.plugins.compose.multiplatform).apply(false)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.detekt)
 }

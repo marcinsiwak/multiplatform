@@ -34,6 +34,7 @@ import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
 import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.notifications.NotificationsService
+import pl.msiwak.multiplatform.shared.TestScreen
 
 @Suppress("LongMethod")
 class MainActivity : ComponentActivity() {

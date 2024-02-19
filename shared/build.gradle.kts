@@ -1,4 +1,5 @@
 import pl.msiwak.multiplatfor.dependencies.Modules
+import org.jetbrains.compose.ExperimentalComposeLibrary
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -6,6 +7,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     id("dev.icerock.mobile.multiplatform-resources")
+    id("org.jetbrains.compose")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -124,6 +126,13 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
+
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.ui)
+            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
         }
 
         androidMain {
