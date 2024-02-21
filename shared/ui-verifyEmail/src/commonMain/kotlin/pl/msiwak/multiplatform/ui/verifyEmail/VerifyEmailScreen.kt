@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.android.ui.verifyEmail
+package pl.msiwak.multiplatform.ui.verifyEmail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,27 +12,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.android.extensions.openMailApp
-import pl.msiwak.multiplatform.android.ui.components.MainButton
-import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
-import pl.msiwak.multiplatform.android.ui.loader.Loader
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
-import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.SR
-import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailEvent
-import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
-import pl.msiwak.multiplatform.ui.verifyEmail.VerifyState
+import pl.msiwak.multiplatform.ui.commonComponent.MainButton
+import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
+import pl.msiwak.multiplatform.ui.commonComponent.openMailApp
 
 @Composable
-fun VerifyEmailScreen() {
-    val viewModel = koinViewModel<VerifyEmailViewModel>()
+fun VerifyEmailScreen(
+    viewModel: VerifyEmailViewModel = koinInject()
+) {
     val viewState = viewModel.viewState.collectAsState()
 
     val context = LocalContext.current
@@ -40,7 +36,7 @@ fun VerifyEmailScreen() {
     LaunchedEffect(key1 = Unit) {
         viewModel.viewEvent.collectLatest {
             when (it) {
-                VerifyEmailEvent.OpenMail -> context.openMailApp()
+                VerifyEmailEvent.OpenMail -> openMailApp()
             }
         }
     }
@@ -74,12 +70,12 @@ fun VerifyEmailScreenContent(
     ) {
         Text(
             modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-            text = stringResource(id = SR.strings.verify_title.resourceId),
+            text = stringResource(SR.strings.verify_title),
             fontSize = MaterialTheme.font.font_24
         )
         Text(
             modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-            text = stringResource(id = SR.strings.verify_description.resourceId),
+            text = stringResource(SR.strings.verify_description),
             fontSize = MaterialTheme.font.font_16
         )
 
@@ -90,13 +86,13 @@ fun VerifyEmailScreenContent(
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
             onClick = { onOpenMailClicked() },
-            text = stringResource(id = SR.strings.verify_open_mail.resourceId)
+            text = stringResource(SR.strings.verify_open_mail)
         )
 
         SecondaryButton(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onResendMailClicked() },
-            text = stringResource(id = SR.strings.verify_resend_mail.resourceId)
+            text = stringResource(SR.strings.verify_resend_mail)
         )
 
         MainButton(
@@ -104,15 +100,15 @@ fun VerifyEmailScreenContent(
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
             onClick = { onLoginClicked() },
-            text = stringResource(id = SR.strings.verify_login.resourceId)
+            text = stringResource(SR.strings.verify_login)
         )
     }
 }
 
-@DarkLightPreview
-@Composable
-fun VerifyEmailScreenPreview() {
-    AppTheme {
-        VerifyEmailScreenContent(MutableStateFlow(VerifyState()).collectAsState())
-    }
-}
+//@DarkLightPreview
+//@Composable
+//fun VerifyEmailScreenPreview() {
+//    AppTheme {
+//        VerifyEmailScreenContent(MutableStateFlow(VerifyState()).collectAsState())
+//    }
+//}

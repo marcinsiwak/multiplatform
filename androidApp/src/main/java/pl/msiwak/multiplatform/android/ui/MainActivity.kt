@@ -29,7 +29,7 @@ import pl.msiwak.multiplatform.android.ui.language.LanguageScreen
 import pl.msiwak.multiplatform.android.ui.register.RegisterScreen
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.units.UnitScreen
-import pl.msiwak.multiplatform.android.ui.verifyEmail.VerifyEmailScreen
+import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailScreen
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreen
 import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.navigator.NavigationDirections

@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.ui.commonComponent
 
 import android.app.Activity
+import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -11,7 +12,7 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import io.github.aakira.napier.Napier
-import pl.msiwak.multiplatform.android.extensions.findActivity
+import pl.msiwak.multiplatform.ui.commonComponent.extensions.findActivity
 
 @Composable
 actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String) -> Unit): () -> Unit {

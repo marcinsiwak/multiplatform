@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.android.extensions
+package pl.msiwak.multiplatform.ui.commonComponent.extensions
 
 import android.app.Activity
 import android.content.Context
@@ -12,10 +12,4 @@ fun Context.findActivity(): Activity {
         context = context.baseContext
     }
     throw IllegalStateException("no activity")
-}
-
-fun Context.openMailApp() {
-    val intent = Intent(Intent.ACTION_MAIN)
-    intent.addCategory(Intent.CATEGORY_APP_EMAIL)
-    findActivity().startActivity(intent)
 }
