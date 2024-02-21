@@ -6,6 +6,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import pl.msiwak.multiplatform.commonResources.theme.Dimensions
 
 private val LocalDim = staticCompositionLocalOf { Dimensions() }
 

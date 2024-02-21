@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import pl.msiwak.multiplatform.android.ui.theme.color
+import pl.msiwak.multiplatform.commonResources.theme.color
 
 @Composable
 fun ResultInputView(

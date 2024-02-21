@@ -6,6 +6,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import pl.msiwak.multiplatform.commonResources.theme.FontSize
 
 val LocalFont = staticCompositionLocalOf { FontSize() }
 

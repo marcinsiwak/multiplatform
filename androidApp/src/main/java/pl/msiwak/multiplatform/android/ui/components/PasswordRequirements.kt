@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonResources.SR
 

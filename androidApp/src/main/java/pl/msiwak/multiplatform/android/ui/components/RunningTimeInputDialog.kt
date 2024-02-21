@@ -22,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.window.Dialog
-import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.SR
 
 private const val MILLISECONDS_DIGITS_AMOUNT = 3

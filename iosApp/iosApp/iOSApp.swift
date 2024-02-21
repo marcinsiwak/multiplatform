@@ -8,12 +8,11 @@ struct iOSApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ComposeView()
-//            ContentView()
-//                .onAppear {
-//                    UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.backward")
-//                    UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.backward")
-//                }
+            ContentView()
+                .onAppear {
+                    UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.backward")
+                    UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.backward")
+                }
         }
     }
 }

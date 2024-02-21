@@ -10,8 +10,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import pl.msiwak.multiplatform.android.ui.theme.color
-import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.color
+import pl.msiwak.multiplatform.commonResources.theme.dimens
 
 @Composable
 fun Loader() {

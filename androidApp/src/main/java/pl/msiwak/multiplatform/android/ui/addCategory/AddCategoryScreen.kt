@@ -20,9 +20,9 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.DropDownView
 import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.loader.Loader
-import pl.msiwak.multiplatform.android.ui.theme.AppTheme
-import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
+import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.SR

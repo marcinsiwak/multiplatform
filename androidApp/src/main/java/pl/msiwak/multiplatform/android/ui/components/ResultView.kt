@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import pl.msiwak.multiplatform.android.ui.extensions.bottomBorder
-import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.dimens
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

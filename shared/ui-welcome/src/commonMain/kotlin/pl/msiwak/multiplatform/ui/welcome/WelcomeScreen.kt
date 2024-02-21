@@ -1,9 +1,5 @@
-package pl.msiwak.multiplatform.android.ui.welcome
+package pl.msiwak.multiplatform.ui.welcome
 
-import android.app.Activity
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.IntentSenderRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,53 +18,29 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.identity.SignInClient
-import io.github.aakira.napier.Napier
-import kotlinx.coroutines.flow.MutableStateFlow
-import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.android.extensions.findActivity
-import pl.msiwak.multiplatform.android.ui.components.InputView
-import pl.msiwak.multiplatform.android.ui.components.MainButton
-import pl.msiwak.multiplatform.android.ui.components.PopupDialog
-import pl.msiwak.multiplatform.android.ui.components.SecondaryButton
-import pl.msiwak.multiplatform.android.ui.theme.AppTheme
-import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
-import pl.msiwak.multiplatform.android.ui.utils.auth.GoogleAuthOneTapConfiguration
+import dev.icerock.moko.resources.compose.painterResource
+import dev.icerock.moko.resources.compose.stringResource
+import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.SR
-import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
-import pl.msiwak.multiplatform.ui.welcome.WelcomeState
+import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.ui.commonComponent.InputView
+import pl.msiwak.multiplatform.ui.commonComponent.MainButton
+import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
+import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
+import pl.msiwak.multiplatform.ui.commonComponent.rememberGoogleLoginLauncherForActivityResult
 
 @Composable
-fun WelcomeScreen() {
-    val viewModel = koinViewModel<WelcomeScreenViewModel>()
+fun WelcomeScreen(
+    viewModel: WelcomeScreenViewModel = koinInject()
+) {
     val viewState = viewModel.viewState.collectAsState()
-    val context = LocalContext.current.findActivity()
 
-    val oneTapClient: SignInClient = remember {
-        Identity.getSignInClient(context)
-    }
-    val signInRequest: BeginSignInRequest = remember {
-        GoogleAuthOneTapConfiguration().signInRequest
-    }
-
-    val googleAuthContract = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartIntentSenderForResult(),
-        onResult = { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
-                val idToken = credential.googleIdToken ?: return@rememberLauncherForActivityResult
-                viewModel.onGoogleLogin(idToken, null)
-            }
+    val startSignIn = rememberGoogleLoginLauncherForActivityResult(
+        onResultOk = { idToken ->
+            viewModel.onGoogleLogin(idToken, null)
         }
     )
 
@@ -83,19 +55,7 @@ fun WelcomeScreen() {
         onLoginClicked = viewModel::onLoginClicked,
         onOfflineModeClicked = viewModel::onOfflineModeClicked,
         onRegistrationClicked = viewModel::onRegistrationClicked,
-        onGoogleLoginClicked = {
-            oneTapClient.beginSignIn(signInRequest)
-                .addOnSuccessListener { result ->
-                    googleAuthContract.launch(
-                        IntentSenderRequest
-                            .Builder(result.pendingIntent.intentSender)
-                            .build()
-                    )
-                }
-                .addOnFailureListener { e ->
-                    Napier.e("GOOGLE AUTH FAILED: $e")
-                }
-        }
+        onGoogleLoginClicked = { startSignIn() }
     )
 }
 
@@ -116,9 +76,9 @@ fun WelcomeScreenContent(
 ) {
     if (viewState.value.isErrorDialogVisible) {
         PopupDialog(
-            title = stringResource(id = SR.strings.auth_failed_title.resourceId),
-            description = stringResource(id = SR.strings.auth_failed_description.resourceId),
-            confirmButtonTitle = stringResource(id = SR.strings.confirm.resourceId),
+            title = stringResource(SR.strings.auth_failed_title),
+            description = stringResource(SR.strings.auth_failed_description),
+            confirmButtonTitle = stringResource(SR.strings.confirm),
             onConfirmClicked = {
                 onConfirmDialogButtonClicked()
             }
@@ -127,10 +87,10 @@ fun WelcomeScreenContent(
 
     if (viewState.value.isSynchronizationDialogVisible) {
         PopupDialog(
-            title = stringResource(id = SR.strings.synchronization_dialog_title.resourceId),
-            description = stringResource(id = SR.strings.synchronization_dialog_description.resourceId),
-            confirmButtonTitle = stringResource(id = SR.strings.confirm.resourceId),
-            dismissButtonTitle = stringResource(id = SR.strings.deny.resourceId),
+            title = stringResource(SR.strings.synchronization_dialog_title),
+            description = stringResource(SR.strings.synchronization_dialog_description),
+            confirmButtonTitle = stringResource(SR.strings.confirm),
+            dismissButtonTitle = stringResource(SR.strings.deny),
             onConfirmClicked = {
                 onConfirmSynchronizationClicked()
             },
@@ -167,7 +127,7 @@ fun WelcomeScreenContent(
                 onValueChange = {
                     onLoginChanged(it)
                 },
-                hintText = stringResource(SR.strings.email.resourceId)
+                hintText = stringResource(SR.strings.email)
             )
 
             InputView(
@@ -183,17 +143,17 @@ fun WelcomeScreenContent(
                         modifier = Modifier
                             .clickable { onVisibilityClicked() },
                         painter = painterResource(
-                            id = if (viewState.value.isPasswordVisible) {
-                                SR.images.ic_invisible.drawableResId
+                            imageResource = if (viewState.value.isPasswordVisible) {
+                                SR.images.ic_invisible
                             } else {
-                                SR.images.ic_visible.drawableResId
+                                SR.images.ic_visible
                             }
                         ),
                         contentDescription = null
                     )
                 },
                 isPassword = true,
-                hintText = stringResource(SR.strings.password.resourceId)
+                hintText = stringResource(SR.strings.password)
             )
 
             MainButton(
@@ -201,7 +161,7 @@ fun WelcomeScreenContent(
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimens.space_24),
                 onClick = { onLoginClicked() },
-                text = stringResource(id = SR.strings.login.resourceId)
+                text = stringResource(SR.strings.login)
             )
 
             MainButton(
@@ -213,7 +173,7 @@ fun WelcomeScreenContent(
                 onClick = {
                     onGoogleLoginClicked()
                 },
-                text = stringResource(id = SR.strings.welcome_google_login.resourceId)
+                text = stringResource(SR.strings.welcome_google_login)
             )
 
             SecondaryButton(
@@ -224,11 +184,11 @@ fun WelcomeScreenContent(
                         bottom = MaterialTheme.dimens.space_16
                     ),
                 onClick = { onOfflineModeClicked() },
-                text = stringResource(id = SR.strings.welcome_offline_mode.resourceId)
+                text = stringResource(SR.strings.welcome_offline_mode)
             )
 
             Text(
-                text = stringResource(SR.strings.welcome_no_account.resourceId),
+                text = stringResource(SR.strings.welcome_no_account),
                 color = MaterialTheme.colorScheme.secondary
             )
             Button(
@@ -239,16 +199,16 @@ fun WelcomeScreenContent(
                     containerColor = Color.Transparent
                 )
             ) {
-                Text(text = stringResource(SR.strings.welcome_create_account.resourceId))
+                Text(text = stringResource(SR.strings.welcome_create_account))
             }
         }
     }
 }
-
-@DarkLightPreview()
-@Composable
-fun WelcomeScreenPreview() {
-    AppTheme {
-        WelcomeScreenContent(MutableStateFlow(WelcomeState()).collectAsState())
-    }
-}
+//
+//@DarkLightPreview()
+//@Composable
+//fun WelcomeScreenPreview() {
+//    AppTheme {
+//        WelcomeScreenContent(MutableStateFlow(WelcomeState()).collectAsState())
+//    }
+//}

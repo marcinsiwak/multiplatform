@@ -34,10 +34,10 @@ import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.android.ui.components.ListItemView
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.loader.Loader
-import pl.msiwak.multiplatform.android.ui.theme.AppTheme
-import pl.msiwak.multiplatform.android.ui.theme.color
-import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
+import pl.msiwak.multiplatform.commonResources.theme.color
+import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.commonObject.ExerciseType

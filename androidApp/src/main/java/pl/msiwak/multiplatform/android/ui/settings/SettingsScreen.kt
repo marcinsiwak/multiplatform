@@ -16,9 +16,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.android.ui.theme.AppTheme
-import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
+import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.settings.SettingsState
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel

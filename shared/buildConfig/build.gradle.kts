@@ -66,6 +66,7 @@ buildkonfig {
     defaultConfigs {
         buildConfigField(STRING, "BUILD_FLAVOUR", "default")
         buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
+        buildConfigField(STRING, "GOOGLE_AUTH_WEB_CLIENT_ID", productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String)
         buildConfigField(BOOLEAN, "IsDebug", "false")
     }
 
@@ -73,12 +74,14 @@ buildkonfig {
         create("android") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseAndroid")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "GOOGLE_AUTH_WEB_CLIENT_ID", productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
         }
 
         create("ios") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseIos")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "GOOGLE_AUTH_WEB_CLIENT_ID", productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
         }
     }
@@ -87,11 +90,13 @@ buildkonfig {
         create("android") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugAndroid")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "GOOGLE_AUTH_WEB_CLIENT_ID", productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
         create("ios") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugIos")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "GOOGLE_AUTH_WEB_CLIENT_ID", productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
     }
@@ -104,11 +109,13 @@ buildkonfig {
         create("android") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugAndroid")
             buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "GOOGLE_AUTH_WEB_CLIENT_ID", stagingProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
         create("ios") {
             buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugIos")
             buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
+            buildConfigField(STRING, "GOOGLE_AUTH_WEB_CLIENT_ID", stagingProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
     }

@@ -26,8 +26,8 @@ import pl.msiwak.multiplatform.android.ui.components.InputView
 import pl.msiwak.multiplatform.android.ui.components.MainButton
 import pl.msiwak.multiplatform.android.ui.components.PasswordRequirements
 import pl.msiwak.multiplatform.android.ui.loader.Loader
-import pl.msiwak.multiplatform.android.ui.theme.AppTheme
-import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
+import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.register.RegisterState
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel

@@ -31,8 +31,8 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.AdmobBanner
 import pl.msiwak.multiplatform.android.ui.components.PopupDialog
 import pl.msiwak.multiplatform.android.ui.loader.Loader
-import pl.msiwak.multiplatform.android.ui.theme.AppTheme
-import pl.msiwak.multiplatform.android.ui.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
+import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.ui.summary.SummaryState

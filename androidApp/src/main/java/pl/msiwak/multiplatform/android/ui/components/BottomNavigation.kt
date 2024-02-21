@@ -13,8 +13,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import pl.msiwak.multiplatform.android.ui.extensions.topBorder
-import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.DashboardNavigationDirections
 
 @Composable

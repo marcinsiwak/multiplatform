@@ -179,7 +179,7 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.android)
 
     api(libs.google.android.playservices.auth)
     api(libs.google.android.playservices.ads)
