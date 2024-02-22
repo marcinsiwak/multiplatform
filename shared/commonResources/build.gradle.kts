@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     id("dev.icerock.mobile.multiplatform-resources")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.composeMultiplatform)
 }
 
 multiplatformResources {

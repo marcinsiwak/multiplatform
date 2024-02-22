@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     id("dev.icerock.mobile.multiplatform-resources")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.composeMultiplatform)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")

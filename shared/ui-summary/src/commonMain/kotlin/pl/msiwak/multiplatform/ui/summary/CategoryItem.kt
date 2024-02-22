@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.android.ui.summary
+package pl.msiwak.multiplatform.ui.summary
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,16 +22,14 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.tooling.preview.Preview
-import pl.msiwak.multiplatform.commonResources.theme.AppTheme
-import pl.msiwak.multiplatform.commonResources.theme.color
-import pl.msiwak.multiplatform.commonResources.theme.dimens
-import pl.msiwak.multiplatform.commonResources.theme.font
+import dev.icerock.moko.resources.compose.painterResource
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.SR
+import pl.msiwak.multiplatform.commonResources.theme.color
+import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.font
 
 @Suppress("MagicNumber")
 @Composable
@@ -40,8 +38,8 @@ fun CategoryItem(
     category: Category
 ) {
     val backgroundId = when (category.exerciseType) {
-        ExerciseType.RUNNING -> SR.images.bg_running_field.drawableResId
-        ExerciseType.GYM -> SR.images.bg_gym.drawableResId
+        ExerciseType.RUNNING -> SR.images.bg_running_field
+        ExerciseType.GYM -> SR.images.bg_gym
 //        ExerciseType.OTHER -> null
     }
 
@@ -69,7 +67,7 @@ fun CategoryItem(
                 .fillMaxSize()
                 .alpha(0.5f)
                 .clip(RoundedCornerShape(MaterialTheme.dimens.space_8)),
-            painter = painterResource(id = backgroundId),
+            painter = painterResource(backgroundId),
             contentScale = ContentScale.Crop,
             contentDescription = null
         )
@@ -114,10 +112,10 @@ fun CategoryItem(
     }
 }
 
-@Preview
-@Composable
-fun CategoryItemPreview() {
-    AppTheme {
-        CategoryItem(category = Category())
-    }
-}
+//@Preview
+//@Composable
+//fun CategoryItemPreview() {
+//    AppTheme {
+//        CategoryItem(category = Category())
+//    }
+//}

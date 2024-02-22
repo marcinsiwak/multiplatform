@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.android.ui.summary
+package pl.msiwak.multiplatform.ui.summary
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
@@ -22,34 +22,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.Lifecycle
-import kotlinx.coroutines.flow.MutableStateFlow
-import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.android.ui.components.AdmobBanner
-import pl.msiwak.multiplatform.android.ui.components.PopupDialog
-import pl.msiwak.multiplatform.android.ui.loader.Loader
-import pl.msiwak.multiplatform.commonResources.theme.AppTheme
-import pl.msiwak.multiplatform.commonResources.theme.dimens
-import pl.msiwak.multiplatform.android.ui.utils.OnLifecycleEvent
+import dev.icerock.moko.resources.compose.painterResource
+import dev.icerock.moko.resources.compose.stringResource
+import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.SR
-import pl.msiwak.multiplatform.ui.summary.SummaryState
-import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
+import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.ui.commonComponent.Loader
+import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SummaryScreen() {
-    val viewModel = koinViewModel<SummaryViewModel>()
+fun SummaryScreen(
+    viewModel: SummaryViewModel = koinInject()
+) {
     val viewState = viewModel.viewState.collectAsState()
 
-    OnLifecycleEvent { _, event ->
-        when (event) {
-            Lifecycle.Event.ON_RESUME -> viewModel.onResume()
-            else -> Unit
-        }
-    }
+//    OnLifecycleEvent { _, event ->
+//        when (event) {
+//            Lifecycle.Event.ON_RESUME -> viewModel.onResume()
+//            else -> Unit
+//        }
+//    }
 
     SummaryScreenContent(
         viewState = viewState,
@@ -73,10 +66,10 @@ fun SummaryScreenContent(
 ) {
     if (viewState.value.isRemoveCategoryDialogVisible) {
         PopupDialog(
-            title = stringResource(SR.strings.remove_category_dialog_title.resourceId),
-            description = stringResource(SR.strings.remove_category_dialog_description.resourceId),
-            confirmButtonTitle = stringResource(SR.strings.yes.resourceId),
-            dismissButtonTitle = stringResource(SR.strings.no.resourceId),
+            title = stringResource(SR.strings.remove_category_dialog_title),
+            description = stringResource(SR.strings.remove_category_dialog_description),
+            confirmButtonTitle = stringResource(SR.strings.yes),
+            dismissButtonTitle = stringResource(SR.strings.no),
             onConfirmClicked = onCategoryRemoved,
             onDismissClicked = onPopupDismissed
         )
@@ -89,7 +82,7 @@ fun SummaryScreenContent(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        AdmobBanner(modifier = Modifier.padding(bottom = MaterialTheme.dimens.space_8))
+//        AdmobBanner(modifier = Modifier.padding(bottom = MaterialTheme.dimens.space_8))
         LazyColumn(
             modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -119,13 +112,13 @@ fun SummaryScreenContent(
                         Row {
                             Icon(
                                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                                painter = painterResource(id = SR.images.ic_add.drawableResId),
+                                painter = painterResource(SR.images.ic_add),
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 contentDescription = null
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = stringResource(SR.strings.summary_add_category.resourceId),
+                                text = stringResource(SR.strings.summary_add_category),
                                 color = MaterialTheme.colorScheme.tertiary
                             )
                         }
@@ -135,11 +128,11 @@ fun SummaryScreenContent(
         )
     }
 }
-
-@Preview
-@Composable
-fun SummaryScreenPreview() {
-    AppTheme {
-        SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState())
-    }
-}
+//
+//@Preview
+//@Composable
+//fun SummaryScreenPreview() {
+//    AppTheme {
+//        SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState())
+//    }
+//}

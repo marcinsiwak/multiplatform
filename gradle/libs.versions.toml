@@ -109,4 +109,4 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref 
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appDistribution" }
-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }

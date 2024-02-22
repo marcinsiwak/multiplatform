@@ -19,7 +19,7 @@ import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.components.OfflineBanner
 import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
-import pl.msiwak.multiplatform.android.ui.summary.SummaryScreen
+import pl.msiwak.multiplatform.ui.summary.SummaryScreen
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.SR

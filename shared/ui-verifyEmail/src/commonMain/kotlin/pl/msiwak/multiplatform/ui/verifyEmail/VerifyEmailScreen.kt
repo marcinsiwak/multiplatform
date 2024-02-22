@@ -8,22 +8,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import dev.icerock.moko.resources.compose.stringResource
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.android.extensions.openMailApp
-import pl.msiwak.multiplatform.commonResources.theme.AppTheme
+import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
-import pl.msiwak.multiplatform.commonResources.SR
+import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
-import pl.msiwak.multiplatform.ui.commonComponent.openMailApp
 
 @Composable
 fun VerifyEmailScreen(
@@ -31,15 +26,15 @@ fun VerifyEmailScreen(
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
-    val context = LocalContext.current
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.viewEvent.collectLatest {
-            when (it) {
-                VerifyEmailEvent.OpenMail -> openMailApp()
-            }
-        }
-    }
+//    val context = LocalContext.current
+//
+//    LaunchedEffect(key1 = Unit) {
+//        viewModel.viewEvent.collectLatest {
+//            when (it) {
+//                VerifyEmailEvent.OpenMail -> openMailApp()
+//            }
+//        }
+//    }
 
     VerifyEmailScreenContent(
         viewState = viewState,
