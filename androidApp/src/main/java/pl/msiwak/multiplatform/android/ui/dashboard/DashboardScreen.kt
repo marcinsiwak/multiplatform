@@ -16,16 +16,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
-import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
-import pl.msiwak.multiplatform.android.ui.components.OfflineBanner
-import pl.msiwak.multiplatform.android.ui.settings.SettingsScreen
-import pl.msiwak.multiplatform.ui.summary.SummaryScreen
-import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.SR
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.navigator.DashboardNavigationDirections
 import pl.msiwak.multiplatform.ui.dashboard.DashboardState
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
+import pl.msiwak.multiplatform.ui.settings.SettingsScreen
+import pl.msiwak.multiplatform.ui.summary.SummaryScreen
 
 @Composable
 fun DashboardScreen() {
@@ -64,10 +62,10 @@ fun DashboardScreenContent(
     Scaffold(
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
-                if (viewState.value.isOfflineBannerVisible && false) {
-                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
-                }
-                BottomNavigation(navController = navController, items = items)
+//                if (viewState.value.isOfflineBannerVisible && false) {
+//                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
+//                }
+//                BottomNavigation(navController = navController, items = items)
             }
         }
     ) {
