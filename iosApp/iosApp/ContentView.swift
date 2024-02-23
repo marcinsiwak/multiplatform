@@ -28,12 +28,12 @@ struct ContentView: View {
                 }
                 if direction is NavigationDirections.CategoryDetails {
                     let id = (direction as? NavigationDirections.CategoryDetails)?.getCategoryId() ?? ""
-                    CategoryScreen()
+                    CategoryScreen(id: id)
                         .navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.AddExercise {
                     let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? ""
-                    AddExerciseScreen()
+                    AddExerciseScreen(id: id)
                         .navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.AddCategory {

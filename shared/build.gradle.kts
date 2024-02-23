@@ -1,5 +1,5 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
 import org.jetbrains.compose.ExperimentalComposeLibrary
+import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
