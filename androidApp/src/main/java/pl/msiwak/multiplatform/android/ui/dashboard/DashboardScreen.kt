@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.androidx.compose.koinViewModel
+import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
@@ -65,7 +66,7 @@ fun DashboardScreenContent(
 //                if (viewState.value.isOfflineBannerVisible && false) {
 //                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
 //                }
-//                BottomNavigation(navController = navController, items = items)
+                BottomNavigation(navController = navController, items = items)
             }
         }
     ) {

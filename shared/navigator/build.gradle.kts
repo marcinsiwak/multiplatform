@@ -1,7 +1,11 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import pl.msiwak.multiplatfor.dependencies.Modules
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.composeMultiplatform)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -41,6 +45,18 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines)
+            implementation(libs.voyager.navigator.core)
+            implementation(libs.voyager.navigator.tabs)
+            implementation(project(Modules.uiCommonComponent))
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
         }
         iosMain.dependencies {
             implementation("co.touchlab:stately-common:2.0.6")

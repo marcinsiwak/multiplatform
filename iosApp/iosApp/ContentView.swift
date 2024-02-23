@@ -21,23 +21,24 @@ struct ContentView: View {
                 }
                 if direction is NavigationDirections.Registration {
                     RegisterScreen()
+                        .navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.Dashboard {
                     DashboardScreen().navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.CategoryDetails {
                     let id = (direction as? NavigationDirections.CategoryDetails)?.getCategoryId() ?? ""
-                    CategoryScreen(id: id)
-                        .navigationBarTitleDisplayMode(.inline)
+                    CategoryScreen()
+                        .navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.AddExercise {
                     let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? ""
-                    AddExerciseScreen(id: id)
-                    .navigationBarTitleDisplayMode(.inline)
+                    AddExerciseScreen()
+                        .navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.AddCategory {
                     AddCategoryScreen()
-                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackButtonHidden(true)
                 }
             }
         }
