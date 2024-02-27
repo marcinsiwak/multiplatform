@@ -41,7 +41,6 @@ kotlin {
             export(project(Modules.commonResources))
             export(project(Modules.commonObject))
             export(project(Modules.uiCommonComponent))
-
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE

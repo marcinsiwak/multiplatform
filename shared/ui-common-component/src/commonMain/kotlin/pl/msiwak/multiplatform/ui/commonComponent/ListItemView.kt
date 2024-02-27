@@ -68,10 +68,10 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
     }
 }
 
-//@Preview
-//@Composable
-//fun ListItemViewPreview() {
-//    AppTheme {
-//        ListItemView(name = "AAAAAA")
-//    }
-//}
+// @Preview
+// @Composable
+// fun ListItemViewPreview() {
+//     AppTheme {
+//         ListItemView(name = "AAAAAA")
+//     }
+// }

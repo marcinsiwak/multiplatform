@@ -129,10 +129,10 @@ fun RegisterScreenContent(
     }
 }
 //
-//@Preview
-//@Composable
-//fun RegisterScreenPreview() {
-//    AppTheme {
-//        RegisterScreenContent(MutableStateFlow(RegisterState()).collectAsState())
-//    }
-//}
+// @Preview
+// @Composable
+// fun RegisterScreenPreview() {
+//     AppTheme {
+//         RegisterScreenContent(MutableStateFlow(RegisterState()).collectAsState())
+//     }
+// }

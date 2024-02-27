@@ -112,10 +112,10 @@ fun CategoryItem(
     }
 }
 
-//@Preview
-//@Composable
-//fun CategoryItemPreview() {
-//    AppTheme {
-//        CategoryItem(category = Category())
-//    }
-//}
+// @Preview
+// @Composable
+// fun CategoryItemPreview() {
+//     AppTheme {
+//         CategoryItem(category = Category())
+//     }
+// }

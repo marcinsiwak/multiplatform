@@ -188,14 +188,14 @@ fun CategoryScreenContent(
         )
     }
 }
-//
-//@DarkLightPreview
-//@Composable
-//fun CategoryScreenPreview() {
-//    AppTheme {
-//        CategoryScreenContent(
-//            viewState = MutableStateFlow(CategoryState()).collectAsState(),
-//            backgroundId = SR.images.bg_gym.drawableResId
-//        )
-//    }
-//}
+
+// @DarkLightPreview
+// @Composable
+// fun CategoryScreenPreview() {
+//     AppTheme {
+//         CategoryScreenContent(
+//             viewState = MutableStateFlow(CategoryState()).collectAsState(),
+//             backgroundId = SR.images.bg_gym.drawableResId
+//         )
+//     }
+// }

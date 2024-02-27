@@ -74,6 +74,7 @@ kotlin {
             export(project(Modules.uiVerifyEmail))
             export(project(Modules.buildConfig))
             export(project(Modules.notifications))
+            export(project(Modules.uiCommonComponent))
         }
 
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -121,6 +122,7 @@ kotlin {
             api(project(Modules.uiVerifyEmail))
             api(project(Modules.buildConfig))
             api(project(Modules.notifications))
+            api(project(Modules.uiCommonComponent))
 
             api(libs.napier)
 

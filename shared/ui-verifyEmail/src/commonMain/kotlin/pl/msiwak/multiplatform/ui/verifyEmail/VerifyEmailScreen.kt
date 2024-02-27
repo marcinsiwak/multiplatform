@@ -100,10 +100,10 @@ fun VerifyEmailScreenContent(
     }
 }
 
-//@DarkLightPreview
-//@Composable
-//fun VerifyEmailScreenPreview() {
-//    AppTheme {
-//        VerifyEmailScreenContent(MutableStateFlow(VerifyState()).collectAsState())
-//    }
-//}
+// @DarkLightPreview
+// @Composable
+// fun VerifyEmailScreenPreview() {
+//     AppTheme {
+//         VerifyEmailScreenContent(MutableStateFlow(VerifyState()).collectAsState())
+//     }
+// }

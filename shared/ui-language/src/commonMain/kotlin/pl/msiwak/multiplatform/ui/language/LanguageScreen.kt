@@ -78,10 +78,10 @@ fun LanguageScreenContent(
     }
 }
 
-//@Preview
-//@Composable
-//fun LanguageScreenPreview() {
-//    AppTheme {
-//        LanguageScreenContent(MutableStateFlow(LanguageState()).collectAsState())
-//    }
-//}
+// @Preview
+// @Composable
+// fun LanguageScreenPreview() {
+//     AppTheme {
+//         LanguageScreenContent(MutableStateFlow(LanguageState()).collectAsState())
+//     }
+// }

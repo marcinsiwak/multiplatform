@@ -24,7 +24,6 @@ import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 fun ForceUpdateScreen(
     viewModel: ForceUpdateViewModel = koinInject()
 ) {
-
     ForceUpdateScreenContent(
         onUpdateClicked = viewModel::onUpdateClicked
     )
@@ -70,10 +69,10 @@ fun ForceUpdateScreenContent(
     }
 }
 
-//@DarkLightPreview
-//@Composable
-//fun ForceUpdateScreenPreview() {
-//    AppTheme {
-//        ForceUpdateScreenContent()
-//    }
-//}
+// @DarkLightPreview
+// @Composable
+// fun ForceUpdateScreenPreview() {
+//     AppTheme {
+//         ForceUpdateScreenContent()
+//     }
+// }

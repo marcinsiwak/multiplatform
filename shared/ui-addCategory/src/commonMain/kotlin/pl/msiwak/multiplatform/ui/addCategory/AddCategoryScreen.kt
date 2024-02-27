@@ -95,12 +95,12 @@ fun AddCategoryScreenContent(
     }
 }
 
-//@DarkLightPreview
-//@Composable
-//fun AddCategoryScreenPreview() {
-//    AppTheme {
-//        AddCategoryScreenContent(
-//            viewState = MutableStateFlow(AddCategoryState()).collectAsState()
-//        )
-//    }
-//}
+// @DarkLightPreview
+// @Composable
+// fun AddCategoryScreenPreview() {
+//     AppTheme {
+//         AddCategoryScreenContent(
+//             viewState = MutableStateFlow(AddCategoryState()).collectAsState()
+//         )
+//     }
+// }

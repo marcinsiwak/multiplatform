@@ -45,8 +45,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines)
-            implementation(libs.voyager.navigator.core)
-            implementation(libs.voyager.navigator.tabs)
             implementation(project(Modules.uiCommonComponent))
 
             implementation(libs.koin.core)

@@ -3,7 +3,6 @@ package pl.msiwak.multiplatform.ui.commonComponent.extensions
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.Intent
 
 fun Context.findActivity(): Activity {
     var context = this

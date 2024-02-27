@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.ui.commonComponent
 
 import android.app.Activity
-import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts

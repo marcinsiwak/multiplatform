@@ -20,20 +20,20 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import io.github.aakira.napier.Napier
 import org.koin.java.KoinJavaComponent.inject
-import pl.msiwak.multiplatform.ui.addCategory.AddCategoryScreen
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseScreen
-import pl.msiwak.multiplatform.ui.category.CategoryScreen
 import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
-import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateScreen
-import pl.msiwak.multiplatform.ui.language.LanguageScreen
-import pl.msiwak.multiplatform.ui.register.RegisterScreen
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
-import pl.msiwak.multiplatform.ui.unit.UnitScreen
-import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailScreen
-import pl.msiwak.multiplatform.ui.welcome.WelcomeScreen
 import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.notifications.NotificationsService
+import pl.msiwak.multiplatform.ui.addCategory.AddCategoryScreen
+import pl.msiwak.multiplatform.ui.addExercise.AddExerciseScreen
+import pl.msiwak.multiplatform.ui.category.CategoryScreen
+import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateScreen
+import pl.msiwak.multiplatform.ui.language.LanguageScreen
+import pl.msiwak.multiplatform.ui.register.RegisterScreen
+import pl.msiwak.multiplatform.ui.unit.UnitScreen
+import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailScreen
+import pl.msiwak.multiplatform.ui.welcome.WelcomeScreen
 
 @Suppress("LongMethod")
 class MainActivity : ComponentActivity() {

@@ -129,10 +129,10 @@ fun SummaryScreenContent(
     }
 }
 //
-//@Preview
-//@Composable
-//fun SummaryScreenPreview() {
-//    AppTheme {
-//        SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState())
-//    }
-//}
+// @Preview
+// @Composable
+// fun SummaryScreenPreview() {
+//     AppTheme {
+//         SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState())
+//     }
+// }

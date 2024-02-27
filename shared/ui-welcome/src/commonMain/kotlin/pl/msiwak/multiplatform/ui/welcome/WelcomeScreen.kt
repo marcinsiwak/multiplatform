@@ -204,11 +204,11 @@ fun WelcomeScreenContent(
         }
     }
 }
-//
-//@DarkLightPreview()
-//@Composable
-//fun WelcomeScreenPreview() {
-//    AppTheme {
-//        WelcomeScreenContent(MutableStateFlow(WelcomeState()).collectAsState())
-//    }
-//}
+
+// @DarkLightPreview()
+// @Composable
+// fun WelcomeScreenPreview() {
+//     AppTheme {
+//         WelcomeScreenContent(MutableStateFlow(WelcomeState()).collectAsState())
+//     }
+// }

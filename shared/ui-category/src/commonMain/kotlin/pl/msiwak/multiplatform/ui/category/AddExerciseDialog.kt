@@ -60,10 +60,10 @@ fun AddExerciseDialog(
     )
 }
 
-//@DarkLightPreview
-//@Composable
-//fun AddExerciseDialogPreview() {
-//    AppTheme {
-//        AddExerciseDialog()
-//    }
-//}
+// @DarkLightPreview
+// @Composable
+// fun AddExerciseDialogPreview() {
+//     AppTheme {
+//         AddExerciseDialog()
+//     }
+// }
