@@ -16,6 +16,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -25,9 +26,11 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.lifecycle.Lifecycle
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -38,6 +41,7 @@ import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.ListItemView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
+import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
 
 @Composable
 fun CategoryScreen(
@@ -49,15 +53,16 @@ fun CategoryScreen(
     val backgroundId = when (viewState.value.exerciseType) {
         ExerciseType.RUNNING -> SR.images.bg_running_field
         ExerciseType.GYM -> SR.images.bg_gym
-//        ExerciseType.OTHER -> null
     }
 
-//    OnLifecycleEvent { _, event ->
-//        when (event) {
-//            Lifecycle.Event.ON_RESUME -> viewModel.onResume()
-//            else -> Unit
-//        }
-//    }
+    LaunchedEffect(Unit) {
+        lifecycleObserver.collect { event ->
+            when (event) {
+                Lifecycle.Event.ON_RESUME -> viewModel.onResume()
+                else -> println("OUTPUT category: ${event.name}")
+            }
+        }
+    }
 
     CategoryScreenContent(
         viewState = viewState,

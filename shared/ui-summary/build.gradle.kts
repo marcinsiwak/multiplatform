@@ -69,6 +69,8 @@ kotlin {
             implementation(compose.components.resources)
 
             implementation(libs.napier)
+
+            implementation(libs.kotlinx.lifecycle)
         }
 
         commonTest.dependencies {

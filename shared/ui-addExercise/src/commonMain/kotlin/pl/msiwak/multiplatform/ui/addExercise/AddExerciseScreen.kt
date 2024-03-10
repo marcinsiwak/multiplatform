@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.lifecycle.Lifecycle
 import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.compose.koinInject
@@ -34,6 +35,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTableView
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTimeFilterView
 import pl.msiwak.multiplatform.ui.commonComponent.RunningTimeInputDialog
+import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
 
 private const val FOCUS_REQUESTERS_AMOUNT = 4
 
@@ -44,16 +46,17 @@ fun AddExerciseScreen(
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
-//    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val focusRequesters = List(FOCUS_REQUESTERS_AMOUNT) { remember { FocusRequester() } }
 
-//    OnLifecycleEvent { _, event ->
-//        when (event) {
-//            Lifecycle.Event.ON_PAUSE -> viewModel.onPause()
-//            else -> Unit
-//        }
-//    }
+    LaunchedEffect(Unit) {
+        lifecycleObserver.collectLatest { event ->
+            when (event) {
+                Lifecycle.Event.ON_PAUSE -> viewModel.onPause()
+                else -> Unit
+            }
+        }
+    }
 
     LaunchedEffect(Unit) {
         viewModel.viewEvent.collectLatest { value ->

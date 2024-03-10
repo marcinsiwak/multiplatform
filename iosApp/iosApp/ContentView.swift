@@ -4,6 +4,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var route: [NavigationDirections] = []
     private let viewModel: MainViewModel = MainDiHelper().getMainViewModel()
+    
 
     var body: some View {
         NavigationStack(path: $route) {

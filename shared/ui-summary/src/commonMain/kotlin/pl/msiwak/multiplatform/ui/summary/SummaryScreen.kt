@@ -16,33 +16,38 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.Lifecycle
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
+import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SummaryScreen(
     viewModel: SummaryViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
-//    OnLifecycleEvent { _, event ->
-//        when (event) {
-//            Lifecycle.Event.ON_RESUME -> viewModel.onResume()
-//            else -> Unit
-//        }
-//    }
+    LaunchedEffect(Unit) {
+        lifecycleObserver.collectLatest { event ->
+            when (event) {
+                Lifecycle.Event.ON_RESUME -> viewModel.onResume()
+                else -> Unit
+            }
+        }
+    }
 
     SummaryScreenContent(
         viewState = viewState,

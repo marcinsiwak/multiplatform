@@ -8,7 +8,7 @@ struct iOSApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
                 .onAppear {
                     UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.backward")
                     UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.backward")

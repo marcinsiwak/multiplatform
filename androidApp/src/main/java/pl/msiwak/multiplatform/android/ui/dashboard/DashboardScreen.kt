@@ -21,6 +21,7 @@ import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.navigator.DashboardNavigationDirections
+import pl.msiwak.multiplatform.ui.commonComponent.OfflineBanner
 import pl.msiwak.multiplatform.ui.dashboard.DashboardState
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
 import pl.msiwak.multiplatform.ui.settings.SettingsScreen
@@ -63,9 +64,9 @@ fun DashboardScreenContent(
     Scaffold(
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
-//                if (viewState.value.isOfflineBannerVisible && false) {
-//                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
-//                }
+                if (viewState.value.isOfflineBannerVisible) {
+                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
+                }
                 BottomNavigation(navController = navController, items = items)
             }
         }
