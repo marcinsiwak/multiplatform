@@ -30,7 +30,6 @@ import androidx.lifecycle.Lifecycle
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
-import kotlinx.coroutines.flow.collectLatest
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -59,7 +58,7 @@ fun CategoryScreen(
         lifecycleObserver.collect { event ->
             when (event) {
                 Lifecycle.Event.ON_RESUME -> viewModel.onResume()
-                else -> println("OUTPUT category: ${event.name}")
+                else -> Unit
             }
         }
     }

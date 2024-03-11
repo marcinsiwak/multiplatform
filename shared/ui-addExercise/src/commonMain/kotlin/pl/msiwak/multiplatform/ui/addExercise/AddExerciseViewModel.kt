@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
@@ -59,8 +60,7 @@ class AddExerciseViewModel(
     private val _viewEvent = MutableSharedFlow<AddExerciseEvent>(extraBufferCapacity = 1)
     val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent.asSharedFlow()
 
-    private var pickedDate: LocalDateTime =
-        Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    private var pickedDate: Long = Clock.System.now().toEpochMilliseconds()
 
     private val currentResults: MutableList<ResultData> = mutableListOf()
 
@@ -139,7 +139,7 @@ class AddExerciseViewModel(
 
     fun onAddNewResultClicked() {
         _viewState.update { it.copy(isResultFieldEnabled = true) }
-        pickedDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+        pickedDate = Clock.System.now().toEpochMilliseconds()
     }
 
     fun onSaveResultClicked() {
@@ -189,7 +189,7 @@ class AddExerciseViewModel(
                 exerciseId = id,
                 result = savedResult,
                 amount = savedAmount,
-                date = pickedDate
+                date = Instant.fromEpochMilliseconds(pickedDate).toLocalDateTime(TimeZone.currentSystemDefault())
             )
             addResultUseCase(AddResultUseCase.Params(data, currentExerciseType))
 
@@ -220,7 +220,8 @@ class AddExerciseViewModel(
     }
 
     fun onDateClicked() {
-        _viewEvent.tryEmit(AddExerciseEvent.OpenCalendar)
+        _viewState.update { it.copy(isDatePickerVisible = true) }
+//        _viewEvent.tryEmit(AddExerciseEvent.OpenCalendar)
     }
 
     fun onAmountClicked() {
@@ -254,10 +255,11 @@ class AddExerciseViewModel(
         }
     }
 
-    fun onDatePicked(date: LocalDateTime) {
+    fun onDatePicked(date: Long?) {
+        if (date == null) return
         val formattedDate = formatDateUseCase(date)
         pickedDate = date
-        _viewState.update { it.copy(newResultData = it.newResultData.copy(date = formattedDate)) }
+        _viewState.update { it.copy(newResultData = it.newResultData.copy(date = formattedDate), isDatePickerVisible = false) }
     }
 
     fun onResultLongClicked(resultIndex: Int) {
@@ -420,5 +422,9 @@ class AddExerciseViewModel(
                 item.copy(isArrowUp = null)
             }
         }
+    }
+
+    fun onDateDismiss() {
+        _viewState.update { it.copy(isDatePickerVisible = false) }
     }
 }

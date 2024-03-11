@@ -10,8 +10,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
@@ -31,6 +35,7 @@ import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
+import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTableView
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTimeFilterView
@@ -61,21 +66,7 @@ fun AddExerciseScreen(
     LaunchedEffect(Unit) {
         viewModel.viewEvent.collectLatest { value ->
             when (value) {
-                AddExerciseEvent.OpenCalendar -> {
-                    focusManager.clearFocus()
-//                    openCalendar(
-//                        context = context,
-//                        onValueChanged = {
-//                            viewModel.onDatePicked(it)
-//                        }
-//                    )
-                }
-
-                is AddExerciseEvent.FocusOnInput -> {
-                    focusRequesters[value.pos].requestFocus()
-//                    val errorMsg = context.getString(SR.strings.input_wrong_format)
-//                    Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
-                }
+                is AddExerciseEvent.FocusOnInput -> focusRequesters[value.pos].requestFocus()
             }
         }
     }
@@ -99,10 +90,13 @@ fun AddExerciseScreen(
         onDateClicked = viewModel::onDateClicked,
         onResultLongClicked = viewModel::onResultLongClicked,
         onLabelClicked = viewModel::onLabelClicked,
-        onAmountClicked = viewModel::onAmountClicked
+        onAmountClicked = viewModel::onAmountClicked,
+        onDateConfirmClicked = viewModel::onDatePicked,
+        onDateDismiss = viewModel::onDateDismiss
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddExerciseScreenContent(
     viewState: State<AddExerciseState>,
@@ -123,8 +117,28 @@ fun AddExerciseScreenContent(
     onDateClicked: () -> Unit = {},
     onResultLongClicked: (Int) -> Unit = {},
     onLabelClicked: (Int) -> Unit = {},
-    onAmountClicked: () -> Unit = {}
+    onAmountClicked: () -> Unit = {},
+    onDateConfirmClicked: (Long?) -> Unit = {},
+    onDateDismiss: () -> Unit = {},
 ) {
+    val datePickerState = rememberDatePickerState()
+
+    if (viewState.value.isDatePickerVisible) {
+        DatePickerDialog(
+            onDismissRequest = onDateDismiss,
+            confirmButton = {
+                MainButton(
+                    text = stringResource(SR.strings.confirm),
+                    onClick = {
+                        onDateConfirmClicked(datePickerState.selectedDateMillis)
+                    }
+                )
+            },
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
             title = stringResource(SR.strings.remove_result_dialog_title),
