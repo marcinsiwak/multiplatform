@@ -1,4 +1,3 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {

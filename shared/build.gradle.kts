@@ -1,4 +1,3 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
@@ -133,7 +132,6 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
-            
             implementation(compose.components.resources)
         }
 

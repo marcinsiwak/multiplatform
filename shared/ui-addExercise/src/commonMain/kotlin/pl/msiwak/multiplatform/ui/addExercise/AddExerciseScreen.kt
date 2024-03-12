@@ -121,7 +121,7 @@ fun AddExerciseScreenContent(
     onLabelClicked: (Int) -> Unit = {},
     onAmountClicked: () -> Unit = {},
     onDateConfirmClicked: (Long?) -> Unit = {},
-    onDateDismiss: () -> Unit = {},
+    onDateDismiss: () -> Unit = {}
 ) {
     val datePickerState = rememberDatePickerState()
 
@@ -135,7 +135,7 @@ fun AddExerciseScreenContent(
                         onDateConfirmClicked(datePickerState.selectedDateMillis)
                     }
                 )
-            },
+            }
         ) {
             DatePicker(state = datePickerState)
         }
@@ -175,8 +175,7 @@ fun AddExerciseScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-        ,
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.Top
     ) {
         if (viewState.value.isEditNameEnabled) {
