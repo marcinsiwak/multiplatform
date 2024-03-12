@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalFocusManager
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonResources.theme.dimens
@@ -33,6 +34,7 @@ fun NewResultView(
     onDateClicked: () -> Unit,
     onAmountClicked: () -> Unit
 ) {
+    val focusManager = LocalFocusManager.current
     Row(
         modifier = modifier
             .height(IntrinsicSize.Min)
@@ -79,6 +81,7 @@ fun NewResultView(
                 .onFocusChanged {
                     if (it.hasFocus) {
                         onDateClicked()
+                        focusManager.clearFocus()
                     }
                 }
                 .padding(horizontal = MaterialTheme.dimens.space_16),

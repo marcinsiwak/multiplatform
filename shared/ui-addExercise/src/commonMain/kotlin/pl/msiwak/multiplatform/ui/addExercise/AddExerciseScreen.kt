@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.ui.addExercise
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonResources.SR
+import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
@@ -171,7 +173,10 @@ fun AddExerciseScreenContent(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+        ,
         verticalArrangement = Arrangement.Top
     ) {
         if (viewState.value.isEditNameEnabled) {

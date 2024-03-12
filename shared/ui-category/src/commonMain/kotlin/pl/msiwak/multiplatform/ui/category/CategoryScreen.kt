@@ -108,7 +108,9 @@ fun CategoryScreenContent(
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
         if (viewState.value.isDialogVisible) {
             AddExerciseDialog(
