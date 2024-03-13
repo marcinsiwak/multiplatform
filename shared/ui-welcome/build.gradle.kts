@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.composeMultiplatform)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -38,6 +39,7 @@ kotlin {
             export(project(Modules.utils))
             export(project(Modules.commonResources))
             export(project(Modules.commonObject))
+            export(project(Modules.uiCommonComponent))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -55,6 +57,21 @@ kotlin {
             implementation(project(Modules.utils))
             implementation(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
+            implementation(project(Modules.uiCommonComponent))
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+
+            implementation(libs.napier)
+        }
+
+        androidMain.dependencies {
+            api(libs.google.android.playservices.auth)
         }
 
         commonTest.dependencies {

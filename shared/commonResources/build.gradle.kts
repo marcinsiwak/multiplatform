@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     id("dev.icerock.mobile.multiplatform-resources")
+    alias(libs.plugins.composeMultiplatform)
 }
 
 multiplatformResources {
@@ -35,6 +36,7 @@ kotlin {
             baseName = "commonResources"
 
             export(libs.moko.resources)
+            export(libs.moko.resources.compose)
             export(libs.moko.graphics)
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -53,7 +55,14 @@ kotlin {
 
         commonMain.dependencies {
             api(libs.moko.resources)
+            api(libs.moko.resources.compose)
             api(libs.moko.graphics)
+
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
         }
 
         commonTest.dependencies {

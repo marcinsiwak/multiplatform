@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
+import pl.msiwak.multiplatform.commonResources.theme.OwnColorPalette
 
 @Suppress("ConstructorParameterNaming")
 data class OwnColorPalette(

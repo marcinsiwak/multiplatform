@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import pl.msiwak.multiplatform.android.ui.extensions.topBorder
-import pl.msiwak.multiplatform.android.ui.theme.dimens
-import pl.msiwak.multiplatform.android.ui.theme.font
+import pl.msiwak.multiplatform.android.ui.extension.topBorder
+import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.DashboardNavigationDirections
 
 @Composable
@@ -33,7 +33,7 @@ fun BottomNavigation(
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             NavigationBarItem(
-                icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
+                icon = { Icon(painterResource(item.icon), contentDescription = item.title) },
                 label = {
                     Text(
                         text = item.title,

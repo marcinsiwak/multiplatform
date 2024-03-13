@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     id("dev.icerock.mobile.multiplatform-resources")
+    alias(libs.plugins.composeMultiplatform)
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -72,6 +73,7 @@ kotlin {
             export(project(Modules.uiVerifyEmail))
             export(project(Modules.buildConfig))
             export(project(Modules.notifications))
+            export(project(Modules.uiCommonComponent))
         }
 
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -119,11 +121,18 @@ kotlin {
             api(project(Modules.uiVerifyEmail))
             api(project(Modules.buildConfig))
             api(project(Modules.notifications))
+            api(project(Modules.uiCommonComponent))
 
             api(libs.napier)
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
+
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
         }
 
         androidMain {

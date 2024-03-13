@@ -3,6 +3,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
@@ -12,6 +13,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
@@ -44,3 +46,4 @@ include(":shared:ui-settings")
 include(":shared:ui-summary")
 include(":shared:ui-unit")
 include(":shared:ui-verifyEmail")
+include(":shared:ui-common-component")

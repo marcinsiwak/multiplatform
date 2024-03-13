@@ -4,6 +4,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var route: [NavigationDirections] = []
     private let viewModel: MainViewModel = MainDiHelper().getMainViewModel()
+    
 
     var body: some View {
         NavigationStack(path: $route) {
@@ -21,6 +22,7 @@ struct ContentView: View {
                 }
                 if direction is NavigationDirections.Registration {
                     RegisterScreen()
+                        .navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.Dashboard {
                     DashboardScreen().navigationBarBackButtonHidden(true)
@@ -28,16 +30,16 @@ struct ContentView: View {
                 if direction is NavigationDirections.CategoryDetails {
                     let id = (direction as? NavigationDirections.CategoryDetails)?.getCategoryId() ?? ""
                     CategoryScreen(id: id)
-                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.AddExercise {
                     let id = (direction as? NavigationDirections.AddExercise)?.getExerciseId() ?? ""
                     AddExerciseScreen(id: id)
-                    .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackButtonHidden(true)
                 }
                 if direction is NavigationDirections.AddCategory {
                     AddCategoryScreen()
-                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackButtonHidden(true)
                 }
             }
         }

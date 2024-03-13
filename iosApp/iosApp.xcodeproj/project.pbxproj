@@ -55,6 +55,7 @@
 		71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */; };
 		71D05CA22B3338DF00994291 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 71D05CA12B3338DF00994291 /* .swiftlint.yml */; };
 		71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */; };
+		71FF1CA02B95193500FFFDCE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FF1C9F2B95193500FFFDCE /* MainView.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,7 @@
 		71A5EF3B2AF3D3F000E373DF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71D05CA12B3338DF00994291 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		71FF1C9F2B95193500FFFDCE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		74DA36D12685A7143467F9F1 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				711E8B5B2A57571F00151063 /* base */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
+				71FF1C9F2B95193500FFFDCE /* MainView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
@@ -541,6 +544,7 @@
 				711E8BA92A575BA200151063 /* WelcomeScreen.swift in Sources */,
 				711E8B832A575A0900151063 /* ResultsTimeFilterView.swift in Sources */,
 				711E8BBE2A682AFC00151063 /* VerifyEmailScreen.swift in Sources */,
+				71FF1CA02B95193500FFFDCE /* MainView.swift in Sources */,
 				7132D0542B07A97200BC2C99 /* BannerAd.swift in Sources */,
 				711E8B9E2A575B3100151063 /* SettingsScreen.swift in Sources */,
 				711E8B6E2A57593D00151063 /* AddExercise.swift in Sources */,

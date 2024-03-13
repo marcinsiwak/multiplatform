@@ -7,11 +7,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleObserver
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -20,30 +21,36 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import io.github.aakira.napier.Napier
 import org.koin.java.KoinJavaComponent.inject
-import pl.msiwak.multiplatform.android.ui.addCategory.AddCategoryScreen
-import pl.msiwak.multiplatform.android.ui.addExercise.AddExerciseScreen
-import pl.msiwak.multiplatform.android.ui.category.CategoryScreen
 import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
-import pl.msiwak.multiplatform.android.ui.forceUpdate.ForceUpdateScreen
-import pl.msiwak.multiplatform.android.ui.language.LanguageScreen
-import pl.msiwak.multiplatform.android.ui.register.RegisterScreen
-import pl.msiwak.multiplatform.android.ui.theme.AppTheme
-import pl.msiwak.multiplatform.android.ui.units.UnitScreen
-import pl.msiwak.multiplatform.android.ui.verifyEmail.VerifyEmailScreen
-import pl.msiwak.multiplatform.android.ui.welcome.WelcomeScreen
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.notifications.NotificationsService
+import pl.msiwak.multiplatform.shared.MainView
+import pl.msiwak.multiplatform.ui.addCategory.AddCategoryScreen
+import pl.msiwak.multiplatform.ui.addExercise.AddExerciseScreen
+import pl.msiwak.multiplatform.ui.category.CategoryScreen
+import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleCallback
+import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateScreen
+import pl.msiwak.multiplatform.ui.language.LanguageScreen
+import pl.msiwak.multiplatform.ui.register.RegisterScreen
+import pl.msiwak.multiplatform.ui.unit.UnitScreen
+import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailScreen
+import pl.msiwak.multiplatform.ui.welcome.WelcomeScreen
 
 @Suppress("LongMethod")
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by inject(MainViewModel::class.java)
 
+    private lateinit var lifeCycleObserver: LifecycleObserver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initiateLifecycleObserver()
 
         NotificationsService()
+
         setContent {
             val viewState = viewModel.viewState.collectAsState()
             installSplashScreen()
@@ -52,7 +59,7 @@ class MainActivity : ComponentActivity() {
                 }
 
             AppTheme {
-                Surface(
+                MainView(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     val navController = rememberNavController()
@@ -108,6 +115,18 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun initiateLifecycleObserver() {
+        lifeCycleObserver = LifecycleEventObserver { _, event ->
+            lifecycleCallback(event)
+        }
+        lifecycle.addObserver(lifeCycleObserver)
+    }
+
+    override fun onDestroy() {
+        lifecycle.removeObserver(lifeCycleObserver)
+        super.onDestroy()
     }
 
     private fun navigate(
