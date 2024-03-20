@@ -1,9 +1,11 @@
 package pl.msiwak.multiplatform.ui.register
 
-import dev.icerock.moko.resources.StringResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.StringResource
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
 
+@OptIn(ExperimentalResourceApi::class)
 data class RegisterState(
     var login: String = "",
     var password: String = "",

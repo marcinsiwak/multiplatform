@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.composeMultiplatform)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -50,6 +51,8 @@ kotlin {
 
             api(libs.firebase.gitlive.auth)
             api(libs.firebase.gitlive.remoteConfig)
+
+            implementation(compose.components.resources)
         }
 
         commonTest.dependencies {

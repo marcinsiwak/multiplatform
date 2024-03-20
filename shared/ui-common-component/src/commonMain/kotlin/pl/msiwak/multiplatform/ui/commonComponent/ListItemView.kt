@@ -16,14 +16,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import dev.icerock.moko.resources.compose.painterResource
-import pl.msiwak.multiplatform.commonResources.SR
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.ic_arrow_right
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.extension.bottomBorder
 
 @Suppress("MagicNumber")
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
 @Composable
 fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> Unit = {}) {
     Row(
@@ -62,7 +64,7 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
                 .weight(0.2f)
                 .padding(MaterialTheme.dimens.space_16),
             tint = MaterialTheme.colorScheme.tertiary,
-            painter = painterResource(SR.images.ic_arrow_right),
+            painter = painterResource(Res.drawable.ic_arrow_right),
             contentDescription = null
         )
     }

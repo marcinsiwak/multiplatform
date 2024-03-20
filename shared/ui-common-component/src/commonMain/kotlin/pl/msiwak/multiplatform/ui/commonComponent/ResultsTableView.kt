@@ -21,13 +21,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.style.TextAlign
-import dev.icerock.moko.resources.compose.stringResource
+import androidx.compose.ui.util.fastForEachIndexed
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.add_new_result
+import athletetrack.shared.commonresources.generated.resources.ic_arrow_down
+import athletetrack.shared.commonresources.generated.resources.ic_arrow_up
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultTableItemData
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
+@ExperimentalResourceApi
 @Composable
 fun ResultsTableView(
     modifier: Modifier = Modifier,
@@ -66,7 +73,7 @@ fun ResultsTableView(
                 .padding(vertical = MaterialTheme.dimens.space_8),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            resultDataTitles.forEachIndexed { index, item ->
+            resultDataTitles.fastForEachIndexed { index, item ->
                 TextWithDrawableView(
                     modifier = Modifier
                         .clickable { onLabelClicked(index) }
@@ -76,8 +83,8 @@ fun ResultsTableView(
                     color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
                     iconResId = when (item.isArrowUp) {
-                        true -> SR.images.ic_arrow_up
-                        false -> SR.images.ic_arrow_down
+                        true -> Res.drawable.ic_arrow_up
+                        false -> Res.drawable.ic_arrow_down
                         null -> null
                     }
                 )
@@ -99,7 +106,7 @@ fun ResultsTableView(
                             },
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.onPrimary,
-                        text = stringResource(SR.strings.add_new_result)
+                        text = stringResource(Res.string.add_new_result)
                     )
                 }
             }
@@ -125,6 +132,7 @@ fun ResultsTableView(
                     )
                 }
             }
+
             itemsIndexed(results) { pos, item ->
                 ResultView(
                     details = listOf(item.result, item.amount, item.date),

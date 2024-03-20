@@ -1,5 +1,6 @@
 import java.io.FileInputStream
 import java.util.Properties
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -172,6 +173,8 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.accompanist.navigation.material)
+
+    implementation(libs.components.resources)
 
     api(libs.firebase.common)
     api(libs.firebase.auth)

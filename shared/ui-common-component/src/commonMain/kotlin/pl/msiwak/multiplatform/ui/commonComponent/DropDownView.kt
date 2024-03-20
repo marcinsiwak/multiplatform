@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.commonComponent
 
 import androidx.compose.foundation.layout.Column
@@ -21,7 +23,11 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.compose.stringResource
+import androidx.compose.ui.util.fastForEach
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.category
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
@@ -48,7 +54,7 @@ fun DropDownView(
                 },
             value = currentValue,
             onValueChange = {},
-            hintText = stringResource(SR.strings.category),
+            hintText = stringResource(Res.string.category),
             readOnly = true,
             errorsEnabled = false,
             trailingIcon = {
@@ -67,7 +73,7 @@ fun DropDownView(
                 focusManager.clearFocus()
             }
         ) {
-            items.forEach { exercise ->
+            items.fastForEach { exercise ->
                 DropdownMenuItem(
                     text = { Text(text = exercise.name) },
                     onClick = {

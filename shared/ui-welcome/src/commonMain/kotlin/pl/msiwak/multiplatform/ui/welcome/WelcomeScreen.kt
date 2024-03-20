@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.welcome
 
 import androidx.compose.foundation.clickable
@@ -21,10 +23,26 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.auth_failed_description
+import athletetrack.shared.commonresources.generated.resources.auth_failed_title
+import athletetrack.shared.commonresources.generated.resources.confirm
+import athletetrack.shared.commonresources.generated.resources.deny
+import athletetrack.shared.commonresources.generated.resources.email
+import athletetrack.shared.commonresources.generated.resources.ic_invisible
+import athletetrack.shared.commonresources.generated.resources.ic_visible
+import athletetrack.shared.commonresources.generated.resources.login
+import athletetrack.shared.commonresources.generated.resources.password
+import athletetrack.shared.commonresources.generated.resources.synchronization_dialog_description
+import athletetrack.shared.commonresources.generated.resources.synchronization_dialog_title
+import athletetrack.shared.commonresources.generated.resources.welcome_create_account
+import athletetrack.shared.commonresources.generated.resources.welcome_google_login
+import athletetrack.shared.commonresources.generated.resources.welcome_no_account
+import athletetrack.shared.commonresources.generated.resources.welcome_offline_mode
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
@@ -76,9 +94,9 @@ fun WelcomeScreenContent(
 ) {
     if (viewState.value.isErrorDialogVisible) {
         PopupDialog(
-            title = stringResource(SR.strings.auth_failed_title),
-            description = stringResource(SR.strings.auth_failed_description),
-            confirmButtonTitle = stringResource(SR.strings.confirm),
+            title = stringResource(Res.string.auth_failed_title),
+            description = stringResource(Res.string.auth_failed_description),
+            confirmButtonTitle = stringResource(Res.string.confirm),
             onConfirmClicked = {
                 onConfirmDialogButtonClicked()
             }
@@ -87,10 +105,10 @@ fun WelcomeScreenContent(
 
     if (viewState.value.isSynchronizationDialogVisible) {
         PopupDialog(
-            title = stringResource(SR.strings.synchronization_dialog_title),
-            description = stringResource(SR.strings.synchronization_dialog_description),
-            confirmButtonTitle = stringResource(SR.strings.confirm),
-            dismissButtonTitle = stringResource(SR.strings.deny),
+            title = stringResource(Res.string.synchronization_dialog_title),
+            description = stringResource(Res.string.synchronization_dialog_description),
+            confirmButtonTitle = stringResource(Res.string.confirm),
+            dismissButtonTitle = stringResource(Res.string.deny),
             onConfirmClicked = {
                 onConfirmSynchronizationClicked()
             },
@@ -103,7 +121,7 @@ fun WelcomeScreenContent(
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(
 //            modifier = Modifier.fillMaxSize(),
-//            painter = painterResource(id = SR.images.bg_welcome_screen.drawableResId),
+//            painter = painterResource(id = Res.drawable.bg_welcome_screen.drawableResId),
 //            contentScale = ContentScale.Crop,
 //            contentDescription = "Welcome screen"
 //        )
@@ -127,7 +145,7 @@ fun WelcomeScreenContent(
                 onValueChange = {
                     onLoginChanged(it)
                 },
-                hintText = stringResource(SR.strings.email)
+                hintText = stringResource(Res.string.email)
             )
 
             InputView(
@@ -143,17 +161,17 @@ fun WelcomeScreenContent(
                         modifier = Modifier
                             .clickable { onVisibilityClicked() },
                         painter = painterResource(
-                            imageResource = if (viewState.value.isPasswordVisible) {
-                                SR.images.ic_invisible
+                            if (viewState.value.isPasswordVisible) {
+                                Res.drawable.ic_invisible
                             } else {
-                                SR.images.ic_visible
+                                Res.drawable.ic_visible
                             }
                         ),
                         contentDescription = null
                     )
                 },
                 isPassword = true,
-                hintText = stringResource(SR.strings.password)
+                hintText = stringResource(Res.string.password)
             )
 
             MainButton(
@@ -161,7 +179,7 @@ fun WelcomeScreenContent(
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimens.space_24),
                 onClick = { onLoginClicked() },
-                text = stringResource(SR.strings.login)
+                text = stringResource(Res.string.login)
             )
 
             MainButton(
@@ -173,7 +191,7 @@ fun WelcomeScreenContent(
                 onClick = {
                     onGoogleLoginClicked()
                 },
-                text = stringResource(SR.strings.welcome_google_login)
+                text = stringResource(Res.string.welcome_google_login)
             )
 
             SecondaryButton(
@@ -184,11 +202,11 @@ fun WelcomeScreenContent(
                         bottom = MaterialTheme.dimens.space_16
                     ),
                 onClick = { onOfflineModeClicked() },
-                text = stringResource(SR.strings.welcome_offline_mode)
+                text = stringResource(Res.string.welcome_offline_mode)
             )
 
             Text(
-                text = stringResource(SR.strings.welcome_no_account),
+                text = stringResource(Res.string.welcome_no_account),
                 color = MaterialTheme.colorScheme.secondary
             )
             Button(
@@ -199,7 +217,7 @@ fun WelcomeScreenContent(
                     containerColor = Color.Transparent
                 )
             ) {
-                Text(text = stringResource(SR.strings.welcome_create_account))
+                Text(text = stringResource(Res.string.welcome_create_account))
             }
         }
     }

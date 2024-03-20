@@ -14,12 +14,12 @@ struct CategoryItem: View {
         self.category = category
         switch category.exerciseType {
         case ExerciseType.running:
-            backgroundImage = SR.images().bg_running_field.toUIImage()
+            backgroundImage = Res.drawable().bg_running_field.toUIImage()
         case ExerciseType.gym:
-            backgroundImage = SR.images().bg_gym.toUIImage()
+            backgroundImage = Res.drawable().bg_gym.toUIImage()
     //        ExerciseType.OTHER -> null
         default:
-            backgroundImage = SR.images().bg_gym.toUIImage()
+            backgroundImage = Res.drawable().bg_gym.toUIImage()
         }
     }
 

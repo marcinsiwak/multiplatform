@@ -12,16 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.compose.painterResource
-import pl.msiwak.multiplatform.commonResources.SR
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.ic_arrow_down
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun TextWithDrawableView(
     modifier: Modifier,
     text: String,
-    iconResId: ImageResource? = null,
+    iconResId: DrawableResource? = null,
     color: Color = MaterialTheme.colorScheme.onPrimary,
     textAlign: TextAlign = TextAlign.Center
 ) {
@@ -43,7 +46,7 @@ fun TextWithDrawableView(
         Icon(
             modifier = Modifier
                 .alpha(iconAlpha),
-            painter = painterResource(iconResId ?: SR.images.ic_arrow_down),
+            painter = painterResource(iconResId ?: Res.drawable.ic_arrow_down),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onPrimary
         )

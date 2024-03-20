@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.language
 
 import androidx.compose.foundation.layout.Column
@@ -16,7 +18,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.language
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
@@ -48,7 +53,7 @@ fun LanguageScreenContent(
                 vertical = MaterialTheme.dimens.space_16,
                 horizontal = MaterialTheme.dimens.space_24
             ),
-            text = stringResource(SR.strings.language),
+            text = stringResource(Res.string.language),
             fontSize = MaterialTheme.font.font_24,
             color = MaterialTheme.colorScheme.onPrimary
         )

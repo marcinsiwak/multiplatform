@@ -1,12 +1,20 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.commonObject
 
-import dev.icerock.moko.resources.StringResource
-import pl.msiwak.multiplatform.commonResources.SR
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.filter_all
+import athletetrack.shared.commonresources.generated.resources.filter_day
+import athletetrack.shared.commonresources.generated.resources.filter_month
+import athletetrack.shared.commonresources.generated.resources.filter_week
+import athletetrack.shared.commonresources.generated.resources.filter_year
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.StringResource
 
 enum class DateFilterType(val nameResourceId: StringResource) {
-    ALL(SR.strings.filter_all),
-    DAY(SR.strings.filter_day),
-    WEEK(SR.strings.filter_week),
-    MONTH(SR.strings.filter_month),
-    YEAR(SR.strings.filter_year);
+    ALL(Res.string.filter_all),
+    DAY(Res.string.filter_day),
+    WEEK(Res.string.filter_week),
+    MONTH(Res.string.filter_month),
+    YEAR(Res.string.filter_year);
 }

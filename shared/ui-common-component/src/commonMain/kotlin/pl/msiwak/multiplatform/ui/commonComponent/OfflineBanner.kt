@@ -13,11 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.ic_arrow_right
+import athletetrack.shared.commonresources.generated.resources.offline_mode_sing_up_in
+import athletetrack.shared.commonresources.generated.resources.offline_mode_title
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
+@ExperimentalResourceApi
 @Composable
 fun OfflineBanner(
     modifier: Modifier = Modifier,
@@ -32,7 +38,7 @@ fun OfflineBanner(
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.dimens.space_8),
-            text = stringResource(SR.strings.offline_mode_title),
+            text = stringResource(Res.string.offline_mode_title),
             style = MaterialTheme.typography.labelSmall,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onTertiary
@@ -48,14 +54,14 @@ fun OfflineBanner(
         ) {
             Text(
                 modifier = Modifier,
-                text = stringResource(SR.strings.offline_mode_sing_up_in),
+                text = stringResource(Res.string.offline_mode_sing_up_in),
                 style = MaterialTheme.typography.labelSmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onTertiary
             )
 
             Icon(
-                painter = painterResource(SR.images.ic_arrow_right),
+                painter = painterResource(Res.drawable.ic_arrow_right),
                 tint = MaterialTheme.colorScheme.onTertiary,
                 contentDescription = null
             )

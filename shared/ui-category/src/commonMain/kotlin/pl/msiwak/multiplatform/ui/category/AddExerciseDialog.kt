@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.category
 
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,8 +10,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.add_new_exercise
+import athletetrack.shared.commonresources.generated.resources.exercise_name
 import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.stringResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
@@ -30,7 +36,7 @@ fun AddExerciseDialog(
         },
         title = {
             Text(
-                text = stringResource(SR.strings.exercise_name),
+                text = stringResource(Res.string.exercise_name),
                 color = MaterialTheme.colorScheme.onPrimary
             )
         },
@@ -54,7 +60,7 @@ fun AddExerciseDialog(
                         horizontal = MaterialTheme.dimens.space_16
                     ),
                 onClick = { onAddExerciseClicked() },
-                text = stringResource(SR.strings.add_new_exercise)
+                text = stringResource(Res.string.add_new_exercise)
             )
         }
     )
