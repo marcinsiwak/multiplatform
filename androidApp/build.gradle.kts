@@ -1,6 +1,5 @@
 import java.io.FileInputStream
 import java.util.Properties
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.androidApplication)

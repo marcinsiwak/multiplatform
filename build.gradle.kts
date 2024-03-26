@@ -14,7 +14,6 @@ plugins {
 buildscript {
     dependencies {
         classpath(libs.google.services)
-        classpath(libs.resources.generator)
         classpath(libs.firebase.crashlytics.gradle)
         classpath(libs.buildkonfig.gradle.plugin)
     }

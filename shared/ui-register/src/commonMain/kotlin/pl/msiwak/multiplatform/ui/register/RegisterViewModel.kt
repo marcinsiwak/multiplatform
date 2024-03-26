@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.navigator.NavigationDirections

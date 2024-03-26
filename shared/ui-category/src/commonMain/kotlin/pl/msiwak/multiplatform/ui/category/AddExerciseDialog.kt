@@ -10,17 +10,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Gray
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_new_exercise
 import athletetrack.shared.commonresources.generated.resources.exercise_name
-import dev.icerock.moko.resources.compose.colorResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun AddExerciseDialog(
     inputText: String = "",
@@ -30,7 +30,7 @@ fun AddExerciseDialog(
 ) {
     AlertDialog(
         shape = RoundedCornerShape(MaterialTheme.dimens.dialog_corners),
-        containerColor = colorResource(SR.colors.gray),
+        containerColor = Gray,
         onDismissRequest = {
             onDialogClosed()
         },

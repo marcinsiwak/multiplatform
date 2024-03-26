@@ -29,9 +29,9 @@ import athletetrack.shared.commonresources.generated.resources.category
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun DropDownView(
     modifier: Modifier = Modifier,

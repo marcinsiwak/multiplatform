@@ -4,8 +4,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import dev.icerock.moko.resources.compose.colorResource
-import pl.msiwak.multiplatform.commonResources.SR
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun PopupDialog(
@@ -18,7 +17,7 @@ fun PopupDialog(
     onDismissClicked: () -> Unit = {}
 ) {
     AlertDialog(
-        containerColor = colorResource(SR.colors.gray),
+        containerColor = Color.Gray,
         onDismissRequest = {
             onDialogClosed()
         },

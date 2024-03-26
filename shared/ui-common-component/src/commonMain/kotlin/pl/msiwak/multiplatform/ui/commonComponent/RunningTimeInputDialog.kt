@@ -29,16 +29,15 @@ import athletetrack.shared.commonresources.generated.resources.milliseconds
 import athletetrack.shared.commonresources.generated.resources.minutes
 import athletetrack.shared.commonresources.generated.resources.running_time_input_insert_result
 import athletetrack.shared.commonresources.generated.resources.seconds
-import dev.icerock.moko.resources.compose.colorResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
 private const val MILLISECONDS_DIGITS_AMOUNT = 3
 private const val MINUTE_IN_SECONDS = 60
 private const val HOUR_IN_MINUTES = 60
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun RunningTimeInputDialog(
     onConfirm: (String, String, String, String) -> Unit,
@@ -60,7 +59,7 @@ fun RunningTimeInputDialog(
         Column(
             modifier = Modifier
                 .background(
-                    colorResource(SR.colors.gray),
+                    Color.Gray,
                     RoundedCornerShape(MaterialTheme.dimens.dialog_corners)
                 )
                 .padding(MaterialTheme.dimens.space_16),

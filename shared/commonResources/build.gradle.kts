@@ -2,14 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
-    id("dev.icerock.mobile.multiplatform-resources")
     alias(libs.plugins.composeMultiplatform)
-}
-
-multiplatformResources {
-    multiplatformResourcesPackage = "pl.msiwak.multiplatform.commonResources" // required
-    iosBaseLocalizationRegion = "en" // optional, default "en"
-    multiplatformResourcesClassName = "SR"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -34,10 +27,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "commonResources"
-
-            export(libs.moko.resources)
-            export(libs.moko.resources.compose)
-            export(libs.moko.graphics)
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -48,16 +37,7 @@ kotlin {
     }
 
     sourceSets {
-        getByName("androidMain").dependsOn(commonMain.get())
-        getByName("iosArm64Main").dependsOn(commonMain.get())
-        getByName("iosX64Main").dependsOn(commonMain.get())
-        getByName("iosSimulatorArm64Main").dependsOn(commonMain.get())
-
         commonMain.dependencies {
-            api(libs.moko.resources)
-            api(libs.moko.resources.compose)
-            api(libs.moko.graphics)
-
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

@@ -29,7 +29,6 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
@@ -51,6 +50,7 @@ fun RegisterScreen(
     )
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun RegisterScreenContent(
     viewState: State<RegisterState>,

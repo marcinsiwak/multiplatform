@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
-    id("dev.icerock.mobile.multiplatform-resources")
     alias(libs.plugins.composeMultiplatform)
 }
 
@@ -43,9 +42,6 @@ kotlin {
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
-
-            export(libs.moko.resources)
-            export(libs.moko.graphics)
 
             export(project(Modules.core))
             export(project(Modules.commonResources))

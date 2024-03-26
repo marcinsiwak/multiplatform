@@ -22,7 +22,6 @@ import athletetrack.shared.commonresources.generated.resources.settings_unit
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 
@@ -40,6 +39,7 @@ fun SettingsScreen(
     )
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun SettingsScreenContent(
     viewState: State<SettingsState>,

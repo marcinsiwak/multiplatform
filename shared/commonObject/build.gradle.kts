@@ -52,6 +52,7 @@ kotlin {
             api(libs.firebase.gitlive.auth)
             api(libs.firebase.gitlive.remoteConfig)
 
+            implementation(compose.runtime)
             implementation(compose.components.resources)
         }
 

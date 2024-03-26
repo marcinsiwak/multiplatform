@@ -63,7 +63,6 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String) -> 
     }
 }
 
-
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 actual fun Icon(drawableResource: DrawableResource) {
@@ -76,5 +75,5 @@ actual fun Icon(drawableResource: DrawableResource) {
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 actual fun stringResource(stringResource: StringResource): String {
-  return org.jetbrains.compose.resources.stringResource(stringResource)
+    return org.jetbrains.compose.resources.stringResource(stringResource)
 }

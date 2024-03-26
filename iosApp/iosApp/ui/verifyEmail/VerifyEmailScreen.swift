@@ -1,41 +1,16 @@
 import shared
 import SwiftUI
 
-struct VerifyEmailScreen: View {
+struct VerifyEmailScreen: UIViewControllerRepresentable {
     
-    let viewModel = VerifyEmailDiHelper().getViewModel()
-
-    
-    var body: some View {
-        
-        VStack {
-            Text(ResourcesHelper().getMyString(stringId: Res.string().verify_title).localized())
-            Text(ResourcesHelper().getMyString(stringId: Res.string().verify_description).localized())
-            
-            Button(action: {
-                viewModel.onOpenMailClicked()
-            }) {
-                Text(ResourcesHelper().getMyString(stringId: Res.string().verify_open_mail).localized())
-            }
-            Button(action: {
-                viewModel.onResendMailClicked()
-            }) {
-                Text(ResourcesHelper().getMyString(stringId: Res.string().verify_resend_mail).localized())
-            }
-            Button(action: {
-                viewModel.onLoginClicked()
-            }) {
-                Text(ResourcesHelper().getMyString(stringId: Res.string().verify_login).localized())
-            }
-        }
-        .padding()
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-        .background(Color.colorPrimary)
+    func makeUIViewController(context: Context) -> some UIViewController {
+        VerifyEmailScreenControllerKt.setup()
     }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
 }
 
-struct VerifyEmailScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        VerifyEmailScreen()
-    }
-}
+//struct VerifyEmailScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VerifyEmailScreen()
+//    }
+//}

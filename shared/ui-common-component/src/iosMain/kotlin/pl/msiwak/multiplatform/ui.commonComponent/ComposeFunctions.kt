@@ -13,7 +13,10 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String) -> 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 actual fun Icon(drawableResource: DrawableResource) {
-    androidx.compose.material3.Icon(org.jetbrains.compose.resources.painterResource(drawableResource), null)
+    androidx.compose.material3.Icon(
+        org.jetbrains.compose.resources.painterResource(drawableResource),
+        null
+    )
 }
 
 @OptIn(ExperimentalResourceApi::class)

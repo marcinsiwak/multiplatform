@@ -26,12 +26,11 @@ import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_new_result
 import athletetrack.shared.commonresources.generated.resources.ic_arrow_down
 import athletetrack.shared.commonresources.generated.resources.ic_arrow_up
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultTableItemData
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
 @ExperimentalResourceApi

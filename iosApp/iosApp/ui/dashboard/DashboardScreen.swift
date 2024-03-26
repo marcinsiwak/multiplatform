@@ -38,7 +38,7 @@ struct DashboardScreen: View {
                 }.tabItem {
                     //                Image(systemName: "phone.fill")
                     Text("Summary")
-                        .foregroundColor(.onPrimary)
+                        .foregroundColor(.black)
                 }
 
                 //            Text("Account")
@@ -58,10 +58,10 @@ struct DashboardScreen: View {
                 } .tabItem {
                     //                Image(systemName: "tv.fill")
                     Text("Settings")
-                        .foregroundColor(.onPrimary)
+                        .foregroundColor(.black)
                 }
             }
-            .accentColor(.onPrimary)
+            .accentColor(.black)
 
         }
     }

@@ -8,7 +8,7 @@ struct OfflineBanner: View {
         VStack {
             Spacer()
             HStack {
-                Text(Res.string().offline_mode_title.desc().localized())
+                Text("Res.string().offline_mode_title")
                     .padding(8)
                     .foregroundColor(Color.white)
                 
@@ -16,12 +16,12 @@ struct OfflineBanner: View {
                                 
                 Button(action: onSignInUpClicked) {
                     HStack {
-                        Text(Res.string().offline_mode_sing_up_in.desc().localized())
+                        Text("Res.string().offline_mode_sing_up_in.desc().localized()")
                             .foregroundColor(Color.white)
                             .padding(8)
                         
-                        Image(uiImage: Res.drawable().ic_arrow_right.toUIImage()!)
-                            .foregroundColor(Color.white)
+//                        Image(uiImage: Res.drawable().ic_arrow_right.toUIImage()!)
+//                            .foregroundColor(Color.white)
                     }
                 }
             }

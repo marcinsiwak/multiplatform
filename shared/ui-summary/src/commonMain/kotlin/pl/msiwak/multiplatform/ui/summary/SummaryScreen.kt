@@ -33,12 +33,11 @@ import athletetrack.shared.commonresources.generated.resources.remove_category_d
 import athletetrack.shared.commonresources.generated.resources.remove_category_dialog_title
 import athletetrack.shared.commonresources.generated.resources.summary_add_category
 import athletetrack.shared.commonresources.generated.resources.yes
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
@@ -69,7 +68,7 @@ fun SummaryScreen(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
 @Composable
 fun SummaryScreenContent(
     viewState: State<SummaryState>,
