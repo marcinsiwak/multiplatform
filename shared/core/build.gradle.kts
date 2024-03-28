@@ -53,9 +53,8 @@ kotlin {
             implementation(project(Modules.commonResources))
 
             implementation(libs.kotlinx.coroutines)
-        }
 
-        androidMain.dependencies {
+            implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
         }
 

@@ -25,7 +25,6 @@ import pl.msiwak.multiplatform.android.ui.dashboard.DashboardScreen
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.navigator.NavigationDirections
-import pl.msiwak.multiplatform.notifications.NotificationsService
 import pl.msiwak.multiplatform.shared.MainView
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryScreen
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseScreen
@@ -48,8 +47,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initiateLifecycleObserver()
-
-        NotificationsService()
+//        NotificationsService()
 
         setContent {
             val viewState = viewModel.viewState.collectAsState()

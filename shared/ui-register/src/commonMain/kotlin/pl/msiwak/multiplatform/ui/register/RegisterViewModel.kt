@@ -1,5 +1,7 @@
 package pl.msiwak.multiplatform.ui.register
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -9,7 +11,6 @@ import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
 import pl.msiwak.multiplatform.commonResources.SR
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.navigator.Navigator
