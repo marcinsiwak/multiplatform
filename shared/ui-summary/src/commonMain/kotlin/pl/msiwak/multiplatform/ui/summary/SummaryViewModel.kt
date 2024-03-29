@@ -1,11 +1,12 @@
 package pl.msiwak.multiplatform.ui.summary
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Category
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase

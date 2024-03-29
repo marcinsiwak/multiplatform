@@ -56,6 +56,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(libs.napier)
             implementation(libs.kotlinx.lifecycle)
+            implementation(libs.kotlinx.viewModel)
         }
 
         androidMain.dependencies {

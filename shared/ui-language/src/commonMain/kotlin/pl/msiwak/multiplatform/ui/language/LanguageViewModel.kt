@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.ui.language
 
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.settings.SetLanguageUseCase
 

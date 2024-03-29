@@ -133,6 +133,8 @@ kotlin {
             implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
+            implementation(libs.kotlinx.lifecycle)
+            implementation(libs.kotlinx.viewModel)
         }
 
         androidMain {

@@ -67,6 +67,9 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
 
+            implementation(libs.kotlinx.lifecycle)
+            implementation(libs.kotlinx.viewModel)
+
             implementation(libs.napier)
         }
 

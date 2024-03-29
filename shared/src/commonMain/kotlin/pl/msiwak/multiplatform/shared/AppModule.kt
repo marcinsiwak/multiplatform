@@ -3,7 +3,6 @@ package pl.msiwak.multiplatform.shared
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.auth.SessionStore
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.OfflineStore
@@ -210,7 +209,6 @@ val viewModelsModule = module {
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel(get()) }
     viewModelDefinition { DashboardViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { ViewModel() }
 }
 
 val useCaseModule = module {

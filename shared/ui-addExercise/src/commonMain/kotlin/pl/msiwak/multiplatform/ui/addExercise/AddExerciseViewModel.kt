@@ -1,5 +1,7 @@
 package pl.msiwak.multiplatform.ui.addExercise
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -20,7 +22,6 @@ import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.commonObject.ResultTableItemData
 import pl.msiwak.multiplatform.commonObject.SortType
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.domain.summaries.AddResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadExerciseUseCase
@@ -188,7 +189,8 @@ class AddExerciseViewModel(
                 exerciseId = id,
                 result = savedResult,
                 amount = savedAmount,
-                date = Instant.fromEpochMilliseconds(pickedDate).toLocalDateTime(TimeZone.currentSystemDefault())
+                date = Instant.fromEpochMilliseconds(pickedDate)
+                    .toLocalDateTime(TimeZone.currentSystemDefault())
             )
             addResultUseCase(AddResultUseCase.Params(data, currentExerciseType))
 
@@ -258,7 +260,12 @@ class AddExerciseViewModel(
         if (date == null) return
         val formattedDate = formatDateUseCase(date)
         pickedDate = date
-        _viewState.update { it.copy(newResultData = it.newResultData.copy(date = formattedDate), isDatePickerVisible = false) }
+        _viewState.update {
+            it.copy(
+                newResultData = it.newResultData.copy(date = formattedDate),
+                isDatePickerVisible = false
+            )
+        }
     }
 
     fun onResultLongClicked(resultIndex: Int) {

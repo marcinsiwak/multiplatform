@@ -168,6 +168,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.kotlinx.lifecycle.ktx)
+    implementation(libs.kotlinx.viewModel.ktx)
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.androidx.navigation.compose)

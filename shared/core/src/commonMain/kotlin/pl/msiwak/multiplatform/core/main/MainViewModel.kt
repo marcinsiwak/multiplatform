@@ -1,5 +1,7 @@
 package pl.msiwak.multiplatform.core.main
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -7,7 +9,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
 import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
