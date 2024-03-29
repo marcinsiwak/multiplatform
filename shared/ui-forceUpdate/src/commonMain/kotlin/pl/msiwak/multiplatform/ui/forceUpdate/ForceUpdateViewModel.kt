@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.ui.forceUpdate
 
-import pl.msiwak.multiplatform.core.ViewModel
+import androidx.lifecycle.ViewModel
 import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.navigator.Navigator
 

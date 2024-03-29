@@ -69,6 +69,7 @@ kotlin {
             implementation(libs.napier)
 
             implementation(libs.kotlinx.lifecycle)
+            implementation(libs.kotlinx.viewModel)
         }
 
         commonTest.dependencies {

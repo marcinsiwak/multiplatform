@@ -1,5 +1,7 @@
 package pl.msiwak.multiplatform.ui.category
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -9,7 +11,6 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.Exercise
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
@@ -111,7 +112,12 @@ class CategoryViewModel(
                 exercises.removeAt(pos)
 
                 removeExerciseUseCase(exercise)
-                _viewState.update { it.copy(isRemoveExerciseDialogVisible = false, isLoading = false) }
+                _viewState.update {
+                    it.copy(
+                        isRemoveExerciseDialogVisible = false,
+                        isLoading = false
+                    )
+                }
             }
         }
     }
