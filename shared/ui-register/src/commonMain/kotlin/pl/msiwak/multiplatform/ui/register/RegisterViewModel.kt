@@ -42,6 +42,7 @@ class RegisterViewModel(
         }
     }
 
+    @OptIn(ExperimentalResourceApi::class)
     fun onLoginChanged(text: String) {
         _viewState.update { it.copy(login = text, loginErrorMessage = null) }
     }
