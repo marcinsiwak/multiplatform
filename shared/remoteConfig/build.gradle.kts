@@ -37,7 +37,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.firebase.gitlive.remoteConfig)
+            api(libs.firebase.gitlive.remoteConfig)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
