@@ -35,7 +35,7 @@ kotlin {
         xcodeConfigurationToNativeBuildType["stagingDebug"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
-        pod("FirebaseMessaging")
+//        pod("FirebaseMessaging")
     }
 
     sourceSets {
