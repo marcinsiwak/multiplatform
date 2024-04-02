@@ -1,3 +1,5 @@
+import pl.msiwak.multiplatfor.dependencies.Modules
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
@@ -40,10 +42,9 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(Modules.commonObject))
             implementation(libs.firebase.gitlive.auth)
             implementation(libs.firebase.gitlive.crashlytics)
-            api(libs.kotlinx.dateTime)
-            api(libs.kotlinx.coroutines)
             implementation(libs.napier)
         }
 

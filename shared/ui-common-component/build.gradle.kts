@@ -61,7 +61,7 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
-            api(libs.google.android.playservices.auth)
+            implementation(libs.google.android.playservices.auth)
         }
 
         commonTest.dependencies {

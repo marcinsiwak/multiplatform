@@ -64,7 +64,7 @@ kotlin {
         }
 
         iosMain.dependencies {
-            api(libs.ktor.ios)
+            implementation(libs.ktor.ios)
         }
 
         commonTest.dependencies {
