@@ -7,8 +7,6 @@ plugins {
     alias(libs.plugins.serialization)
 }
 
-apply(from = "$rootDir/gradle/buildVariants.gradle")
-
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
 

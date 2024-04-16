@@ -6,9 +6,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
+    id("pl.msiwak.convention.android.config")
 }
-
-apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -78,8 +77,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.ui.settings"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }
