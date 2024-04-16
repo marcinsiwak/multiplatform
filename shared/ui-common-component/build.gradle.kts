@@ -48,11 +48,6 @@ kotlin {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
             implementation(libs.napier)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
