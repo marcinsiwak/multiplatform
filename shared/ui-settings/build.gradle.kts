@@ -34,7 +34,6 @@ kotlin {
 
             export(project(Modules.navigator))
             export(project(Modules.domain))
-            export(project(Modules.core))
             export(project(Modules.utils))
             export(project(Modules.commonResources))
             export(project(Modules.commonObject))
@@ -49,7 +48,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(Modules.core))
             implementation(project(Modules.domain))
             implementation(project(Modules.navigator))
             implementation(project(Modules.utils))
