@@ -1,6 +1,14 @@
 plugins {
+//    id(libs.plugins.kotlinAndroid.get().pluginId) apply false
+//    id(libs.plugins.kotlinCocoapods.get().pluginId) apply false
     `java-gradle-plugin`
     `kotlin-dsl`
+//    id(libs.plugins.androidApplication.get().pluginId).apply(false)
+//    id(libs.plugins.androidLibrary.get().pluginId).apply(false)
+//    id(libs.plugins.kotlinAndroid.get().pluginId).apply(false)
+//    id(libs.plugins.kotlinMultiplatform.get().pluginId).apply(false)
+//    id(libs.plugins.kotlinCocoapods.get().pluginId).apply(false)
+
 }
 
 repositories {
@@ -9,13 +17,13 @@ repositories {
 
 gradlePlugin {
     plugins {
-        register("compose") {
-            id = "pl.msiwak.convention.compose"
-            implementationClass = "pl.msiwak.convention.compose.ComposePlugin"
-        }
         register("AndroidConfigPlugin") {
             id = "pl.msiwak.convention.android.config"
             implementationClass = "pl.msiwak.convention.config.AndroidConfigPlugin"
+        }
+        register("TargetConfigPlugin") {
+            id = "pl.msiwak.convention.target.config"
+            implementationClass = "pl.msiwak.convention.config.TargetConfigPlugin"
         }
     }
 }
