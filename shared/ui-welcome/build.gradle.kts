@@ -6,25 +6,12 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
+    id("pl.msiwak.convention.android.config")
+    id("pl.msiwak.convention.target.config")
 }
-
-apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Ui welcome Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -35,7 +22,6 @@ kotlin {
 
             export(project(Modules.navigator))
             export(project(Modules.domain))
-            export(project(Modules.core))
             export(project(Modules.utils))
             export(project(Modules.commonResources))
             export(project(Modules.commonObject))
@@ -51,7 +37,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(Modules.core))
             implementation(project(Modules.domain))
             implementation(project(Modules.navigator))
             implementation(project(Modules.utils))
@@ -61,11 +46,6 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
 
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
@@ -85,8 +65,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.ui.welcome"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

@@ -7,25 +7,14 @@ plugins {
     alias(libs.plugins.serialization)
     id("dev.icerock.mobile.multiplatform-resources")
     alias(libs.plugins.composeMultiplatform)
+    id("pl.msiwak.convention.android.config")
+    id("pl.msiwak.convention.target.config")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 kotlin {
     targetHierarchy.default()
-
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
 
     cocoapods {
         summary = "Main Shared Module"
@@ -152,10 +141,5 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.android"
-    compileSdk = 34
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 27
-        targetSdk = 33
-    }
 }
