@@ -7,23 +7,11 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
     id("pl.msiwak.convention.android.config")
+    id("pl.msiwak.convention.target.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Ui Summary Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"

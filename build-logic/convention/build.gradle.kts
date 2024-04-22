@@ -1,14 +1,6 @@
 plugins {
-//    id(libs.plugins.kotlinAndroid.get().pluginId) apply false
-//    id(libs.plugins.kotlinCocoapods.get().pluginId) apply false
     `java-gradle-plugin`
     `kotlin-dsl`
-//    id(libs.plugins.androidApplication.get().pluginId).apply(false)
-//    id(libs.plugins.androidLibrary.get().pluginId).apply(false)
-//    id(libs.plugins.kotlinAndroid.get().pluginId).apply(false)
-//    id(libs.plugins.kotlinMultiplatform.get().pluginId).apply(false)
-//    id(libs.plugins.kotlinCocoapods.get().pluginId).apply(false)
-
 }
 
 repositories {

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     id("dev.icerock.mobile.multiplatform-resources")
     alias(libs.plugins.composeMultiplatform)
+    id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 multiplatformResources {
@@ -14,19 +16,6 @@ multiplatformResources {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "CommonResources for the Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -73,8 +62,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.commonResources"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }
