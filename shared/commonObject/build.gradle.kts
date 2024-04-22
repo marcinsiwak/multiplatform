@@ -6,24 +6,12 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
+    id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "CommonObject Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -64,8 +52,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.commonObject"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

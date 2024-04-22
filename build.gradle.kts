@@ -19,6 +19,10 @@ buildscript {
     }
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
 subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(from = "$rootDir/extras/detekt.gradle")

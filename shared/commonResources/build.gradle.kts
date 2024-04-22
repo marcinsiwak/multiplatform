@@ -3,23 +3,12 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
+    id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "CommonResources for the Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -38,11 +27,11 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.material3)
+            api(compose.ui)
+            api(compose.components.resources)
         }
 
         commonTest.dependencies {
@@ -92,8 +81,4 @@ tasks.named("generateComposeResClass") {
 
 android {
     namespace = "pl.msiwak.multiplatform.commonResources"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }
