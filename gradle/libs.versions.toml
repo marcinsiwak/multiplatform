@@ -88,12 +88,6 @@ sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", 
 napier = { module = "io.github.aakira:napier", version.ref = "napier"}
 google-android-playservices-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-playservices-auth"}
 google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
-androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
-voyager-navigator-core = {module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager"}
-voyager-navigator-tabs = {module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager"}
-moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources"}
-moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources"}
-moko-graphics = { module = "dev.icerock.moko:graphics", version.ref = "moko-graphics"}
 
 # Gradle scripts depdendecies
 gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
