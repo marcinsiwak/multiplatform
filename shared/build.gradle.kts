@@ -13,8 +13,6 @@ plugins {
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 kotlin {
-    targetHierarchy.default()
-
     cocoapods {
         summary = "Main Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -122,11 +120,8 @@ kotlin {
             implementation(libs.kotlinx.viewModel)
         }
 
-        androidMain {
-            dependsOn(commonMain.get())
-            dependencies {
-                implementation(libs.koin.android)
-            }
+        androidMain.dependencies {
+            implementation(libs.koin.android)
         }
 
         commonTest.dependencies {

@@ -32,7 +32,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(Modules.commonResources))
+            api(project(Modules.commonResources))
 
             api(libs.kotlinx.dateTime)
             implementation(libs.kotlinx.serialization)

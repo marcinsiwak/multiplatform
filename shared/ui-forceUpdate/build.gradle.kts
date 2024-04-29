@@ -39,7 +39,7 @@ kotlin {
             implementation(project(Modules.domain))
             implementation(project(Modules.navigator))
             implementation(project(Modules.utils))
-            implementation(project(Modules.commonResources))
+            api(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
             implementation(project(Modules.uiCommonComponent))
 
