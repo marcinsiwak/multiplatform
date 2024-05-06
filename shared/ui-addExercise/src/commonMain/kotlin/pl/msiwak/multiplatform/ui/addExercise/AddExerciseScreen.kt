@@ -27,6 +27,7 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.compose.koinInject
@@ -47,6 +48,7 @@ private const val FOCUS_REQUESTERS_AMOUNT = 4
 
 @Composable
 fun AddExerciseScreen(
+    navController: NavController,
     id: String,
     viewModel: AddExerciseViewModel = koinInject { parametersOf(id) }
 ) {

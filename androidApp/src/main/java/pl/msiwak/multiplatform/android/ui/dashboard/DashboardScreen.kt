@@ -76,9 +76,9 @@ fun DashboardScreenContent(
             navController = navController,
             startDestination = items[0].route
         ) {
-            composable(items[0].route) { SummaryScreen() }
+//            composable(items[0].route) { SummaryScreen() }
 //            composable(items[1].route) { AccountScreen() }
-            composable(items[1].route) { SettingsScreen() }
+//            composable(items[1].route) { SettingsScreen() }
         }
     }
 }

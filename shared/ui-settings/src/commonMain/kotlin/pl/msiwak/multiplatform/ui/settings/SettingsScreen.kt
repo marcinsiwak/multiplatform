@@ -12,6 +12,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.SR
@@ -20,6 +21,7 @@ import pl.msiwak.multiplatform.commonResources.theme.font
 
 @Composable
 fun SettingsScreen(
+    navController: NavController,
     viewModel: SettingsViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()

@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.core.main
+package pl.msiwak.multiplatform.shared
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,8 +15,9 @@ import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
-import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.navigator.Navigator
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class MainViewModel(
@@ -27,7 +28,8 @@ class MainViewModel(
     globalErrorHandler: GlobalErrorHandler,
     getUserTokenUseCase: GetUserTokenUseCase,
     observeAuthStateChangedUseCase: ObserveAuthStateChangedUseCase,
-    getIsOfflineModeUseCase: GetIsOfflineModeUseCase
+    getIsOfflineModeUseCase: GetIsOfflineModeUseCase,
+    val navigationProvider: NavigationProvider
 ) : ViewModel() {
 
     val mainNavigator = navigator
@@ -47,17 +49,17 @@ class MainViewModel(
             StringDesc.localeType = StringDesc.LocaleType.Custom(getLanguageUseCase())
 
             if (!getUserTokenUseCase().isNullOrEmpty()) {
-                _viewState.update { it.copy(directions = NavigationDirections.Dashboard(true)) }
+                _viewState.update { it.copy(directions = NavDestination.DashboardDestination.NavDashboardGraphDestination) }
             }
             if (getForceUpdateStateUseCase()) {
-                _viewState.update { it.copy(directions = NavigationDirections.ForceUpdate) }
+                _viewState.update { it.copy(directions = NavDestination.ForceUpdateDestination.NavForceUpdateGraphDestination) }
             }
             delay(500)
             _viewState.update { it.copy(isLoading = false) }
         }
         viewModelScope.launch {
             if (getIsOfflineModeUseCase()) {
-                _viewState.update { it.copy(directions = NavigationDirections.Dashboard(true)) }
+                _viewState.update { it.copy(directions = NavDestination.DashboardDestination.NavDashboardGraphDestination) }
             }
         }
     }

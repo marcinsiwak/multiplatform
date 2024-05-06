@@ -116,6 +116,7 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
+            implementation(libs.koin.compose)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -124,6 +125,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
+            implementation(libs.compose.multiplatform.navigation)
         }
 
         androidMain {

@@ -18,7 +18,8 @@ class DashboardViewModel(
     private val getUser: GetUserUseCase,
     private val navigator: Navigator,
     getIsOfflineModeUseCase: GetIsOfflineModeUseCase,
-    globalErrorHandler: GlobalErrorHandler
+    globalErrorHandler: GlobalErrorHandler,
+    val bottomNavigationProvider: BottomNavigationProvider
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(DashboardState())

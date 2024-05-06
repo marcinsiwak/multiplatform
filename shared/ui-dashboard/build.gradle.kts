@@ -42,11 +42,14 @@ kotlin {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
             implementation(project(Modules.uiCommonComponent))
+            implementation(project(Modules.uiSummary))
+            implementation(project(Modules.uiSettings))
 
             implementation(libs.napier)
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.compose.multiplatform.navigation)
 
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)

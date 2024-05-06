@@ -16,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.SR
@@ -24,6 +25,7 @@ import pl.msiwak.multiplatform.commonResources.theme.font
 
 @Composable
 fun LanguageScreen(
+    navController: NavController,
     viewModel: LanguageViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()

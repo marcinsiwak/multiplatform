@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
@@ -44,6 +45,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
 
 @Composable
 fun CategoryScreen(
+    navController: NavController,
     id: String,
     viewModel: CategoryViewModel = koinInject { parametersOf(id) }
 ) {

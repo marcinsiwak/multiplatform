@@ -26,8 +26,8 @@ moko-resources = "0.24.0-alpha-4"
 moko-graphics = "0.9.0"
 firebaseGitlive = "1.10.0"
 firebase-android-bom = "32.3.1"
-kotlinx-lifecycle = "2.8.0-alpha03"
-kotlinx-viewModel = "2.8.0-alpha03"
+kotlinx-lifecycle = "2.8.0-beta01"
+kotlinx-viewModel = "2.8.0-beta01"
 kotlinx-coroutines = "1.6.4"
 kotlinx-dateTime = "0.4.0"
 kotlinx-serialization = "1.5.0"
@@ -38,6 +38,7 @@ ktlint = "11.5.1"
 detekt = "1.19.0"
 firebase-appDistribution = "4.0.1"
 compose-components-resources = "1.4.0"
+compose-multiplatform-navigation = "2.7.0-alpha03"
 compose-multiplatform = "1.6.0"
 koin-compose = "1.0.4"
 
@@ -93,6 +94,7 @@ google-android-playservices-ads = { module = "com.google.android.gms:play-servic
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources"}
 moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources"}
 moko-graphics = { module = "dev.icerock.moko:graphics", version.ref = "moko-graphics"}
+compose-multiplatform-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-multiplatform-navigation" }
 
 # Gradle scripts depdendecies
 gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }

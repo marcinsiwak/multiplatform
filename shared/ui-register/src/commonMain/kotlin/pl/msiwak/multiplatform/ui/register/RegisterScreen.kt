@@ -17,6 +17,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
@@ -29,6 +30,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.PasswordRequirements
 
 @Composable
 fun RegisterScreen(
+    navController: NavController,
     viewModel: RegisterViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()

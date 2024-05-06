@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.collectLatest
@@ -36,6 +37,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
 
 @Composable
 fun SummaryScreen(
+    navController: NavController,
     viewModel: SummaryViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()

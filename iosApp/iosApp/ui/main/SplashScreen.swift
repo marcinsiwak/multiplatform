@@ -22,14 +22,14 @@ struct SplashScreen: View {
     }
     
     private func observeState() {
-        viewModel.viewState.collect(collector: Collector<MainState> { state in
-            self.state.value = state
-            if (!state.isLoading) {
-                navigate(state.directions)
-            }
-        }) { _ in
-            print("Error ocurred during state collection")
-        }
+//        viewModel.viewState.collect(collector: Collector<MainState> { state in
+//            self.state.value = state
+//            if (!state.isLoading) {
+//                navigate(state.directions)
+//            }
+//        }) { _ in
+//            print("Error ocurred during state collection")
+//        }
     }
     
     private func observeNavigator() {

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.SR
@@ -22,6 +23,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
 
 @Composable
 fun VerifyEmailScreen(
+    navController: NavController,
     viewModel: VerifyEmailViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()

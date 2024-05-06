@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
@@ -22,6 +23,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 
 @Composable
 fun ForceUpdateScreen(
+    navController: NavController,
     viewModel: ForceUpdateViewModel = koinInject()
 ) {
     ForceUpdateScreenContent(

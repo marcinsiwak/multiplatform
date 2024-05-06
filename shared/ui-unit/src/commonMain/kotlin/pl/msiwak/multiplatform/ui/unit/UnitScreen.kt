@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
 import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.SR
@@ -26,6 +27,7 @@ import pl.msiwak.multiplatform.commonResources.theme.font
 
 @Composable
 fun UnitScreen(
+    navController: NavController,
     viewModel: UnitViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
