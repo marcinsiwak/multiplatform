@@ -16,7 +16,6 @@ import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
-import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class WelcomeScreenViewModel(

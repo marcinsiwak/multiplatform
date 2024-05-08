@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.shared
 
-import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 
 data class MainState(

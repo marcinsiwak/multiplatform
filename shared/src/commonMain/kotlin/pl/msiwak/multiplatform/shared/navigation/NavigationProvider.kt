@@ -7,8 +7,6 @@ import pl.msiwak.multiplatform.ui.dashboard.DashboardGraph
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateGraph
 import pl.msiwak.multiplatform.ui.language.LanguageGraph
 import pl.msiwak.multiplatform.ui.register.RegisterGraph
-import pl.msiwak.multiplatform.ui.settings.SettingsGraph
-import pl.msiwak.multiplatform.ui.summary.SummaryGraph
 import pl.msiwak.multiplatform.ui.unit.UnitGraph
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailGraph
 import pl.msiwak.multiplatform.ui.welcome.WelcomeGraph
