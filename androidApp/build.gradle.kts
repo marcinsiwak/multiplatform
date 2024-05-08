@@ -58,6 +58,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+        // todo remove after final versions released kotlin/compose-multiplatform
+        freeCompilerArgs = listOf(
+            "-Xallow-jvm-ir-dependencies",
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
     }
 
     val releaseKeystorePropFile = rootProject.file("signing/release.properties")
@@ -147,12 +153,13 @@ android {
             )
         }
     }
+// todo uncomment after final versions released kotlin/compose-multiplatform
 
-    productFlavors {
-        getByName("staging") {
-            applicationIdSuffix = ".staging"
-        }
-    }
+//    productFlavors {
+//        getByName("staging") {
+//            applicationIdSuffix = ".staging"
+//        }
+//    }
 }
 
 dependencies {

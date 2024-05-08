@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,7 @@
 		71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */; };
 		71D05CA22B3338DF00994291 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 71D05CA12B3338DF00994291 /* .swiftlint.yml */; };
 		71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */; };
+		71FADE022BEA5B1C000D65C7 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FADE012BEA5B1C000D65C7 /* GoogleMobileAds.xcframework */; };
 		71FF1CA02B95193500FFFDCE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FF1C9F2B95193500FFFDCE /* MainView.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,7 @@
 		719EA0152BB220680078244F /* AddCategoryScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCategoryScreen.swift; sourceTree = "<group>"; };
 		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71D05CA12B3338DF00994291 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		71FADE012BEA5B1C000D65C7 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; name = GoogleMobileAds.xcframework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework"; sourceTree = "<group>"; };
 		71FF1C9F2B95193500FFFDCE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		74DA36D12685A7143467F9F1 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71FADE022BEA5B1C000D65C7 /* GoogleMobileAds.xcframework in Frameworks */,
 				71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +146,7 @@
 		12D7815B5D0DFCE35AA0A587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				71FADE012BEA5B1C000D65C7 /* GoogleMobileAds.xcframework */,
 				81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */,
 			);
 			name = Frameworks;
@@ -490,23 +494,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FA0C7B113DBE509932A53ACD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

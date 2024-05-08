@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.android.config")
 }
