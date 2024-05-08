@@ -17,7 +17,7 @@ class ForceUpdateGraph : NavigationNestedGraph {
             composable(
                 route = ForceUpdateDestination.NavForceUpdateScreen.route
             ) {
-                ForceUpdateScreen(navController)
+                ForceUpdateScreen()
             }
         }
     }

@@ -1,8 +1,5 @@
 package pl.msiwak.multiplatform.android.ui
 
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,7 +7,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleObserver
-import io.github.aakira.napier.Napier
 import org.koin.java.KoinJavaComponent.inject
 import pl.msiwak.multiplatform.shared.MainView
 import pl.msiwak.multiplatform.shared.MainViewModel
@@ -48,25 +44,5 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() {
         lifecycle.removeObserver(lifeCycleObserver)
         super.onDestroy()
-    }
-
-
-    private fun openStore() {
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("$URI_MARKET$packageName")))
-        } catch (e: ActivityNotFoundException) {
-            Napier.e("Error: $e")
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("$URI_STORE$packageName")
-                )
-            )
-        }
-    }
-
-    companion object {
-        private const val URI_MARKET = "market://details?id="
-        private const val URI_STORE = "https://play.google.com/store/apps/details?id="
     }
 }

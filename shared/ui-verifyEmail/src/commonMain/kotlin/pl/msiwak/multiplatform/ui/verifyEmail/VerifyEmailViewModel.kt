@@ -2,11 +2,8 @@ package pl.msiwak.multiplatform.ui.verifyEmail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.ResendVerificationEmailUseCase
@@ -17,17 +14,10 @@ class VerifyEmailViewModel(
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
-    private val _viewEvent = MutableSharedFlow<VerifyEmailEvent>()
-    val viewEvent: SharedFlow<VerifyEmailEvent> = _viewEvent.asSharedFlow()
-
     private val _viewState = MutableStateFlow(VerifyState())
     val viewState: StateFlow<VerifyState> = _viewState.asStateFlow()
 
     private val errorHandler = globalErrorHandler.handleError()
-
-    fun onOpenMailClicked() = viewModelScope.launch {
-        _viewEvent.emit(VerifyEmailEvent.OpenMail)
-    }
 
     fun onResendMailClicked() = viewModelScope.launch(errorHandler) {
         resendVerificationEmailUseCase()

@@ -33,6 +33,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines)
             implementation(project(Modules.uiCommonComponent))
             implementation(project(Modules.commonResources))
+            implementation(project(Modules.utils))
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
