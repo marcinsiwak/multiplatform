@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.commonComponent
 
 import androidx.compose.foundation.background
@@ -20,15 +22,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.window.Dialog
-import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.stringResource
-import pl.msiwak.multiplatform.commonResources.SR
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.confirm
+import athletetrack.shared.commonresources.generated.resources.hours
+import athletetrack.shared.commonresources.generated.resources.milliseconds
+import athletetrack.shared.commonresources.generated.resources.minutes
+import athletetrack.shared.commonresources.generated.resources.running_time_input_insert_result
+import athletetrack.shared.commonresources.generated.resources.seconds
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
 private const val MILLISECONDS_DIGITS_AMOUNT = 3
 private const val MINUTE_IN_SECONDS = 60
 private const val HOUR_IN_MINUTES = 60
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun RunningTimeInputDialog(
     onConfirm: (String, String, String, String) -> Unit,
@@ -50,7 +59,7 @@ fun RunningTimeInputDialog(
         Column(
             modifier = Modifier
                 .background(
-                    colorResource(SR.colors.gray),
+                    Color.Gray,
                     RoundedCornerShape(MaterialTheme.dimens.dialog_corners)
                 )
                 .padding(MaterialTheme.dimens.space_16),
@@ -58,7 +67,7 @@ fun RunningTimeInputDialog(
         ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(SR.strings.running_time_input_insert_result),
+                text = stringResource(Res.string.running_time_input_insert_result),
                 style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center
             )
@@ -77,7 +86,7 @@ fun RunningTimeInputDialog(
                         Text("0")
                     },
                     label = {
-                        Text(stringResource(SR.strings.hours))
+                        Text(stringResource(Res.string.hours))
                     }
                 )
 
@@ -94,7 +103,7 @@ fun RunningTimeInputDialog(
                         Text("0")
                     },
                     label = {
-                        Text(stringResource(SR.strings.minutes))
+                        Text(stringResource(Res.string.minutes))
                     }
                 )
             }
@@ -114,7 +123,7 @@ fun RunningTimeInputDialog(
                         Text("0")
                     },
                     label = {
-                        Text(stringResource(SR.strings.seconds))
+                        Text(stringResource(Res.string.seconds))
                     }
                 )
                 RunningTimeInputView(
@@ -128,13 +137,13 @@ fun RunningTimeInputDialog(
                         Text("0")
                     },
                     label = {
-                        Text(stringResource(SR.strings.milliseconds))
+                        Text(stringResource(Res.string.milliseconds))
                     }
                 )
             }
             SecondaryButton(
                 modifier = Modifier.padding(vertical = MaterialTheme.dimens.space_8),
-                text = stringResource(SR.strings.confirm),
+                text = stringResource(Res.string.confirm),
                 onClick = {
                     if (hours.value.isEmpty()) {
                         hours.value = "0"

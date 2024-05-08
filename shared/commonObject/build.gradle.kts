@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.android.config")
 }
@@ -31,13 +33,16 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(Modules.commonResources))
+            api(project(Modules.commonResources))
 
             api(libs.kotlinx.dateTime)
             implementation(libs.kotlinx.serialization)
 
             api(libs.firebase.gitlive.auth)
             api(libs.firebase.gitlive.remoteConfig)
+
+            implementation(compose.runtime)
+            implementation(compose.components.resources)
         }
 
         commonTest.dependencies {

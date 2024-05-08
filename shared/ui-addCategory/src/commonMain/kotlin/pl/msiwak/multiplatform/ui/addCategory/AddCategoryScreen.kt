@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.addCategory
 
 import androidx.compose.foundation.layout.Box
@@ -14,10 +16,13 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.add_category
+import athletetrack.shared.commonresources.generated.resources.category_name
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.DropDownView
@@ -38,6 +43,7 @@ fun AddCategoryScreen(
     )
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun AddCategoryScreenContent(
     viewState: State<AddCategoryState>,
@@ -62,7 +68,7 @@ fun AddCategoryScreenContent(
                 onValueChange = {
                     onCategoryNameChanged(it)
                 },
-                hintText = stringResource(SR.strings.category_name)
+                hintText = stringResource(Res.string.category_name)
             )
             DropDownView(
                 currentValue = viewState.value.exerciseType.name,
@@ -88,7 +94,7 @@ fun AddCategoryScreenContent(
         ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(SR.strings.add_category),
+                text = stringResource(Res.string.add_category),
                 fontSize = MaterialTheme.font.font_16
             )
         }

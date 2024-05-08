@@ -9,7 +9,7 @@ struct SettingsItem: View {
         VStack {
             Text(title)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(.onPrimary)
+                .foregroundColor(.blue)
             Divider()
                 .background(.tertiary)
         }

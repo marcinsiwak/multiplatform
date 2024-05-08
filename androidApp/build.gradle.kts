@@ -50,7 +50,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.9"
+        kotlinCompilerExtensionVersion = "1.5.13-dev-k2.0.0-RC1-50f08dfa4b4"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -58,6 +58,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+        // todo remove after final versions released kotlin/compose-multiplatform
+        freeCompilerArgs = listOf(
+            "-Xallow-jvm-ir-dependencies",
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
     }
 
     val releaseKeystorePropFile = rootProject.file("signing/release.properties")
@@ -147,12 +153,13 @@ android {
             )
         }
     }
+// todo uncomment after final versions released kotlin/compose-multiplatform
 
-    productFlavors {
-        getByName("staging") {
-            applicationIdSuffix = ".staging"
-        }
-    }
+//    productFlavors {
+//        getByName("staging") {
+//            applicationIdSuffix = ".staging"
+//        }
+//    }
 }
 
 dependencies {
@@ -173,6 +180,8 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.accompanist.navigation.material)
+
+    implementation(libs.components.resources)
 
     api(libs.firebase.common)
     api(libs.firebase.auth)

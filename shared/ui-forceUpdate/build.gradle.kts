@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     id("pl.msiwak.convention.android.config")
     id("pl.msiwak.convention.target.config")
 }
@@ -39,7 +40,7 @@ kotlin {
             implementation(project(Modules.domain))
             implementation(project(Modules.navigator))
             implementation(project(Modules.utils))
-            implementation(project(Modules.commonResources))
+            api(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
             implementation(project(Modules.uiCommonComponent))
 

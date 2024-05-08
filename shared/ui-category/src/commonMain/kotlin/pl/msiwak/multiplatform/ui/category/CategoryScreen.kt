@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.category
 
 import androidx.compose.foundation.Image
@@ -27,13 +29,21 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.Lifecycle
-import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.add_exercise
+import athletetrack.shared.commonresources.generated.resources.bg_gym
+import athletetrack.shared.commonresources.generated.resources.bg_running_field
+import athletetrack.shared.commonresources.generated.resources.no
+import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
+import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
+import athletetrack.shared.commonresources.generated.resources.yes
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
@@ -42,6 +52,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun CategoryScreen(
     id: String,
@@ -50,8 +61,8 @@ fun CategoryScreen(
     val viewState = viewModel.viewState.collectAsState()
 
     val backgroundId = when (viewState.value.exerciseType) {
-        ExerciseType.RUNNING -> SR.images.bg_running_field
-        ExerciseType.GYM -> SR.images.bg_gym
+        ExerciseType.RUNNING -> Res.drawable.bg_running_field
+        ExerciseType.GYM -> Res.drawable.bg_gym
     }
 
     LaunchedEffect(Unit) {
@@ -82,7 +93,7 @@ fun CategoryScreen(
 @Composable
 fun CategoryScreenContent(
     viewState: State<CategoryState>,
-    backgroundId: ImageResource,
+    backgroundId: DrawableResource,
     onConfirmClicked: () -> Unit = {},
     onDismissClicked: () -> Unit = {},
     onExerciseTitleChanged: (String) -> Unit = {},
@@ -94,10 +105,10 @@ fun CategoryScreenContent(
 ) {
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = stringResource(SR.strings.remove_result_dialog_title),
-            description = stringResource(SR.strings.remove_result_dialog_description),
-            confirmButtonTitle = stringResource(SR.strings.yes),
-            dismissButtonTitle = stringResource(SR.strings.no),
+            title = stringResource(Res.string.remove_result_dialog_title),
+            description = stringResource(Res.string.remove_result_dialog_description),
+            confirmButtonTitle = stringResource(Res.string.yes),
+            dismissButtonTitle = stringResource(Res.string.no),
             onConfirmClicked = onConfirmClicked,
             onDismissClicked = onDismissClicked
         )
@@ -169,7 +180,7 @@ fun CategoryScreenContent(
         ) {
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(SR.strings.add_exercise),
+                text = stringResource(Res.string.add_exercise),
                 fontSize = MaterialTheme.font.font_16
             )
         }
@@ -201,7 +212,7 @@ fun CategoryScreenContent(
 //     AppTheme {
 //         CategoryScreenContent(
 //             viewState = MutableStateFlow(CategoryState()).collectAsState(),
-//             backgroundId = SR.images.bg_gym.drawableResId
+//             backgroundId = Res.drawable.bg_gym.drawableResId
 //         )
 //     }
 // }

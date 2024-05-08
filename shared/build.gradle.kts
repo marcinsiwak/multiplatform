@@ -5,8 +5,8 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
-    id("dev.icerock.mobile.multiplatform-resources")
     alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     id("pl.msiwak.convention.android.config")
     id("pl.msiwak.convention.target.config")
 }
@@ -14,8 +14,6 @@ plugins {
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 kotlin {
-    targetHierarchy.default()
-
     cocoapods {
         summary = "Main Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -32,9 +30,6 @@ kotlin {
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
-
-            export(libs.moko.resources)
-            export(libs.moko.graphics)
 
             export(project(Modules.core))
             export(project(Modules.commonResources))
@@ -126,11 +121,8 @@ kotlin {
             implementation(libs.kotlinx.viewModel)
         }
 
-        androidMain {
-            dependsOn(commonMain.get())
-            dependencies {
-                implementation(libs.koin.android)
-            }
+        androidMain.dependencies {
+            implementation(libs.koin.android)
         }
 
         commonTest.dependencies {

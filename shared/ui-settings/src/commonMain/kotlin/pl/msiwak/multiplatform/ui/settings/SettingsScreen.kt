@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.settings
 
 import androidx.compose.foundation.clickable
@@ -12,9 +14,14 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.settings
+import athletetrack.shared.commonresources.generated.resources.settings_language
+import athletetrack.shared.commonresources.generated.resources.settings_logout
+import athletetrack.shared.commonresources.generated.resources.settings_unit
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 
@@ -32,6 +39,7 @@ fun SettingsScreen(
     )
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun SettingsScreenContent(
     viewState: State<SettingsState>,
@@ -48,7 +56,7 @@ fun SettingsScreenContent(
                     vertical = MaterialTheme.dimens.space_16,
                     horizontal = MaterialTheme.dimens.space_24
                 ),
-                text = stringResource(SR.strings.settings),
+                text = stringResource(Res.string.settings),
                 fontSize = MaterialTheme.font.font_24,
                 color = MaterialTheme.colorScheme.onPrimary
             )
@@ -58,7 +66,7 @@ fun SettingsScreenContent(
                     .clickable {
                         onUnitClicked()
                     },
-                text = stringResource(SR.strings.settings_unit)
+                text = stringResource(Res.string.settings_unit)
             )
             val isLanguageEnabled = false
             if (isLanguageEnabled) {
@@ -68,7 +76,7 @@ fun SettingsScreenContent(
                         .clickable {
                             onLanguageClicked()
                         },
-                    text = stringResource(SR.strings.settings_language)
+                    text = stringResource(Res.string.settings_language)
                 )
             }
             if (viewState.value.isLogoutButtonVisible) {
@@ -78,7 +86,7 @@ fun SettingsScreenContent(
                         .clickable {
                             onLogoutClicked()
                         },
-                    text = stringResource(SR.strings.settings_logout)
+                    text = stringResource(Res.string.settings_logout)
                 )
             }
         }

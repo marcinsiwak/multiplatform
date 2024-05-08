@@ -11,9 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.verify_description
+import athletetrack.shared.commonresources.generated.resources.verify_login
+import athletetrack.shared.commonresources.generated.resources.verify_open_mail
+import athletetrack.shared.commonresources.generated.resources.verify_resend_mail
+import athletetrack.shared.commonresources.generated.resources.verify_title
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
@@ -44,6 +50,7 @@ fun VerifyEmailScreen(
     )
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun VerifyEmailScreenContent(
     viewState: State<VerifyState>,
@@ -65,12 +72,12 @@ fun VerifyEmailScreenContent(
     ) {
         Text(
             modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-            text = stringResource(SR.strings.verify_title),
+            text = stringResource(Res.string.verify_title),
             fontSize = MaterialTheme.font.font_24
         )
         Text(
             modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-            text = stringResource(SR.strings.verify_description),
+            text = stringResource(Res.string.verify_description),
             fontSize = MaterialTheme.font.font_16
         )
 
@@ -81,13 +88,13 @@ fun VerifyEmailScreenContent(
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
             onClick = { onOpenMailClicked() },
-            text = stringResource(SR.strings.verify_open_mail)
+            text = stringResource(Res.string.verify_open_mail)
         )
 
         SecondaryButton(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onResendMailClicked() },
-            text = stringResource(SR.strings.verify_resend_mail)
+            text = stringResource(Res.string.verify_resend_mail)
         )
 
         MainButton(
@@ -95,7 +102,7 @@ fun VerifyEmailScreenContent(
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
             onClick = { onLoginClicked() },
-            text = stringResource(SR.strings.verify_login)
+            text = stringResource(Res.string.verify_login)
         )
     }
 }

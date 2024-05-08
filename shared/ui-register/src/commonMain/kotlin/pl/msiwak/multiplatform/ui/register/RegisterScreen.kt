@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.register
 
 import androidx.compose.foundation.clickable
@@ -17,10 +19,16 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.email
+import athletetrack.shared.commonresources.generated.resources.ic_invisible
+import athletetrack.shared.commonresources.generated.resources.ic_visible
+import athletetrack.shared.commonresources.generated.resources.password
+import athletetrack.shared.commonresources.generated.resources.register
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
@@ -42,6 +50,7 @@ fun RegisterScreen(
     )
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun RegisterScreenContent(
     viewState: State<RegisterState>,
@@ -57,7 +66,7 @@ fun RegisterScreenContent(
     Box(modifier = Modifier.fillMaxSize()) {
 //        Image(
 //            modifier = Modifier.fillMaxSize(),
-//            painter = painterResource(id = SR.images.bg_running_field.drawableResId),
+//            painter = painterResource(id = Res.drawable.bg_running_field.drawableResId),
 //            contentScale = ContentScale.Crop,
 //            contentDescription = null
 //        )
@@ -83,7 +92,7 @@ fun RegisterScreenContent(
                     )
                 },
                 onValueChange = onLoginChanged,
-                hintText = stringResource(SR.strings.email)
+                hintText = stringResource(Res.string.email)
             )
 
             InputView(
@@ -103,15 +112,15 @@ fun RegisterScreenContent(
                             .clickable { onVisibilityClicked() },
                         painter = painterResource(
                             if (viewState.value.isPasswordVisible) {
-                                SR.images.ic_invisible
+                                Res.drawable.ic_invisible
                             } else {
-                                SR.images.ic_visible
+                                Res.drawable.ic_visible
                             }
                         ),
                         contentDescription = null
                     )
                 },
-                hintText = stringResource(SR.strings.password)
+                hintText = stringResource(Res.string.password)
             )
 
             PasswordRequirements(requirements = viewState.value.passwordRequirements)
@@ -123,7 +132,7 @@ fun RegisterScreenContent(
                 onClick = {
                     onRegisterClicked()
                 },
-                text = stringResource(SR.strings.register)
+                text = stringResource(Res.string.register)
             )
         }
     }

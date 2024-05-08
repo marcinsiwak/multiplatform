@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.summary
 
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -24,11 +26,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.Lifecycle
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.ic_add
+import athletetrack.shared.commonresources.generated.resources.no
+import athletetrack.shared.commonresources.generated.resources.remove_category_dialog_description
+import athletetrack.shared.commonresources.generated.resources.remove_category_dialog_title
+import athletetrack.shared.commonresources.generated.resources.summary_add_category
+import athletetrack.shared.commonresources.generated.resources.yes
 import kotlinx.coroutines.flow.collectLatest
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
@@ -59,7 +68,7 @@ fun SummaryScreen(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
 @Composable
 fun SummaryScreenContent(
     viewState: State<SummaryState>,
@@ -71,10 +80,10 @@ fun SummaryScreenContent(
 ) {
     if (viewState.value.isRemoveCategoryDialogVisible) {
         PopupDialog(
-            title = stringResource(SR.strings.remove_category_dialog_title),
-            description = stringResource(SR.strings.remove_category_dialog_description),
-            confirmButtonTitle = stringResource(SR.strings.yes),
-            dismissButtonTitle = stringResource(SR.strings.no),
+            title = stringResource(Res.string.remove_category_dialog_title),
+            description = stringResource(Res.string.remove_category_dialog_description),
+            confirmButtonTitle = stringResource(Res.string.yes),
+            dismissButtonTitle = stringResource(Res.string.no),
             onConfirmClicked = onCategoryRemoved,
             onDismissClicked = onPopupDismissed
         )
@@ -117,13 +126,13 @@ fun SummaryScreenContent(
                         Row {
                             Icon(
                                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                                painter = painterResource(SR.images.ic_add),
+                                painter = painterResource(Res.drawable.ic_add),
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 contentDescription = null
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = stringResource(SR.strings.summary_add_category),
+                                text = stringResource(Res.string.summary_add_category),
                                 color = MaterialTheme.colorScheme.tertiary
                             )
                         }

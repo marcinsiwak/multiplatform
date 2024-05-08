@@ -2,7 +2,7 @@ import shared
 import SwiftUI
 
 extension SwiftUI.Color {
-    static let colorPrimary = Color(SR.colors().colorPrimary.getUIColor())
+    static let colorPrimary = Color.p(SR.colors().colorPrimary.getUIColor())
     static let onPrimary = Color(SR.colors().colorOnPrimary.getUIColor())
     static let colorSecondary = Color(SR.colors().colorSecondary.getUIColor())
     static let onSecondary = Color(SR.colors().colorOnSecondary.getUIColor())

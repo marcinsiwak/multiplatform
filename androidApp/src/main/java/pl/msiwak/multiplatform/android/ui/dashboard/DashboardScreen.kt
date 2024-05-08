@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.android.ui.dashboard
 
 import androidx.compose.foundation.layout.Column
@@ -9,16 +11,20 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.ic_settings
+import athletetrack.shared.commonresources.generated.resources.ic_workout
+import athletetrack.shared.commonresources.generated.resources.settings
+import athletetrack.shared.commonresources.generated.resources.summary
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.androidx.compose.koinViewModel
 import pl.msiwak.multiplatform.android.ui.components.BottomNavigation
 import pl.msiwak.multiplatform.android.ui.utils.DarkLightPreview
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.navigator.DashboardNavigationDirections
 import pl.msiwak.multiplatform.ui.commonComponent.OfflineBanner
@@ -36,13 +42,13 @@ fun DashboardScreen() {
 
     val items = listOf(
         DashboardNavigationDirections.Summary(
-            SR.images.ic_workout.drawableResId,
-            stringResource(SR.strings.summary.resourceId)
+            Res.drawable.ic_workout,
+            Res.string.summary
         ),
-//        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(SR.strings.account)),
+//        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(Res.string.account)),
         DashboardNavigationDirections.Settings(
-            SR.images.ic_settings.drawableResId,
-            stringResource(SR.strings.settings.resourceId)
+            Res.drawable.ic_settings,
+            Res.string.settings
         )
     )
 
