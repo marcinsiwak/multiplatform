@@ -1,32 +1,50 @@
 package pl.msiwak.multiplatform.commonResources.theme
 
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import dev.icerock.moko.resources.compose.colorResource
-import pl.msiwak.multiplatform.commonResources.SR
 
 @Composable
 private fun appColorScheme() = lightColorScheme(
-    primary = colorResource(SR.colors.colorPrimary),
-    onPrimary = colorResource(SR.colors.colorOnPrimary),
-    secondary = colorResource(SR.colors.colorSecondary),
-    onSecondary = colorResource(SR.colors.colorOnSecondary),
-    tertiary = colorResource(SR.colors.colorTertiary),
-    onTertiary = colorResource(SR.colors.colorOnTertiary),
-    surface = colorResource(SR.colors.colorSurface),
-    onSurface = colorResource(SR.colors.colorOnSurface),
-    background = colorResource(SR.colors.background),
-    error = colorResource(SR.colors.colorError),
-    onError = colorResource(SR.colors.colorOnError)
+    primary = White,
+    onPrimary = Black,
+    secondary = DarkGrey,
+    onSecondary = Black,
+    tertiary = LightGrey,
+    onTertiary = Black,
+    surface = Black,
+    onSurface = White,
+    background = Black,
+    error = Red,
+    onError = Red
+)
+
+@Composable
+private fun appColorSchemeDark() = darkColorScheme(
+    primary = Black,
+    onPrimary = White,
+    secondary = DarkGrey,
+    onSecondary = Black,
+    tertiary = LightGrey,
+    onTertiary = Black,
+    surface = Black,
+    onSurface = White,
+    background = Black,
+    error = Red,
+    onError = Red
 )
 
 @Composable
 fun AppTheme(
     content: @Composable () -> Unit
 ) {
-    val colorScheme = appColorScheme()
+    val colorScheme = if (true) {
+        appColorSchemeDark()
+    } else {
+        appColorScheme()
+    }
 
     CompositionLocalProvider(LocalOwnColorScheme provides OwnColorScheme(true)) {
         MaterialTheme(

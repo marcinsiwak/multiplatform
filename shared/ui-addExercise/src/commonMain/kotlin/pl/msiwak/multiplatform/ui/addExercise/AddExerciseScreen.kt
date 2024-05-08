@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.addExercise
 
 import androidx.compose.foundation.background
@@ -27,13 +29,21 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.Lifecycle
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.add_new_result
+import athletetrack.shared.commonresources.generated.resources.add_result_save
+import athletetrack.shared.commonresources.generated.resources.confirm
+import athletetrack.shared.commonresources.generated.resources.no
+import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
+import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
+import athletetrack.shared.commonresources.generated.resources.yes
 import androidx.navigation.NavController
-import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.collectLatest
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.DateFilterType
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
@@ -99,7 +109,7 @@ fun AddExerciseScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalResourceApi::class)
 @Composable
 fun AddExerciseScreenContent(
     viewState: State<AddExerciseState>,
@@ -131,7 +141,7 @@ fun AddExerciseScreenContent(
             onDismissRequest = onDateDismiss,
             confirmButton = {
                 MainButton(
-                    text = stringResource(SR.strings.confirm),
+                    text = stringResource(Res.string.confirm),
                     onClick = {
                         onDateConfirmClicked(datePickerState.selectedDateMillis)
                     }
@@ -144,10 +154,10 @@ fun AddExerciseScreenContent(
 
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
-            title = stringResource(SR.strings.remove_result_dialog_title),
-            description = stringResource(SR.strings.remove_result_dialog_description),
-            confirmButtonTitle = stringResource(SR.strings.yes),
-            dismissButtonTitle = stringResource(SR.strings.no),
+            title = stringResource(Res.string.remove_result_dialog_title),
+            description = stringResource(Res.string.remove_result_dialog_description),
+            confirmButtonTitle = stringResource(Res.string.yes),
+            dismissButtonTitle = stringResource(Res.string.no),
             onConfirmClicked = {
                 onResultRemoved()
             },
@@ -231,7 +241,7 @@ fun AddExerciseScreenContent(
                     }
                 ) {
                     Text(
-                        text = stringResource(SR.strings.add_new_result),
+                        text = stringResource(Res.string.add_new_result),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
@@ -249,7 +259,7 @@ fun AddExerciseScreenContent(
                     }
                 ) {
                     Text(
-                        text = stringResource(SR.strings.add_result_save),
+                        text = stringResource(Res.string.add_result_save),
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }

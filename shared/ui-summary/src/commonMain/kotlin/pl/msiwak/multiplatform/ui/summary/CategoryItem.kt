@@ -23,14 +23,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
-import dev.icerock.moko.resources.compose.painterResource
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.bg_gym
+import athletetrack.shared.commonresources.generated.resources.bg_running_field
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 
+@OptIn(ExperimentalResourceApi::class)
 @Suppress("MagicNumber")
 @Composable
 fun CategoryItem(
@@ -38,8 +42,8 @@ fun CategoryItem(
     category: Category
 ) {
     val backgroundId = when (category.exerciseType) {
-        ExerciseType.RUNNING -> SR.images.bg_running_field
-        ExerciseType.GYM -> SR.images.bg_gym
+        ExerciseType.RUNNING -> Res.drawable.bg_running_field
+        ExerciseType.GYM -> Res.drawable.bg_gym
 //        ExerciseType.OTHER -> null
     }
 

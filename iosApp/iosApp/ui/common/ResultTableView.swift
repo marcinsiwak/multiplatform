@@ -67,7 +67,7 @@ struct ResultsTableView: View {
                 
                 if results.isEmpty && !isNewResultEnabled {
                     Button(action: onAddNewResultClicked) {
-                        Text(SR.strings().add_first_result.desc().localized())
+                        Text(Res.string().add_first_result.desc().localized())
                     }
                     .frame(maxWidth: .infinity, minHeight: Dimensions.results_min_height)
                     .listRowSeparator(.hidden)
@@ -90,7 +90,7 @@ struct ResultsTableView: View {
 
                 if !results.isEmpty && !isNewResultEnabled {
                     Button(action: onAddNewResultClicked) {
-                        Text(SR.strings().add_new_result.desc().localized())
+                        Text(Res.string().add_new_result.desc().localized())
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)

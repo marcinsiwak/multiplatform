@@ -29,8 +29,6 @@
     <string name="category">Kategoria</string>
 
     <string name="add_new_result">Dodaj nowy wynik</string>
-    <string name="remove_result_dialog_title">Usuń wynik </string>
-    <string name="remove_result_dialog_description">Czy na pewno chcesz usunąć ten wynik?</string>
 
     <string name="add_result_save">Zapisz wynik</string>
     <string name="add_first_result">Dodaj pierwszy wynik</string>
@@ -38,7 +36,6 @@
     <string name="remove_result_dialog_title">Usuń wynik</string>
     <string name="remove_result_dialog_description">Czy chcesz usunąć ten wynik?</string>
 
-    <string name="settings">Ustawienia</string>
     <string name="settings_language">Język</string>
     <string name="settings_unit">Jednostka</string>
     <string name="settings_logout">Wyloguj</string>

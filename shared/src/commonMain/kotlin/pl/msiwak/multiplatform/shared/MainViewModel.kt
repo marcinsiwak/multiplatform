@@ -2,7 +2,6 @@ package pl.msiwak.multiplatform.shared
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -46,7 +45,7 @@ class MainViewModel(
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             fetchRemoteConfigUseCase()
-            StringDesc.localeType = StringDesc.LocaleType.Custom(getLanguageUseCase())
+//            StringDesc.localeType = StringDesc.LocaleType.Custom(getLanguageUseCase())
 
             if (!getUserTokenUseCase().isNullOrEmpty()) {
                 _viewState.update { it.copy(directions = NavDestination.DashboardDestination.NavDashboardGraphDestination) }

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.commonComponent
 
 import androidx.compose.foundation.layout.padding
@@ -13,7 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.compose.stringResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.extension.fittingTabIndicatorOffset

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.forceUpdate
 
 import androidx.compose.foundation.Image
@@ -12,11 +14,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.bg_force_update
+import athletetrack.shared.commonresources.generated.resources.force_update_description
+import athletetrack.shared.commonresources.generated.resources.force_update_title
+import athletetrack.shared.commonresources.generated.resources.force_update_update
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import androidx.navigation.NavController
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
@@ -40,19 +47,19 @@ fun ForceUpdateScreenContent(
     ) {
         Column {
             Image(
-                painter = painterResource(SR.images.bg_force_update),
+                painter = painterResource(Res.drawable.bg_force_update),
                 contentScale = ContentScale.FillWidth,
                 contentDescription = null
             )
             Text(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_16),
-                text = stringResource(SR.strings.force_update_title),
+                text = stringResource(Res.string.force_update_title),
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = MaterialTheme.font.font_24
             )
             Text(
                 modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
-                text = stringResource(SR.strings.force_update_description),
+                text = stringResource(Res.string.force_update_description),
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = MaterialTheme.font.font_16
             )
@@ -66,7 +73,7 @@ fun ForceUpdateScreenContent(
                     horizontal = MaterialTheme.dimens.space_80
                 ),
             onClick = onUpdateClicked,
-            text = stringResource(SR.strings.force_update_update)
+            text = stringResource(Res.string.force_update_update)
         )
     }
 }

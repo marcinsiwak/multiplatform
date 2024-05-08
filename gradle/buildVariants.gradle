@@ -7,14 +7,15 @@ android {
 
     flavorDimensions "environment"
     productFlavors {
-        staging {
-            dimension = "environment"
-        }
-        production {
-            dimension = "environment"
-        }
-    }
+// todo uncomment after final versions released kotlin/compose-multiplatform
 
+//        staging {
+//            dimension = "environment"
+//        }
+//        production {
+//            dimension = "environment"
+//        }
+    }
 
     variantFilter { variant ->
         def names = variant.flavors*.name

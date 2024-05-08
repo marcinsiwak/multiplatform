@@ -12,22 +12,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
+import androidx.compose.ui.util.fastForEach
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.ic_correct
+import athletetrack.shared.commonresources.generated.resources.ic_wrong
+import athletetrack.shared.commonresources.generated.resources.password_requirements
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
+@ExperimentalResourceApi
 @Composable
 fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<PasswordRequirement>) {
     Column(modifier = modifier) {
         Text(
             modifier = Modifier
                 .padding(vertical = MaterialTheme.dimens.space_4),
-            text = stringResource(SR.strings.password_requirements),
+            text = stringResource(Res.string.password_requirements),
             style = MaterialTheme.typography.labelLarge
         )
-        requirements.forEach {
+        requirements.fastForEach {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
@@ -35,14 +41,14 @@ fun PasswordRequirements(modifier: Modifier = Modifier, requirements: List<Passw
                 if (it.isCorrect) {
                     Icon(
                         modifier = Modifier.size(MaterialTheme.dimens.requirements_icon_size),
-                        painter = painterResource(SR.images.ic_correct),
+                        painter = painterResource(Res.drawable.ic_correct),
                         tint = Color.Green,
                         contentDescription = null
                     )
                 } else {
                     Icon(
                         modifier = Modifier.size(MaterialTheme.dimens.requirements_icon_size),
-                        painter = painterResource(SR.images.ic_wrong),
+                        painter = painterResource(Res.drawable.ic_wrong),
                         tint = Color.Red,
                         contentDescription = null
                     )

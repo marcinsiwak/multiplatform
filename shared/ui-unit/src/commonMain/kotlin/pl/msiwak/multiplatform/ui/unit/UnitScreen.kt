@@ -18,10 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.settings_unit
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import androidx.navigation.NavController
-import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.SR
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 
@@ -38,6 +40,7 @@ fun UnitScreen(
     )
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun UnitScreenContent(
     viewState: State<UnitState>,
@@ -53,7 +56,7 @@ fun UnitScreenContent(
                 vertical = MaterialTheme.dimens.space_16,
                 horizontal = MaterialTheme.dimens.space_24
             ),
-            text = stringResource(SR.strings.settings_unit),
+            text = stringResource(Res.string.settings_unit),
             fontSize = MaterialTheme.font.font_24,
             color = Color.White
         )
