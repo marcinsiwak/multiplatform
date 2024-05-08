@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_exercise
 import athletetrack.shared.commonresources.generated.resources.bg_gym
@@ -37,17 +38,18 @@ import athletetrack.shared.commonresources.generated.resources.no
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
 import athletetrack.shared.commonresources.generated.resources.yes
+import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.navigation.NavController
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.ListItemView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
@@ -76,6 +78,16 @@ fun CategoryScreen(
         }
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.viewEvent.collectLatest { event ->
+            when (event) {
+                is CategoryEvent.NavigateToAddExercise -> navController.navigate(
+                    NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(event.id)
+                )
+            }
+        }
+    }
+
     CategoryScreenContent(
         viewState = viewState,
         backgroundId = backgroundId,
@@ -84,7 +96,9 @@ fun CategoryScreen(
         onExerciseTitleChanged = viewModel::onAddExerciseNameChanged,
         onAddExerciseClicked = viewModel::onAddExerciseClicked,
         onDialogClosed = viewModel::onDialogClosed,
-        onItemClick = viewModel::onExerciseClicked,
+        onItemClick = {
+            navController.navigate(NavDestination.AddExerciseDestination.NavAddExerciseScreen.route)
+        },
         onLongClick = viewModel::onResultLongClicked,
         onClick = viewModel::onAddNewExerciseClicked
 

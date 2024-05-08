@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.verify_description
 import athletetrack.shared.commonresources.generated.resources.verify_login
@@ -19,10 +20,10 @@ import athletetrack.shared.commonresources.generated.resources.verify_resend_mai
 import athletetrack.shared.commonresources.generated.resources.verify_title
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
-import androidx.navigation.NavController
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
@@ -48,7 +49,9 @@ fun VerifyEmailScreen(
         viewState = viewState,
         onOpenMailClicked = viewModel::onOpenMailClicked,
         onResendMailClicked = viewModel::onResendMailClicked,
-        onLoginClicked = viewModel::onLoginClicked
+        onLoginClicked = {
+            navController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+        }
     )
 }
 

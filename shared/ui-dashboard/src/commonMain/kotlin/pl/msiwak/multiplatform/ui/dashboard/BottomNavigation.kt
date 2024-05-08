@@ -11,12 +11,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
+import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.BottomNavigationDestination
 import pl.msiwak.multiplatform.ui.commonComponent.extension.topBorder
+import pl.msiwak.multiplatform.ui.commonComponent.stringResource
 
 @Composable
 fun BottomNavigation(

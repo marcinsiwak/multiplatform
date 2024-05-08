@@ -10,10 +10,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleObserver
-import androidx.navigation.NavController
 import io.github.aakira.napier.Napier
 import org.koin.java.KoinJavaComponent.inject
-import pl.msiwak.multiplatform.navigator.NavigationDirections
 import pl.msiwak.multiplatform.shared.MainView
 import pl.msiwak.multiplatform.shared.MainViewModel
 import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleCallback
@@ -52,18 +50,6 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
     }
 
-    private fun navigate(
-        navController: NavController,
-        command: NavigationDirections
-    ) {
-        if (command.isInclusive) {
-            navController.navigate(route = command.destination) {
-                popUpTo(0)
-            }
-        } else {
-            navController.navigate(route = command.destination)
-        }
-    }
 
     private fun openStore() {
         try {

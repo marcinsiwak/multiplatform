@@ -25,6 +25,8 @@ import androidx.navigation.NavController
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.navigator.destination.NavDestination.LanguageDestination
 
 @Composable
 fun SettingsScreen(
@@ -35,8 +37,12 @@ fun SettingsScreen(
 
     SettingsScreenContent(
         viewState = viewState,
-        onUnitClicked = viewModel::onUnitClicked,
-        onLanguageClicked = viewModel::onLanguageClicked,
+        onUnitClicked = {
+            navController.navigate(NavDestination.UnitDestination.NavUnitScreen.route)
+        },
+        onLanguageClicked = {
+            navController.navigate(LanguageDestination.NavLanguageScreen.route)
+        },
         onLogoutClicked = viewModel::onLogoutClicked
     )
 }

@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.ic_add
 import athletetrack.shared.commonresources.generated.resources.no
@@ -33,13 +34,13 @@ import athletetrack.shared.commonresources.generated.resources.remove_category_d
 import athletetrack.shared.commonresources.generated.resources.remove_category_dialog_title
 import athletetrack.shared.commonresources.generated.resources.summary_add_category
 import athletetrack.shared.commonresources.generated.resources.yes
-import androidx.navigation.NavController
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
@@ -64,9 +65,13 @@ fun SummaryScreen(
         viewState = viewState,
         onCategoryRemoved = viewModel::onCategoryRemoved,
         onPopupDismissed = viewModel::onPopupDismissed,
-        onCategoryClicked = viewModel::onCategoryClicked,
+        onCategoryClicked = {
+            navController.navigate(NavDestination.CategoryDestination.NavCategoryScreen.route)
+        },
         onCategoryLongClicked = viewModel::onCategoryLongClicked,
-        onAddCategoryClicked = viewModel::onAddCategoryClicked
+        onAddCategoryClicked = {
+            navController.navigate(NavDestination.AddCategoryDestination.NavAddCategoryScreen.route)
+        }
     )
 }
 

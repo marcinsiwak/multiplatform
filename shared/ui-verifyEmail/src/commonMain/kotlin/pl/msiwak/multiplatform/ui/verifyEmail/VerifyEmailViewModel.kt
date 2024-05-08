@@ -10,13 +10,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.ResendVerificationEmailUseCase
-import pl.msiwak.multiplatform.navigator.NavigationDirections
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class VerifyEmailViewModel(
     private val resendVerificationEmailUseCase: ResendVerificationEmailUseCase,
-    private val navigator: Navigator,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -34,9 +31,5 @@ class VerifyEmailViewModel(
 
     fun onResendMailClicked() = viewModelScope.launch(errorHandler) {
         resendVerificationEmailUseCase()
-    }
-
-    fun onLoginClicked() {
-        navigator.navigate(NavigationDirections.Welcome(true))
     }
 }

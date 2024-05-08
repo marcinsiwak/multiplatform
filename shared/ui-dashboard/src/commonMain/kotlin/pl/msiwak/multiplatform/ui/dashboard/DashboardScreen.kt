@@ -11,9 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.navigator.destination.BottomNavigationDestination
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.ui.commonComponent.OfflineBanner
 
 @Composable
 fun DashboardScreen(
@@ -29,28 +31,33 @@ fun DashboardScreen(
     )
 
     DashboardScreenContent(
-        parentNavController,
-        viewModel.bottomNavigationProvider,
-        viewState,
-        items
+        parentNavController = parentNavController,
+        bottomNavigationProvider = viewModel.bottomNavigationProvider,
+        viewState = viewState,
+        items = items,
+        onSignInUpClicked = {
+            parentNavController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+        }
     )
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun DashboardScreenContent(
     parentNavController: NavHostController,
     bottomNavigationProvider: BottomNavigationProvider,
     viewState: State<DashboardState>,
-    items: List<BottomNavigationDestination>
+    items: List<BottomNavigationDestination>,
+    onSignInUpClicked: () -> Unit
 ) {
     val navController = rememberNavController()
 
     Scaffold(
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
-//                if (viewState.value.isOfflineBannerVisible) {
-//                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
-//                }
+                if (viewState.value.isOfflineBannerVisible) {
+                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
+                }
                 BottomNavigation(navController = navController, items = items)
             }
         }

@@ -1,6 +1,10 @@
 package pl.msiwak.multiplatform.navigator.destination
 
-import pl.msiwak.multiplatform.commonResources.SR
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.ic_settings
+import athletetrack.shared.commonresources.generated.resources.ic_workout
+import athletetrack.shared.commonresources.generated.resources.settings
+import athletetrack.shared.commonresources.generated.resources.summary
 
 sealed class NavDestination(val route: String) {
     //    object NavigateUp : NavDestination()
@@ -20,8 +24,8 @@ sealed class NavDestination(val route: String) {
 
         sealed class SummaryDestination(route: String) : DashboardDestination(route) {
             object NavSummaryGraphDestination : BottomNavigationDestination(
-                SR.images.ic_workout,
-                SR.strings.summary,
+                Res.drawable.ic_workout,
+                Res.string.summary,
                 "summary_graph"
             )
 
@@ -30,8 +34,8 @@ sealed class NavDestination(val route: String) {
 
         sealed class SettingsDestination(route: String) : DashboardDestination(route) {
             object NavSettingsGraphDestination : BottomNavigationDestination(
-                SR.images.ic_settings,
-                SR.strings.settings,
+                Res.drawable.ic_settings,
+                Res.string.settings,
                 "settings_graph"
             )
 
@@ -42,8 +46,8 @@ sealed class NavDestination(val route: String) {
     sealed class AddExerciseDestination(route: String) : NavDestination(route) {
         object NavAddExerciseGraphDestination : AddExerciseDestination("add_exercise_graph")
         object NavAddExerciseScreen : AddExerciseDestination("add_exercise_screen") {
-            fun route(id: String) {
-
+            fun route(id: String): String {
+                return id
             }
         }
     }
@@ -53,8 +57,8 @@ sealed class NavDestination(val route: String) {
             CategoryDestination("category_details_graph")
 
         object NavCategoryScreen : CategoryDestination("category_details_screen") {
-            fun route(id: String) {
-
+            fun route(id: String): String {
+                return id
             }
         }
     }
@@ -62,8 +66,8 @@ sealed class NavDestination(val route: String) {
     sealed class AddCategoryDestination(route: String) : NavDestination(route) {
         object NavAddCategoryGraphDestination : AddCategoryDestination("add_category_graph")
         object NavAddCategoryScreen : AddCategoryDestination("add_category_screen") {
-            fun route(id: String) {
-
+            fun route(id: String): String {
+                return id
             }
         }
     }

@@ -98,7 +98,6 @@ import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCaseImpl
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.network.client.CategoryClient
 import pl.msiwak.multiplatform.network.client.KtorClient
 import pl.msiwak.multiplatform.network.client.UserClient
@@ -173,7 +172,6 @@ val apiModule = module {
 }
 
 val toolsModule = module {
-    single { Navigator() }
     single { GlobalErrorHandler() }
     single { Validator() }
     single { DateFormatter() }
@@ -185,11 +183,22 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
-    viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { VerifyEmailViewModel(get(), get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
-    viewModelDefinition { SummaryViewModel(get(), get(), get(), get(), get()) }
+    viewModelDefinition {
+        MainViewModel(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
+    viewModelDefinition { RegisterViewModel(get(), get(), get()) }
+    viewModelDefinition { VerifyEmailViewModel(get(), get(),) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
             id = params.get(),
@@ -213,16 +222,15 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
-            get(),
             get()
         )
     }
-    viewModelDefinition { AddCategoryViewModel(get(), get(), get()) }
-    viewModelDefinition { SettingsViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { AddCategoryViewModel(get(), get()) }
+    viewModelDefinition { SettingsViewModel(get(), get(), get()) }
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
-    viewModelDefinition { ForceUpdateViewModel(get()) }
-    viewModelDefinition { DashboardViewModel(get(), get(), get(), get(), get()) }
+    viewModelDefinition { ForceUpdateViewModel() }
+    viewModelDefinition { DashboardViewModel(get(), get(), get(), get()) }
 }
 
 val useCaseModule = module {

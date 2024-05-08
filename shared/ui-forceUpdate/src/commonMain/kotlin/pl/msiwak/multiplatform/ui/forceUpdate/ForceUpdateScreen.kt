@@ -34,7 +34,9 @@ fun ForceUpdateScreen(
     viewModel: ForceUpdateViewModel = koinInject()
 ) {
     ForceUpdateScreenContent(
-        onUpdateClicked = viewModel::onUpdateClicked
+        onUpdateClicked = {
+            // open store
+        }
     )
 }
 

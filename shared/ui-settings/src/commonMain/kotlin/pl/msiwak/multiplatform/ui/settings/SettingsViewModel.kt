@@ -10,10 +10,8 @@ import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
 import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.navigator.NavigationDirections
-import pl.msiwak.multiplatform.navigator.Navigator
 
 class SettingsViewModel(
-    private val navigator: Navigator,
     getVersionNameUseCase: GetVersionNameUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val isOfflineModeUseCase: GetIsOfflineModeUseCase
@@ -34,18 +32,10 @@ class SettingsViewModel(
         }
     }
 
-    fun onLanguageClicked() {
-        navigator.navigate(NavigationDirections.Language)
-    }
-
-    fun onUnitClicked() {
-        navigator.navigate(NavigationDirections.Unit)
-    }
-
     fun onLogoutClicked() {
         viewModelScope.launch {
             logoutUseCase()
-            navigator.navigate(NavigationDirections.Welcome(true))
+//            navigator.navigate(NavigationDirections.Welcome(true))
         }
     }
 }

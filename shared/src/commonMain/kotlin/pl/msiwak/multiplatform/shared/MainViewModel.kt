@@ -14,13 +14,11 @@ import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class MainViewModel(
-    navigator: Navigator,
     getLanguageUseCase: GetLanguageUseCase,
     fetchRemoteConfigUseCase: FetchRemoteConfigUseCase,
     getForceUpdateStateUseCase: GetForceUpdateStateUseCase,
@@ -30,8 +28,6 @@ class MainViewModel(
     getIsOfflineModeUseCase: GetIsOfflineModeUseCase,
     val navigationProvider: NavigationProvider
 ) : ViewModel() {
-
-    val mainNavigator = navigator
 
     private val errorHandler = globalErrorHandler.handleError()
 
@@ -45,7 +41,6 @@ class MainViewModel(
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             fetchRemoteConfigUseCase()
-//            StringDesc.localeType = StringDesc.LocaleType.Custom(getLanguageUseCase())
 
             if (!getUserTokenUseCase().isNullOrEmpty()) {
                 _viewState.update { it.copy(directions = NavDestination.DashboardDestination.NavDashboardGraphDestination) }
