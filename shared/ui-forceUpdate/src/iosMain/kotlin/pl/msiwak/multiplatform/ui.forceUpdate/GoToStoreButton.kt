@@ -13,7 +13,7 @@ import platform.UIKit.UIApplication
 actual fun GoToStoreButton(modifier: Modifier) {
     MainButton(
         onClick = {
-            UIApplication.sharedApplication().openURL(NSURL("path"))
+            UIApplication.sharedApplication().openURL(NSURL(string = "path"))
         },
         text = stringResource(Res.string.force_update_update)
     )

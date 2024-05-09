@@ -9,10 +9,10 @@ struct iOSApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .onAppear {
-                    UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.backward")
-                    UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.backward")
-                }
+//                .onAppear {
+//                    UINavigationBar.appearance().backIndicatorImage = UIImage(systemName: "arrow.backward")
+//                    UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.backward")
+//                }
         }
     }
 }
