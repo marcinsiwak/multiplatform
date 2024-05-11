@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.BottomNavigationDestination
 import pl.msiwak.multiplatform.ui.commonComponent.extension.topBorder
-import pl.msiwak.multiplatform.ui.commonComponent.stringResource
 
 @Composable
 fun BottomNavigation(

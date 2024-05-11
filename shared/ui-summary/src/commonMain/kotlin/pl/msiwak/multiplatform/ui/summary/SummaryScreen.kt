@@ -41,6 +41,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.ui.commonComponent.AdmobBanner
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
@@ -101,9 +102,10 @@ fun SummaryScreenContent(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-//        AdmobBanner(modifier = Modifier.padding(bottom = MaterialTheme.dimens.space_8))
+        AdmobBanner(modifier = Modifier.padding(bottom = MaterialTheme.dimens.space_8))
         LazyColumn(
             modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
             horizontalAlignment = Alignment.CenterHorizontally,

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,14 +13,9 @@
 		711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B952A575ADD00151063 /* SplashScreen.swift */; };
 		711E8BB22A575C2500151063 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB12A575C2500151063 /* DatePicker.swift */; };
 		711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB82A575EE700151063 /* AppDelegate.swift */; };
-		7132D0542B07A97200BC2C99 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0532B07A97200BC2C99 /* BannerAd.swift */; };
-		7132D0572B07AA2300BC2C99 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0562B07AA2300BC2C99 /* BannerViewController.swift */; };
-		7132D0592B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D0582B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift */; };
-		7132D05D2B07C8E400BC2C99 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7132D05C2B07C8E400BC2C99 /* BannerView.swift */; };
 		71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */; };
 		71D05CA22B3338DF00994291 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 71D05CA12B3338DF00994291 /* .swiftlint.yml */; };
 		71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */; };
-		71FADE022BEA5B1C000D65C7 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FADE012BEA5B1C000D65C7 /* GoogleMobileAds.xcframework */; };
 		71FF1CA02B95193500FFFDCE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FF1C9F2B95193500FFFDCE /* MainView.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,13 +42,8 @@
 		711E8B952A575ADD00151063 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		711E8BB12A575C2500151063 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		711E8BB82A575EE700151063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7132D0532B07A97200BC2C99 /* BannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
-		7132D0562B07AA2300BC2C99 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
-		7132D0582B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewControllerWidthDelegate.swift; sourceTree = "<group>"; };
-		7132D05C2B07C8E400BC2C99 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71D05CA12B3338DF00994291 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		71FADE012BEA5B1C000D65C7 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; name = GoogleMobileAds.xcframework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework"; sourceTree = "<group>"; };
 		71FF1C9F2B95193500FFFDCE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		74DA36D12685A7143467F9F1 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71FADE022BEA5B1C000D65C7 /* GoogleMobileAds.xcframework in Frameworks */,
 				71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,7 +87,6 @@
 		12D7815B5D0DFCE35AA0A587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				71FADE012BEA5B1C000D65C7 /* GoogleMobileAds.xcframework */,
 				81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */,
 			);
 			name = Frameworks;
@@ -116,7 +104,6 @@
 		711E8B722A57596700151063 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				7132D0552B07A9F500BC2C99 /* admobBanner */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -135,17 +122,6 @@
 				711E8BB12A575C2500151063 /* DatePicker.swift */,
 			);
 			path = widgets;
-			sourceTree = "<group>";
-		};
-		7132D0552B07A9F500BC2C99 /* admobBanner */ = {
-			isa = PBXGroup;
-			children = (
-				7132D0532B07A97200BC2C99 /* BannerAd.swift */,
-				7132D0562B07AA2300BC2C99 /* BannerViewController.swift */,
-				7132D0582B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift */,
-				7132D05C2B07C8E400BC2C99 /* BannerView.swift */,
-			);
-			path = admobBanner;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -320,13 +296,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				7132D0572B07AA2300BC2C99 /* BannerViewController.swift in Sources */,
-				7132D05D2B07C8E400BC2C99 /* BannerView.swift in Sources */,
 				711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */,
 				71FF1CA02B95193500FFFDCE /* MainView.swift in Sources */,
-				7132D0542B07A97200BC2C99 /* BannerAd.swift in Sources */,
 				711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */,
-				7132D0592B07AA6000BC2C99 /* BannerViewControllerWidthDelegate.swift in Sources */,
 				711E8BB22A575C2500151063 /* DatePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

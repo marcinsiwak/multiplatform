@@ -39,6 +39,7 @@ firebase-appDistribution = "4.0.1"
 compose-components-resources = "1.4.0"
 compose-multiplatform = "1.6.10-rc01"
 compose-multiplatform-navigation = "2.7.0-alpha03"
+playServicesAdsLite = "23.0.0"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }

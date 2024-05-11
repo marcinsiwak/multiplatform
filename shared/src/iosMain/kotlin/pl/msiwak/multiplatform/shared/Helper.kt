@@ -13,11 +13,19 @@ import pl.msiwak.multiplatform.utils.KMMPreferences
 import platform.Foundation.NSBundle
 import platform.Foundation.NSURL
 import platform.darwin.NSObject
+import cocoapods.GoogleMobileAds.GADMobileAds
+import kotlinx.cinterop.ExperimentalForeignApi
 
 fun initKoin() {
     startKoin {
         modules(appModule() + sharedPreferencesModule + iosDatabaseModule + iosRepositoryModule)
     }
+}
+
+@OptIn(ExperimentalForeignApi::class)
+fun initMobileAds() {
+    GADMobileAds.sharedInstance().startWithCompletionHandler(null)
+//    GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = listOf("b7496249c8b3b0419541121ffbd27c57")
 }
 
 fun initNapier() {

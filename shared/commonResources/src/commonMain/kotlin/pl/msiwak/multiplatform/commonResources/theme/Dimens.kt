@@ -37,7 +37,8 @@ data class Dimensions(
     val loader_size: Dp = 64.dp,
     val result_item_width: Dp = 124.dp,
     val result_item_input_width: Dp = 116.dp,
-    val dialog_corners: Dp = 16.dp
+    val dialog_corners: Dp = 16.dp,
+    val ad_height: Dp = 64.dp
 )
 
 val MaterialTheme.dimens: Dimensions

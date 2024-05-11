@@ -62,18 +62,3 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String) -> 
             }
     }
 }
-
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-actual fun Icon(drawableResource: DrawableResource) {
-    Column {
-        val painter = painterResource(drawableResource)
-        androidx.compose.material3.Icon(painter, null)
-    }
-}
-
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-actual fun stringResource(stringResource: StringResource): String {
-    return org.jetbrains.compose.resources.stringResource(stringResource)
-}
