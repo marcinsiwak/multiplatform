@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
-		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		2152FB042600AC8F00CF470E /* IOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* IOSApp.swift */; };
 		711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B952A575ADD00151063 /* SplashScreen.swift */; };
 		711E8BB22A575C2500151063 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB12A575C2500151063 /* DatePicker.swift */; };
 		711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB82A575EE700151063 /* AppDelegate.swift */; };
@@ -36,7 +36,7 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0B32D50A8A5B3B208BF18584 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
-		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		2152FB032600AC8F00CF470E /* IOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSApp.swift; sourceTree = "<group>"; };
 		321EE48D0E4A0D68324B171D /* Pods-iosApp.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.stagingdebug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		6AFEB18FD9875F7CA0588D4D /* Pods-iosApp.productiondebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.productiondebug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.productiondebug.xcconfig"; sourceTree = "<group>"; };
 		711E8B952A575ADD00151063 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				71FF1C9F2B95193500FFFDCE /* MainView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
-				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				2152FB032600AC8F00CF470E /* IOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				711E8BB82A575EE700151063 /* AppDelegate.swift */,
 			);
@@ -295,7 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				2152FB042600AC8F00CF470E /* IOSApp.swift in Sources */,
 				711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */,
 				71FF1CA02B95193500FFFDCE /* MainView.swift in Sources */,
 				711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */,

@@ -58,7 +58,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
-        // todo remove after final versions released kotlin/compose-multiplatform
+//        // todo remove after final versions released kotlin/compose-multiplatform
         freeCompilerArgs = listOf(
             "-Xallow-jvm-ir-dependencies",
             "-P",
@@ -153,13 +153,29 @@ android {
             )
         }
     }
-// todo uncomment after final versions released kotlin/compose-multiplatform
 
-//    productFlavors {
-//        getByName("staging") {
-//            applicationIdSuffix = ".staging"
-//        }
-//    }
+    productFlavors {
+        getByName("staging") {
+            applicationIdSuffix = ".staging"
+        }
+    }
+
+    applicationVariants.all {
+        val isProduction = mergedFlavor.applicationIdSuffix.isNullOrBlank()
+        val isStaging = mergedFlavor.applicationIdSuffix == ".staging"
+        val buildName = buildType.name
+
+        val prodDebug = isProduction && buildName == "debug"
+        val stagingDebug = isStaging && buildName == "debug"
+
+        val label = when {
+            prodDebug -> "(PD) Athlete track"
+            stagingDebug -> "(SD) Athlete track"
+            else -> "Athlete track"
+        }
+        println("label: $label")
+        mergedFlavor.manifestPlaceholders["applicationLabel"] = label
+    }
 }
 
 dependencies {

@@ -14,6 +14,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.settings
 import athletetrack.shared.commonresources.generated.resources.settings_language
@@ -21,7 +22,6 @@ import athletetrack.shared.commonresources.generated.resources.settings_logout
 import athletetrack.shared.commonresources.generated.resources.settings_unit
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
-import androidx.navigation.NavController
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font

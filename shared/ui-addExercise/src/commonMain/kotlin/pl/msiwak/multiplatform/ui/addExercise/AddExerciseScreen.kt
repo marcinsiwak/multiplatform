@@ -29,6 +29,7 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_new_result
 import athletetrack.shared.commonresources.generated.resources.add_result_save
@@ -37,7 +38,6 @@ import athletetrack.shared.commonresources.generated.resources.no
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
 import athletetrack.shared.commonresources.generated.resources.yes
-import androidx.navigation.NavController
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource

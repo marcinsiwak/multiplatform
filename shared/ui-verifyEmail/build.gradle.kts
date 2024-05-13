@@ -52,7 +52,6 @@ kotlin {
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
 
-
             implementation(libs.napier)
         }
 
