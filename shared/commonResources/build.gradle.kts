@@ -2,30 +2,14 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
-    id("dev.icerock.mobile.multiplatform-resources")
-}
-
-multiplatformResources {
-    multiplatformResourcesPackage = "pl.msiwak.multiplatform.commonResources" // required
-    iosBaseLocalizationRegion = "en" // optional, default "en"
-    multiplatformResourcesClassName = "SR"
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "CommonResources for the Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -33,9 +17,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "commonResources"
-
-            export(libs.moko.resources)
-            export(libs.moko.graphics)
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -46,14 +27,12 @@ kotlin {
     }
 
     sourceSets {
-        getByName("androidMain").dependsOn(commonMain.get())
-        getByName("iosArm64Main").dependsOn(commonMain.get())
-        getByName("iosX64Main").dependsOn(commonMain.get())
-        getByName("iosSimulatorArm64Main").dependsOn(commonMain.get())
-
         commonMain.dependencies {
-            api(libs.moko.resources)
-            api(libs.moko.graphics)
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.material3)
+            api(compose.ui)
+            api(compose.components.resources)
         }
 
         commonTest.dependencies {
@@ -62,10 +41,10 @@ kotlin {
     }
 }
 
+compose.resources {
+    publicResClass = true
+}
+
 android {
     namespace = "pl.msiwak.multiplatform.commonResources"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

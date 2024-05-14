@@ -15,7 +15,6 @@ android {
         }
     }
 
-
     variantFilter { variant ->
         def names = variant.flavors*.name
 

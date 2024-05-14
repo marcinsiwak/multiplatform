@@ -1,35 +1,45 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package pl.msiwak.multiplatform.ui.register
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.input_wrong_format
 import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
-import pl.msiwak.multiplatform.commonResources.SR
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
-import pl.msiwak.multiplatform.navigator.NavigationDirections
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.validators.Validator
 
 class RegisterViewModel(
     private val registerUserUseCase: RegisterUserUseCase,
     private val validator: Validator,
-    globalErrorHandler: GlobalErrorHandler,
-    private val navigator: Navigator
+    globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(RegisterState())
     val viewState: StateFlow<RegisterState> = _viewState.asStateFlow()
 
+    private val _viewEvent = MutableSharedFlow<RegisterEvent>()
+    val viewEvent: SharedFlow<RegisterEvent> = _viewEvent.asSharedFlow()
+
     private val errorHandler = globalErrorHandler.handleError { throwable ->
         when (throwable) {
             is FirebaseAuthUserCollisionException -> {
-                navigator.navigate(NavigationDirections.VerifyEmail)
+                viewModelScope.launch {
+                    _viewEvent.emit(RegisterEvent.NavigateToVerifyEmail)
+                }
                 true
             }
 
@@ -37,6 +47,7 @@ class RegisterViewModel(
         }
     }
 
+    @OptIn(ExperimentalResourceApi::class)
     fun onLoginChanged(text: String) {
         _viewState.update { it.copy(login = text, loginErrorMessage = null) }
     }
@@ -94,12 +105,12 @@ class RegisterViewModel(
         if (isPasswordValid) {
             _viewState.update { it.copy(passwordErrorMessage = null) }
         } else {
-            _viewState.update { it.copy(passwordErrorMessage = SR.strings.input_wrong_format) }
+            _viewState.update { it.copy(passwordErrorMessage = Res.string.input_wrong_format) }
         }
         if (isLoginValid) {
             _viewState.update { it.copy(loginErrorMessage = null) }
         } else {
-            _viewState.update { it.copy(loginErrorMessage = SR.strings.input_wrong_format) }
+            _viewState.update { it.copy(loginErrorMessage = Res.string.input_wrong_format) }
         }
 
         if (!isPasswordValid || !isLoginValid) return
@@ -113,7 +124,7 @@ class RegisterViewModel(
                 )
             )
             _viewState.update { it.copy(isLoading = false) }
-            navigator.navigate(NavigationDirections.VerifyEmail)
+            _viewEvent.emit(RegisterEvent.NavigateToVerifyEmail)
         }
     }
 

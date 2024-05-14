@@ -1,7 +1,12 @@
 package pl.msiwak.multiplatform.ui.category
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -9,18 +14,14 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.Exercise
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
-import pl.msiwak.multiplatform.navigator.NavigationDirections
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class CategoryViewModel(
     id: String,
-    private val navigator: Navigator,
     private val addExerciseUseCase: AddExerciseUseCase,
     private val removeExerciseUseCase: RemoveExerciseUseCase,
     private val downloadCategoryUseCase: DownloadCategoryUseCase,
@@ -30,6 +31,9 @@ class CategoryViewModel(
 
     private val _viewState = MutableStateFlow(CategoryState())
     val viewState: StateFlow<CategoryState> = _viewState.asStateFlow()
+
+    private val _viewEvent = MutableSharedFlow<CategoryEvent>()
+    val viewEvent: SharedFlow<CategoryEvent> = _viewEvent.asSharedFlow()
 
     private val categoryId: String = id
     private var exerciseToRemovePosition: Int? = null
@@ -65,10 +69,6 @@ class CategoryViewModel(
         _viewState.update { it.copy(isDialogVisible = true) }
     }
 
-    fun onExerciseClicked(id: String) {
-        navigator.navigate(NavigationDirections.AddExercise(id))
-    }
-
     fun onAddExerciseNameChanged(name: String) {
         _viewState.update { it.copy(newExerciseName = name) }
     }
@@ -89,7 +89,7 @@ class CategoryViewModel(
                 )
             )
             _viewState.update { it.copy(isLoading = false) }
-            navigator.navigate(NavigationDirections.AddExercise(id))
+            _viewEvent.emit(CategoryEvent.NavigateToAddExercise(id))
         }
     }
 
@@ -111,7 +111,12 @@ class CategoryViewModel(
                 exercises.removeAt(pos)
 
                 removeExerciseUseCase(exercise)
-                _viewState.update { it.copy(isRemoveExerciseDialogVisible = false, isLoading = false) }
+                _viewState.update {
+                    it.copy(
+                        isRemoveExerciseDialogVisible = false,
+                        isLoading = false
+                    )
+                }
             }
         }
     }

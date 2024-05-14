@@ -4,24 +4,12 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
+    id("pl.msiwak.convention.android.config")
+    id("pl.msiwak.convention.target.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Auth Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -55,8 +43,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.auth"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

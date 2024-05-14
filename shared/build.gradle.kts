@@ -5,27 +5,15 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
-    id("dev.icerock.mobile.multiplatform-resources")
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    id("pl.msiwak.convention.android.config")
+    id("pl.msiwak.convention.target.config")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 kotlin {
-    targetHierarchy.default()
-
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Main Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -42,9 +30,6 @@ kotlin {
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
-
-            export(libs.moko.resources)
-            export(libs.moko.graphics)
 
             export(project(Modules.core))
             export(project(Modules.commonResources))
@@ -72,6 +57,7 @@ kotlin {
             export(project(Modules.uiVerifyEmail))
             export(project(Modules.buildConfig))
             export(project(Modules.notifications))
+            export(project(Modules.uiCommonComponent))
         }
 
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -87,7 +73,7 @@ kotlin {
         pod("FirebaseCrashlytics", linkOnly = true)
 //        pod("GoogleSignIn", linkOnly = true)
         pod("FirebaseMessaging", linkOnly = true)
-        pod("Google-Mobile-Ads-SDK", linkOnly = true)
+        pod("Google-Mobile-Ads-SDK", moduleName = "GoogleMobileAds", linkOnly = true)
     }
 
     sourceSets {
@@ -119,18 +105,26 @@ kotlin {
             api(project(Modules.uiVerifyEmail))
             api(project(Modules.buildConfig))
             api(project(Modules.notifications))
+            api(project(Modules.uiCommonComponent))
 
-            api(libs.napier)
+            implementation(libs.napier)
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
+            implementation(libs.koin.compose)
+
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(libs.kotlinx.lifecycle)
+            implementation(libs.kotlinx.viewModel)
+            implementation(libs.compose.multiplatform.navigation)
         }
 
-        androidMain {
-            dependsOn(commonMain.get())
-            dependencies {
-                implementation(libs.koin.android)
-            }
+        androidMain.dependencies {
+            implementation(libs.koin.android)
         }
 
         commonTest.dependencies {
@@ -141,10 +135,5 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.android"
-    compileSdk = 34
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 27
-        targetSdk = 33
-    }
 }

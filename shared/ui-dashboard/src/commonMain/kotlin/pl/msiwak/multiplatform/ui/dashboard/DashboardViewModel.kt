@@ -1,23 +1,22 @@
 package pl.msiwak.multiplatform.ui.dashboard
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
-import pl.msiwak.multiplatform.navigator.NavigationDirections
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class DashboardViewModel(
     private val getUser: GetUserUseCase,
-    private val navigator: Navigator,
     getIsOfflineModeUseCase: GetIsOfflineModeUseCase,
-    globalErrorHandler: GlobalErrorHandler
+    globalErrorHandler: GlobalErrorHandler,
+    val bottomNavigationProvider: BottomNavigationProvider
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(DashboardState())
@@ -33,9 +32,5 @@ class DashboardViewModel(
             val user = getUser()
             Napier.e("OUTPUT, ${user.email}")
         }
-    }
-
-    fun onSignInUpClicked() {
-        navigator.navigate(NavigationDirections.Welcome(false))
     }
 }

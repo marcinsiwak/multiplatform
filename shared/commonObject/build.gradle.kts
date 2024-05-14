@@ -5,24 +5,14 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "CommonObject Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -43,13 +33,16 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(Modules.commonResources))
+            api(project(Modules.commonResources))
 
             api(libs.kotlinx.dateTime)
             implementation(libs.kotlinx.serialization)
 
             api(libs.firebase.gitlive.auth)
             api(libs.firebase.gitlive.remoteConfig)
+
+            implementation(compose.runtime)
+            implementation(compose.components.resources)
         }
 
         commonTest.dependencies {
@@ -60,8 +53,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.commonObject"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

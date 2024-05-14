@@ -50,7 +50,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.9"
+        kotlinCompilerExtensionVersion = "1.5.13-dev-k2.0.0-RC1-50f08dfa4b4"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -58,6 +58,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+//        // todo remove after final versions released kotlin/compose-multiplatform
+        freeCompilerArgs = listOf(
+            "-Xallow-jvm-ir-dependencies",
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
     }
 
     val releaseKeystorePropFile = rootProject.file("signing/release.properties")
@@ -153,6 +159,23 @@ android {
             applicationIdSuffix = ".staging"
         }
     }
+
+    applicationVariants.all {
+        val isProduction = mergedFlavor.applicationIdSuffix.isNullOrBlank()
+        val isStaging = mergedFlavor.applicationIdSuffix == ".staging"
+        val buildName = buildType.name
+
+        val prodDebug = isProduction && buildName == "debug"
+        val stagingDebug = isStaging && buildName == "debug"
+
+        val label = when {
+            prodDebug -> "(PD) Athlete track"
+            stagingDebug -> "(SD) Athlete track"
+            else -> "Athlete track"
+        }
+        println("label: $label")
+        mergedFlavor.manifestPlaceholders["applicationLabel"] = label
+    }
 }
 
 dependencies {
@@ -167,11 +190,14 @@ dependencies {
 
     implementation(libs.androidx.core.splashscreen)
 
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.kotlinx.lifecycle.ktx)
+    implementation(libs.kotlinx.viewModel.ktx)
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.accompanist.navigation.material)
+
+    implementation(libs.components.resources)
 
     api(libs.firebase.common)
     api(libs.firebase.auth)
@@ -179,8 +205,10 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.android)
 
-    api(libs.google.android.playservices.auth)
-    api(libs.google.android.playservices.ads)
+    implementation(libs.google.android.playservices.auth)
+    implementation(libs.google.android.playservices.ads)
+
+    implementation(libs.napier)
 }

@@ -1,5 +1,4 @@
 import Foundation
-import GoogleMobileAds
 import shared
 import SwiftUI
 
@@ -10,7 +9,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         HelperKt.doInitKoin()
         HelperKt.doInitNapier()
         HelperKt.doInitFirebase()
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        HelperKt.doInitMobileAds()
 
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
@@ -19,23 +18,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         )
 
         application.registerForRemoteNotifications()
-        
-        let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithOpaqueBackground()
-            navigationBarAppearance.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.white
-            ]
-            navigationBarAppearance.backgroundColor = UIColor.black
-            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-            
-            let tabBarApperance = UITabBarAppearance()
-            tabBarApperance.configureWithOpaqueBackground()
-            tabBarApperance.backgroundColor = UIColor.black
-            tabBarApperance.shadowColor = .white
-//            UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
-            UITabBar.appearance().standardAppearance = tabBarApperance
         
         return true
     }

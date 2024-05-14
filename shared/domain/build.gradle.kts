@@ -4,25 +4,11 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
+    id("pl.msiwak.convention.target.config")
 }
-
-apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Domain Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -31,10 +17,8 @@ kotlin {
         framework {
             baseName = "domain"
 
-            export(project(Modules.data))
             export(project(Modules.commonObject))
             export(project(Modules.commonResources))
-            export(project(Modules.utils))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -46,10 +30,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(Modules.data))
             implementation(project(Modules.commonObject))
             implementation(project(Modules.commonResources))
-            implementation(project(Modules.utils))
 
             implementation(libs.napier)
         }

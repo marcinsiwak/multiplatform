@@ -2,6 +2,8 @@
 accompanistNavigationMaterial = "0.25.0"
 activityCompose = "1.7.2"
 agp = "8.2.2"
+ksp = "2.0.0-RC2-1.0.20"
+
 appcompat = "1.6.1"
 buildkonfigGradlePlugin = "0.14.0"
 coreSplashscreen = "1.0.1"
@@ -9,44 +11,44 @@ firebaseAuth = "22.3.1"
 firebaseCommon = "20.4.2"
 firebaseConfig = "21.6.1"
 firebaseCrashlyticsGradle = "2.9.9"
-googleServices = "4.4.0"
-kotlin = "1.9.22"
-compose = "1.5.4"
+googleServices = "4.4.1"
+kotlin = "2.0.0-RC3"
+compose = "1.7.0-alpha07"
 compose-compiler = "1.5.4"
-compose-material3 = "1.1.2"
-androidx-activityCompose = "1.8.0"
-koin = "3.3.2"
-koin-compose = "3.4.2"
+compose-material3 = "1.2.0"
+koin = "3.6.0-Beta2"
+koin-compose-android = "3.6.0-Beta2"
+koin-compose = "1.2.0-Beta2"
 ktor = "2.3.5"
-lifecycleRuntimeKtx = "2.6.2"
 navigationCompose = "2.7.7"
 resourcesGenerator = "0.23.0"
 sqlDelight = "2.0.1"
-moko-resources = "0.24.0-alpha-4"
-moko-graphics = "0.9.0"
-firebaseGitlive = "1.10.0"
+firebaseGitlive = "1.12.0"
 firebase-android-bom = "32.3.1"
-kotlinx-lifecycle = "2.3.1"
-kotlinx-viewModel = "2.6.1"
-kotlinx-coroutines = "1.6.4"
-kotlinx-dateTime = "0.4.0"
-kotlinx-serialization = "1.5.0"
-napier = "2.6.1"
+kotlinx-lifecycle = "2.8.0-beta01"
+kotlinx-viewModel = "2.8.0-beta01"
+kotlinx-coroutines = "1.8.1-Beta"
+kotlinx-dateTime = "0.5.0"
+kotlinx-serialization = "1.5.1"
+napier = "2.7.1"
 google-playservices-auth = "20.6.0"
 google-playservices-ads = "22.5.0"
 ktlint = "11.5.1"
 detekt = "1.19.0"
 firebase-appDistribution = "4.0.1"
-lifecycleViewmodelCompose = "2.7.0"
+compose-components-resources = "1.4.0"
+compose-multiplatform = "1.6.10-rc01"
+compose-multiplatform-navigation = "2.7.0-alpha03"
+playServicesAdsLite = "23.0.0"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
-androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
+components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose-multiplatform" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-common = { module = "com.google.firebase:firebase-common", version.ref = "firebaseCommon" }
 firebase-config = { module = "com.google.firebase:firebase-config", version.ref = "firebaseConfig" }
@@ -56,20 +58,21 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
-koin-navigation = { module = "io.insert-koin:koin-androidx-navigation", version.ref = "koin"}
-koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-compose"}
+koin-compose-android = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-compose-android"}
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose"}
 firebase-gitlive-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseGitlive"}
 firebase-gitlive-remoteConfig = { module = "dev.gitlive:firebase-config", version.ref = "firebaseGitlive"}
 firebase-gitlive-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebaseGitlive"}
 firebase-andorid-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom"}
 firebase-andorid-messaging = { module = "com.google.firebase:firebase-messaging-ktx"}
-kotlinx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "kotlinx-lifecycle"}
-kotlinx-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "kotlinx-viewModel"}
+kotlinx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "kotlinx-lifecycle"}
+kotlinx-lifecycle-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "kotlinx-lifecycle"}
+kotlinx-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "kotlinx-viewModel"}
+kotlinx-viewModel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "kotlinx-viewModel"}
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines"}
 kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-dateTime"}
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
@@ -80,7 +83,6 @@ ktor-contentNegation = { module = "io.ktor:ktor-client-content-negotiation", ver
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor"}
 ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor"}
 ktor-logger = { module = "io.ktor:ktor-client-logging", version.ref = "ktor"}
-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "resourcesGenerator" }
 sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight"}
 sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight"}
 sqlDelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight"}
@@ -88,9 +90,12 @@ sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", 
 napier = { module = "io.github.aakira:napier", version.ref = "napier"}
 google-android-playservices-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-playservices-auth"}
 google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
-moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources"}
-moko-graphics = { module = "dev.icerock.moko:graphics", version.ref = "moko-graphics"}
-androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+compose-multiplatform-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-multiplatform-navigation" }
+
+# Gradle scripts depdendecies
+gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -103,3 +108,5 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref 
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appDistribution" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

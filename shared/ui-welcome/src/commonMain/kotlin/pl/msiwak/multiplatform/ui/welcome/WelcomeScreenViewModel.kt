@@ -1,25 +1,26 @@
 package pl.msiwak.multiplatform.ui.welcome
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.gitlive.firebase.auth.FirebaseAuthInvalidCredentialsException
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
-import pl.msiwak.multiplatform.navigator.NavigationDirections
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
     private val googleLoginUseCase: GoogleLoginUseCase,
-    private val navigator: Navigator,
     private val setOfflineModeUseCase: SetOfflineModeUseCase,
     private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
@@ -28,6 +29,9 @@ class WelcomeScreenViewModel(
 
     private val _viewState = MutableStateFlow(WelcomeState())
     val viewState: StateFlow<WelcomeState> = _viewState.asStateFlow()
+
+    private val _viewEvent = MutableSharedFlow<WelcomeEvent>()
+    val viewEvent: SharedFlow<WelcomeEvent> = _viewEvent.asSharedFlow()
 
     private val errorHandler = globalErrorHandler.handleError { throwable ->
         when (throwable) {
@@ -62,10 +66,10 @@ class WelcomeScreenViewModel(
                 if (isSynchronizationPossible) {
                     _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
                 } else {
-                    navigator.navigate(NavigationDirections.Dashboard(true))
+                    _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
                 }
             } else {
-                navigator.navigate(NavigationDirections.VerifyEmail)
+                _viewEvent.emit(WelcomeEvent.NavigateToVerifyEmail)
             }
         }
     }
@@ -78,7 +82,7 @@ class WelcomeScreenViewModel(
             if (isSynchronizationPossible) {
                 _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
             } else {
-                navigator.navigate(NavigationDirections.Dashboard(true))
+                _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
             }
             _viewState.update { it.copy(isLoading = false) }
         }
@@ -89,12 +93,14 @@ class WelcomeScreenViewModel(
     fun onOfflineModeClicked() {
         viewModelScope.launch {
             setOfflineModeUseCase(true)
-            navigator.navigate(NavigationDirections.Dashboard(true))
+            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
         }
     }
 
     fun onRegistrationClicked() {
-        navigator.navigate(NavigationDirections.Registration)
+        viewModelScope.launch {
+            _viewEvent.emit(WelcomeEvent.NavigateToRegistration)
+        }
     }
 
     fun onVisibilityClicked() {
@@ -110,7 +116,7 @@ class WelcomeScreenViewModel(
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             synchronizeDatabaseUseCase()
-            navigator.navigate(NavigationDirections.Dashboard(true))
+            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
             _viewState.update { it.copy(isLoading = false) }
         }
     }

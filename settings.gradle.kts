@@ -1,5 +1,7 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         google()
         gradlePluginPortal()
         mavenCentral()
@@ -7,11 +9,13 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
     repositories {
         google()
         mavenCentral()
+        maven("https://androidx.dev/storage/compose-compiler/repository/")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
@@ -44,3 +48,4 @@ include(":shared:ui-settings")
 include(":shared:ui-summary")
 include(":shared:ui-unit")
 include(":shared:ui-verifyEmail")
+include(":shared:ui-common-component")

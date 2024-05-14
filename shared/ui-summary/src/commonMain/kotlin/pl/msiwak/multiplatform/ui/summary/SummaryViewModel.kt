@@ -1,22 +1,20 @@
 package pl.msiwak.multiplatform.ui.summary
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.Category
-import pl.msiwak.multiplatform.core.ViewModel
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveCategoryUseCase
-import pl.msiwak.multiplatform.navigator.NavigationDirections
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class SummaryViewModel(
     private val downloadCategoriesUseCase: DownloadCategoriesUseCase,
     observeCategoriesUseCase: ObserveCategoriesUseCase,
-    private val navigator: Navigator,
     globalErrorHandler: GlobalErrorHandler,
     private val removeCategoryUseCase: RemoveCategoryUseCase
 ) : ViewModel() {
@@ -45,14 +43,6 @@ class SummaryViewModel(
             downloadCategoriesUseCase()
             _viewState.update { it.copy(isLoading = false) }
         }
-    }
-
-    fun onAddCategoryClicked() {
-        navigator.navigate(NavigationDirections.AddCategory)
-    }
-
-    fun onCategoryClicked(id: String) {
-        navigator.navigate(NavigationDirections.CategoryDetails(id))
     }
 
     fun onCategoryLongClicked(categoryIndex: Int) {

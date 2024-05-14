@@ -1,11 +1,11 @@
 package pl.msiwak.multiplatform.shared
 
+import androidx.lifecycle.ViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.definition.Definition
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
 import org.koin.core.qualifier.Qualifier
-import pl.msiwak.multiplatform.core.ViewModel
 
 actual inline fun <reified T : ViewModel> Module.viewModelDefinition(
     qualifier: Qualifier?,

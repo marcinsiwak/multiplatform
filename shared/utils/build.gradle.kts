@@ -1,24 +1,15 @@
+import pl.msiwak.multiplatfor.dependencies.Modules
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
+    id("pl.msiwak.convention.android.config")
+    id("pl.msiwak.convention.target.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Utils Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -40,10 +31,9 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(Modules.commonObject))
             implementation(libs.firebase.gitlive.auth)
             implementation(libs.firebase.gitlive.crashlytics)
-            api(libs.kotlinx.dateTime)
-            api(libs.kotlinx.coroutines)
             implementation(libs.napier)
         }
 
@@ -55,8 +45,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.utils"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

@@ -2,23 +2,11 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
+    id("pl.msiwak.convention.target.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -35,7 +23,7 @@ kotlin {
         xcodeConfigurationToNativeBuildType["stagingDebug"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
-        pod("FirebaseMessaging")
+//        pod("FirebaseMessaging")
     }
 
     sourceSets {
@@ -44,7 +32,7 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+            implementation(project.dependencies.platform("com.google.firebase:firebase-bom:32.3.1"))
             implementation(libs.firebase.andorid.messaging)
         }
         commonTest.dependencies {

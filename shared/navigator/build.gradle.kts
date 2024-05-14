@@ -1,26 +1,16 @@
+import pl.msiwak.multiplatfor.dependencies.Modules
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    id("pl.msiwak.convention.target.config")
 }
-
-apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Navigator Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -41,6 +31,18 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines)
+            implementation(project(Modules.uiCommonComponent))
+            implementation(project(Modules.commonResources))
+            implementation(project(Modules.utils))
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(libs.compose.multiplatform.navigation)
         }
         iosMain.dependencies {
             implementation("co.touchlab:stately-common:2.0.6")

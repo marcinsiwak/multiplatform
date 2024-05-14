@@ -28,4 +28,5 @@ object Modules {
     const val uiVerifyEmail = "$shared:ui-verifyEmail"
     const val buildConfig = "$shared:buildConfig"
     const val notifications = "$shared:notifications"
+    const val uiCommonComponent = "$shared:ui-common-component"
 }
