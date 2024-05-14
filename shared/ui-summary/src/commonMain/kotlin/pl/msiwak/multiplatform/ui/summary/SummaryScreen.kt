@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.ic_add
 import athletetrack.shared.commonresources.generated.resources.no
@@ -39,12 +40,15 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.ui.commonComponent.AdmobBanner
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
 
 @Composable
 fun SummaryScreen(
+    navController: NavController,
     viewModel: SummaryViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
@@ -62,9 +66,13 @@ fun SummaryScreen(
         viewState = viewState,
         onCategoryRemoved = viewModel::onCategoryRemoved,
         onPopupDismissed = viewModel::onPopupDismissed,
-        onCategoryClicked = viewModel::onCategoryClicked,
+        onCategoryClicked = {
+            navController.navigate(NavDestination.CategoryDestination.NavCategoryScreen.route)
+        },
         onCategoryLongClicked = viewModel::onCategoryLongClicked,
-        onAddCategoryClicked = viewModel::onAddCategoryClicked
+        onAddCategoryClicked = {
+            navController.navigate(NavDestination.AddCategoryDestination.NavAddCategoryScreen.route)
+        }
     )
 }
 
@@ -94,9 +102,10 @@ fun SummaryScreenContent(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-//        AdmobBanner(modifier = Modifier.padding(bottom = MaterialTheme.dimens.space_8))
+        AdmobBanner(modifier = Modifier.padding(bottom = MaterialTheme.dimens.space_8))
         LazyColumn(
             modifier = Modifier.padding(horizontal = MaterialTheme.dimens.space_16),
             horizontalAlignment = Alignment.CenterHorizontally,

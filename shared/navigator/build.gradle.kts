@@ -32,6 +32,8 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines)
             implementation(project(Modules.uiCommonComponent))
+            implementation(project(Modules.commonResources))
+            implementation(project(Modules.utils))
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
@@ -40,6 +42,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
+            implementation(libs.compose.multiplatform.navigation)
         }
         iosMain.dependencies {
             implementation("co.touchlab:stately-common:2.0.6")

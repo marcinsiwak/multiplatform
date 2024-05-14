@@ -18,28 +18,22 @@ import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.bg_force_update
 import athletetrack.shared.commonresources.generated.resources.force_update_description
 import athletetrack.shared.commonresources.generated.resources.force_update_title
-import athletetrack.shared.commonresources.generated.resources.force_update_update
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
-import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 
 @Composable
 fun ForceUpdateScreen(
     viewModel: ForceUpdateViewModel = koinInject()
 ) {
-    ForceUpdateScreenContent(
-        onUpdateClicked = viewModel::onUpdateClicked
-    )
+    ForceUpdateScreenContent()
 }
 
 @Composable
-fun ForceUpdateScreenContent(
-    onUpdateClicked: () -> Unit = {}
-) {
+fun ForceUpdateScreenContent() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -62,16 +56,14 @@ fun ForceUpdateScreenContent(
                 fontSize = MaterialTheme.font.font_16
             )
         }
-        MainButton(
-            modifier = Modifier
+        GoToStoreButton(
+            Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
                 .padding(
                     vertical = MaterialTheme.dimens.space_16,
                     horizontal = MaterialTheme.dimens.space_80
-                ),
-            onClick = onUpdateClicked,
-            text = stringResource(Res.string.force_update_update)
+                )
         )
     }
 }

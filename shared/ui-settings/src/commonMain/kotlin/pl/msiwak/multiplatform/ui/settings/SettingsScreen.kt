@@ -14,6 +14,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.settings
 import athletetrack.shared.commonresources.generated.resources.settings_language
@@ -24,17 +25,24 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.navigator.destination.NavDestination.LanguageDestination
 
 @Composable
 fun SettingsScreen(
+    navController: NavController,
     viewModel: SettingsViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
     SettingsScreenContent(
         viewState = viewState,
-        onUnitClicked = viewModel::onUnitClicked,
-        onLanguageClicked = viewModel::onLanguageClicked,
+        onUnitClicked = {
+            navController.navigate(NavDestination.UnitDestination.NavUnitScreen.route)
+        },
+        onLanguageClicked = {
+            navController.navigate(LanguageDestination.NavLanguageScreen.route)
+        },
         onLogoutClicked = viewModel::onLogoutClicked
     )
 }

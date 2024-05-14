@@ -4,7 +4,6 @@ import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -12,10 +11,6 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import io.github.aakira.napier.Napier
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.ui.commonComponent.extensions.findActivity
 
 @Composable
@@ -61,19 +56,4 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String) -> 
                 Napier.e("GOOGLE AUTH FAILED: $e")
             }
     }
-}
-
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-actual fun Icon(drawableResource: DrawableResource) {
-    Column {
-        val painter = painterResource(drawableResource)
-        androidx.compose.material3.Icon(painter, null)
-    }
-}
-
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-actual fun stringResource(stringResource: StringResource): String {
-    return org.jetbrains.compose.resources.stringResource(stringResource)
 }

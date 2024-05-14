@@ -11,50 +11,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.verify_description
 import athletetrack.shared.commonresources.generated.resources.verify_login
-import athletetrack.shared.commonresources.generated.resources.verify_open_mail
 import athletetrack.shared.commonresources.generated.resources.verify_resend_mail
 import athletetrack.shared.commonresources.generated.resources.verify_title
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
 
 @Composable
 fun VerifyEmailScreen(
+    navController: NavController,
     viewModel: VerifyEmailViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
-//    val context = LocalContext.current
-//
-//    LaunchedEffect(key1 = Unit) {
-//        viewModel.viewEvent.collectLatest {
-//            when (it) {
-//                VerifyEmailEvent.OpenMail -> openMailApp()
-//            }
-//        }
-//    }
-
     VerifyEmailScreenContent(
         viewState = viewState,
-        onOpenMailClicked = viewModel::onOpenMailClicked,
         onResendMailClicked = viewModel::onResendMailClicked,
-        onLoginClicked = viewModel::onLoginClicked
+        onLoginClicked = {
+            navController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+        }
     )
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun VerifyEmailScreenContent(
     viewState: State<VerifyState>,
-    onOpenMailClicked: () -> Unit = {},
     onResendMailClicked: () -> Unit = {},
     onLoginClicked: () -> Unit = {}
 ) {
@@ -83,12 +73,10 @@ fun VerifyEmailScreenContent(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        MainButton(
+        OpenMailButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = MaterialTheme.dimens.space_8),
-            onClick = { onOpenMailClicked() },
-            text = stringResource(Res.string.verify_open_mail)
+                .padding(vertical = MaterialTheme.dimens.space_8)
         )
 
         SecondaryButton(

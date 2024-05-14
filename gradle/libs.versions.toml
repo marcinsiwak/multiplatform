@@ -2,7 +2,7 @@
 accompanistNavigationMaterial = "0.25.0"
 activityCompose = "1.7.2"
 agp = "8.2.2"
-ksp = "2.0.0-RC1-1.0.20"
+ksp = "2.0.0-RC2-1.0.20"
 
 appcompat = "1.6.1"
 buildkonfigGradlePlugin = "0.14.0"
@@ -12,25 +12,25 @@ firebaseCommon = "20.4.2"
 firebaseConfig = "21.6.1"
 firebaseCrashlyticsGradle = "2.9.9"
 googleServices = "4.4.1"
-kotlin = "2.0.0-RC2"
+kotlin = "2.0.0-RC3"
 compose = "1.7.0-alpha07"
 compose-compiler = "1.5.4"
 compose-material3 = "1.2.0"
-koin = "3.5.6"
-koin-compose-android = "3.4.2"
-koin-compose = "1.1.5"
+koin = "3.6.0-Beta2"
+koin-compose-android = "3.6.0-Beta2"
+koin-compose = "1.2.0-Beta2"
 ktor = "2.3.5"
 navigationCompose = "2.7.7"
 resourcesGenerator = "0.23.0"
 sqlDelight = "2.0.1"
-firebaseGitlive = "1.10.0"
+firebaseGitlive = "1.12.0"
 firebase-android-bom = "32.3.1"
 kotlinx-lifecycle = "2.8.0-beta01"
 kotlinx-viewModel = "2.8.0-beta01"
-kotlinx-coroutines = "1.6.4"
-kotlinx-dateTime = "0.4.0"
-kotlinx-serialization = "1.5.0"
-napier = "2.6.1"
+kotlinx-coroutines = "1.8.1-Beta"
+kotlinx-dateTime = "0.5.0"
+kotlinx-serialization = "1.5.1"
+napier = "2.7.1"
 google-playservices-auth = "20.6.0"
 google-playservices-ads = "22.5.0"
 ktlint = "11.5.1"
@@ -38,6 +38,8 @@ detekt = "1.19.0"
 firebase-appDistribution = "4.0.1"
 compose-components-resources = "1.4.0"
 compose-multiplatform = "1.6.10-rc01"
+compose-multiplatform-navigation = "2.7.0-alpha03"
+playServicesAdsLite = "23.0.0"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
@@ -88,6 +90,7 @@ sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", 
 napier = { module = "io.github.aakira:napier", version.ref = "napier"}
 google-android-playservices-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-playservices-auth"}
 google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
+compose-multiplatform-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-multiplatform-navigation" }
 
 # Gradle scripts depdendecies
 gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }

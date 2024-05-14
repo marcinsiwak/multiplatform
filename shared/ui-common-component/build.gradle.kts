@@ -19,7 +19,7 @@ kotlin {
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "ui-welcome"
+            baseName = "ui-common-component"
 
             export(project(Modules.commonResources))
             export(project(Modules.commonObject))
@@ -30,6 +30,8 @@ kotlin {
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
         xcodeConfigurationToNativeBuildType["stagingDebug"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+
+        pod("Google-Mobile-Ads-SDK", moduleName = "GoogleMobileAds")
     }
 
     sourceSets {
@@ -45,6 +47,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.google.android.playservices.auth)
+            implementation(libs.google.android.playservices.ads)
         }
 
         commonTest.dependencies {

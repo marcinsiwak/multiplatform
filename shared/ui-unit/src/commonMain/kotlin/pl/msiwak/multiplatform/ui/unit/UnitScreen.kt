@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.settings_unit
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -28,6 +29,7 @@ import pl.msiwak.multiplatform.commonResources.theme.font
 
 @Composable
 fun UnitScreen(
+    navController: NavController,
     viewModel: UnitViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()

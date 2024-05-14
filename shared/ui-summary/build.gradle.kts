@@ -51,6 +51,7 @@ kotlin {
 
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
+            implementation(libs.compose.multiplatform.navigation)
         }
 
         commonTest.dependencies {

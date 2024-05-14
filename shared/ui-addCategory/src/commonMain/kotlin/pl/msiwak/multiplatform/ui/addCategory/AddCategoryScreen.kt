@@ -12,13 +12,16 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_category
 import athletetrack.shared.commonresources.generated.resources.category_name
+import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -31,9 +34,18 @@ import pl.msiwak.multiplatform.ui.commonComponent.Loader
 
 @Composable
 fun AddCategoryScreen(
+    navController: NavController,
     viewModel: AddCategoryViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
+
+    LaunchedEffect(true) {
+        viewModel.viewEvent.collectLatest { value ->
+            when (value) {
+                is AddCategoryEvent.NavigateBack -> navController.navigateUp()
+            }
+        }
+    }
 
     AddCategoryScreenContent(
         viewState = viewState,

@@ -15,21 +15,25 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.email
 import athletetrack.shared.commonresources.generated.resources.ic_invisible
 import athletetrack.shared.commonresources.generated.resources.ic_visible
 import athletetrack.shared.commonresources.generated.resources.password
 import athletetrack.shared.commonresources.generated.resources.register
+import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
@@ -37,9 +41,20 @@ import pl.msiwak.multiplatform.ui.commonComponent.PasswordRequirements
 
 @Composable
 fun RegisterScreen(
+    navController: NavController,
     viewModel: RegisterViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.viewEvent.collectLatest { event ->
+            when (event) {
+                RegisterEvent.NavigateToVerifyEmail -> navController.navigate(
+                    NavDestination.VerifyEmailDestination.NavVerifyEmailScreen.route
+                )
+            }
+        }
+    }
 
     RegisterScreenContent(
         viewState = viewState,

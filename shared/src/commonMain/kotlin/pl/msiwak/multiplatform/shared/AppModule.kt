@@ -3,7 +3,6 @@ package pl.msiwak.multiplatform.shared
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.auth.SessionStore
-import pl.msiwak.multiplatform.core.main.MainViewModel
 import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
@@ -99,7 +98,6 @@ import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCaseImpl
-import pl.msiwak.multiplatform.navigator.Navigator
 import pl.msiwak.multiplatform.network.client.CategoryClient
 import pl.msiwak.multiplatform.network.client.KtorClient
 import pl.msiwak.multiplatform.network.client.UserClient
@@ -110,17 +108,31 @@ import pl.msiwak.multiplatform.network.mapper.UserMapper
 import pl.msiwak.multiplatform.network.service.CategoryService
 import pl.msiwak.multiplatform.network.service.UserService
 import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
+import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
+import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
+import pl.msiwak.multiplatform.ui.addExercise.AddExerciseGraph
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
+import pl.msiwak.multiplatform.ui.category.CategoryGraph
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
+import pl.msiwak.multiplatform.ui.dashboard.BottomNavigationProvider
+import pl.msiwak.multiplatform.ui.dashboard.DashboardGraph
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
+import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateGraph
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
+import pl.msiwak.multiplatform.ui.language.LanguageGraph
 import pl.msiwak.multiplatform.ui.language.LanguageViewModel
+import pl.msiwak.multiplatform.ui.register.RegisterGraph
 import pl.msiwak.multiplatform.ui.register.RegisterViewModel
+import pl.msiwak.multiplatform.ui.settings.SettingsGraph
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
+import pl.msiwak.multiplatform.ui.summary.SummaryGraph
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
+import pl.msiwak.multiplatform.ui.unit.UnitGraph
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
+import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailGraph
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
+import pl.msiwak.multiplatform.ui.welcome.WelcomeGraph
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 import pl.msiwak.multiplatform.utils.DateFormatter
 import pl.msiwak.multiplatform.utils.NumberFormatter
@@ -136,7 +148,8 @@ fun appModule() = listOf(
     repositoryUseModule,
     storeModule,
     serviceModule,
-    clientModule
+    clientModule,
+    navigationModule
 )
 
 val databaseModule = module {
@@ -159,7 +172,6 @@ val apiModule = module {
 }
 
 val toolsModule = module {
-    single { Navigator() }
     single { GlobalErrorHandler() }
     single { Validator() }
     single { DateFormatter() }
@@ -171,11 +183,22 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition { MainViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
-    viewModelDefinition { RegisterViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { VerifyEmailViewModel(get(), get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
-    viewModelDefinition { SummaryViewModel(get(), get(), get(), get(), get()) }
+    viewModelDefinition {
+        MainViewModel(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
+    viewModelDefinition { RegisterViewModel(get(), get(), get()) }
+    viewModelDefinition { VerifyEmailViewModel(get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition { params ->
         AddExerciseViewModel(
             id = params.get(),
@@ -199,15 +222,14 @@ val viewModelsModule = module {
             get(),
             get(),
             get(),
-            get(),
             get()
         )
     }
-    viewModelDefinition { AddCategoryViewModel(get(), get(), get()) }
-    viewModelDefinition { SettingsViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { AddCategoryViewModel(get(), get()) }
+    viewModelDefinition { SettingsViewModel(get(), get(), get()) }
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
-    viewModelDefinition { ForceUpdateViewModel(get()) }
+    viewModelDefinition { ForceUpdateViewModel() }
     viewModelDefinition { DashboardViewModel(get(), get(), get(), get()) }
 }
 
@@ -277,4 +299,34 @@ val clientModule = module {
     single { KtorClient(get()) }
     single { UserClient(get()) }
     single { CategoryClient(get()) }
+}
+
+val navigationModule = module {
+    single { WelcomeGraph() }
+    single { RegisterGraph() }
+    single { AddCategoryGraph() }
+    single { CategoryGraph() }
+    single { DashboardGraph() }
+    single { AddExerciseGraph() }
+    single { UnitGraph() }
+    single { LanguageGraph() }
+    single { ForceUpdateGraph() }
+    single { VerifyEmailGraph() }
+    single { SummaryGraph() }
+    single { SettingsGraph() }
+    single {
+        NavigationProvider(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
+    single { BottomNavigationProvider(get(), get()) }
 }
