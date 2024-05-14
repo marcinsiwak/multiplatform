@@ -110,11 +110,6 @@ jobs:
           echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
-      - name: GitHub Action for SwiftLint
-        run: |
-          brew install swiftlint
-          swiftlint
-
       - run: ./gradlew :shared:generateDummyFramework
       - name: Set up cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1

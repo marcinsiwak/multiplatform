@@ -18,7 +18,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
@@ -34,7 +33,6 @@ import athletetrack.shared.commonresources.generated.resources.remove_category_d
 import athletetrack.shared.commonresources.generated.resources.remove_category_dialog_title
 import athletetrack.shared.commonresources.generated.resources.summary_add_category
 import athletetrack.shared.commonresources.generated.resources.yes
-import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -44,7 +42,7 @@ import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.AdmobBanner
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
-import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
+import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
 @Composable
 fun SummaryScreen(
@@ -53,12 +51,9 @@ fun SummaryScreen(
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
-    LaunchedEffect(Unit) {
-        lifecycleObserver.collectLatest { event ->
-            when (event) {
-                Lifecycle.Event.ON_RESUME -> viewModel.onResume()
-                else -> Unit
-            }
+    OnLifecycleEvent { _, event ->
+        if (event == Lifecycle.Event.ON_RESUME) {
+            viewModel.onResume()
         }
     }
 

@@ -53,7 +53,7 @@ import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.ListItemView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
-import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
+import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -69,12 +69,9 @@ fun CategoryScreen(
         ExerciseType.GYM -> Res.drawable.bg_gym
     }
 
-    LaunchedEffect(Unit) {
-        lifecycleObserver.collect { event ->
-            when (event) {
-                Lifecycle.Event.ON_RESUME -> viewModel.onResume()
-                else -> Unit
-            }
+    OnLifecycleEvent { _, event ->
+        if (event == Lifecycle.Event.ON_RESUME) {
+            viewModel.onResume()
         }
     }
 
