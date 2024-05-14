@@ -52,7 +52,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTableView
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTimeFilterView
 import pl.msiwak.multiplatform.ui.commonComponent.RunningTimeInputDialog
-import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
+import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
 private const val FOCUS_REQUESTERS_AMOUNT = 4
 
@@ -67,12 +67,9 @@ fun AddExerciseScreen(
     val focusManager = LocalFocusManager.current
     val focusRequesters = List(FOCUS_REQUESTERS_AMOUNT) { remember { FocusRequester() } }
 
-    LaunchedEffect(Unit) {
-        lifecycleObserver.collectLatest { event ->
-            when (event) {
-                Lifecycle.Event.ON_PAUSE -> viewModel.onPause()
-                else -> Unit
-            }
+    OnLifecycleEvent { _, event ->
+        if (event == Lifecycle.Event.ON_PAUSE) {
+            viewModel.onPause()
         }
     }
 
