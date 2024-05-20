@@ -240,7 +240,16 @@
 		<false/>
 	</dict>
 	<key>UILaunchScreen</key>
-	<dict/>
+	<dict>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<true/>
+		<key>UIColorName</key>
+		<string>MainColor</string>
+		<key>UIImageName</key>
+		<string>MainIcon</string>
+	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

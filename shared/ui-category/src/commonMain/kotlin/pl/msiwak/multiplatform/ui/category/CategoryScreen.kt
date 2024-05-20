@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,6 +32,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.add_category
 import athletetrack.shared.commonresources.generated.resources.add_exercise
 import athletetrack.shared.commonresources.generated.resources.bg_gym
 import athletetrack.shared.commonresources.generated.resources.bg_running_field
@@ -50,6 +52,7 @@ import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.ListItemView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
@@ -86,6 +89,7 @@ fun CategoryScreen(
     }
 
     CategoryScreenContent(
+        navController = navController,
         viewState = viewState,
         backgroundId = backgroundId,
         onConfirmClicked = viewModel::onResultRemoved,
@@ -105,6 +109,7 @@ fun CategoryScreen(
 @Suppress("MagicNumber")
 @Composable
 fun CategoryScreenContent(
+    navController: NavController,
     viewState: State<CategoryState>,
     backgroundId: DrawableResource,
     onConfirmClicked: () -> Unit = {},
@@ -140,84 +145,93 @@ fun CategoryScreenContent(
         )
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
 
-        Column {
-            val shadowColor = MaterialTheme.color.ShadowColor
-            Image(
+    Scaffold(
+        topBar = {
+            AppBar(navController = navController, title = viewState.value.categoryName)
+        },
+        content = {
+
+            Box(
                 modifier = Modifier
-                    .drawWithCache {
-                        val gradient = Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, shadowColor),
-                            startY = size.height / 3,
-                            endY = size.height
-                        )
-                        onDrawWithContent {
-                            drawContent()
-                            drawRect(gradient, blendMode = BlendMode.Multiply)
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+
+                Column {
+                    val shadowColor = MaterialTheme.color.ShadowColor
+                    Image(
+                        modifier = Modifier
+                            .drawWithCache {
+                                val gradient = Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, shadowColor),
+                                    startY = size.height / 3,
+                                    endY = size.height
+                                )
+                                onDrawWithContent {
+                                    drawContent()
+                                    drawRect(gradient, blendMode = BlendMode.Multiply)
+                                }
+                            }
+                            .fillMaxWidth()
+                            .height(MaterialTheme.dimens.space_264),
+                        painter = painterResource(backgroundId),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = null
+                    )
+
+                    LazyColumn {
+                        itemsIndexed(viewState.value.exerciseList) { index, item ->
+                            ListItemView(
+                                name = item.exerciseTitle,
+                                onItemClick = { onItemClick(item.id) },
+                                onLongClick = { onLongClick(index) }
+                            )
                         }
                     }
-                    .fillMaxWidth()
-                    .height(MaterialTheme.dimens.space_264),
-                painter = painterResource(backgroundId),
-                contentScale = ContentScale.Crop,
-                contentDescription = null
-            )
-
-            LazyColumn {
-                itemsIndexed(viewState.value.exerciseList) { index, item ->
-                    ListItemView(
-                        name = item.exerciseTitle,
-                        onItemClick = { onItemClick(item.id) },
-                        onLongClick = { onLongClick(index) }
+                }
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter)
+                        .padding(
+                            vertical = MaterialTheme.dimens.space_16,
+                            horizontal = MaterialTheme.dimens.space_80
+                        ),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    ),
+                    onClick = onClick
+                ) {
+                    Text(
+                        modifier = Modifier.padding(MaterialTheme.dimens.space_8),
+                        text = stringResource(Res.string.add_exercise),
+                        fontSize = MaterialTheme.font.font_16
                     )
                 }
+
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .background(
+                            color = MaterialTheme.colorScheme.primary,
+                            shape = RoundedCornerShape(
+                                topStart = MaterialTheme.dimens.space_8,
+                                bottomEnd = MaterialTheme.dimens.space_8
+                            )
+                        )
+                        .padding(
+                            horizontal = MaterialTheme.dimens.space_12,
+                            vertical = MaterialTheme.dimens.space_8
+                        ),
+                    text = viewState.value.categoryName,
+                    fontSize = MaterialTheme.font.font_14,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         }
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .padding(
-                    vertical = MaterialTheme.dimens.space_16,
-                    horizontal = MaterialTheme.dimens.space_80
-                ),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.tertiary,
-                contentColor = MaterialTheme.colorScheme.primary
-            ),
-            onClick = onClick
-        ) {
-            Text(
-                modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(Res.string.add_exercise),
-                fontSize = MaterialTheme.font.font_16
-            )
-        }
-
-        Text(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .background(
-                    color = MaterialTheme.colorScheme.primary,
-                    shape = RoundedCornerShape(
-                        topStart = MaterialTheme.dimens.space_8,
-                        bottomEnd = MaterialTheme.dimens.space_8
-                    )
-                )
-                .padding(
-                    horizontal = MaterialTheme.dimens.space_12,
-                    vertical = MaterialTheme.dimens.space_8
-                ),
-            text = viewState.value.categoryName,
-            fontSize = MaterialTheme.font.font_14,
-            color = MaterialTheme.colorScheme.onPrimary
-        )
-    }
+    )
 }
 
 // @DarkLightPreview

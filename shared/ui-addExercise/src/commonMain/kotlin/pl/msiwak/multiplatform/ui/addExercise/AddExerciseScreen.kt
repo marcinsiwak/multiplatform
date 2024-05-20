@@ -17,6 +17,7 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
@@ -31,6 +32,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.add_category
+import athletetrack.shared.commonresources.generated.resources.add_exercise
 import athletetrack.shared.commonresources.generated.resources.add_new_result
 import athletetrack.shared.commonresources.generated.resources.add_result_save
 import athletetrack.shared.commonresources.generated.resources.confirm
@@ -45,6 +48,7 @@ import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
@@ -82,6 +86,7 @@ fun AddExerciseScreen(
     }
 
     AddExerciseScreenContent(
+        navController = navController,
         viewState = viewState,
         focusManager = focusManager,
         focusRequesters = focusRequesters,
@@ -109,6 +114,7 @@ fun AddExerciseScreen(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalResourceApi::class)
 @Composable
 fun AddExerciseScreenContent(
+    navController: NavController,
     viewState: State<AddExerciseState>,
     focusManager: FocusManager,
     focusRequesters: List<FocusRequester>,
@@ -180,107 +186,114 @@ fun AddExerciseScreenContent(
         )
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.Top
-    ) {
-        if (viewState.value.isEditNameEnabled) {
-            InputView(
-                value = viewState.value.exerciseTitle,
-                onValueChange = {
-                    onExerciseTitleChanged(it)
-                }
-            )
-        } else {
-            Text(
+    Scaffold(
+        topBar = {
+            AppBar(navController = navController, title = stringResource(Res.string.add_exercise))
+        },
+        content = {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = MaterialTheme.dimens.space_12,
-                        end = MaterialTheme.dimens.space_24
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+                verticalArrangement = Arrangement.Top
+            ) {
+                if (viewState.value.isEditNameEnabled) {
+                    InputView(
+                        value = viewState.value.exerciseTitle,
+                        onValueChange = {
+                            onExerciseTitleChanged(it)
+                        }
                     )
-                    .padding(vertical = MaterialTheme.dimens.space_16)
-                    .clickable { onTitleClicked() },
-                text = viewState.value.exerciseTitle,
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onPrimary
-            )
-        }
-
-        ResultsTimeFilterView(
-            modifier = Modifier
-                .wrapContentWidth()
-                .padding(bottom = MaterialTheme.dimens.space_16),
-            tabs = viewState.value.filter,
-            selectedPos = viewState.value.selectedFilterPosition,
-            onTabClicked = {
-                onTabClicked(it)
-            }
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
-        ) {
-            if (!viewState.value.isResultFieldEnabled) {
-                Button(
-                    modifier = Modifier
-                        .padding(bottom = MaterialTheme.dimens.space_16)
-                        .padding(horizontal = MaterialTheme.dimens.space_16),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        contentColor = MaterialTheme.colorScheme.primary
-                    ),
-                    onClick = {
-                        onAddNewResultClicked()
-                    }
-                ) {
+                } else {
                     Text(
-                        text = stringResource(Res.string.add_new_result),
-                        style = MaterialTheme.typography.bodyMedium
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                start = MaterialTheme.dimens.space_12,
+                                end = MaterialTheme.dimens.space_24
+                            )
+                            .padding(vertical = MaterialTheme.dimens.space_16)
+                            .clickable { onTitleClicked() },
+                        text = viewState.value.exerciseTitle,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
-            } else {
-                Button(
+
+                ResultsTimeFilterView(
                     modifier = Modifier
-                        .padding(bottom = MaterialTheme.dimens.space_16)
-                        .padding(horizontal = MaterialTheme.dimens.space_16),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        contentColor = MaterialTheme.colorScheme.primary
-                    ),
-                    onClick = {
-                        onSaveResultClicked()
+                        .wrapContentWidth()
+                        .padding(bottom = MaterialTheme.dimens.space_16),
+                    tabs = viewState.value.filter,
+                    selectedPos = viewState.value.selectedFilterPosition,
+                    onTabClicked = {
+                        onTabClicked(it)
                     }
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
                 ) {
-                    Text(
-                        text = stringResource(Res.string.add_result_save),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
+                    if (!viewState.value.isResultFieldEnabled) {
+                        Button(
+                            modifier = Modifier
+                                .padding(bottom = MaterialTheme.dimens.space_16)
+                                .padding(horizontal = MaterialTheme.dimens.space_16),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.tertiary,
+                                contentColor = MaterialTheme.colorScheme.primary
+                            ),
+                            onClick = {
+                                onAddNewResultClicked()
+                            }
+                        ) {
+                            Text(
+                                text = stringResource(Res.string.add_new_result),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    } else {
+                        Button(
+                            modifier = Modifier
+                                .padding(bottom = MaterialTheme.dimens.space_16)
+                                .padding(horizontal = MaterialTheme.dimens.space_16),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.tertiary,
+                                contentColor = MaterialTheme.colorScheme.primary
+                            ),
+                            onClick = {
+                                onSaveResultClicked()
+                            }
+                        ) {
+                            Text(
+                                text = stringResource(Res.string.add_result_save),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                    }
                 }
+
+                ResultsTableView(
+                    modifier = Modifier,
+                    resultDataTitles = viewState.value.resultDataTitles,
+                    results = viewState.value.results,
+                    exerciseType = viewState.value.exerciseType,
+                    focusRequesters = focusRequesters,
+                    isNewResultEnabled = viewState.value.isResultFieldEnabled,
+                    newResultData = viewState.value.newResultData,
+                    onAddNewResultClicked = onAddNewResultClicked::invoke,
+                    onResultValueChanged = onResultValueChanged::invoke,
+                    onAmountValueChanged = onAmountValueChanged::invoke,
+                    onDateValueChanged = onDateValueChanged::invoke,
+                    onDateClicked = onDateClicked::invoke,
+                    onResultLongClick = onResultLongClicked::invoke,
+                    onLabelClicked = onLabelClicked::invoke,
+                    onAmountClicked = onAmountClicked::invoke
+                )
             }
         }
-
-        ResultsTableView(
-            modifier = Modifier,
-            resultDataTitles = viewState.value.resultDataTitles,
-            results = viewState.value.results,
-            exerciseType = viewState.value.exerciseType,
-            focusRequesters = focusRequesters,
-            isNewResultEnabled = viewState.value.isResultFieldEnabled,
-            newResultData = viewState.value.newResultData,
-            onAddNewResultClicked = onAddNewResultClicked::invoke,
-            onResultValueChanged = onResultValueChanged::invoke,
-            onAmountValueChanged = onAmountValueChanged::invoke,
-            onDateValueChanged = onDateValueChanged::invoke,
-            onDateClicked = onDateClicked::invoke,
-            onResultLongClick = onResultLongClicked::invoke,
-            onLabelClicked = onLabelClicked::invoke,
-            onAmountClicked = onAmountClicked::invoke
-        )
-    }
+    )
 }
 
 // @DarkLightPreview

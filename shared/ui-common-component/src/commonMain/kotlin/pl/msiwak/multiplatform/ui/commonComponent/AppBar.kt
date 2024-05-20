@@ -29,21 +29,20 @@ fun AppBar(
         title = {
             Text(
                 modifier = Modifier.padding(
-                    vertical = MaterialTheme.dimens.space_16,
-                    horizontal = MaterialTheme.dimens.space_24
+                    vertical = MaterialTheme.dimens.space_16
                 ),
                 text = title,
-                fontSize = MaterialTheme.font.font_24,
+                fontSize = MaterialTheme.font.font_20,
                 color = Color.White
             )
         },
         navigationIcon = {
             Icon(
                 modifier = Modifier
-                    .padding(MaterialTheme.dimens.space_8)
                     .clickable {
                         navController.navigateUp()
-                    },
+                    }
+                    .padding(MaterialTheme.dimens.space_16),
                 painter = painterResource(Res.drawable.ic_arrow_back),
                 contentDescription = null
             )

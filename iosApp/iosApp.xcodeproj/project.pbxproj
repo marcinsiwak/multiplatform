@@ -10,8 +10,6 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* IOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* IOSApp.swift */; };
-		711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B952A575ADD00151063 /* SplashScreen.swift */; };
-		711E8BB22A575C2500151063 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB12A575C2500151063 /* DatePicker.swift */; };
 		711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB82A575EE700151063 /* AppDelegate.swift */; };
 		71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */; };
 		71D05CA22B3338DF00994291 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 71D05CA12B3338DF00994291 /* .swiftlint.yml */; };
@@ -39,8 +37,6 @@
 		2152FB032600AC8F00CF470E /* IOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSApp.swift; sourceTree = "<group>"; };
 		321EE48D0E4A0D68324B171D /* Pods-iosApp.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.stagingdebug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		6AFEB18FD9875F7CA0588D4D /* Pods-iosApp.productiondebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.productiondebug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.productiondebug.xcconfig"; sourceTree = "<group>"; };
-		711E8B952A575ADD00151063 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		711E8BB12A575C2500151063 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		711E8BB82A575EE700151063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71D05CA12B3338DF00994291 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -96,32 +92,15 @@
 			isa = PBXGroup;
 			children = (
 				711E8B942A575ACF00151063 /* main */,
-				711E8B722A57596700151063 /* common */,
 			);
 			path = ui;
-			sourceTree = "<group>";
-		};
-		711E8B722A57596700151063 /* common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = common;
 			sourceTree = "<group>";
 		};
 		711E8B942A575ACF00151063 /* main */ = {
 			isa = PBXGroup;
 			children = (
-				711E8B952A575ADD00151063 /* SplashScreen.swift */,
 			);
 			path = main;
-			sourceTree = "<group>";
-		};
-		711E8BB02A575C1600151063 /* widgets */ = {
-			isa = PBXGroup;
-			children = (
-				711E8BB12A575C2500151063 /* DatePicker.swift */,
-			);
-			path = widgets;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -147,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */,
-				711E8BB02A575C1600151063 /* widgets */,
 				711E8B682A57585F00151063 /* ui */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				71FF1C9F2B95193500FFFDCE /* MainView.swift */,
@@ -298,8 +276,6 @@
 				2152FB042600AC8F00CF470E /* IOSApp.swift in Sources */,
 				711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */,
 				71FF1CA02B95193500FFFDCE /* MainView.swift in Sources */,
-				711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */,
-				711E8BB22A575C2500151063 /* DatePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

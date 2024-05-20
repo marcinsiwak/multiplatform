@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -20,12 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.add_category
 import athletetrack.shared.commonresources.generated.resources.language
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
+import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 
 @Composable
 fun LanguageScreen(
@@ -35,6 +38,7 @@ fun LanguageScreen(
     val viewState = viewModel.viewState.collectAsState()
 
     LanguageScreenContent(
+        navController = navController,
         viewState = viewState,
         onLanguageChanged = viewModel::onLanguageChanged
     )
@@ -42,46 +46,44 @@ fun LanguageScreen(
 
 @Composable
 fun LanguageScreenContent(
+    navController: NavController,
     viewState: State<LanguageState>,
     onLanguageChanged: (Int) -> Unit = {}
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        Text(
-            modifier = Modifier.padding(
-                vertical = MaterialTheme.dimens.space_16,
-                horizontal = MaterialTheme.dimens.space_24
-            ),
-            text = stringResource(Res.string.language),
-            fontSize = MaterialTheme.font.font_24,
-            color = MaterialTheme.colorScheme.onPrimary
-        )
-
-        LazyColumn {
-            itemsIndexed(viewState.value.languages) { index, item ->
-                Row {
-                    RadioButton(
-                        selected = item.isSelected,
-                        onClick = {
-                            onLanguageChanged(index)
-                        },
-                        colors = RadioButtonDefaults.colors(
-                            selectedColor = MaterialTheme.colorScheme.onPrimary,
-                            unselectedColor = MaterialTheme.colorScheme.tertiary
-                        )
-                    )
-                    Text(
-                        modifier = Modifier.align(Alignment.CenterVertically),
-                        text = item.name,
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        textAlign = TextAlign.Center
-                    )
+    Scaffold(
+        topBar = {
+            AppBar(navController = navController, title = stringResource(Res.string.language))
+        },
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                LazyColumn {
+                    itemsIndexed(viewState.value.languages) { index, item ->
+                        Row {
+                            RadioButton(
+                                selected = item.isSelected,
+                                onClick = {
+                                    onLanguageChanged(index)
+                                },
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = MaterialTheme.colorScheme.onPrimary,
+                                    unselectedColor = MaterialTheme.colorScheme.tertiary
+                                )
+                            )
+                            Text(
+                                modifier = Modifier.align(Alignment.CenterVertically),
+                                text = item.name,
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
                 }
             }
         }
-    }
+    )
 }
 
 // @Preview

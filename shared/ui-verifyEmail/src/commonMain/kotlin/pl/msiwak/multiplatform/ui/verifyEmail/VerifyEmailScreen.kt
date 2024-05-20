@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -22,6 +23,7 @@ import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
@@ -34,6 +36,7 @@ fun VerifyEmailScreen(
     val viewState = viewModel.viewState.collectAsState()
 
     VerifyEmailScreenContent(
+        navController = navController,
         viewState = viewState,
         onResendMailClicked = viewModel::onResendMailClicked,
         onLoginClicked = {
@@ -44,6 +47,7 @@ fun VerifyEmailScreen(
 
 @Composable
 fun VerifyEmailScreenContent(
+    navController: NavController,
     viewState: State<VerifyState>,
     onResendMailClicked: () -> Unit = {},
     onLoginClicked: () -> Unit = {}
@@ -52,47 +56,49 @@ fun VerifyEmailScreenContent(
         Loader()
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                vertical = MaterialTheme.dimens.space_32,
-                horizontal = MaterialTheme.dimens.space_16
-            )
-    ) {
-        Text(
-            modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-            text = stringResource(Res.string.verify_title),
-            fontSize = MaterialTheme.font.font_24
-        )
-        Text(
-            modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-            text = stringResource(Res.string.verify_description),
-            fontSize = MaterialTheme.font.font_16
-        )
+    Scaffold(
+        topBar = {
+            AppBar(navController = navController, title = stringResource(Res.string.verify_title))
+        },
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(
+                        vertical = MaterialTheme.dimens.space_32,
+                        horizontal = MaterialTheme.dimens.space_16
+                    )
+            ) {
+                Text(
+                    modifier = Modifier.padding(MaterialTheme.dimens.space_8),
+                    text = stringResource(Res.string.verify_description),
+                    fontSize = MaterialTheme.font.font_16
+                )
 
-        Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.weight(1f))
 
-        OpenMailButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = MaterialTheme.dimens.space_8)
-        )
+                OpenMailButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = MaterialTheme.dimens.space_8)
+                )
 
-        SecondaryButton(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = { onResendMailClicked() },
-            text = stringResource(Res.string.verify_resend_mail)
-        )
+                SecondaryButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { onResendMailClicked() },
+                    text = stringResource(Res.string.verify_resend_mail)
+                )
 
-        MainButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = MaterialTheme.dimens.space_8),
-            onClick = { onLoginClicked() },
-            text = stringResource(Res.string.verify_login)
-        )
-    }
+                MainButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = MaterialTheme.dimens.space_8),
+                    onClick = { onLoginClicked() },
+                    text = stringResource(Res.string.verify_login)
+                )
+            }
+        }
+    )
 }
 
 // @DarkLightPreview
