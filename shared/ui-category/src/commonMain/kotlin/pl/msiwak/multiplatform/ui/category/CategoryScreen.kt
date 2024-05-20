@@ -131,19 +131,20 @@ fun CategoryScreenContent(
         Loader()
     }
 
+    if (viewState.value.isDialogVisible) {
+        AddExerciseDialog(
+            inputText = viewState.value.newExerciseName,
+            onExerciseTitleChanged = onExerciseTitleChanged,
+            onAddExerciseClicked = onAddExerciseClicked,
+            onDialogClosed = onDialogClosed
+        )
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        if (viewState.value.isDialogVisible) {
-            AddExerciseDialog(
-                inputText = viewState.value.newExerciseName,
-                onExerciseTitleChanged = onExerciseTitleChanged,
-                onAddExerciseClicked = onAddExerciseClicked,
-                onDialogClosed = onDialogClosed
-            )
-        }
 
         Column {
             val shadowColor = MaterialTheme.color.ShadowColor
