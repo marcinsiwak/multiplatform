@@ -59,7 +59,7 @@ PODS:
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
   - FirebaseSharedSwift (10.25.0)
-  - Google-Mobile-Ads-SDK (11.4.0):
+  - Google-Mobile-Ads-SDK (11.5.0):
     - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleDataTransport (9.4.1):
     - GoogleUtilities/Environment (~> 7.7)
@@ -155,7 +155,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfigInterop: b25018791b204c0d78a90e394d6c62d9b1f22da8
   FirebaseSessions: c0939656253a1fa0e94ecc266ccf770cc8b33732
   FirebaseSharedSwift: 0274086954b1b2d5fd7e829eccc587044d72a4ba
-  Google-Mobile-Ads-SDK: d097dca17b9344135dcf592e79df0c7fbd89947b
+  Google-Mobile-Ads-SDK: 7db2098033ad3bfcd72a11e7503b49700a93029e
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUserMessagingPlatform: f131fa7978d2ba88d7426702b057c2cc318e6595
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
