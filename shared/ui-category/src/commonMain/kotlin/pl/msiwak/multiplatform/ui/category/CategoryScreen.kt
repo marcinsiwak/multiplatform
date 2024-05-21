@@ -63,7 +63,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 fun CategoryScreen(
     navController: NavController,
     id: String,
-    viewModel: CategoryViewModel = koinInject { parametersOf(id) }
+    viewModel: CategoryViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
@@ -79,6 +79,7 @@ fun CategoryScreen(
     }
 
     LaunchedEffect(Unit) {
+        viewModel.onInit(id)
         viewModel.viewEvent.collectLatest { event ->
             when (event) {
                 is CategoryEvent.NavigateToAddExercise -> navController.navigate(
@@ -98,7 +99,7 @@ fun CategoryScreen(
         onAddExerciseClicked = viewModel::onAddExerciseClicked,
         onDialogClosed = viewModel::onDialogClosed,
         onItemClick = {
-            navController.navigate(NavDestination.AddExerciseDestination.NavAddExerciseScreen.route)
+            navController.navigate(NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(it))
         },
         onLongClick = viewModel::onResultLongClicked,
         onClick = viewModel::onAddNewExerciseClicked
@@ -155,6 +156,7 @@ fun CategoryScreenContent(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(top = it.calculateTopPadding())
                     .background(MaterialTheme.colorScheme.background)
             ) {
 

@@ -4,6 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import pl.msiwak.multiplatform.navigator.ARG_EXERCISE_ID
 import pl.msiwak.multiplatform.navigator.destination.NavDestination.AddExerciseDestination
 import pl.msiwak.multiplatform.navigator.graph.NavigationNestedGraph
 
@@ -16,8 +17,11 @@ class AddExerciseGraph : NavigationNestedGraph {
         ) {
             composable(
                 route = AddExerciseDestination.NavAddExerciseScreen.route
-            ) {
-                AddExerciseScreen(navController, "")
+            ) { backStackEntry ->
+                AddExerciseScreen(
+                    navController,
+                    backStackEntry.arguments?.getString(ARG_EXERCISE_ID) ?: ""
+                )
             }
         }
     }

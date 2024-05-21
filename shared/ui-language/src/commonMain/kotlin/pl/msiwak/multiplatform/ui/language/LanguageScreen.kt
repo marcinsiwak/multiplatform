@@ -58,6 +58,7 @@ fun LanguageScreenContent(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(top = it.calculateTopPadding())
             ) {
                 LazyColumn {
                     itemsIndexed(viewState.value.languages) { index, item ->

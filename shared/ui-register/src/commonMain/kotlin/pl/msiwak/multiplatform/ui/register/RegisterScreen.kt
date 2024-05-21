@@ -23,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
-import athletetrack.shared.commonresources.generated.resources.add_category
 import athletetrack.shared.commonresources.generated.resources.email
 import athletetrack.shared.commonresources.generated.resources.ic_invisible
 import athletetrack.shared.commonresources.generated.resources.ic_visible
@@ -89,8 +88,11 @@ fun RegisterScreenContent(
             AppBar(navController = navController, title = stringResource(Res.string.register))
         },
         content = {
-
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = it.calculateTopPadding())
+            ) {
 //        Image(
 //            modifier = Modifier.fillMaxSize(),
 //            painter = painterResource(id = Res.drawable.bg_running_field.drawableResId),

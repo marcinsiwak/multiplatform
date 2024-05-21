@@ -62,7 +62,7 @@ fun SummaryScreen(
         onCategoryRemoved = viewModel::onCategoryRemoved,
         onPopupDismissed = viewModel::onPopupDismissed,
         onCategoryClicked = {
-            navController.navigate(NavDestination.CategoryDestination.NavCategoryScreen.route)
+            navController.navigate(NavDestination.CategoryDestination.NavCategoryScreen.route(it))
         },
         onCategoryLongClicked = viewModel::onCategoryLongClicked,
         onAddCategoryClicked = {

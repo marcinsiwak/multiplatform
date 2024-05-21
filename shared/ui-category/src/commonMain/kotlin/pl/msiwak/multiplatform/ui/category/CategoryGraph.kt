@@ -4,6 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import pl.msiwak.multiplatform.navigator.ARG_CATEGORY_ID
 import pl.msiwak.multiplatform.navigator.destination.NavDestination.CategoryDestination
 import pl.msiwak.multiplatform.navigator.graph.NavigationNestedGraph
 
@@ -15,9 +16,10 @@ class CategoryGraph : NavigationNestedGraph {
             startDestination = CategoryDestination.NavCategoryScreen.route
         ) {
             composable(
-                route = CategoryDestination.NavCategoryScreen.route
-            ) {
-                CategoryScreen(navController, "")
+                route = CategoryDestination.NavCategoryScreen.route,
+                arguments = listOf()
+            ) { backStackEntry ->
+                CategoryScreen(navController, backStackEntry.arguments?.getString(ARG_CATEGORY_ID) ?: "")
             }
         }
     }

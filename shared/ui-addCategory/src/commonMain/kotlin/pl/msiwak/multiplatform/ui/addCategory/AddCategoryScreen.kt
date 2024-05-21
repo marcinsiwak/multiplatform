@@ -78,10 +78,10 @@ fun AddCategoryScreenContent(
             AppBar(navController = navController, title = stringResource(Res.string.add_category))
         },
         content = {
-
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(top = it.calculateTopPadding())
             ) {
                 Column {
                     InputView(

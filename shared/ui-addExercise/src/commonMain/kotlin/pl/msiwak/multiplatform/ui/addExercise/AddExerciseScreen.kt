@@ -78,6 +78,7 @@ fun AddExerciseScreen(
     }
 
     LaunchedEffect(Unit) {
+        viewModel.onInit(id)
         viewModel.viewEvent.collectLatest { value ->
             when (value) {
                 is AddExerciseEvent.FocusOnInput -> focusRequesters[value.pos].requestFocus()
@@ -194,6 +195,7 @@ fun AddExerciseScreenContent(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(top = it.calculateTopPadding())
                     .background(MaterialTheme.colorScheme.background),
                 verticalArrangement = Arrangement.Top
             ) {
