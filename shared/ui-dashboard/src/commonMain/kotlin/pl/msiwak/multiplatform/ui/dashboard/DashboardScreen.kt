@@ -17,12 +17,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.navigator.destination.BottomNavigationDestination
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.navigator.destination.NavDestination.DashboardDestination
-import pl.msiwak.multiplatform.ui.commonComponent.OfflineBanner
 
 @Composable
 fun DashboardScreen(
@@ -32,9 +30,8 @@ fun DashboardScreen(
     val viewState = viewModel.viewState.collectAsState()
 
     val items = listOf(
-        NavDestination.DashboardDestination.SummaryDestination.NavSummaryGraphDestination,
-//        DashboardNavigationDirections.Account(R.drawable.ic_account, stringResource(SR.strings.account)),
-        NavDestination.DashboardDestination.SettingsDestination.NavSettingsGraphDestination
+        DashboardDestination.SummaryDestination.NavSummaryGraphDestination,
+        DashboardDestination.SettingsDestination.NavSettingsGraphDestination
     )
 
     DashboardScreenContent(
@@ -49,7 +46,6 @@ fun DashboardScreen(
     )
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun DashboardScreenContent(
     parentNavController: NavHostController,
@@ -63,9 +59,9 @@ private fun DashboardScreenContent(
 
     val selectedTabDestination = items[viewState.value.selectedTabIndex]
 
-
-    println("OUTPUT: ${viewState.value.selectedTabIndex}")
-    println("OUTPUT: ${selectedTabDestination.graphRoute}")
+    val initialTabDestination = remember {
+        items[viewState.value.initialTabIndex]
+    }
 
     val navigationSelectedItem by navController.currentDashboardDirectionAsState(
         selectedTabDestination
@@ -79,10 +75,15 @@ private fun DashboardScreenContent(
     Scaffold(
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
-                if (viewState.value.isOfflineBannerVisible) {
-                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
-                }
-                BottomNavigation(navController = navController, items = items)
+                // todo uncomment when available
+//                if (viewState.value.isOfflineBannerVisible) {
+//                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
+//                }
+                BottomNavigation(
+                    initialTabDestination = initialTabDestination,
+                    navController = navController,
+                    items = items
+                )
             }
         }
     ) {

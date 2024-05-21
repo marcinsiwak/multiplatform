@@ -22,11 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.settings_unit
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonResources.theme.dimens
-import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 
 @Composable
@@ -43,7 +40,6 @@ fun UnitScreen(
     )
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun UnitScreenContent(
     navController: NavController,

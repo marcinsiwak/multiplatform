@@ -22,7 +22,7 @@ import pl.msiwak.multiplatform.commonResources.theme.font
 fun AppBar(
     navController: NavController,
     modifier: Modifier = Modifier,
-    title: String,
+    title: String
 ) {
     TopAppBar(
         modifier = modifier,
@@ -46,7 +46,6 @@ fun AppBar(
                 painter = painterResource(Res.drawable.ic_arrow_back),
                 contentDescription = null
             )
-
-        },
+        }
     )
 }

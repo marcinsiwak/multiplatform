@@ -147,20 +147,17 @@ fun CategoryScreenContent(
         )
     }
 
-
     Scaffold(
         topBar = {
             AppBar(navController = navController, title = viewState.value.categoryName)
         },
         content = {
-
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = it.calculateTopPadding())
                     .background(MaterialTheme.colorScheme.background)
             ) {
-
                 Column {
                     val shadowColor = MaterialTheme.color.ShadowColor
                     Image(

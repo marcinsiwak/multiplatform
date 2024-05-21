@@ -17,12 +17,10 @@ import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.ic_arrow_right
 import athletetrack.shared.commonresources.generated.resources.offline_mode_sing_up_in
 import athletetrack.shared.commonresources.generated.resources.offline_mode_title
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
-@ExperimentalResourceApi
 @Composable
 fun OfflineBanner(
     modifier: Modifier = Modifier,

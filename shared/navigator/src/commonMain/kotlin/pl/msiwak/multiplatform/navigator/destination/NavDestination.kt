@@ -39,7 +39,8 @@ sealed class NavDestination(val route: String) {
             object NavSummaryGraphDestination : BottomNavigationDestination(
                 Res.drawable.ic_workout,
                 Res.string.summary,
-                "summary_graph"
+                "summary_graph",
+                NavSummaryScreen.route
             )
 
             object NavSummaryScreen : SummaryDestination(SUMMARY_SCREEN_ROUTE)
@@ -49,7 +50,8 @@ sealed class NavDestination(val route: String) {
             object NavSettingsGraphDestination : BottomNavigationDestination(
                 Res.drawable.ic_settings,
                 Res.string.settings,
-                "settings_graph"
+                "settings_graph",
+                NavSettingsScreen.route
             )
 
             object NavSettingsScreen : SettingsDestination(SETTINGS_SCREEN_ROUTE)

@@ -82,7 +82,6 @@ fun RegisterScreenContent(
         Loader()
     }
 
-
     Scaffold(
         topBar = {
             AppBar(navController = navController, title = stringResource(Res.string.register))

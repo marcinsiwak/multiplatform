@@ -21,9 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_category
-import athletetrack.shared.commonresources.generated.resources.category
 import athletetrack.shared.commonresources.generated.resources.category_name
-import athletetrack.shared.commonresources.generated.resources.verify_title
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
