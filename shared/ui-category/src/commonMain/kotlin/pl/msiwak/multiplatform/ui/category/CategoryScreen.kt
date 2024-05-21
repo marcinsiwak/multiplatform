@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -32,7 +31,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
-import athletetrack.shared.commonresources.generated.resources.add_category
 import athletetrack.shared.commonresources.generated.resources.add_exercise
 import athletetrack.shared.commonresources.generated.resources.bg_gym
 import athletetrack.shared.commonresources.generated.resources.bg_running_field
@@ -46,7 +44,6 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
@@ -99,7 +96,11 @@ fun CategoryScreen(
         onAddExerciseClicked = viewModel::onAddExerciseClicked,
         onDialogClosed = viewModel::onDialogClosed,
         onItemClick = {
-            navController.navigate(NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(it))
+            navController.navigate(
+                NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(
+                    it
+                )
+            )
         },
         onLongClick = viewModel::onResultLongClicked,
         onClick = viewModel::onAddNewExerciseClicked
@@ -165,18 +166,24 @@ fun CategoryScreenContent(
                     Image(
                         modifier = Modifier
                             .drawWithCache {
-                                val gradient = Brush.verticalGradient(
+                                val gradientTop = Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, shadowColor),
+                                    startY = size.height / 6,
+                                    endY = 0f
+                                )
+                                val gradientBottom = Brush.verticalGradient(
                                     colors = listOf(Color.Transparent, shadowColor),
                                     startY = size.height / 3,
                                     endY = size.height
                                 )
                                 onDrawWithContent {
                                     drawContent()
-                                    drawRect(gradient, blendMode = BlendMode.Multiply)
+                                    drawRect(gradientTop, blendMode = BlendMode.Multiply)
+                                    drawRect(gradientBottom, blendMode = BlendMode.Multiply)
                                 }
                             }
                             .fillMaxWidth()
-                            .height(MaterialTheme.dimens.space_264),
+                            .height(MaterialTheme.dimens.category_img_height),
                         painter = painterResource(backgroundId),
                         contentScale = ContentScale.Crop,
                         contentDescription = null
@@ -212,25 +219,6 @@ fun CategoryScreenContent(
                         fontSize = MaterialTheme.font.font_16
                     )
                 }
-
-                Text(
-                    modifier = Modifier
-                        .align(Alignment.TopStart)
-                        .background(
-                            color = MaterialTheme.colorScheme.primary,
-                            shape = RoundedCornerShape(
-                                topStart = MaterialTheme.dimens.space_8,
-                                bottomEnd = MaterialTheme.dimens.space_8
-                            )
-                        )
-                        .padding(
-                            horizontal = MaterialTheme.dimens.space_12,
-                            vertical = MaterialTheme.dimens.space_8
-                        ),
-                    text = viewState.value.categoryName,
-                    fontSize = MaterialTheme.font.font_14,
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
             }
         }
     )

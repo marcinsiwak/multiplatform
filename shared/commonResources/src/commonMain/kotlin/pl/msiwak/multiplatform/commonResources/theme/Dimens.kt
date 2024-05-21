@@ -26,7 +26,6 @@ data class Dimensions(
     val space_96: Dp = 96.dp,
     val space_132: Dp = 132.dp,
     val space_164: Dp = 164.dp,
-    val space_264: Dp = 264.dp,
     val first_list_item_size: Dp = 116.dp,
     val second_list_item_size: Dp = 132.dp,
     val bottom_navigation_elevation: Dp = 10.dp,
@@ -38,7 +37,8 @@ data class Dimensions(
     val result_item_width: Dp = 124.dp,
     val result_item_input_width: Dp = 116.dp,
     val dialog_corners: Dp = 16.dp,
-    val ad_height: Dp = 64.dp
+    val ad_height: Dp = 64.dp,
+    val category_img_height: Dp = 164.dp
 )
 
 val MaterialTheme.dimens: Dimensions
