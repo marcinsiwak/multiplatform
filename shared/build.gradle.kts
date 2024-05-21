@@ -24,9 +24,7 @@ kotlin {
 
         framework {
             baseName = "shared"
-            if (System.getenv("XCODE_VERSION_MAJOR") == "1500") {
-                linkerOpts += "-ld_classic"
-            }
+            linkerOpts += "-ld_classic"
 
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
