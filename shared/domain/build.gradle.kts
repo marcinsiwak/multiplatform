@@ -34,6 +34,7 @@ kotlin {
             implementation(project(Modules.commonResources))
 
             implementation(libs.napier)
+            implementation(libs.kotlinx.coroutines)
         }
 
         commonTest.dependencies {

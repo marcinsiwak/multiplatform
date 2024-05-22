@@ -17,7 +17,7 @@ fun PopupDialog(
     onDismissClicked: () -> Unit = {}
 ) {
     AlertDialog(
-        containerColor = Color.Gray,
+        containerColor = Color.DarkGray,
         onDismissRequest = {
             onDialogClosed()
         },

@@ -33,4 +33,8 @@ class DashboardViewModel(
             Napier.e("OUTPUT, ${user.email}")
         }
     }
+
+    fun onTabChanges(pos: Int) {
+        _viewState.update { it.copy(selectedTabIndex = pos) }
+    }
 }

@@ -118,6 +118,7 @@ jobs:
       - name: Install Dependencies
         run: |
           cd iosApp
+          xcodebuild clean
           pod install --verbose
       - run: xcodebuild build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -workspace iosApp/iosApp.xcworkspace -configuration productionDebug -allowProvisioningUpdates -scheme iosApp -sdk iphoneos -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2" -verbose
 

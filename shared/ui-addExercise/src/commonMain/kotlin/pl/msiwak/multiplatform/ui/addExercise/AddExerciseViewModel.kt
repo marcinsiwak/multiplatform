@@ -40,7 +40,6 @@ import pl.msiwak.multiplatform.utils.extensions.isNumber
 import pl.msiwak.multiplatform.utils.extensions.isTime
 
 class AddExerciseViewModel(
-    private val id: String,
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
     private val addResultUseCase: AddResultUseCase,
@@ -73,7 +72,10 @@ class AddExerciseViewModel(
 
     private val errorHandler = globalErrorHandler.handleError()
 
-    init {
+    private lateinit var exerciseId: String
+
+    fun onInit(id: String) {
+        exerciseId = id
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             downloadExerciseUseCase(id)
@@ -186,7 +188,7 @@ class AddExerciseViewModel(
 
         viewModelScope.launch(errorHandler) {
             val data = ResultData(
-                exerciseId = id,
+                exerciseId = exerciseId,
                 result = savedResult,
                 amount = savedAmount,
                 date = Instant.fromEpochMilliseconds(pickedDate)

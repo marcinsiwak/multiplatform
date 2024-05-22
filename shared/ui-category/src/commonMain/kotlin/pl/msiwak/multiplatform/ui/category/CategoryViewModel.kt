@@ -21,11 +21,10 @@ import pl.msiwak.multiplatform.domain.summaries.RemoveExerciseUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class CategoryViewModel(
-    id: String,
     private val addExerciseUseCase: AddExerciseUseCase,
     private val removeExerciseUseCase: RemoveExerciseUseCase,
     private val downloadCategoryUseCase: DownloadCategoryUseCase,
-    observeCategoryUseCase: ObserveCategoryUseCase,
+    private val observeCategoryUseCase: ObserveCategoryUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -35,13 +34,14 @@ class CategoryViewModel(
     private val _viewEvent = MutableSharedFlow<CategoryEvent>()
     val viewEvent: SharedFlow<CategoryEvent> = _viewEvent.asSharedFlow()
 
-    private val categoryId: String = id
+    private lateinit var categoryId: String
     private var exerciseToRemovePosition: Int? = null
     private val exercises: MutableList<Exercise> = mutableListOf()
 
     private val errorHandler = globalErrorHandler.handleError()
 
-    init {
+    fun onInit(id: String) {
+        categoryId = id
         viewModelScope.launch(errorHandler) {
             observeCategoryUseCase(categoryId).collect { category ->
                 exercises.clear()

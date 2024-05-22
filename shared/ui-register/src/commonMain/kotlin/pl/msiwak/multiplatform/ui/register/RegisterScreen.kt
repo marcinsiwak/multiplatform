@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
@@ -34,6 +35,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
@@ -57,6 +59,7 @@ fun RegisterScreen(
     }
 
     RegisterScreenContent(
+        navController = navController,
         viewState = viewState,
         onLoginChanged = viewModel::onLoginChanged,
         onPasswordChanged = viewModel::onPasswordChanged,
@@ -68,6 +71,7 @@ fun RegisterScreen(
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun RegisterScreenContent(
+    navController: NavController,
     viewState: State<RegisterState>,
     onLoginChanged: (String) -> Unit = { _ -> },
     onPasswordChanged: (String) -> Unit = { _ -> },
@@ -78,79 +82,90 @@ fun RegisterScreenContent(
         Loader()
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Scaffold(
+        topBar = {
+            AppBar(navController = navController, title = stringResource(Res.string.register))
+        },
+        content = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = it.calculateTopPadding())
+            ) {
 //        Image(
 //            modifier = Modifier.fillMaxSize(),
 //            painter = painterResource(id = Res.drawable.bg_running_field.drawableResId),
 //            contentScale = ContentScale.Crop,
 //            contentDescription = null
 //        )
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .align(Alignment.Center)
-                .width(IntrinsicSize.Min)
-                .padding(
-                    start = MaterialTheme.dimens.space_36,
-                    end = MaterialTheme.dimens.space_36,
-                    top = MaterialTheme.dimens.space_164
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
-        ) {
-            InputView(
-                modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
-                value = viewState.value.login,
-                errorMessage = viewState.value.loginErrorMessage?.let {
-                    stringResource(
-                        it
-                    )
-                },
-                onValueChange = onLoginChanged,
-                hintText = stringResource(Res.string.email)
-            )
-
-            InputView(
-                modifier = Modifier,
-                value = viewState.value.password,
-                errorMessage = viewState.value.passwordErrorMessage?.let {
-                    stringResource(
-                        it
-                    )
-                },
-                onValueChange = onPasswordChanged,
-                isPassword = true,
-                isPasswordVisible = viewState.value.isPasswordVisible,
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .clickable { onVisibilityClicked() },
-                        painter = painterResource(
-                            if (viewState.value.isPasswordVisible) {
-                                Res.drawable.ic_invisible
-                            } else {
-                                Res.drawable.ic_visible
-                            }
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .align(Alignment.Center)
+                        .width(IntrinsicSize.Min)
+                        .padding(
+                            start = MaterialTheme.dimens.space_36,
+                            end = MaterialTheme.dimens.space_36,
+                            top = MaterialTheme.dimens.space_164
                         ),
-                        contentDescription = null
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top
+                ) {
+                    InputView(
+                        modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
+                        value = viewState.value.login,
+                        errorMessage = viewState.value.loginErrorMessage?.let {
+                            stringResource(
+                                it
+                            )
+                        },
+                        onValueChange = onLoginChanged,
+                        hintText = stringResource(Res.string.email)
                     )
-                },
-                hintText = stringResource(Res.string.password)
-            )
 
-            PasswordRequirements(requirements = viewState.value.passwordRequirements)
+                    InputView(
+                        modifier = Modifier,
+                        value = viewState.value.password,
+                        errorMessage = viewState.value.passwordErrorMessage?.let {
+                            stringResource(
+                                it
+                            )
+                        },
+                        onValueChange = onPasswordChanged,
+                        isPassword = true,
+                        isPasswordVisible = viewState.value.isPasswordVisible,
+                        trailingIcon = {
+                            Icon(
+                                modifier = Modifier
+                                    .clickable { onVisibilityClicked() },
+                                painter = painterResource(
+                                    if (viewState.value.isPasswordVisible) {
+                                        Res.drawable.ic_invisible
+                                    } else {
+                                        Res.drawable.ic_visible
+                                    }
+                                ),
+                                contentDescription = null
+                            )
+                        },
+                        hintText = stringResource(Res.string.password)
+                    )
 
-            MainButton(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = MaterialTheme.dimens.space_32),
-                onClick = {
-                    onRegisterClicked()
-                },
-                text = stringResource(Res.string.register)
-            )
+                    PasswordRequirements(requirements = viewState.value.passwordRequirements)
+
+                    MainButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = MaterialTheme.dimens.space_32),
+                        onClick = {
+                            onRegisterClicked()
+                        },
+                        text = stringResource(Res.string.register)
+                    )
+                }
+            }
         }
-    }
+    )
 }
 //
 // @Preview

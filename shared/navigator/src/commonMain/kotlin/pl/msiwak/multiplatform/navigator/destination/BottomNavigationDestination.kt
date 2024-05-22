@@ -6,5 +6,6 @@ import org.jetbrains.compose.resources.StringResource
 sealed class BottomNavigationDestination(
     val iconId: DrawableResource,
     val labelId: StringResource,
-    val graphRoute: String
+    val graphRoute: String,
+    val startDestinationRoute: String
 )
