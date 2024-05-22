@@ -1,30 +1,18 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    kotlin("plugin.serialization") version "1.8.22"
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "CommonObject Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -44,28 +32,25 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                api(project(Modules.commonResources))
+        commonMain.dependencies {
+            api(project(Modules.commonResources))
 
-                with(Deps.Kotlinx) {
-                    api(dateTime)
-                    api(serialization)
-                }
-            }
+            api(libs.kotlinx.dateTime)
+            implementation(libs.kotlinx.serialization)
+
+            api(libs.firebase.gitlive.auth)
+            api(libs.firebase.gitlive.remoteConfig)
+
+            implementation(compose.runtime)
+            implementation(compose.components.resources)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
 
 android {
     namespace = "pl.msiwak.multiplatform.commonObject"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

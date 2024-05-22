@@ -1,5 +1,7 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         google()
         gradlePluginPortal()
         mavenCentral()
@@ -7,11 +9,13 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
     repositories {
         google()
         mavenCentral()
+        maven("https://androidx.dev/storage/compose-compiler/repository/")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
@@ -28,7 +32,20 @@ include(":shared:network")
 include(":shared:data")
 include(":shared:remoteConfig")
 include(":shared:domain")
-include(":shared:injector")
-include(":shared:ui")
+include(":shared:domain-impl")
+include(":shared:navigator")
 include(":shared:buildConfig")
 include(":shared:notifications")
+include(":shared:ui-welcome")
+include(":shared:ui-addCategory")
+include(":shared:ui-addExercise")
+include(":shared:ui-category")
+include(":shared:ui-dashboard")
+include(":shared:ui-forceUpdate")
+include(":shared:ui-language")
+include(":shared:ui-register")
+include(":shared:ui-settings")
+include(":shared:ui-summary")
+include(":shared:ui-unit")
+include(":shared:ui-verifyEmail")
+include(":shared:ui-common-component")

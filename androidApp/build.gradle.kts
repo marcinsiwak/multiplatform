@@ -1,19 +1,18 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    id("com.android.application")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("com.google.firebase.appdistribution")
-    kotlin("android")
 }
 
 val versionMajor = 1
 val versionMinor = 0
-val versionPatch = 0
+val versionPatch = 1
 val versionBuild = 0
 val versionCode =
     1_000_000 * versionMajor + 10_000 * versionMinor + 100 * versionPatch + versionBuild
@@ -34,7 +33,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        val firebaseServiceCredentialsFile = rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
+        val firebaseServiceCredentialsFile =
+            rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
 
         if (firebaseServiceCredentialsFile.exists()) {
             configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
@@ -50,7 +50,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
+        kotlinCompilerExtensionVersion = "1.5.13-dev-k2.0.0-RC1-50f08dfa4b4"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -58,6 +58,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+//        // todo remove after final versions released kotlin/compose-multiplatform
+        freeCompilerArgs = listOf(
+            "-Xallow-jvm-ir-dependencies",
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
     }
 
     val releaseKeystorePropFile = rootProject.file("signing/release.properties")
@@ -153,36 +159,56 @@ android {
             applicationIdSuffix = ".staging"
         }
     }
+
+    applicationVariants.all {
+        val isProduction = mergedFlavor.applicationIdSuffix.isNullOrBlank()
+        val isStaging = mergedFlavor.applicationIdSuffix == ".staging"
+        val buildName = buildType.name
+
+        val prodDebug = isProduction && buildName == "debug"
+        val stagingDebug = isStaging && buildName == "debug"
+
+        val label = when {
+            prodDebug -> "(PD) Athlete track"
+            stagingDebug -> "(SD) Athlete track"
+            else -> "Athlete track"
+        }
+        println("label: $label")
+        mergedFlavor.manifestPlaceholders["applicationLabel"] = label
+    }
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation(project(":shared:core"))
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation(libs.androidx.appcompat)
 
-    val composeBom = platform("androidx.compose:compose-bom:2023.10.00")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
-    implementation("androidx.compose.ui:ui-tooling:1.5.4")
-    implementation("androidx.compose.ui:ui")
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.androidx.activity.compose)
+    debugImplementation(libs.compose.ui.tooling)
 
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.core.splashscreen)
 
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation(libs.kotlinx.lifecycle.ktx)
+    implementation(libs.kotlinx.viewModel.ktx)
+    implementation(libs.androidx.activity.compose)
 
-    implementation("androidx.navigation:navigation-compose:2.7.3")
-    implementation("com.google.accompanist:accompanist-navigation-material:0.25.0")
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.accompanist.navigation.material)
 
-    with(Deps.Koin) {
-        implementation(core)
-        implementation(android)
-        implementation(compose)
-    }
-    with(Deps.Google) {
-        api(andorid_play_services_auth)
-        api(andorid_play_services_ads)
-    }
+    implementation(libs.components.resources)
+
+    api(libs.firebase.common)
+    api(libs.firebase.auth)
+    api(libs.firebase.config)
+
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose.android)
+
+    implementation(libs.google.android.playservices.auth)
+    implementation(libs.google.android.playservices.ads)
+
+    implementation(libs.napier)
 }

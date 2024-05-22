@@ -1,27 +1,15 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
+import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
+    id("pl.msiwak.convention.android.config")
+    id("pl.msiwak.convention.target.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
-
-    androidTarget() {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Utils Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -42,34 +30,19 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                with(Deps.Firebase) {
-                    api(authentication)
-                    api(crashlytics)
-                }
-                with(Deps.Kotlinx) {
-                    api(dateTime)
-                    api(coroutines)
-                }
-                with(Deps.Napier) {
-                    api(napier)
-                }
-            }
+        commonMain.dependencies {
+            implementation(project(Modules.commonObject))
+            implementation(libs.firebase.gitlive.auth)
+            implementation(libs.firebase.gitlive.crashlytics)
+            implementation(libs.napier)
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
 
 android {
     namespace = "pl.msiwak.multiplatform.utils"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

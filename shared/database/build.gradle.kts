@@ -1,30 +1,16 @@
-import pl.msiwak.multiplatfor.dependencies.Deps
 import pl.msiwak.multiplatfor.dependencies.Modules
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
-    id("app.cash.sqldelight") version "2.0.0"
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.sqlDelight)
+    id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
-
-    android {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-    jvmToolchain(17)
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         summary = "Database Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -35,54 +21,39 @@ kotlin {
 
             export(project(Modules.commonObject))
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["productionRelease"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["productionDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["stagingDebug"] =
+            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                api(project(Modules.commonObject))
+        commonMain.dependencies {
+            implementation(project(Modules.commonObject))
 
-                with(Deps.SQLDelight) {
-                    api(coroutines)
-                }
-                with(Deps.Kotlinx) {
-                    api(coroutines)
-                    api(dateTime)
-                    api(serialization)
-                }
-            }
+            implementation(libs.sqlDelight.coroutines)
+            implementation(libs.kotlinx.coroutines)
+            implementation(libs.kotlinx.dateTime)
+            implementation(libs.kotlinx.serialization)
         }
-        val androidMain by getting {
-            dependencies {
-                with(Deps.SQLDelight) {
-                    api(android)
-                }
-            }
+        androidMain.dependencies {
+            implementation(libs.sqlDelight.android)
         }
-        val iosMain by getting {
-            dependencies {
-                with(Deps.SQLDelight) {
-                    api(ios)
-                }
-            }
+
+        iosMain.dependencies {
+            implementation(libs.sqlDelight.ios)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
 
 android {
     namespace = "pl.msiwak.multiplatform.database"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }
 
 sqldelight {

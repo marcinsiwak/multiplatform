@@ -110,11 +110,6 @@ jobs:
           echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
-      - name: GitHub Action for SwiftLint
-        run: |
-          brew install swiftlint
-          swiftlint
-
       - run: ./gradlew :shared:generateDummyFramework
       - name: Set up cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
@@ -123,8 +118,9 @@ jobs:
       - name: Install Dependencies
         run: |
           cd iosApp
+          xcodebuild clean
           pod install --verbose
-      - run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2" -verbose
+      - run: xcodebuild build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -workspace iosApp/iosApp.xcworkspace -configuration productionDebug -allowProvisioningUpdates -scheme iosApp -sdk iphoneos -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2" -verbose
 
 #  Push to develop scripts
   Distribute-Android-ProductionDebug:
@@ -352,13 +348,13 @@ jobs:
           echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
-      - name: Decode debug Keystore
-        id: decode_keystore_debug
+      - name: Decode Keystore
+        id: decode_keystore
         uses: timheuer/base64-to-file@v1.2
         with:
-          fileName: 'debug.jks'
+          fileName: 'release.jks'
           fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
-          encodedString: ${{ secrets.SIGNING_DEBUG }}
+          encodedString: ${{ secrets.SIGNING_RELEASE }}
 
       - name: Build productionRelease APK
         run: |

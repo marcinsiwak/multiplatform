@@ -8,13 +8,28 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Main Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/shared.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '16.2'
+    spec.ios.deployment_target    = '16.2'
     spec.dependency 'FirebaseAuth'
     spec.dependency 'FirebaseCore'
     spec.dependency 'FirebaseCrashlytics'
     spec.dependency 'FirebaseMessaging'
     spec.dependency 'FirebaseRemoteConfig'
     spec.dependency 'Google-Mobile-Ads-SDK'
+                
+    if !Dir.exist?('build/cocoapods/framework/shared.framework') || Dir.empty?('build/cocoapods/framework/shared.framework')
+        raise "
+
+        Kotlin framework 'shared' doesn't exist yet, so a proper Xcode project can't be generated.
+        'pod install' should be executed after running ':generateDummyFramework' Gradle task:
+
+            ./gradlew :shared:generateDummyFramework
+
+        Alternatively, proper pod installation is performed during Gradle sync in the IDE (if Podfile location is set)"
+    end
+                
+    spec.xcconfig = {
+        'ENABLE_USER_SCRIPT_SANDBOXING' => 'NO',
+    }
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':shared',
@@ -40,5 +55,5 @@ Pod::Spec.new do |spec|
             SCRIPT
         }
     ]
-                
+    spec.resources = ['build/compose/ios/shared/compose-resources']
 end

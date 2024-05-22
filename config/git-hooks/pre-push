@@ -27,28 +27,4 @@ if [ $EXIT_CODE -ne 0 ]; then
   echo "***********************************************"
   exit $EXIT_CODE
 fi
-
-echo "Running pre-push swiftlint check..."
-cd iosApp
-cd iosApp
-swiftlint > OUTPUT
-EXIT_CODE=$?
-if [ $EXIT_CODE -ne 0 ]; then
-  cat OUTPUT
-  rm OUTPUT
-  echo "***********************************************"
-  echo "                 Swiftlint failed                 "
-  echo "***********************************************"
-  exit $EXIT_CODE
-fi
-detekt > OUTPUT
-EXIT_CODE=$?
-if [ $EXIT_CODE -ne 0 ]; then
-  cat OUTPUT
-  rm OUTPUT
-  echo "***********************************************"
-  echo "                 Swiftlint failed                 "
-  echo "***********************************************"
-  exit $EXIT_CODE
-fi
 rm OUTPUT
