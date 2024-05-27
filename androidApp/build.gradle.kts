@@ -4,6 +4,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinCompose)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
