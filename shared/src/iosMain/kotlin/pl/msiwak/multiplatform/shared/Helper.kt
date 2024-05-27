@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.shared
 
-import cocoapods.GoogleMobileAds.GADMobileAds
+//import cocoapods.GoogleMobileAds.GADMobileAds
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.initialize
 import io.github.aakira.napier.DebugAntilog
@@ -23,7 +23,7 @@ fun initKoin() {
 
 @OptIn(ExperimentalForeignApi::class)
 fun initMobileAds() {
-    GADMobileAds.sharedInstance().startWithCompletionHandler(null)
+//    GADMobileAds.sharedInstance().startWithCompletionHandler(null)
 //    GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = listOf("b7496249c8b3b0419541121ffbd27c57")
 }
 

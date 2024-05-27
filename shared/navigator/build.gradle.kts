@@ -45,7 +45,7 @@ kotlin {
             implementation(libs.compose.multiplatform.navigation)
         }
         iosMain.dependencies {
-            implementation("co.touchlab:stately-common:2.0.6")
+//            implementation("co.touchlab:stately-common:2.0.6")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

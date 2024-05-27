@@ -12,10 +12,10 @@ import pl.msiwak.multiplatform.commonResources.theme.dimens
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun AdmobBanner(modifier: Modifier) {
-    UIKitViewController(
-        factory = {
-            BannerViewController()
-        },
-        modifier = Modifier.fillMaxWidth().height(MaterialTheme.dimens.ad_height)
-    )
+//    UIKitViewController(
+//        factory = {
+//            BannerViewController()
+//        },
+//        modifier = Modifier.fillMaxWidth().height(MaterialTheme.dimens.ad_height)
+//    )
 }
