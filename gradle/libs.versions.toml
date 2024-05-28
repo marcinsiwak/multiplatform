@@ -2,17 +2,17 @@
 accompanistNavigationMaterial = "0.25.0"
 activityCompose = "1.7.2"
 agp = "8.2.2"
-ksp = "2.0.0-RC2-1.0.20"
+ksp = "2.0.0-1.0.21"
 
 appcompat = "1.6.1"
 buildkonfigGradlePlugin = "0.14.0"
 coreSplashscreen = "1.0.1"
-firebaseAuth = "22.3.1"
-firebaseCommon = "20.4.2"
-firebaseConfig = "21.6.1"
-firebaseCrashlyticsGradle = "2.9.9"
+firebaseAuth = "23.0.0"
+firebaseCommon = "21.0.0"
+firebaseConfig = "22.0.0"
+firebaseCrashlyticsGradle = "3.0.1"
 googleServices = "4.4.1"
-kotlin = "2.0.0-RC3"
+kotlin = "2.0.0"
 compose = "1.7.0-alpha07"
 compose-compiler = "1.5.4"
 compose-material3 = "1.2.0"
@@ -110,4 +110,4 @@ ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appDistribution" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
-composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
