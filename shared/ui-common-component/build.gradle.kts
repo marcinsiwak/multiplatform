@@ -32,6 +32,7 @@ kotlin {
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
         pod("Google-Mobile-Ads-SDK", moduleName = "GoogleMobileAds")
+        pod("GoogleSignIn")
     }
 
     sourceSets {

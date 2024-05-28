@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.language
 
 import androidx.compose.foundation.layout.Column
@@ -22,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.language
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar

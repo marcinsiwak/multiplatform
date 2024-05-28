@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.commonComponent
 
 import androidx.compose.foundation.background

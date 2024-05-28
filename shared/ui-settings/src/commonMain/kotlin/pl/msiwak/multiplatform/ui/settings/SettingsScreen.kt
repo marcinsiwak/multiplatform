@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.settings
 
 import androidx.compose.foundation.clickable

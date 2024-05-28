@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.forceUpdate
 
 import androidx.compose.foundation.Image
@@ -18,7 +16,6 @@ import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.bg_force_update
 import athletetrack.shared.commonresources.generated.resources.force_update_description
 import athletetrack.shared.commonresources.generated.resources.force_update_title
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject

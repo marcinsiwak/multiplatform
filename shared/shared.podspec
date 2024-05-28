@@ -15,6 +15,7 @@ Pod::Spec.new do |spec|
     spec.dependency 'FirebaseMessaging'
     spec.dependency 'FirebaseRemoteConfig'
     spec.dependency 'Google-Mobile-Ads-SDK'
+    spec.dependency 'GoogleSignIn'
                 
     if !Dir.exist?('build/cocoapods/framework/shared.framework') || Dir.empty?('build/cocoapods/framework/shared.framework')
         raise "
