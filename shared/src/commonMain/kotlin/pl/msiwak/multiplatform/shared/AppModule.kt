@@ -199,9 +199,8 @@ val viewModelsModule = module {
     viewModelDefinition { VerifyEmailViewModel(get(), get()) }
     viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { params ->
+    viewModelDefinition {
         AddExerciseViewModel(
-            id = params.get(),
             get(),
             get(),
             get(),
@@ -215,9 +214,8 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition { params ->
+    viewModelDefinition {
         CategoryViewModel(
-            id = params.get(),
             get(),
             get(),
             get(),

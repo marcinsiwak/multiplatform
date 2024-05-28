@@ -59,7 +59,7 @@ fun RunningTimeInputDialog(
         Column(
             modifier = Modifier
                 .background(
-                    Color.Gray,
+                    Color.DarkGray,
                     RoundedCornerShape(MaterialTheme.dimens.dialog_corners)
                 )
                 .padding(MaterialTheme.dimens.space_16),
@@ -69,7 +69,8 @@ fun RunningTimeInputDialog(
                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
                 text = stringResource(Res.string.running_time_input_insert_result),
                 style = MaterialTheme.typography.headlineMedium,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
             Row(

@@ -12,10 +12,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,23 +44,23 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.ListItemView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
-import pl.msiwak.multiplatform.ui.commonComponent.extension.lifecycleObserver
+import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun CategoryScreen(
     navController: NavController,
     id: String,
-    viewModel: CategoryViewModel = koinInject { parametersOf(id) }
+    viewModel: CategoryViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
@@ -69,16 +69,14 @@ fun CategoryScreen(
         ExerciseType.GYM -> Res.drawable.bg_gym
     }
 
-    LaunchedEffect(Unit) {
-        lifecycleObserver.collect { event ->
-            when (event) {
-                Lifecycle.Event.ON_RESUME -> viewModel.onResume()
-                else -> Unit
-            }
+    OnLifecycleEvent { _, event ->
+        if (event == Lifecycle.Event.ON_RESUME) {
+            viewModel.onResume()
         }
     }
 
     LaunchedEffect(Unit) {
+        viewModel.onInit(id)
         viewModel.viewEvent.collectLatest { event ->
             when (event) {
                 is CategoryEvent.NavigateToAddExercise -> navController.navigate(
@@ -89,6 +87,7 @@ fun CategoryScreen(
     }
 
     CategoryScreenContent(
+        navController = navController,
         viewState = viewState,
         backgroundId = backgroundId,
         onConfirmClicked = viewModel::onResultRemoved,
@@ -97,7 +96,11 @@ fun CategoryScreen(
         onAddExerciseClicked = viewModel::onAddExerciseClicked,
         onDialogClosed = viewModel::onDialogClosed,
         onItemClick = {
-            navController.navigate(NavDestination.AddExerciseDestination.NavAddExerciseScreen.route)
+            navController.navigate(
+                NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(
+                    it
+                )
+            )
         },
         onLongClick = viewModel::onResultLongClicked,
         onClick = viewModel::onAddNewExerciseClicked
@@ -108,6 +111,7 @@ fun CategoryScreen(
 @Suppress("MagicNumber")
 @Composable
 fun CategoryScreenContent(
+    navController: NavController,
     viewState: State<CategoryState>,
     backgroundId: DrawableResource,
     onConfirmClicked: () -> Unit = {},
@@ -134,92 +138,87 @@ fun CategoryScreenContent(
         Loader()
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        if (viewState.value.isDialogVisible) {
-            AddExerciseDialog(
-                inputText = viewState.value.newExerciseName,
-                onExerciseTitleChanged = onExerciseTitleChanged,
-                onAddExerciseClicked = onAddExerciseClicked,
-                onDialogClosed = onDialogClosed
-            )
-        }
+    if (viewState.value.isDialogVisible) {
+        AddExerciseDialog(
+            inputText = viewState.value.newExerciseName,
+            onExerciseTitleChanged = onExerciseTitleChanged,
+            onAddExerciseClicked = onAddExerciseClicked,
+            onDialogClosed = onDialogClosed
+        )
+    }
 
-        Column {
-            val shadowColor = MaterialTheme.color.ShadowColor
-            Image(
+    Scaffold(
+        topBar = {
+            AppBar(navController = navController, title = viewState.value.categoryName)
+        },
+        content = {
+            Box(
                 modifier = Modifier
-                    .drawWithCache {
-                        val gradient = Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, shadowColor),
-                            startY = size.height / 3,
-                            endY = size.height
-                        )
-                        onDrawWithContent {
-                            drawContent()
-                            drawRect(gradient, blendMode = BlendMode.Multiply)
+                    .fillMaxSize()
+                    .padding(top = it.calculateTopPadding())
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+                Column {
+                    val shadowColor = MaterialTheme.color.ShadowColor
+                    Image(
+                        modifier = Modifier
+                            .drawWithCache {
+                                val gradientTop = Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, shadowColor),
+                                    startY = size.height / 6,
+                                    endY = 0f
+                                )
+                                val gradientBottom = Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, shadowColor),
+                                    startY = size.height / 3,
+                                    endY = size.height
+                                )
+                                onDrawWithContent {
+                                    drawContent()
+                                    drawRect(gradientTop, blendMode = BlendMode.Multiply)
+                                    drawRect(gradientBottom, blendMode = BlendMode.Multiply)
+                                }
+                            }
+                            .fillMaxWidth()
+                            .height(MaterialTheme.dimens.category_img_height),
+                        painter = painterResource(backgroundId),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = null
+                    )
+
+                    LazyColumn {
+                        itemsIndexed(viewState.value.exerciseList) { index, item ->
+                            ListItemView(
+                                name = item.exerciseTitle,
+                                onItemClick = { onItemClick(item.id) },
+                                onLongClick = { onLongClick(index) }
+                            )
                         }
                     }
-                    .fillMaxWidth()
-                    .height(MaterialTheme.dimens.space_264),
-                painter = painterResource(backgroundId),
-                contentScale = ContentScale.Crop,
-                contentDescription = null
-            )
-
-            LazyColumn {
-                itemsIndexed(viewState.value.exerciseList) { index, item ->
-                    ListItemView(
-                        name = item.exerciseTitle,
-                        onItemClick = { onItemClick(item.id) },
-                        onLongClick = { onLongClick(index) }
+                }
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter)
+                        .padding(
+                            vertical = MaterialTheme.dimens.space_16,
+                            horizontal = MaterialTheme.dimens.space_80
+                        ),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    ),
+                    onClick = onClick
+                ) {
+                    Text(
+                        modifier = Modifier.padding(MaterialTheme.dimens.space_8),
+                        text = stringResource(Res.string.add_exercise),
+                        fontSize = MaterialTheme.font.font_16
                     )
                 }
             }
         }
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .padding(
-                    vertical = MaterialTheme.dimens.space_16,
-                    horizontal = MaterialTheme.dimens.space_80
-                ),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.tertiary,
-                contentColor = MaterialTheme.colorScheme.primary
-            ),
-            onClick = onClick
-        ) {
-            Text(
-                modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                text = stringResource(Res.string.add_exercise),
-                fontSize = MaterialTheme.font.font_16
-            )
-        }
-
-        Text(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .background(
-                    color = MaterialTheme.colorScheme.primary,
-                    shape = RoundedCornerShape(
-                        topStart = MaterialTheme.dimens.space_8,
-                        bottomEnd = MaterialTheme.dimens.space_8
-                    )
-                )
-                .padding(
-                    horizontal = MaterialTheme.dimens.space_12,
-                    vertical = MaterialTheme.dimens.space_8
-                ),
-            text = viewState.value.categoryName,
-            fontSize = MaterialTheme.font.font_14,
-            color = MaterialTheme.colorScheme.onPrimary
-        )
-    }
+    )
 }
 
 // @DarkLightPreview

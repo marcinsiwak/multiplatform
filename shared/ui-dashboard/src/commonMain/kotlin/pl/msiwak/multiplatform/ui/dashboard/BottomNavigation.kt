@@ -20,6 +20,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.extension.topBorder
 
 @Composable
 fun BottomNavigation(
+    initialTabDestination: BottomNavigationDestination,
     navController: NavController,
     items: List<BottomNavigationDestination>
 ) {
@@ -55,10 +56,8 @@ fun BottomNavigation(
                 selected = currentRoute == item.graphRoute,
                 onClick = {
                     navController.navigate(item.graphRoute) {
-                        navController.graph.startDestinationRoute?.let {
-                            popUpTo(it) {
-                                saveState = true
-                            }
+                        popUpTo(initialTabDestination.startDestinationRoute) {
+                            saveState = true
                         }
                         launchSingleTop = true
                     }
