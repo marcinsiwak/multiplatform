@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.network.model
 
-@Serializable
 class ApiCategoryRequest(
     val name: String,
     val exerciseType: String,

@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.network.model
 
-@Serializable
 class ApiCategorySyncRequest(
     val id: String,
     val name: String,

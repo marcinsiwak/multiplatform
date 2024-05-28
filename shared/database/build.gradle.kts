@@ -36,7 +36,6 @@ kotlin {
             implementation(libs.sqlDelight.coroutines)
             implementation(libs.kotlinx.coroutines)
             implementation(libs.kotlinx.dateTime)
-            implementation(libs.kotlinx.serialization)
         }
         androidMain.dependencies {
             implementation(libs.sqlDelight.android)

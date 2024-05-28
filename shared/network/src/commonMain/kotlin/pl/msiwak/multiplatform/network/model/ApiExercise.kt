@@ -2,7 +2,6 @@ package pl.msiwak.multiplatform.network.model
 
 import kotlinx.datetime.Instant
 
-@Serializable
 class ApiExercise(
     val exerciseId: String,
     val categoryId: String,

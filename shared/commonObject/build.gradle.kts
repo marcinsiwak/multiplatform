@@ -36,7 +36,6 @@ kotlin {
             api(project(Modules.commonResources))
 
             api(libs.kotlinx.dateTime)
-            implementation(libs.kotlinx.serialization)
 
             api(libs.firebase.gitlive.auth)
             api(libs.firebase.gitlive.remoteConfig)

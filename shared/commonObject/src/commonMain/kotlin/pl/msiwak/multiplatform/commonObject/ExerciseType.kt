@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.commonObject
 
-@Serializable
 enum class ExerciseType(
     val unitMetric: String,
     val unitImperial: String,

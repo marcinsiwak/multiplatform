@@ -5,7 +5,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
-@Serializable
 data class Exercise(
     val id: String = "",
     val categoryId: String = "",
