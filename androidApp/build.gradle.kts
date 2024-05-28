@@ -206,7 +206,6 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose.android)
 
-    implementation(libs.google.android.playservices.auth)
     implementation(libs.google.android.playservices.ads)
 
     implementation(libs.napier)

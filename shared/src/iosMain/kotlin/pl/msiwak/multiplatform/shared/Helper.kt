@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.shared
 
 import cocoapods.GoogleMobileAds.GADMobileAds
+import cocoapods.GoogleSignIn.GIDSignIn
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.initialize
 import io.github.aakira.napier.DebugAntilog
@@ -35,9 +36,9 @@ fun initFirebase() {
     Firebase.initialize()
 }
 
+@OptIn(ExperimentalForeignApi::class)
 fun initGIDSingIn(url: NSURL): Boolean {
-//    return GIDSignIn.sharedInstance.handleURL(url)
-    return false
+    return GIDSignIn.sharedInstance().handleURL(url)
 }
 
 val sharedPreferencesModule = module {

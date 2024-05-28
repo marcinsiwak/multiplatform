@@ -7,7 +7,8 @@ import pl.msiwak.multiplatform.utils.DateFormatter
 
 class FormatDateUseCaseImpl(private val dateFormatter: DateFormatter) : FormatDateUseCase {
     override operator fun invoke(date: Long): String {
-        val localDateTime = Instant.fromEpochMilliseconds(date).toLocalDateTime(TimeZone.currentSystemDefault())
+        val localDateTime =
+            Instant.fromEpochMilliseconds(date).toLocalDateTime(TimeZone.currentSystemDefault())
         return dateFormatter.formatDate(localDateTime)
     }
 }

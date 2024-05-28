@@ -19,7 +19,10 @@ class CategoryGraph : NavigationNestedGraph {
                 route = CategoryDestination.NavCategoryScreen.route,
                 arguments = listOf()
             ) { backStackEntry ->
-                CategoryScreen(navController, backStackEntry.arguments?.getString(ARG_CATEGORY_ID) ?: "")
+                CategoryScreen(
+                    navController,
+                    backStackEntry.arguments?.getString(ARG_CATEGORY_ID) ?: ""
+                )
             }
         }
     }

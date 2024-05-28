@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.addExercise
 
 import androidx.compose.foundation.background
@@ -201,9 +199,7 @@ fun AddExerciseScreenContent(
                 if (viewState.value.isEditNameEnabled) {
                     InputView(
                         value = viewState.value.exerciseTitle,
-                        onValueChange = {
-                            onExerciseTitleChanged(it)
-                        }
+                        onValueChange = onExerciseTitleChanged
                     )
                 } else {
                     Text(

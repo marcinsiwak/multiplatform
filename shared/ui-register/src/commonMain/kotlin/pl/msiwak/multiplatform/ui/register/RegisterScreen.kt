@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.register
 
 import androidx.compose.foundation.clickable
@@ -29,7 +27,6 @@ import athletetrack.shared.commonresources.generated.resources.ic_visible
 import athletetrack.shared.commonresources.generated.resources.password
 import athletetrack.shared.commonresources.generated.resources.register
 import kotlinx.coroutines.flow.collectLatest
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -68,7 +65,6 @@ fun RegisterScreen(
     )
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun RegisterScreenContent(
     navController: NavController,
@@ -92,12 +88,6 @@ fun RegisterScreenContent(
                     .fillMaxSize()
                     .padding(top = it.calculateTopPadding())
             ) {
-//        Image(
-//            modifier = Modifier.fillMaxSize(),
-//            painter = painterResource(id = Res.drawable.bg_running_field.drawableResId),
-//            contentScale = ContentScale.Crop,
-//            contentDescription = null
-//        )
                 Column(
                     modifier = Modifier
                         .fillMaxHeight()

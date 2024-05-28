@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.welcome
 
 import androidx.compose.foundation.clickable
@@ -16,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -42,7 +41,6 @@ import athletetrack.shared.commonresources.generated.resources.welcome_google_lo
 import athletetrack.shared.commonresources.generated.resources.welcome_no_account
 import athletetrack.shared.commonresources.generated.resources.welcome_offline_mode
 import kotlinx.coroutines.flow.collectLatest
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -62,8 +60,8 @@ fun WelcomeScreen(
     val viewState = viewModel.viewState.collectAsState()
 
     val startSignIn = rememberGoogleLoginLauncherForActivityResult(
-        onResultOk = { idToken ->
-            viewModel.onGoogleLogin(idToken, null)
+        onResultOk = { idToken, accessToken ->
+            viewModel.onGoogleLogin(idToken, accessToken)
         }
     )
 
@@ -141,109 +139,108 @@ fun WelcomeScreenContent(
         )
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-//        Image(
-//            modifier = Modifier.fillMaxSize(),
-//            painter = painterResource(id = Res.drawable.bg_welcome_screen.drawableResId),
-//            contentScale = ContentScale.Crop,
-//            contentDescription = "Welcome screen"
-//        )
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .align(Alignment.Center)
-                .width(IntrinsicSize.Min)
-                .padding(
-                    start = MaterialTheme.dimens.space_36,
-                    end = MaterialTheme.dimens.space_36,
-                    top = MaterialTheme.dimens.space_164
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
-        ) {
-            InputView(
-                modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
-                value = viewState.value.login,
-                errorMessage = viewState.value.authErrorMessage,
-                onValueChange = {
-                    onLoginChanged(it)
-                },
-                hintText = stringResource(Res.string.email)
-            )
-
-            InputView(
-                modifier = Modifier,
-                value = viewState.value.password,
-                errorMessage = viewState.value.authErrorMessage,
-                onValueChange = {
-                    onPasswordChanged(it)
-                },
-                isPasswordVisible = viewState.value.isPasswordVisible,
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .clickable { onVisibilityClicked() },
-                        painter = painterResource(
-                            if (viewState.value.isPasswordVisible) {
-                                Res.drawable.ic_invisible
-                            } else {
-                                Res.drawable.ic_visible
-                            }
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        content = {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .align(Alignment.Center)
+                        .width(IntrinsicSize.Min)
+                        .padding(
+                            start = MaterialTheme.dimens.space_36,
+                            end = MaterialTheme.dimens.space_36,
+                            top = MaterialTheme.dimens.space_164
                         ),
-                        contentDescription = null
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top
+                ) {
+                    InputView(
+                        modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
+                        value = viewState.value.login,
+                        errorMessage = viewState.value.authErrorMessage,
+                        onValueChange = {
+                            onLoginChanged(it)
+                        },
+                        hintText = stringResource(Res.string.email)
                     )
-                },
-                isPassword = true,
-                hintText = stringResource(Res.string.password)
-            )
 
-            MainButton(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimens.space_24),
-                onClick = { onLoginClicked() },
-                text = stringResource(Res.string.login)
-            )
+                    InputView(
+                        modifier = Modifier,
+                        value = viewState.value.password,
+                        errorMessage = viewState.value.authErrorMessage,
+                        onValueChange = {
+                            onPasswordChanged(it)
+                        },
+                        isPasswordVisible = viewState.value.isPasswordVisible,
+                        trailingIcon = {
+                            Icon(
+                                modifier = Modifier
+                                    .clickable { onVisibilityClicked() },
+                                painter = painterResource(
+                                    if (viewState.value.isPasswordVisible) {
+                                        Res.drawable.ic_invisible
+                                    } else {
+                                        Res.drawable.ic_visible
+                                    }
+                                ),
+                                contentDescription = null
+                            )
+                        },
+                        isPassword = true,
+                        hintText = stringResource(Res.string.password)
+                    )
 
-            MainButton(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = MaterialTheme.dimens.space_16
-                    ),
-                onClick = {
-                    onGoogleLoginClicked()
-                },
-                text = stringResource(Res.string.welcome_google_login)
-            )
+                    MainButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = MaterialTheme.dimens.space_24),
+                        onClick = { onLoginClicked() },
+                        text = stringResource(Res.string.login)
+                    )
 
-            SecondaryButton(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = MaterialTheme.dimens.space_16,
-                        bottom = MaterialTheme.dimens.space_16
-                    ),
-                onClick = { onOfflineModeClicked() },
-                text = stringResource(Res.string.welcome_offline_mode)
-            )
+                    MainButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                top = MaterialTheme.dimens.space_16
+                            ),
+                        onClick = {
+                            onGoogleLoginClicked()
+                        },
+                        text = stringResource(Res.string.welcome_google_login)
+                    )
 
-            Text(
-                text = stringResource(Res.string.welcome_no_account),
-                color = MaterialTheme.colorScheme.secondary
-            )
-            Button(
-                onClick = {
-                    onRegistrationClicked()
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent
-                )
-            ) {
-                Text(text = stringResource(Res.string.welcome_create_account))
+                    SecondaryButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                top = MaterialTheme.dimens.space_16,
+                                bottom = MaterialTheme.dimens.space_16
+                            ),
+                        onClick = { onOfflineModeClicked() },
+                        text = stringResource(Res.string.welcome_offline_mode)
+                    )
+
+                    Text(
+                        text = stringResource(Res.string.welcome_no_account),
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                    Button(
+                        onClick = {
+                            onRegistrationClicked()
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Transparent
+                        )
+                    ) {
+                        Text(text = stringResource(Res.string.welcome_create_account))
+                    }
+                }
             }
         }
-    }
+    )
 }
 
 // @DarkLightPreview()
