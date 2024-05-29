@@ -20,9 +20,11 @@ import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.ic_arrow_right
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.extension.bottomBorder
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Suppress("MagicNumber")
 @OptIn(ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
@@ -70,10 +72,10 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
     }
 }
 
-// @Preview
-// @Composable
-// fun ListItemViewPreview() {
-//     AppTheme {
-//         ListItemView(name = "AAAAAA")
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun ListItemViewPreview() {
+    AppTheme {
+        ListItemView(name = "AAAAAA")
+    }
+}

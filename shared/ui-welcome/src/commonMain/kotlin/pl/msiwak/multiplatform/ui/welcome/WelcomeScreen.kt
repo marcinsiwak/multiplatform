@@ -40,10 +40,12 @@ import athletetrack.shared.commonresources.generated.resources.welcome_create_ac
 import athletetrack.shared.commonresources.generated.resources.welcome_google_login
 import athletetrack.shared.commonresources.generated.resources.welcome_no_account
 import athletetrack.shared.commonresources.generated.resources.welcome_offline_mode
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
@@ -51,6 +53,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
 import pl.msiwak.multiplatform.ui.commonComponent.rememberGoogleLoginLauncherForActivityResult
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun WelcomeScreen(
@@ -243,10 +246,10 @@ fun WelcomeScreenContent(
     )
 }
 
-// @DarkLightPreview()
-// @Composable
-// fun WelcomeScreenPreview() {
-//     AppTheme {
-//         WelcomeScreenContent(MutableStateFlow(WelcomeState()).collectAsState())
-//     }
-// }
+@DarkLightPreview()
+@Composable
+fun WelcomeScreenPreview() {
+    AppTheme {
+        WelcomeScreenContent(MutableStateFlow(WelcomeState()).collectAsState())
+    }
+}

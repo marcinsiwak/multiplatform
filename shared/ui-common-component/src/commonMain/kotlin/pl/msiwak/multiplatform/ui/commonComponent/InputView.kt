@@ -13,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun InputView(
@@ -70,11 +72,11 @@ fun InputView(
         )
     }
 }
-//
-// @Preview
-// @Composable
-// fun InputViewPreview() {
-//     AppTheme {
-//         InputView(modifier = Modifier, value = "", onValueChange = {})
-//     }
-// }
+
+@DarkLightPreview
+@Composable
+fun InputViewPreview() {
+    AppTheme {
+        InputView(modifier = Modifier, value = "", onValueChange = {})
+    }
+}

@@ -18,13 +18,16 @@ import athletetrack.shared.commonresources.generated.resources.settings
 import athletetrack.shared.commonresources.generated.resources.settings_language
 import athletetrack.shared.commonresources.generated.resources.settings_logout
 import athletetrack.shared.commonresources.generated.resources.settings_unit
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.navigator.destination.NavDestination.LanguageDestination
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun SettingsScreen(
@@ -106,10 +109,10 @@ fun SettingsScreenContent(
     }
 }
 
-// @Preview
-// @Composable
-// fun SettingsScreenPreview() {
-//     AppTheme {
-//         SettingsScreenContent(MutableStateFlow(SettingsState()).collectAsState())
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun SettingsScreenPreview() {
+    AppTheme {
+        SettingsScreenContent(MutableStateFlow(SettingsState()).collectAsState())
+    }
+}

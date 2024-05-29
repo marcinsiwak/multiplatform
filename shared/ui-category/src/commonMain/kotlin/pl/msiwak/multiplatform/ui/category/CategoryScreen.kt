@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_exercise
 import athletetrack.shared.commonresources.generated.resources.bg_gym
@@ -36,13 +37,14 @@ import athletetrack.shared.commonresources.generated.resources.no
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
 import athletetrack.shared.commonresources.generated.resources.yes
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonObject.ExerciseType
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
@@ -51,9 +53,9 @@ import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.ListItemView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun CategoryScreen(
     navController: NavController,
@@ -219,13 +221,14 @@ fun CategoryScreenContent(
     )
 }
 
-// @DarkLightPreview
-// @Composable
-// fun CategoryScreenPreview() {
-//     AppTheme {
-//         CategoryScreenContent(
-//             viewState = MutableStateFlow(CategoryState()).collectAsState(),
-//             backgroundId = Res.drawable.bg_gym.drawableResId
-//         )
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun CategoryScreenPreview() {
+    AppTheme {
+        CategoryScreenContent(
+            rememberNavController(),
+            viewState = MutableStateFlow(CategoryState()).collectAsState(),
+            backgroundId = Res.drawable.bg_running_field
+        )
+    }
+}

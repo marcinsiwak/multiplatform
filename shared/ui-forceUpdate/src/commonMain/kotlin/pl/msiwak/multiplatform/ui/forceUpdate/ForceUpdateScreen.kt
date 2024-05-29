@@ -19,8 +19,10 @@ import athletetrack.shared.commonresources.generated.resources.force_update_titl
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun ForceUpdateScreen(
@@ -65,10 +67,10 @@ fun ForceUpdateScreenContent() {
     }
 }
 
-// @DarkLightPreview
-// @Composable
-// fun ForceUpdateScreenPreview() {
-//     AppTheme {
-//         ForceUpdateScreenContent()
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun ForceUpdateScreenPreview() {
+    AppTheme {
+        ForceUpdateScreenContent()
+    }
+}

@@ -20,16 +20,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.email
 import athletetrack.shared.commonresources.generated.resources.ic_invisible
 import athletetrack.shared.commonresources.generated.resources.ic_visible
 import athletetrack.shared.commonresources.generated.resources.password
 import athletetrack.shared.commonresources.generated.resources.register
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
@@ -37,6 +40,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PasswordRequirements
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun RegisterScreen(
@@ -157,11 +161,14 @@ fun RegisterScreenContent(
         }
     )
 }
-//
-// @Preview
-// @Composable
-// fun RegisterScreenPreview() {
-//     AppTheme {
-//         RegisterScreenContent(MutableStateFlow(RegisterState()).collectAsState())
-//     }
-// }
+
+@DarkLightPreview
+@Composable
+fun RegisterScreenPreview() {
+    AppTheme {
+        RegisterScreenContent(
+            rememberNavController(),
+            MutableStateFlow(RegisterState()).collectAsState()
+        )
+    }
+}
