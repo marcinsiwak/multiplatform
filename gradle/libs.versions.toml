@@ -30,6 +30,7 @@ kotlinx-viewModel = "2.8.0-beta01"
 kotlinx-multiplatform-viewModel = "2.8.0-beta02"
 kotlinx-coroutines = "1.8.1"
 kotlinx-dateTime = "0.6.0"
+kotlinx-serialization = "1.7.0-RC"
 napier = "2.7.1"
 google-playservices-auth = "20.6.0"
 google-playservices-ads = "22.5.0"
@@ -75,6 +76,7 @@ kotlinx-viewModel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewm
 kotlinx-viewModel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "kotlinx-viewModel"}
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines"}
 kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-dateTime"}
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor"}
 ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor"}
 ktor-ios = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor"}
