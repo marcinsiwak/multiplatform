@@ -45,6 +45,7 @@ kotlin {
             implementation(libs.ktor.logger)
 
             implementation(libs.napier)
+            implementation(libs.kotlinx.serialization)
         }
 
         androidMain.dependencies {

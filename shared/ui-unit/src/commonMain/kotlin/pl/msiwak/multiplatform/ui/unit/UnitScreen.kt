@@ -20,11 +20,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.settings_unit
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun UnitScreen(
@@ -85,10 +89,13 @@ fun UnitScreenContent(
     )
 }
 
-// @DarkLightPreview
-// @Composable
-// fun UnitScreenPreview() {
-//     AppTheme {
-//         UnitScreenContent(MutableStateFlow(UnitState()).collectAsState())
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun UnitScreenPreview() {
+    AppTheme {
+        UnitScreenContent(
+            rememberNavController(),
+            MutableStateFlow(UnitState()).collectAsState()
+        )
+    }
+}

@@ -45,7 +45,6 @@ kotlin {
             implementation(project(Modules.remoteConfig))
 
             implementation(libs.kotlinx.coroutines)
-            implementation(libs.kotlinx.serialization)
         }
 
         commonTest.dependencies {

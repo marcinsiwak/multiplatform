@@ -1,5 +1,7 @@
 package pl.msiwak.multiplatform.commonObject
 
+import kotlinx.serialization.Serializable
+
 @Serializable
 enum class ExerciseType(
     val unitMetric: String,

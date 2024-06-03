@@ -17,20 +17,24 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_category
 import athletetrack.shared.commonresources.generated.resources.category_name
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonObject.ExerciseType
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.DropDownView
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun AddCategoryScreen(
@@ -123,12 +127,13 @@ fun AddCategoryScreenContent(
     )
 }
 
-// @DarkLightPreview
-// @Composable
-// fun AddCategoryScreenPreview() {
-//     AppTheme {
-//         AddCategoryScreenContent(
-//             viewState = MutableStateFlow(AddCategoryState()).collectAsState()
-//         )
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun AddCategoryScreenPreview() {
+    AppTheme {
+        AddCategoryScreenContent(
+            rememberNavController(),
+            viewState = MutableStateFlow(AddCategoryState()).collectAsState()
+        )
+    }
+}

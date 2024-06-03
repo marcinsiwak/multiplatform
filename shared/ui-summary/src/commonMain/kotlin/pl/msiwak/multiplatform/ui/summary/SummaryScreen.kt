@@ -31,15 +31,18 @@ import athletetrack.shared.commonresources.generated.resources.remove_category_d
 import athletetrack.shared.commonresources.generated.resources.remove_category_dialog_title
 import athletetrack.shared.commonresources.generated.resources.summary_add_category
 import athletetrack.shared.commonresources.generated.resources.yes
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.AdmobBanner
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
 @Composable
@@ -144,11 +147,11 @@ fun SummaryScreenContent(
         )
     }
 }
-//
-// @Preview
-// @Composable
-// fun SummaryScreenPreview() {
-//     AppTheme {
-//         SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState())
-//     }
-// }
+
+@DarkLightPreview
+@Composable
+fun SummaryScreenPreview() {
+    AppTheme {
+        SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState())
+    }
+}

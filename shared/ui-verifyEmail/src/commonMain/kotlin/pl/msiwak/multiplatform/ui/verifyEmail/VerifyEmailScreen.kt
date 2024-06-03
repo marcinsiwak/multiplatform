@@ -13,13 +13,16 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.verify_description
 import athletetrack.shared.commonresources.generated.resources.verify_login
 import athletetrack.shared.commonresources.generated.resources.verify_resend_mail
 import athletetrack.shared.commonresources.generated.resources.verify_title
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
@@ -27,6 +30,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun VerifyEmailScreen(
@@ -101,10 +105,13 @@ fun VerifyEmailScreenContent(
     )
 }
 
-// @DarkLightPreview
-// @Composable
-// fun VerifyEmailScreenPreview() {
-//     AppTheme {
-//         VerifyEmailScreenContent(MutableStateFlow(VerifyState()).collectAsState())
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun VerifyEmailScreenPreview() {
+    AppTheme {
+        VerifyEmailScreenContent(
+            rememberNavController(),
+            MutableStateFlow(VerifyState()).collectAsState()
+        )
+    }
+}

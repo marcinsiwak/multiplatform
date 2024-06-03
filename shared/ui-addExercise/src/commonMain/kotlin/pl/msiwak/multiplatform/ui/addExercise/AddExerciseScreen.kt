@@ -29,6 +29,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_exercise
 import athletetrack.shared.commonresources.generated.resources.add_new_result
@@ -38,12 +39,14 @@ import athletetrack.shared.commonresources.generated.resources.no
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
 import athletetrack.shared.commonresources.generated.resources.yes
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.DateFilterType
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
@@ -53,6 +56,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTableView
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTimeFilterView
 import pl.msiwak.multiplatform.ui.commonComponent.RunningTimeInputDialog
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
 private const val FOCUS_REQUESTERS_AMOUNT = 4
@@ -293,14 +297,15 @@ fun AddExerciseScreenContent(
     )
 }
 
-// @DarkLightPreview
-// @Composable
-// fun AddExerciseScreenPreview() {
-//     AppTheme {
-//         AddExerciseScreenContent(
-//             viewState = MutableStateFlow(AddExerciseState()).collectAsState(),
-//             focusManager = LocalFocusManager.current,
-//             focusRequesters = listOf()
-//         )
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun AddExerciseScreenPreview() {
+    AppTheme {
+        AddExerciseScreenContent(
+            rememberNavController(),
+            viewState = MutableStateFlow(AddExerciseState()).collectAsState(),
+            focusManager = LocalFocusManager.current,
+            focusRequesters = listOf()
+        )
+    }
+}
