@@ -6,6 +6,5 @@ import kotlinx.serialization.Serializable
 class ApiCategorySyncRequest(
     val id: String,
     val name: String,
-    val exerciseType: String,
-    val exercises: List<ApiExercise> = emptyList()
+    val exerciseType: String
 )

@@ -21,6 +21,7 @@ import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.navigator.destination.BottomNavigationDestination
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.navigator.destination.NavDestination.DashboardDestination
+import pl.msiwak.multiplatform.ui.commonComponent.OfflineBanner
 
 @Composable
 fun DashboardScreen(
@@ -75,10 +76,9 @@ private fun DashboardScreenContent(
     Scaffold(
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
-                // todo uncomment when available
-//                if (viewState.value.isOfflineBannerVisible) {
-//                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
-//                }
+                if (viewState.value.isOfflineBannerVisible) {
+                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
+                }
                 BottomNavigation(
                     initialTabDestination = initialTabDestination,
                     navController = navController,

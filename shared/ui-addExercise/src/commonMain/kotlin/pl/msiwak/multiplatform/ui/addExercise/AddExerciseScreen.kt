@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.ui.addExercise
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -49,7 +48,6 @@ import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
-import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
@@ -65,7 +63,7 @@ private const val FOCUS_REQUESTERS_AMOUNT = 4
 fun AddExerciseScreen(
     navController: NavController,
     id: String,
-    viewModel: AddExerciseViewModel = koinInject { parametersOf(id) }
+    viewModel: AddExerciseViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
@@ -96,8 +94,6 @@ fun AddExerciseScreen(
         onPopupDismissed = viewModel::onPopupDismissed,
         onConfirmRunningAmount = viewModel::onConfirmRunningAmount,
         onDismissAmountDialog = viewModel::onDismissAmountDialog,
-        onExerciseTitleChanged = viewModel::onExerciseTitleChanged,
-        onTitleClicked = viewModel::onTitleClicked,
         onTabClicked = viewModel::onTabClicked,
         onSaveResultClicked = viewModel::onSaveResultClicked,
         onAddNewResultClicked = viewModel::onAddNewResultClicked,
@@ -124,8 +120,6 @@ fun AddExerciseScreenContent(
     onPopupDismissed: () -> Unit = {},
     onConfirmRunningAmount: (String, String, String, String) -> Unit = { _, _, _, _ -> },
     onDismissAmountDialog: () -> Unit = {},
-    onExerciseTitleChanged: (String) -> Unit = {},
-    onTitleClicked: () -> Unit = {},
     onTabClicked: (DateFilterType) -> Unit = {},
     onSaveResultClicked: () -> Unit = {},
     onAddNewResultClicked: () -> Unit = {},
@@ -190,7 +184,7 @@ fun AddExerciseScreenContent(
 
     Scaffold(
         topBar = {
-            AppBar(navController = navController, title = stringResource(Res.string.add_exercise))
+            AppBar(navController = navController, title = viewState.value.exerciseTitle)
         },
         content = {
             Column(
@@ -200,27 +194,6 @@ fun AddExerciseScreenContent(
                     .background(MaterialTheme.colorScheme.background),
                 verticalArrangement = Arrangement.Top
             ) {
-                if (viewState.value.isEditNameEnabled) {
-                    InputView(
-                        value = viewState.value.exerciseTitle,
-                        onValueChange = onExerciseTitleChanged
-                    )
-                } else {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                start = MaterialTheme.dimens.space_12,
-                                end = MaterialTheme.dimens.space_24
-                            )
-                            .padding(vertical = MaterialTheme.dimens.space_16)
-                            .clickable { onTitleClicked() },
-                        text = viewState.value.exerciseTitle,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-
                 ResultsTimeFilterView(
                     modifier = Modifier
                         .wrapContentWidth()

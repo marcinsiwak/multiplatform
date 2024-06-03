@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.network.client
 
-import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.HttpResponseValidator
@@ -29,7 +28,7 @@ class KtorClient(private val sessionStore: SessionStore) {
                 level = LogLevel.ALL
                 logger = object : Logger {
                     override fun log(message: String) {
-                        Napier.v("HTTP Client", null, message)
+//                        Napier.v("HTTP Client", null, message)
                     }
                 }
                 sanitizeHeader { header -> header == HttpHeaders.Authorization }
@@ -54,11 +53,11 @@ class KtorClient(private val sessionStore: SessionStore) {
 
         HttpResponseValidator {
             validateResponse {
-                if (!it.status.isSuccess()) {
-                    Napier.e("HTTP Client Error: ${it.status}")
-                } else {
-                    Napier.v("HTTP Client: ${it.status}")
-                }
+//                if (!it.status.isSuccess()) {
+//                    Napier.e("HTTP Client Error: ${it.status}")
+//                } else {
+//                    Napier.v("HTTP Client: ${it.status}")
+//                }
 
                 when (val statusCode = it.status.value) {
                     in CLIENT_ERROR_RANGE_START..CLIENT_ERROR_RANGE_END -> throw parseClientErrors(

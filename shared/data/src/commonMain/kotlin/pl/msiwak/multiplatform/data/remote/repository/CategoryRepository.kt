@@ -168,7 +168,7 @@ class CategoryRepository(
         if (categories.isEmpty()) {
             return@withContext
         }
-        val exercises = exercisesDao.getAllCategories()
+        val exercises = exercisesDao.getAllExercises()
         val results = resultsDao.getAllResults()
 
         val apiCategories = categories.map { category ->
@@ -199,9 +199,9 @@ class CategoryRepository(
 
         categoryService.startInitialSynchronization(
             ApiSynchronizationRequest(
-                apiCategoriesRequest = apiCategories,
-                apiExercisesRequest = apiExercises,
-                apiResultsRequest = apiResults
+                apiCategories,
+                apiExercises,
+                apiResults
             )
         )
     }

@@ -15,7 +15,7 @@ class ExercisesDao(database: Database) {
 
     private val dbQuery = database.getDatabaseQueries()
 
-    fun getAllCategories(): List<Exercise> {
+    fun getAllExercises(): List<Exercise> {
         return dbQuery.selectAllFromExercises(::mapExercise).executeAsList()
     }
 
