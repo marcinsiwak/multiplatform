@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.addExercise
+package pl.msiwak.multiplatform.ui.exercise
 
 import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -6,7 +6,7 @@ import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultTableItemData
 import pl.msiwak.multiplatform.commonObject.UnitType
 
-data class AddExerciseState(
+data class ExerciseState(
     var exerciseTitle: String = "",
     val exerciseType: ExerciseType = ExerciseType.GYM,
     var results: List<FormattedResultData> = listOf(),

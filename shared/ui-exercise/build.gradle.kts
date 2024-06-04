@@ -15,12 +15,12 @@ plugins {
 kotlin {
 
     cocoapods {
-        summary = "Ui AddExercise Shared Module"
+        summary = "Ui Exercise Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "ui-addExercise"
+            baseName = "ui-exercise"
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -55,5 +55,5 @@ kotlin {
 }
 
 android {
-    namespace = "pl.msiwak.multiplatform.ui.addExercise"
+    namespace = "pl.msiwak.multiplatform.ui.exercise"
 }

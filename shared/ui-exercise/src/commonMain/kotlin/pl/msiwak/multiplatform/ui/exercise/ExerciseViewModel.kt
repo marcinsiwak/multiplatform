@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.addExercise
+package pl.msiwak.multiplatform.ui.exercise
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -39,7 +39,7 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.extensions.isNumber
 import pl.msiwak.multiplatform.utils.extensions.isTime
 
-class AddExerciseViewModel(
+class ExerciseViewModel(
     private val formatDateUseCase: FormatDateUseCase,
     private val formatResultsUseCase: FormatResultsUseCase,
     private val addResultUseCase: AddResultUseCase,
@@ -53,11 +53,11 @@ class AddExerciseViewModel(
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(AddExerciseState())
-    val viewState: StateFlow<AddExerciseState> = _viewState.asStateFlow()
+    private val _viewState = MutableStateFlow(ExerciseState())
+    val viewState: StateFlow<ExerciseState> = _viewState.asStateFlow()
 
-    private val _viewEvent = MutableSharedFlow<AddExerciseEvent>(extraBufferCapacity = 1)
-    val viewEvent: SharedFlow<AddExerciseEvent> = _viewEvent.asSharedFlow()
+    private val _viewEvent = MutableSharedFlow<ExerciseEvent>(extraBufferCapacity = 1)
+    val viewEvent: SharedFlow<ExerciseEvent> = _viewEvent.asSharedFlow()
 
     private var pickedDate: Long = Clock.System.now().toEpochMilliseconds()
 
@@ -143,38 +143,38 @@ class AddExerciseViewModel(
         val savedDate = _viewState.value.newResultData.date
 
         if (savedResult.isEmpty()) {
-            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
+            _viewEvent.tryEmit(ExerciseEvent.FocusOnInput(1))
             return
         }
         if (savedAmount.isEmpty()) {
-            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
+            _viewEvent.tryEmit(ExerciseEvent.FocusOnInput(2))
             return
         }
         if (savedDate.isEmpty()) {
-            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
+            _viewEvent.tryEmit(ExerciseEvent.FocusOnInput(3))
             return
         }
         if (!savedDate.matches(Regex(DATE_REGEX))) {
             _viewState.update { it.copy(newResultData = it.newResultData.copy(isDateError = true)) }
-            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(3))
+            _viewEvent.tryEmit(ExerciseEvent.FocusOnInput(3))
             return
         }
 
         if (!isInputGymCorrect(savedResult, exerciseType)) {
             _viewState.update { it.copy(newResultData = it.newResultData.copy(isResultError = true)) }
-            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(1))
+            _viewEvent.tryEmit(ExerciseEvent.FocusOnInput(1))
             return
         }
 
         if (!isInputGymCorrect(savedResult, exerciseType)) {
             _viewState.update { it.copy(newResultData = it.newResultData.copy(isAmountError = true)) }
-            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
+            _viewEvent.tryEmit(ExerciseEvent.FocusOnInput(2))
             return
         }
 
         if (savedAmount.isEmpty() && exerciseType == ExerciseType.RUNNING) {
             _viewState.update { it.copy(newResultData = it.newResultData.copy(isAmountError = true)) }
-            _viewEvent.tryEmit(AddExerciseEvent.FocusOnInput(2))
+            _viewEvent.tryEmit(ExerciseEvent.FocusOnInput(2))
             return
         }
 

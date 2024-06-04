@@ -26,7 +26,7 @@ fun MainView(
                 addCategoryGraph.create(navController, this@NavHost)
                 categoryGraph.create(navController, this@NavHost)
                 dashboardGraph.create(navController, this@NavHost)
-                addExerciseGraph.create(navController, this@NavHost)
+                exerciseGraph.create(navController, this@NavHost)
                 unitGraph.create(navController, this@NavHost)
                 languageGraph.create(navController, this@NavHost)
                 forceUpdateGraph.create(navController, this@NavHost)

@@ -80,7 +80,7 @@ fun CategoryScreen(
         viewModel.viewEvent.collectLatest { event ->
             when (event) {
                 is CategoryEvent.NavigateToAddExercise -> navController.navigate(
-                    NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(event.id)
+                    NavDestination.ExerciseDestination.NavExerciseScreen.route(event.id)
                 )
             }
         }
@@ -97,7 +97,7 @@ fun CategoryScreen(
         onDialogClosed = viewModel::onDialogClosed,
         onItemClick = {
             navController.navigate(
-                NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(
+                NavDestination.ExerciseDestination.NavExerciseScreen.route(
                     it
                 )
             )

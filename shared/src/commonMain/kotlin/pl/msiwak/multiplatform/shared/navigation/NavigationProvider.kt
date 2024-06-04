@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.shared.navigation
 
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseGraph
+import pl.msiwak.multiplatform.ui.exercise.ExerciseGraph
 import pl.msiwak.multiplatform.ui.category.CategoryGraph
 import pl.msiwak.multiplatform.ui.dashboard.DashboardGraph
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateGraph
@@ -17,7 +17,7 @@ data class NavigationProvider(
     val addCategoryGraph: AddCategoryGraph,
     val categoryGraph: CategoryGraph,
     val dashboardGraph: DashboardGraph,
-    val addExerciseGraph: AddExerciseGraph,
+    val exerciseGraph: ExerciseGraph,
     val unitGraph: UnitGraph,
     val languageGraph: LanguageGraph,
     val forceUpdateGraph: ForceUpdateGraph,

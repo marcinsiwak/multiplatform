@@ -16,7 +16,7 @@ object Modules {
     const val navigator = "$shared:navigator"
     const val uiWelcome = "$shared:ui-welcome"
     const val uiAddCategory = "$shared:ui-addCategory"
-    const val uiAddExercise = "$shared:ui-addExercise"
+    const val uiExercise = "$shared:ui-exercise"
     const val uiCategory = "$shared:ui-category"
     const val uiDashboard = "$shared:ui-dashboard"
     const val uiForceUpdate = "$shared:ui-forceUpdate"

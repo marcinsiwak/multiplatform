@@ -111,8 +111,8 @@ import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseGraph
-import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
+import pl.msiwak.multiplatform.ui.exercise.ExerciseGraph
+import pl.msiwak.multiplatform.ui.exercise.ExerciseViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryGraph
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.dashboard.BottomNavigationProvider
@@ -200,7 +200,7 @@ val viewModelsModule = module {
     viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition {
-        AddExerciseViewModel(
+        ExerciseViewModel(
             get(),
             get(),
             get(),
@@ -305,7 +305,7 @@ val navigationModule = module {
     single { AddCategoryGraph() }
     single { CategoryGraph() }
     single { DashboardGraph() }
-    single { AddExerciseGraph() }
+    single { ExerciseGraph() }
     single { UnitGraph() }
     single { LanguageGraph() }
     single { ForceUpdateGraph() }

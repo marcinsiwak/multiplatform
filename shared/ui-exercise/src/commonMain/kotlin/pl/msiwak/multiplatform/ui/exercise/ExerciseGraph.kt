@@ -1,24 +1,24 @@
-package pl.msiwak.multiplatform.ui.addExercise
+package pl.msiwak.multiplatform.ui.exercise
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import pl.msiwak.multiplatform.navigator.ARG_EXERCISE_ID
-import pl.msiwak.multiplatform.navigator.destination.NavDestination.AddExerciseDestination
+import pl.msiwak.multiplatform.navigator.destination.NavDestination.ExerciseDestination
 import pl.msiwak.multiplatform.navigator.graph.NavigationNestedGraph
 
-class AddExerciseGraph : NavigationNestedGraph {
+class ExerciseGraph : NavigationNestedGraph {
 
     override fun create(navController: NavHostController, navGraphBuilder: NavGraphBuilder) {
         navGraphBuilder.navigation(
-            route = AddExerciseDestination.NavAddExerciseGraphDestination.route,
-            startDestination = AddExerciseDestination.NavAddExerciseScreen.route
+            route = ExerciseDestination.NavExerciseGraphDestination.route,
+            startDestination = ExerciseDestination.NavExerciseScreen.route
         ) {
             composable(
-                route = AddExerciseDestination.NavAddExerciseScreen.route
+                route = ExerciseDestination.NavExerciseScreen.route
             ) { backStackEntry ->
-                AddExerciseScreen(
+                ExerciseScreen(
                     navController,
                     backStackEntry.arguments?.getString(ARG_EXERCISE_ID) ?: ""
                 )

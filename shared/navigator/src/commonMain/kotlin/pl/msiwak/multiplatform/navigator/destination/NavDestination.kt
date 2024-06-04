@@ -58,10 +58,10 @@ sealed class NavDestination(val route: String) {
         }
     }
 
-    sealed class AddExerciseDestination(route: String) : NavDestination(route) {
-        object NavAddExerciseGraphDestination : AddExerciseDestination("add_exercise_graph")
-        object NavAddExerciseScreen :
-            AddExerciseDestination("$ADD_EXERCISE_SCREEN_ROUTE/{$ARG_EXERCISE_ID}") {
+    sealed class ExerciseDestination(route: String) : NavDestination(route) {
+        object NavExerciseGraphDestination : ExerciseDestination("add_exercise_graph")
+        object NavExerciseScreen :
+            ExerciseDestination("$ADD_EXERCISE_SCREEN_ROUTE/{$ARG_EXERCISE_ID}") {
             fun route(id: String): String {
                 return "$ADD_EXERCISE_SCREEN_ROUTE/$id"
             }

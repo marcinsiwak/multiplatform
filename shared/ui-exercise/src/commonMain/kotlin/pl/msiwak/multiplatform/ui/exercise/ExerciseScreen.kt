@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.ui.addExercise
+package pl.msiwak.multiplatform.ui.exercise
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -58,10 +58,10 @@ import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 private const val FOCUS_REQUESTERS_AMOUNT = 4
 
 @Composable
-fun AddExerciseScreen(
+fun ExerciseScreen(
     navController: NavController,
     id: String,
-    viewModel: AddExerciseViewModel = koinInject()
+    viewModel: ExerciseViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
@@ -78,12 +78,12 @@ fun AddExerciseScreen(
         viewModel.onInit(id)
         viewModel.viewEvent.collectLatest { value ->
             when (value) {
-                is AddExerciseEvent.FocusOnInput -> focusRequesters[value.pos].requestFocus()
+                is ExerciseEvent.FocusOnInput -> focusRequesters[value.pos].requestFocus()
             }
         }
     }
 
-    AddExerciseScreenContent(
+    ExerciseScreenContent(
         navController = navController,
         viewState = viewState,
         focusManager = focusManager,
@@ -109,9 +109,9 @@ fun AddExerciseScreen(
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalResourceApi::class)
 @Composable
-fun AddExerciseScreenContent(
+fun ExerciseScreenContent(
     navController: NavController,
-    viewState: State<AddExerciseState>,
+    viewState: State<ExerciseState>,
     focusManager: FocusManager,
     focusRequesters: List<FocusRequester>,
     onResultRemoved: () -> Unit = {},
@@ -270,11 +270,11 @@ fun AddExerciseScreenContent(
 
 @DarkLightPreview
 @Composable
-fun AddExerciseScreenPreview() {
+fun ExerciseScreenPreview() {
     AppTheme {
-        AddExerciseScreenContent(
+        ExerciseScreenContent(
             rememberNavController(),
-            viewState = MutableStateFlow(AddExerciseState()).collectAsState(),
+            viewState = MutableStateFlow(ExerciseState()).collectAsState(),
             focusManager = LocalFocusManager.current,
             focusRequesters = listOf()
         )
