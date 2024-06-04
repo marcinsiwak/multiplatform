@@ -46,7 +46,7 @@ kotlin {
             implementation(project(Modules.uiSummary))
             implementation(project(Modules.uiSettings))
 
-            implementation(libs.napier)
+            
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)

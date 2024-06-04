@@ -207,6 +207,4 @@ dependencies {
     implementation(libs.koin.compose.android)
 
     implementation(libs.google.android.playservices.ads)
-
-    implementation(libs.napier)
 }

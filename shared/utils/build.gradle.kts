@@ -32,7 +32,7 @@ kotlin {
             implementation(project(Modules.commonObject))
             implementation(libs.firebase.gitlive.auth)
             implementation(libs.firebase.gitlive.crashlytics)
-            implementation(libs.napier)
+            
         }
 
         commonTest.dependencies {

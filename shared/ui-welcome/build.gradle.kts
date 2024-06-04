@@ -54,7 +54,7 @@ kotlin {
             implementation(libs.compose.multiplatform.navigation)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.napier)
+            
         }
 
         androidMain.dependencies {

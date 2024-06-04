@@ -12,7 +12,6 @@ import io.ktor.client.request.bearerAuth
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
-import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import pl.msiwak.multiplatform.auth.SessionStore

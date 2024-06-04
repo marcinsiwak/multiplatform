@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.utils.errorHandler
 
 import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 class GlobalErrorHandler {
@@ -11,11 +10,11 @@ class GlobalErrorHandler {
             if (!customHandle(throwable)) {
                 when (throwable) {
                     is FirebaseAuthUserCollisionException -> {
-                        Napier.e("Same user error: $throwable")
+//                        Napier.e("Same user error: $throwable")
                     }
 
                     else -> {
-                        Napier.e("Error: $throwable")
+//                        Napier.e("Error: $throwable")
                     }
                 }
             }

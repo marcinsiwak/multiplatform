@@ -4,8 +4,6 @@ import cocoapods.GoogleMobileAds.GADMobileAds
 import cocoapods.GoogleSignIn.GIDSignIn
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.initialize
-import io.github.aakira.napier.DebugAntilog
-import io.github.aakira.napier.Napier
 import kotlinx.cinterop.ExperimentalForeignApi
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -26,10 +24,6 @@ fun initKoin() {
 fun initMobileAds() {
     GADMobileAds.sharedInstance().startWithCompletionHandler(null)
 //    GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = listOf("b7496249c8b3b0419541121ffbd27c57")
-}
-
-fun initNapier() {
-    Napier.base(DebugAntilog())
 }
 
 fun initFirebase() {

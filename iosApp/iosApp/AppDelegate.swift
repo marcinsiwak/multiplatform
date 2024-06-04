@@ -7,7 +7,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         HelperKt.doInitKoin()
-        HelperKt.doInitNapier()
         HelperKt.doInitFirebase()
         HelperKt.doInitMobileAds()
 

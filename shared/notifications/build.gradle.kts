@@ -27,10 +27,6 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            implementation(libs.napier)
-        }
-
         androidMain.dependencies {
             implementation(project.dependencies.platform("com.google.firebase:firebase-bom:32.3.1"))
             implementation(libs.firebase.andorid.messaging)

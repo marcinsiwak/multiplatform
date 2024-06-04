@@ -33,7 +33,6 @@ kotlin {
             implementation(project(Modules.commonObject))
             implementation(project(Modules.commonResources))
 
-            implementation(libs.napier)
             implementation(libs.kotlinx.coroutines)
         }
 
