@@ -87,11 +87,7 @@ fun RegisterScreenContent(
             AppBar(navController = navController, title = stringResource(Res.string.register))
         },
         content = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = it.calculateTopPadding())
-            ) {
+            Box(modifier = Modifier.fillMaxSize()) {
                 Column(
                     modifier = Modifier
                         .fillMaxHeight()

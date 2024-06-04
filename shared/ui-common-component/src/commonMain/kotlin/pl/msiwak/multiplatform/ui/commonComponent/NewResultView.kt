@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.ui.commonComponent
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,7 +44,8 @@ fun NewResultView(
                 MaterialTheme.colorScheme.tertiary
             )
             .padding(bottom = MaterialTheme.dimens.space_16)
-            .fillMaxWidth()
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center
     ) {
         ResultInputView(
             modifier = Modifier

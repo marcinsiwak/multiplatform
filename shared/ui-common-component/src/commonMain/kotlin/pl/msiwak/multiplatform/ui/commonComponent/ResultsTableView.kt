@@ -64,7 +64,6 @@ fun ResultsTableView(
     ) {
         Row(
             modifier = Modifier
-//                .background(color = colorResource(id = SR.colors.gray.resourceId))
                 .height(IntrinsicSize.Min)
                 .fillMaxWidth()
                 .padding(vertical = MaterialTheme.dimens.space_8),
@@ -74,8 +73,7 @@ fun ResultsTableView(
                 TextWithDrawableView(
                     modifier = Modifier
                         .clickable { onLabelClicked(index) }
-                        .width(MaterialTheme.dimens.result_item_width)
-                        .padding(horizontal = MaterialTheme.dimens.space_24),
+                        .width(MaterialTheme.dimens.result_item_width),
                     text = item.text,
                     color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
