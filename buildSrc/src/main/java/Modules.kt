@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatfor.dependencies
+package pl.msiwak.multiplatform.dependencies
 
 object Modules {
     private const val shared =":shared"
