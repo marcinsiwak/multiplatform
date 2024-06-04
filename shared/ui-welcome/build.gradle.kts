@@ -53,8 +53,6 @@ kotlin {
 
             implementation(libs.compose.multiplatform.navigation)
             implementation(compose.components.uiToolingPreview)
-
-            
         }
 
         androidMain.dependencies {

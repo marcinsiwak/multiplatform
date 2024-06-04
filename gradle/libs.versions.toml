@@ -40,6 +40,7 @@ compose-components-resources = "1.4.0"
 compose-multiplatform = "1.6.10-rc01"
 compose-multiplatform-navigation = "2.7.0-alpha03"
 playServicesAdsLite = "23.0.0"
+kermit = "2.0.3"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
@@ -90,6 +91,7 @@ sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", 
 google-android-playservices-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-playservices-auth"}
 google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
 compose-multiplatform-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-multiplatform-navigation" }
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
 # Gradle scripts depdendecies
 gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }

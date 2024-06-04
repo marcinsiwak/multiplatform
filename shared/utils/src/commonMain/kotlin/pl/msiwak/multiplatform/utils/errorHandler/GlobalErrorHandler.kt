@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.utils.errorHandler
 
+import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.coroutines.CoroutineExceptionHandler
 
@@ -10,11 +11,11 @@ class GlobalErrorHandler {
             if (!customHandle(throwable)) {
                 when (throwable) {
                     is FirebaseAuthUserCollisionException -> {
-//                        Napier.e("Same user error: $throwable")
+                        Logger.e("Same user error: $throwable")
                     }
 
                     else -> {
-//                        Napier.e("Error: $throwable")
+                        Logger.e("Error: $throwable")
                     }
                 }
             }

@@ -12,6 +12,7 @@ import io.ktor.client.request.bearerAuth
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
+import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import pl.msiwak.multiplatform.auth.SessionStore
@@ -19,6 +20,7 @@ import pl.msiwak.multiplatform.buildconfig.BuildConfig
 import pl.msiwak.multiplatform.network.exception.ClientErrorException
 import pl.msiwak.multiplatform.network.exception.InvalidAuthTokenException
 import pl.msiwak.multiplatform.network.exception.ServerErrorException
+import co.touchlab.kermit.Logger as KermitLogger
 
 class KtorClient(private val sessionStore: SessionStore) {
     val httpClient = HttpClient(CIO) {
@@ -27,7 +29,7 @@ class KtorClient(private val sessionStore: SessionStore) {
                 level = LogLevel.ALL
                 logger = object : Logger {
                     override fun log(message: String) {
-//                        Napier.v("HTTP Client", null, message)
+                        KermitLogger.v("HTTP Client: $message")
                     }
                 }
                 sanitizeHeader { header -> header == HttpHeaders.Authorization }
@@ -52,11 +54,11 @@ class KtorClient(private val sessionStore: SessionStore) {
 
         HttpResponseValidator {
             validateResponse {
-//                if (!it.status.isSuccess()) {
-//                    Napier.e("HTTP Client Error: ${it.status}")
-//                } else {
-//                    Napier.v("HTTP Client: ${it.status}")
-//                }
+                if (!it.status.isSuccess()) {
+                    KermitLogger.e("HTTP Client Error: ${it.status}")
+                } else {
+                    KermitLogger.v("HTTP Client: ${it.status}")
+                }
 
                 when (val statusCode = it.status.value) {
                     in CLIENT_ERROR_RANGE_START..CLIENT_ERROR_RANGE_END -> throw parseClientErrors(
