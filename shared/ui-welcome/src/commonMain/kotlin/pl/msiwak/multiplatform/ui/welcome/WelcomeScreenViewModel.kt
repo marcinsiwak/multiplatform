@@ -123,5 +123,8 @@ class WelcomeScreenViewModel(
 
     fun onDismissSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
+        viewModelScope.launch {
+            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
+        }
     }
 }

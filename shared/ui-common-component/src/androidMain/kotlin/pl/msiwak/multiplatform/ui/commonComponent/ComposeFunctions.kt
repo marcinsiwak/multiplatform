@@ -7,10 +7,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import co.touchlab.kermit.Logger
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
-import io.github.aakira.napier.Napier
 import pl.msiwak.multiplatform.ui.commonComponent.extensions.findActivity
 
 @Composable
@@ -53,7 +53,7 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String, Str
                 )
             }
             .addOnFailureListener { e ->
-                Napier.e("GOOGLE AUTH FAILED: $e")
+                Logger.e("GOOGLE AUTH FAILED: $e")
             }
     }
 }

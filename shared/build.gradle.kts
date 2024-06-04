@@ -107,8 +107,6 @@ kotlin {
             api(project(Modules.notifications))
             api(project(Modules.uiCommonComponent))
 
-            implementation(libs.napier)
-
             implementation(libs.koin.core)
             implementation(libs.koin.test)
             implementation(libs.koin.compose)

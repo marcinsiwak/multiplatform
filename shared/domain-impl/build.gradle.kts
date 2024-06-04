@@ -40,8 +40,6 @@ kotlin {
             implementation(project(Modules.commonObject))
             implementation(project(Modules.commonResources))
             implementation(project(Modules.utils))
-
-            implementation(libs.napier)
         }
 
         commonTest.dependencies {

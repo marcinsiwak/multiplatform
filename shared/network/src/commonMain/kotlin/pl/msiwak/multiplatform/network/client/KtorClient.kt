@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.network.client
 
-import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.HttpResponseValidator
@@ -21,6 +20,7 @@ import pl.msiwak.multiplatform.buildconfig.BuildConfig
 import pl.msiwak.multiplatform.network.exception.ClientErrorException
 import pl.msiwak.multiplatform.network.exception.InvalidAuthTokenException
 import pl.msiwak.multiplatform.network.exception.ServerErrorException
+import co.touchlab.kermit.Logger as KermitLogger
 
 class KtorClient(private val sessionStore: SessionStore) {
     val httpClient = HttpClient(CIO) {
@@ -29,7 +29,7 @@ class KtorClient(private val sessionStore: SessionStore) {
                 level = LogLevel.ALL
                 logger = object : Logger {
                     override fun log(message: String) {
-                        Napier.v("HTTP Client", null, message)
+                        KermitLogger.v("HTTP Client: $message")
                     }
                 }
                 sanitizeHeader { header -> header == HttpHeaders.Authorization }
@@ -55,9 +55,9 @@ class KtorClient(private val sessionStore: SessionStore) {
         HttpResponseValidator {
             validateResponse {
                 if (!it.status.isSuccess()) {
-                    Napier.e("HTTP Client Error: ${it.status}")
+                    KermitLogger.e("HTTP Client Error: ${it.status}")
                 } else {
-                    Napier.v("HTTP Client: ${it.status}")
+                    KermitLogger.v("HTTP Client: ${it.status}")
                 }
 
                 when (val statusCode = it.status.value) {

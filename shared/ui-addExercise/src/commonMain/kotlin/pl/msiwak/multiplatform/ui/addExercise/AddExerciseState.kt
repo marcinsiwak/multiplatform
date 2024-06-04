@@ -25,7 +25,6 @@ data class AddExerciseState(
     val unit: String = "kg",
     val resultDataTitles: List<ResultTableItemData> = emptyList(),
     val isLoading: Boolean = false,
-    val isEditNameEnabled: Boolean = false,
     var isTimeInputDialogVisible: Boolean = false,
     val isDatePickerVisible: Boolean = false
 )

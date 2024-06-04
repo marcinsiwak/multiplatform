@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -19,7 +20,7 @@ import athletetrack.shared.commonresources.generated.resources.settings_language
 import athletetrack.shared.commonresources.generated.resources.settings_logout
 import athletetrack.shared.commonresources.generated.resources.settings_unit
 import kotlinx.coroutines.flow.MutableStateFlow
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
@@ -36,6 +37,14 @@ fun SettingsScreen(
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
+    LaunchedEffect(true) {
+        viewModel.viewEvent.collectLatest {
+            when (it) {
+                SettingsEvent.Logout -> navController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+            }
+        }
+    }
+
     SettingsScreenContent(
         viewState = viewState,
         onUnitClicked = {
@@ -48,7 +57,6 @@ fun SettingsScreen(
     )
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun SettingsScreenContent(
     viewState: State<SettingsState>,

@@ -32,7 +32,8 @@ kotlin {
             implementation(project(Modules.commonObject))
             implementation(libs.firebase.gitlive.auth)
             implementation(libs.firebase.gitlive.crashlytics)
-            implementation(libs.napier)
+
+            implementation(libs.kermit)
         }
 
         commonTest.dependencies {

@@ -44,7 +44,8 @@ kotlin {
             implementation(libs.ktor.cio)
             implementation(libs.ktor.logger)
 
-            implementation(libs.napier)
+            implementation(libs.kermit)
+
             implementation(libs.kotlinx.serialization)
         }
 

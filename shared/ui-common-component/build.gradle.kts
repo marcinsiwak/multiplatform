@@ -40,11 +40,12 @@ kotlin {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
 
-            implementation(libs.napier)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
             implementation(compose.components.uiToolingPreview)
+
+            implementation(libs.kermit)
         }
 
         androidMain.dependencies {
