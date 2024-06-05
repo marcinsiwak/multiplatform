@@ -76,6 +76,8 @@ import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatRunningAmountUseCaseImpl
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCase
 import pl.msiwak.multiplatform.domain.summaries.FormatStringToDateUseCaseImpl
+import pl.msiwak.multiplatform.domain.summaries.GetResultsUseCase
+import pl.msiwak.multiplatform.domain.summaries.GetResultsUseCaseImpl
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCase
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoriesUseCaseImpl
 import pl.msiwak.multiplatform.domain.summaries.ObserveCategoryUseCase
@@ -111,13 +113,14 @@ import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
-import pl.msiwak.multiplatform.ui.exercise.ExerciseGraph
-import pl.msiwak.multiplatform.ui.exercise.ExerciseViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryGraph
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.dashboard.BottomNavigationProvider
 import pl.msiwak.multiplatform.ui.dashboard.DashboardGraph
 import pl.msiwak.multiplatform.ui.dashboard.DashboardViewModel
+import pl.msiwak.multiplatform.ui.exercise.ExerciseGraph
+import pl.msiwak.multiplatform.ui.exercise.ExerciseViewModel
+import pl.msiwak.multiplatform.ui.exercise.chart.ExerciseChartViewModel
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateGraph
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateViewModel
 import pl.msiwak.multiplatform.ui.language.LanguageGraph
@@ -229,6 +232,7 @@ val viewModelsModule = module {
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel() }
     viewModelDefinition { DashboardViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { ExerciseChartViewModel(get()) }
 }
 
 val useCaseModule = module {
@@ -277,6 +281,7 @@ val useCaseModule = module {
     single<FormatMillisecondsToRunningAmountUseCase> { FormatMillisecondsToRunningAmountUseCaseImpl() }
     single<FormatRunningAmountToMillisecondsUseCase> { FormatRunningAmountToMillisecondsUseCaseImpl() }
     single<FormatRunningAmountUseCase> { FormatRunningAmountUseCaseImpl() }
+    single<GetResultsUseCase> { GetResultsUseCaseImpl(get(), get(), get(), get()) }
 }
 
 val repositoryUseModule = module {

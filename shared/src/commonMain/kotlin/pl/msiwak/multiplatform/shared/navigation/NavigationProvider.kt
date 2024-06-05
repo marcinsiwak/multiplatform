@@ -1,9 +1,9 @@
 package pl.msiwak.multiplatform.shared.navigation
 
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
-import pl.msiwak.multiplatform.ui.exercise.ExerciseGraph
 import pl.msiwak.multiplatform.ui.category.CategoryGraph
 import pl.msiwak.multiplatform.ui.dashboard.DashboardGraph
+import pl.msiwak.multiplatform.ui.exercise.ExerciseGraph
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateGraph
 import pl.msiwak.multiplatform.ui.language.LanguageGraph
 import pl.msiwak.multiplatform.ui.register.RegisterGraph

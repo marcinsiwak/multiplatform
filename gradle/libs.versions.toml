@@ -41,6 +41,7 @@ compose-multiplatform = "1.6.10-rc01"
 compose-multiplatform-navigation = "2.7.0-alpha03"
 playServicesAdsLite = "23.0.0"
 kermit = "2.0.3"
+charts-aay = "Beta-0.0.5"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
@@ -92,6 +93,7 @@ google-android-playservices-auth = { module = "com.google.android.gms:play-servi
 google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
 compose-multiplatform-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-multiplatform-navigation" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+charts-aay = { module = "io.github.thechance101:chart", version.ref = "charts-aay" }
 
 # Gradle scripts depdendecies
 gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }

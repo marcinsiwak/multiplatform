@@ -46,6 +46,8 @@ kotlin {
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
             implementation(compose.components.uiToolingPreview)
+
+            implementation(libs.charts.aay)
         }
 
         commonTest.dependencies {

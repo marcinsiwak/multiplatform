@@ -6,11 +6,13 @@ import athletetrack.shared.commonresources.generated.resources.ic_workout
 import athletetrack.shared.commonresources.generated.resources.settings
 import athletetrack.shared.commonresources.generated.resources.summary
 import pl.msiwak.multiplatform.navigator.ADD_CATEGORY_SCREEN_ROUTE
-import pl.msiwak.multiplatform.navigator.ADD_EXERCISE_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.ARG_CATEGORY_ID
 import pl.msiwak.multiplatform.navigator.ARG_EXERCISE_ID
+import pl.msiwak.multiplatform.navigator.ARG_EXERCISE_TYPE
 import pl.msiwak.multiplatform.navigator.CATEGORY_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.DASHBOARD_SCREEN_ROUTE
+import pl.msiwak.multiplatform.navigator.EXERCISE_CHART_SCREEN_ROUTE
+import pl.msiwak.multiplatform.navigator.EXERCISE_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.FORCE_UPDATE_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.LANGUAGE_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.REGISTRATION_SCREEN_ROUTE
@@ -61,9 +63,18 @@ sealed class NavDestination(val route: String) {
     sealed class ExerciseDestination(route: String) : NavDestination(route) {
         object NavExerciseGraphDestination : ExerciseDestination("add_exercise_graph")
         object NavExerciseScreen :
-            ExerciseDestination("$ADD_EXERCISE_SCREEN_ROUTE/{$ARG_EXERCISE_ID}") {
+            ExerciseDestination("$EXERCISE_SCREEN_ROUTE/{$ARG_EXERCISE_ID}") {
             fun route(id: String): String {
-                return "$ADD_EXERCISE_SCREEN_ROUTE/$id"
+                return "$EXERCISE_SCREEN_ROUTE/$id"
+            }
+        }
+
+        object NavExerciseChartScreen :
+            ExerciseDestination(
+                "$EXERCISE_CHART_SCREEN_ROUTE/{$ARG_EXERCISE_ID}/{$ARG_EXERCISE_TYPE}"
+            ) {
+            fun route(exerciseId: String, exerciseType: String): String {
+                return "$EXERCISE_CHART_SCREEN_ROUTE/$exerciseId/$exerciseType"
             }
         }
     }

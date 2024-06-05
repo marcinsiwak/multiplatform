@@ -205,4 +205,8 @@ class CategoryRepository(
             )
         )
     }
+
+    suspend fun getResults(exerciseId: String): List<ResultData> = withContext(Dispatchers.IO) {
+        return@withContext resultsDao.getExerciseResults(exerciseId)
+    }
 }

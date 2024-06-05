@@ -13,6 +13,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -33,6 +35,7 @@ import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_new_result
 import athletetrack.shared.commonresources.generated.resources.add_result_save
 import athletetrack.shared.commonresources.generated.resources.confirm
+import athletetrack.shared.commonresources.generated.resources.ic_chart
 import athletetrack.shared.commonresources.generated.resources.no
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
@@ -40,11 +43,14 @@ import athletetrack.shared.commonresources.generated.resources.yes
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonObject.DateFilterType
+import pl.msiwak.multiplatform.commonObject.extenstion.serializeToJson
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
+import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
@@ -84,6 +90,7 @@ fun ExerciseScreen(
     }
 
     ExerciseScreenContent(
+        id = id,
         navController = navController,
         viewState = viewState,
         focusManager = focusManager,
@@ -110,6 +117,7 @@ fun ExerciseScreen(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalResourceApi::class)
 @Composable
 fun ExerciseScreenContent(
+    id: String,
     navController: NavController,
     viewState: State<ExerciseState>,
     focusManager: FocusManager,
@@ -207,6 +215,22 @@ fun ExerciseScreenContent(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
+                    IconButton(
+                        onClick = {
+                            navController.navigate(
+                                NavDestination.ExerciseDestination.NavExerciseChartScreen.route(
+                                    exerciseId = id,
+                                    exerciseType = viewState.value.exerciseType.serializeToJson()
+                                )
+                            )
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(Res.drawable.ic_chart),
+                            contentDescription = null
+                        )
+                    }
+
                     if (!viewState.value.isResultFieldEnabled) {
                         Button(
                             modifier = Modifier
@@ -273,6 +297,7 @@ fun ExerciseScreenContent(
 fun ExerciseScreenPreview() {
     AppTheme {
         ExerciseScreenContent(
+            id = "",
             rememberNavController(),
             viewState = MutableStateFlow(ExerciseState()).collectAsState(),
             focusManager = LocalFocusManager.current,

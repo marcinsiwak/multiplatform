@@ -36,6 +36,10 @@ class ResultsDao(database: Database) {
         dbQuery.removeAllCategories()
     }
 
+    fun getExerciseResults(exerciseId: String): List<ResultData> {
+        return dbQuery.selectFromResultsByExercise(exerciseId, ::mapResult).executeAsList()
+    }
+
     private fun mapResult(
         id: String,
         exerciseId: String,
