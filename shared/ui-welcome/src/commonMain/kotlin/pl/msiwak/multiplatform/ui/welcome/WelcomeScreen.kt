@@ -30,6 +30,7 @@ import athletetrack.shared.commonresources.generated.resources.auth_failed_title
 import athletetrack.shared.commonresources.generated.resources.confirm
 import athletetrack.shared.commonresources.generated.resources.deny
 import athletetrack.shared.commonresources.generated.resources.email
+import athletetrack.shared.commonresources.generated.resources.ic_google
 import athletetrack.shared.commonresources.generated.resources.ic_invisible
 import athletetrack.shared.commonresources.generated.resources.ic_visible
 import athletetrack.shared.commonresources.generated.resources.login
@@ -212,6 +213,7 @@ fun WelcomeScreenContent(
                         onClick = {
                             onGoogleLoginClicked()
                         },
+                        leadingIcon = Res.drawable.ic_google,
                         text = stringResource(Res.string.welcome_google_login)
                     )
 

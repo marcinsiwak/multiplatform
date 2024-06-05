@@ -1,19 +1,33 @@
 package pl.msiwak.multiplatform.ui.commonComponent
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
 @Composable
-fun MainButton(modifier: Modifier = Modifier, onClick: () -> Unit, text: String) {
+fun MainButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    leadingIcon: DrawableResource? = null,
+    text: String
+) {
     Button(
-        modifier = modifier,
+        modifier = modifier.height(MaterialTheme.dimens.default_button_height),
         onClick = onClick,
         border = BorderStroke(
             MaterialTheme.dimens.border_width,
@@ -23,9 +37,23 @@ fun MainButton(modifier: Modifier = Modifier, onClick: () -> Unit, text: String)
             containerColor = MaterialTheme.colorScheme.primary
         )
     ) {
-        Row {
-//            Image(painter = painterResource(id = com.google.android.gms.auth.api.R.drawable.common_google_signin_btn_text_light), contentDescription = null)
-            Text(text = text)
+        Box(
+            modifier = Modifier.height(IntrinsicSize.Min).fillMaxWidth()
+        ) {
+            leadingIcon?.let {
+                Image(
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .size(MaterialTheme.dimens.google_icon_size)
+                        .padding(start = MaterialTheme.dimens.space_16),
+                    painter = painterResource(it),
+                    contentDescription = null
+                )
+            }
+            Text(
+                modifier = Modifier.align(Alignment.Center),
+                text = text
+            )
         }
     }
 }
