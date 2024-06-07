@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
     spec.vendored_frameworks      = 'build/cocoapods/framework/notifications.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target    = '14.1'
-                
+    spec.dependency 'FirebaseMessaging'
                 
     if !Dir.exist?('build/cocoapods/framework/notifications.framework') || Dir.empty?('build/cocoapods/framework/notifications.framework')
         raise "
