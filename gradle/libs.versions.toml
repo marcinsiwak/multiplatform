@@ -5,7 +5,7 @@ agp = "8.2.2"
 ksp = "2.0.0-1.0.21"
 
 appcompat = "1.6.1"
-buildkonfigGradlePlugin = "0.14.0"
+buildkonfigGradlePlugin = "0.15.1"
 coreSplashscreen = "1.0.1"
 firebaseAuth = "23.0.0"
 firebaseCommon = "21.0.0"

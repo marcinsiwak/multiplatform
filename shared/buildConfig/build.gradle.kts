@@ -1,6 +1,7 @@
 import com.android.build.gradle.internal.tasks.factory.dependsOn
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
 import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin
 import java.io.FileInputStream
@@ -58,13 +59,13 @@ buildkonfig {
     }
 
     targetConfigs {
-        create("android") {
+        android {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseAndroid")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
         }
 
-        create("ios") {
+        ios {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseIos")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
@@ -72,12 +73,12 @@ buildkonfig {
     }
 
     targetConfigs("productionDebug") {
-        create("android") {
+        android {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugAndroid")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
-        create("ios") {
+        ios {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugIos")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
@@ -89,12 +90,12 @@ buildkonfig {
         val stagingProperties = Properties()
         stagingProperties.load(FileInputStream(stagingPropertiesFile))
 
-        create("android") {
+        android {
             buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugAndroid")
             buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
         }
-        create("ios") {
+        ios {
             buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugIos")
             buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
@@ -154,8 +155,11 @@ tasks.create("setupBuildkonfig") {
     val flavor = getCurrentFlavor()
     val kmmFlavor = flavor.plus(variant.capitalized())
 
+    println("CONFIG kmmFlavor OUTPUT: $kmmFlavor")
+
     if (kmmFlavor.isEmpty()) {
         val iosVariant = project.findProperty(KotlinCocoapodsPlugin.CONFIGURATION_PROPERTY)
+        println("CONFIG OUTPUT: $iosVariant")
 
         project.setProperty("buildkonfig.flavor", iosVariant)
     } else {
@@ -167,4 +171,14 @@ tasks.preBuild.dependsOn("setupBuildkonfig")
 
 android {
     namespace = "pl.msiwak.multiplatform.buildconfig"
+}
+
+fun NamedDomainObjectContainer<TargetConfigDsl>.ios(block: TargetConfigDsl.() -> Unit) {
+    listOf("iosArm64", "iosSimulatorArm64", "iosX64").forEach {
+        create(it, block)
+    }
+}
+
+fun NamedDomainObjectContainer<TargetConfigDsl>.android(block: TargetConfigDsl.() -> Unit) {
+    create("android", block)
 }

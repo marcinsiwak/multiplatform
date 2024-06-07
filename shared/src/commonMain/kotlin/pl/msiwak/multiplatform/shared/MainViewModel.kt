@@ -51,10 +51,5 @@ class MainViewModel(
             delay(500)
             _viewState.update { it.copy(isLoading = false) }
         }
-        viewModelScope.launch {
-            if (getIsOfflineModeUseCase()) {
-                _viewState.update { it.copy(directions = NavDestination.DashboardDestination.NavDashboardGraphDestination) }
-            }
-        }
     }
 }
