@@ -23,14 +23,19 @@ kotlin {
         xcodeConfigurationToNativeBuildType["stagingDebug"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
-//        pod("FirebaseMessaging")
+        pod("FirebaseMessaging")
     }
 
     sourceSets {
         androidMain.dependencies {
-            implementation(project.dependencies.platform("com.google.firebase:firebase-bom:32.3.1"))
+            implementation(project.dependencies.platform("com.google.firebase:firebase-bom:33.1.0"))
             implementation(libs.firebase.andorid.messaging)
         }
+
+        commonMain.dependencies {
+            implementation(libs.kermit)
+        }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
