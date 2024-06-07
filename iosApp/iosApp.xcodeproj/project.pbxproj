@@ -168,7 +168,7 @@
 		7555FF73242A565900829871 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
+				BuildIndependentTargetsInParallel = NO;
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1530;
 				ORGANIZATIONNAME = orgName;
@@ -286,6 +286,7 @@
 /* Begin XCBuildConfiguration section */
 		71FF5EF72B10C41800A50488 /* productionDebug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AFEB18FD9875F7CA0588D4D /* Pods-iosApp.productiondebug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_NAME = "";
@@ -477,6 +478,7 @@
 		};
 		71FF5EF92B10CDE500A50488 /* stagingDebug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 321EE48D0E4A0D68324B171D /* Pods-iosApp.stagingdebug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_NAME = "";
@@ -672,6 +674,7 @@
 		};
 		7555FFA3242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74DA36D12685A7143467F9F1 /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_NAME = "";
@@ -735,6 +738,7 @@
 		};
 		7555FFA4242A565B00829871 /* productionRelease */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E08BA275858B2F5BAAB775FC /* Pods-iosApp.productionrelease.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_NAME = "";
@@ -1066,7 +1070,7 @@
 				71FF5EF72B10C41800A50488 /* productionDebug */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = productionRelease;
+			defaultConfigurationName = stagingDebug;
 		};
 		7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */ = {
 			isa = XCConfigurationList;
@@ -1077,7 +1081,7 @@
 				71FF5EF82B10C41800A50488 /* productionDebug */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = productionRelease;
+			defaultConfigurationName = stagingDebug;
 		};
 /* End XCConfigurationList section */
 	};

@@ -16,7 +16,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        NotificationsService()
 
         setContent {
             val viewState = viewModel.viewState.collectAsState()
