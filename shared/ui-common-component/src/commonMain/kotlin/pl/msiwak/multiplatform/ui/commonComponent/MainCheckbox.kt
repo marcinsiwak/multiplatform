@@ -12,12 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
 import athletetrack.shared.commonresources.generated.resources.Res
-import athletetrack.shared.commonresources.generated.resources.accept_terms
 import athletetrack.shared.commonresources.generated.resources.ic_check_empty
 import athletetrack.shared.commonresources.generated.resources.ic_check_full
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
 @Composable
@@ -25,7 +24,8 @@ fun MainCheckbox(
     modifier: Modifier = Modifier,
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit),
-    text: String
+    onTextClicked: (() -> Unit),
+    text: AnnotatedString
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -49,6 +49,9 @@ fun MainCheckbox(
         )
 
         Text(
+            modifier = Modifier.clickable {
+                onTextClicked()
+            },
             style = MaterialTheme.typography.labelMedium,
             text = text
         )

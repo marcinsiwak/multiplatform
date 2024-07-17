@@ -128,6 +128,7 @@ import pl.msiwak.multiplatform.ui.settings.SettingsGraph
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 import pl.msiwak.multiplatform.ui.summary.SummaryGraph
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
+import pl.msiwak.multiplatform.ui.terms.TermsGraph
 import pl.msiwak.multiplatform.ui.unit.UnitGraph
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailGraph
@@ -302,6 +303,7 @@ val clientModule = module {
 val navigationModule = module {
     single { WelcomeGraph() }
     single { RegisterGraph() }
+    single { TermsGraph() }
     single { AddCategoryGraph() }
     single { CategoryGraph() }
     single { DashboardGraph() }
@@ -314,6 +316,7 @@ val navigationModule = module {
     single { SettingsGraph() }
     single {
         NavigationProvider(
+            get(),
             get(),
             get(),
             get(),

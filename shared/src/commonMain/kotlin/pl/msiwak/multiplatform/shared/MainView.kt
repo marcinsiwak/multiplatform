@@ -27,6 +27,7 @@ fun MainView(
                 with(navigationProvider) {
                     welcomeGraph.create(navController, this@NavHost)
                     registerGraph.create(navController, this@NavHost)
+                    termsGraph.create(navController, this@NavHost)
                     addCategoryGraph.create(navController, this@NavHost)
                     categoryGraph.create(navController, this@NavHost)
                     dashboardGraph.create(navController, this@NavHost)

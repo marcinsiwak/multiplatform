@@ -19,6 +19,10 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
@@ -153,16 +157,23 @@ fun RegisterScreenContent(
                             .padding(top = MaterialTheme.dimens.space_24),
                         checked = viewState.value.isTermsChecked,
                         onCheckedChange = onTermsClicked,
-                        text = stringResource(Res.string.accept_terms)
+                        text = buildAnnotatedString {
+                            withStyle(style = SpanStyle(textDecoration = TextDecoration.Underline)) {
+                                append(stringResource(Res.string.accept_terms))
+                            }
+                        },
+                        onTextClicked = {
+                            navController.navigate(NavDestination.TermsDestination.NavTermsScreen.route)
+                        }
                     )
 
                     MainButton(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = MaterialTheme.dimens.space_32),
-                        enabled = viewState.value.isTermsChecked
-                                && viewState.value.login.isNotBlank()
-                                && viewState.value.passwordErrorMessage == null,
+                        enabled = with(viewState.value) {
+                            isTermsChecked && login.isNotBlank() && passwordErrorMessage == null
+                        },
                         onClick = {
                             onRegisterClicked()
                         },

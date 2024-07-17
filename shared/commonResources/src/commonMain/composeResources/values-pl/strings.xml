@@ -91,5 +91,6 @@
     <string name="running_time_input_insert_result">Wprowadź swój wynik</string>
 
     <string name="accept_terms">Zaakceptuj regulamin</string>
+    <string name="terms">Regulamin</string>
 
 </resources>

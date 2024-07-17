@@ -92,5 +92,6 @@
     <string name="running_time_input_insert_result">Insert your result</string>
 
     <string name="accept_terms">Accept terms and conditions</string>
+    <string name="terms">Terms and conditions</string>
 
 </resources>
