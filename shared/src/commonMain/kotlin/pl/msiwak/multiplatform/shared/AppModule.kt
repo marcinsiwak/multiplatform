@@ -135,6 +135,7 @@ import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailGraph
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
 import pl.msiwak.multiplatform.ui.welcome.WelcomeGraph
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
+import pl.msiwak.multiplatform.ui.welcome.terms.TermsConfirmationViewModel
 import pl.msiwak.multiplatform.utils.DateFormatter
 import pl.msiwak.multiplatform.utils.NumberFormatter
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
@@ -198,7 +199,8 @@ val viewModelsModule = module {
     }
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get()) }
+    viewModelDefinition { TermsConfirmationViewModel(get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition {
         AddExerciseViewModel(

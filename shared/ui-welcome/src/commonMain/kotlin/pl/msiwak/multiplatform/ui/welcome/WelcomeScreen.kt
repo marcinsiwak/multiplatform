@@ -65,7 +65,12 @@ fun WelcomeScreen(
 
     val startSignIn = rememberGoogleLoginLauncherForActivityResult(
         onResultOk = { idToken, accessToken ->
-            viewModel.onGoogleLogin(idToken, accessToken)
+            navController.navigate(
+                NavDestination.WelcomeDestination.NavTermsConfirmationScreen.route(
+                    idToken,
+                    accessToken
+                )
+            )
         }
     )
 
