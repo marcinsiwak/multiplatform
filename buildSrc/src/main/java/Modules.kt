@@ -29,4 +29,5 @@ object Modules {
     const val buildConfig = "$shared:buildConfig"
     const val notifications = "$shared:notifications"
     const val uiCommonComponent = "$shared:ui-common-component"
+    const val uiTerms = "$shared:ui-terms"
 }

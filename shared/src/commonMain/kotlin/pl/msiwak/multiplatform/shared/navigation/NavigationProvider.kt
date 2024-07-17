@@ -7,6 +7,7 @@ import pl.msiwak.multiplatform.ui.dashboard.DashboardGraph
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateGraph
 import pl.msiwak.multiplatform.ui.language.LanguageGraph
 import pl.msiwak.multiplatform.ui.register.RegisterGraph
+import pl.msiwak.multiplatform.ui.terms.TermsGraph
 import pl.msiwak.multiplatform.ui.unit.UnitGraph
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailGraph
 import pl.msiwak.multiplatform.ui.welcome.WelcomeGraph
@@ -14,6 +15,7 @@ import pl.msiwak.multiplatform.ui.welcome.WelcomeGraph
 data class NavigationProvider(
     val welcomeGraph: WelcomeGraph,
     val registerGraph: RegisterGraph,
+    val termsGraph: TermsGraph,
     val addCategoryGraph: AddCategoryGraph,
     val categoryGraph: CategoryGraph,
     val dashboardGraph: DashboardGraph,

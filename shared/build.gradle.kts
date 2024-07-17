@@ -106,6 +106,7 @@ kotlin {
             api(project(Modules.buildConfig))
             api(project(Modules.notifications))
             api(project(Modules.uiCommonComponent))
+            api(project(Modules.uiTerms))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)

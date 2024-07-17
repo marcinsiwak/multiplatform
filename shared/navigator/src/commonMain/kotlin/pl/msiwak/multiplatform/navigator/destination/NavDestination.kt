@@ -16,6 +16,7 @@ import pl.msiwak.multiplatform.navigator.LANGUAGE_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.REGISTRATION_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.SETTINGS_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.SUMMARY_SCREEN_ROUTE
+import pl.msiwak.multiplatform.navigator.TERMS_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.UNIT_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.VERIFY_EMAIL_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.WELCOME_SCREEN_ROUTE
@@ -29,6 +30,11 @@ sealed class NavDestination(val route: String) {
     sealed class RegistrationDestination(route: String) : NavDestination(route) {
         object NavRegistrationGraphDestination : RegistrationDestination("registration_graph")
         object NavRegistrationScreen : RegistrationDestination(REGISTRATION_SCREEN_ROUTE)
+    }
+
+    sealed class TermsDestination(route: String) : NavDestination(route) {
+        object NavTermsGraphDestination : TermsDestination("terms_graph")
+        object NavTermsScreen : TermsDestination(TERMS_SCREEN_ROUTE)
     }
 
     sealed class DashboardDestination(route: String) : NavDestination(route) {

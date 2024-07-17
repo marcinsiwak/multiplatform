@@ -10,7 +10,7 @@ class UserClient(private val ktorClient: KtorClient) {
 
     suspend fun getUser(): Flow<ApiUser> {
         val response: ApiUser =
-            ktorClient.httpClient.get("/User/UserInfo").body()
+            ktorClient.httpClient.get("User/UserInfo").body()
         return flowOf(response)
     }
 }
