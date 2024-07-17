@@ -1,11 +1,9 @@
 package pl.msiwak.multiplatform.ui.register
 
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.StringResource
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
 
-@OptIn(ExperimentalResourceApi::class)
 data class RegisterState(
     var login: String = "",
     var password: String = "",
@@ -19,5 +17,6 @@ data class RegisterState(
         PasswordRequirement(false, PasswordRequirementType.CAPITAL),
         PasswordRequirement(false, PasswordRequirementType.NUMBER)
     ),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isTermsChecked: Boolean = false
 )

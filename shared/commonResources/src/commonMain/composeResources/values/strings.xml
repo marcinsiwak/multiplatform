@@ -54,7 +54,7 @@
     <string name="force_update_description">We have added some functionalities which require update of app.</string>
     <string name="force_update_update">Update</string>
 
-    <string name="welcome_no_account">Don\'t have an account?</string>
+    <string name="welcome_no_account">Don't have an account?</string>
     <string name="welcome_create_account">Create account</string>
     <string name="welcome_google_login">Login with Google</string>
     <string name="welcome_offline_mode">Offline mode</string>
@@ -90,5 +90,7 @@
     <string name="milliseconds">Milliseconds</string>
 
     <string name="running_time_input_insert_result">Insert your result</string>
+
+    <string name="accept_terms">Accept terms and conditions</string>
 
 </resources>

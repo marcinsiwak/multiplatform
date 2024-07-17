@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
+import athletetrack.shared.commonresources.generated.resources.accept_terms
 import athletetrack.shared.commonresources.generated.resources.email
 import athletetrack.shared.commonresources.generated.resources.ic_invisible
 import athletetrack.shared.commonresources.generated.resources.ic_visible
@@ -39,6 +40,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
+import pl.msiwak.multiplatform.ui.commonComponent.MainCheckbox
 import pl.msiwak.multiplatform.ui.commonComponent.PasswordRequirements
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
@@ -65,7 +67,8 @@ fun RegisterScreen(
         onLoginChanged = viewModel::onLoginChanged,
         onPasswordChanged = viewModel::onPasswordChanged,
         onVisibilityClicked = viewModel::onVisibilityClicked,
-        onRegisterClicked = viewModel::onRegisterClicked
+        onRegisterClicked = viewModel::onRegisterClicked,
+        onTermsClicked = viewModel::onTermsClicked
     )
 }
 
@@ -76,7 +79,8 @@ fun RegisterScreenContent(
     onLoginChanged: (String) -> Unit = { _ -> },
     onPasswordChanged: (String) -> Unit = { _ -> },
     onVisibilityClicked: () -> Unit = {},
-    onRegisterClicked: () -> Unit = {}
+    onRegisterClicked: () -> Unit = {},
+    onTermsClicked: (Boolean) -> Unit = {}
 ) {
     if (viewState.value.isLoading) {
         Loader()
@@ -143,10 +147,22 @@ fun RegisterScreenContent(
 
                     PasswordRequirements(requirements = viewState.value.passwordRequirements)
 
+                    MainCheckbox(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = MaterialTheme.dimens.space_24),
+                        checked = viewState.value.isTermsChecked,
+                        onCheckedChange = onTermsClicked,
+                        text = stringResource(Res.string.accept_terms)
+                    )
+
                     MainButton(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = MaterialTheme.dimens.space_32),
+                        enabled = viewState.value.isTermsChecked
+                                && viewState.value.login.isNotBlank()
+                                && viewState.value.passwordErrorMessage == null,
                         onClick = {
                             onRegisterClicked()
                         },

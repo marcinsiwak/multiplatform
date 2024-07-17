@@ -22,12 +22,14 @@ import pl.msiwak.multiplatform.commonResources.theme.dimens
 @Composable
 fun MainButton(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onClick: () -> Unit,
     leadingIcon: DrawableResource? = null,
     text: String
 ) {
     Button(
         modifier = modifier.height(MaterialTheme.dimens.default_button_height),
+        enabled = enabled,
         onClick = onClick,
         border = BorderStroke(
             MaterialTheme.dimens.border_width,
