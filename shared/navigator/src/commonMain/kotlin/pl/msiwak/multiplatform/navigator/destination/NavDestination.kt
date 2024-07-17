@@ -7,8 +7,10 @@ import athletetrack.shared.commonresources.generated.resources.settings
 import athletetrack.shared.commonresources.generated.resources.summary
 import pl.msiwak.multiplatform.navigator.ADD_CATEGORY_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.ADD_EXERCISE_SCREEN_ROUTE
+import pl.msiwak.multiplatform.navigator.ARG_ACCESS_TOKEN_ID
 import pl.msiwak.multiplatform.navigator.ARG_CATEGORY_ID
 import pl.msiwak.multiplatform.navigator.ARG_EXERCISE_ID
+import pl.msiwak.multiplatform.navigator.ARG_TOKEN_ID
 import pl.msiwak.multiplatform.navigator.CATEGORY_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.DASHBOARD_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.FORCE_UPDATE_SCREEN_ROUTE
@@ -16,6 +18,7 @@ import pl.msiwak.multiplatform.navigator.LANGUAGE_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.REGISTRATION_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.SETTINGS_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.SUMMARY_SCREEN_ROUTE
+import pl.msiwak.multiplatform.navigator.TERMS_CONFIRMATION_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.TERMS_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.UNIT_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.VERIFY_EMAIL_SCREEN_ROUTE
@@ -25,6 +28,13 @@ sealed class NavDestination(val route: String) {
     sealed class WelcomeDestination(route: String) : NavDestination(route) {
         object NavWelcomeGraphDestination : WelcomeDestination("welcome_graph")
         object NavWelcomeScreen : WelcomeDestination(WELCOME_SCREEN_ROUTE)
+
+        object NavTermsConfirmationScreen :
+            WelcomeDestination("$TERMS_CONFIRMATION_SCREEN_ROUTE/{$ARG_TOKEN_ID}?$ARG_ACCESS_TOKEN_ID={$ARG_ACCESS_TOKEN_ID}") {
+            fun route(idToken: String, accessToken: String?): String {
+                return "$TERMS_CONFIRMATION_SCREEN_ROUTE/$idToken?$ARG_ACCESS_TOKEN_ID=$accessToken"
+            }
+        }
     }
 
     sealed class RegistrationDestination(route: String) : NavDestination(route) {

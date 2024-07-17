@@ -23,7 +23,6 @@ import athletetrack.shared.commonresources.generated.resources.add_category
 import athletetrack.shared.commonresources.generated.resources.category_name
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonObject.ExerciseType
@@ -60,7 +59,6 @@ fun AddCategoryScreen(
     )
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun AddCategoryScreenContent(
     navController: NavController,
