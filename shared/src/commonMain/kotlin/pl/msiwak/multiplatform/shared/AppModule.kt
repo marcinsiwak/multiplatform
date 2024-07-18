@@ -98,6 +98,7 @@ import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCaseImpl
+import pl.msiwak.multiplatform.network.EngineProvider
 import pl.msiwak.multiplatform.network.client.CategoryClient
 import pl.msiwak.multiplatform.network.client.KtorClient
 import pl.msiwak.multiplatform.network.client.UserClient
@@ -297,9 +298,10 @@ val serviceModule = module {
 }
 
 val clientModule = module {
-    single { KtorClient(get()) }
+    single { KtorClient(get(), get()) }
     single { UserClient(get()) }
     single { CategoryClient(get()) }
+    single { EngineProvider() }
 }
 
 val navigationModule = module {
