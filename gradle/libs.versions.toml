@@ -2,24 +2,24 @@
 accompanistNavigationMaterial = "0.25.0"
 activityCompose = "1.7.2"
 agp = "8.2.2"
-ksp = "2.0.0-RC2-1.0.20"
+ksp = "2.0.0-1.0.21"
 
 appcompat = "1.6.1"
-buildkonfigGradlePlugin = "0.14.0"
+buildkonfigGradlePlugin = "0.15.1"
 coreSplashscreen = "1.0.1"
-firebaseAuth = "22.3.1"
-firebaseCommon = "20.4.2"
-firebaseConfig = "21.6.1"
-firebaseCrashlyticsGradle = "2.9.9"
-googleServices = "4.4.1"
-kotlin = "2.0.0-RC3"
+firebaseAuth = "23.0.0"
+firebaseCommon = "21.0.0"
+firebaseConfig = "22.0.0"
+firebaseCrashlyticsGradle = "3.0.1"
+googleServices = "4.4.2"
+kotlin = "2.0.0"
 compose = "1.7.0-alpha07"
 compose-compiler = "1.5.4"
 compose-material3 = "1.2.0"
 koin = "3.6.0-Beta2"
 koin-compose-android = "3.6.0-Beta2"
 koin-compose = "1.2.0-Beta2"
-ktor = "2.3.5"
+ktor = "2.3.11"
 navigationCompose = "2.7.7"
 resourcesGenerator = "0.23.0"
 sqlDelight = "2.0.1"
@@ -28,10 +28,9 @@ firebase-android-bom = "32.3.1"
 kotlinx-lifecycle = "2.8.0-beta01"
 kotlinx-viewModel = "2.8.0-beta01"
 kotlinx-multiplatform-viewModel = "2.8.0-beta02"
-kotlinx-coroutines = "1.8.1"
+kotlinx-coroutines = "1.9.0-RC"
 kotlinx-dateTime = "0.6.0"
-kotlinx-serialization = "1.5.1"
-napier = "2.7.1"
+kotlinx-serialization = "1.7.0-RC"
 google-playservices-auth = "20.6.0"
 google-playservices-ads = "22.5.0"
 ktlint = "11.5.1"
@@ -41,6 +40,7 @@ compose-components-resources = "1.4.0"
 compose-multiplatform = "1.6.10-rc01"
 compose-multiplatform-navigation = "2.7.0-alpha03"
 playServicesAdsLite = "23.0.0"
+kermit = "2.0.3"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
@@ -88,10 +88,10 @@ sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref =
 sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight"}
 sqlDelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight"}
 sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight"}
-napier = { module = "io.github.aakira:napier", version.ref = "napier"}
 google-android-playservices-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-playservices-auth"}
 google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
 compose-multiplatform-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-multiplatform-navigation" }
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
 # Gradle scripts depdendecies
 gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
@@ -110,4 +110,4 @@ ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appDistribution" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
-composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

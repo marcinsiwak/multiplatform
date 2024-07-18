@@ -2,7 +2,6 @@ package pl.msiwak.multiplatform.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,7 +29,6 @@ class DashboardViewModel(
         }
         viewModelScope.launch(errorHandler) {
             val user = getUser()
-            Napier.e("OUTPUT, ${user.email}")
         }
     }
 

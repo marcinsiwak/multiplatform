@@ -1,4 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinCompose)
     id("pl.msiwak.convention.android.config")
     id("pl.msiwak.convention.target.config")
 }
@@ -24,8 +24,10 @@ kotlin {
 
         framework {
             baseName = "shared"
-            linkerOpts += "-ld_classic"
-
+            if (System.getenv("XCODE_VERSION_MAJOR") == "1500") {
+                linkerOpts += "-ld_classic"
+            }
+            isStatic = true
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
 
@@ -69,7 +71,7 @@ kotlin {
         pod("FirebaseAuth", linkOnly = true)
         pod("FirebaseRemoteConfig", linkOnly = true)
         pod("FirebaseCrashlytics", linkOnly = true)
-//        pod("GoogleSignIn", linkOnly = true)
+        pod("GoogleSignIn", linkOnly = true)
         pod("FirebaseMessaging", linkOnly = true)
         pod("Google-Mobile-Ads-SDK", moduleName = "GoogleMobileAds", linkOnly = true)
     }
@@ -104,8 +106,7 @@ kotlin {
             api(project(Modules.buildConfig))
             api(project(Modules.notifications))
             api(project(Modules.uiCommonComponent))
-
-            implementation(libs.napier)
+            api(project(Modules.uiTerms))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)

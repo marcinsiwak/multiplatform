@@ -1,4 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinCompose)
     id("pl.msiwak.convention.android.config")
     id("pl.msiwak.convention.target.config")
 }
@@ -32,6 +32,7 @@ kotlin {
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
         pod("Google-Mobile-Ads-SDK", moduleName = "GoogleMobileAds")
+        pod("GoogleSignIn")
     }
 
     sourceSets {
@@ -39,10 +40,12 @@ kotlin {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
 
-            implementation(libs.napier)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
+            implementation(compose.components.uiToolingPreview)
+
+            implementation(libs.kermit)
         }
 
         androidMain.dependencies {

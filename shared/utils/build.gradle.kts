@@ -1,4 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -25,8 +25,6 @@ kotlin {
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
         xcodeConfigurationToNativeBuildType["stagingDebug"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-
-//        pod("GoogleSignIn")
     }
 
     sourceSets {
@@ -34,7 +32,8 @@ kotlin {
             implementation(project(Modules.commonObject))
             implementation(libs.firebase.gitlive.auth)
             implementation(libs.firebase.gitlive.crashlytics)
-            implementation(libs.napier)
+
+            implementation(libs.kermit)
         }
 
         commonTest.dependencies {

@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatfor.dependencies
+package pl.msiwak.multiplatform.dependencies
 
 object Modules {
     private const val shared =":shared"
@@ -29,4 +29,5 @@ object Modules {
     const val buildConfig = "$shared:buildConfig"
     const val notifications = "$shared:notifications"
     const val uiCommonComponent = "$shared:ui-common-component"
+    const val uiTerms = "$shared:ui-terms"
 }

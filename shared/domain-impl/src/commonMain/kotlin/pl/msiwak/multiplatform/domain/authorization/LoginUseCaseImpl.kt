@@ -1,6 +1,5 @@
 package pl.msiwak.multiplatform.domain.authorization
 
-import io.github.aakira.napier.Napier
 import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
 import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
 
@@ -15,7 +14,6 @@ class LoginUseCaseImpl(
         if (token != null && isEmailVerified) {
             sessionRepository.saveToken(token)
             sessionRepository.setOfflineSession(false)
-            Napier.e("OUTPUT: $token")
         }
         return isEmailVerified
     }

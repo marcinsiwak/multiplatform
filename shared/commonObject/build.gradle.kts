@@ -1,4 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinCompose)
     id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.android.config")
 }
@@ -36,13 +36,13 @@ kotlin {
             api(project(Modules.commonResources))
 
             api(libs.kotlinx.dateTime)
-            implementation(libs.kotlinx.serialization)
 
             api(libs.firebase.gitlive.auth)
             api(libs.firebase.gitlive.remoteConfig)
 
             implementation(compose.runtime)
             implementation(compose.components.resources)
+            implementation(libs.kotlinx.serialization)
         }
 
         commonTest.dependencies {

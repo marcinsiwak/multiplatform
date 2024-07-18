@@ -1,11 +1,11 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinCompose)
     id("pl.msiwak.convention.target.config")
 }
 
@@ -43,9 +43,6 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(libs.compose.multiplatform.navigation)
-        }
-        iosMain.dependencies {
-            implementation("co.touchlab:stately-common:2.0.6")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

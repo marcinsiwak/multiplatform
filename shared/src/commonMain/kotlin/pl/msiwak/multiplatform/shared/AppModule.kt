@@ -98,6 +98,7 @@ import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCaseImpl
+import pl.msiwak.multiplatform.network.EngineProvider
 import pl.msiwak.multiplatform.network.client.CategoryClient
 import pl.msiwak.multiplatform.network.client.KtorClient
 import pl.msiwak.multiplatform.network.client.UserClient
@@ -128,12 +129,14 @@ import pl.msiwak.multiplatform.ui.settings.SettingsGraph
 import pl.msiwak.multiplatform.ui.settings.SettingsViewModel
 import pl.msiwak.multiplatform.ui.summary.SummaryGraph
 import pl.msiwak.multiplatform.ui.summary.SummaryViewModel
+import pl.msiwak.multiplatform.ui.terms.TermsGraph
 import pl.msiwak.multiplatform.ui.unit.UnitGraph
 import pl.msiwak.multiplatform.ui.unit.UnitViewModel
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailGraph
 import pl.msiwak.multiplatform.ui.verifyEmail.VerifyEmailViewModel
 import pl.msiwak.multiplatform.ui.welcome.WelcomeGraph
 import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
+import pl.msiwak.multiplatform.ui.welcome.terms.TermsConfirmationViewModel
 import pl.msiwak.multiplatform.utils.DateFormatter
 import pl.msiwak.multiplatform.utils.NumberFormatter
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
@@ -197,7 +200,8 @@ val viewModelsModule = module {
     }
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get()) }
+    viewModelDefinition { TermsConfirmationViewModel(get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition {
         AddExerciseViewModel(
@@ -294,14 +298,16 @@ val serviceModule = module {
 }
 
 val clientModule = module {
-    single { KtorClient(get()) }
+    single { KtorClient(get(), get()) }
     single { UserClient(get()) }
     single { CategoryClient(get()) }
+    single { EngineProvider() }
 }
 
 val navigationModule = module {
     single { WelcomeGraph() }
     single { RegisterGraph() }
+    single { TermsGraph() }
     single { AddCategoryGraph() }
     single { CategoryGraph() }
     single { DashboardGraph() }
@@ -314,6 +320,7 @@ val navigationModule = module {
     single { SettingsGraph() }
     single {
         NavigationProvider(
+            get(),
             get(),
             get(),
             get(),

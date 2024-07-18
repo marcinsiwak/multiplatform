@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
-import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
@@ -20,7 +19,6 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
-    private val googleLoginUseCase: GoogleLoginUseCase,
     private val setOfflineModeUseCase: SetOfflineModeUseCase,
     private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
@@ -74,20 +72,6 @@ class WelcomeScreenViewModel(
         }
     }
 
-    fun onGoogleLogin(idToken: String?, accessToken: String?) {
-        viewModelScope.launch(errorHandler) {
-            val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
-            _viewState.update { it.copy(isLoading = true) }
-            googleLoginUseCase(idToken, accessToken)
-            if (isSynchronizationPossible) {
-                _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
-            } else {
-                _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
-            }
-            _viewState.update { it.copy(isLoading = false) }
-        }
-    }
-
     // TODO: Add Apple login
 
     fun onOfflineModeClicked() {
@@ -123,5 +107,8 @@ class WelcomeScreenViewModel(
 
     fun onDismissSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
+        viewModelScope.launch {
+            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
+        }
     }
 }

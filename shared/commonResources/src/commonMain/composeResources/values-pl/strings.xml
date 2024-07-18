@@ -89,4 +89,10 @@
     <string name="milliseconds">Milisekundy</string>
 
     <string name="running_time_input_insert_result">Wprowadź swój wynik</string>
+
+    <string name="accept_terms">Zaakceptuj regulamin</string>
+    <string name="terms">Regulamin</string>
+    <string name="terms_confirmation_title">Utwórz konto</string>
+    <string name="terms_confirmation_description">Wybierając opcję Utwórz konto, wyrażasz zgodę na nasz regulamin.</string>
+
 </resources>

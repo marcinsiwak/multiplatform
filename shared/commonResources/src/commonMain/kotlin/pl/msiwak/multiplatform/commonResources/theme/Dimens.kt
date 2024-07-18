@@ -38,7 +38,10 @@ data class Dimensions(
     val result_item_input_width: Dp = 116.dp,
     val dialog_corners: Dp = 16.dp,
     val ad_height: Dp = 64.dp,
-    val category_img_height: Dp = 164.dp
+    val category_img_height: Dp = 164.dp,
+    val google_icon_size: Dp = 36.dp,
+    val default_button_height: Dp = 48.dp,
+    val checkbox_size: Dp = 24.dp
 )
 
 val MaterialTheme.dimens: Dimensions

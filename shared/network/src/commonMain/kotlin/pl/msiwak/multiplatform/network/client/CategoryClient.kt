@@ -74,7 +74,7 @@ class CategoryClient(private val ktorClient: KtorClient) {
     }
 
     suspend fun startInitialSynchronization(synchronizationRequest: ApiSynchronizationRequest) {
-        ktorClient.httpClient.post("Exercises/Synchronization") {
+        ktorClient.httpClient.post("Exercises/Synchronize") {
             setBody(synchronizationRequest)
         }
     }

@@ -2,6 +2,8 @@ package pl.msiwak.multiplatform.navigator
 
 const val WELCOME_SCREEN_ROUTE = "welcome_screen"
 const val REGISTRATION_SCREEN_ROUTE = "registration_screen"
+const val TERMS_SCREEN_ROUTE = "terms_screen"
+const val TERMS_CONFIRMATION_SCREEN_ROUTE = "terms_confirmation_screen"
 const val DASHBOARD_SCREEN_ROUTE = "dashboard_screen"
 const val SUMMARY_SCREEN_ROUTE = "summary_screen"
 const val SETTINGS_SCREEN_ROUTE = "settings_screen"

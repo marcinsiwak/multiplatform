@@ -4,6 +4,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinCompose)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
@@ -11,8 +12,8 @@ plugins {
 }
 
 val versionMajor = 1
-val versionMinor = 0
-val versionPatch = 1
+val versionMinor = 1
+val versionPatch = 0
 val versionBuild = 0
 val versionCode =
     1_000_000 * versionMajor + 10_000 * versionMinor + 100 * versionPatch + versionBuild
@@ -49,9 +50,7 @@ android {
         compose = true
         buildConfig = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.13-dev-k2.0.0-RC1-50f08dfa4b4"
-    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -207,8 +206,5 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose.android)
 
-    implementation(libs.google.android.playservices.auth)
     implementation(libs.google.android.playservices.ads)
-
-    implementation(libs.napier)
 }

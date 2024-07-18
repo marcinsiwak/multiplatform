@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ApiSynchronizationRequest(
-    val apiCategoriesRequest: List<ApiCategorySyncRequest>,
-    val apiExercisesRequest: List<ApiExerciseSyncRequest>,
-    val apiResultsRequest: List<ApiResultSyncRequest>
+    val categoriesRequestModel: List<ApiCategorySyncRequest>,
+    val exercisesRequestModel: List<ApiExerciseSyncRequest>,
+    val resultsRequestModel: List<ApiResultSyncRequest>
 )

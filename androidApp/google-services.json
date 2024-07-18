@@ -58,6 +58,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "607279059338-2pl27r2jgju8dt6oa057dnh0f7l3skur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.msiwak.athletetrack.android.debug",
+            "certificate_hash": "8f5e2af74847e6bc8466b91553350322ebac6094"
+          }
+        },
+        {
           "client_id": "607279059338-fic402i84uj6ibdjjvkeor105ea1l7l9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -107,6 +115,14 @@
           "android_info": {
             "package_name": "pl.msiwak.athletetrack.android.staging.debug",
             "certificate_hash": "a9c7dd3eb2c4bd46c70bd285944fca067975be0e"
+          }
+        },
+        {
+          "client_id": "607279059338-kklrpn1056aq8trb2mn51edjdi8ru89t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.msiwak.athletetrack.android.staging.debug",
+            "certificate_hash": "8f5e2af74847e6bc8466b91553350322ebac6094"
           }
         },
         {

@@ -2,8 +2,11 @@ package pl.msiwak.multiplatform.ui.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
@@ -18,6 +21,9 @@ class SettingsViewModel(
 
     private val _viewState = MutableStateFlow(SettingsState())
     val viewState: StateFlow<SettingsState> = _viewState
+
+    private val _viewEvent = MutableSharedFlow<SettingsEvent>()
+    val viewEvent: SharedFlow<SettingsEvent> = _viewEvent.asSharedFlow()
 
     init {
         viewModelScope.launch {
@@ -34,7 +40,7 @@ class SettingsViewModel(
     fun onLogoutClicked() {
         viewModelScope.launch {
             logoutUseCase()
-//            navigator.navigate(NavigationDirections.Welcome(true))
+            _viewEvent.emit(SettingsEvent.Logout)
         }
     }
 }

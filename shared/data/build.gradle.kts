@@ -1,4 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -45,7 +45,6 @@ kotlin {
             implementation(project(Modules.remoteConfig))
 
             implementation(libs.kotlinx.coroutines)
-            implementation(libs.kotlinx.serialization)
         }
 
         commonTest.dependencies {

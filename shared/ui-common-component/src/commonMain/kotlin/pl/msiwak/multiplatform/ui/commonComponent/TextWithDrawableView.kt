@@ -15,11 +15,9 @@ import androidx.compose.ui.text.style.TextAlign
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.ic_arrow_down
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun TextWithDrawableView(
     modifier: Modifier,

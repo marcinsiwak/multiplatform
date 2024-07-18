@@ -1,4 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -44,7 +44,9 @@ kotlin {
             implementation(libs.ktor.cio)
             implementation(libs.ktor.logger)
 
-            implementation(libs.napier)
+            implementation(libs.kermit)
+
+            implementation(libs.kotlinx.serialization)
         }
 
         androidMain.dependencies {

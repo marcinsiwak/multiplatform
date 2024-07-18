@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.register
 
 import androidx.lifecycle.ViewModel
@@ -130,5 +128,9 @@ class RegisterViewModel(
 
     fun onVisibilityClicked() {
         _viewState.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
+    }
+
+    fun onTermsClicked(isChecked: Boolean) {
+        _viewState.update { it.copy(isTermsChecked = isChecked) }
     }
 }

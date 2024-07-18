@@ -7,14 +7,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import co.touchlab.kermit.Logger
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
-import io.github.aakira.napier.Napier
 import pl.msiwak.multiplatform.ui.commonComponent.extensions.findActivity
 
 @Composable
-actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String) -> Unit): () -> Unit {
+actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String, String?) -> Unit): () -> Unit {
     val context = LocalContext.current.findActivity()
 
     val oneTapClient: SignInClient = remember {
@@ -38,7 +38,7 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String) -> 
             if (result.resultCode == Activity.RESULT_OK) {
                 val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
                 val idToken = credential.googleIdToken ?: return@rememberLauncherForActivityResult
-                onResultOk(idToken)
+                onResultOk(idToken, null)
             }
         }
     )
@@ -53,7 +53,7 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String) -> 
                 )
             }
             .addOnFailureListener { e ->
-                Napier.e("GOOGLE AUTH FAILED: $e")
+                Logger.e("GOOGLE AUTH FAILED: $e")
             }
     }
 }

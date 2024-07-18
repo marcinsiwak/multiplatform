@@ -1,9 +1,6 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.addExercise
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,8 +28,8 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
-import athletetrack.shared.commonresources.generated.resources.add_exercise
 import athletetrack.shared.commonresources.generated.resources.add_new_result
 import athletetrack.shared.commonresources.generated.resources.add_result_save
 import athletetrack.shared.commonresources.generated.resources.confirm
@@ -40,21 +37,22 @@ import athletetrack.shared.commonresources.generated.resources.no
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
 import athletetrack.shared.commonresources.generated.resources.yes
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import org.koin.core.parameter.parametersOf
 import pl.msiwak.multiplatform.commonObject.DateFilterType
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
-import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTableView
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTimeFilterView
 import pl.msiwak.multiplatform.ui.commonComponent.RunningTimeInputDialog
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
 private const val FOCUS_REQUESTERS_AMOUNT = 4
@@ -63,7 +61,7 @@ private const val FOCUS_REQUESTERS_AMOUNT = 4
 fun AddExerciseScreen(
     navController: NavController,
     id: String,
-    viewModel: AddExerciseViewModel = koinInject { parametersOf(id) }
+    viewModel: AddExerciseViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
@@ -94,8 +92,6 @@ fun AddExerciseScreen(
         onPopupDismissed = viewModel::onPopupDismissed,
         onConfirmRunningAmount = viewModel::onConfirmRunningAmount,
         onDismissAmountDialog = viewModel::onDismissAmountDialog,
-        onExerciseTitleChanged = viewModel::onExerciseTitleChanged,
-        onTitleClicked = viewModel::onTitleClicked,
         onTabClicked = viewModel::onTabClicked,
         onSaveResultClicked = viewModel::onSaveResultClicked,
         onAddNewResultClicked = viewModel::onAddNewResultClicked,
@@ -122,8 +118,6 @@ fun AddExerciseScreenContent(
     onPopupDismissed: () -> Unit = {},
     onConfirmRunningAmount: (String, String, String, String) -> Unit = { _, _, _, _ -> },
     onDismissAmountDialog: () -> Unit = {},
-    onExerciseTitleChanged: (String) -> Unit = {},
-    onTitleClicked: () -> Unit = {},
     onTabClicked: (DateFilterType) -> Unit = {},
     onSaveResultClicked: () -> Unit = {},
     onAddNewResultClicked: () -> Unit = {},
@@ -188,7 +182,7 @@ fun AddExerciseScreenContent(
 
     Scaffold(
         topBar = {
-            AppBar(navController = navController, title = stringResource(Res.string.add_exercise))
+            AppBar(navController = navController, title = viewState.value.exerciseTitle)
         },
         content = {
             Column(
@@ -198,29 +192,6 @@ fun AddExerciseScreenContent(
                     .background(MaterialTheme.colorScheme.background),
                 verticalArrangement = Arrangement.Top
             ) {
-                if (viewState.value.isEditNameEnabled) {
-                    InputView(
-                        value = viewState.value.exerciseTitle,
-                        onValueChange = {
-                            onExerciseTitleChanged(it)
-                        }
-                    )
-                } else {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                start = MaterialTheme.dimens.space_12,
-                                end = MaterialTheme.dimens.space_24
-                            )
-                            .padding(vertical = MaterialTheme.dimens.space_16)
-                            .clickable { onTitleClicked() },
-                        text = viewState.value.exerciseTitle,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-
                 ResultsTimeFilterView(
                     modifier = Modifier
                         .wrapContentWidth()
@@ -297,14 +268,15 @@ fun AddExerciseScreenContent(
     )
 }
 
-// @DarkLightPreview
-// @Composable
-// fun AddExerciseScreenPreview() {
-//     AppTheme {
-//         AddExerciseScreenContent(
-//             viewState = MutableStateFlow(AddExerciseState()).collectAsState(),
-//             focusManager = LocalFocusManager.current,
-//             focusRequesters = listOf()
-//         )
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun AddExerciseScreenPreview() {
+    AppTheme {
+        AddExerciseScreenContent(
+            rememberNavController(),
+            viewState = MutableStateFlow(AddExerciseState()).collectAsState(),
+            focusManager = LocalFocusManager.current,
+            focusRequesters = listOf()
+        )
+    }
+}

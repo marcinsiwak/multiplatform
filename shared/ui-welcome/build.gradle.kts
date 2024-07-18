@@ -1,4 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinCompose)
     id("pl.msiwak.convention.android.config")
     id("pl.msiwak.convention.target.config")
 }
@@ -47,13 +47,13 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.kermit)
 
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
 
             implementation(libs.compose.multiplatform.navigation)
-
-            implementation(libs.napier)
+            implementation(compose.components.uiToolingPreview)
         }
 
         androidMain.dependencies {

@@ -1,4 +1,4 @@
-import pl.msiwak.multiplatfor.dependencies.Modules
+import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -33,7 +33,6 @@ kotlin {
             implementation(project(Modules.commonObject))
             implementation(project(Modules.commonResources))
 
-            implementation(libs.napier)
             implementation(libs.kotlinx.coroutines)
         }
 

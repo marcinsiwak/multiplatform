@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.settings
 
 import androidx.compose.foundation.clickable
@@ -10,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -20,13 +19,16 @@ import athletetrack.shared.commonresources.generated.resources.settings
 import athletetrack.shared.commonresources.generated.resources.settings_language
 import athletetrack.shared.commonresources.generated.resources.settings_logout
 import athletetrack.shared.commonresources.generated.resources.settings_unit
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.navigator.destination.NavDestination.LanguageDestination
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun SettingsScreen(
@@ -34,6 +36,14 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = koinInject()
 ) {
     val viewState = viewModel.viewState.collectAsState()
+
+    LaunchedEffect(true) {
+        viewModel.viewEvent.collectLatest {
+            when (it) {
+                SettingsEvent.Logout -> navController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+            }
+        }
+    }
 
     SettingsScreenContent(
         viewState = viewState,
@@ -47,7 +57,6 @@ fun SettingsScreen(
     )
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun SettingsScreenContent(
     viewState: State<SettingsState>,
@@ -108,10 +117,10 @@ fun SettingsScreenContent(
     }
 }
 
-// @Preview
-// @Composable
-// fun SettingsScreenPreview() {
-//     AppTheme {
-//         SettingsScreenContent(MutableStateFlow(SettingsState()).collectAsState())
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun SettingsScreenPreview() {
+    AppTheme {
+        SettingsScreenContent(MutableStateFlow(SettingsState()).collectAsState())
+    }
+}

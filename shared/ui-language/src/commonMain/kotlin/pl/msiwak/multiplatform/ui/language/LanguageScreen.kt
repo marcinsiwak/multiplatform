@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package pl.msiwak.multiplatform.ui.language
 
 import androidx.compose.foundation.layout.Column
@@ -20,12 +18,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.language
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun LanguageScreen(
@@ -84,10 +85,13 @@ fun LanguageScreenContent(
     )
 }
 
-// @Preview
-// @Composable
-// fun LanguageScreenPreview() {
-//     AppTheme {
-//         LanguageScreenContent(MutableStateFlow(LanguageState()).collectAsState())
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun LanguageScreenPreview() {
+    AppTheme {
+        LanguageScreenContent(
+            navController = rememberNavController(),
+            MutableStateFlow(LanguageState()).collectAsState()
+        ) {}
+    }
+}

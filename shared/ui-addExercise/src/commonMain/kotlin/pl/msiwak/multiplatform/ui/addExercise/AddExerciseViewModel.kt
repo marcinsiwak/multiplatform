@@ -131,14 +131,6 @@ class AddExerciseViewModel(
         }
     }
 
-    fun onTitleClicked() {
-        _viewState.update { it.copy(isEditNameEnabled = true) }
-    }
-
-    fun onExerciseTitleChanged(title: String) {
-        _viewState.update { it.copy(exerciseTitle = title) }
-    }
-
     fun onAddNewResultClicked() {
         _viewState.update { it.copy(isResultFieldEnabled = true) }
         pickedDate = Clock.System.now().toEpochMilliseconds()
@@ -224,7 +216,6 @@ class AddExerciseViewModel(
 
     fun onDateClicked() {
         _viewState.update { it.copy(isDatePickerVisible = true) }
-//        _viewEvent.tryEmit(AddExerciseEvent.OpenCalendar)
     }
 
     fun onAmountClicked() {

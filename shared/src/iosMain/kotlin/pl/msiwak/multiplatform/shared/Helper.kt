@@ -1,10 +1,9 @@
 package pl.msiwak.multiplatform.shared
 
 import cocoapods.GoogleMobileAds.GADMobileAds
+import cocoapods.GoogleSignIn.GIDSignIn
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.initialize
-import io.github.aakira.napier.DebugAntilog
-import io.github.aakira.napier.Napier
 import kotlinx.cinterop.ExperimentalForeignApi
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -27,17 +26,13 @@ fun initMobileAds() {
 //    GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = listOf("b7496249c8b3b0419541121ffbd27c57")
 }
 
-fun initNapier() {
-    Napier.base(DebugAntilog())
-}
-
 fun initFirebase() {
     Firebase.initialize()
 }
 
+@OptIn(ExperimentalForeignApi::class)
 fun initGIDSingIn(url: NSURL): Boolean {
-//    return GIDSignIn.sharedInstance.handleURL(url)
-    return false
+    return GIDSignIn.sharedInstance().handleURL(url)
 }
 
 val sharedPreferencesModule = module {
