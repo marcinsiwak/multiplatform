@@ -51,7 +51,7 @@ class SummaryViewModel(
     }
 
     fun onCategoryRemoved() {
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             categoryToRemovePosition?.let { pos ->
                 val id = currentCategories[pos].id
