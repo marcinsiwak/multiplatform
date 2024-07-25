@@ -2,10 +2,12 @@ val kotlin_version: String by project
 val logback_version: String by project
 val postgresql_driver_version: String by project
 val exposed_version: String by project
+val koin_ktor_version: String by project
 
 plugins {
     kotlin("jvm") version "2.0.0"
     id("io.ktor.plugin") version "2.3.12"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20-Beta2"
 }
 
 group = "msiwak.pl"
@@ -44,6 +46,11 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+
+    // Koin for Ktor
+    implementation("io.insert-koin:koin-ktor:$koin_ktor_version")
+    // SLF4J Logger
+    implementation("io.insert-koin:koin-logger-slf4j:$koin_ktor_version")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-config-yaml")
