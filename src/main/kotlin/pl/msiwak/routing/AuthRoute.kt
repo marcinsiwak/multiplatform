@@ -6,13 +6,13 @@ import io.ktor.server.auth.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import pl.msiwak.auth.firebase.FIREBASE_AUTH
-import pl.msiwak.auth.firebase.User
+import pl.msiwak.auth.firebase.FirebaseUser
 
 fun Route.authenticatedRoute() {
     authenticate(FIREBASE_AUTH) {
         get("/authenticated") {
-            val user: User = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
-            call.respond("User is authenticated: $user")
+            val firebaseUser: FirebaseUser = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
+            call.respond("User is authenticated: $firebaseUser")
         }
     }
 }

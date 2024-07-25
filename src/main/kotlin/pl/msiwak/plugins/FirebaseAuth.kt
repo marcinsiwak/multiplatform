@@ -2,7 +2,7 @@ package pl.msiwak.plugins
 
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
-import pl.msiwak.auth.firebase.User
+import pl.msiwak.auth.firebase.FirebaseUser
 import pl.msiwak.auth.firebase.firebase
 
 fun Application.configureFirebaseAuth() {
@@ -10,7 +10,7 @@ fun Application.configureFirebaseAuth() {
         firebase {
             validate {
                 // TODO look up user profile from DB
-                User(it.uid, it.name.orEmpty())
+                FirebaseUser(it.uid, it.email.orEmpty())
             }
         }
     }

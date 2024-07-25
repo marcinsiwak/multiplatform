@@ -14,7 +14,7 @@ class FirebaseConfig(name: String?) : AuthenticationProvider.Config(name) {
         throw NotImplementedError(FirebaseImplementationError)
     }
 
-    fun validate(validate: suspend ApplicationCall.(FirebaseToken) -> User?) {
+    fun validate(validate: suspend ApplicationCall.(FirebaseToken) -> FirebaseUser?) {
         firebaseAuthenticationFunction = validate
     }
 }
