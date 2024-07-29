@@ -3,14 +3,13 @@ package pl.msiwak.database.dao.user
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.transactions.transaction
 import pl.msiwak.database.dao.dbQuery
 import pl.msiwak.database.table.Users
 import pl.msiwak.entities.UserEntity
 
 class UserDaoImpl : UserDao {
-    override suspend fun getUser(id: String) {
-        Users.select {
+    override suspend fun getUser(id: String): UserEntity? = dbQuery{
+        return@dbQuery Users.select {
             Users.id eq id
         }
             .map(::resultRowToUser)
