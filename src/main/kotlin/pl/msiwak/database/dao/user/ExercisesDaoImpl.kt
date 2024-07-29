@@ -34,6 +34,13 @@ class ExercisesDaoImpl : ExercisesDao {
             .singleOrNull()
     }
 
+    override suspend fun getCategories(userId: String): List<CategoryEntity> = dbQuery {
+        return@dbQuery Categories.select {
+            Categories.userId eq userId
+        }
+            .map(::resultRowToCategory)
+    }
+
     override suspend fun removeCategory(categoryId: String) {
         dbQuery {
             Categories.deleteWhere {

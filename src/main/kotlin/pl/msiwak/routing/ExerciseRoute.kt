@@ -10,13 +10,14 @@ import org.koin.ktor.ext.inject
 import pl.msiwak.auth.firebase.FIREBASE_AUTH
 import pl.msiwak.auth.firebase.FirebaseUser
 import pl.msiwak.commands.AddCategoryCommand
-import pl.msiwak.commands.AddUserCommand
 import pl.msiwak.dtos.CategoryDTO
-import pl.msiwak.queries.GetUserQuery
-import pl.msiwak.dtos.UserDTO
+import pl.msiwak.queries.GetCategoriesQuery
+import pl.msiwak.queries.GetCategoryQuery
 
 fun Route.addExerciseRoute() {
     val addCategoryCommand by inject<AddCategoryCommand>()
+    val getCategoriesQuery by inject<GetCategoriesQuery>()
+    val getCategoryQuery by inject<GetCategoryQuery>()
 
     authenticate(FIREBASE_AUTH) {
         post("/addCategory") {
@@ -26,17 +27,16 @@ fun Route.addExerciseRoute() {
             call.respond(HttpStatusCode.OK)
         }
 
-//        get("/getUser") {
-//            val firebaseUser: FirebaseUser = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
-//            val user = getUserQuery.invoke(firebaseUser.userId)
-//            user?.let {
-//                call.respond(
-//                    status = HttpStatusCode.OK,
-//                    message = it
-//                )
-//            } ?: run {
-//                call.respond(HttpStatusCode.NotFound)
-//            }
-//        }
+        get("/getCategories") {
+            val firebaseUser: FirebaseUser = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
+            val categories = getCategoriesQuery.invoke(firebaseUser.userId)
+            call.respond(HttpStatusCode.OK, categories)
+        }
+
+        get("/getCategory") {
+            val firebaseUser: FirebaseUser = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
+            val category = getCategoryQuery.invoke(firebaseUser.userId) ?: return@get call.respond(HttpStatusCode.NotFound)
+            call.respond(HttpStatusCode.OK, category)
+        }
     }
 }

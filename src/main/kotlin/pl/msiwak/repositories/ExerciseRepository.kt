@@ -18,6 +18,10 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
         return exercisesDao.getCategory(categoryId)
     }
 
+    suspend fun getCategories(userId: String): List<CategoryEntity> {
+        return exercisesDao.getCategories(userId)
+    }
+
     suspend fun removeCategory(categoryId: String) {
         exercisesDao.removeCategory(categoryId)
     }
