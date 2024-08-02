@@ -1,11 +1,11 @@
 package pl.msiwak.commands
 
-import pl.msiwak.repositories.ExerciseRepository
-import java.util.*
+import pl.msiwak.entities.CategoryEntity
+import pl.msiwak.repositories.CategoryRepository
 
-class AddCategoryCommandImpl(private val exerciseRepository: ExerciseRepository): AddCategoryCommand {
+class AddCategoryCommandImpl(private val categoryRepository: CategoryRepository) : AddCategoryCommand {
     override suspend fun invoke(userId: String, name: String, exerciseType: String) {
-        val categoryUuid = UUID.randomUUID().toString()
-        exerciseRepository.addCategory(categoryUuid, userId, name, exerciseType)
+        val category = CategoryEntity(userId = userId, name = name, exerciseType = exerciseType)
+        categoryRepository.addCategory(category)
     }
 }

@@ -1,8 +1,9 @@
 package pl.msiwak.entities
 
 import kotlinx.serialization.Serializable
-import pl.msiwak.util.LocalDateTimeSerializer
-import java.time.LocalDateTime
+import java.util.*
+import kotlin.collections.HashSet
+
 
 @Serializable
 data class CategoryEntity(
@@ -10,7 +11,24 @@ data class CategoryEntity(
     val userId: String,
     val name: String,
     val exerciseType: String,
-//    val exercises: List<ExerciseDTO>,
+    val exercises: HashSet<ExerciseEntity> = hashSetOf(),
 //    @Serializable(with = LocalDateTimeSerializer::class)
 //    val creationDate: LocalDateTime
-)
+) {
+
+    constructor(userId: String, name: String, exerciseType: String) : this(
+        id = UUID.randomUUID().toString(),
+        userId = userId,
+        name = name,
+        exerciseType = exerciseType
+    )
+
+    fun addExercise(exerciseEntity: ExerciseEntity) {
+        exercises.add(exerciseEntity)
+    }
+
+    fun getExercise(exerciseId: String): ExerciseEntity? {
+        return exercises.firstOrNull { exercise -> exercise.id == exerciseId }
+    }
+
+}
