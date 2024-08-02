@@ -7,7 +7,7 @@ import pl.msiwak.database.dao.user.ExercisesDaoImpl
 import pl.msiwak.database.dao.user.UserDao
 import pl.msiwak.database.dao.user.UserDaoImpl
 import pl.msiwak.queries.*
-import pl.msiwak.repositories.CategoryRepository
+import pl.msiwak.repositories.ExerciseRepository
 import pl.msiwak.repositories.UserRepository
 
 val diModule = module {
@@ -18,7 +18,7 @@ val diModule = module {
     single<GetCategoryQuery> { GetCategoryQueryImpl(get()) }
     single<GetCategoriesQuery> { GetCategoriesQueryImpl(get()) }
     single { UserRepository(get()) }
-    single { CategoryRepository(get()) }
+    single { ExerciseRepository(get()) }
     single<UserDao> { UserDaoImpl() }
     single<ExercisesDao> { ExercisesDaoImpl() }
 }

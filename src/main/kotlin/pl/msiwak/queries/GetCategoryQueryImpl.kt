@@ -1,11 +1,11 @@
 package pl.msiwak.queries
 
 import pl.msiwak.dtos.CategoryDTO
-import pl.msiwak.repositories.CategoryRepository
+import pl.msiwak.repositories.ExerciseRepository
 
-class GetCategoryQueryImpl(private val categoryRepository: CategoryRepository) : GetCategoryQuery {
+class GetCategoryQueryImpl(private val exerciseRepository: ExerciseRepository) : GetCategoryQuery {
     override suspend fun invoke(id: String): CategoryDTO? {
-        val categoryEntity = categoryRepository.getCategory(id) ?: return null
+        val categoryEntity = exerciseRepository.getCategory(id) ?: return null
         return with(categoryEntity) {
             CategoryDTO(
                 id = id,

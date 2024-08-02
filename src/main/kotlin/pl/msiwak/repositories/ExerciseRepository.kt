@@ -3,7 +3,7 @@ package pl.msiwak.repositories
 import pl.msiwak.database.dao.user.ExercisesDao
 import pl.msiwak.entities.CategoryEntity
 
-class CategoryRepository(private val exercisesDao: ExercisesDao) {
+class ExerciseRepository(private val exercisesDao: ExercisesDao) {
 
     suspend fun addCategory(
         categoryEntity: CategoryEntity

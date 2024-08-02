@@ -1,13 +1,13 @@
 package pl.msiwak.commands
 
 import pl.msiwak.entities.ExerciseEntity
-import pl.msiwak.repositories.CategoryRepository
+import pl.msiwak.repositories.ExerciseRepository
 
-class AddExerciseCommandImpl(private val categoryRepository: CategoryRepository) : AddExerciseCommand {
+class AddExerciseCommandImpl(private val exerciseRepository: ExerciseRepository) : AddExerciseCommand {
     override suspend fun invoke(categoryId: String, name: String) {
-        val category = categoryRepository.getCategory(categoryId) ?: return
+        val category = exerciseRepository.getCategory(categoryId) ?: return
         val exercise = ExerciseEntity(name = name)
         category.addExercise(exercise)
-        categoryRepository.addExercise(category)
+        exerciseRepository.addExercise(category)
     }
 }

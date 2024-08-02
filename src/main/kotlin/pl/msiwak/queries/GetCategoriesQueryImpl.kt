@@ -2,11 +2,11 @@ package pl.msiwak.queries
 
 import pl.msiwak.dtos.CategoryDTO
 import pl.msiwak.dtos.ExerciseDTO
-import pl.msiwak.repositories.CategoryRepository
+import pl.msiwak.repositories.ExerciseRepository
 
-class GetCategoriesQueryImpl(private val categoryRepository: CategoryRepository) : GetCategoriesQuery {
+class GetCategoriesQueryImpl(private val exerciseRepository: ExerciseRepository) : GetCategoriesQuery {
     override suspend fun invoke(userId: String): List<CategoryDTO> {
-        return categoryRepository.getCategories(userId)
+        return exerciseRepository.getCategories(userId)
             .map { category ->
                 CategoryDTO(
                     id = category.id,
