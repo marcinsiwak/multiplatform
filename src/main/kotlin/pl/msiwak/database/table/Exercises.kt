@@ -1,8 +1,6 @@
 package pl.msiwak.database.table
 
-import org.jetbrains.exposed.sql.Table
-
-object Exercises : Table() {
+object Exercises : Auditable() {
     val id = varchar("id", 128)
     val categoryId = varchar("categoryId", 128)
     val name = varchar("name", 128)

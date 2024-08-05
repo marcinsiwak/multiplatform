@@ -3,6 +3,7 @@ package pl.msiwak.database.dao.user
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import pl.msiwak.database.dao.dbQuery
+import pl.msiwak.database.dao.insertWithAudit
 import pl.msiwak.database.table.Categories
 import pl.msiwak.database.table.Exercises
 import pl.msiwak.entities.CategoryEntity
@@ -17,7 +18,7 @@ class ExercisesDaoImpl : ExercisesDao {
     }
 
     private suspend fun addExercise(exercise: ExerciseEntity, categoryId: String) = dbQuery {
-        val insertStatement = Exercises.insert {
+        val insertStatement = insertWithAudit(Exercises) {
             it[this.id] = exercise.id!!
             it[this.categoryId] = categoryId
             it[this.name] = exercise.name
@@ -25,28 +26,26 @@ class ExercisesDaoImpl : ExercisesDao {
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToExercise)
     }
 
-    override suspend fun addCategory(
-        categoryEntity: CategoryEntity
-    ): CategoryEntity? = dbQuery {
-        val insertStatement = Categories.insert {
-            it[this.id] = categoryEntity.id!!
-            it[this.name] = categoryEntity.name
-            it[this.userId] = categoryEntity.userId
-            it[this.exerciseType] = categoryEntity.exerciseType
+    override suspend fun addCategory(categoryEntity: CategoryEntity): CategoryEntity? = dbQuery {
+        val insertStatement = insertWithAudit(Categories) {
+            it[id] = categoryEntity.id!!
+            it[name] = categoryEntity.name
+            it[userId] = categoryEntity.userId
+            it[exerciseType] = categoryEntity.exerciseType
         }
-        insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToCategory)
+        insertStatement.resultedValues?.single()?.let(::resultRowToCategory)
     }
 
     override suspend fun getCategory(categoryId: String): CategoryEntity? = dbQuery {
-        val categoryRow = Categories.select { Categories.id eq categoryId }.singleOrNull()
+        val categoryRow = Categories.selectAll().where { Categories.id eq categoryId }.singleOrNull()
         categoryRow?.let {
-            val exercises = Exercises.select { Exercises.categoryId eq categoryId }.map(::resultRowToExercise)
+            val exercises = Exercises.selectAll().where { Exercises.categoryId eq categoryId }.map(::resultRowToExercise)
             resultRowToCategory(it, exercises)
         }
     }
 
     override suspend fun getCategories(userId: String): List<CategoryEntity> = dbQuery {
-        val categories = Categories.select { Categories.userId eq userId }.map(::resultRowToCategory)
+        val categories = Categories.selectAll().where { Categories.userId eq userId }.map(::resultRowToCategory)
         categories.map { category ->
             val exercisesList = Exercises.selectAll().map(::resultRowToExercise)
             val out = exercisesList.toHashSet()
@@ -59,7 +58,7 @@ class ExercisesDaoImpl : ExercisesDao {
     override suspend fun removeCategory(categoryId: String) {
         dbQuery {
             Categories.deleteWhere {
-                Categories.id eq categoryId
+                id eq categoryId
             }
         }
     }

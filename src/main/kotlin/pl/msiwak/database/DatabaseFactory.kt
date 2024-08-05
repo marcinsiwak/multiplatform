@@ -16,10 +16,9 @@ object DatabaseFactory {
             user = "postgres",
             password = "postgres"
         )
+
         transaction(database) {
-            SchemaUtils.create(Users)
-            SchemaUtils.create(Categories)
-            SchemaUtils.create(Exercises)
+            SchemaUtils.create(Users, Categories, Exercises)
         }
     }
 }

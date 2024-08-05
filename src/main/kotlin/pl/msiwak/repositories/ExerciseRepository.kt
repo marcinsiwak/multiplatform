@@ -5,9 +5,7 @@ import pl.msiwak.entities.CategoryEntity
 
 class ExerciseRepository(private val exercisesDao: ExercisesDao) {
 
-    suspend fun addCategory(
-        categoryEntity: CategoryEntity
-    ) {
+    suspend fun addCategory(categoryEntity: CategoryEntity) {
         exercisesDao.addCategory(categoryEntity)
     }
 
@@ -23,9 +21,11 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
         exercisesDao.removeCategory(categoryId)
     }
 
-    suspend fun addExercise(
-        categoryEntity: CategoryEntity
-    ) {
+    suspend fun addExercise(categoryEntity: CategoryEntity) {
         exercisesDao.addExercise(categoryEntity)
     }
+//
+//    suspend fun addResult(categoryEntity: CategoryEntity) {
+//        exercisesDao.addResult(categoryEntity)
+//    }
 }
