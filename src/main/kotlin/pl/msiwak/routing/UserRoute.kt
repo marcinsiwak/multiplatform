@@ -18,14 +18,14 @@ fun Route.addUserRoutes() {
     val getUserQuery by inject<GetUserQuery>()
 
     authenticate(FIREBASE_AUTH) {
-        post("/addUser") {
+        post("/user") {
             val firebaseUser: FirebaseUser = call.principal() ?: return@post call.respond(HttpStatusCode.Unauthorized)
             val user = call.receive<UserDTO>()
             addUserCommand.invoke(firebaseUser.userId, user.name, user.email)
             call.respond(HttpStatusCode.OK)
         }
 
-        get("/getUser") {
+        get("/user") {
             val firebaseUser: FirebaseUser = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
             val user = getUserQuery.invoke(firebaseUser.userId)
             user?.let {

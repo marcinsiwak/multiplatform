@@ -1,7 +1,7 @@
 package pl.msiwak.commands
 
-import java.time.LocalDateTime
+import pl.msiwak.entities.ResultEntity
 
 interface AddResultCommand {
-    suspend fun invoke(exerciseId: String, amount: String, result: String, dateTime: LocalDateTime)
+    suspend fun invoke(exerciseId: String, resultEntity: ResultEntity)
 }

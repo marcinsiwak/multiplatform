@@ -5,6 +5,7 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import pl.msiwak.database.table.Categories
 import pl.msiwak.database.table.Exercises
+import pl.msiwak.database.table.Results
 import pl.msiwak.database.table.Users
 
 object DatabaseFactory {
@@ -18,7 +19,7 @@ object DatabaseFactory {
         )
 
         transaction(database) {
-            SchemaUtils.create(Users, Categories, Exercises)
+            SchemaUtils.create(Users, Categories, Exercises, Results)
         }
     }
 }

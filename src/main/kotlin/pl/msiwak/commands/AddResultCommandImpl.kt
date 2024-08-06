@@ -1,10 +1,12 @@
 package pl.msiwak.commands
 
+import pl.msiwak.entities.ResultEntity
 import pl.msiwak.repositories.ExerciseRepository
-import java.time.LocalDateTime
 
-class AddResultCommandImpl(private val exerciseRepository: ExerciseRepository): AddResultCommand {
-    override suspend fun invoke(exerciseId: String, amount: String, result: String, dateTime: LocalDateTime) {
-//        exerciseRepository.addResult()
+class AddResultCommandImpl(private val exerciseRepository: ExerciseRepository) : AddResultCommand {
+    override suspend fun invoke(exerciseId: String, resultEntity: ResultEntity) {
+        val category = exerciseRepository.getCategoryByExercise(exerciseId) ?: return
+        category.addResult(exerciseId, resultEntity)
+        exerciseRepository.addResult(category)
     }
 }

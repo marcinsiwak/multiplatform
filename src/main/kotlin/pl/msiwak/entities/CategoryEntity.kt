@@ -27,6 +27,10 @@ data class CategoryEntity(
         exercises.add(exerciseEntity)
     }
 
+    fun addResult(exerciseId: String, resultEntity: ResultEntity) {
+        exercises.find { it.id == exerciseId }?.addResult(resultEntity)
+    }
+
     fun getExercise(exerciseId: String): ExerciseEntity? {
         return exercises.firstOrNull { exercise -> exercise.id == exerciseId }
     }

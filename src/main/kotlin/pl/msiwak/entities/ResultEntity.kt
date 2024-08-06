@@ -1,13 +1,12 @@
-package pl.msiwak.dtos
+package pl.msiwak.entities
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResultDTO(
+data class ResultEntity(
     val id: String? = null,
-    val exerciseId: String,
-    val result: String,
     val amount: String,
+    val result: String,
     val date: LocalDateTime
 )

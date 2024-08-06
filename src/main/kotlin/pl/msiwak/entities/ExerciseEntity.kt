@@ -9,8 +9,7 @@ data class ExerciseEntity(
     val id: String? = null,
     val categoryId: String? = null,
     val name: String,
-//    @Serializable(with = LocalDateTimeSerializer::class)
-//    val creationDate: LocalDateTime
+    val results: HashSet<ResultEntity> = hashSetOf(),
 ) {
 
     constructor(name: String) : this(
@@ -18,4 +17,7 @@ data class ExerciseEntity(
         name = name
     )
 
+    fun addResult(resultEntity: ResultEntity) {
+        results.add(resultEntity)
+    }
 }

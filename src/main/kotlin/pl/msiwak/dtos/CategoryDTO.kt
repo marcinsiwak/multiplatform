@@ -8,6 +8,4 @@ data class CategoryDTO(
     val name: String,
     val exerciseType: String,
     val exercises: List<ExerciseDTO> = emptyList()
-//    @Serializable(with = LocalDateTimeSerializer::class)
-//    val creationDate: LocalDateTime
 )
