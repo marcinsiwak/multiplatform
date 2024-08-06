@@ -5,8 +5,8 @@ import pl.msiwak.dtos.ResultDTO
 import pl.msiwak.repositories.ExerciseRepository
 
 class GetExerciseQueryImpl(private val exerciseRepository: ExerciseRepository) : GetExerciseQuery {
-    override suspend fun invoke(id: String): ExerciseDTO? {
-        val category = exerciseRepository.getCategoryByExercise(id) ?: return null
+    override suspend fun invoke(id: String, userId: String): ExerciseDTO? {
+        val category = exerciseRepository.getCategoryByExercise(id, userId) ?: return null
         val exercise = category.getExercise(id) ?: return null
         return with(exercise) {
             ExerciseDTO(

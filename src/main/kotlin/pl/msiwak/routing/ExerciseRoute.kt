@@ -61,16 +61,17 @@ fun Route.addExerciseRoute() {
         get("/exercise/{id}") {
             val id = call.parameters["id"] ?: return@get call.respond(HttpStatusCode.NotFound)
             val firebaseUser = call.principal<FirebaseUser>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
-            getExerciseQuery.invoke(id)
+            getExerciseQuery.invoke(id, firebaseUser.userId)
             call.respond(HttpStatusCode.OK)
         }
 
         post("/result") {
-            call.principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
+            val firebaseUser = call.principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
             val result = call.receive<ResultDTO>()
             addResultCommand.invoke(
-                result.exerciseId,
-                ResultEntity(amount = result.amount, result = result.result, date = result.date)
+                exerciseId = result.exerciseId,
+                resultEntity = ResultEntity(amount = result.amount, result = result.result, date = result.date),
+                userId = firebaseUser.userId
             )
             call.respond(HttpStatusCode.OK)
         }

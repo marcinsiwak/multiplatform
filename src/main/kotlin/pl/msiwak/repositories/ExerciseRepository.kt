@@ -13,8 +13,8 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
         return exercisesDao.getCategory(categoryId, userId)
     }
 
-    suspend fun getCategoryByExercise(exerciseId: String): CategoryEntity? {
-        return exercisesDao.getCategoryByExercise(exerciseId)
+    suspend fun getCategoryByExercise(exerciseId: String, userId: String): CategoryEntity? {
+        return exercisesDao.getCategoryByExercise(exerciseId, userId)
     }
 
     suspend fun getCategories(userId: String): List<CategoryEntity> {

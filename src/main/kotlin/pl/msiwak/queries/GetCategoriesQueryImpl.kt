@@ -2,6 +2,7 @@ package pl.msiwak.queries
 
 import pl.msiwak.dtos.CategoryDTO
 import pl.msiwak.dtos.ExerciseDTO
+import pl.msiwak.dtos.ResultDTO
 import pl.msiwak.repositories.ExerciseRepository
 
 class GetCategoriesQueryImpl(private val exerciseRepository: ExerciseRepository) : GetCategoriesQuery {
@@ -17,7 +18,16 @@ class GetCategoriesQueryImpl(private val exerciseRepository: ExerciseRepository)
                             id = exercise.id,
                             categoryId = category.id!!,
                             name = exercise.name,
-                            exerciseType = category.exerciseType
+                            exerciseType = category.exerciseType,
+                            results = exercise.results.map {
+                                ResultDTO(
+                                    id = it.id,
+                                    exerciseId = exercise.id!!,
+                                    amount = it.amount,
+                                    result = it.result,
+                                    date = it.date
+                                )
+                            }
                         )
                     }
                 )

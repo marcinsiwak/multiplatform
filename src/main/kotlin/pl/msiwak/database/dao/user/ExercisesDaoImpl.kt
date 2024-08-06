@@ -54,34 +54,43 @@ class ExercisesDaoImpl : ExercisesDao {
             it[this.result] = resultEntity.result
             it[this.date] = resultEntity.date
         }
-        insertStatement.resultedValues?.single()?.let(::resultRowToCategory)
+        insertStatement.resultedValues?.single()?.let(::resultRowToResult)
     }
 
     override suspend fun getCategory(categoryId: String, userId: String): CategoryEntity? = dbQuery {
+        getCategoryEntity(categoryId, userId)
+    }
+
+    private fun getCategoryEntity(categoryId: String, userId: String): CategoryEntity? {
         val categoryRow =
             Categories.selectAll().where { Categories.id eq categoryId }.andWhere { Categories.userId eq userId }
                 .singleOrNull()
         categoryRow?.let {
             val exercises =
                 Exercises.selectAll().where { Exercises.categoryId eq categoryId }.map(::resultRowToExercise)
-            resultRowToCategory(it, exercises)
+            return resultRowToCategory(it, exercises)
         }
+        return null
     }
 
     override suspend fun getCategories(userId: String): List<CategoryEntity> = dbQuery {
         val categories = Categories.selectAll().where { Categories.userId eq userId }.map(::resultRowToCategory)
         categories.map { category ->
             val exercises =
-                Exercises.selectAll().where { Exercises.categoryId eq category.id!! }.map(::resultRowToExercise)
-                    .toHashSet()
+                Exercises.selectAll().where { Exercises.categoryId eq category.id!! }.map { resultRowToExercise(it) }
+                    .map {
+                        val results =
+                            Results.selectAll().map(::resultRowToResult)
+                        it.copy(results = results.toHashSet())
+                    }.toHashSet()
             category.copy(exercises = exercises)
         }
     }
 
-    override suspend fun getCategoryByExercise(exerciseId: String): CategoryEntity? = dbQuery {
+    override suspend fun getCategoryByExercise(exerciseId: String, userId: String): CategoryEntity? = dbQuery {
         val exercise = getExercise(exerciseId)
-        val category = Categories.selectAll().where { Categories.id eq exercise.categoryId!! }.single()
-            .let { resultRowToCategory(it) }
+        val categoryId = exercise.categoryId ?: return@dbQuery null
+        val category = getCategoryEntity(categoryId, userId)
         return@dbQuery category
     }
 
@@ -95,12 +104,13 @@ class ExercisesDaoImpl : ExercisesDao {
 
     private fun getExercise(exerciseId: String): ExerciseEntity {
         val results = getResults(exerciseId)
-        val exercise = Exercises.selectAll().where { Exercises.id eq exerciseId }.single().let { resultRowToExercise(it, results) }
+        val exercise =
+            Exercises.selectAll().where { Exercises.id eq exerciseId }.single().let { resultRowToExercise(it, results) }
         return exercise
     }
 
     private fun getResults(exerciseId: String): List<ResultEntity> {
-        val results = Results.selectAll().where { Exercises.id eq exerciseId }.map(::resultRowToResult)
+        val results = Results.selectAll().where { Results.id eq exerciseId }.map(::resultRowToResult)
         return results
     }
 
