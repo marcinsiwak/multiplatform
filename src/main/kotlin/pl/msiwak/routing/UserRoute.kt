@@ -8,10 +8,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import pl.msiwak.auth.firebase.FIREBASE_AUTH
-import pl.msiwak.auth.firebase.FirebaseUser
 import pl.msiwak.commands.AddUserCommand
-import pl.msiwak.queries.GetUserQuery
 import pl.msiwak.dtos.UserDTO
+import pl.msiwak.queries.GetUserQuery
 
 fun Route.addUserRoutes() {
     val addUserCommand by inject<AddUserCommand>()
@@ -19,24 +18,18 @@ fun Route.addUserRoutes() {
 
     authenticate(FIREBASE_AUTH) {
         post("/user") {
-            val firebaseUser: FirebaseUser = call.principal() ?: return@post call.respond(HttpStatusCode.Unauthorized)
-            val user = call.receive<UserDTO>()
-            addUserCommand.invoke(firebaseUser.userId, user.name, user.email)
-            call.respond(HttpStatusCode.OK)
+            with(call) {
+                receive<UserDTO>().run { addUserCommand.invoke(name, email) }
+                respond(HttpStatusCode.OK)
+            }
         }
 
         get("/user") {
-            val firebaseUser: FirebaseUser = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
-            val user = getUserQuery.invoke(firebaseUser.userId)
-            user?.let {
-                call.respond(
-                    status = HttpStatusCode.OK,
-                    message = it
-                )
-            } ?: run {
-                call.respond(HttpStatusCode.NotFound)
+            with(call) {
+                getUserQuery.invoke()?.let {
+                    respond(status = HttpStatusCode.OK, message = it)
+                } ?: return@get call.respond(HttpStatusCode.NotFound)
             }
-
         }
     }
 }

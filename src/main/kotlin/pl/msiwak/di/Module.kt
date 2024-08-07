@@ -12,11 +12,11 @@ import pl.msiwak.repositories.ExerciseRepository
 import pl.msiwak.repositories.UserRepository
 
 val diModule = module {
-    single<AddUserCommand> { AddUserCommandImpl(get()) }
+    single<AddUserCommand> { AddUserCommandImpl(get(), get()) }
     single<AddCategoryCommand> { AddCategoryCommandImpl(get(), get()) }
     single<AddExerciseCommand> { AddExerciseCommandImpl(get()) }
     single<AddResultCommand> { AddResultCommandImpl(get()) }
-    single<GetUserQuery> { GetUserQueryImpl(get()) }
+    single<GetUserQuery> { GetUserQueryImpl(get(), get()) }
     single<GetCategoryQuery> { GetCategoryQueryImpl(get()) }
     single<GetExerciseQuery> { GetExerciseQueryImpl(get()) }
     single<GetCategoriesQuery> { GetCategoriesQueryImpl(get()) }
