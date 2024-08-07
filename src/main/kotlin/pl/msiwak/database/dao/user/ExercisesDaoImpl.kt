@@ -5,6 +5,7 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.andWhere
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.selectAll
+import pl.msiwak.auth.PrincipalProvider
 import pl.msiwak.database.dao.dbQuery
 import pl.msiwak.database.dao.insertWithAudit
 import pl.msiwak.database.table.Categories
@@ -14,7 +15,7 @@ import pl.msiwak.entities.CategoryEntity
 import pl.msiwak.entities.ExerciseEntity
 import pl.msiwak.entities.ResultEntity
 
-class ExercisesDaoImpl : ExercisesDao {
+class ExercisesDaoImpl(private val principalProvider: PrincipalProvider) : ExercisesDao {
 
     override suspend fun addExercise(categoryEntity: CategoryEntity) {
         categoryEntity.exercises.map { exercise ->
@@ -57,8 +58,8 @@ class ExercisesDaoImpl : ExercisesDao {
         insertStatement.resultedValues?.single()?.let(::resultRowToResult)
     }
 
-    override suspend fun getCategory(categoryId: String, userId: String): CategoryEntity? = dbQuery {
-        getCategoryEntity(categoryId, userId)
+    override suspend fun getCategory(categoryId: String): CategoryEntity? = dbQuery {
+        getCategoryEntity(categoryId, principalProvider.getPrincipal().userId)
     }
 
     private fun getCategoryEntity(categoryId: String, userId: String): CategoryEntity? {
@@ -73,24 +74,28 @@ class ExercisesDaoImpl : ExercisesDao {
         return null
     }
 
-    override suspend fun getCategories(userId: String): List<CategoryEntity> = dbQuery {
-        val categories = Categories.selectAll().where { Categories.userId eq userId }.map(::resultRowToCategory)
-        categories.map { category ->
-            val exercises =
-                Exercises.selectAll().where { Exercises.categoryId eq category.id!! }.map { resultRowToExercise(it) }
-                    .map {
-                        val results =
-                            Results.selectAll().map(::resultRowToResult)
-                        it.copy(results = results.toHashSet())
-                    }.toHashSet()
-            category.copy(exercises = exercises)
+    override suspend fun getCategories(): List<CategoryEntity> {
+        val userId = principalProvider.getPrincipal().userId
+        return dbQuery {
+            val categories = Categories.selectAll().where { Categories.userId eq userId }.map(::resultRowToCategory)
+            return@dbQuery categories.map { category ->
+                val exercises =
+                    Exercises.selectAll().where { Exercises.categoryId eq category.id!! }
+                        .map { resultRowToExercise(it) }
+                        .map {
+                            val results =
+                                Results.selectAll().map(::resultRowToResult)
+                            it.copy(results = results.toHashSet())
+                        }.toHashSet()
+                category.copy(exercises = exercises)
+            }
         }
     }
 
-    override suspend fun getCategoryByExercise(exerciseId: String, userId: String): CategoryEntity? = dbQuery {
+    override suspend fun getCategoryByExercise(exerciseId: String): CategoryEntity? = dbQuery {
         val exercise = getExercise(exerciseId)
         val categoryId = exercise.categoryId ?: return@dbQuery null
-        val category = getCategoryEntity(categoryId, userId)
+        val category = getCategoryEntity(categoryId, principalProvider.getPrincipal().userId)
         return@dbQuery category
     }
 

@@ -30,48 +30,40 @@ fun Route.addExerciseRoute() {
 
     authenticate(FIREBASE_AUTH) {
         post("/category") {
-            val firebaseUser: FirebaseUser = call.principal() ?: return@post call.respond(HttpStatusCode.Unauthorized)
             val category = call.receive<CategoryDTO>()
-            addCategoryCommand.invoke(firebaseUser.userId, category.name, category.exerciseType)
+            addCategoryCommand.invoke(category.name, category.exerciseType)
             call.respond(HttpStatusCode.OK)
         }
 
         get("/categories") {
-            val firebaseUser: FirebaseUser = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
-            val categories = getCategoriesQuery.invoke(firebaseUser.userId)
+            val categories = getCategoriesQuery.invoke()
             println("OUTPUT: ${categories.map { it.exercises }}")
             call.respond(HttpStatusCode.OK, categories)
         }
 
         get("/category/{id}") {
             val id = call.parameters["id"] ?: return@get call.respond(HttpStatusCode.NotFound)
-            val firebaseUser: FirebaseUser = call.principal() ?: return@get call.respond(HttpStatusCode.Unauthorized)
-            val category =
-                getCategoryQuery.invoke(id, firebaseUser.userId) ?: return@get call.respond(HttpStatusCode.NotFound)
+            val category = getCategoryQuery.invoke(id) ?: return@get call.respond(HttpStatusCode.NotFound)
             call.respond(HttpStatusCode.OK, category)
         }
 
         post("/exercise") {
-            val firebaseUser = call.principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
             val exercise = call.receive<ExerciseDTO>()
-            addExerciseCommand.invoke(exercise.categoryId, exercise.name, firebaseUser.userId)
+            addExerciseCommand.invoke(exercise.categoryId, exercise.name)
             call.respond(HttpStatusCode.OK)
         }
 
         get("/exercise/{id}") {
             val id = call.parameters["id"] ?: return@get call.respond(HttpStatusCode.NotFound)
-            val firebaseUser = call.principal<FirebaseUser>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
-            getExerciseQuery.invoke(id, firebaseUser.userId)
+            getExerciseQuery.invoke(id)
             call.respond(HttpStatusCode.OK)
         }
 
         post("/result") {
-            val firebaseUser = call.principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
             val result = call.receive<ResultDTO>()
             addResultCommand.invoke(
                 exerciseId = result.exerciseId,
-                resultEntity = ResultEntity(amount = result.amount, result = result.result, date = result.date),
-                userId = firebaseUser.userId
+                resultEntity = ResultEntity(amount = result.amount, result = result.result, date = result.date)
             )
             call.respond(HttpStatusCode.OK)
         }

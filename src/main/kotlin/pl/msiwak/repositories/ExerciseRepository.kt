@@ -9,16 +9,16 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
         exercisesDao.addCategory(categoryEntity)
     }
 
-    suspend fun getCategory(categoryId: String, userId: String): CategoryEntity? {
-        return exercisesDao.getCategory(categoryId, userId)
+    suspend fun getCategory(categoryId: String): CategoryEntity? {
+        return exercisesDao.getCategory(categoryId)
     }
 
-    suspend fun getCategoryByExercise(exerciseId: String, userId: String): CategoryEntity? {
-        return exercisesDao.getCategoryByExercise(exerciseId, userId)
+    suspend fun getCategoryByExercise(exerciseId: String): CategoryEntity? {
+        return exercisesDao.getCategoryByExercise(exerciseId)
     }
 
-    suspend fun getCategories(userId: String): List<CategoryEntity> {
-        return exercisesDao.getCategories(userId)
+    suspend fun getCategories(): List<CategoryEntity> {
+        return exercisesDao.getCategories()
     }
 
     suspend fun removeCategory(categoryId: String) {

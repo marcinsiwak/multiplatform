@@ -6,8 +6,8 @@ import pl.msiwak.dtos.ResultDTO
 import pl.msiwak.repositories.ExerciseRepository
 
 class GetCategoriesQueryImpl(private val exerciseRepository: ExerciseRepository) : GetCategoriesQuery {
-    override suspend fun invoke(userId: String): List<CategoryDTO> {
-        return exerciseRepository.getCategories(userId)
+    override suspend fun invoke(): List<CategoryDTO> {
+        return exerciseRepository.getCategories()
             .map { category ->
                 CategoryDTO(
                     id = category.id,

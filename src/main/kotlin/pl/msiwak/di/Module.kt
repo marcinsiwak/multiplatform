@@ -1,6 +1,7 @@
 package pl.msiwak.di
 
 import org.koin.dsl.module
+import pl.msiwak.auth.PrincipalProvider
 import pl.msiwak.commands.*
 import pl.msiwak.database.dao.user.ExercisesDao
 import pl.msiwak.database.dao.user.ExercisesDaoImpl
@@ -12,7 +13,7 @@ import pl.msiwak.repositories.UserRepository
 
 val diModule = module {
     single<AddUserCommand> { AddUserCommandImpl(get()) }
-    single<AddCategoryCommand> { AddCategoryCommandImpl(get()) }
+    single<AddCategoryCommand> { AddCategoryCommandImpl(get(), get()) }
     single<AddExerciseCommand> { AddExerciseCommandImpl(get()) }
     single<AddResultCommand> { AddResultCommandImpl(get()) }
     single<GetUserQuery> { GetUserQueryImpl(get()) }
@@ -22,5 +23,6 @@ val diModule = module {
     single { UserRepository(get()) }
     single { ExerciseRepository(get()) }
     single<UserDao> { UserDaoImpl() }
-    single<ExercisesDao> { ExercisesDaoImpl() }
+    single<ExercisesDao> { ExercisesDaoImpl(get()) }
+    single { PrincipalProvider() }
 }

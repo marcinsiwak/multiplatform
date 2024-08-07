@@ -9,7 +9,6 @@ fun Application.configureFirebaseAuth() {
     install(Authentication) {
         firebase {
             validate {
-                // TODO look up user profile from DB
                 FirebaseUser(it.uid, it.email.orEmpty())
             }
         }
