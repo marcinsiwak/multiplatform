@@ -1,10 +1,7 @@
 package pl.msiwak.database.dao.user
 
-import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.andWhere
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.selectAll
 import pl.msiwak.auth.PrincipalProvider
 import pl.msiwak.database.dao.dbQuery
 import pl.msiwak.database.dao.insertWithAudit
@@ -101,9 +98,19 @@ class ExercisesDaoImpl(private val principalProvider: PrincipalProvider) : Exerc
 
     override suspend fun removeCategory(categoryId: String) {
         dbQuery {
-            Categories.deleteWhere {
-                id eq categoryId
-            }
+            Categories.deleteWhere { id eq categoryId and (userId eq principalProvider.getPrincipal().userId) }
+        }
+    }
+
+    override suspend fun removeExercise(exerciseId: String) {
+        dbQuery {
+            Exercises.deleteWhere { id eq exerciseId }
+        }
+    }
+
+    override suspend fun removeResult(resultId: String) {
+        dbQuery {
+            Results.deleteWhere { id eq resultId }
         }
     }
 

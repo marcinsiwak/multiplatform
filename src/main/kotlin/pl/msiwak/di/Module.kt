@@ -20,6 +20,9 @@ val diModule = module {
     single<GetCategoryQuery> { GetCategoryQueryImpl(get()) }
     single<GetExerciseQuery> { GetExerciseQueryImpl(get()) }
     single<GetCategoriesQuery> { GetCategoriesQueryImpl(get()) }
+    single<RemoveCategoryCommand> { RemoveCategoryCommandImpl(get()) }
+    single<RemoveExerciseCommand> { RemoveExerciseCommandImpl(get()) }
+    single<RemoveResultCommand> { RemoveResultCommandImpl(get()) }
     single { UserRepository(get()) }
     single { ExerciseRepository(get()) }
     single<UserDao> { UserDaoImpl() }

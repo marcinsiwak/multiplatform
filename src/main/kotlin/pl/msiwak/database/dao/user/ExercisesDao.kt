@@ -8,6 +8,8 @@ interface ExercisesDao {
     suspend fun getCategoryByExercise(exerciseId: String): CategoryEntity?
     suspend fun getCategories(): List<CategoryEntity>
     suspend fun removeCategory(categoryId: String)
+    suspend fun removeExercise(exerciseId: String)
+    suspend fun removeResult(resultId: String)
     suspend fun addExercise(categoryEntity: CategoryEntity)
     suspend fun addResult(categoryEntity: CategoryEntity)
 }

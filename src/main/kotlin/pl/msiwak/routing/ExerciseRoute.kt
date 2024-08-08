@@ -8,9 +8,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import pl.msiwak.auth.firebase.FIREBASE_AUTH
-import pl.msiwak.commands.AddCategoryCommand
-import pl.msiwak.commands.AddExerciseCommand
-import pl.msiwak.commands.AddResultCommand
+import pl.msiwak.commands.*
 import pl.msiwak.dtos.CategoryDTO
 import pl.msiwak.dtos.ExerciseDTO
 import pl.msiwak.dtos.ResultDTO
@@ -26,17 +24,22 @@ fun Route.addExerciseRoute() {
     val getCategoriesQuery by inject<GetCategoriesQuery>()
     val getCategoryQuery by inject<GetCategoryQuery>()
     val getExerciseQuery by inject<GetExerciseQuery>()
+    val removeCategoryCommand by inject<RemoveCategoryCommand>()
+    val removeExerciseCommand by inject<RemoveExerciseCommand>()
+    val removeResultCommand by inject<RemoveResultCommand>()
 
     authenticate(FIREBASE_AUTH) {
-        post("/category") {
-            with(call) {
-                receive<CategoryDTO>().run { addCategoryCommand.invoke(name, exerciseType) }
-                respond(HttpStatusCode.OK)
-            }
-        }
-
         get("/categories") {
             getCategoriesQuery.invoke().run { call.respond(HttpStatusCode.OK, this) }
+        }
+
+        post("/category") {
+            with(call) {
+                receive<CategoryDTO>().run {
+                    addCategoryCommand.invoke(name, exerciseType)
+                    respond(HttpStatusCode.OK, this)
+                }
+            }
         }
 
         get("/category/{id}") {
@@ -48,10 +51,20 @@ fun Route.addExerciseRoute() {
             }
         }
 
+        delete("/category/{id}") {
+            with(call) {
+                val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
+                removeCategoryCommand.invoke(id)
+                respond(HttpStatusCode.OK)
+            }
+        }
+
         post("/exercise") {
             with(call) {
-                receive<ExerciseDTO>().run { addExerciseCommand.invoke(categoryId, name) }
-                respond(HttpStatusCode.OK)
+                receive<ExerciseDTO>().run {
+                    addExerciseCommand.invoke(categoryId, name)
+                    respond(HttpStatusCode.OK, this)
+                }
             }
         }
 
@@ -62,6 +75,14 @@ fun Route.addExerciseRoute() {
             }
         }
 
+        delete("/exercise/{id}") {
+            with(call) {
+                val id = parameters["id"] ?: return@delete respond(HttpStatusCode.BadRequest)
+                removeExerciseCommand.invoke(id)
+                respond(HttpStatusCode.OK)
+            }
+        }
+
         post("/result") {
             with(call) {
                 receive<ResultDTO>().run {
@@ -69,7 +90,15 @@ fun Route.addExerciseRoute() {
                         exerciseId = exerciseId,
                         resultEntity = ResultEntity(amount = amount, result = result, date = date)
                     )
+                    respond(HttpStatusCode.OK, this)
                 }
+            }
+        }
+
+        delete("/result/{id}") {
+            with(call) {
+                val id = parameters["id"] ?: return@delete respond(HttpStatusCode.BadRequest)
+                removeResultCommand.invoke(id)
                 respond(HttpStatusCode.OK)
             }
         }

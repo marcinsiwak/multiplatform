@@ -25,6 +25,14 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
         exercisesDao.removeCategory(categoryId)
     }
 
+    suspend fun removeExercise(exerciseId: String) {
+        exercisesDao.removeExercise(exerciseId)
+    }
+
+    suspend fun removeResult(resultId: String) {
+        exercisesDao.removeResult(resultId)
+    }
+
     suspend fun addExercise(categoryEntity: CategoryEntity) {
         exercisesDao.addExercise(categoryEntity)
     }
