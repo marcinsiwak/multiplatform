@@ -3,8 +3,10 @@ val logback_version: String by project
 val postgresql_driver_version: String by project
 val exposed_version: String by project
 val koin_ktor_version: String by project
+val ktor_version: String by project
 
 plugins {
+    application
     kotlin("jvm") version "2.0.0"
     id("io.ktor.plugin") version "2.3.12"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20-Beta2"
@@ -54,7 +56,7 @@ dependencies {
     implementation("io.insert-koin:koin-logger-slf4j:$koin_ktor_version")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-config-yaml")
+    implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
