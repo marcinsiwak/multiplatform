@@ -6,8 +6,8 @@ import pl.msiwak.repositories.ExerciseRepository
 class AddExerciseCommandImpl(private val exerciseRepository: ExerciseRepository) : AddExerciseCommand {
     override suspend fun invoke(categoryId: String, name: String) {
         val category = exerciseRepository.getCategory(categoryId) ?: return
-        val exercise = ExerciseEntity(name = name)
+        val exercise = ExerciseEntity(name = name, categoryId = categoryId)
         category.addExercise(exercise)
-        exerciseRepository.addExercise(category)
+        exerciseRepository.updateCategory(category)
     }
 }

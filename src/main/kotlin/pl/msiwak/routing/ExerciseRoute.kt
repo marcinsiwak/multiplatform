@@ -88,7 +88,9 @@ fun Route.addExerciseRoute() {
                 receive<ResultDTO>().run {
                     addResultCommand.invoke(
                         exerciseId = exerciseId,
-                        resultEntity = ResultEntity(amount = amount, result = result, date = date)
+                        amount = amount,
+                        result = result,
+                        date = date
                     )
                     respond(HttpStatusCode.OK, this)
                 }

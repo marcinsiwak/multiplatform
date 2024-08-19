@@ -4,6 +4,8 @@ import pl.msiwak.repositories.ExerciseRepository
 
 class RemoveResultCommandImpl(private val exerciseRepository: ExerciseRepository) : RemoveResultCommand {
     override suspend fun invoke(resultId: String) {
-        exerciseRepository.removeResult(resultId)
+        val category = exerciseRepository.getCategoryByResult(resultId) ?: return
+        category.removeResult(resultId)
+        exerciseRepository.updateCategory(category)
     }
 }

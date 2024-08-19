@@ -14,6 +14,6 @@ class AddCategoryCommandImpl(
             name = name,
             exerciseType = exerciseType
         )
-        exerciseRepository.addCategory(category)
+        exerciseRepository.updateCategory(category)
     }
 }

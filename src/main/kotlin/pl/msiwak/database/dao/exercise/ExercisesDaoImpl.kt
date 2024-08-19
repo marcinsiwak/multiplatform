@@ -1,10 +1,11 @@
-package pl.msiwak.database.dao.user
+package pl.msiwak.database.dao.exercise
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import pl.msiwak.auth.PrincipalProvider
 import pl.msiwak.database.dao.dbQuery
 import pl.msiwak.database.dao.insertWithAudit
+import pl.msiwak.database.dao.upsertWithAudit
 import pl.msiwak.database.table.Categories
 import pl.msiwak.database.table.Exercises
 import pl.msiwak.database.table.Results
@@ -13,6 +14,56 @@ import pl.msiwak.entities.ExerciseEntity
 import pl.msiwak.entities.ResultEntity
 
 class ExercisesDaoImpl(private val principalProvider: PrincipalProvider) : ExercisesDao {
+
+    override suspend fun updateCategory(category: CategoryEntity) {
+        dbQuery {
+            upsertWithAudit(Categories) {
+                it[id] = category.id!!
+                it[name] = category.name
+                it[userId] = category.userId
+                it[exerciseType] = category.exerciseType
+            }
+
+            val exercisesBeforeUpdate = Exercises
+                .selectAll()
+                .where { Exercises.categoryId eq category.id!! }
+                .map(::resultRowToExercise)
+                .toMutableList()
+
+
+            category.exercises.forEach { updatedExercise ->
+                upsertWithAudit(Exercises) {
+                    it[this.id] = updatedExercise.id!!
+                    it[this.categoryId] = updatedExercise.categoryId!!
+                    it[this.name] = updatedExercise.name
+                }
+                exercisesBeforeUpdate.removeIf { it.id == updatedExercise.id }
+            }
+            exercisesBeforeUpdate.forEach { exerciseBeforeUpdate ->
+                Exercises.deleteWhere { id eq exerciseBeforeUpdate.id!! }
+            }
+
+            val resultsBeforeUpdate = Results
+                .selectAll()
+                .where { Results.exerciseId inList category.exercises.map { it.id!! } }
+                .map(::resultRowToResult)
+                .toMutableList()
+
+            category.exercises.flatMap { it.results }.forEach { updatedResult ->
+                upsertWithAudit(Results) {
+                    it[this.id] = updatedResult.id!!
+                    it[this.exerciseId] = updatedResult.exerciseId!!
+                    it[this.amount] = updatedResult.amount
+                    it[this.result] = updatedResult.result
+                    it[this.date] = updatedResult.date
+                }
+                resultsBeforeUpdate.removeIf { it.id == updatedResult.id }
+            }
+            resultsBeforeUpdate.forEach {  resultBeforeUpdate ->
+                Results.deleteWhere { id eq resultBeforeUpdate.id!! }
+            }
+        }
+    }
 
     override suspend fun addExercise(categoryEntity: CategoryEntity) {
         categoryEntity.exercises.map { exercise ->
@@ -56,6 +107,8 @@ class ExercisesDaoImpl(private val principalProvider: PrincipalProvider) : Exerc
     }
 
     override suspend fun getCategory(categoryId: String): CategoryEntity? = dbQuery {
+        val userId = principalProvider.getPrincipal()
+        val userId2 = userId.userId
         getCategoryEntity(categoryId, principalProvider.getPrincipal().userId)
     }
 
@@ -96,6 +149,21 @@ class ExercisesDaoImpl(private val principalProvider: PrincipalProvider) : Exerc
         return@dbQuery category
     }
 
+    override suspend fun getCategoryByResult(resultId: String): CategoryEntity? = dbQuery {
+        val result = Results.selectAll().where { Results.id eq resultId }.map(::resultRowToResult).singleOrNull()
+            ?: return@dbQuery null
+        val exercise = Exercises.selectAll().where { Exercises.id eq result.exerciseId!! }.map(::resultRowToExercise)
+            .singleOrNull() ?: return@dbQuery null
+        val exercises = Exercises.selectAll().where { Exercises.categoryId eq exercise.categoryId!! }.map {
+            val exerciseId = it[Exercises.id]
+            val results = getResultsByExercise(exerciseId)
+            resultRowToExercise(it, results)
+        }
+
+        return@dbQuery Categories.selectAll().where { Categories.id eq exercise.categoryId!! }
+            .map { resultRowToCategory(it, exercises) }.single()
+    }
+
     override suspend fun removeCategory(categoryId: String) {
         dbQuery {
             Categories.deleteWhere { id eq categoryId and (userId eq principalProvider.getPrincipal().userId) }
@@ -115,14 +183,14 @@ class ExercisesDaoImpl(private val principalProvider: PrincipalProvider) : Exerc
     }
 
     private fun getExercise(exerciseId: String): ExerciseEntity {
-        val results = getResults(exerciseId)
+        val results = getResultsByExercise(exerciseId)
         val exercise =
             Exercises.selectAll().where { Exercises.id eq exerciseId }.single().let { resultRowToExercise(it, results) }
         return exercise
     }
 
-    private fun getResults(exerciseId: String): List<ResultEntity> {
-        val results = Results.selectAll().where { Results.id eq exerciseId }.map(::resultRowToResult)
+    private fun getResultsByExercise(exerciseId: String): List<ResultEntity> {
+        val results = Results.selectAll().where { Results.exerciseId eq exerciseId }.map(::resultRowToResult)
         return results
     }
 
@@ -143,8 +211,11 @@ class ExercisesDaoImpl(private val principalProvider: PrincipalProvider) : Exerc
 
     private fun resultRowToResult(row: ResultRow) = ResultEntity(
         id = row[Results.id],
+        exerciseId = row[Results.exerciseId],
         amount = row[Results.amount],
         result = row[Results.result],
         date = row[Results.date]
     )
+
+
 }

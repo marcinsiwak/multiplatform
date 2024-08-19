@@ -1,6 +1,6 @@
 package pl.msiwak.repositories
 
-import pl.msiwak.database.dao.user.ExercisesDao
+import pl.msiwak.database.dao.exercise.ExercisesDao
 import pl.msiwak.entities.CategoryEntity
 
 class ExerciseRepository(private val exercisesDao: ExercisesDao) {
@@ -15,6 +15,10 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
 
     suspend fun getCategoryByExercise(exerciseId: String): CategoryEntity? {
         return exercisesDao.getCategoryByExercise(exerciseId)
+    }
+
+    suspend fun getCategoryByResult(resultId: String): CategoryEntity? {
+        return exercisesDao.getCategoryByResult(resultId)
     }
 
     suspend fun getCategories(): List<CategoryEntity> {
@@ -39,5 +43,9 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
 
     suspend fun addResult(categoryEntity: CategoryEntity) {
         exercisesDao.addResult(categoryEntity)
+    }
+
+    suspend fun updateCategory(category: CategoryEntity?) {
+        category?.let { exercisesDao.updateCategory(it) } ?: return
     }
 }

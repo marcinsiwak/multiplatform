@@ -3,8 +3,8 @@ package pl.msiwak.di
 import org.koin.dsl.module
 import pl.msiwak.auth.PrincipalProvider
 import pl.msiwak.commands.*
-import pl.msiwak.database.dao.user.ExercisesDao
-import pl.msiwak.database.dao.user.ExercisesDaoImpl
+import pl.msiwak.database.dao.exercise.ExercisesDao
+import pl.msiwak.database.dao.exercise.ExercisesDaoImpl
 import pl.msiwak.database.dao.user.UserDao
 import pl.msiwak.database.dao.user.UserDaoImpl
 import pl.msiwak.queries.*

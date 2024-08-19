@@ -12,12 +12,17 @@ data class ExerciseEntity(
     val results: HashSet<ResultEntity> = hashSetOf(),
 ) {
 
-    constructor(name: String) : this(
+    constructor(name: String, categoryId: String) : this(
         id = UUID.randomUUID().toString(),
+        categoryId = categoryId,
         name = name
     )
 
     fun addResult(resultEntity: ResultEntity) {
         results.add(resultEntity)
+    }
+
+    fun removeResult(resultId: String) {
+        results.removeIf { it.id == resultId }
     }
 }
