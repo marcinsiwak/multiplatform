@@ -1,19 +1,17 @@
 package pl.msiwak.commands
 
-import pl.msiwak.auth.PrincipalProvider
 import pl.msiwak.entities.CategoryEntity
 import pl.msiwak.repositories.ExerciseRepository
 
 class AddCategoryCommandImpl(
     private val exerciseRepository: ExerciseRepository,
-    private val principalProvider: PrincipalProvider
 ) : AddCategoryCommand {
-    override suspend fun invoke(name: String, exerciseType: String) {
+    override suspend fun invoke(name: String, exerciseType: String, userId: String) {
         val category = CategoryEntity(
-            userId = principalProvider.getPrincipal().userId,
+            userId = userId,
             name = name,
             exerciseType = exerciseType
         )
-        exerciseRepository.addCategory(category)
+        exerciseRepository.updateCategory(category)
     }
 }

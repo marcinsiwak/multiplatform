@@ -1,7 +1,12 @@
 package pl.msiwak.commands
 
-import pl.msiwak.entities.ResultEntity
+import kotlinx.datetime.LocalDateTime
 
 interface AddResultCommand {
-    suspend fun invoke(exerciseId: String, resultEntity: ResultEntity)
+    suspend fun invoke(
+        exerciseId: String,
+        amount: String,
+        result: String,
+        date: LocalDateTime
+    )
 }

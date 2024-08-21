@@ -8,11 +8,11 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import pl.msiwak.auth.firebase.FIREBASE_AUTH
+import pl.msiwak.auth.firebase.FirebaseUser
 import pl.msiwak.commands.*
 import pl.msiwak.dtos.CategoryDTO
 import pl.msiwak.dtos.ExerciseDTO
 import pl.msiwak.dtos.ResultDTO
-import pl.msiwak.entities.ResultEntity
 import pl.msiwak.queries.GetCategoriesQuery
 import pl.msiwak.queries.GetCategoryQuery
 import pl.msiwak.queries.GetExerciseQuery
@@ -30,13 +30,17 @@ fun Route.addExerciseRoute() {
 
     authenticate(FIREBASE_AUTH) {
         get("/categories") {
-            getCategoriesQuery.invoke().run { call.respond(HttpStatusCode.OK, this) }
+            with(call) {
+                val principal = principal<FirebaseUser>() ?: return@get respond(HttpStatusCode.Unauthorized)
+                getCategoriesQuery.invoke(principal.userId).run { respond(HttpStatusCode.OK, this) }
+            }
         }
 
         post("/category") {
             with(call) {
+                val principal = principal<FirebaseUser>() ?: return@post respond(HttpStatusCode.Unauthorized)
                 receive<CategoryDTO>().run {
-                    addCategoryCommand.invoke(name, exerciseType)
+                    addCategoryCommand.invoke(name, exerciseType, principal.userId)
                     respond(HttpStatusCode.OK, this)
                 }
             }
@@ -88,7 +92,9 @@ fun Route.addExerciseRoute() {
                 receive<ResultDTO>().run {
                     addResultCommand.invoke(
                         exerciseId = exerciseId,
-                        resultEntity = ResultEntity(amount = amount, result = result, date = date)
+                        amount = amount,
+                        result = result,
+                        date = date
                     )
                     respond(HttpStatusCode.OK, this)
                 }

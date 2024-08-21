@@ -4,17 +4,21 @@ import pl.msiwak.auth.firebase.FirebaseUser
 import pl.msiwak.error.MissingPrincipalError
 
 class PrincipalProvider {
-    private val principal = ThreadLocal<FirebaseUser?>()
+    private var principal: FirebaseUser? = null
 
     fun setPrincipal(principal: FirebaseUser) {
-        this.principal.set(principal)
+        println("Setting principal on thread: ${Thread.currentThread().id}")
+
+        this.principal = principal
     }
 
     fun getPrincipal(): FirebaseUser {
-        return this.principal.get() ?: throw MissingPrincipalError()
+        println("Setting principal on thread: ${Thread.currentThread().id}")
+
+        return principal ?: throw MissingPrincipalError()
     }
 
     fun clear() {
-        this.principal.remove()
+        this.principal = null
     }
 }
