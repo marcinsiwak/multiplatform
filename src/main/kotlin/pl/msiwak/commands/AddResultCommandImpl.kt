@@ -14,6 +14,6 @@ class AddResultCommandImpl(private val exerciseRepository: ExerciseRepository) :
         val category = exerciseRepository.getCategoryByExercise(exerciseId) ?: return
         val resultEntity = ResultEntity(exerciseId, amount, result, date)
         category.addResult(exerciseId, resultEntity)
-        exerciseRepository.updateCategory(category)
+        exerciseRepository.updateResults(category)
     }
 }

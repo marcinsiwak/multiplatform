@@ -9,15 +9,12 @@ import io.ktor.server.auth.*
 import io.ktor.server.response.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.koin.ktor.ext.inject
-import pl.msiwak.auth.PrincipalProvider
 
 class FirebaseAuthProvider(config: FirebaseConfig) : AuthenticationProvider(config) {
     val authHeader: (ApplicationCall) -> HttpAuthHeader? = config.authHeader
     private val authFunction = config.firebaseAuthenticationFunction
 
     override suspend fun onAuthenticate(context: AuthenticationContext) {
-        val principalProvider by context.call.application.inject<PrincipalProvider>()
         val token = authHeader(context.call)
 
         if (token == null) {
@@ -35,14 +32,11 @@ class FirebaseAuthProvider(config: FirebaseConfig) : AuthenticationProvider(conf
             val principal = verifyFirebaseIdToken(context.call, token, authFunction)
 
             if (principal != null) {
-                principalProvider.setPrincipal(principal as FirebaseUser)
                 context.principal(principal)
             } else {
                 context.call.respond(HttpStatusCode.Unauthorized)
-                principalProvider.clear()
             }
         } catch (cause: Throwable) {
-            principalProvider.clear()
             val message = cause.message ?: cause.javaClass.simpleName
             context.error(FirebaseJWTAuthKey, AuthenticationFailedCause.Error(message))
         }

@@ -6,7 +6,6 @@ class RemoveExerciseCommandImpl(private val exerciseRepository: ExerciseReposito
     override suspend fun invoke(exerciseId: String) {
         val category = exerciseRepository.getCategoryByExercise(exerciseId) ?: return
         category.removeExercise(exerciseId)
-        exerciseRepository.updateCategory(category)
-//        exerciseRepository.removeExercise(exerciseId)
+        exerciseRepository.updateExercises(category)
     }
 }

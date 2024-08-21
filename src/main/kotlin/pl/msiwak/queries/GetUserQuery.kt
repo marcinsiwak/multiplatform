@@ -3,5 +3,5 @@ package pl.msiwak.queries
 import pl.msiwak.dtos.UserDTO
 
 interface GetUserQuery {
-    suspend fun invoke(): UserDTO?
+    suspend fun invoke(userId: String): UserDTO?
 }

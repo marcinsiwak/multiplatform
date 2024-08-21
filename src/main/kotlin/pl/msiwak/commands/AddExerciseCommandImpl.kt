@@ -8,6 +8,6 @@ class AddExerciseCommandImpl(private val exerciseRepository: ExerciseRepository)
         val category = exerciseRepository.getCategory(categoryId) ?: return
         val exercise = ExerciseEntity(name = name, categoryId = categoryId)
         category.addExercise(exercise)
-        exerciseRepository.updateCategory(category)
+        exerciseRepository.updateExercises(category)
     }
 }

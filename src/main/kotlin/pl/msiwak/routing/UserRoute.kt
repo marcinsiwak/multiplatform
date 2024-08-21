@@ -8,6 +8,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import pl.msiwak.auth.firebase.FIREBASE_AUTH
+import pl.msiwak.auth.firebase.FirebaseUser
 import pl.msiwak.commands.AddUserCommand
 import pl.msiwak.dtos.UserDTO
 import pl.msiwak.queries.GetUserQuery
@@ -26,7 +27,8 @@ fun Route.addUserRoutes() {
 
         get("/user") {
             with(call) {
-                getUserQuery.invoke()?.let {
+                val principal = principal<FirebaseUser>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
+                getUserQuery.invoke(principal.userId)?.let {
                     respond(status = HttpStatusCode.OK, message = it)
                 } ?: return@get call.respond(HttpStatusCode.NotFound)
             }
