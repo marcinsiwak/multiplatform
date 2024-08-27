@@ -5,6 +5,6 @@ ktor:
     deployment:
         port: 8080
 storage:
-    jdbcURL: "jdbc:postgresql://localhost:5432/postgres"
+    jdbcURL: "jdbc:postgresql://database:5432/postgres"
     user: "postgres"
     password: "password"

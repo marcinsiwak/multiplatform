@@ -8,7 +8,9 @@ import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDao
 import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDaoImpl
 import pl.msiwak.infrastructure.database.dao.user.UserDao
 import pl.msiwak.infrastructure.database.dao.user.UserDaoImpl
+import pl.msiwak.interfaces.controller.ExerciseController
 import pl.msiwak.interfaces.controller.ExerciseControllerImpl
+import pl.msiwak.interfaces.controller.UserController
 import pl.msiwak.interfaces.controller.UserControllerImpl
 import pl.msiwak.interfaces.mapper.CategoryDTOMapper
 import pl.msiwak.interfaces.mapper.ExerciseDTOMapper
@@ -47,6 +49,6 @@ val diMapperModule = module {
 }
 
 val diControllerModule = module {
-    single { UserControllerImpl(get(), get()) }
-    single { ExerciseControllerImpl(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    single<UserController> { UserControllerImpl(get(), get()) }
+    single<ExerciseController> { ExerciseControllerImpl(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }
