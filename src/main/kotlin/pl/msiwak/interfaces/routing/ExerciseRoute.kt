@@ -13,6 +13,7 @@ import pl.msiwak.interfaces.controller.ExerciseController
 import pl.msiwak.interfaces.dtos.CategoryDTO
 import pl.msiwak.interfaces.dtos.ExerciseDTO
 import pl.msiwak.interfaces.dtos.ResultDTO
+import pl.msiwak.interfaces.dtos.SynchronizeDataDTO
 
 fun Route.addExerciseRoute() {
     val exerciseController by inject<ExerciseController>()
@@ -96,6 +97,21 @@ fun Route.addExerciseRoute() {
                 val id = parameters["id"] ?: return@delete respond(HttpStatusCode.BadRequest)
                 exerciseController.removeResult(id)
                 respond(HttpStatusCode.OK)
+            }
+        }
+
+        post("/synchronize") {
+            with(call) {
+                val principal = principal<FirebaseUser>() ?: return@post respond(HttpStatusCode.Unauthorized)
+                receive<SynchronizeDataDTO>().run {
+                    exerciseController.synchronizeData(
+                        categories,
+                        exercises,
+                        results,
+                        principal.userId
+                    )
+                    respond(HttpStatusCode.OK, this)
+                }
             }
         }
     }

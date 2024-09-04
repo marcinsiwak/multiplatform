@@ -1,17 +1,21 @@
 package pl.msiwak.infrastructure.database.dao.exercise
 
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.batchUpsert
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.selectAll
+import pl.msiwak.domain.entities.CategoryEntity
+import pl.msiwak.domain.entities.ExerciseEntity
+import pl.msiwak.domain.entities.ResultEntity
 import pl.msiwak.infrastructure.database.dao.dbQuery
 import pl.msiwak.infrastructure.database.dao.upsertWithAudit
 import pl.msiwak.infrastructure.database.table.Categories
 import pl.msiwak.infrastructure.database.table.Exercises
 import pl.msiwak.infrastructure.database.table.Results
-import pl.msiwak.domain.entities.CategoryEntity
-import pl.msiwak.domain.entities.ExerciseEntity
-import pl.msiwak.domain.entities.ResultEntity
 
 class ExercisesDaoImpl : ExercisesDao {
 
@@ -144,6 +148,57 @@ class ExercisesDaoImpl : ExercisesDao {
     override suspend fun removeCategory(categoryId: String) {
         dbQuery {
             Categories.deleteWhere { id eq categoryId }
+        }
+    }
+
+    override suspend fun syncCategories(categories: List<CategoryEntity>) {
+        dbQuery {
+            val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+            Categories.batchUpsert(
+                data = categories,
+                onUpdateExclude = listOf(Categories.createdAtUtc)
+            ) { category ->
+                this[Categories.id] = category.id!!
+                this[Categories.name] = category.name
+                this[Categories.userId] = category.userId
+                this[Categories.exerciseType] = category.exerciseType
+                this[Categories.createdAtUtc] = now
+                this[Categories.modifiedAtUtc] = now
+            }
+        }
+    }
+
+    override suspend fun syncExercises(exercises: List<ExerciseEntity>) {
+        dbQuery {
+            val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+            Exercises.batchUpsert(
+                data = exercises,
+                onUpdateExclude = listOf(Exercises.createdAtUtc)
+            ) { exercise ->
+                this[Exercises.id] = exercise.id!!
+                this[Exercises.categoryId] = exercise.categoryId!!
+                this[Exercises.name] = exercise.name
+                this[Exercises.createdAtUtc] = now
+                this[Exercises.modifiedAtUtc] = now
+            }
+        }
+    }
+
+    override suspend fun syncResults(results: List<ResultEntity>) {
+        dbQuery {
+            val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+            Results.batchUpsert(
+                data = results,
+                onUpdateExclude = listOf(Categories.createdAtUtc)
+            ) { result ->
+                this[Results.id] = result.id!!
+                this[Results.exerciseId] = result.exerciseId!!
+                this[Results.amount] = result.amount
+                this[Results.result] = result.result
+                this[Results.date] = result.date
+                this[Results.createdAtUtc] = now
+                this[Results.modifiedAtUtc] = now
+            }
         }
     }
 

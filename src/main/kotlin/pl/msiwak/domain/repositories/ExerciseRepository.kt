@@ -1,7 +1,7 @@
 package pl.msiwak.domain.repositories
 
-import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDao
 import pl.msiwak.domain.entities.CategoryEntity
+import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDao
 
 class ExerciseRepository(private val exercisesDao: ExercisesDao) {
 
@@ -35,5 +35,19 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
 
     suspend fun updateResults(category: CategoryEntity?) {
         category?.let { exercisesDao.updateResults(it) } ?: return
+    }
+
+    suspend fun synchronizeData(
+        categories: List<CategoryEntity>
+    ) {
+        with(exercisesDao) {
+            syncCategories(categories)
+            val exercises = categories.map { it.exercises }.flatten().also {
+                syncExercises(it)
+            }
+            exercises.map { it.results }.flatten().let {
+                syncResults(it)
+            }
+        }
     }
 }

@@ -29,6 +29,7 @@ val diModule = module {
     single<RemoveCategoryUseCase> { RemoveCategoryUseCaseImpl(get()) }
     single<RemoveExerciseUseCase> { RemoveExerciseUseCaseImpl(get()) }
     single<RemoveResultUseCase> { RemoveResultUseCaseImpl(get()) }
+    single<SynchronizeDataUseCase> { SynchronizeDataUseCaseImpl(get()) }
 }
 
 val diRepositoryModule = module {
@@ -50,5 +51,18 @@ val diMapperModule = module {
 
 val diControllerModule = module {
     single<UserController> { UserControllerImpl(get(), get()) }
-    single<ExerciseController> { ExerciseControllerImpl(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    single<ExerciseController> {
+        ExerciseControllerImpl(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
 }

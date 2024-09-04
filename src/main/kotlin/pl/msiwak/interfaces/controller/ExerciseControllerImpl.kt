@@ -4,6 +4,7 @@ import kotlinx.datetime.LocalDateTime
 import pl.msiwak.application.usecases.*
 import pl.msiwak.interfaces.dtos.CategoryDTO
 import pl.msiwak.interfaces.dtos.ExerciseDTO
+import pl.msiwak.interfaces.dtos.ResultDTO
 
 class ExerciseControllerImpl(
     private val addCategoryUseCase: AddCategoryUseCase,
@@ -14,9 +15,9 @@ class ExerciseControllerImpl(
     private val getExerciseUseCase: GetExerciseUseCase,
     private val removeExerciseUseCase: RemoveExerciseUseCase,
     private val addResultUseCase: AddResultUseCase,
-    private val removeResultUseCase: RemoveResultUseCase
+    private val removeResultUseCase: RemoveResultUseCase,
+    private val synchronizeDataUseCase: SynchronizeDataUseCase
 ): ExerciseController {
-
 
     override suspend fun addCategory(name: String, exerciseType: String, userId: String) {
         addCategoryUseCase(
@@ -69,5 +70,14 @@ class ExerciseControllerImpl(
 
     override suspend fun removeResult(resultId: String) {
         removeResultUseCase(resultId)
+    }
+
+    override suspend fun synchronizeData(
+        categoriesDTO: List<CategoryDTO>,
+        exercisesDTO: List<ExerciseDTO>,
+        resultsDTO: List<ResultDTO>,
+        userId: String,
+    ) {
+        synchronizeDataUseCase(categoriesDTO, exercisesDTO, resultsDTO, userId)
     }
 }
