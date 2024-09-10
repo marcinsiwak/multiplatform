@@ -24,6 +24,7 @@ object DatabaseFactory {
         )
 
         val flyway = Flyway.configure().dataSource(url, user, password).load()
+        flyway.clean()
         flyway.migrate()
 
         transaction(database) {

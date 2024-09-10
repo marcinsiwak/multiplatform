@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "msiwak.pl"
-version = "0.0.1"
+version = "1.0.0"
 
 application {
     mainClass.set("pl.msiwak.ApplicationKt")
@@ -32,6 +32,7 @@ dependencies {
     // Ktor Core
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
+    implementation("io.ktor:ktor-server-html-builder:$ktor_version")
 
     // Content Negotiation and Serialization
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
@@ -41,6 +42,9 @@ dependencies {
     implementation("io.ktor:ktor-server-auth-jvm")
     implementation("io.ktor:ktor-server-auth-jwt-jvm")
     implementation("io.ktor:ktor-server-host-common-jvm")
+
+    // Ktor html
+    implementation("io.ktor:ktor-server-html-builder:$ktor_version")
 
     // Firebase
     implementation("com.google.firebase:firebase-admin:9.3.0")
@@ -57,8 +61,8 @@ dependencies {
     // SLF4J Logger
     implementation("io.insert-koin:koin-logger-slf4j:$koin_ktor_version")
 
+    // Flyaway - db migrations
     implementation("org.flywaydb:flyway-core:$flyway_version")
-
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
