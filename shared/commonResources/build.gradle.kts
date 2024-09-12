@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.kotlinCompose)
     id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.releaseonly.config")
     id("pl.msiwak.convention.android.config")
 }
 
