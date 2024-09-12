@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.network.client
+package pl.msiwak.multiplatform.network.api
 
 import io.ktor.client.call.body
 import io.ktor.client.request.delete
@@ -9,6 +9,7 @@ import io.ktor.client.request.setBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import pl.msiwak.multiplatform.network.client.KtorClient
 import pl.msiwak.multiplatform.network.model.ApiCategory
 import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
 import pl.msiwak.multiplatform.network.model.ApiExercise
@@ -18,7 +19,7 @@ import pl.msiwak.multiplatform.network.model.ApiResultRequest
 import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
 import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 
-class CategoryClient(private val ktorClient: KtorClient) {
+class CategoryApi(private val ktorClient: KtorClient) {
 
     suspend fun downloadCategories(): Flow<List<ApiCategory>> {
         val response: List<ApiCategory> = ktorClient.httpClient.get("Exercises/Categories").body()
