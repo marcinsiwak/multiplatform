@@ -30,8 +30,7 @@ fun Route.addExerciseRoute() {
             with(call) {
                 val principal = principal<FirebaseUser>() ?: return@post respond(HttpStatusCode.Unauthorized)
                 receive<CategoryDTO>().run {
-                    exerciseController.addCategory(name, exerciseType, principal.userId)
-                    respond(HttpStatusCode.OK, this)
+                    respond(HttpStatusCode.OK, exerciseController.addCategory(name, exerciseType, principal.userId))
                 }
             }
         }
@@ -56,8 +55,9 @@ fun Route.addExerciseRoute() {
         post("/exercise") {
             with(call) {
                 receive<ExerciseDTO>().run {
-                    exerciseController.addExercise(categoryId, name)
-                    respond(HttpStatusCode.OK, this)
+                    exerciseController.addExercise(categoryId, name)?.let {
+                        respond(HttpStatusCode.OK, it)
+                    }
                 }
             }
         }
@@ -86,8 +86,9 @@ fun Route.addExerciseRoute() {
                         amount = amount,
                         result = result,
                         date = date
-                    )
-                    respond(HttpStatusCode.OK, this)
+                    )?.let {
+                        respond(HttpStatusCode.OK, it)
+                    }
                 }
             }
         }

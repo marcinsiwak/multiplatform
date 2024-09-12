@@ -19,9 +19,9 @@ import pl.msiwak.interfaces.mapper.UserDTOMapper
 
 val diModule = module {
     single<AddUserUseCase> { AddUserUseCaseImpl(get()) }
-    single<AddCategoryUseCase> { AddCategoryUseCaseImpl(get()) }
-    single<AddExerciseUseCase> { AddExerciseUseCaseImpl(get()) }
-    single<AddResultUseCase> { AddResultUseCaseImpl(get()) }
+    single<AddCategoryUseCase> { AddCategoryUseCaseImpl(get(), get()) }
+    single<AddExerciseUseCase> { AddExerciseUseCaseImpl(get(), get()) }
+    single<AddResultUseCase> { AddResultUseCaseImpl(get(), get()) }
     single<GetUserUseCase> { GetUserUseCaseImpl(get(), get()) }
     single<GetCategoryUseCase> { GetCategoryUseCaseImpl(get(), get()) }
     single<GetExerciseUseCase> { GetExerciseUseCaseImpl(get(), get()) }

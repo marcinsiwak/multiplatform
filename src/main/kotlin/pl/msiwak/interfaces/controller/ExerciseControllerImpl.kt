@@ -2,6 +2,7 @@ package pl.msiwak.interfaces.controller
 
 import kotlinx.datetime.LocalDateTime
 import pl.msiwak.application.usecases.*
+import pl.msiwak.domain.entities.ExerciseEntity
 import pl.msiwak.interfaces.dtos.CategoryDTO
 import pl.msiwak.interfaces.dtos.ExerciseDTO
 import pl.msiwak.interfaces.dtos.ResultDTO
@@ -19,8 +20,8 @@ class ExerciseControllerImpl(
     private val synchronizeDataUseCase: SynchronizeDataUseCase
 ): ExerciseController {
 
-    override suspend fun addCategory(name: String, exerciseType: String, userId: String) {
-        addCategoryUseCase(
+    override suspend fun addCategory(name: String, exerciseType: String, userId: String): CategoryDTO {
+        return addCategoryUseCase(
             name = name,
             exerciseType = exerciseType,
             userId = userId
@@ -39,8 +40,8 @@ class ExerciseControllerImpl(
         removeCategoryUseCase(categoryId = categoryId)
     }
 
-    override suspend fun addExercise(categoryId: String, name: String) {
-        addExerciseUseCase(
+    override suspend fun addExercise(categoryId: String, name: String): ExerciseDTO? {
+        return addExerciseUseCase(
             categoryId = categoryId,
             name = name
         )
@@ -59,8 +60,8 @@ class ExerciseControllerImpl(
         amount: String,
         result: String,
         date: LocalDateTime
-    ) {
-        addResultUseCase(
+    ): ResultDTO? {
+        return addResultUseCase(
             exerciseId = exerciseId,
             amount = amount,
             result = result,
