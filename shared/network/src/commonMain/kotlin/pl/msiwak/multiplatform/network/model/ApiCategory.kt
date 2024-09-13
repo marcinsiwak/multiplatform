@@ -1,13 +1,11 @@
 package pl.msiwak.multiplatform.network.model
 
-import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
 class ApiCategory(
-    val categoryId: String = "",
+    val id: String? = null,
     val name: String,
     val exerciseType: String,
-    val exercises: List<ApiExercise> = emptyList(),
-    val creationDate: Instant
+    val exercises: List<ApiExercise> = emptyList()
 )

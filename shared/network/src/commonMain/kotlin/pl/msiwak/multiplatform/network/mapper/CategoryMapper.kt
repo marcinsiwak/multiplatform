@@ -1,7 +1,5 @@
 package pl.msiwak.multiplatform.network.mapper
 
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.network.model.ApiCategory
@@ -11,11 +9,10 @@ class CategoryMapper(private val exerciseMapper: ExerciseMapper) : Mapper<ApiCat
     override fun map(value: ApiCategory): Category {
         val exercises = value.exercises.map { exerciseMapper(it) }
         return Category(
-            id = value.categoryId,
+            id = value.id!!,
             name = value.name,
             exerciseType = ExerciseType.valueOf(value.exerciseType),
-            exercises = exercises,
-            creationDate = value.creationDate.toLocalDateTime(TimeZone.currentSystemDefault())
+            exercises = exercises
         )
     }
 }

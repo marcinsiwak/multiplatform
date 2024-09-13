@@ -15,11 +15,11 @@ import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.database.dao.ResultsDao
-import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
+import pl.msiwak.multiplatform.network.model.ApiCategory
 import pl.msiwak.multiplatform.network.model.ApiCategorySyncRequest
-import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
+import pl.msiwak.multiplatform.network.model.ApiExercise
 import pl.msiwak.multiplatform.network.model.ApiExerciseSyncRequest
-import pl.msiwak.multiplatform.network.model.ApiResultRequest
+import pl.msiwak.multiplatform.network.model.ApiResult
 import pl.msiwak.multiplatform.network.model.ApiResultSyncRequest
 import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
 import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
@@ -62,7 +62,7 @@ class CategoryRepository(
     suspend fun createCategory(category: Category) = withContext(Dispatchers.IO) {
         if (!sessionStore.getIsOfflineSession()) {
             categoryService.createCategory(
-                ApiCategoryRequest(
+                ApiCategory(
                     name = category.name,
                     exerciseType = category.exerciseType.name
                 )
@@ -93,9 +93,10 @@ class CategoryRepository(
     suspend fun addExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
         if (!sessionStore.getIsOfflineSession()) {
             val exerciseResponse = categoryService.addExercise(
-                ApiExerciseRequest(
+                ApiExercise(
                     categoryId = exercise.categoryId,
-                    name = exercise.exerciseTitle
+                    name = exercise.exerciseTitle,
+                    exerciseType = exercise.exerciseType.name
                 )
             ).first()
             exercisesDao.updateExercise(exerciseResponse)
@@ -129,11 +130,11 @@ class CategoryRepository(
     suspend fun addResult(result: ResultData) = withContext(Dispatchers.IO) {
         if (!sessionStore.getIsOfflineSession()) {
             val newResult = categoryService.addResult(
-                ApiResultRequest(
-                    result.exerciseId,
-                    result.result,
-                    result.amount,
-                    result.date.toInstant(TimeZone.currentSystemDefault())
+                ApiResult(
+                    exerciseId = result.exerciseId,
+                    result = result.result,
+                    amount = result.amount,
+                    date = result.date.toInstant(TimeZone.currentSystemDefault())
                 )
             ).first()
             resultsDao.updateResult(newResult)

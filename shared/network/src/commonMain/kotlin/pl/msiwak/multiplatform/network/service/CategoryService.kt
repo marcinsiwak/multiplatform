@@ -9,9 +9,9 @@ import pl.msiwak.multiplatform.network.api.CategoryApi
 import pl.msiwak.multiplatform.network.mapper.CategoryMapper
 import pl.msiwak.multiplatform.network.mapper.ExerciseMapper
 import pl.msiwak.multiplatform.network.mapper.ResultMapper
-import pl.msiwak.multiplatform.network.model.ApiCategoryRequest
-import pl.msiwak.multiplatform.network.model.ApiExerciseRequest
-import pl.msiwak.multiplatform.network.model.ApiResultRequest
+import pl.msiwak.multiplatform.network.model.ApiCategory
+import pl.msiwak.multiplatform.network.model.ApiExercise
+import pl.msiwak.multiplatform.network.model.ApiResult
 import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
 import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 
@@ -36,7 +36,7 @@ class CategoryService(
             .map { categoryMapper(it) }
     }
 
-    suspend fun createCategory(category: ApiCategoryRequest) {
+    suspend fun createCategory(category: ApiCategory) {
         categoryApi.createCategory(category)
     }
 
@@ -49,7 +49,7 @@ class CategoryService(
             .map { exerciseMapper(it) }
     }
 
-    suspend fun addExercise(exerciseRequest: ApiExerciseRequest): Flow<Exercise> {
+    suspend fun addExercise(exerciseRequest: ApiExercise): Flow<Exercise> {
         return categoryApi.addExercise(exerciseRequest)
             .map { exerciseMapper(it) }
     }
@@ -62,7 +62,7 @@ class CategoryService(
         categoryApi.removeExercise(id)
     }
 
-    suspend fun addResult(result: ApiResultRequest): Flow<ResultData> {
+    suspend fun addResult(result: ApiResult): Flow<ResultData> {
         return categoryApi.addResult(result)
             .map { resultMapper(it) }
     }

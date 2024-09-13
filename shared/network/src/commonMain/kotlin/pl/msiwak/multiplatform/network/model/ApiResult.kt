@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class ApiResult(
-    val id: String,
+    val id: String? = null,
     val exerciseId: String,
     val result: String,
     val amount: String,

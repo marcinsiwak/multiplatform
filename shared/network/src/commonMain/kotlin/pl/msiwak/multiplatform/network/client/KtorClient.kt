@@ -29,7 +29,7 @@ class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider)
                 level = LogLevel.ALL
                 logger = object : Logger {
                     override fun log(message: String) {
-                        KermitLogger.v("HTTP Client: $message")
+                        KermitLogger.i("HTTP Client: $message")
                     }
                 }
                 sanitizeHeader { header -> header == HttpHeaders.Authorization }
