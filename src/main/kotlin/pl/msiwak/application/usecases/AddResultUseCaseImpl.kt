@@ -1,6 +1,6 @@
 package pl.msiwak.application.usecases
 
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import pl.msiwak.domain.entities.ResultEntity
 import pl.msiwak.domain.repositories.ExerciseRepository
 import pl.msiwak.interfaces.dtos.ResultDTO
@@ -14,7 +14,7 @@ class AddResultUseCaseImpl(
         exerciseId: String,
         amount: String,
         result: String,
-        date: LocalDateTime
+        date: Instant
     ): ResultDTO? {
         val category = exerciseRepository.getCategoryByExercise(exerciseId) ?: return null
         val resultEntity = ResultEntity(exerciseId, amount, result, date)

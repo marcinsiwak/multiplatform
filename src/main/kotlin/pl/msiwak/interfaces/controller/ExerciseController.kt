@@ -1,7 +1,6 @@
 package pl.msiwak.interfaces.controller
 
-import kotlinx.datetime.LocalDateTime
-import pl.msiwak.domain.entities.ExerciseEntity
+import kotlinx.datetime.Instant
 import pl.msiwak.interfaces.dtos.CategoryDTO
 import pl.msiwak.interfaces.dtos.ExerciseDTO
 import pl.msiwak.interfaces.dtos.ResultDTO
@@ -14,7 +13,12 @@ interface ExerciseController {
     suspend fun addExercise(categoryId: String, name: String): ExerciseDTO?
     suspend fun getExercise(exerciseId: String): ExerciseDTO?
     suspend fun removeExercise(exerciseId: String)
-    suspend fun addResult(exerciseId: String, amount: String, result: String, date: LocalDateTime): ResultDTO?
+    suspend fun addResult(exerciseId: String, amount: String, result: String, date: Instant): ResultDTO?
     suspend fun removeResult(resultId: String)
-    suspend fun synchronizeData(categoriesDTO: List<CategoryDTO>, exercisesDTO: List<ExerciseDTO>, resultsDTO: List<ResultDTO>, userId: String)
+    suspend fun synchronizeData(
+        categoriesDTO: List<CategoryDTO>,
+        exercisesDTO: List<ExerciseDTO>,
+        resultsDTO: List<ResultDTO>,
+        userId: String
+    )
 }

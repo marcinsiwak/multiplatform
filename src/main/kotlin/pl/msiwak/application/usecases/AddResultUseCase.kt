@@ -1,6 +1,6 @@
 package pl.msiwak.application.usecases
 
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import pl.msiwak.interfaces.dtos.ResultDTO
 
 interface AddResultUseCase {
@@ -8,6 +8,6 @@ interface AddResultUseCase {
         exerciseId: String,
         amount: String,
         result: String,
-        date: LocalDateTime
+        date: Instant
     ): ResultDTO?
 }

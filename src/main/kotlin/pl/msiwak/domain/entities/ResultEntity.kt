@@ -1,6 +1,6 @@
 package pl.msiwak.domain.entities
 
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import java.util.*
 
@@ -10,13 +10,13 @@ data class ResultEntity(
     val exerciseId: String? = null,
     val amount: String,
     val result: String,
-    val date: LocalDateTime
+    val date: Instant
 ) {
     constructor(
         exerciseId: String,
         amount: String,
         result: String,
-        date: LocalDateTime
+        date: Instant
     ) : this(
         id = UUID.randomUUID().toString(),
         exerciseId = exerciseId,

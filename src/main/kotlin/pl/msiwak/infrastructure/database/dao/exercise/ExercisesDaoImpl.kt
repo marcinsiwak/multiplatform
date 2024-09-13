@@ -1,8 +1,6 @@
 package pl.msiwak.infrastructure.database.dao.exercise
 
 import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.batchUpsert
@@ -157,7 +155,7 @@ class ExercisesDaoImpl : ExercisesDao {
 
     override suspend fun syncCategories(categories: List<CategoryEntity>) {
         dbQuery {
-            val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+            val now = Clock.System.now()
             Categories.batchUpsert(
                 data = categories,
                 onUpdateExclude = listOf(Categories.createdAtUtc)
@@ -174,7 +172,7 @@ class ExercisesDaoImpl : ExercisesDao {
 
     override suspend fun syncExercises(exercises: List<ExerciseEntity>) {
         dbQuery {
-            val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+            val now = Clock.System.now()
             Exercises.batchUpsert(
                 data = exercises,
                 onUpdateExclude = listOf(Exercises.createdAtUtc)
@@ -190,7 +188,7 @@ class ExercisesDaoImpl : ExercisesDao {
 
     override suspend fun syncResults(results: List<ResultEntity>) {
         dbQuery {
-            val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+            val now = Clock.System.now()
             Results.batchUpsert(
                 data = results,
                 onUpdateExclude = listOf(Categories.createdAtUtc)
