@@ -50,44 +50,48 @@ class ExercisesDaoImpl : ExercisesDao {
     }
 
     override suspend fun updateExercises(category: CategoryEntity) {
-        val exercisesBeforeUpdate = Exercises
-            .selectAll()
-            .where { Exercises.categoryId eq category.id!! }
-            .map(::resultRowToExercise)
-            .toMutableList()
+        dbQuery {
+            val exercisesBeforeUpdate = Exercises
+                .selectAll()
+                .where { Exercises.categoryId eq category.id!! }
+                .map(::resultRowToExercise)
+                .toMutableList()
 
-        category.exercises.forEach { updatedExercise ->
-            upsertWithAudit(Exercises) {
-                it[this.id] = updatedExercise.id!!
-                it[this.categoryId] = updatedExercise.categoryId!!
-                it[this.name] = updatedExercise.name
+            category.exercises.forEach { updatedExercise ->
+                upsertWithAudit(Exercises) {
+                    it[this.id] = updatedExercise.id!!
+                    it[this.categoryId] = updatedExercise.categoryId!!
+                    it[this.name] = updatedExercise.name
+                }
+                exercisesBeforeUpdate.removeIf { it.id == updatedExercise.id }
             }
-            exercisesBeforeUpdate.removeIf { it.id == updatedExercise.id }
-        }
-        exercisesBeforeUpdate.forEach { exerciseBeforeUpdate ->
-            Exercises.deleteWhere { id eq exerciseBeforeUpdate.id!! }
+            exercisesBeforeUpdate.forEach { exerciseBeforeUpdate ->
+                Exercises.deleteWhere { id eq exerciseBeforeUpdate.id!! }
+            }
         }
     }
 
     override suspend fun updateResults(category: CategoryEntity) {
-        val resultsBeforeUpdate = Results
-            .selectAll()
-            .where { Results.exerciseId inList category.exercises.map { it.id!! } }
-            .map(::resultRowToResult)
-            .toMutableList()
+        dbQuery {
+            val resultsBeforeUpdate = Results
+                .selectAll()
+                .where { Results.exerciseId inList category.exercises.map { it.id!! } }
+                .map(::resultRowToResult)
+                .toMutableList()
 
-        category.exercises.flatMap { it.results }.forEach { updatedResult ->
-            upsertWithAudit(Results) {
-                it[this.id] = updatedResult.id!!
-                it[this.exerciseId] = updatedResult.exerciseId!!
-                it[this.amount] = updatedResult.amount
-                it[this.result] = updatedResult.result
-                it[this.date] = updatedResult.date
+            category.exercises.flatMap { it.results }.forEach { updatedResult ->
+                upsertWithAudit(Results) {
+                    it[this.id] = updatedResult.id!!
+                    it[this.exerciseId] = updatedResult.exerciseId!!
+                    it[this.amount] = updatedResult.amount
+                    it[this.result] = updatedResult.result
+                    it[this.date] = updatedResult.date
+                }
+                resultsBeforeUpdate.removeIf { it.id == updatedResult.id }
             }
-            resultsBeforeUpdate.removeIf { it.id == updatedResult.id }
-        }
-        resultsBeforeUpdate.forEach { resultBeforeUpdate ->
-            Results.deleteWhere { id eq resultBeforeUpdate.id!! }
+            resultsBeforeUpdate.forEach { resultBeforeUpdate ->
+                Results.deleteWhere { id eq resultBeforeUpdate.id!! }
+            }
         }
     }
 
