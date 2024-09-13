@@ -23,9 +23,9 @@ object DatabaseFactory {
             password = password
         )
 
-        val flyway = Flyway.configure().dataSource(url, user, password).load()
-        flyway.clean()
-        flyway.migrate()
+        Flyway.configure().dataSource(url, user, password).load().also {
+            it.migrate()
+        }
 
         transaction(database) {
             SchemaUtils.create(Users, Categories, Exercises, Results)
@@ -38,7 +38,7 @@ object DatabaseFactory {
 
         transaction {
 //            val sqlStatements = SchemaUtils.createMissingTablesAndColumns(Users, Categories, Exercises, Results)
-            val sqlStatements =SchemaUtils.statementsRequiredForDatabaseMigration()
+            val sqlStatements = SchemaUtils.statementsRequiredForDatabaseMigration()
 
             outputFile.writeText(sqlStatements.joinToString(";\n") + ";")
         }
