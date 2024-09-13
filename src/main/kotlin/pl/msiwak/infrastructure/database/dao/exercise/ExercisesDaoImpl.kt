@@ -103,7 +103,11 @@ class ExercisesDaoImpl : ExercisesDao {
                 .singleOrNull()
         categoryRow?.let {
             val exercises =
-                Exercises.selectAll().where { Exercises.categoryId eq categoryId }.map(::resultRowToExercise)
+                Exercises.selectAll().where { Exercises.categoryId eq categoryId }
+                    .map(::resultRowToExercise)
+                    .map { exercise ->
+                        exercise.copy(results = Results.selectAll().map(::resultRowToResult).toHashSet())
+                    }
             return resultRowToCategory(it, exercises)
         }
         return null
