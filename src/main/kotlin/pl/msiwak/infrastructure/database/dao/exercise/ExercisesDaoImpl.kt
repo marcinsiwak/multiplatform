@@ -131,7 +131,7 @@ class ExercisesDaoImpl : ExercisesDao {
     }
 
     override suspend fun getCategoryByExercise(exerciseId: String): CategoryEntity? = dbQuery {
-        return@dbQuery getExercise(exerciseId).categoryId?.let {
+        return@dbQuery getExercise(exerciseId)?.categoryId?.let {
             getCategoryEntity(it)
         }
     }
@@ -148,7 +148,7 @@ class ExercisesDaoImpl : ExercisesDao {
         }
 
         return@dbQuery Categories.selectAll().where { Categories.id eq exercise.categoryId!! }
-            .map { resultRowToCategory(it, exercises) }.single()
+            .map { resultRowToCategory(it, exercises) }.singleOrNull()
     }
 
     override suspend fun removeCategory(categoryId: String) {
@@ -208,15 +208,17 @@ class ExercisesDaoImpl : ExercisesDao {
         }
     }
 
-    private fun getExercise(exerciseId: String): ExerciseEntity {
+    private fun getExercise(exerciseId: String): ExerciseEntity? {
         val results = getResultsByExercise(exerciseId)
         val exercise =
-            Exercises.selectAll().where { Exercises.id eq exerciseId }.single().let { resultRowToExercise(it, results) }
+            Exercises.selectAll().where { Exercises.id eq exerciseId }.singleOrNull()
+                ?.let { resultRowToExercise(it, results) }
         return exercise
     }
 
     private fun getResultsByExercise(exerciseId: String): List<ResultEntity> {
-        val results = Results.selectAll().where { Results.exerciseId eq exerciseId }.map(::resultRowToResult)
+        val results =
+            Results.selectAll().where { Results.exerciseId eq exerciseId }.mapNotNull { resultRowToResult(it) }
         return results
     }
 
