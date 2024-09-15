@@ -7,7 +7,7 @@ class ResultDTOMapper : Mapper<ResultEntity, ResultDTO>() {
     override fun map(value: ResultEntity): ResultDTO = with(value) {
         ResultDTO(
             id = id,
-            exerciseId = id!!,
+            exerciseId = exerciseId!!,
             amount = amount,
             result = result,
             date = date
