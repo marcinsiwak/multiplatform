@@ -17,6 +17,10 @@ gradlePlugin {
             id = "pl.msiwak.convention.target.config"
             implementationClass = "pl.msiwak.convention.config.TargetConfigPlugin"
         }
+        register("ReleaseOnlyBuildVariantPlugin ") {
+            id = "pl.msiwak.convention.releaseonly.config"
+            implementationClass = "pl.msiwak.convention.config.ReleaseOnlyBuildVariantPlugin"
+        }
     }
 }
 

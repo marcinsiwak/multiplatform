@@ -42,6 +42,7 @@ class CategoryViewModel(
 
     fun onInit(id: String) {
         categoryId = id
+        println("ID: $id")
         viewModelScope.launch(errorHandler) {
             observeCategoryUseCase(categoryId).collect { category ->
                 exercises.clear()

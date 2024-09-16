@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
+    id("pl.msiwak.convention.android.config")
     id("pl.msiwak.convention.target.config")
 }
 

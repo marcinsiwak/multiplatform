@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinCompose)
     id("pl.msiwak.convention.android.config")
     id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.releaseonly.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)

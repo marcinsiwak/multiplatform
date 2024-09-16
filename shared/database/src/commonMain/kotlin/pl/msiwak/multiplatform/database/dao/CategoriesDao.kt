@@ -68,19 +68,6 @@ class CategoriesDao(database: Database) {
             }
     }
 
-    fun insertCategories(categories: List<Category>) {
-        categories.forEach {
-            with(it) {
-                dbQuery.insertCategory(
-                    id = id,
-                    name = name,
-                    exerciseType = exerciseType,
-                    creationDate = creationDate
-                )
-            }
-        }
-    }
-
     fun updateCategories(categories: List<Category>) {
         categories.forEach {
             with(it) {
