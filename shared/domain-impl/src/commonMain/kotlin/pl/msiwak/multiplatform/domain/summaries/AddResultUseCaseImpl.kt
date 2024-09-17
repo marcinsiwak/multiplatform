@@ -19,7 +19,6 @@ class AddResultUseCaseImpl(
                 amount = amount
             )
             categoryRepository.addResult(resultData)
-
         }
     }
 }

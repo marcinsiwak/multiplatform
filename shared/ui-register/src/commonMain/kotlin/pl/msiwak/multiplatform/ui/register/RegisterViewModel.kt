@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
@@ -45,7 +44,6 @@ class RegisterViewModel(
         }
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     fun onLoginChanged(text: String) {
         _viewState.update { it.copy(login = text, loginErrorMessage = null) }
     }
@@ -63,35 +61,11 @@ class RegisterViewModel(
     private fun getPasswordRequirementsState(text: String): List<PasswordRequirement> {
         return viewState.value.passwordRequirements.map {
             when (it.type) {
-                PasswordRequirementType.LENGTH -> it.copy(
-                    isCorrect = validator.isCorrectPasswordLength(
-                        text
-                    )
-                )
-
-                PasswordRequirementType.NUMBER -> it.copy(
-                    isCorrect = validator.hasPasswordNumber(
-                        text
-                    )
-                )
-
-                PasswordRequirementType.LETTER -> it.copy(
-                    isCorrect = validator.hasPasswordLetter(
-                        text
-                    )
-                )
-
-                PasswordRequirementType.CAPITAL -> it.copy(
-                    isCorrect = validator.hasPasswordCapitalLetter(
-                        text
-                    )
-                )
-
-                PasswordRequirementType.SPECIAL -> it.copy(
-                    isCorrect = validator.hasPasswordSpecialCharacter(
-                        text
-                    )
-                )
+                PasswordRequirementType.LENGTH -> it.copy(isCorrect = validator.isCorrectPasswordLength(text))
+                PasswordRequirementType.NUMBER -> it.copy(isCorrect = validator.hasPasswordNumber(text))
+                PasswordRequirementType.LETTER -> it.copy(isCorrect = validator.hasPasswordLetter(text))
+                PasswordRequirementType.CAPITAL -> it.copy(isCorrect = validator.hasPasswordCapitalLetter(text))
+                PasswordRequirementType.SPECIAL -> it.copy(isCorrect = validator.hasPasswordSpecialCharacter(text))
             }
         }
     }

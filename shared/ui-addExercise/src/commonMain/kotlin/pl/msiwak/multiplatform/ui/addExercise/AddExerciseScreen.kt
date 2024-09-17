@@ -53,7 +53,6 @@ import athletetrack.shared.commonresources.generated.resources.remove_result_dia
 import athletetrack.shared.commonresources.generated.resources.yes
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonObject.DateFilterType

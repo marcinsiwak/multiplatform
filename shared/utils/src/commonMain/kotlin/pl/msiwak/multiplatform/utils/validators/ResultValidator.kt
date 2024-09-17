@@ -31,14 +31,12 @@ class ResultValidator {
         return null
     }
 
-
     private fun isInputGymCorrect(savedResult: String, exerciseType: ExerciseType): Boolean {
         return isCorrectRegex(savedResult, Regex(NUMBER_REGEX_DOT)) || isCorrectRegex(
             savedResult,
             Regex(NUMBER_REGEX_COMMA)
         ) && exerciseType == ExerciseType.GYM
     }
-
 
     private fun isCorrectRegex(input: String, regex: Regex): Boolean {
         return input.matches(regex)

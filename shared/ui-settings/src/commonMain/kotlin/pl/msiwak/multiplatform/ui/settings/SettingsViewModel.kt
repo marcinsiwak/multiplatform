@@ -27,10 +27,9 @@ class SettingsViewModel(
 
     init {
         viewModelScope.launch {
-            val versionName = getVersionNameUseCase()
             _viewState.update {
                 it.copy(
-                    versionName = versionName,
+                    versionName = getVersionNameUseCase(),
                     isLogoutButtonVisible = !isOfflineModeUseCase()
                 )
             }

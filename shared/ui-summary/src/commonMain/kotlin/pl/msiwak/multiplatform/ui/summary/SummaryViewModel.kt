@@ -23,15 +23,14 @@ class SummaryViewModel(
     val viewState: StateFlow<SummaryState> = _viewState
 
     private var categoryToRemovePosition: Int? = null
-    private val currentCategories: MutableList<Category> = mutableListOf()
+    private var currentCategories: List<Category> = mutableListOf()
 
     private val errorHandler = globalErrorHandler.handleError()
 
     init {
         viewModelScope.launch(errorHandler) {
             observeCategoriesUseCase().collect { categories ->
-                currentCategories.clear()
-                currentCategories.addAll(categories)
+                currentCategories = categories
                 _viewState.update { it.copy(categories = categories) }
             }
         }
@@ -55,13 +54,9 @@ class SummaryViewModel(
             _viewState.update { it.copy(isLoading = true) }
             categoryToRemovePosition?.let { pos ->
                 val id = currentCategories[pos].id
-                currentCategories.removeAt(pos)
-                _viewState.update { it.copy(categories = currentCategories) }
-
                 removeCategoryUseCase(id)
-                _viewState.update { it.copy(isRemoveCategoryDialogVisible = false) }
             }
-            _viewState.update { it.copy(isLoading = false) }
+            _viewState.update { it.copy(isLoading = false, isRemoveCategoryDialogVisible = false) }
         }
     }
 

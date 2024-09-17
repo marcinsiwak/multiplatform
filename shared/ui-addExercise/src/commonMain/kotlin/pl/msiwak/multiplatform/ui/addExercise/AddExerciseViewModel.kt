@@ -18,6 +18,7 @@ import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ExerciseType
+import pl.msiwak.multiplatform.commonObject.FormattedResultData
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.commonObject.ResultTableItemData
 import pl.msiwak.multiplatform.commonObject.SortType
@@ -96,7 +97,7 @@ class AddExerciseViewModel(
                         ),
                         resultDataTitles = setTableTitles(exercise.exerciseType),
                         exerciseType = exercise.exerciseType,
-                        newResultData = it.newResultData.copy(date = formatDateUseCase(pickedDate))
+                        newResultData = FormattedResultData(date = formatDateUseCase(pickedDate))
                     )
                 }
             }
