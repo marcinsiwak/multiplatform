@@ -123,7 +123,7 @@ fun AddExerciseScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalResourceApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddExerciseScreenContent(
     navController: NavController,

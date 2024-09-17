@@ -1,10 +1,16 @@
 package pl.msiwak.multiplatform.domain.summaries
 
+import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.commonObject.ResultData
 
 interface AddResultUseCase {
     suspend operator fun invoke(params: Params)
 
-    data class Params(val result: ResultData, val exerciseType: ExerciseType)
+    data class Params(
+        val exerciseId: String,
+        val result: String,
+        val amount: String,
+        val date: LocalDateTime,
+        val exerciseType: ExerciseType
+    )
 }
