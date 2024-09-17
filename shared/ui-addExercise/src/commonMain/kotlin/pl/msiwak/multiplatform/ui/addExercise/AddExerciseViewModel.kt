@@ -61,16 +61,18 @@ class AddExerciseViewModel(
 
     private var pickedDate: Long = Clock.System.now().toEpochMilliseconds()
 
-    private val currentResults: MutableList<ResultData> = mutableListOf()
+    private var currentResults: MutableList<ResultData> = mutableListOf()
 
     private var exerciseToRemovePosition: Int? = null
 
     private var currentExercise: Exercise? = null
-    private var currentExerciseType: ExerciseType = ExerciseType.GYM
 
     private var sortType: SortType = SortType.DATE_DECREASING
 
-    private val errorHandler = globalErrorHandler.handleError()
+    private val errorHandler = globalErrorHandler.handleError {
+        _viewState.update { it.copy(isLoading = false) }
+        false
+    }
 
     private lateinit var exerciseId: String
 
@@ -83,10 +85,8 @@ class AddExerciseViewModel(
         }
         viewModelScope.launch(errorHandler) {
             observeExerciseUseCase(id).collect { exercise ->
-                currentResults.clear()
-                currentResults.addAll(exercise.results)
                 currentExercise = exercise
-                currentExerciseType = exercise.exerciseType
+                currentResults = exercise.results.toMutableList()
                 _viewState.update {
                     it.copy(
                         exerciseTitle = exercise.exerciseTitle,
@@ -137,6 +137,7 @@ class AddExerciseViewModel(
     }
 
     fun onSaveResultClicked() {
+        _viewState.update { it.copy(isLoading = true) }
         val exerciseType = _viewState.value.exerciseType
         val savedResult = _viewState.value.newResultData.result
         val savedAmount = _viewState.value.newResultData.amount
@@ -186,18 +187,19 @@ class AddExerciseViewModel(
                 date = Instant.fromEpochMilliseconds(pickedDate)
                     .toLocalDateTime(TimeZone.currentSystemDefault())
             )
-            addResultUseCase(AddResultUseCase.Params(data, currentExerciseType))
+            addResultUseCase(AddResultUseCase.Params(data, currentExercise!!.exerciseType))
 
             _viewState.update {
                 it.copy(
                     results = formatResultsUseCase(
                         FormatResultsUseCase.Params(
                             currentResults,
-                            currentExerciseType
+                            currentExercise!!.exerciseType
                         )
                     ),
                     isResultFieldEnabled = false,
-                    newResultData = FormattedResultData(date = _viewState.value.newResultData.date)
+                    newResultData = FormattedResultData(date = it.newResultData.date),
+                    isLoading = false
                 )
             }
         }
@@ -275,7 +277,7 @@ class AddExerciseViewModel(
                 results = formatResultsUseCase(
                     FormatResultsUseCase.Params(
                         currentResults,
-                        currentExerciseType
+                        currentExercise!!.exerciseType
                     )
                 )
             )
@@ -350,7 +352,7 @@ class AddExerciseViewModel(
         val newResults = formatResultsUseCase(
             FormatResultsUseCase.Params(
                 currentResults,
-                currentExerciseType
+                currentExercise!!.exerciseType
             )
         )
         _viewState.update { it.copy(results = newResults) }
@@ -362,7 +364,12 @@ class AddExerciseViewModel(
             it.date.dayOfYear == currentDate.dayOfYear
         }
         val newResults =
-            formatResultsUseCase(FormatResultsUseCase.Params(filteredResults, currentExerciseType))
+            formatResultsUseCase(
+                FormatResultsUseCase.Params(
+                    filteredResults,
+                    currentExercise!!.exerciseType
+                )
+            )
         _viewState.value = _viewState.value.copy(results = newResults)
     }
 
@@ -374,7 +381,12 @@ class AddExerciseViewModel(
             diff in 0..previousDaysCount
         }
         val newResults =
-            formatResultsUseCase(FormatResultsUseCase.Params(filteredResults, currentExerciseType))
+            formatResultsUseCase(
+                FormatResultsUseCase.Params(
+                    filteredResults,
+                    currentExercise!!.exerciseType
+                )
+            )
         _viewState.value = _viewState.value.copy(results = newResults)
     }
 
@@ -392,7 +404,7 @@ class AddExerciseViewModel(
         when (sortType) {
             SortType.RESULT_INCREASING -> currentResults.sortBy { it.result.toDouble() }
             SortType.AMOUNT_INCREASING -> {
-                if (currentExerciseType == ExerciseType.RUNNING) {
+                if (currentExercise!!.exerciseType == ExerciseType.RUNNING) {
                     currentResults.sortBy { formatRunningAmountToMillisecondsUseCase(it.amount) }
                 } else {
                     currentResults.sortBy { it.amount.toDouble() }
@@ -402,7 +414,7 @@ class AddExerciseViewModel(
             SortType.DATE_INCREASING -> currentResults.sortBy { it.date }
             SortType.RESULT_DECREASING -> currentResults.sortByDescending { it.result.toDouble() }
             SortType.AMOUNT_DECREASING -> {
-                if (currentExerciseType == ExerciseType.RUNNING) {
+                if (currentExercise!!.exerciseType == ExerciseType.RUNNING) {
                     currentResults.sortByDescending { formatRunningAmountToMillisecondsUseCase(it.amount) }
                 } else {
                     currentResults.sortByDescending { it.amount.toDouble() }

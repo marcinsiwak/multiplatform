@@ -17,7 +17,7 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class AddCategoryViewModel(
     private val createCategoryUseCase: CreateCategoryUseCase,
-    private val globalErrorHandler: GlobalErrorHandler
+    globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AddCategoryState())
@@ -25,6 +25,11 @@ class AddCategoryViewModel(
 
     private val _viewEvent = MutableSharedFlow<AddCategoryEvent>()
     val viewEvent: SharedFlow<AddCategoryEvent> = _viewEvent.asSharedFlow()
+
+    private val errorHandler = globalErrorHandler.handleError {
+        _viewState.update { it.copy(isLoading = false) }
+        false
+    }
 
     fun onTypePicked(exerciseType: ExerciseType) {
         _viewState.value = _viewState.value.copy(exerciseType = exerciseType)
@@ -37,8 +42,8 @@ class AddCategoryViewModel(
     fun onSaveCategoryClicked() {
         val name = _viewState.value.name
         val exerciseType = _viewState.value.exerciseType
-        viewModelScope.launch(globalErrorHandler.handleError()) {
-            _viewState.update { it.copy(isLoading = true) }
+        _viewState.update { it.copy(isLoading = true) }
+        viewModelScope.launch(errorHandler) {
             createCategoryUseCase(Category(name = name, exerciseType = exerciseType))
             _viewState.update { it.copy(isLoading = false) }
             _viewEvent.emit(AddCategoryEvent.NavigateBack)

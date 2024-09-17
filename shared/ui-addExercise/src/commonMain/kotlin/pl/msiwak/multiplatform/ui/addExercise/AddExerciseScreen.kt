@@ -1,13 +1,21 @@
 package pl.msiwak.multiplatform.ui.addExercise
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
@@ -22,10 +30,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.util.fastForEachIndexed
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -33,6 +45,8 @@ import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_new_result
 import athletetrack.shared.commonresources.generated.resources.add_result_save
 import athletetrack.shared.commonresources.generated.resources.confirm
+import athletetrack.shared.commonresources.generated.resources.ic_arrow_down
+import athletetrack.shared.commonresources.generated.resources.ic_arrow_up
 import athletetrack.shared.commonresources.generated.resources.no
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_description
 import athletetrack.shared.commonresources.generated.resources.remove_result_dialog_title
@@ -48,10 +62,12 @@ import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
+import pl.msiwak.multiplatform.ui.commonComponent.NewResultView
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
-import pl.msiwak.multiplatform.ui.commonComponent.ResultsTableView
+import pl.msiwak.multiplatform.ui.commonComponent.ResultView
 import pl.msiwak.multiplatform.ui.commonComponent.ResultsTimeFilterView
 import pl.msiwak.multiplatform.ui.commonComponent.RunningTimeInputDialog
+import pl.msiwak.multiplatform.ui.commonComponent.TextWithDrawableView
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
@@ -246,23 +262,92 @@ fun AddExerciseScreenContent(
                     }
                 }
 
-                ResultsTableView(
-                    modifier = Modifier,
-                    resultDataTitles = viewState.value.resultDataTitles,
-                    results = viewState.value.results,
-                    exerciseType = viewState.value.exerciseType,
-                    focusRequesters = focusRequesters,
-                    isNewResultEnabled = viewState.value.isResultFieldEnabled,
-                    newResultData = viewState.value.newResultData,
-                    onAddNewResultClicked = onAddNewResultClicked::invoke,
-                    onResultValueChanged = onResultValueChanged::invoke,
-                    onAmountValueChanged = onAmountValueChanged::invoke,
-                    onDateValueChanged = onDateValueChanged::invoke,
-                    onDateClicked = onDateClicked::invoke,
-                    onResultLongClick = onResultLongClicked::invoke,
-                    onLabelClicked = onLabelClicked::invoke,
-                    onAmountClicked = onAmountClicked::invoke
-                )
+                val listState = rememberLazyListState()
+
+                LaunchedEffect(viewState.value.isResultFieldEnabled) {
+                    if (viewState.value.isResultFieldEnabled) {
+                        listState.animateScrollToItem(0, 0)
+                        focusRequesters[0].requestFocus()
+                    }
+                }
+
+                Column {
+                    Row(
+                        modifier = Modifier
+                            .height(IntrinsicSize.Min)
+                            .fillMaxWidth()
+                            .padding(vertical = MaterialTheme.dimens.space_8),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        viewState.value.resultDataTitles.fastForEachIndexed { index, item ->
+                            TextWithDrawableView(
+                                modifier = Modifier
+                                    .clickable { onLabelClicked(index) }
+                                    .width(MaterialTheme.dimens.result_item_width),
+                                text = item.text,
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                textAlign = TextAlign.Center,
+                                iconResId = when (item.isArrowUp) {
+                                    true -> Res.drawable.ic_arrow_up
+                                    false -> Res.drawable.ic_arrow_down
+                                    null -> null
+                                }
+                            )
+                        }
+                    }
+
+                    LazyColumn(
+                        modifier = Modifier.fillMaxHeight(),
+                        state = listState
+                    ) {
+                        if (viewState.value.results.isEmpty() && !viewState.value.isResultFieldEnabled) {
+                            item {
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(MaterialTheme.dimens.space_32)
+                                        .clickable {
+                                            onAddNewResultClicked()
+                                        },
+                                    textAlign = TextAlign.Center,
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    text = stringResource(Res.string.add_new_result)
+                                )
+                            }
+                        }
+                        if (viewState.value.isResultFieldEnabled) {
+                            item {
+                                NewResultView(
+                                    modifier = Modifier.focusRequester(focusRequesters[0]),
+                                    focusRequesters = focusRequesters,
+                                    exerciseType = viewState.value.exerciseType,
+                                    newResultData = viewState.value.newResultData,
+                                    onResultValueChanged = {
+                                        onResultValueChanged(it)
+                                    }, onAmountValueChanged = {
+                                        onAmountValueChanged(it)
+                                    }, onDateValueChanged = {
+                                        onDateValueChanged(it)
+                                    }, onDateClicked = {
+                                        onDateClicked()
+                                    },
+                                    onAmountClicked = {
+                                        onAmountClicked()
+                                    }
+                                )
+                            }
+                        }
+
+                        itemsIndexed(viewState.value.results) { pos, item ->
+                            ResultView(
+                                details = listOf(item.result, item.amount, item.date),
+                                onResultLongClick = {
+                                    onResultLongClicked(pos)
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     )

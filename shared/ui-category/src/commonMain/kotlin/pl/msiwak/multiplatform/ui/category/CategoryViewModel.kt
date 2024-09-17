@@ -38,11 +38,13 @@ class CategoryViewModel(
     private var exerciseToRemovePosition: Int? = null
     private val exercises: MutableList<Exercise> = mutableListOf()
 
-    private val errorHandler = globalErrorHandler.handleError()
+    private val errorHandler = globalErrorHandler.handleError {
+        _viewState.update { it.copy(isLoading = false) }
+        false
+    }
 
     fun onInit(id: String) {
         categoryId = id
-        println("ID: $id")
         viewModelScope.launch(errorHandler) {
             observeCategoryUseCase(categoryId).collect { category ->
                 exercises.clear()
@@ -59,8 +61,8 @@ class CategoryViewModel(
     }
 
     fun onResume() {
+        _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
-            _viewState.update { it.copy(isLoading = true) }
             downloadCategoryUseCase(categoryId)
             _viewState.update { it.copy(isLoading = false) }
         }
@@ -104,9 +106,8 @@ class CategoryViewModel(
     }
 
     fun onResultRemoved() {
+        _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
-            _viewState.update { it.copy(isLoading = true) }
-
             exerciseToRemovePosition?.let { pos ->
                 val exercise = exercises[pos]
                 exercises.removeAt(pos)
