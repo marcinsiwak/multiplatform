@@ -28,7 +28,7 @@ class DashboardViewModel(
             _viewState.update { it.copy(isOfflineBannerVisible = getIsOfflineModeUseCase()) }
         }
         viewModelScope.launch(errorHandler) {
-            val user = getUser()
+            getUser()
         }
     }
 

@@ -140,6 +140,7 @@ import pl.msiwak.multiplatform.ui.welcome.terms.TermsConfirmationViewModel
 import pl.msiwak.multiplatform.utils.DateFormatter
 import pl.msiwak.multiplatform.utils.NumberFormatter
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
+import pl.msiwak.multiplatform.utils.validators.ResultValidator
 import pl.msiwak.multiplatform.utils.validators.Validator
 
 fun appModule() = listOf(
@@ -177,6 +178,7 @@ val apiModule = module {
 val toolsModule = module {
     single { GlobalErrorHandler() }
     single { Validator() }
+    single { ResultValidator() }
     single { DateFormatter() }
     single { NumberFormatter() }
     single { UserMapper() }
@@ -205,6 +207,7 @@ val viewModelsModule = module {
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition {
         AddExerciseViewModel(
+            get(),
             get(),
             get(),
             get(),

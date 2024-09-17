@@ -36,17 +36,18 @@ class CategoryViewModel(
 
     private lateinit var categoryId: String
     private var exerciseToRemovePosition: Int? = null
-    private val exercises: MutableList<Exercise> = mutableListOf()
+    private var exercises: List<Exercise> = emptyList()
 
-    private val errorHandler = globalErrorHandler.handleError()
+    private val errorHandler = globalErrorHandler.handleError {
+        _viewState.update { it.copy(isLoading = false) }
+        false
+    }
 
     fun onInit(id: String) {
         categoryId = id
-        println("ID: $id")
         viewModelScope.launch(errorHandler) {
             observeCategoryUseCase(categoryId).collect { category ->
-                exercises.clear()
-                exercises.addAll(category.exercises)
+                exercises = category.exercises
                 _viewState.update {
                     it.copy(
                         categoryName = category.name,
@@ -59,8 +60,8 @@ class CategoryViewModel(
     }
 
     fun onResume() {
+        _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
-            _viewState.update { it.copy(isLoading = true) }
             downloadCategoryUseCase(categoryId)
             _viewState.update { it.copy(isLoading = false) }
         }
@@ -78,13 +79,11 @@ class CategoryViewModel(
         _viewState.update { it.copy(isDialogVisible = false, isLoading = true) }
 
         viewModelScope.launch(errorHandler) {
-            val exerciseName = _viewState.value.newExerciseName
-            val exerciseType = _viewState.value.exerciseType
             val id = addExerciseUseCase(
                 Exercise(
                     categoryId = categoryId,
-                    exerciseTitle = exerciseName,
-                    exerciseType = exerciseType,
+                    exerciseTitle = viewState.value.newExerciseName,
+                    exerciseType = viewState.value.exerciseType,
                     creationDate = Clock.System.now()
                         .toLocalDateTime(TimeZone.currentSystemDefault())
                 )
@@ -103,13 +102,11 @@ class CategoryViewModel(
         _viewState.update { it.copy(isRemoveExerciseDialogVisible = true) }
     }
 
-    fun onResultRemoved() {
+    fun onExerciseRemoved() {
+        _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
-            _viewState.update { it.copy(isLoading = true) }
-
             exerciseToRemovePosition?.let { pos ->
                 val exercise = exercises[pos]
-                exercises.removeAt(pos)
 
                 removeExerciseUseCase(exercise)
                 _viewState.update {

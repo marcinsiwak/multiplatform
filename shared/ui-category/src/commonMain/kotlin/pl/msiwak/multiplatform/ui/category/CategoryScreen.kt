@@ -90,18 +90,12 @@ fun CategoryScreen(
         navController = navController,
         viewState = viewState,
         backgroundId = backgroundId,
-        onConfirmClicked = viewModel::onResultRemoved,
+        onConfirmClicked = viewModel::onExerciseRemoved,
         onDismissClicked = viewModel::onPopupDismissed,
         onExerciseTitleChanged = viewModel::onAddExerciseNameChanged,
         onAddExerciseClicked = viewModel::onAddExerciseClicked,
         onDialogClosed = viewModel::onDialogClosed,
-        onItemClick = {
-            navController.navigate(
-                NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(
-                    it
-                )
-            )
-        },
+        onItemClick = { navController.navigate(NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(it)) },
         onLongClick = viewModel::onResultLongClicked,
         onClick = viewModel::onAddNewExerciseClicked
 

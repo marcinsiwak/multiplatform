@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.ui.unit
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import pl.msiwak.multiplatform.domain.settings.GetUnitsUseCase
 import pl.msiwak.multiplatform.domain.settings.SetUnitsUseCase
 
@@ -15,19 +16,18 @@ class UnitViewModel(
     val viewState: StateFlow<UnitState> = _viewState
 
     init {
-        val unit = getUnitsUseCase()
-        val units = _viewState.value.unitItemList.map {
-            if (it.unitType == unit) {
+        val units = viewState.value.unitItemList.map {
+            if (it.unitType == getUnitsUseCase()) {
                 it.copy(isSelected = true)
             } else {
                 it.copy(isSelected = false)
             }
         }
-        _viewState.value = _viewState.value.copy(unitItemList = units)
+        _viewState.update { it.copy(unitItemList = units) }
     }
 
     fun onUnitTypeChanged(pos: Int) {
-        val newItem = _viewState.value.unitItemList.mapIndexed { index, item ->
+        val newItem = viewState.value.unitItemList.mapIndexed { index, item ->
             if (pos == index) {
                 setUnitsUseCase(item.unitType)
                 item.copy(isSelected = true)
@@ -35,6 +35,6 @@ class UnitViewModel(
                 item.copy(isSelected = false)
             }
         }
-        _viewState.value = _viewState.value.copy(unitItemList = newItem)
+        _viewState.update { it.copy(unitItemList = newItem) }
     }
 }
