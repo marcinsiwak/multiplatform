@@ -45,7 +45,6 @@ fun DashboardScreen(
                 DashboardUiAction.OnSignInUpClicked -> parentNavController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
                 else -> viewModel.onUiAction(it)
             }
-
         }
     )
 }
@@ -56,7 +55,7 @@ private fun DashboardScreenContent(
     bottomNavigationProvider: BottomNavigationProvider,
     viewState: State<DashboardState>,
     items: List<BottomNavigationDestination>,
-    onUiAction: (DashboardUiAction) -> Unit,
+    onUiAction: (DashboardUiAction) -> Unit
 ) {
     val navController = rememberNavController()
 
