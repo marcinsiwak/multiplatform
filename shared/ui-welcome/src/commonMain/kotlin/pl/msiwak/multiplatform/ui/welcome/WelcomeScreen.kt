@@ -94,32 +94,19 @@ fun WelcomeScreen(
 
     WelcomeScreenContent(
         viewState = viewState,
-        onConfirmDialogButtonClicked = viewModel::onConfirmDialogButtonClicked,
-        onConfirmSynchronizationClicked = viewModel::onConfirmSynchronizationClicked,
-        onDismissSynchronizationClicked = viewModel::onDismissSynchronizationClicked,
-        onLoginChanged = viewModel::onLoginChanged,
-        onPasswordChanged = viewModel::onPasswordChanged,
-        onVisibilityClicked = viewModel::onVisibilityClicked,
-        onLoginClicked = viewModel::onLoginClicked,
-        onOfflineModeClicked = viewModel::onOfflineModeClicked,
-        onRegistrationClicked = viewModel::onRegistrationClicked,
-        onGoogleLoginClicked = { startSignIn() }
+        onUiAction = {
+            when (it) {
+                WelcomeUiAction.OnGoogleLoginClicked -> startSignIn()
+                else -> viewModel.onUiAction(it)
+            }
+        }
     )
 }
 
 @Composable
 fun WelcomeScreenContent(
     viewState: State<WelcomeState>,
-    onConfirmDialogButtonClicked: () -> Unit = {},
-    onConfirmSynchronizationClicked: () -> Unit = {},
-    onDismissSynchronizationClicked: () -> Unit = {},
-    onLoginChanged: (String) -> Unit = {},
-    onPasswordChanged: (String) -> Unit = {},
-    onVisibilityClicked: () -> Unit = {},
-    onLoginClicked: () -> Unit = {},
-    onOfflineModeClicked: () -> Unit = {},
-    onRegistrationClicked: () -> Unit = {},
-    onGoogleLoginClicked: () -> Unit = {}
+    onUiAction: (WelcomeUiAction) -> Unit
 
 ) {
     if (viewState.value.isErrorDialogVisible) {
@@ -128,7 +115,7 @@ fun WelcomeScreenContent(
             description = stringResource(Res.string.auth_failed_description),
             confirmButtonTitle = stringResource(Res.string.confirm),
             onConfirmClicked = {
-                onConfirmDialogButtonClicked()
+                onUiAction(WelcomeUiAction.OnConfirmDialogButtonClicked)
             }
         )
     }
@@ -140,10 +127,10 @@ fun WelcomeScreenContent(
             confirmButtonTitle = stringResource(Res.string.confirm),
             dismissButtonTitle = stringResource(Res.string.deny),
             onConfirmClicked = {
-                onConfirmSynchronizationClicked()
+                onUiAction(WelcomeUiAction.OnConfirmSynchronizationClicked)
             },
             onDismissClicked = {
-                onDismissSynchronizationClicked()
+                onUiAction(WelcomeUiAction.OnDismissSynchronizationClicked)
             }
         )
     }
@@ -170,7 +157,7 @@ fun WelcomeScreenContent(
                         value = viewState.value.login,
                         errorMessage = viewState.value.authErrorMessage,
                         onValueChange = {
-                            onLoginChanged(it)
+                            onUiAction(WelcomeUiAction.OnLoginChanged(it))
                         },
                         hintText = stringResource(Res.string.email)
                     )
@@ -180,13 +167,13 @@ fun WelcomeScreenContent(
                         value = viewState.value.password,
                         errorMessage = viewState.value.authErrorMessage,
                         onValueChange = {
-                            onPasswordChanged(it)
+                            onUiAction(WelcomeUiAction.OnPasswordChanged(it))
                         },
                         isPasswordVisible = viewState.value.isPasswordVisible,
                         trailingIcon = {
                             Icon(
                                 modifier = Modifier
-                                    .clickable { onVisibilityClicked() },
+                                    .clickable { onUiAction(WelcomeUiAction.OnVisibilityClicked) },
                                 painter = painterResource(
                                     if (viewState.value.isPasswordVisible) {
                                         Res.drawable.ic_invisible
@@ -205,7 +192,7 @@ fun WelcomeScreenContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = MaterialTheme.dimens.space_24),
-                        onClick = { onLoginClicked() },
+                        onClick = { onUiAction(WelcomeUiAction.OnLoginClicked) },
                         text = stringResource(Res.string.login)
                     )
 
@@ -216,7 +203,7 @@ fun WelcomeScreenContent(
                                 top = MaterialTheme.dimens.space_16
                             ),
                         onClick = {
-                            onGoogleLoginClicked()
+                            onUiAction(WelcomeUiAction.OnGoogleLoginClicked)
                         },
                         leadingIcon = Res.drawable.ic_google,
                         text = stringResource(Res.string.welcome_google_login)
@@ -229,7 +216,7 @@ fun WelcomeScreenContent(
                                 top = MaterialTheme.dimens.space_16,
                                 bottom = MaterialTheme.dimens.space_16
                             ),
-                        onClick = { onOfflineModeClicked() },
+                        onClick = { onUiAction(WelcomeUiAction.OnOfflineModeClicked) },
                         text = stringResource(Res.string.welcome_offline_mode)
                     )
 
@@ -239,7 +226,7 @@ fun WelcomeScreenContent(
                     )
                     Button(
                         onClick = {
-                            onRegistrationClicked()
+                            onUiAction(WelcomeUiAction.OnRegistrationClicked)
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent
@@ -257,6 +244,6 @@ fun WelcomeScreenContent(
 @Composable
 fun WelcomeScreenPreview() {
     AppTheme {
-        WelcomeScreenContent(MutableStateFlow(WelcomeState()).collectAsState())
+        WelcomeScreenContent(MutableStateFlow(WelcomeState()).collectAsState()) {}
     }
 }

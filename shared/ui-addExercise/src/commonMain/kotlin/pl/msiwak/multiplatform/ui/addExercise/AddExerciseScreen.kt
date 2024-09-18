@@ -55,7 +55,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import pl.msiwak.multiplatform.commonObject.DateFilterType
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
@@ -103,22 +102,7 @@ fun AddExerciseScreen(
         viewState = viewState,
         focusManager = focusManager,
         focusRequesters = focusRequesters,
-        onResultRemoved = viewModel::onResultRemoved,
-        onPopupDismissed = viewModel::onPopupDismissed,
-        onConfirmRunningAmount = viewModel::onConfirmRunningAmount,
-        onDismissAmountDialog = viewModel::onDismissAmountDialog,
-        onTabClicked = viewModel::onTabClicked,
-        onSaveResultClicked = viewModel::onSaveResultClicked,
-        onAddNewResultClicked = viewModel::onAddNewResultClicked,
-        onResultValueChanged = viewModel::onResultValueChanged,
-        onAmountValueChanged = viewModel::onAmountValueChanged,
-        onDateValueChanged = viewModel::onDateValueChanged,
-        onDateClicked = viewModel::onDateClicked,
-        onResultLongClicked = viewModel::onResultLongClicked,
-        onLabelClicked = viewModel::onLabelClicked,
-        onAmountClicked = viewModel::onAmountClicked,
-        onDateConfirmClicked = viewModel::onDatePicked,
-        onDateDismiss = viewModel::onDateDismiss
+        onUiAction = viewModel::onUiAction
     )
 }
 
@@ -129,33 +113,18 @@ fun AddExerciseScreenContent(
     viewState: State<AddExerciseState>,
     focusManager: FocusManager,
     focusRequesters: List<FocusRequester>,
-    onResultRemoved: () -> Unit = {},
-    onPopupDismissed: () -> Unit = {},
-    onConfirmRunningAmount: (String, String, String, String) -> Unit = { _, _, _, _ -> },
-    onDismissAmountDialog: () -> Unit = {},
-    onTabClicked: (DateFilterType) -> Unit = {},
-    onSaveResultClicked: () -> Unit = {},
-    onAddNewResultClicked: () -> Unit = {},
-    onResultValueChanged: (String) -> Unit = {},
-    onAmountValueChanged: (String) -> Unit = {},
-    onDateValueChanged: (String) -> Unit = {},
-    onDateClicked: () -> Unit = {},
-    onResultLongClicked: (Int) -> Unit = {},
-    onLabelClicked: (Int) -> Unit = {},
-    onAmountClicked: () -> Unit = {},
-    onDateConfirmClicked: (Long?) -> Unit = {},
-    onDateDismiss: () -> Unit = {}
+    onUiAction: (AddExerciseUiAction) -> Unit
 ) {
     val datePickerState = rememberDatePickerState()
 
     if (viewState.value.isDatePickerVisible) {
         DatePickerDialog(
-            onDismissRequest = onDateDismiss,
+            onDismissRequest = { onUiAction(AddExerciseUiAction.OnDateDismiss) },
             confirmButton = {
                 MainButton(
                     text = stringResource(Res.string.confirm),
                     onClick = {
-                        onDateConfirmClicked(datePickerState.selectedDateMillis)
+                        onUiAction(AddExerciseUiAction.OnDateConfirmClicked(datePickerState.selectedDateMillis))
                     }
                 )
             }
@@ -171,10 +140,10 @@ fun AddExerciseScreenContent(
             confirmButtonTitle = stringResource(Res.string.yes),
             dismissButtonTitle = stringResource(Res.string.no),
             onConfirmClicked = {
-                onResultRemoved()
+                onUiAction(AddExerciseUiAction.OnResultRemoved)
             },
             onDismissClicked = {
-                onPopupDismissed()
+                onUiAction(AddExerciseUiAction.OnPopupDismissed)
             }
         )
     }
@@ -187,10 +156,10 @@ fun AddExerciseScreenContent(
         focusManager.clearFocus()
         RunningTimeInputDialog(
             onConfirm = { hours: String, minutes: String, seconds: String, milliseconds: String ->
-                onConfirmRunningAmount(hours, minutes, seconds, milliseconds)
+                onUiAction(AddExerciseUiAction.OnConfirmRunningAmount(hours, minutes, seconds, milliseconds))
             },
             onDismiss = {
-                onDismissAmountDialog()
+                onUiAction(AddExerciseUiAction.OnDismissAmountDialog)
             }
         )
     }
@@ -214,7 +183,7 @@ fun AddExerciseScreenContent(
                     tabs = viewState.value.filter,
                     selectedPos = viewState.value.selectedFilterPosition,
                     onTabClicked = {
-                        onTabClicked(it)
+                        onUiAction(AddExerciseUiAction.OnTabClicked(it))
                     }
                 )
 
@@ -232,7 +201,7 @@ fun AddExerciseScreenContent(
                                 contentColor = MaterialTheme.colorScheme.primary
                             ),
                             onClick = {
-                                onAddNewResultClicked()
+                                onUiAction(AddExerciseUiAction.OnAddNewResultClicked)
                             }
                         ) {
                             Text(
@@ -250,7 +219,7 @@ fun AddExerciseScreenContent(
                                 contentColor = MaterialTheme.colorScheme.primary
                             ),
                             onClick = {
-                                onSaveResultClicked()
+                                onUiAction(AddExerciseUiAction.OnSaveResultClicked)
                             }
                         ) {
                             Text(
@@ -281,7 +250,7 @@ fun AddExerciseScreenContent(
                         viewState.value.resultDataTitles.fastForEachIndexed { index, item ->
                             TextWithDrawableView(
                                 modifier = Modifier
-                                    .clickable { onLabelClicked(index) }
+                                    .clickable { onUiAction(AddExerciseUiAction.OnLabelClicked(index)) }
                                     .width(MaterialTheme.dimens.result_item_width),
                                 text = item.text,
                                 color = MaterialTheme.colorScheme.onPrimary,
@@ -306,7 +275,7 @@ fun AddExerciseScreenContent(
                                         .fillMaxWidth()
                                         .padding(MaterialTheme.dimens.space_32)
                                         .clickable {
-                                            onAddNewResultClicked()
+                                            onUiAction(AddExerciseUiAction.OnAddNewResultClicked)
                                         },
                                     textAlign = TextAlign.Center,
                                     color = MaterialTheme.colorScheme.onPrimary,
@@ -322,16 +291,16 @@ fun AddExerciseScreenContent(
                                     exerciseType = viewState.value.exerciseType,
                                     newResultData = viewState.value.newResultData,
                                     onResultValueChanged = {
-                                        onResultValueChanged(it)
+                                        onUiAction(AddExerciseUiAction.OnResultValueChanged(it))
                                     }, onAmountValueChanged = {
-                                        onAmountValueChanged(it)
+                                        onUiAction(AddExerciseUiAction.OnAmountValueChanged(it))
                                     }, onDateValueChanged = {
-                                        onDateValueChanged(it)
+                                        onUiAction(AddExerciseUiAction.OnDateValueChanged(it))
                                     }, onDateClicked = {
-                                        onDateClicked()
+                                        onUiAction(AddExerciseUiAction.OnDateClicked)
                                     },
                                     onAmountClicked = {
-                                        onAmountClicked()
+                                        onUiAction(AddExerciseUiAction.OnAmountClicked)
                                     }
                                 )
                             }
@@ -341,7 +310,7 @@ fun AddExerciseScreenContent(
                             ResultView(
                                 details = listOf(item.result, item.amount, item.date),
                                 onResultLongClick = {
-                                    onResultLongClicked(pos)
+                                    onUiAction(AddExerciseUiAction.OnResultLongClicked(pos))
                                 }
                             )
                         }
@@ -360,7 +329,8 @@ fun AddExerciseScreenPreview() {
             rememberNavController(),
             viewState = MutableStateFlow(AddExerciseState()).collectAsState(),
             focusManager = LocalFocusManager.current,
-            focusRequesters = listOf()
+            focusRequesters = listOf(),
+            onUiAction = {}
         )
     }
 }

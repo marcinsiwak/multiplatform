@@ -53,9 +53,7 @@ fun AddCategoryScreen(
     AddCategoryScreenContent(
         navController = navController,
         viewState = viewState,
-        onCategoryNameChanged = viewModel::onCategoryNameChanged,
-        onTypePicked = viewModel::onTypePicked,
-        onSaveCategoryClicked = viewModel::onSaveCategoryClicked
+        onUiAction = viewModel::onUiAction
     )
 }
 
@@ -63,9 +61,7 @@ fun AddCategoryScreen(
 fun AddCategoryScreenContent(
     navController: NavController,
     viewState: State<AddCategoryState>,
-    onCategoryNameChanged: (String) -> Unit = {},
-    onTypePicked: (ExerciseType) -> Unit = {},
-    onSaveCategoryClicked: () -> Unit = {}
+    onUiAction: (AddCategoryUiAction) -> Unit
 ) {
     if (viewState.value.isLoading) {
         Loader()
@@ -88,15 +84,15 @@ fun AddCategoryScreenContent(
                             .padding(MaterialTheme.dimens.space_8),
                         value = viewState.value.name,
                         onValueChange = {
-                            onCategoryNameChanged(it)
+                            onUiAction(AddCategoryUiAction.OnCategoryNameChanged(it))
                         },
                         hintText = stringResource(Res.string.category_name)
                     )
                     DropDownView(
                         currentValue = viewState.value.exerciseType.name,
-                        items = ExerciseType.values().toList(),
+                        items = ExerciseType.entries,
                         onItemPicked = {
-                            onTypePicked(it)
+                            onUiAction(AddCategoryUiAction.OnTypePicked(it))
                         }
                     )
                 }
@@ -112,7 +108,7 @@ fun AddCategoryScreenContent(
                         containerColor = MaterialTheme.colorScheme.tertiary,
                         contentColor = MaterialTheme.colorScheme.primary
                     ),
-                    onClick = { onSaveCategoryClicked() }
+                    onClick = { onUiAction(AddCategoryUiAction.OnSaveCategoryClicked) }
                 ) {
                     Text(
                         modifier = Modifier.padding(MaterialTheme.dimens.space_8),
@@ -131,7 +127,8 @@ fun AddCategoryScreenPreview() {
     AppTheme {
         AddCategoryScreenContent(
             rememberNavController(),
-            viewState = MutableStateFlow(AddCategoryState()).collectAsState()
+            viewState = MutableStateFlow(AddCategoryState()).collectAsState(),
+            onUiAction = {}
         )
     }
 }

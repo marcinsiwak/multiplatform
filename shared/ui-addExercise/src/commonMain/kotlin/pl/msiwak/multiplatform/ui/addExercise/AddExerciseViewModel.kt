@@ -130,12 +130,33 @@ class AddExerciseViewModel(
         }
     }
 
-    fun onAddNewResultClicked() {
+    fun onUiAction(action: AddExerciseUiAction) {
+        when (action) {
+            AddExerciseUiAction.OnAddNewResultClicked -> onAddNewResultClicked()
+            AddExerciseUiAction.OnAmountClicked -> onAmountClicked()
+            is AddExerciseUiAction.OnAmountValueChanged -> onAmountValueChanged(action.amount)
+            is AddExerciseUiAction.OnConfirmRunningAmount -> onConfirmRunningAmount(action.hours, action.minutes, action.seconds, action.milliseconds)
+            AddExerciseUiAction.OnDateClicked -> onDateClicked()
+            is AddExerciseUiAction.OnDateConfirmClicked -> onDatePicked(action.selectedDateMillis)
+            AddExerciseUiAction.OnDateDismiss -> onDateDismiss()
+            is AddExerciseUiAction.OnDateValueChanged -> onDateValueChanged(action.date)
+            AddExerciseUiAction.OnDismissAmountDialog -> onDismissAmountDialog()
+            is AddExerciseUiAction.OnLabelClicked -> onLabelClicked(action.index)
+            AddExerciseUiAction.OnPopupDismissed -> onPopupDismissed()
+            is AddExerciseUiAction.OnResultLongClicked -> onResultLongClicked(action.pos)
+            AddExerciseUiAction.OnResultRemoved -> onResultRemoved()
+            is AddExerciseUiAction.OnResultValueChanged -> onResultValueChanged(action.result)
+            AddExerciseUiAction.OnSaveResultClicked -> onSaveResultClicked()
+            is AddExerciseUiAction.OnTabClicked -> onTabClicked(action.dateFilterType)
+        }
+    }
+
+    private fun onAddNewResultClicked() {
         _viewState.update { it.copy(isResultFieldEnabled = true) }
         pickedDate = Clock.System.now().toEpochMilliseconds()
     }
 
-    fun onSaveResultClicked() {
+    private fun onSaveResultClicked() {
         _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
             with(viewState.value.newResultData) {
@@ -175,19 +196,19 @@ class AddExerciseViewModel(
         }
     }
 
-    fun onDateClicked() {
+    private fun onDateClicked() {
         _viewState.update { it.copy(isDatePickerVisible = true) }
     }
 
-    fun onAmountClicked() {
+    private fun onAmountClicked() {
         _viewState.update { it.copy(isTimeInputDialogVisible = true) }
     }
 
-    fun onDismissAmountDialog() {
+    private fun onDismissAmountDialog() {
         _viewState.update { it.copy(isTimeInputDialogVisible = false) }
     }
 
-    fun onConfirmRunningAmount(
+    private fun onConfirmRunningAmount(
         hours: String,
         minutes: String,
         seconds: String,
@@ -210,18 +231,18 @@ class AddExerciseViewModel(
         }
     }
 
-    fun onDatePicked(date: Long?) {
+    private fun onDatePicked(date: Long?) {
         if (date == null) return
         pickedDate = date
         _viewState.update { it.copy(newResultData = it.newResultData.copy(date = formatDateUseCase(date)), isDatePickerVisible = false) }
     }
 
-    fun onResultLongClicked(resultIndex: Int) {
+    private fun onResultLongClicked(resultIndex: Int) {
         exerciseToRemovePosition = resultIndex
         _viewState.update { it.copy(isRemoveExerciseDialogVisible = true) }
     }
 
-    fun onLabelClicked(labelPosition: Int) {
+    private fun onLabelClicked(labelPosition: Int) {
         sortResults(labelPosition)
 
         _viewState.update {
@@ -232,7 +253,7 @@ class AddExerciseViewModel(
         }
     }
 
-    fun onResultRemoved() {
+    private fun onResultRemoved() {
         viewModelScope.launch {
             exerciseToRemovePosition?.let {
                 val id = currentResults[it].id
@@ -242,15 +263,15 @@ class AddExerciseViewModel(
         }
     }
 
-    fun onPopupDismissed() {
+    private fun onPopupDismissed() {
         _viewState.update { it.copy(isRemoveExerciseDialogVisible = false) }
     }
 
-    fun onResultValueChanged(text: String) {
+    private fun onResultValueChanged(text: String) {
         _viewState.update { it.copy(newResultData = _viewState.value.newResultData.copy(result = text.filter { it.isNumber() }, isResultError = false)) }
     }
 
-    fun onAmountValueChanged(text: String) {
+    private fun onAmountValueChanged(text: String) {
         val amount = text.filter {
             if (viewState.value.exerciseType == ExerciseType.RUNNING) {
                 if (text.length >= 8) return
@@ -262,11 +283,11 @@ class AddExerciseViewModel(
         _viewState.update { it.copy(newResultData = it.newResultData.copy(amount = amount, isAmountError = false)) }
     }
 
-    fun onDateValueChanged(text: String) {
+    private fun onDateValueChanged(text: String) {
         _viewState.update { it.copy(newResultData = _viewState.value.newResultData.copy(date = text)) }
     }
 
-    fun onTabClicked(item: DateFilterType) {
+    private fun onTabClicked(item: DateFilterType) {
         viewState.value.filter.forEach { dateFilter ->
             if (dateFilter == item) {
                 filterResults(dateFilter)
@@ -348,7 +369,7 @@ class AddExerciseViewModel(
         }
     }
 
-    fun onDateDismiss() {
+    private fun onDateDismiss() {
         _viewState.update { it.copy(isDatePickerVisible = false) }
     }
 }

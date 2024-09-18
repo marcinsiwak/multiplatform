@@ -25,6 +25,16 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Update production.properties
         env:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
@@ -94,6 +104,16 @@ jobs:
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Update production.properties
         env:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
@@ -160,6 +180,16 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Update production.properties
         env:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
@@ -222,6 +252,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
@@ -309,6 +349,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - uses: actions/github-script@v6
         id: get_pull_request_number

@@ -44,12 +44,21 @@ class SummaryViewModel(
         }
     }
 
-    fun onCategoryLongClicked(categoryIndex: Int) {
+    fun onUiAction(action: SummaryUiAction) {
+        when (action) {
+            is SummaryUiAction.OnCategoryLongClicked -> onCategoryLongClicked(action.pos)
+            SummaryUiAction.OnCategoryRemoved -> onCategoryRemoved()
+            SummaryUiAction.OnPopupDismissed -> onPopupDismissed()
+            else -> Unit
+        }
+    }
+
+    private fun onCategoryLongClicked(categoryIndex: Int) {
         categoryToRemovePosition = categoryIndex
         _viewState.update { it.copy(isRemoveCategoryDialogVisible = true) }
     }
 
-    fun onCategoryRemoved() {
+    private fun onCategoryRemoved() {
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             categoryToRemovePosition?.let { pos ->
@@ -60,7 +69,7 @@ class SummaryViewModel(
         }
     }
 
-    fun onPopupDismissed() {
+    private fun onPopupDismissed() {
         _viewState.update { it.copy(isRemoveCategoryDialogVisible = false) }
     }
 }

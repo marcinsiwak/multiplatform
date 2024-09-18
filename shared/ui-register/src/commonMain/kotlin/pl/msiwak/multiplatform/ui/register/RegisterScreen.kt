@@ -68,11 +68,7 @@ fun RegisterScreen(
     RegisterScreenContent(
         navController = navController,
         viewState = viewState,
-        onLoginChanged = viewModel::onLoginChanged,
-        onPasswordChanged = viewModel::onPasswordChanged,
-        onVisibilityClicked = viewModel::onVisibilityClicked,
-        onRegisterClicked = viewModel::onRegisterClicked,
-        onTermsClicked = viewModel::onTermsClicked
+        onUiAction = viewModel::onUiAction
     )
 }
 
@@ -80,11 +76,7 @@ fun RegisterScreen(
 fun RegisterScreenContent(
     navController: NavController,
     viewState: State<RegisterState>,
-    onLoginChanged: (String) -> Unit = { _ -> },
-    onPasswordChanged: (String) -> Unit = { _ -> },
-    onVisibilityClicked: () -> Unit = {},
-    onRegisterClicked: () -> Unit = {},
-    onTermsClicked: (Boolean) -> Unit = {}
+    onUiAction: (RegisterUiAction) -> Unit
 ) {
     if (viewState.value.isLoading) {
         Loader()
@@ -117,7 +109,7 @@ fun RegisterScreenContent(
                                 it
                             )
                         },
-                        onValueChange = onLoginChanged,
+                        onValueChange = { onUiAction(RegisterUiAction.OnLoginChanged(it)) },
                         hintText = stringResource(Res.string.email)
                     )
 
@@ -129,13 +121,13 @@ fun RegisterScreenContent(
                                 it
                             )
                         },
-                        onValueChange = onPasswordChanged,
+                        onValueChange = { onUiAction(RegisterUiAction.OnPasswordChanged(it)) },
                         isPassword = true,
                         isPasswordVisible = viewState.value.isPasswordVisible,
                         trailingIcon = {
                             Icon(
                                 modifier = Modifier
-                                    .clickable { onVisibilityClicked() },
+                                    .clickable { onUiAction(RegisterUiAction.OnVisibilityClicked) },
                                 painter = painterResource(
                                     if (viewState.value.isPasswordVisible) {
                                         Res.drawable.ic_invisible
@@ -156,7 +148,7 @@ fun RegisterScreenContent(
                             .fillMaxWidth()
                             .padding(top = MaterialTheme.dimens.space_24),
                         checked = viewState.value.isTermsChecked,
-                        onCheckedChange = onTermsClicked,
+                        onCheckedChange = { onUiAction(RegisterUiAction.OnTermsClicked(it)) },
                         text = buildAnnotatedString {
                             withStyle(style = SpanStyle(textDecoration = TextDecoration.Underline)) {
                                 append(stringResource(Res.string.accept_terms))
@@ -175,7 +167,7 @@ fun RegisterScreenContent(
                             isTermsChecked && login.isNotBlank() && passwordErrorMessage == null
                         },
                         onClick = {
-                            onRegisterClicked()
+                            onUiAction(RegisterUiAction.OnRegisterClicked)
                         },
                         text = stringResource(Res.string.register)
                     )
@@ -191,7 +183,8 @@ fun RegisterScreenPreview() {
     AppTheme {
         RegisterScreenContent(
             rememberNavController(),
-            MutableStateFlow(RegisterState()).collectAsState()
+            MutableStateFlow(RegisterState()).collectAsState(),
+            onUiAction = {}
         )
     }
 }

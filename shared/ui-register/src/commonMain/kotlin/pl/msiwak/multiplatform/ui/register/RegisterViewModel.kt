@@ -44,6 +44,16 @@ class RegisterViewModel(
         }
     }
 
+    fun onUiAction(action: RegisterUiAction) {
+        when (action) {
+            is RegisterUiAction.OnLoginChanged -> onLoginChanged(action.login)
+            is RegisterUiAction.OnPasswordChanged -> onPasswordChanged(action.password)
+            RegisterUiAction.OnRegisterClicked -> onRegisterClicked()
+            is RegisterUiAction.OnTermsClicked -> onTermsClicked(action.isChecked)
+            RegisterUiAction.OnVisibilityClicked -> onVisibilityClicked()
+        }
+    }
+
     fun onLoginChanged(text: String) {
         _viewState.update { it.copy(login = text, loginErrorMessage = null) }
     }

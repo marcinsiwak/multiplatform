@@ -42,9 +42,11 @@ fun VerifyEmailScreen(
     VerifyEmailScreenContent(
         navController = navController,
         viewState = viewState,
-        onResendMailClicked = viewModel::onResendMailClicked,
-        onLoginClicked = {
-            navController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+        onUiAction = {
+            when (it) {
+                VerifyEmailUiAction.OnLoginClicked -> navController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+                else -> viewModel.onUiAction(it)
+            }
         }
     )
 }
@@ -53,8 +55,7 @@ fun VerifyEmailScreen(
 fun VerifyEmailScreenContent(
     navController: NavController,
     viewState: State<VerifyState>,
-    onResendMailClicked: () -> Unit = {},
-    onLoginClicked: () -> Unit = {}
+    onUiAction: (VerifyEmailUiAction) -> Unit
 ) {
     if (viewState.value.isLoading) {
         Loader()
@@ -89,7 +90,7 @@ fun VerifyEmailScreenContent(
 
                 SecondaryButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { onResendMailClicked() },
+                    onClick = { onUiAction(VerifyEmailUiAction.OnResendMailClicked) },
                     text = stringResource(Res.string.verify_resend_mail)
                 )
 
@@ -97,7 +98,7 @@ fun VerifyEmailScreenContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = MaterialTheme.dimens.space_8),
-                    onClick = { onLoginClicked() },
+                    onClick = { onUiAction(VerifyEmailUiAction.OnLoginClicked) },
                     text = stringResource(Res.string.verify_login)
                 )
             }
@@ -111,7 +112,8 @@ fun VerifyEmailScreenPreview() {
     AppTheme {
         VerifyEmailScreenContent(
             rememberNavController(),
-            MutableStateFlow(VerifyState()).collectAsState()
+            MutableStateFlow(VerifyState()).collectAsState(),
+            {}
         )
     }
 }

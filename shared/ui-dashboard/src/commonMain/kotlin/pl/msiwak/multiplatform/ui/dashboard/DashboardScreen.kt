@@ -40,10 +40,12 @@ fun DashboardScreen(
         bottomNavigationProvider = viewModel.bottomNavigationProvider,
         viewState = viewState,
         items = items,
-        onSignInUpClicked = {
-            parentNavController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
-        },
-        onTabChanges = viewModel::onTabChanges
+        onUiAction = {
+            when (it) {
+                DashboardUiAction.OnSignInUpClicked -> parentNavController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+                else -> viewModel.onUiAction(it)
+            }
+        }
     )
 }
 
@@ -53,8 +55,7 @@ private fun DashboardScreenContent(
     bottomNavigationProvider: BottomNavigationProvider,
     viewState: State<DashboardState>,
     items: List<BottomNavigationDestination>,
-    onSignInUpClicked: () -> Unit,
-    onTabChanges: (Int) -> Unit
+    onUiAction: (DashboardUiAction) -> Unit
 ) {
     val navController = rememberNavController()
 
@@ -70,14 +71,14 @@ private fun DashboardScreenContent(
 
     LaunchedEffect(key1 = navigationSelectedItem) {
         val selectedTabIndex = items.indexOf(navigationSelectedItem)
-        onTabChanges(selectedTabIndex)
+        onUiAction(DashboardUiAction.OnTabChanges(selectedTabIndex))
     }
 
     Scaffold(
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
                 if (viewState.value.isOfflineBannerVisible) {
-                    OfflineBanner(onSignInUpClicked = onSignInUpClicked)
+                    OfflineBanner(onSignInUpClicked = { onUiAction(DashboardUiAction.OnSignInUpClicked) })
                 }
                 BottomNavigation(
                     initialTabDestination = initialTabDestination,
