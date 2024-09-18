@@ -27,7 +27,13 @@ class LanguageViewModel(
         _viewState.update { it.copy(languages = languages) }
     }
 
-    fun onLanguageChanged(pos: Int) {
+    fun onUiAction(action: LanguageUiAction) {
+        when (action) {
+            is LanguageUiAction.OnLanguageChanged -> onLanguageChanged(action.pos)
+        }
+    }
+
+    private fun onLanguageChanged(pos: Int) {
         val newLanguages = viewState.value.languages.mapIndexed { index, language ->
             if (pos == index) {
                 setLanguageUseCase(language.code)

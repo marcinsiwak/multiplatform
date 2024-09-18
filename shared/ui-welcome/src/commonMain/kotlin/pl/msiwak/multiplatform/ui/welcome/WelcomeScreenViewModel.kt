@@ -44,6 +44,21 @@ class WelcomeScreenViewModel(
         }
     }
 
+    fun onUiAction(action: WelcomeUiAction) {
+        when (action) {
+            WelcomeUiAction.OnConfirmDialogButtonClicked -> onConfirmDialogButtonClicked()
+            WelcomeUiAction.OnConfirmSynchronizationClicked -> onConfirmSynchronizationClicked()
+            WelcomeUiAction.OnDismissSynchronizationClicked -> onDismissSynchronizationClicked()
+            is WelcomeUiAction.OnLoginChanged -> onLoginChanged(action.login)
+            WelcomeUiAction.OnLoginClicked -> onLoginClicked()
+            WelcomeUiAction.OnOfflineModeClicked -> onOfflineModeClicked()
+            is WelcomeUiAction.OnPasswordChanged -> onPasswordChanged(action.password)
+            WelcomeUiAction.OnRegistrationClicked -> onRegistrationClicked()
+            WelcomeUiAction.OnVisibilityClicked -> onVisibilityClicked()
+            else -> Unit
+        }
+    }
+
     fun onLoginChanged(text: String) {
         _viewState.update { it.copy(login = text, authErrorMessage = null) }
     }

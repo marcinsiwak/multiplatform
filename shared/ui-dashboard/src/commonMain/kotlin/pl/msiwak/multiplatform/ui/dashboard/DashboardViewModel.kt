@@ -32,7 +32,14 @@ class DashboardViewModel(
         }
     }
 
-    fun onTabChanges(pos: Int) {
+    fun onUiAction(action: DashboardUiAction) {
+        when (action) {
+            is DashboardUiAction.OnTabChanges -> onTabChanges(action.pos)
+            else -> Unit
+        }
+    }
+
+    private fun onTabChanges(pos: Int) {
         _viewState.update { it.copy(selectedTabIndex = pos) }
     }
 }

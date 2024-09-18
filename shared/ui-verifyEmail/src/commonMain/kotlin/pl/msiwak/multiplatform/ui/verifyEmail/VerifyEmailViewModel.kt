@@ -19,7 +19,14 @@ class VerifyEmailViewModel(
 
     private val errorHandler = globalErrorHandler.handleError()
 
-    fun onResendMailClicked() = viewModelScope.launch(errorHandler) {
+    fun onUiAction(action: VerifyEmailUiAction) {
+        when (action) {
+            VerifyEmailUiAction.OnResendMailClicked -> onResendMailClicked()
+            else -> Unit
+        }
+    }
+
+    private fun onResendMailClicked() = viewModelScope.launch(errorHandler) {
         resendVerificationEmailUseCase()
     }
 }

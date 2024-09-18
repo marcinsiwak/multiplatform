@@ -32,7 +32,6 @@ import athletetrack.shared.commonresources.generated.resources.remove_category_d
 import athletetrack.shared.commonresources.generated.resources.summary_add_category
 import athletetrack.shared.commonresources.generated.resources.yes
 import kotlinx.coroutines.flow.MutableStateFlow
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -60,27 +59,21 @@ fun SummaryScreen(
 
     SummaryScreenContent(
         viewState = viewState,
-        onCategoryRemoved = viewModel::onCategoryRemoved,
-        onPopupDismissed = viewModel::onPopupDismissed,
-        onCategoryClicked = {
-            navController.navigate(NavDestination.CategoryDestination.NavCategoryScreen.route(it))
-        },
-        onCategoryLongClicked = viewModel::onCategoryLongClicked,
-        onAddCategoryClicked = {
-            navController.navigate(NavDestination.AddCategoryDestination.NavAddCategoryScreen.route)
+        onUiAction = {
+            when (it) {
+                SummaryUiAction.OnAddCategoryClicked -> navController.navigate(NavDestination.AddCategoryDestination.NavAddCategoryScreen.route)
+                is SummaryUiAction.OnCategoryClicked -> navController.navigate(NavDestination.CategoryDestination.NavCategoryScreen.route(it.id))
+                else -> viewModel.onUiAction(it)
+            }
         }
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SummaryScreenContent(
     viewState: State<SummaryState>,
-    onCategoryRemoved: () -> Unit = {},
-    onPopupDismissed: () -> Unit = {},
-    onCategoryClicked: (String) -> Unit = {},
-    onCategoryLongClicked: (Int) -> Unit = {},
-    onAddCategoryClicked: () -> Unit = {}
+    onUiAction: (SummaryUiAction) -> Unit
 ) {
     if (viewState.value.isRemoveCategoryDialogVisible) {
         PopupDialog(
@@ -88,8 +81,8 @@ fun SummaryScreenContent(
             description = stringResource(Res.string.remove_category_dialog_description),
             confirmButtonTitle = stringResource(Res.string.yes),
             dismissButtonTitle = stringResource(Res.string.no),
-            onConfirmClicked = onCategoryRemoved,
-            onDismissClicked = onPopupDismissed
+            onConfirmClicked = { onUiAction(SummaryUiAction.OnCategoryRemoved) },
+            onDismissClicked = { onUiAction(SummaryUiAction.OnPopupDismissed) }
         )
     }
 
@@ -112,8 +105,8 @@ fun SummaryScreenContent(
                             .padding(vertical = MaterialTheme.dimens.space_8)
                             .combinedClickable(
                                 enabled = true,
-                                onClick = { onCategoryClicked(category.id) },
-                                onLongClick = { onCategoryLongClicked(index) },
+                                onClick = { onUiAction(SummaryUiAction.OnCategoryClicked(category.id)) },
+                                onLongClick = { onUiAction(SummaryUiAction.OnCategoryLongClicked(index)) },
                                 interactionSource = remember { MutableInteractionSource() },
                                 indication = rememberRipple(
                                     color = Color.LightGray
@@ -126,7 +119,7 @@ fun SummaryScreenContent(
                     Button(
                         modifier = Modifier.padding(MaterialTheme.dimens.space_16),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                        onClick = { onAddCategoryClicked() }
+                        onClick = { onUiAction(SummaryUiAction.OnAddCategoryClicked) }
                     ) {
                         Row {
                             Icon(
@@ -152,6 +145,6 @@ fun SummaryScreenContent(
 @Composable
 fun SummaryScreenPreview() {
     AppTheme {
-        SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState())
+        SummaryScreenContent(MutableStateFlow(SummaryState()).collectAsState()) {}
     }
 }

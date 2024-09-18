@@ -47,22 +47,20 @@ fun SettingsScreen(
 
     SettingsScreenContent(
         viewState = viewState,
-        onUnitClicked = {
-            navController.navigate(NavDestination.UnitDestination.NavUnitScreen.route)
-        },
-        onLanguageClicked = {
-            navController.navigate(LanguageDestination.NavLanguageScreen.route)
-        },
-        onLogoutClicked = viewModel::onLogoutClicked
+        onUiAction = {
+            when (it) {
+                SettingsUiAction.OnLanguageClicked -> navController.navigate(LanguageDestination.NavLanguageScreen.route)
+                SettingsUiAction.OnUnitClicked -> navController.navigate(NavDestination.UnitDestination.NavUnitScreen.route)
+                else -> viewModel.onUiAction(it)
+            }
+        }
     )
 }
 
 @Composable
 fun SettingsScreenContent(
     viewState: State<SettingsState>,
-    onUnitClicked: () -> Unit = {},
-    onLanguageClicked: () -> Unit = {},
-    onLogoutClicked: () -> Unit = {}
+    onUiAction: (SettingsUiAction) -> Unit
 ) {
     Box {
         Column(
@@ -81,7 +79,7 @@ fun SettingsScreenContent(
                 modifier = Modifier
                     .padding(top = MaterialTheme.dimens.space_8)
                     .clickable {
-                        onUnitClicked()
+                        onUiAction(SettingsUiAction.OnUnitClicked)
                     },
                 text = stringResource(Res.string.settings_unit)
             )
@@ -91,7 +89,7 @@ fun SettingsScreenContent(
                     modifier = Modifier
                         .padding(top = MaterialTheme.dimens.space_8)
                         .clickable {
-                            onLanguageClicked()
+                            onUiAction(SettingsUiAction.OnLanguageClicked)
                         },
                     text = stringResource(Res.string.settings_language)
                 )
@@ -101,7 +99,7 @@ fun SettingsScreenContent(
                     modifier = Modifier
                         .padding(top = MaterialTheme.dimens.space_8)
                         .clickable {
-                            onLogoutClicked()
+                            onUiAction(SettingsUiAction.OnLogoutClicked)
                         },
                     text = stringResource(Res.string.settings_logout)
                 )
@@ -121,6 +119,6 @@ fun SettingsScreenContent(
 @Composable
 fun SettingsScreenPreview() {
     AppTheme {
-        SettingsScreenContent(MutableStateFlow(SettingsState()).collectAsState())
+        SettingsScreenContent(MutableStateFlow(SettingsState()).collectAsState()) {}
     }
 }

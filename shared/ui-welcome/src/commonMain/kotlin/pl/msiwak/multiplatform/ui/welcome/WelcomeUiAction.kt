@@ -1,0 +1,14 @@
+package pl.msiwak.multiplatform.ui.welcome
+
+sealed class WelcomeUiAction {
+    data object OnConfirmDialogButtonClicked : WelcomeUiAction()
+    data object OnConfirmSynchronizationClicked : WelcomeUiAction()
+    data object OnDismissSynchronizationClicked : WelcomeUiAction()
+    data class OnLoginChanged(val login: String) : WelcomeUiAction()
+    data class OnPasswordChanged(val password: String) : WelcomeUiAction()
+    data object OnVisibilityClicked : WelcomeUiAction()
+    data object OnLoginClicked : WelcomeUiAction()
+    data object OnOfflineModeClicked : WelcomeUiAction()
+    data object OnRegistrationClicked : WelcomeUiAction()
+    data object OnGoogleLoginClicked : WelcomeUiAction()
+}

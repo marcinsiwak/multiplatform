@@ -38,7 +38,7 @@ fun LanguageScreen(
     LanguageScreenContent(
         navController = navController,
         viewState = viewState,
-        onLanguageChanged = viewModel::onLanguageChanged
+        onUiAction = viewModel::onUiAction
     )
 }
 
@@ -46,7 +46,7 @@ fun LanguageScreen(
 fun LanguageScreenContent(
     navController: NavController,
     viewState: State<LanguageState>,
-    onLanguageChanged: (Int) -> Unit = {}
+    onUiAction: (LanguageUiAction) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -64,7 +64,7 @@ fun LanguageScreenContent(
                             RadioButton(
                                 selected = item.isSelected,
                                 onClick = {
-                                    onLanguageChanged(index)
+                                    onUiAction(LanguageUiAction.OnLanguageChanged(index))
                                 },
                                 colors = RadioButtonDefaults.colors(
                                     selectedColor = MaterialTheme.colorScheme.onPrimary,

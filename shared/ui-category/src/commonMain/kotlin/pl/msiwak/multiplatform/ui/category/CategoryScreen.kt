@@ -90,15 +90,7 @@ fun CategoryScreen(
         navController = navController,
         viewState = viewState,
         backgroundId = backgroundId,
-        onConfirmClicked = viewModel::onExerciseRemoved,
-        onDismissClicked = viewModel::onPopupDismissed,
-        onExerciseTitleChanged = viewModel::onAddExerciseNameChanged,
-        onAddExerciseClicked = viewModel::onAddExerciseClicked,
-        onDialogClosed = viewModel::onDialogClosed,
-        onItemClick = { navController.navigate(NavDestination.AddExerciseDestination.NavAddExerciseScreen.route(it)) },
-        onLongClick = viewModel::onResultLongClicked,
-        onClick = viewModel::onAddNewExerciseClicked
-
+        onUiAction = viewModel::onUiAction
     )
 }
 
@@ -108,14 +100,7 @@ fun CategoryScreenContent(
     navController: NavController,
     viewState: State<CategoryState>,
     backgroundId: DrawableResource,
-    onConfirmClicked: () -> Unit = {},
-    onDismissClicked: () -> Unit = {},
-    onExerciseTitleChanged: (String) -> Unit = {},
-    onAddExerciseClicked: () -> Unit = {},
-    onDialogClosed: () -> Unit = {},
-    onItemClick: (String) -> Unit = {},
-    onLongClick: (Int) -> Unit = {},
-    onClick: () -> Unit = {}
+    onUiAction: (CategoryUiAction) -> Unit
 ) {
     if (viewState.value.isRemoveExerciseDialogVisible) {
         PopupDialog(
@@ -123,8 +108,8 @@ fun CategoryScreenContent(
             description = stringResource(Res.string.remove_result_dialog_description),
             confirmButtonTitle = stringResource(Res.string.yes),
             dismissButtonTitle = stringResource(Res.string.no),
-            onConfirmClicked = onConfirmClicked,
-            onDismissClicked = onDismissClicked
+            onConfirmClicked = { onUiAction(CategoryUiAction.OnConfirmClick) },
+            onDismissClicked = { onUiAction(CategoryUiAction.OnDismissClicked) }
         )
     }
 
@@ -135,9 +120,9 @@ fun CategoryScreenContent(
     if (viewState.value.isDialogVisible) {
         AddExerciseDialog(
             inputText = viewState.value.newExerciseName,
-            onExerciseTitleChanged = onExerciseTitleChanged,
-            onAddExerciseClicked = onAddExerciseClicked,
-            onDialogClosed = onDialogClosed
+            onExerciseTitleChanged = { onUiAction(CategoryUiAction.OnExerciseTitleChanged(it)) },
+            onAddExerciseClicked = { onUiAction(CategoryUiAction.OnAddExerciseClicked) },
+            onDialogClosed = { onUiAction(CategoryUiAction.OnDialogClosed) }
         )
     }
 
@@ -184,8 +169,8 @@ fun CategoryScreenContent(
                         itemsIndexed(viewState.value.exerciseList) { index, item ->
                             ListItemView(
                                 name = item.exerciseTitle,
-                                onItemClick = { onItemClick(item.id) },
-                                onLongClick = { onLongClick(index) }
+                                onItemClick = { onUiAction(CategoryUiAction.OnItemClick(item.id)) },
+                                onLongClick = { onUiAction(CategoryUiAction.OnLongClick(index)) }
                             )
                         }
                     }
@@ -202,7 +187,7 @@ fun CategoryScreenContent(
                         containerColor = MaterialTheme.colorScheme.tertiary,
                         contentColor = MaterialTheme.colorScheme.primary
                     ),
-                    onClick = onClick
+                    onClick = { onUiAction(CategoryUiAction.OnClick) }
                 ) {
                     Text(
                         modifier = Modifier.padding(MaterialTheme.dimens.space_8),
@@ -222,7 +207,8 @@ fun CategoryScreenPreview() {
         CategoryScreenContent(
             rememberNavController(),
             viewState = MutableStateFlow(CategoryState()).collectAsState(),
-            backgroundId = Res.drawable.bg_running_field
+            backgroundId = Res.drawable.bg_running_field,
+            onUiAction = { CategoryUiAction.OnClick }
         )
     }
 }

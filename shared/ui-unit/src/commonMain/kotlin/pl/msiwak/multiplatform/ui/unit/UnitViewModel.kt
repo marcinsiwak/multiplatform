@@ -26,7 +26,13 @@ class UnitViewModel(
         _viewState.update { it.copy(unitItemList = units) }
     }
 
-    fun onUnitTypeChanged(pos: Int) {
+    fun onUiAction(action: UnitUiAction) {
+        when (action) {
+            is UnitUiAction.OnUnitTypeChanged -> onUnitTypeChanged(action.pos)
+        }
+    }
+
+    private fun onUnitTypeChanged(pos: Int) {
         val newItem = viewState.value.unitItemList.mapIndexed { index, item ->
             if (pos == index) {
                 setUnitsUseCase(item.unitType)

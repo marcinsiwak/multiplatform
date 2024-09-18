@@ -36,7 +36,14 @@ class SettingsViewModel(
         }
     }
 
-    fun onLogoutClicked() {
+    fun onUiAction(action: SettingsUiAction) {
+        when (action) {
+            SettingsUiAction.OnLogoutClicked -> onLogoutClicked()
+            else -> Unit
+        }
+    }
+
+    private fun onLogoutClicked() {
         viewModelScope.launch {
             logoutUseCase()
             _viewEvent.emit(SettingsEvent.Logout)

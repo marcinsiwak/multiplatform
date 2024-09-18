@@ -31,20 +31,26 @@ class AddCategoryViewModel(
         false
     }
 
-    fun onTypePicked(exerciseType: ExerciseType) {
-        _viewState.value = _viewState.value.copy(exerciseType = exerciseType)
+    fun onUiAction(action: AddCategoryUiAction) {
+        when (action) {
+            is AddCategoryUiAction.OnCategoryNameChanged -> onCategoryNameChanged(action.name)
+            is AddCategoryUiAction.OnTypePicked -> onTypePicked(action.type)
+            is AddCategoryUiAction.OnSaveCategoryClicked -> onSaveCategoryClicked()
+        }
     }
 
-    fun onCategoryNameChanged(name: String) {
-        _viewState.value = _viewState.value.copy(name = name)
+    private fun onTypePicked(exerciseType: ExerciseType) {
+        _viewState.update { it.copy(exerciseType = exerciseType) }
     }
 
-    fun onSaveCategoryClicked() {
-        val name = _viewState.value.name
-        val exerciseType = _viewState.value.exerciseType
+    private fun onCategoryNameChanged(name: String) {
+        _viewState.update { it.copy(name = name) }
+    }
+
+    private fun onSaveCategoryClicked() {
         _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
-            createCategoryUseCase(Category(name = name, exerciseType = exerciseType))
+            createCategoryUseCase(Category(name = viewState.value.name, exerciseType = viewState.value.exerciseType))
             _viewState.update { it.copy(isLoading = false) }
             _viewEvent.emit(AddCategoryEvent.NavigateBack)
         }

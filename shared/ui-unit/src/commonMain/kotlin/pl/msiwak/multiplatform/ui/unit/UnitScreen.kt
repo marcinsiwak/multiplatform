@@ -40,7 +40,7 @@ fun UnitScreen(
     UnitScreenContent(
         navController = navController,
         viewState = viewState,
-        onUnitTypeChanged = viewModel::onUnitTypeChanged
+        onUiAction = viewModel::onUiAction
     )
 }
 
@@ -48,7 +48,7 @@ fun UnitScreen(
 fun UnitScreenContent(
     navController: NavController,
     viewState: State<UnitState>,
-    onUnitTypeChanged: (Int) -> Unit = {}
+    onUiAction: (UnitUiAction) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -67,7 +67,7 @@ fun UnitScreenContent(
                             RadioButton(
                                 selected = item.isSelected,
                                 onClick = {
-                                    onUnitTypeChanged(index)
+                                    onUiAction(UnitUiAction.OnUnitTypeChanged(index))
                                 },
                                 colors = RadioButtonDefaults.colors(
                                     selectedColor = MaterialTheme.colorScheme.onPrimary,
@@ -96,6 +96,6 @@ fun UnitScreenPreview() {
         UnitScreenContent(
             rememberNavController(),
             MutableStateFlow(UnitState()).collectAsState()
-        )
+        ) {}
     }
 }

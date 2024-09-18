@@ -67,15 +67,28 @@ class CategoryViewModel(
         }
     }
 
-    fun onAddNewExerciseClicked() {
+    fun onUiAction(action: CategoryUiAction) {
+        when (action) {
+            CategoryUiAction.OnConfirmClick -> onExerciseRemoved()
+            CategoryUiAction.OnDismissClicked -> onPopupDismissed()
+            is CategoryUiAction.OnExerciseTitleChanged -> onAddExerciseNameChanged(action.name)
+            CategoryUiAction.OnAddExerciseClicked -> onAddExerciseClicked()
+            CategoryUiAction.OnDialogClosed -> onDialogClosed()
+            is CategoryUiAction.OnItemClick -> TODO()
+            is CategoryUiAction.OnLongClick -> onResultLongClicked(action.pos)
+            CategoryUiAction.OnClick -> onAddNewExerciseClicked()
+        }
+    }
+
+    private fun onAddNewExerciseClicked() {
         _viewState.update { it.copy(isDialogVisible = true) }
     }
 
-    fun onAddExerciseNameChanged(name: String) {
+    private fun onAddExerciseNameChanged(name: String) {
         _viewState.update { it.copy(newExerciseName = name) }
     }
 
-    fun onAddExerciseClicked() {
+    private fun onAddExerciseClicked() {
         _viewState.update { it.copy(isDialogVisible = false, isLoading = true) }
 
         viewModelScope.launch(errorHandler) {
@@ -93,16 +106,16 @@ class CategoryViewModel(
         }
     }
 
-    fun onDialogClosed() {
+    private fun onDialogClosed() {
         _viewState.update { it.copy(isDialogVisible = false) }
     }
 
-    fun onResultLongClicked(resultIndex: Int) {
+    private fun onResultLongClicked(resultIndex: Int) {
         exerciseToRemovePosition = resultIndex
         _viewState.update { it.copy(isRemoveExerciseDialogVisible = true) }
     }
 
-    fun onExerciseRemoved() {
+    private fun onExerciseRemoved() {
         _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
             exerciseToRemovePosition?.let { pos ->
@@ -119,7 +132,7 @@ class CategoryViewModel(
         }
     }
 
-    fun onPopupDismissed() {
+    private fun onPopupDismissed() {
         _viewState.update { it.copy(isRemoveExerciseDialogVisible = false) }
     }
 }
