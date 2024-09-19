@@ -15,7 +15,7 @@ kotlin {
         summary = "Domain Implementation Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
-        ios.deploymentTarget = "14.1"
+        ios.deploymentTarget = "16.2"
         framework {
             baseName = "domain-impl"
 

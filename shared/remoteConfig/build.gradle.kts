@@ -13,7 +13,7 @@ kotlin {
         summary = "Remote config Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
-        ios.deploymentTarget = "14.1"
+        ios.deploymentTarget = "16.2"
         framework {
             baseName = "remoteConfig"
         }

@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Domain Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/domain.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target    = '14.1'
+    spec.ios.deployment_target    = '16.2'
                 
                 
     if !Dir.exist?('build/cocoapods/framework/domain.framework') || Dir.empty?('build/cocoapods/framework/domain.framework')
