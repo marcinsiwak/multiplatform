@@ -120,7 +120,7 @@ PODS:
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
   - RecaptchaInterop (100.0.0)
-  - shared (1.0):
+  - shared_mobile (1.0):
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCrashlytics
@@ -130,7 +130,7 @@ PODS:
     - GoogleSignIn
 
 DEPENDENCIES:
-  - shared (from `../shared`)
+  - shared_mobile (from `../shared-mobile`)
 
 SPEC REPOS:
   trunk:
@@ -163,8 +163,8 @@ SPEC REPOS:
     - RecaptchaInterop
 
 EXTERNAL SOURCES:
-  shared:
-    :path: "../shared"
+  shared_mobile:
+    :path: "../shared-mobile"
 
 SPEC CHECKSUMS:
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
@@ -194,8 +194,8 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  shared: 79a7f95ed555a577ba3328d363ae2f13f2e131bf
+  shared_mobile: e0f94120ae36806e4fa1353f17d5201971515b6c
 
-PODFILE CHECKSUM: 0bd1e32dcafd1b6829bf53d787c2d6285bcba11b
+PODFILE CHECKSUM: e2e40760e37846f72250030c3e0ee1738fd272be
 
 COCOAPODS: 1.15.2

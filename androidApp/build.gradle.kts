@@ -178,7 +178,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":shared"))
+    implementation(project(":shared-mobile"))
     implementation(libs.androidx.appcompat)
 
     implementation(libs.compose.ui)

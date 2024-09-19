@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.dependencies
 
 object Modules {
-    private const val shared =":shared"
+    private const val shared =":shared-mobile"
     const val core = "$shared:core"
     const val commonResources = "$shared:commonResources"
     const val commonObject = "$shared:commonObject"
