@@ -23,9 +23,10 @@ object DatabaseFactory {
             password = password
         )
 
-        Flyway.configure().dataSource(url, user, password).load().also {
-            it.migrate()
-        }
+        Flyway.configure().dataSource(url, user, password).load()
+//            .also {
+//            it.migrate()
+//        }
 
         transaction(database) {
             SchemaUtils.create(Users, Categories, Exercises, Results)
