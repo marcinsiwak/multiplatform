@@ -2,12 +2,14 @@ name: Android CI
 
 on:
   push:
+    paths: [ "multiplatform" ]
     branches: [ "develop", "master" ]
   pull_request:
+    paths: [ "multiplatform" ]
     branches: [ "develop", "master" ]
 
 jobs:
-#  Pull request script
+  #  Pull request script
   Pull-Request-Android:
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false && (contains(github.event.pull_request.labels.*.name, 'KMP') || contains(github.event.pull_request.labels.*.name, 'Android'))) }}
     runs-on: ubuntu-latest
@@ -150,7 +152,7 @@ jobs:
           pod install --verbose
       - run: xcodebuild build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -workspace iosApp/iosApp.xcworkspace -configuration productionDebug -allowProvisioningUpdates -scheme iosApp -sdk iphoneos -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2" -verbose
 
-#  Push to develop scripts
+  #  Push to develop scripts
   Distribute-Android-ProductionDebug:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop'}}
 
