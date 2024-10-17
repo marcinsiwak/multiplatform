@@ -2,10 +2,10 @@ name: Docker Image CI
 
 on:
   push:
-#    paths: [ "backendApp/**" ]
+    paths: [ "backendApp/**" ]
     branches: [ "develop" ]
   pull_request:
-#    paths: [ "backendApp/**" ]
+    paths: [ "backendApp/**" ]
     branches: [ "develop" ]
 
 jobs:
