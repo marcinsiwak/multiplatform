@@ -13,6 +13,5 @@ data class Exercise(
     var exerciseTitle: String = "",
     val results: List<ResultData> = emptyList(),
     val exerciseType: ExerciseType = ExerciseType.GYM,
-    val creationDate: LocalDateTime = Clock.System.now()
-        .toLocalDateTime(TimeZone.currentSystemDefault())
+    val creationDate: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 )
