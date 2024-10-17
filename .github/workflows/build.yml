@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: open mobile folder
+        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
@@ -88,6 +90,8 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: open mobile folder
+        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
@@ -149,6 +153,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: open mobile folder
+        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
@@ -244,6 +250,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: open mobile folder
+        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
@@ -341,6 +349,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: open mobile folder
+        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
