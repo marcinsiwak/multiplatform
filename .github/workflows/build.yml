@@ -143,6 +143,8 @@ jobs:
           podfile-path: multiplatform/iosApp/Podfile.lock
       - name: Install Dependencies
         run: |
+          pwd
+          cd multiplatform
           cd iosApp
           xcodebuild clean
           pod install --verbose
