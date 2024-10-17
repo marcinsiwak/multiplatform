@@ -140,12 +140,12 @@ jobs:
       - name: Set up cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
         with:
-          podfile-path: multiplatform/iosApp/Podfile.lock
+          version: 1.15.2
       - name: Install Dependencies
         run: |
           pwd
-          cd multiplatform
           cd iosApp
+          ls
           xcodebuild clean
           pod install --verbose
       - run: xcodebuild build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -workspace iosApp/iosApp.xcworkspace -configuration productionDebug -allowProvisioningUpdates -scheme iosApp -sdk iphoneos -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.2" -verbose
