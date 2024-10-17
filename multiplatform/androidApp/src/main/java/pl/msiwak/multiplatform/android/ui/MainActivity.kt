@@ -23,6 +23,7 @@ class MainActivity : ComponentActivity() {
                 .setKeepOnScreenCondition {
                     viewState.value.isLoading
                 }
+
             MainView()
         }
     }
