@@ -11,10 +11,11 @@ jobs:
   Pull-Request-Android:
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false && (contains(github.event.pull_request.labels.*.name, 'KMP') || contains(github.event.pull_request.labels.*.name, 'Android'))) }}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./multiplatform
 
     steps:
-      - name: open mobile folder
-        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
@@ -88,10 +89,11 @@ jobs:
   Pull-Request-iOS:
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false && (contains(github.event.pull_request.labels.*.name, 'KMP') || contains(github.event.pull_request.labels.*.name, 'iOS'))) }}
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./multiplatform
 
     steps:
-      - name: open mobile folder
-        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
@@ -151,10 +153,11 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop'}}
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./multiplatform
 
     steps:
-      - name: open mobile folder
-        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
@@ -248,10 +251,11 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop'}}
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./multiplatform
 
     steps:
-      - name: open mobile folder
-        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
@@ -347,10 +351,11 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./multiplatform
 
     steps:
-      - name: open mobile folder
-        run: cd multiplatform
       - uses: actions/checkout@v3
       - run: echo "Setting up JDK"
       - name: set up JDK 17
