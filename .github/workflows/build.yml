@@ -2,10 +2,10 @@ name: Android CI
 
 on:
   push:
-    paths: [ "multiplatform" ]
+    paths: [ "multiplatform/**" ]
     branches: [ "develop", "master" ]
   pull_request:
-    paths: [ "multiplatform" ]
+    paths: [ "multiplatform/**" ]
     branches: [ "develop", "master" ]
 
 jobs:
