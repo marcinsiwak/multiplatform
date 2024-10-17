@@ -68,7 +68,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'release.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_RELEASE }}
 
       - name: Decode debug Keystore
@@ -76,7 +76,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'debug.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Build APK
@@ -140,7 +140,7 @@ jobs:
       - name: Set up cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
         with:
-          podfile-path: iosApp/Podfile.lock
+          podfile-path: multiplatform/iosApp/Podfile.lock
       - name: Install Dependencies
         run: |
           cd iosApp
@@ -220,7 +220,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'debug.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Build productionDebug APK
@@ -236,7 +236,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/multiplatform/androidApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
@@ -318,7 +318,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'debug.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Build stagingDebug APK
@@ -335,7 +335,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/multiplatform/androidApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
@@ -418,7 +418,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'release.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_RELEASE }}
 
       - name: Build productionRelease APK
@@ -435,7 +435,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/multiplatform/androidApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
