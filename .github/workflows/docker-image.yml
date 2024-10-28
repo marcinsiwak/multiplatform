@@ -104,7 +104,7 @@ jobs:
           port: ${{ secrets.RPI_PORT }}
           passphrase: ${{ secrets.RPI_PASSPHRASE }}
           script: |
-            cd athletetrack
+            cd server/athletetrack
             sudo docker compose down
             sudo docker compose pull
             sudo docker compose up -d
