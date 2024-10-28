@@ -22,7 +22,6 @@ dependencyResolutionManagement {
 rootProject.name = "athletetrack"
 include(":androidApp")
 include(":shared")
-include(":shared:core")
 include(":shared:commonResources")
 include(":shared:database")
 include(":shared:commonObject")
