@@ -96,12 +96,13 @@ jobs:
 
     steps:
       - name: SSH into Raspberry Pi and deploy
-        uses: appleboy/ssh-action@v0.1.6
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.RPI_HOST }}
           username: ${{ secrets.RPI_USER }}
-          password: ${{ secrets.RPI_KEY }}
+          key: ${{ secrets.RPI_KEY }}
           port: ${{ secrets.RPI_PORT }}
+          passphrase: ${{ secrets.RPI_PASSPHRASE }}
           script: |
             cd athletetrack
             sudo docker compose down
