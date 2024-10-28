@@ -6,6 +6,7 @@ ktor:
     deployment:
         port: 8080
 storage:
-    jdbcURL: "jdbc:postgresql://database:5432/postgres"
-    user: "postgres"
-    password: "password"
+    driverClassName: "org.postgresql.Driver"
+    jdbcURL: "$DATABASE_URL"
+    user: "$DATABASE_USER"
+    password: "$DATABASE_PASSWORD"

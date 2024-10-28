@@ -1,1 +1,1 @@
-rootProject.name = "pl.msiwak.ktor-athletetrack"
+rootProject.name = "pl.msiwak.athletetrack-api-kotlin"

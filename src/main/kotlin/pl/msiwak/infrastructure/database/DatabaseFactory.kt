@@ -23,7 +23,6 @@ object DatabaseFactory {
             password = password
         )
 
-
         Flyway.configure().baselineOnMigrate(true).dataSource(url, user, password).load().also {
             it.migrate()
         }
