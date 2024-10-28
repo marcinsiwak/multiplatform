@@ -12,7 +12,6 @@ import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 class AndroidConfigPlugin: Plugin<Project> {
     override fun apply(project: Project) {
         val javaVersion = JavaVersion.VERSION_17
-        val libs = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
 
         with(project.extensions.getByType<BaseExtension>()) {
             compileSdkVersion(34)

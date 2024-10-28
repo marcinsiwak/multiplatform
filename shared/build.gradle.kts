@@ -31,7 +31,6 @@ kotlin {
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
 
-            export(project(Modules.core))
             export(project(Modules.commonResources))
             export(project(Modules.commonObject))
             export(project(Modules.database))
@@ -79,7 +78,6 @@ kotlin {
     sourceSets {
 
         commonMain.dependencies {
-            api(project(Modules.core))
             api(project(Modules.commonResources))
             api(project(Modules.commonObject))
             api(project(Modules.database))
@@ -133,6 +131,6 @@ kotlin {
 }
 
 android {
-    namespace = "pl.msiwak.multiplatform.android"
+    namespace = "pl.msiwak.multiplatform.shared"
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 }

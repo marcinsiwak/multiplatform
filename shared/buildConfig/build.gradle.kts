@@ -174,7 +174,11 @@ android {
 }
 
 fun NamedDomainObjectContainer<TargetConfigDsl>.ios(block: TargetConfigDsl.() -> Unit) {
-    listOf("iosArm64", "iosSimulatorArm64", "iosX64").forEach {
+    listOf(
+        "iosArm64",
+        "iosSimulatorArm64"
+//        "iosX64"
+    ).forEach {
         create(it, block)
     }
 }

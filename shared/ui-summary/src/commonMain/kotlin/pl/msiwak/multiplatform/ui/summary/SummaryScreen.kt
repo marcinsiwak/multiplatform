@@ -9,12 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -62,7 +62,12 @@ fun SummaryScreen(
         onUiAction = {
             when (it) {
                 SummaryUiAction.OnAddCategoryClicked -> navController.navigate(NavDestination.AddCategoryDestination.NavAddCategoryScreen.route)
-                is SummaryUiAction.OnCategoryClicked -> navController.navigate(NavDestination.CategoryDestination.NavCategoryScreen.route(it.id))
+                is SummaryUiAction.OnCategoryClicked -> navController.navigate(
+                    NavDestination.CategoryDestination.NavCategoryScreen.route(
+                        it.id
+                    )
+                )
+
                 else -> viewModel.onUiAction(it)
             }
         }
@@ -106,9 +111,15 @@ fun SummaryScreenContent(
                             .combinedClickable(
                                 enabled = true,
                                 onClick = { onUiAction(SummaryUiAction.OnCategoryClicked(category.id)) },
-                                onLongClick = { onUiAction(SummaryUiAction.OnCategoryLongClicked(index)) },
+                                onLongClick = {
+                                    onUiAction(
+                                        SummaryUiAction.OnCategoryLongClicked(
+                                            index
+                                        )
+                                    )
+                                },
                                 interactionSource = remember { MutableInteractionSource() },
-                                indication = rememberRipple(
+                                indication = ripple(
                                     color = Color.LightGray
                                 )
                             ),
