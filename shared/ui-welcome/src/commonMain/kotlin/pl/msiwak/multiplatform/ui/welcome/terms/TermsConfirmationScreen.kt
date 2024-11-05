@@ -58,27 +58,26 @@ fun TermsConfirmationScreen(
     }
 
     TermsConfirmationContent(
-        navController,
-        viewState,
-        onButtonClick = {
-            viewModel.onGoogleLogin(idToken, accessToken)
-        },
-        onTermsClick = {
-            navController.navigate(NavDestination.TermsDestination.NavTermsScreen.route)
-        },
-        onConfirmSynchronizationClicked = viewModel::onConfirmSynchronizationClicked,
-        onDismissSynchronizationClicked = viewModel::onDismissSynchronizationClicked
+        idToken = idToken,
+        accessToken = accessToken,
+        navController = navController,
+        viewState = viewState,
+        onUiAction = {
+            when (it) {
+                is TermsConfirmationUiAction.OnTermsClick -> navController.navigate(NavDestination.TermsDestination.NavTermsScreen.route)
+                else -> viewModel.onUiAction(it)
+            }
+        }
     )
 }
 
 @Composable
 private fun TermsConfirmationContent(
+    idToken: String,
+    accessToken: String?,
     navController: NavController,
     viewState: State<TermsConfirmationState>,
-    onButtonClick: () -> Unit = {},
-    onTermsClick: () -> Unit = {},
-    onConfirmSynchronizationClicked: () -> Unit = {},
-    onDismissSynchronizationClicked: () -> Unit = {}
+    onUiAction: (TermsConfirmationUiAction) -> Unit
 ) {
     if (viewState.value.isSynchronizationDialogVisible) {
         PopupDialog(
@@ -87,10 +86,10 @@ private fun TermsConfirmationContent(
             confirmButtonTitle = stringResource(Res.string.confirm),
             dismissButtonTitle = stringResource(Res.string.deny),
             onConfirmClicked = {
-                onConfirmSynchronizationClicked()
+                onUiAction(TermsConfirmationUiAction.OnConfirmSynchronizationClicked)
             },
             onDismissClicked = {
-                onDismissSynchronizationClicked()
+                onUiAction(TermsConfirmationUiAction.OnDismissSynchronizationClicked)
             }
         )
     }
@@ -117,7 +116,7 @@ private fun TermsConfirmationContent(
                 Text(
                     modifier = Modifier
                         .clickable {
-                            onTermsClick()
+                            onUiAction(TermsConfirmationUiAction.OnTermsClick)
                         }
                         .padding(vertical = MaterialTheme.dimens.space_8),
                     text = buildAnnotatedString {
@@ -133,7 +132,9 @@ private fun TermsConfirmationContent(
                 MainButton(
                     modifier = Modifier.padding(MaterialTheme.dimens.space_16),
                     text = stringResource(Res.string.terms_confirmation_title),
-                    onClick = onButtonClick
+                    onClick = {
+                        onUiAction(TermsConfirmationUiAction.OnButtonClick(idToken, accessToken))
+                    }
                 )
             }
         }

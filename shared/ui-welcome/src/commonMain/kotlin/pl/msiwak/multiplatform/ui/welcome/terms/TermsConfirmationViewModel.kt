@@ -30,7 +30,20 @@ class TermsConfirmationViewModel(
 
     private val errorHandler = globalErrorHandler.handleError()
 
-    fun onGoogleLogin(idToken: String?, accessToken: String?) {
+    fun onUiAction(action: TermsConfirmationUiAction) {
+        when (action) {
+            is TermsConfirmationUiAction.OnButtonClick -> onGoogleLogin(
+                action.idToken,
+                action.accessToken
+            )
+
+            TermsConfirmationUiAction.OnConfirmSynchronizationClicked -> onConfirmSynchronizationClicked()
+            TermsConfirmationUiAction.OnDismissSynchronizationClicked -> onDismissSynchronizationClicked()
+            else -> Unit
+        }
+    }
+
+    private fun onGoogleLogin(idToken: String?, accessToken: String?) {
         viewModelScope.launch(errorHandler) {
             val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
             _viewState.update { it.copy(isLoading = true) }
@@ -44,7 +57,7 @@ class TermsConfirmationViewModel(
         }
     }
 
-    fun onConfirmSynchronizationClicked() {
+    private fun onConfirmSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
@@ -54,7 +67,7 @@ class TermsConfirmationViewModel(
         }
     }
 
-    fun onDismissSynchronizationClicked() {
+    private fun onDismissSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
         viewModelScope.launch {
             _viewEvent.emit(TermsConfirmationEvent.NavigateToDashboard)

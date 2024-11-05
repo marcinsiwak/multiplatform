@@ -59,15 +59,15 @@ class WelcomeScreenViewModel(
         }
     }
 
-    fun onLoginChanged(text: String) {
+    private fun onLoginChanged(text: String) {
         _viewState.update { it.copy(login = text, authErrorMessage = null) }
     }
 
-    fun onPasswordChanged(text: String) {
+    private fun onPasswordChanged(text: String) {
         _viewState.update { it.copy(password = text, authErrorMessage = null) }
     }
 
-    fun onLoginClicked() {
+    private fun onLoginClicked() {
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             val isUserVerified =
@@ -89,28 +89,28 @@ class WelcomeScreenViewModel(
 
     // TODO: Add Apple login
 
-    fun onOfflineModeClicked() {
+    private fun onOfflineModeClicked() {
         viewModelScope.launch {
             setOfflineModeUseCase(true)
             _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
         }
     }
 
-    fun onRegistrationClicked() {
+    private fun onRegistrationClicked() {
         viewModelScope.launch {
             _viewEvent.emit(WelcomeEvent.NavigateToRegistration)
         }
     }
 
-    fun onVisibilityClicked() {
+    private fun onVisibilityClicked() {
         _viewState.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
     }
 
-    fun onConfirmDialogButtonClicked() {
+    private fun onConfirmDialogButtonClicked() {
         _viewState.update { it.copy(isErrorDialogVisible = false) }
     }
 
-    fun onConfirmSynchronizationClicked() {
+    private fun onConfirmSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
@@ -120,7 +120,7 @@ class WelcomeScreenViewModel(
         }
     }
 
-    fun onDismissSynchronizationClicked() {
+    private fun onDismissSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
         viewModelScope.launch {
             _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
