@@ -40,9 +40,9 @@ fun InputView(
                 disabledContainerColor = backgroundColor,
                 cursorColor = MaterialTheme.colorScheme.onPrimary,
                 focusedBorderColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
-                unfocusedBorderColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.tertiary,
+                unfocusedBorderColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onTertiary,
                 focusedLabelColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.tertiary
+                unfocusedLabelColor = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onTertiary
             ),
             trailingIcon = trailingIcon,
             shape = RoundedCornerShape(MaterialTheme.dimens.space_12),

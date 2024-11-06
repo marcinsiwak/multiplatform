@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.ic_arrow_right
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
@@ -27,7 +26,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.extension.bottomBorder
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Suppress("MagicNumber")
-@OptIn(ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> Unit = {}) {
     Row(
@@ -65,7 +64,7 @@ fun ListItemView(name: String, onItemClick: () -> Unit = {}, onLongClick: () -> 
             modifier = Modifier
                 .weight(0.2f)
                 .padding(MaterialTheme.dimens.space_16),
-            tint = MaterialTheme.colorScheme.tertiary,
+            tint = MaterialTheme.colorScheme.onPrimary,
             painter = painterResource(Res.drawable.ic_arrow_right),
             contentDescription = null
         )

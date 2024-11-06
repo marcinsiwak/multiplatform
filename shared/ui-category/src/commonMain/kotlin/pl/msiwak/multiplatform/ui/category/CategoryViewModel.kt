@@ -74,9 +74,15 @@ class CategoryViewModel(
             is CategoryUiAction.OnExerciseTitleChanged -> onAddExerciseNameChanged(action.name)
             CategoryUiAction.OnAddExerciseClicked -> onAddExerciseClicked()
             CategoryUiAction.OnDialogClosed -> onDialogClosed()
-            is CategoryUiAction.OnItemClick -> TODO()
+            is CategoryUiAction.OnItemClick -> openExercise(action.id)
             is CategoryUiAction.OnLongClick -> onResultLongClicked(action.pos)
             CategoryUiAction.OnClick -> onAddNewExerciseClicked()
+        }
+    }
+
+    private fun openExercise(id: String) {
+        viewModelScope.launch {
+            _viewEvent.emit(CategoryEvent.NavigateToAddExercise(id))
         }
     }
 

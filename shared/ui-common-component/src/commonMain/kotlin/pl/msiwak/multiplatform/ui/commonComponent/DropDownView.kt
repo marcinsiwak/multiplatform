@@ -58,7 +58,8 @@ fun DropDownView(
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Default.ArrowDropDown,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onTertiary
                 )
             }
         )

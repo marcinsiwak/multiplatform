@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.ui.summary
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -36,6 +37,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
+import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.AdmobBanner
@@ -96,7 +98,9 @@ fun SummaryScreenContent(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.tertiary),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AdmobBanner(modifier = Modifier.padding(bottom = MaterialTheme.dimens.space_8))
@@ -136,13 +140,13 @@ fun SummaryScreenContent(
                             Icon(
                                 modifier = Modifier.padding(MaterialTheme.dimens.space_8),
                                 painter = painterResource(Res.drawable.ic_add),
-                                tint = MaterialTheme.colorScheme.tertiary,
+                                tint = MaterialTheme.colorScheme.secondary,
                                 contentDescription = null
                             )
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
                                 text = stringResource(Res.string.summary_add_category),
-                                color = MaterialTheme.colorScheme.tertiary
+                                color = MaterialTheme.colorScheme.secondary
                             )
                         }
                     }

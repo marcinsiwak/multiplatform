@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.ui.welcome.terms
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
@@ -104,14 +106,27 @@ private fun TermsConfirmationContent(
         content = {
             Column(
                 modifier = Modifier
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.secondary,
+                                MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    )
                     .fillMaxSize()
-                    .padding(top = it.calculateTopPadding())
+                    .padding(
+                        top = it.calculateTopPadding(),
+                        start = MaterialTheme.dimens.space_16,
+                        end = MaterialTheme.dimens.space_16
+                    )
             ) {
                 Text(
                     modifier = Modifier
                         .padding(vertical = MaterialTheme.dimens.space_8),
                     text = stringResource(Res.string.terms_confirmation_description),
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
                 Text(
                     modifier = Modifier
@@ -124,7 +139,8 @@ private fun TermsConfirmationContent(
                             append(stringResource(Res.string.terms))
                         }
                     },
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
 
                 Spacer(modifier = Modifier.weight(1f))

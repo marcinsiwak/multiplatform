@@ -29,7 +29,7 @@ fun OfflineBanner(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.tertiary),
+            .background(MaterialTheme.colorScheme.secondary),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(

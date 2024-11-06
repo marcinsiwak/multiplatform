@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.ui.settings
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -64,7 +65,9 @@ fun SettingsScreenContent(
 ) {
     Box {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.tertiary)
         ) {
             Text(
                 modifier = Modifier.padding(

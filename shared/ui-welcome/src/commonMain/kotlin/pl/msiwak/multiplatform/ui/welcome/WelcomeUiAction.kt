@@ -11,4 +11,6 @@ sealed class WelcomeUiAction {
     data object OnOfflineModeClicked : WelcomeUiAction()
     data object OnRegistrationClicked : WelcomeUiAction()
     data object OnGoogleLoginClicked : WelcomeUiAction()
+    data class OnGoogleLoginSucceed(val idToken: String, val accessToken: String?) :
+        WelcomeUiAction()
 }

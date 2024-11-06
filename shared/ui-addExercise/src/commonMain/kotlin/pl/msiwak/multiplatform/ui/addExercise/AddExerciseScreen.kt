@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.util.fastForEachIndexed
@@ -156,7 +157,14 @@ fun AddExerciseScreenContent(
         focusManager.clearFocus()
         RunningTimeInputDialog(
             onConfirm = { hours: String, minutes: String, seconds: String, milliseconds: String ->
-                onUiAction(AddExerciseUiAction.OnConfirmRunningAmount(hours, minutes, seconds, milliseconds))
+                onUiAction(
+                    AddExerciseUiAction.OnConfirmRunningAmount(
+                        hours,
+                        minutes,
+                        seconds,
+                        milliseconds
+                    )
+                )
             },
             onDismiss = {
                 onUiAction(AddExerciseUiAction.OnDismissAmountDialog)
@@ -172,8 +180,15 @@ fun AddExerciseScreenContent(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = it.calculateTopPadding())
-                    .background(MaterialTheme.colorScheme.background),
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.secondary,
+                                MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    )
+                    .padding(top = it.calculateTopPadding()),
                 verticalArrangement = Arrangement.Top
             ) {
                 ResultsTimeFilterView(
@@ -198,7 +213,7 @@ fun AddExerciseScreenContent(
                                 .padding(horizontal = MaterialTheme.dimens.space_16),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.tertiary,
-                                contentColor = MaterialTheme.colorScheme.primary
+                                contentColor = MaterialTheme.colorScheme.onTertiary
                             ),
                             onClick = {
                                 onUiAction(AddExerciseUiAction.OnAddNewResultClicked)
@@ -216,7 +231,7 @@ fun AddExerciseScreenContent(
                                 .padding(horizontal = MaterialTheme.dimens.space_16),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.tertiary,
-                                contentColor = MaterialTheme.colorScheme.primary
+                                contentColor = MaterialTheme.colorScheme.onTertiary
                             ),
                             onClick = {
                                 onUiAction(AddExerciseUiAction.OnSaveResultClicked)

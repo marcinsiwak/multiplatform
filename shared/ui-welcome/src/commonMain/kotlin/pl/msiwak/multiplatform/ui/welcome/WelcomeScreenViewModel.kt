@@ -55,7 +55,18 @@ class WelcomeScreenViewModel(
             is WelcomeUiAction.OnPasswordChanged -> onPasswordChanged(action.password)
             WelcomeUiAction.OnRegistrationClicked -> onRegistrationClicked()
             WelcomeUiAction.OnVisibilityClicked -> onVisibilityClicked()
+            is WelcomeUiAction.OnGoogleLoginSucceed -> onGoogleLoginSucceed(
+                action.idToken,
+                action.accessToken
+            )
+
             else -> Unit
+        }
+    }
+
+    private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
+        viewModelScope.launch {
+            _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions(idToken, accessToken))
         }
     }
 
