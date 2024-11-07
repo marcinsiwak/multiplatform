@@ -29,8 +29,8 @@ fun BottomNavigation(
             MaterialTheme.dimens.bottom_navigation_divider_width,
             MaterialTheme.colorScheme.secondary
         ),
-        containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.onPrimary
+        containerColor = MaterialTheme.colorScheme.tertiary,
+        contentColor = MaterialTheme.colorScheme.onTertiary
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

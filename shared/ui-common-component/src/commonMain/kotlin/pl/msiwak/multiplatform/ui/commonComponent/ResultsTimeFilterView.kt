@@ -4,12 +4,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,7 @@ fun ResultsTimeFilterView(
     TabRow(
         modifier = modifier,
         indicator = {
-            TabRowDefaults.Indicator(
+            SecondaryIndicator(
                 Modifier
                     .fittingTabIndicatorOffset(
                         currentTabPosition = it[selectedPos],
@@ -47,7 +48,7 @@ fun ResultsTimeFilterView(
             )
         },
         divider = {},
-        containerColor = MaterialTheme.colorScheme.primary,
+        containerColor = Color.Transparent,
         selectedTabIndex = selectedPos,
         tabs = {
             tabs.forEachIndexed { index, item ->

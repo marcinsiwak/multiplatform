@@ -4,7 +4,6 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun PopupDialog(
@@ -17,14 +16,14 @@ fun PopupDialog(
     onDismissClicked: () -> Unit = {}
 ) {
     AlertDialog(
-        containerColor = Color.DarkGray,
+        containerColor = MaterialTheme.colorScheme.tertiary,
         onDismissRequest = {
             onDialogClosed()
         },
         title = {
             Text(
                 text = title,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onTertiary
             )
         },
         text = {

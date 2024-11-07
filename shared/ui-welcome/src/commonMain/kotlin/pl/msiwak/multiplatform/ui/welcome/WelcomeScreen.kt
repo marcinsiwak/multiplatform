@@ -1,15 +1,13 @@
 package pl.msiwak.multiplatform.ui.welcome
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -22,6 +20,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import athletetrack.shared.commonresources.generated.resources.Res
@@ -65,12 +64,7 @@ fun WelcomeScreen(
 
     val startSignIn = rememberGoogleLoginLauncherForActivityResult(
         onResultOk = { idToken, accessToken ->
-            navController.navigate(
-                NavDestination.WelcomeDestination.NavTermsConfirmationScreen.route(
-                    idToken,
-                    accessToken
-                )
-            )
+            viewModel.onUiAction(WelcomeUiAction.OnGoogleLoginSucceed(idToken, accessToken))
         }
     )
 
@@ -87,6 +81,13 @@ fun WelcomeScreen(
 
                 WelcomeEvent.NavigateToVerifyEmail -> navController.navigate(
                     NavDestination.VerifyEmailDestination.NavVerifyEmailScreen.route
+                )
+
+                is WelcomeEvent.NavigateToTermsAndConditions -> navController.navigate(
+                    NavDestination.WelcomeDestination.NavTermsConfirmationScreen.route(
+                        event.idToken,
+                        event.accessToken
+                    )
                 )
             }
         }
@@ -138,102 +139,107 @@ fun WelcomeScreenContent(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         content = {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .align(Alignment.Center)
-                        .width(IntrinsicSize.Min)
-                        .padding(
-                            start = MaterialTheme.dimens.space_36,
-                            end = MaterialTheme.dimens.space_36,
-                            top = MaterialTheme.dimens.space_164
-                        ),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Top
-                ) {
-                    InputView(
-                        modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
-                        value = viewState.value.login,
-                        errorMessage = viewState.value.authErrorMessage,
-                        onValueChange = {
-                            onUiAction(WelcomeUiAction.OnLoginChanged(it))
-                        },
-                        hintText = stringResource(Res.string.email)
-                    )
-
-                    InputView(
-                        modifier = Modifier,
-                        value = viewState.value.password,
-                        errorMessage = viewState.value.authErrorMessage,
-                        onValueChange = {
-                            onUiAction(WelcomeUiAction.OnPasswordChanged(it))
-                        },
-                        isPasswordVisible = viewState.value.isPasswordVisible,
-                        trailingIcon = {
-                            Icon(
-                                modifier = Modifier
-                                    .clickable { onUiAction(WelcomeUiAction.OnVisibilityClicked) },
-                                painter = painterResource(
-                                    if (viewState.value.isPasswordVisible) {
-                                        Res.drawable.ic_invisible
-                                    } else {
-                                        Res.drawable.ic_visible
-                                    }
-                                ),
-                                contentDescription = null
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.secondary,
+                                MaterialTheme.colorScheme.primary
                             )
-                        },
-                        isPassword = true,
-                        hintText = stringResource(Res.string.password)
-                    )
-
-                    MainButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = MaterialTheme.dimens.space_24),
-                        onClick = { onUiAction(WelcomeUiAction.OnLoginClicked) },
-                        text = stringResource(Res.string.login)
-                    )
-
-                    MainButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = MaterialTheme.dimens.space_16
-                            ),
-                        onClick = {
-                            onUiAction(WelcomeUiAction.OnGoogleLoginClicked)
-                        },
-                        leadingIcon = Res.drawable.ic_google,
-                        text = stringResource(Res.string.welcome_google_login)
-                    )
-
-                    SecondaryButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = MaterialTheme.dimens.space_16,
-                                bottom = MaterialTheme.dimens.space_16
-                            ),
-                        onClick = { onUiAction(WelcomeUiAction.OnOfflineModeClicked) },
-                        text = stringResource(Res.string.welcome_offline_mode)
-                    )
-
-                    Text(
-                        text = stringResource(Res.string.welcome_no_account),
-                        color = MaterialTheme.colorScheme.secondary
-                    )
-                    Button(
-                        onClick = {
-                            onUiAction(WelcomeUiAction.OnRegistrationClicked)
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Transparent
                         )
-                    ) {
-                        Text(text = stringResource(Res.string.welcome_create_account))
-                    }
+                    )
+                    .padding(
+                        start = MaterialTheme.dimens.space_36,
+                        end = MaterialTheme.dimens.space_36
+                    ),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                InputView(
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
+                    value = viewState.value.login,
+                    errorMessage = viewState.value.authErrorMessage,
+                    onValueChange = {
+                        onUiAction(WelcomeUiAction.OnLoginChanged(it))
+                    },
+                    hintText = stringResource(Res.string.email)
+                )
+
+                InputView(
+                    modifier = Modifier,
+                    value = viewState.value.password,
+                    errorMessage = viewState.value.authErrorMessage,
+                    onValueChange = {
+                        onUiAction(WelcomeUiAction.OnPasswordChanged(it))
+                    },
+                    isPasswordVisible = viewState.value.isPasswordVisible,
+                    trailingIcon = {
+                        Icon(
+                            modifier = Modifier
+                                .clickable { onUiAction(WelcomeUiAction.OnVisibilityClicked) },
+                            painter = painterResource(
+                                if (viewState.value.isPasswordVisible) {
+                                    Res.drawable.ic_invisible
+                                } else {
+                                    Res.drawable.ic_visible
+                                }
+                            ),
+                            tint = MaterialTheme.colorScheme.onTertiary,
+                            contentDescription = null
+                        )
+                    },
+                    isPassword = true,
+                    hintText = stringResource(Res.string.password)
+                )
+
+                MainButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = MaterialTheme.dimens.space_24),
+                    onClick = { onUiAction(WelcomeUiAction.OnLoginClicked) },
+                    text = stringResource(Res.string.login)
+                )
+
+                MainButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = MaterialTheme.dimens.space_16
+                        ),
+                    onClick = {
+                        onUiAction(WelcomeUiAction.OnGoogleLoginClicked)
+                    },
+                    leadingIcon = Res.drawable.ic_google,
+                    text = stringResource(Res.string.welcome_google_login)
+                )
+
+                SecondaryButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = MaterialTheme.dimens.space_16,
+                            bottom = MaterialTheme.dimens.space_16
+                        ),
+                    onClick = { onUiAction(WelcomeUiAction.OnOfflineModeClicked) },
+                    text = stringResource(Res.string.welcome_offline_mode)
+                )
+
+                Text(
+                    text = stringResource(Res.string.welcome_no_account),
+                    color = MaterialTheme.colorScheme.secondary
+                )
+                Button(
+                    onClick = {
+                        onUiAction(WelcomeUiAction.OnRegistrationClicked)
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
+                ) {
+                    Text(text = stringResource(Res.string.welcome_create_account))
                 }
             }
         }

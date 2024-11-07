@@ -10,21 +10,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
@@ -45,13 +39,12 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
-import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
-import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.ListItemView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
+import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
@@ -134,30 +127,19 @@ fun CategoryScreenContent(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.secondary,
+                                MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    )
                     .padding(top = it.calculateTopPadding())
-                    .background(MaterialTheme.colorScheme.background)
             ) {
                 Column {
-                    val shadowColor = MaterialTheme.color.ShadowColor
                     Image(
                         modifier = Modifier
-                            .drawWithCache {
-                                val gradientTop = Brush.verticalGradient(
-                                    colors = listOf(Color.Transparent, shadowColor),
-                                    startY = size.height / 6,
-                                    endY = 0f
-                                )
-                                val gradientBottom = Brush.verticalGradient(
-                                    colors = listOf(Color.Transparent, shadowColor),
-                                    startY = size.height / 3,
-                                    endY = size.height
-                                )
-                                onDrawWithContent {
-                                    drawContent()
-                                    drawRect(gradientTop, blendMode = BlendMode.Multiply)
-                                    drawRect(gradientBottom, blendMode = BlendMode.Multiply)
-                                }
-                            }
                             .fillMaxWidth()
                             .height(MaterialTheme.dimens.category_img_height),
                         painter = painterResource(backgroundId),
@@ -175,7 +157,8 @@ fun CategoryScreenContent(
                         }
                     }
                 }
-                Button(
+
+                MainButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.BottomCenter)
@@ -183,18 +166,9 @@ fun CategoryScreenContent(
                             vertical = MaterialTheme.dimens.space_16,
                             horizontal = MaterialTheme.dimens.space_80
                         ),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        contentColor = MaterialTheme.colorScheme.primary
-                    ),
-                    onClick = { onUiAction(CategoryUiAction.OnClick) }
-                ) {
-                    Text(
-                        modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                        text = stringResource(Res.string.add_exercise),
-                        fontSize = MaterialTheme.font.font_16
-                    )
-                }
+                    onClick = { onUiAction(CategoryUiAction.OnClick) },
+                    text = stringResource(Res.string.add_exercise)
+                )
             }
         }
     )
