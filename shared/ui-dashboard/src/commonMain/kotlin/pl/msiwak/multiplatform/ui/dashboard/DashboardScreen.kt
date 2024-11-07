@@ -1,8 +1,10 @@
 package pl.msiwak.multiplatform.ui.dashboard
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -89,7 +91,9 @@ private fun DashboardScreenContent(
         }
     ) {
         NavHost(
-            modifier = Modifier.padding(paddingValues = it),
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.tertiary)
+                .padding(paddingValues = it),
             navController = navController,
             startDestination = selectedTabDestination.graphRoute
         ) {
