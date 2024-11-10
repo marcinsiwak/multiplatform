@@ -21,7 +21,7 @@ fun Route.addUserRoutes() {
         post("/user") {
             with(call) {
                 val principal = principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
-                receive<UserDTO>().run { userController.addUser(name, email, principal.userId) }
+                receive<UserDTO>().run { userController.addUser(name ?: principal.displayName, principal.displayName, principal.userId) }
                 respond(HttpStatusCode.OK)
             }
         }
