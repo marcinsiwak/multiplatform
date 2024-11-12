@@ -14,4 +14,8 @@ class UserService(
     suspend fun getUser(): Flow<User> {
         return client.getUser().map { mapper(it) }
     }
+
+    suspend fun createUser(uuid: String) {
+        return client.createUser(uuid)
+    }
 }

@@ -13,7 +13,8 @@ class SessionStore(private val sharedPreferences: KMMPreferences) {
     }
 
     fun getToken(): String? {
-        return sharedPreferences.getString(PREFS_TOKEN_KEY)
+        val token = sharedPreferences.getString(PREFS_TOKEN_KEY)
+        return token
     }
 
     fun setOfflineSession(isOfflineSession: Boolean) {

@@ -90,6 +90,8 @@ import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCase
 import pl.msiwak.multiplatform.domain.summaries.RemoveResultUseCaseImpl
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseNameUseCase
 import pl.msiwak.multiplatform.domain.summaries.UpdateExerciseNameUseCaseImpl
+import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
+import pl.msiwak.multiplatform.domain.user.CreateUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
@@ -202,7 +204,7 @@ val viewModelsModule = module {
     }
     viewModelDefinition { RegisterViewModel(get(), get(), get()) }
     viewModelDefinition { VerifyEmailViewModel(get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get()) }
+    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModelDefinition { TermsConfirmationViewModel(get(), get(), get(), get()) }
     viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
     viewModelDefinition {
@@ -235,7 +237,7 @@ val viewModelsModule = module {
     viewModelDefinition { LanguageViewModel(get(), get()) }
     viewModelDefinition { UnitViewModel(get(), get()) }
     viewModelDefinition { ForceUpdateViewModel() }
-    viewModelDefinition { DashboardViewModel(get(), get(), get(), get()) }
+    viewModelDefinition { DashboardViewModel(get(), get(), get()) }
 }
 
 val useCaseModule = module {
@@ -266,6 +268,7 @@ val useCaseModule = module {
     single<GetCurrentAppCodeUseCase> { GetCurrentAppCodeUseCaseImpl(get()) }
     single<GetVersionNameUseCase> { GetVersionNameUseCaseImpl(get()) }
     single<GetUserUseCase> { GetUserUseCaseImpl(get()) }
+    single<CreateUserUseCase> { CreateUserUseCaseImpl(get()) }
     single<ObserveAuthStateChangedUseCase> { ObserveAuthStateChangedUseCaseImpl(get(), get()) }
     single<ResendVerificationEmailUseCase> { ResendVerificationEmailUseCaseImpl(get()) }
     single<AddExerciseUseCase> { AddExerciseUseCaseImpl(get()) }

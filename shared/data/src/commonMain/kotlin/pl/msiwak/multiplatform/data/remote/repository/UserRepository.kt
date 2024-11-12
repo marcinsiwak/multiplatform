@@ -12,4 +12,8 @@ class UserRepository(private val userService: UserService) {
     suspend fun getUser(): User = withContext(Dispatchers.IO) {
         return@withContext userService.getUser().first()
     }
+
+    suspend fun createUser(uuid: String) = withContext(Dispatchers.IO) {
+        return@withContext userService.createUser(uuid)
+    }
 }

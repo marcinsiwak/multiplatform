@@ -3,6 +3,8 @@ package pl.msiwak.multiplatform.ui.welcome
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.gitlive.firebase.auth.FirebaseAuthInvalidCredentialsException
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -12,17 +14,22 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
+import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
+import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
+import kotlin.math.log
 
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
     private val setOfflineModeUseCase: SetOfflineModeUseCase,
     private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
-    globalErrorHandler: GlobalErrorHandler
+    private val googleLoginUseCase: GoogleLoginUseCase,
+    private val getUser: GetUserUseCase,
+    private val globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(WelcomeState())
@@ -42,6 +49,15 @@ class WelcomeScreenViewModel(
 
             else -> false
         }
+    }
+
+    private fun prepareGoogleLoginErrorHandler(
+        uuid: String,
+    ): CoroutineExceptionHandler = globalErrorHandler.handleError { _ ->
+        viewModelScope.launch {
+            _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions(uuid))
+        }
+        false
     }
 
     fun onUiAction(action: WelcomeUiAction) {
@@ -65,8 +81,19 @@ class WelcomeScreenViewModel(
     }
 
     private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
-        viewModelScope.launch {
-            _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions(idToken, accessToken))
+        viewModelScope.launch(errorHandler) {
+
+            val loginJob = async {
+                val result = googleLoginUseCase(idToken, accessToken)
+                return@async result
+            }
+            val uuid = loginJob.await() ?: throw Exception()
+
+            viewModelScope.launch(prepareGoogleLoginErrorHandler(uuid)) {
+                val user = getUser()
+                user
+                _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
+            }
         }
     }
 
