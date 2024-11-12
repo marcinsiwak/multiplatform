@@ -234,7 +234,7 @@ jobs:
 
 
   Distribute-Android-RC:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')}}
 
     runs-on: ubuntu-latest
 
