@@ -8,7 +8,7 @@ class UserDTOMapper : Mapper<UserEntity, UserDTO>() {
         return UserDTO(
             id = id,
             email = email,
-            name = name
+            username = name
         )
     }
 }
