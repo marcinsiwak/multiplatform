@@ -11,14 +11,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
-import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
+import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class TermsConfirmationViewModel(
-    private val googleLoginUseCase: GoogleLoginUseCase,
     private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
+    private val createUserUseCase: CreateUserUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -30,11 +30,21 @@ class TermsConfirmationViewModel(
 
     private val errorHandler = globalErrorHandler.handleError()
 
-    fun onGoogleLogin(idToken: String?, accessToken: String?) {
+    fun onUiAction(action: TermsConfirmationUiAction) {
+        when (action) {
+            is TermsConfirmationUiAction.OnButtonClick -> onCreateAccount(action.uuid)
+
+            TermsConfirmationUiAction.OnConfirmSynchronizationClicked -> onConfirmSynchronizationClicked()
+            TermsConfirmationUiAction.OnDismissSynchronizationClicked -> onDismissSynchronizationClicked()
+            else -> Unit
+        }
+    }
+
+    private fun onCreateAccount(uuid: String) {
         viewModelScope.launch(errorHandler) {
+            createUserUseCase(uuid)
             val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
             _viewState.update { it.copy(isLoading = true) }
-            googleLoginUseCase(idToken, accessToken)
             if (isSynchronizationPossible) {
                 _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
             } else {
@@ -44,7 +54,7 @@ class TermsConfirmationViewModel(
         }
     }
 
-    fun onConfirmSynchronizationClicked() {
+    private fun onConfirmSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
@@ -54,7 +64,7 @@ class TermsConfirmationViewModel(
         }
     }
 
-    fun onDismissSynchronizationClicked() {
+    private fun onDismissSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
         viewModelScope.launch {
             _viewEvent.emit(TermsConfirmationEvent.NavigateToDashboard)

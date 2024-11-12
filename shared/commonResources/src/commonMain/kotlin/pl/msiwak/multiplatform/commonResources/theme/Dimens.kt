@@ -41,7 +41,8 @@ data class Dimensions(
     val category_img_height: Dp = 164.dp,
     val google_icon_size: Dp = 36.dp,
     val default_button_height: Dp = 48.dp,
-    val checkbox_size: Dp = 24.dp
+    val checkbox_size: Dp = 24.dp,
+    val defaultElevation: Dp = 1.dp
 )
 
 val MaterialTheme.dimens: Dimensions

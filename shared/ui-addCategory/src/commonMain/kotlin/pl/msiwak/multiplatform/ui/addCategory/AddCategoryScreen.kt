@@ -1,21 +1,20 @@
 package pl.msiwak.multiplatform.ui.addCategory
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import athletetrack.shared.commonresources.generated.resources.Res
@@ -28,11 +27,11 @@ import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
-import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.DropDownView
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.Loader
+import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
@@ -75,6 +74,14 @@ fun AddCategoryScreenContent(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.secondary,
+                                MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    )
                     .padding(top = it.calculateTopPadding())
             ) {
                 Column {
@@ -96,7 +103,8 @@ fun AddCategoryScreenContent(
                         }
                     )
                 }
-                Button(
+
+                MainButton(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()
@@ -104,18 +112,9 @@ fun AddCategoryScreenContent(
                             vertical = MaterialTheme.dimens.space_16,
                             horizontal = MaterialTheme.dimens.space_80
                         ),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        contentColor = MaterialTheme.colorScheme.primary
-                    ),
-                    onClick = { onUiAction(AddCategoryUiAction.OnSaveCategoryClicked) }
-                ) {
-                    Text(
-                        modifier = Modifier.padding(MaterialTheme.dimens.space_8),
-                        text = stringResource(Res.string.add_category),
-                        fontSize = MaterialTheme.font.font_16
-                    )
-                }
+                    onClick = { onUiAction(AddCategoryUiAction.OnSaveCategoryClicked) },
+                    text = stringResource(Res.string.add_category)
+                )
             }
         }
     )

@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.commonResources.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -10,15 +11,16 @@ import androidx.compose.runtime.CompositionLocalProvider
 private fun appColorScheme() = lightColorScheme(
     primary = White,
     onPrimary = Black,
-    secondary = DarkGrey,
+    secondary = Grey,
     onSecondary = Black,
     tertiary = LightGrey,
     onTertiary = Black,
-    surface = Black,
-    onSurface = White,
-    background = Black,
+    surface = SurfaceGray,
+    onSurface = Black,
+    background = White,
+    onBackground = Black,
     error = Red,
-    onError = Red
+    onError = White
 )
 
 @Composable
@@ -27,8 +29,8 @@ private fun appColorSchemeDark() = darkColorScheme(
     onPrimary = White,
     secondary = DarkGrey,
     onSecondary = Black,
-    tertiary = LightGrey,
-    onTertiary = Black,
+    tertiary = Black,
+    onTertiary = White,
     surface = Black,
     onSurface = White,
     background = Black,
@@ -38,9 +40,10 @@ private fun appColorSchemeDark() = darkColorScheme(
 
 @Composable
 fun AppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (true) {
+    val colorScheme = if (darkTheme) {
         appColorSchemeDark()
     } else {
         appColorScheme()

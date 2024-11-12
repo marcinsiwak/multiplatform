@@ -15,8 +15,8 @@ fun SecondaryButton(modifier: Modifier = Modifier, onClick: () -> Unit, text: St
         modifier = modifier.height(MaterialTheme.dimens.default_button_height),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.tertiary,
-            contentColor = MaterialTheme.colorScheme.onTertiary
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onSecondary
         )
     ) {
         Text(text = text)

@@ -1,15 +1,12 @@
 package pl.msiwak.multiplatform.ui.register
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -19,6 +16,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
@@ -87,91 +85,95 @@ fun RegisterScreenContent(
             AppBar(navController = navController, title = stringResource(Res.string.register))
         },
         content = {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Column(
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.secondary,
+                                MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    )
+                    .padding(
+                        start = MaterialTheme.dimens.space_36,
+                        end = MaterialTheme.dimens.space_36
+                    ),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                InputView(
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
+                    value = viewState.value.login,
+                    errorMessage = viewState.value.loginErrorMessage?.let {
+                        stringResource(
+                            it
+                        )
+                    },
+                    onValueChange = { onUiAction(RegisterUiAction.OnLoginChanged(it)) },
+                    hintText = stringResource(Res.string.email)
+                )
+
+                InputView(
+                    modifier = Modifier,
+                    value = viewState.value.password,
+                    errorMessage = viewState.value.passwordErrorMessage?.let {
+                        stringResource(
+                            it
+                        )
+                    },
+                    onValueChange = { onUiAction(RegisterUiAction.OnPasswordChanged(it)) },
+                    isPassword = true,
+                    isPasswordVisible = viewState.value.isPasswordVisible,
+                    trailingIcon = {
+                        Icon(
+                            modifier = Modifier
+                                .clickable { onUiAction(RegisterUiAction.OnVisibilityClicked) },
+                            painter = painterResource(
+                                if (viewState.value.isPasswordVisible) {
+                                    Res.drawable.ic_invisible
+                                } else {
+                                    Res.drawable.ic_visible
+                                }
+                            ),
+                            tint = MaterialTheme.colorScheme.onTertiary,
+                            contentDescription = null
+                        )
+                    },
+                    hintText = stringResource(Res.string.password)
+                )
+
+                PasswordRequirements(requirements = viewState.value.passwordRequirements)
+
+                MainCheckbox(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .align(Alignment.Center)
-                        .width(IntrinsicSize.Min)
-                        .padding(
-                            start = MaterialTheme.dimens.space_36,
-                            end = MaterialTheme.dimens.space_36,
-                            top = MaterialTheme.dimens.space_164
-                        ),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Top
-                ) {
-                    InputView(
-                        modifier = Modifier.padding(top = MaterialTheme.dimens.space_64),
-                        value = viewState.value.login,
-                        errorMessage = viewState.value.loginErrorMessage?.let {
-                            stringResource(
-                                it
-                            )
-                        },
-                        onValueChange = { onUiAction(RegisterUiAction.OnLoginChanged(it)) },
-                        hintText = stringResource(Res.string.email)
-                    )
-
-                    InputView(
-                        modifier = Modifier,
-                        value = viewState.value.password,
-                        errorMessage = viewState.value.passwordErrorMessage?.let {
-                            stringResource(
-                                it
-                            )
-                        },
-                        onValueChange = { onUiAction(RegisterUiAction.OnPasswordChanged(it)) },
-                        isPassword = true,
-                        isPasswordVisible = viewState.value.isPasswordVisible,
-                        trailingIcon = {
-                            Icon(
-                                modifier = Modifier
-                                    .clickable { onUiAction(RegisterUiAction.OnVisibilityClicked) },
-                                painter = painterResource(
-                                    if (viewState.value.isPasswordVisible) {
-                                        Res.drawable.ic_invisible
-                                    } else {
-                                        Res.drawable.ic_visible
-                                    }
-                                ),
-                                contentDescription = null
-                            )
-                        },
-                        hintText = stringResource(Res.string.password)
-                    )
-
-                    PasswordRequirements(requirements = viewState.value.passwordRequirements)
-
-                    MainCheckbox(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = MaterialTheme.dimens.space_24),
-                        checked = viewState.value.isTermsChecked,
-                        onCheckedChange = { onUiAction(RegisterUiAction.OnTermsClicked(it)) },
-                        text = buildAnnotatedString {
-                            withStyle(style = SpanStyle(textDecoration = TextDecoration.Underline)) {
-                                append(stringResource(Res.string.accept_terms))
-                            }
-                        },
-                        onTextClicked = {
-                            navController.navigate(NavDestination.TermsDestination.NavTermsScreen.route)
+                        .fillMaxWidth()
+                        .padding(top = MaterialTheme.dimens.space_24),
+                    checked = viewState.value.isTermsChecked,
+                    onCheckedChange = { onUiAction(RegisterUiAction.OnTermsClicked(it)) },
+                    text = buildAnnotatedString {
+                        withStyle(style = SpanStyle(textDecoration = TextDecoration.Underline)) {
+                            append(stringResource(Res.string.accept_terms))
                         }
-                    )
+                    },
+                    onTextClicked = {
+                        navController.navigate(NavDestination.TermsDestination.NavTermsScreen.route)
+                    }
+                )
 
-                    MainButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = MaterialTheme.dimens.space_32),
-                        enabled = with(viewState.value) {
-                            isTermsChecked && login.isNotBlank() && passwordErrorMessage == null
-                        },
-                        onClick = {
-                            onUiAction(RegisterUiAction.OnRegisterClicked)
-                        },
-                        text = stringResource(Res.string.register)
-                    )
-                }
+                MainButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = MaterialTheme.dimens.space_32),
+                    enabled = with(viewState.value) {
+                        isTermsChecked && login.isNotBlank() && passwordErrorMessage == null
+                    },
+                    onClick = {
+                        onUiAction(RegisterUiAction.OnRegisterClicked)
+                    },
+                    text = stringResource(Res.string.register)
+                )
             }
         }
     )

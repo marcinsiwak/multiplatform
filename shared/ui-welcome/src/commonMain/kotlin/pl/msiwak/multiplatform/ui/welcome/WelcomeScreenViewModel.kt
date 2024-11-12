@@ -3,6 +3,8 @@ package pl.msiwak.multiplatform.ui.welcome
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.gitlive.firebase.auth.FirebaseAuthInvalidCredentialsException
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -12,9 +14,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
+import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
+import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class WelcomeScreenViewModel(
@@ -22,7 +26,9 @@ class WelcomeScreenViewModel(
     private val setOfflineModeUseCase: SetOfflineModeUseCase,
     private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
-    globalErrorHandler: GlobalErrorHandler
+    private val googleLoginUseCase: GoogleLoginUseCase,
+    private val getUser: GetUserUseCase,
+    private val globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(WelcomeState())
@@ -44,6 +50,14 @@ class WelcomeScreenViewModel(
         }
     }
 
+    private fun prepareGoogleLoginErrorHandler(uuid: String): CoroutineExceptionHandler =
+        globalErrorHandler.handleError { _ ->
+            viewModelScope.launch {
+                _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions(uuid))
+            }
+            false
+        }
+
     fun onUiAction(action: WelcomeUiAction) {
         when (action) {
             WelcomeUiAction.OnConfirmDialogButtonClicked -> onConfirmDialogButtonClicked()
@@ -55,19 +69,39 @@ class WelcomeScreenViewModel(
             is WelcomeUiAction.OnPasswordChanged -> onPasswordChanged(action.password)
             WelcomeUiAction.OnRegistrationClicked -> onRegistrationClicked()
             WelcomeUiAction.OnVisibilityClicked -> onVisibilityClicked()
+            is WelcomeUiAction.OnGoogleLoginSucceed -> onGoogleLoginSucceed(
+                action.idToken,
+                action.accessToken
+            )
+
             else -> Unit
         }
     }
 
-    fun onLoginChanged(text: String) {
+    private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
+        viewModelScope.launch(errorHandler) {
+            val loginJob = async {
+                val result = googleLoginUseCase(idToken, accessToken)
+                return@async result
+            }
+            val uuid = loginJob.await() ?: throw Exception()
+
+            viewModelScope.launch(prepareGoogleLoginErrorHandler(uuid)) {
+                getUser()
+                _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
+            }
+        }
+    }
+
+    private fun onLoginChanged(text: String) {
         _viewState.update { it.copy(login = text, authErrorMessage = null) }
     }
 
-    fun onPasswordChanged(text: String) {
+    private fun onPasswordChanged(text: String) {
         _viewState.update { it.copy(password = text, authErrorMessage = null) }
     }
 
-    fun onLoginClicked() {
+    private fun onLoginClicked() {
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             val isUserVerified =
@@ -89,28 +123,28 @@ class WelcomeScreenViewModel(
 
     // TODO: Add Apple login
 
-    fun onOfflineModeClicked() {
+    private fun onOfflineModeClicked() {
         viewModelScope.launch {
             setOfflineModeUseCase(true)
             _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
         }
     }
 
-    fun onRegistrationClicked() {
+    private fun onRegistrationClicked() {
         viewModelScope.launch {
             _viewEvent.emit(WelcomeEvent.NavigateToRegistration)
         }
     }
 
-    fun onVisibilityClicked() {
+    private fun onVisibilityClicked() {
         _viewState.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
     }
 
-    fun onConfirmDialogButtonClicked() {
+    private fun onConfirmDialogButtonClicked() {
         _viewState.update { it.copy(isErrorDialogVisible = false) }
     }
 
-    fun onConfirmSynchronizationClicked() {
+    private fun onConfirmSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
@@ -120,7 +154,7 @@ class WelcomeScreenViewModel(
         }
     }
 
-    fun onDismissSynchronizationClicked() {
+    private fun onDismissSynchronizationClicked() {
         _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
         viewModelScope.launch {
             _viewEvent.emit(WelcomeEvent.NavigateToDashboard)

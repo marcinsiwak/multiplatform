@@ -8,6 +8,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import pl.msiwak.multiplatform.navigator.ARG_ACCESS_TOKEN_ID
 import pl.msiwak.multiplatform.navigator.ARG_TOKEN_ID
+import pl.msiwak.multiplatform.navigator.ARG_UUID_ID
 import pl.msiwak.multiplatform.navigator.destination.NavDestination.WelcomeDestination
 import pl.msiwak.multiplatform.navigator.graph.NavigationNestedGraph
 import pl.msiwak.multiplatform.ui.welcome.terms.TermsConfirmationScreen
@@ -39,8 +40,7 @@ class WelcomeGraph : NavigationNestedGraph {
                 )
             ) { backStackEntry ->
                 TermsConfirmationScreen(
-                    idToken = backStackEntry.arguments?.getString(ARG_TOKEN_ID) ?: "",
-                    accessToken = backStackEntry.arguments?.getString(ARG_ACCESS_TOKEN_ID),
+                    uuid = backStackEntry.arguments?.getString(ARG_UUID_ID) ?: "",
                     navController = navController
                 )
             }

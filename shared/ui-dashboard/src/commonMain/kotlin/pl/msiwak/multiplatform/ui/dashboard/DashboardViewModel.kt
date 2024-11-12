@@ -8,11 +8,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
-import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class DashboardViewModel(
-    private val getUser: GetUserUseCase,
     getIsOfflineModeUseCase: GetIsOfflineModeUseCase,
     globalErrorHandler: GlobalErrorHandler,
     val bottomNavigationProvider: BottomNavigationProvider
@@ -26,9 +24,6 @@ class DashboardViewModel(
     init {
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isOfflineBannerVisible = getIsOfflineModeUseCase()) }
-        }
-        viewModelScope.launch(errorHandler) {
-            getUser()
         }
     }
 

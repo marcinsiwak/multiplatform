@@ -8,14 +8,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_new_exercise
 import athletetrack.shared.commonresources.generated.resources.exercise_name
 import org.jetbrains.compose.resources.stringResource
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun AddExerciseDialog(
@@ -26,14 +27,14 @@ fun AddExerciseDialog(
 ) {
     AlertDialog(
         shape = RoundedCornerShape(MaterialTheme.dimens.dialog_corners),
-        containerColor = DarkGray,
+        containerColor = MaterialTheme.colorScheme.tertiary,
         onDismissRequest = {
             onDialogClosed()
         },
         title = {
             Text(
                 text = stringResource(Res.string.exercise_name),
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onTertiary
             )
         },
         text = {
@@ -62,10 +63,10 @@ fun AddExerciseDialog(
     )
 }
 
-// @DarkLightPreview
-// @Composable
-// fun AddExerciseDialogPreview() {
-//     AppTheme {
-//         AddExerciseDialog()
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun AddExerciseDialogPreview() {
+    AppTheme {
+        AddExerciseDialog()
+    }
+}

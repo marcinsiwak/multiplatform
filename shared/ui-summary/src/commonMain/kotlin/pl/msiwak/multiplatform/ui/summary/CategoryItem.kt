@@ -10,33 +10,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.util.fastForEach
 import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.bg_gym
 import athletetrack.shared.commonresources.generated.resources.bg_running_field
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
-import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
-@OptIn(ExperimentalResourceApi::class)
 @Suppress("MagicNumber")
 @Composable
 fun CategoryItem(
@@ -46,18 +40,13 @@ fun CategoryItem(
     val backgroundId = when (category.exerciseType) {
         ExerciseType.RUNNING -> Res.drawable.bg_running_field
         ExerciseType.GYM -> Res.drawable.bg_gym
-//        ExerciseType.OTHER -> null
     }
 
     Box(
         modifier = modifier
             .background(
-                color = MaterialTheme.color.ShadowColor,
+                color = MaterialTheme.colorScheme.tertiary,
                 shape = RoundedCornerShape(MaterialTheme.dimens.space_12)
-            )
-            .shadow(
-                elevation = MaterialTheme.dimens.space_2,
-                shape = RoundedCornerShape(MaterialTheme.dimens.space_8)
             )
             .border(
                 MaterialTheme.dimens.space_2,
@@ -71,7 +60,6 @@ fun CategoryItem(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .fillMaxSize()
-                .alpha(0.5f)
                 .clip(RoundedCornerShape(MaterialTheme.dimens.space_8)),
             painter = painterResource(backgroundId),
             contentScale = ContentScale.Crop,
@@ -82,7 +70,7 @@ fun CategoryItem(
             Text(
                 modifier = Modifier
                     .background(
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.secondary,
                         shape = RoundedCornerShape(
                             topStart = MaterialTheme.dimens.space_8,
                             bottomEnd = MaterialTheme.dimens.space_8
@@ -94,25 +82,20 @@ fun CategoryItem(
                     ),
                 text = category.name,
                 fontSize = MaterialTheme.font.font_14,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onSecondary
             )
 
-            LazyColumn(
-                modifier
-                    .fillMaxHeight()
-            ) {
-                items(category.exercises) {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .padding(start = MaterialTheme.dimens.space_8),
-                        maxLines = 1,
-                        text = it.exerciseTitle,
-                        fontSize = MaterialTheme.font.font_12,
-                        fontStyle = FontStyle.Italic,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
+            category.exercises.fastForEach {
+                Text(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(start = MaterialTheme.dimens.space_8),
+                    maxLines = 1,
+                    text = it.exerciseTitle,
+                    fontSize = MaterialTheme.font.font_12,
+                    fontStyle = FontStyle.Italic,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         }
     }
