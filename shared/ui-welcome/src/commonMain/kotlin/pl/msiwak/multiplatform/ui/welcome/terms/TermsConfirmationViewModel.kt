@@ -11,14 +11,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
-import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
+import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class TermsConfirmationViewModel(
-    private val googleLoginUseCase: GoogleLoginUseCase,
     private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
+    private val createUserUseCase: CreateUserUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
@@ -32,10 +32,7 @@ class TermsConfirmationViewModel(
 
     fun onUiAction(action: TermsConfirmationUiAction) {
         when (action) {
-            is TermsConfirmationUiAction.OnButtonClick -> onGoogleLogin(
-                action.idToken,
-                action.accessToken
-            )
+            is TermsConfirmationUiAction.OnButtonClick -> onCreateAccount(action.uuid)
 
             TermsConfirmationUiAction.OnConfirmSynchronizationClicked -> onConfirmSynchronizationClicked()
             TermsConfirmationUiAction.OnDismissSynchronizationClicked -> onDismissSynchronizationClicked()
@@ -43,11 +40,11 @@ class TermsConfirmationViewModel(
         }
     }
 
-    private fun onGoogleLogin(idToken: String?, accessToken: String?) {
+    private fun onCreateAccount(uuid: String) {
         viewModelScope.launch(errorHandler) {
+            createUserUseCase(uuid)
             val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
             _viewState.update { it.copy(isLoading = true) }
-            googleLoginUseCase(idToken, accessToken)
             if (isSynchronizationPossible) {
                 _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
             } else {
