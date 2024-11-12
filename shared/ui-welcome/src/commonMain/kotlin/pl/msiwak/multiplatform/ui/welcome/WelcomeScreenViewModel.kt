@@ -87,8 +87,7 @@ class WelcomeScreenViewModel(
             val uuid = loginJob.await() ?: throw Exception()
 
             viewModelScope.launch(prepareGoogleLoginErrorHandler(uuid)) {
-                val user = getUser()
-                user
+                getUser()
                 _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
             }
         }

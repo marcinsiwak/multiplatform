@@ -12,9 +12,11 @@ import athletetrack.shared.commonresources.generated.resources.Res
 import athletetrack.shared.commonresources.generated.resources.add_new_exercise
 import athletetrack.shared.commonresources.generated.resources.exercise_name
 import org.jetbrains.compose.resources.stringResource
+import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
+import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun AddExerciseDialog(
@@ -61,10 +63,10 @@ fun AddExerciseDialog(
     )
 }
 
-// @DarkLightPreview
-// @Composable
-// fun AddExerciseDialogPreview() {
-//     AppTheme {
-//         AddExerciseDialog()
-//     }
-// }
+@DarkLightPreview
+@Composable
+fun AddExerciseDialogPreview() {
+    AppTheme {
+        AddExerciseDialog()
+    }
+}
