@@ -20,7 +20,6 @@ import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
-import kotlin.math.log
 
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
@@ -51,14 +50,13 @@ class WelcomeScreenViewModel(
         }
     }
 
-    private fun prepareGoogleLoginErrorHandler(
-        uuid: String,
-    ): CoroutineExceptionHandler = globalErrorHandler.handleError { _ ->
-        viewModelScope.launch {
-            _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions(uuid))
+    private fun prepareGoogleLoginErrorHandler(uuid: String): CoroutineExceptionHandler =
+        globalErrorHandler.handleError { _ ->
+            viewModelScope.launch {
+                _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions(uuid))
+            }
+            false
         }
-        false
-    }
 
     fun onUiAction(action: WelcomeUiAction) {
         when (action) {
@@ -82,7 +80,6 @@ class WelcomeScreenViewModel(
 
     private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
         viewModelScope.launch(errorHandler) {
-
             val loginJob = async {
                 val result = googleLoginUseCase(idToken, accessToken)
                 return@async result

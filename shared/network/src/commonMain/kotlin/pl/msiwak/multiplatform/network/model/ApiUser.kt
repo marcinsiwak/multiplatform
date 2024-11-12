@@ -6,6 +6,5 @@ import kotlinx.serialization.Serializable
 data class ApiUser(
     val id: String,
     val email: String? = null,
-    val emailVerified: Boolean? = null,
     val username: String? = null
 )
