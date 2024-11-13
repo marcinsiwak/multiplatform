@@ -46,6 +46,9 @@ jobs:
   build-and-push:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backendApp
 
     steps:
       - name: Checkout repository
