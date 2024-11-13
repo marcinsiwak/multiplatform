@@ -1,15 +1,19 @@
 name: Docker Image CI
 
 on:
+  workflow_call:
   push:
-    branches: [ "master" ]
+    branches: [ "master, develop" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master, develop" ]
 
 jobs:
   build:
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false)}}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backendApp
 
     steps:
       - name: Checkout repository

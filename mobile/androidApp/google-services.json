@@ -1,0 +1,158 @@
+{
+  "project_info": {
+    "project_number": "607279059338",
+    "project_id": "sportplatform-b5318",
+    "storage_bucket": "sportplatform-b5318.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607279059338:android:fcb0776540d69ff3cb3873",
+        "android_client_info": {
+          "package_name": "pl.msiwak.athletetrack.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607279059338-pi971g6en33gfq4qjtmsjeq6or3kjkdc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.msiwak.athletetrack.android",
+            "certificate_hash": "86a3bc55bdd6dd678e43ea7815cd5669af866e25"
+          }
+        },
+        {
+          "client_id": "607279059338-tf6mpi0ac6fdecs7jq0b05pkvvnirdmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuGdmDq8ooDXggYvkgQviYbGUykdOBjOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607279059338-ildvb5nvgahchrkqje1vhk6fr5ns23tk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "607279059338-18rnfh9m3nefhtdj8j783u0n9ovn9cqb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pl.msiwak.multiplatform.ios"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607279059338:android:471f39e46d37f481cb3873",
+        "android_client_info": {
+          "package_name": "pl.msiwak.athletetrack.android.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607279059338-2pl27r2jgju8dt6oa057dnh0f7l3skur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.msiwak.athletetrack.android.debug",
+            "certificate_hash": "8f5e2af74847e6bc8466b91553350322ebac6094"
+          }
+        },
+        {
+          "client_id": "607279059338-fic402i84uj6ibdjjvkeor105ea1l7l9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.msiwak.athletetrack.android.debug",
+            "certificate_hash": "a9c7dd3eb2c4bd46c70bd285944fca067975be0e"
+          }
+        },
+        {
+          "client_id": "607279059338-tf6mpi0ac6fdecs7jq0b05pkvvnirdmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuGdmDq8ooDXggYvkgQviYbGUykdOBjOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607279059338-ildvb5nvgahchrkqje1vhk6fr5ns23tk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "607279059338-18rnfh9m3nefhtdj8j783u0n9ovn9cqb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pl.msiwak.multiplatform.ios"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607279059338:android:19d9c140fc2d2f16cb3873",
+        "android_client_info": {
+          "package_name": "pl.msiwak.athletetrack.android.staging.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607279059338-e51botsk8doke2ssjrb6rqkivr7gqh5q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.msiwak.athletetrack.android.staging.debug",
+            "certificate_hash": "a9c7dd3eb2c4bd46c70bd285944fca067975be0e"
+          }
+        },
+        {
+          "client_id": "607279059338-kklrpn1056aq8trb2mn51edjdi8ru89t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.msiwak.athletetrack.android.staging.debug",
+            "certificate_hash": "8f5e2af74847e6bc8466b91553350322ebac6094"
+          }
+        },
+        {
+          "client_id": "607279059338-tf6mpi0ac6fdecs7jq0b05pkvvnirdmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuGdmDq8ooDXggYvkgQviYbGUykdOBjOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607279059338-ildvb5nvgahchrkqje1vhk6fr5ns23tk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "607279059338-18rnfh9m3nefhtdj8j783u0n9ovn9cqb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pl.msiwak.multiplatform.ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
