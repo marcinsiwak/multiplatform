@@ -318,7 +318,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'debug.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/signing/'
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Build stagingDebug APK
@@ -335,7 +335,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/androidApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
@@ -447,6 +447,7 @@ jobs:
           BUILD_NUMBER: ${{steps.get_pull_request_number.outputs.result}}
 
   backendAppJob:
+    if: ${{contains(github.event.pull_request.labels.*.name, 'Backend') }}
     name: Run docker image
     uses: ./.github/workflows/docker-image.yml
     secrets: inherit
