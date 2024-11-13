@@ -3,6 +3,7 @@
 OUTPUT="/tmp/output"
 
 echo "Running pre-push ktlint check..."
+cd mobile
 ./gradlew ktlintCheck > OUTPUT
 EXIT_CODE=$?
 if [ $EXIT_CODE -ne 0 ]; then
@@ -17,6 +18,7 @@ if [ $EXIT_CODE -ne 0 ]; then
 fi
 
 echo "Running pre-push detekt check..."
+cd mobile
 ./gradlew detekt > OUTPUT
 EXIT_CODE=$?
 if [ $EXIT_CODE -ne 0 ]; then
