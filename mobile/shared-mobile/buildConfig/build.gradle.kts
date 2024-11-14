@@ -87,18 +87,20 @@ buildkonfig {
 
     targetConfigs("stagingDebug") {
         val stagingPropertiesFile = rootProject.file("staging.properties")
-        val stagingProperties = Properties()
-        stagingProperties.load(FileInputStream(stagingPropertiesFile))
+        if (stagingPropertiesFile.exists()) {
+            val stagingProperties = Properties()
+            stagingProperties.load(FileInputStream(stagingPropertiesFile))
 
-        android {
-            buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugAndroid")
-            buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "true")
-        }
-        ios {
-            buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugIos")
-            buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "true")
+            android {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugAndroid")
+                buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
+                buildConfigField(BOOLEAN, "IsDebug", "true")
+            }
+            ios {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugIos")
+                buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
+                buildConfigField(BOOLEAN, "IsDebug", "true")
+            }
         }
     }
 }
