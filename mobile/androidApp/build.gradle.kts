@@ -80,16 +80,6 @@ android {
                 storePassword = releaseKeystoreProp["storePassword"] as String
             }
         }
-    } else {
-        signingConfigs {
-            maybeCreate("release")
-            getByName("release") {
-                keyAlias = System.getenv("KEY_ALIAS")
-                keyPassword = System.getenv("KEY_PASSWORD")
-                storeFile = rootProject.file("signing/release.jks")
-                storePassword = System.getenv("KEY_STORE_PASSWORD")
-            }
-        }
     }
 
     val debugKeystorePropFile = rootProject.file("signing/debug.properties")
@@ -106,17 +96,8 @@ android {
                 storePassword = debugKeystoreProp["storePassword"] as String
             }
         }
-    } else {
-        signingConfigs {
-            maybeCreate("debug")
-            getByName("debug") {
-                keyAlias = System.getenv("KEY_ALIAS_DEBUG")
-                keyPassword = System.getenv("KEY_PASSWORD_DEBUG")
-                storeFile = rootProject.file("signing/debug.jks")
-                storePassword = System.getenv("KEY_STORE_PASSWORD_DEBUG")
-            }
-        }
     }
+
     buildTypes {
         release {
             isMinifyEnabled = true
