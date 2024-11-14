@@ -73,29 +73,9 @@ android {
                 getDefaultProguardFile("proguard-android.txt"),
                 file("proguard-rules.pro")
             )
-
-            val productionPropertiesFile = rootProject.file("androidApp/production.properties")
-            val productionProperties = Properties()
-            productionProperties.load(FileInputStream(productionPropertiesFile))
-
-            buildConfigField(
-                "String",
-                "GOOGLE_AUTH_WEB_CLIENT_ID",
-                productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-            )
         }
         debug {
             applicationIdSuffix = ".debug"
-
-            val stagingPropertiesFile = rootProject.file("androidApp/staging.properties")
-            val stagingProperties = Properties()
-            stagingProperties.load(FileInputStream(stagingPropertiesFile))
-
-            buildConfigField(
-                "String",
-                "GOOGLE_AUTH_WEB_CLIENT_ID",
-                stagingProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-            )
         }
     }
 
@@ -147,6 +127,31 @@ android {
     productFlavors {
         getByName("staging") {
             applicationIdSuffix = ".staging"
+
+            val stagingPropertiesFile = rootProject.file("androidApp/staging.properties")
+            if (stagingPropertiesFile.exists()) {
+                val stagingProperties = Properties()
+                stagingProperties.load(FileInputStream(stagingPropertiesFile))
+
+                buildConfigField(
+                    "String",
+                    "GOOGLE_AUTH_WEB_CLIENT_ID",
+                    stagingProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                )
+            }
+        }
+        getByName("production") {
+            val productionPropertiesFile = rootProject.file("androidApp/production.properties")
+            if (productionPropertiesFile.exists()) {
+                val productionProperties = Properties()
+                productionProperties.load(FileInputStream(productionPropertiesFile))
+
+                buildConfigField(
+                    "String",
+                    "GOOGLE_AUTH_WEB_CLIENT_ID",
+                    productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
+                )
+            }
         }
     }
 
