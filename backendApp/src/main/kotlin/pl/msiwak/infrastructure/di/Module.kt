@@ -12,10 +12,10 @@ import pl.msiwak.interfaces.controller.ExerciseController
 import pl.msiwak.interfaces.controller.ExerciseControllerImpl
 import pl.msiwak.interfaces.controller.UserController
 import pl.msiwak.interfaces.controller.UserControllerImpl
-import pl.msiwak.interfaces.mapper.CategoryDTOMapper
-import pl.msiwak.interfaces.mapper.ExerciseDTOMapper
-import pl.msiwak.interfaces.mapper.ResultDTOMapper
-import pl.msiwak.interfaces.mapper.UserDTOMapper
+import pl.msiwak.interfaces.mapper.ApiCategoryMapper
+import pl.msiwak.interfaces.mapper.ApiExerciseMapper
+import pl.msiwak.interfaces.mapper.ApiResultMapper
+import pl.msiwak.interfaces.mapper.ApiUserMapper
 
 val diModule = module {
     single<AddUserUseCase> { AddUserUseCaseImpl(get()) }
@@ -43,10 +43,10 @@ val diDaoModule = module {
 }
 
 val diMapperModule = module {
-    single { CategoryDTOMapper(get()) }
-    single { ExerciseDTOMapper(get()) }
-    single { ResultDTOMapper() }
-    single { UserDTOMapper() }
+    single { ApiCategoryMapper(get()) }
+    single { ApiExerciseMapper(get()) }
+    single { ApiResultMapper() }
+    single { ApiUserMapper() }
 }
 
 val diControllerModule = module {

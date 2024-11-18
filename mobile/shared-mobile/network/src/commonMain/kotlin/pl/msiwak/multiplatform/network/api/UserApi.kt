@@ -7,7 +7,7 @@ import io.ktor.client.request.setBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import pl.msiwak.multiplatform.network.client.KtorClient
-import pl.msiwak.multiplatform.network.model.ApiUser
+import pl.msiwak.multiplatform.shared.model.ApiUser
 
 class UserApi(private val ktorClient: KtorClient) {
 

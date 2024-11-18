@@ -2,9 +2,9 @@ package pl.msiwak.interfaces.controller
 
 import kotlinx.datetime.Instant
 import pl.msiwak.application.usecases.*
-import pl.msiwak.interfaces.dtos.CategoryDTO
-import pl.msiwak.interfaces.dtos.ExerciseDTO
-import pl.msiwak.interfaces.dtos.ResultDTO
+import pl.msiwak.multiplatform.shared.model.ApiCategory
+import pl.msiwak.multiplatform.shared.model.ApiExercise
+import pl.msiwak.multiplatform.shared.model.ApiResult
 
 class ExerciseControllerImpl(
     private val addCategoryUseCase: AddCategoryUseCase,
@@ -19,7 +19,7 @@ class ExerciseControllerImpl(
     private val synchronizeDataUseCase: SynchronizeDataUseCase
 ) : ExerciseController {
 
-    override suspend fun addCategory(name: String, exerciseType: String, userId: String): CategoryDTO {
+    override suspend fun addCategory(name: String, exerciseType: String, userId: String): ApiCategory {
         return addCategoryUseCase(
             name = name,
             exerciseType = exerciseType,
@@ -27,11 +27,11 @@ class ExerciseControllerImpl(
         )
     }
 
-    override suspend fun getCategories(userId: String): List<CategoryDTO> {
+    override suspend fun getCategories(userId: String): List<ApiCategory> {
         return getCategoriesUseCase(userId = userId)
     }
 
-    override suspend fun getCategory(userId: String): CategoryDTO? {
+    override suspend fun getCategory(userId: String): ApiCategory? {
         return getCategoryUseCase(id = userId)
     }
 
@@ -39,14 +39,14 @@ class ExerciseControllerImpl(
         removeCategoryUseCase(categoryId = categoryId)
     }
 
-    override suspend fun addExercise(categoryId: String, name: String): ExerciseDTO? {
+    override suspend fun addExercise(categoryId: String, name: String): ApiExercise? {
         return addExerciseUseCase(
             categoryId = categoryId,
             name = name
         )
     }
 
-    override suspend fun getExercise(exerciseId: String): ExerciseDTO? {
+    override suspend fun getExercise(exerciseId: String): ApiExercise? {
         return getExerciseUseCase(id = exerciseId)
     }
 
@@ -59,7 +59,7 @@ class ExerciseControllerImpl(
         amount: String,
         result: String,
         date: Instant
-    ): ResultDTO? {
+    ): ApiResult? {
         return addResultUseCase(
             exerciseId = exerciseId,
             amount = amount,
@@ -73,9 +73,9 @@ class ExerciseControllerImpl(
     }
 
     override suspend fun synchronizeData(
-        categoriesDTO: List<CategoryDTO>,
-        exercisesDTO: List<ExerciseDTO>,
-        resultsDTO: List<ResultDTO>,
+        categoriesDTO: List<ApiCategory>,
+        exercisesDTO: List<ApiExercise>,
+        resultsDTO: List<ApiResult>,
         userId: String,
     ) {
         synchronizeDataUseCase(categoriesDTO, exercisesDTO, resultsDTO, userId)

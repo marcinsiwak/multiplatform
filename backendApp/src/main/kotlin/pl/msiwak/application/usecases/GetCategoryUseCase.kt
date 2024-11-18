@@ -1,7 +1,7 @@
 package pl.msiwak.application.usecases
 
-import pl.msiwak.interfaces.dtos.CategoryDTO
+import pl.msiwak.multiplatform.shared.model.ApiCategory
 
 interface GetCategoryUseCase {
-    suspend operator fun invoke(id: String): CategoryDTO?
+    suspend operator fun invoke(id: String): ApiCategory?
 }
