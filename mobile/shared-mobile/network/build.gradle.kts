@@ -38,6 +38,7 @@ kotlin {
             implementation(project(Modules.commonObject))
             implementation(project(Modules.buildConfig))
             implementation(project(Modules.auth))
+            implementation("pl.msiwak.shared:model")
 
             implementation(libs.ktor.core)
             implementation(libs.ktor.contentNegation)

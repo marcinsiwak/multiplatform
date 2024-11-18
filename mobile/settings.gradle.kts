@@ -17,6 +17,12 @@ dependencyResolutionManagement {
         maven("https://androidx.dev/storage/compose-compiler/repository/")
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
+
+    versionCatalogs {
+        create("sharedLibs") {
+            from(files("../gradle/sharedLibs.versions.toml"))
+        }
+    }
 }
 
 rootProject.name = "athletetrack"
@@ -49,3 +55,4 @@ include(":shared-mobile:ui-unit")
 include(":shared-mobile:ui-verifyEmail")
 include(":shared-mobile:ui-common-component")
 include(":shared-mobile:ui-terms")
+includeBuild("../shared")
