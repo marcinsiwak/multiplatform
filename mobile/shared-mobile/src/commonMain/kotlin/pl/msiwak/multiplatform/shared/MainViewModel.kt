@@ -10,22 +10,18 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
-import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
-import pl.msiwak.multiplatform.domain.settings.GetLanguageUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class MainViewModel(
-    getLanguageUseCase: GetLanguageUseCase,
     fetchRemoteConfigUseCase: FetchRemoteConfigUseCase,
     getForceUpdateStateUseCase: GetForceUpdateStateUseCase,
     globalErrorHandler: GlobalErrorHandler,
     getUserTokenUseCase: GetUserTokenUseCase,
     observeAuthStateChangedUseCase: ObserveAuthStateChangedUseCase,
-    getIsOfflineModeUseCase: GetIsOfflineModeUseCase,
     val navigationProvider: NavigationProvider
 ) : ViewModel() {
 

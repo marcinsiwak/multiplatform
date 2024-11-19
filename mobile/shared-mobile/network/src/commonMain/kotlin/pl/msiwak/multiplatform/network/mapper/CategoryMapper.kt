@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.network.mapper
 
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.network.model.ApiCategory
+import pl.msiwak.multiplatform.shared.model.ApiCategory
 
 class CategoryMapper(private val exerciseMapper: ExerciseMapper) : Mapper<ApiCategory, Category>() {
 

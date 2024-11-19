@@ -10,13 +10,11 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
-import pl.msiwak.multiplatform.domain.offline.GetIsOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
 
 class SettingsViewModel(
     getVersionNameUseCase: GetVersionNameUseCase,
-    private val logoutUseCase: LogoutUseCase,
-    private val isOfflineModeUseCase: GetIsOfflineModeUseCase
+    private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(SettingsState())
@@ -29,8 +27,7 @@ class SettingsViewModel(
         viewModelScope.launch {
             _viewState.update {
                 it.copy(
-                    versionName = getVersionNameUseCase(),
-                    isLogoutButtonVisible = !isOfflineModeUseCase()
+                    versionName = getVersionNameUseCase()
                 )
             }
         }

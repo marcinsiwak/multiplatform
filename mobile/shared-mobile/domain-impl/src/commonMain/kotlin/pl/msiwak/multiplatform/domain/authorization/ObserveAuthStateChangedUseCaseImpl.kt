@@ -11,12 +11,9 @@ class ObserveAuthStateChangedUseCaseImpl(
         authRepository.observeAuthStateChanged().collect {
             if (it != null && it.isEmailVerified) {
                 it.getIdToken(true)?.let { token ->
-                    println("TOKEN: $token")
                     sessionRepository.saveToken(token)
-                    sessionRepository.setOfflineSession(false)
                 }
             } else {
-                sessionRepository.setOfflineSession(true)
                 sessionRepository.clearToken()
             }
         }

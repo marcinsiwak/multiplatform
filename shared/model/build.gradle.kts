@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform") version "2.0.21"
-    kotlin("plugin.serialization") version "2.0.21"
+    alias(sharedLibs.plugins.kotlinMultiplatform)
+    alias(sharedLibs.plugins.serialization)
 }
 
 group = "pl.msiwak.shared"

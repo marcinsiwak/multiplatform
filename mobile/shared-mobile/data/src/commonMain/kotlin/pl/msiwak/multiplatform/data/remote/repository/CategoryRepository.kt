@@ -15,15 +15,12 @@ import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.database.dao.ResultsDao
-import pl.msiwak.multiplatform.network.model.ApiCategory
-import pl.msiwak.multiplatform.network.model.ApiCategorySyncRequest
-import pl.msiwak.multiplatform.network.model.ApiExercise
-import pl.msiwak.multiplatform.network.model.ApiExerciseSyncRequest
-import pl.msiwak.multiplatform.network.model.ApiResult
-import pl.msiwak.multiplatform.network.model.ApiResultSyncRequest
-import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
-import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
 import pl.msiwak.multiplatform.network.service.CategoryService
+import pl.msiwak.multiplatform.shared.model.ApiCategory
+import pl.msiwak.multiplatform.shared.model.ApiExercise
+import pl.msiwak.multiplatform.shared.model.ApiResult
+import pl.msiwak.multiplatform.shared.model.ApiSynchronizationRequest
+import pl.msiwak.multiplatform.shared.model.ApiUpdateExerciseNameRequest
 
 class CategoryRepository(
     private val categoriesDao: CategoriesDao,
@@ -173,7 +170,7 @@ class CategoryRepository(
         val results = resultsDao.getAllResults()
 
         val apiCategories = categories.map { category ->
-            ApiCategorySyncRequest(
+            ApiCategory(
                 id = category.id,
                 name = category.name,
                 exerciseType = category.exerciseType.name
@@ -181,15 +178,16 @@ class CategoryRepository(
         }
 
         val apiExercises = exercises.map { exercise ->
-            ApiExerciseSyncRequest(
+            ApiExercise(
                 id = exercise.id,
                 categoryId = exercise.categoryId,
+                exerciseType = exercise.exerciseType.name,
                 name = exercise.exerciseTitle
             )
         }
 
         val apiResults = results.map { result ->
-            ApiResultSyncRequest(
+            ApiResult(
                 id = result.id,
                 exerciseId = result.exerciseId,
                 result = result.result,
