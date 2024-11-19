@@ -119,7 +119,7 @@ jobs:
       - name: Set up cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
         with:
-          podfile-path: iosApp/Podfile.lock
+          podfile-path: mobile/iosApp/Podfile.lock
       - name: Install Dependencies
         run: |
           cd iosApp
