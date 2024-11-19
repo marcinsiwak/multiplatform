@@ -124,6 +124,7 @@ class WelcomeScreenViewModel(
     // TODO: Add Apple login
 
     private fun onOfflineModeClicked() {
+        // todo: improve offline mode - currently feature is disabled
         viewModelScope.launch {
             setOfflineModeUseCase(true)
             _viewEvent.emit(WelcomeEvent.NavigateToDashboard)

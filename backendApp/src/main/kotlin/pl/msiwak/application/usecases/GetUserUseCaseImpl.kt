@@ -1,15 +1,15 @@
 package pl.msiwak.application.usecases
 
 import pl.msiwak.domain.repositories.UserRepository
-import pl.msiwak.interfaces.dtos.UserDTO
-import pl.msiwak.interfaces.mapper.UserDTOMapper
+import pl.msiwak.interfaces.mapper.ApiUserMapper
+import pl.msiwak.multiplatform.shared.model.ApiUser
 
 class GetUserUseCaseImpl(
     private val userRepository: UserRepository,
-    private val userDTOMapper: UserDTOMapper
+    private val apiUserMapper: ApiUserMapper
 ) : GetUserUseCase {
-    override suspend operator fun invoke(userId: String): UserDTO? {
+    override suspend operator fun invoke(userId: String): ApiUser? {
         val userEntity = userRepository.getUser(userId) ?: return null
-        return userDTOMapper(userEntity)
+        return apiUserMapper(userEntity)
     }
 }

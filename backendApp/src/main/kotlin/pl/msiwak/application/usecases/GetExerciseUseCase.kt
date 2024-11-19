@@ -1,7 +1,7 @@
 package pl.msiwak.application.usecases
 
-import pl.msiwak.interfaces.dtos.ExerciseDTO
+import pl.msiwak.multiplatform.shared.model.ApiExercise
 
 interface GetExerciseUseCase {
-    suspend operator fun invoke(id: String): ExerciseDTO?
+    suspend operator fun invoke(id: String): ApiExercise?
 }

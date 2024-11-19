@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import pl.msiwak.multiplatform.network.client.KtorClient
-import pl.msiwak.multiplatform.network.model.ApiCategory
-import pl.msiwak.multiplatform.network.model.ApiExercise
-import pl.msiwak.multiplatform.network.model.ApiResult
-import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
-import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
+import pl.msiwak.multiplatform.shared.model.ApiCategory
+import pl.msiwak.multiplatform.shared.model.ApiExercise
+import pl.msiwak.multiplatform.shared.model.ApiResult
+import pl.msiwak.multiplatform.shared.model.ApiSynchronizationRequest
+import pl.msiwak.multiplatform.shared.model.ApiUpdateExerciseNameRequest
 
 class CategoryApi(private val ktorClient: KtorClient) {
 

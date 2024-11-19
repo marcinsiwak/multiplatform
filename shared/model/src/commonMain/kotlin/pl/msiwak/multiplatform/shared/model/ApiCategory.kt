@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.network.model
+package pl.msiwak.multiplatform.shared.model
 
 import kotlinx.serialization.Serializable
 

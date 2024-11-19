@@ -1,10 +1,10 @@
-package pl.msiwak.interfaces.dtos
+package pl.msiwak.multiplatform.shared.model
 
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResultDTO(
+class ApiResult(
     val id: String? = null,
     val exerciseId: String,
     val result: String,

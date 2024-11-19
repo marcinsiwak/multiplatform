@@ -10,7 +10,7 @@ import org.koin.ktor.ext.inject
 import pl.msiwak.infrastructure.config.auth.firebase.FIREBASE_AUTH
 import pl.msiwak.infrastructure.config.auth.firebase.FirebaseUser
 import pl.msiwak.interfaces.controller.UserController
-import pl.msiwak.interfaces.dtos.UserDTO
+import pl.msiwak.multiplatform.shared.model.ApiUser
 
 fun Route.addUserRoutes() {
     val userController by inject<UserController>()
@@ -19,7 +19,7 @@ fun Route.addUserRoutes() {
         post("/user") {
             with(call) {
                 val principal = principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
-                receive<UserDTO>().run {
+                receive<ApiUser>().run {
                     userController.addUser(
                         username ?: principal.displayName,
                         principal.displayName,

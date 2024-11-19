@@ -10,10 +10,10 @@ import org.koin.ktor.ext.inject
 import pl.msiwak.infrastructure.config.auth.firebase.FIREBASE_AUTH
 import pl.msiwak.infrastructure.config.auth.firebase.FirebaseUser
 import pl.msiwak.interfaces.controller.ExerciseController
-import pl.msiwak.interfaces.dtos.CategoryDTO
-import pl.msiwak.interfaces.dtos.ExerciseDTO
-import pl.msiwak.interfaces.dtos.ResultDTO
-import pl.msiwak.interfaces.dtos.SynchronizeDataDTO
+import pl.msiwak.multiplatform.shared.model.ApiCategory
+import pl.msiwak.multiplatform.shared.model.ApiExercise
+import pl.msiwak.multiplatform.shared.model.ApiResult
+import pl.msiwak.multiplatform.shared.model.ApiSynchronizationRequest
 
 fun Route.addExerciseRoute() {
     val exerciseController by inject<ExerciseController>()
@@ -29,7 +29,7 @@ fun Route.addExerciseRoute() {
         post("/category") {
             with(call) {
                 val principal = principal<FirebaseUser>() ?: return@post respond(HttpStatusCode.Unauthorized)
-                receive<CategoryDTO>().run {
+                receive<ApiCategory>().run {
                     respond(HttpStatusCode.OK, exerciseController.addCategory(name, exerciseType, principal.userId))
                 }
             }
@@ -54,7 +54,7 @@ fun Route.addExerciseRoute() {
 
         post("/exercise") {
             with(call) {
-                receive<ExerciseDTO>().run {
+                receive<ApiExercise>().run {
                     exerciseController.addExercise(categoryId, name)?.let {
                         respond(HttpStatusCode.OK, it)
                     }
@@ -80,7 +80,7 @@ fun Route.addExerciseRoute() {
 
         post("/result") {
             with(call) {
-                receive<ResultDTO>().run {
+                receive<ApiResult>().run {
                     exerciseController.addResult(
                         exerciseId = exerciseId,
                         amount = amount,
@@ -104,7 +104,7 @@ fun Route.addExerciseRoute() {
         post("/synchronize") {
             with(call) {
                 val principal = principal<FirebaseUser>() ?: return@post respond(HttpStatusCode.Unauthorized)
-                receive<SynchronizeDataDTO>().run {
+                receive<ApiSynchronizationRequest>().run {
                     exerciseController.synchronizeData(
                         categories,
                         exercises,

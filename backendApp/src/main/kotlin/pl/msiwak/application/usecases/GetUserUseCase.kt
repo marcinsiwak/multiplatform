@@ -1,7 +1,7 @@
 package pl.msiwak.application.usecases
 
-import pl.msiwak.interfaces.dtos.UserDTO
+import pl.msiwak.multiplatform.shared.model.ApiUser
 
 interface GetUserUseCase {
-    suspend operator fun invoke(userId: String): UserDTO?
+    suspend operator fun invoke(userId: String): ApiUser?
 }

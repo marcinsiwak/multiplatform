@@ -1,16 +1,16 @@
 package pl.msiwak.application.usecases
 
 import pl.msiwak.domain.repositories.ExerciseRepository
-import pl.msiwak.interfaces.dtos.ExerciseDTO
-import pl.msiwak.interfaces.mapper.ExerciseDTOMapper
+import pl.msiwak.interfaces.mapper.ApiExerciseMapper
+import pl.msiwak.multiplatform.shared.model.ApiExercise
 
 class GetExerciseUseCaseImpl(
     private val exerciseRepository: ExerciseRepository,
-    private val exerciseDTOMapper: ExerciseDTOMapper
+    private val apiExerciseMapper: ApiExerciseMapper
 ) : GetExerciseUseCase {
-    override suspend operator fun invoke(id: String): ExerciseDTO? {
+    override suspend operator fun invoke(id: String): ApiExercise? {
         val category = exerciseRepository.getCategoryByExercise(id) ?: return null
         val exercise = category.getExercise(id) ?: return null
-        return exerciseDTOMapper(Pair(exercise, category.exerciseType))
+        return apiExerciseMapper(Pair(exercise, category.exerciseType))
     }
 }

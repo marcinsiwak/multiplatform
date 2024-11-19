@@ -48,6 +48,8 @@ kotlin {
             implementation(libs.kermit)
 
             implementation(libs.kotlinx.serialization)
+
+            implementation(sharedLibs.local.model)
         }
 
         androidMain.dependencies {

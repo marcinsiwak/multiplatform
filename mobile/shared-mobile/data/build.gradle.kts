@@ -45,6 +45,8 @@ kotlin {
             implementation(project(Modules.remoteConfig))
 
             implementation(libs.kotlinx.coroutines)
+
+            implementation(sharedLibs.local.model)
         }
 
         commonTest.dependencies {

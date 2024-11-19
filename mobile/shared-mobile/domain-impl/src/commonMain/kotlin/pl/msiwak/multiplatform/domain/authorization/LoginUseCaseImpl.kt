@@ -13,7 +13,6 @@ class LoginUseCaseImpl(
         val isEmailVerified = result.user?.isEmailVerified ?: false
         if (token != null && isEmailVerified) {
             sessionRepository.saveToken(token)
-            sessionRepository.setOfflineSession(false)
         }
         return isEmailVerified
     }

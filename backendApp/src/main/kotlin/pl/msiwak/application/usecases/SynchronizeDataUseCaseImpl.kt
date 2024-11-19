@@ -4,15 +4,15 @@ import pl.msiwak.domain.entities.CategoryEntity
 import pl.msiwak.domain.entities.ExerciseEntity
 import pl.msiwak.domain.entities.ResultEntity
 import pl.msiwak.domain.repositories.ExerciseRepository
-import pl.msiwak.interfaces.dtos.CategoryDTO
-import pl.msiwak.interfaces.dtos.ExerciseDTO
-import pl.msiwak.interfaces.dtos.ResultDTO
+import pl.msiwak.multiplatform.shared.model.ApiCategory
+import pl.msiwak.multiplatform.shared.model.ApiExercise
+import pl.msiwak.multiplatform.shared.model.ApiResult
 
 class SynchronizeDataUseCaseImpl(private val exercisesRepository: ExerciseRepository) : SynchronizeDataUseCase {
     override suspend fun invoke(
-        categoriesDTO: List<CategoryDTO>,
-        exercisesDTO: List<ExerciseDTO>,
-        resultsDTO: List<ResultDTO>,
+        categoriesDTO: List<ApiCategory>,
+        exercisesDTO: List<ApiExercise>,
+        resultsDTO: List<ApiResult>,
         userId: String
     ) {
         val syncCategories = categoriesDTO

@@ -9,11 +9,11 @@ import pl.msiwak.multiplatform.network.api.CategoryApi
 import pl.msiwak.multiplatform.network.mapper.CategoryMapper
 import pl.msiwak.multiplatform.network.mapper.ExerciseMapper
 import pl.msiwak.multiplatform.network.mapper.ResultMapper
-import pl.msiwak.multiplatform.network.model.ApiCategory
-import pl.msiwak.multiplatform.network.model.ApiExercise
-import pl.msiwak.multiplatform.network.model.ApiResult
-import pl.msiwak.multiplatform.network.model.ApiSynchronizationRequest
-import pl.msiwak.multiplatform.network.model.ApiUpdateExerciseNameRequest
+import pl.msiwak.multiplatform.shared.model.ApiCategory
+import pl.msiwak.multiplatform.shared.model.ApiExercise
+import pl.msiwak.multiplatform.shared.model.ApiResult
+import pl.msiwak.multiplatform.shared.model.ApiSynchronizationRequest
+import pl.msiwak.multiplatform.shared.model.ApiUpdateExerciseNameRequest
 
 class CategoryService(
     private val categoryApi: CategoryApi,

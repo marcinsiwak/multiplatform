@@ -39,7 +39,6 @@ import athletetrack.shared_mobile.commonresources.generated.resources.synchroniz
 import athletetrack.shared_mobile.commonresources.generated.resources.welcome_create_account
 import athletetrack.shared_mobile.commonresources.generated.resources.welcome_google_login
 import athletetrack.shared_mobile.commonresources.generated.resources.welcome_no_account
-import athletetrack.shared_mobile.commonresources.generated.resources.welcome_offline_mode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.painterResource
@@ -51,7 +50,6 @@ import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
-import pl.msiwak.multiplatform.ui.commonComponent.SecondaryButton
 import pl.msiwak.multiplatform.ui.commonComponent.rememberGoogleLoginLauncherForActivityResult
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
@@ -214,18 +212,20 @@ fun WelcomeScreenContent(
                     text = stringResource(Res.string.welcome_google_login)
                 )
 
-                SecondaryButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            top = MaterialTheme.dimens.space_16,
-                            bottom = MaterialTheme.dimens.space_16
-                        ),
-                    onClick = { onUiAction(WelcomeUiAction.OnOfflineModeClicked) },
-                    text = stringResource(Res.string.welcome_offline_mode)
-                )
+                // todo: improve offline mode - currently feature is disabled
+//                SecondaryButton(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(
+//                            top = MaterialTheme.dimens.space_16,
+//                            bottom = MaterialTheme.dimens.space_16
+//                        ),
+//                    onClick = { onUiAction(WelcomeUiAction.OnOfflineModeClicked) },
+//                    text = stringResource(Res.string.welcome_offline_mode)
+//                )
 
                 Text(
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.space_16),
                     text = stringResource(Res.string.welcome_no_account),
                     color = MaterialTheme.colorScheme.secondary
                 )

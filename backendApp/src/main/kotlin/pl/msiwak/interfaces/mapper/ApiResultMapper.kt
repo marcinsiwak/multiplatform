@@ -1,11 +1,11 @@
 package pl.msiwak.interfaces.mapper
 
 import pl.msiwak.domain.entities.ResultEntity
-import pl.msiwak.interfaces.dtos.ResultDTO
+import pl.msiwak.multiplatform.shared.model.ApiResult
 
-class ResultDTOMapper : Mapper<ResultEntity, ResultDTO>() {
-    override fun map(value: ResultEntity): ResultDTO = with(value) {
-        ResultDTO(
+class ApiResultMapper : Mapper<ResultEntity, ApiResult>() {
+    override fun map(value: ResultEntity): ApiResult = with(value) {
+        ApiResult(
             id = id,
             exerciseId = exerciseId!!,
             amount = amount,

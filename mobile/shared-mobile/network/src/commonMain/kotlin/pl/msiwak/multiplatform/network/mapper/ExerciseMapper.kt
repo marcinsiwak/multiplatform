@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.network.mapper
 
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ExerciseType
-import pl.msiwak.multiplatform.network.model.ApiExercise
+import pl.msiwak.multiplatform.shared.model.ApiExercise
 
 class ExerciseMapper(private val resultMapper: ResultMapper) : Mapper<ApiExercise, Exercise>() {
 
