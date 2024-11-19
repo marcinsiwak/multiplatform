@@ -6,7 +6,7 @@ Pod::Spec.new do |spec|
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Main Shared Module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/shared.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/shared_mobile.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target    = '16.2'
     spec.dependency 'FirebaseAuth'
@@ -17,10 +17,10 @@ Pod::Spec.new do |spec|
     spec.dependency 'Google-Mobile-Ads-SDK'
     spec.dependency 'GoogleSignIn'
                 
-    if !Dir.exist?('build/cocoapods/framework/shared.framework') || Dir.empty?('build/cocoapods/framework/shared.framework')
+    if !Dir.exist?('build/cocoapods/framework/shared_mobile.framework') || Dir.empty?('build/cocoapods/framework/shared_mobile.framework')
         raise "
 
-        Kotlin framework 'shared' doesn't exist yet, so a proper Xcode project can't be generated.
+        Kotlin framework 'shared_mobile' doesn't exist yet, so a proper Xcode project can't be generated.
         'pod install' should be executed after running ':generateDummyFramework' Gradle task:
 
             ./gradlew :shared-mobile:generateDummyFramework
@@ -34,7 +34,7 @@ Pod::Spec.new do |spec|
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':shared-mobile',
-        'PRODUCT_MODULE_NAME' => 'shared',
+        'PRODUCT_MODULE_NAME' => 'shared_mobile',
     }
                 
     spec.script_phases = [

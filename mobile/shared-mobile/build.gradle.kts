@@ -23,7 +23,7 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
 
         framework {
-            baseName = "shared"
+            baseName = "shared-mobile"
             if (System.getenv("XCODE_VERSION_MAJOR") == "1500") {
                 linkerOpts += "-ld_classic"
             }
