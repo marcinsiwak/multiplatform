@@ -27,7 +27,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "athletetrack"
 include(":composeApp")
-include(":androidApp")
+//include(":androidApp")
 include(":shared")
 include(":shared-mobile")
 include(":shared-mobile:commonResources")
