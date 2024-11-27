@@ -1,6 +1,6 @@
 plugins {
-    alias(sharedLibs.plugins.kotlinMultiplatform)
-    alias(sharedLibs.plugins.serialization)
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.serialization)
 }
 
 group = "pl.msiwak.shared"
