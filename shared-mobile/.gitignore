@@ -1,0 +1,11 @@
+/build
+shared.podspec
+/ui/build/cocoapods/framework/ui.framework/ui
+/ui/build/intermediates
+/ui/build/cocoapods/framework/ui.framework/Info.plist
+/ui/build/reports/ktlint/ktlintAndroidMainSourceSetCheck/ktlintAndroidMainSourceSetCheck.txt
+/ui/build/reports/ktlint/ktlintCommonMainSourceSetCheck/ktlintCommonMainSourceSetCheck.txt
+/ui/build/reports/ktlint/ktlintIosMainSourceSetCheck/ktlintIosMainSourceSetCheck.txt
+/ui/build/reports/ktlint/ktlintKotlinScriptCheck/ktlintKotlinScriptCheck.txt
+/ui/build/cocoapods/framework/ui.framework/Modules/module.modulemap
+/ui/build/cocoapods/framework/ui.framework/Headers/placeholder.h

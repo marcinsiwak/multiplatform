@@ -1,0 +1,26 @@
+android {
+    buildTypes {
+        debug {
+            matchingFallbacks.add("release")
+        }
+    }
+
+    flavorDimensions "environment"
+    productFlavors {
+        staging {
+            dimension = "environment"
+        }
+        production {
+            dimension = "environment"
+        }
+    }
+
+    variantFilter { variant ->
+        def names = variant.flavors*.name
+
+        // keep only productionRelease variant
+        if (variant.buildType.name == 'release' && !names.contains('production')) {
+            variant.setIgnore(true)
+        }
+    }
+}

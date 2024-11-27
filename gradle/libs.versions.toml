@@ -88,6 +88,8 @@ google-android-playservices-ads = { module = "com.google.android.gms:play-servic
 compose-multiplatform-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-multiplatform-navigation" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
+local-model = { module = "pl.msiwak.shared:model"}
+
 # Gradle scripts depdendecies
 gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
