@@ -1,34 +1,38 @@
+rootProject.name = "athletetrack"
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        google()
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
         gradlePluginPortal()
         mavenCentral()
     }
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
     repositories {
-        google()
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
         mavenCentral()
-        maven("https://androidx.dev/storage/compose-compiler/repository/")
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
-
-//    versionCatalogs {
-//        create("sharedLibs") {
-//            from(files("gradle/sharedLibs.versions.toml"))
-//        }
-//    }
 }
 
-rootProject.name = "athletetrack"
 include(":composeApp")
-//include(":androidApp")
+//include(":backendApp")
 include(":shared")
+include(":shared:model")
 include(":shared-mobile")
 include(":shared-mobile:commonResources")
 include(":shared-mobile:database")

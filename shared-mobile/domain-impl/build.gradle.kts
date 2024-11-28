@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     id("pl.msiwak.convention.target.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
@@ -50,8 +51,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.domainimpl"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

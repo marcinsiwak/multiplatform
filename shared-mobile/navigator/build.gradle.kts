@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.kotlinCompose)
+    id("pl.msiwak.convention.android.config")
     id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.releaseonly.config")
 }
@@ -53,8 +54,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.navigator"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

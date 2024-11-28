@@ -46,7 +46,7 @@ kotlin {
 
             implementation(libs.kotlinx.coroutines)
 
-            implementation(libs.local.model)
+            //implementation(libs.local.model)
         }
 
         commonTest.dependencies {

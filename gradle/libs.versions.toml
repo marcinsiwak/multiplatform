@@ -1,8 +1,8 @@
 [versions]
 accompanistNavigationMaterial = "0.25.0"
 activityCompose = "1.9.2"
-agp = "8.2.2"
-ksp = "2.0.0-1.0.21"
+agp = "8.5.2"
+ksp = "2.0.21-1.0.25"
 
 appcompat = "1.7.0"
 buildkonfigGradlePlugin = "0.15.1"
@@ -21,7 +21,7 @@ koin-compose = "1.2.0-Beta2"
 ktor = "2.3.11"
 navigationCompose = "2.8.0"
 sqlDelight = "2.0.2"
-firebaseGitlive = "1.12.0"
+firebaseGitlive = "2.1.0"
 firebase-android-bom = "32.3.1"
 kotlinx-lifecycle = "2.8.5"
 kotlinx-viewModel = "2.8.0-beta02"
@@ -108,3 +108,4 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appDistribution" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

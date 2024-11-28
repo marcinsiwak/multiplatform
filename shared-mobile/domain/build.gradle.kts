@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.releaseonly.config")
+    id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -45,8 +46,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.domain"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }

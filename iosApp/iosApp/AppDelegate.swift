@@ -9,7 +9,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         HelperKt.doInitKoin()
         HelperKt.doInitFirebase()
         HelperKt.doInitMobileAds()
-        NotificationService()
+        //NotificationService()
 
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(

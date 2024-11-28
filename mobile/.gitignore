@@ -16,7 +16,7 @@ androidApp/staging.properties
 /staging.properties
 /production.properties
 /androidApp/google-services.json
-iosApp/Pods/*
-iosApp/iosApp.xcworkspace/*
-iosApp/iosApp.xcodeproj/*
-!iosApp/iosApp.xcodeproj/project.pbxproj
+../iosApp/Pods/*
+../iosApp/iosApp.xcworkspace/*
+../iosApp/iosApp.xcodeproj/*
+!../iosApp/iosApp.xcodeproj/project.pbxproj

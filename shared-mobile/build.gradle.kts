@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -30,33 +31,6 @@ kotlin {
             isStatic = true
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
-
-            export(project(Modules.commonResources))
-            export(project(Modules.commonObject))
-            export(project(Modules.database))
-            export(project(Modules.utils))
-            export(project(Modules.auth))
-            export(project(Modules.network))
-            export(project(Modules.data))
-            export(project(Modules.remoteConfig))
-            export(project(Modules.domain))
-            export(project(Modules.domainImpl))
-            export(project(Modules.navigator))
-            export(project(Modules.uiWelcome))
-            export(project(Modules.uiAddCategory))
-            export(project(Modules.uiAddExercise))
-            export(project(Modules.uiCategory))
-            export(project(Modules.uiDashboard))
-            export(project(Modules.uiForceUpdate))
-            export(project(Modules.uiLanguage))
-            export(project(Modules.uiRegister))
-            export(project(Modules.uiSettings))
-            export(project(Modules.uiSummary))
-            export(project(Modules.uiUnit))
-            export(project(Modules.uiVerifyEmail))
-            export(project(Modules.buildConfig))
-            export(project(Modules.notifications))
-            export(project(Modules.uiCommonComponent))
         }
 
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -129,8 +103,11 @@ kotlin {
         }
     }
 }
-
+//
+//android {
+//    namespace = "pl.msiwak.multiplatform.shared"
+//    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+//}
 android {
     namespace = "pl.msiwak.multiplatform.shared"
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 }

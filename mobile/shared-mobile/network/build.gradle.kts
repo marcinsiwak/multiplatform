@@ -49,7 +49,7 @@ kotlin {
 
             implementation(libs.kotlinx.serialization)
 
-            implementation(libs.local.model)
+            //implementation(libs.local.model)
         }
 
         androidMain.dependencies {

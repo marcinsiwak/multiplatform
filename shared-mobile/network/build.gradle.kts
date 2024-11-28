@@ -49,7 +49,7 @@ kotlin {
 
             implementation(libs.kotlinx.serialization)
 
-            implementation(libs.local.model)
+            implementation(project(Modules.sharedModel))
         }
 
         androidMain.dependencies {
@@ -68,8 +68,4 @@ kotlin {
 
 android {
     namespace = "pl.msiwak.multiplatform.network"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 }
