@@ -30,7 +30,7 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
-//include(":backendApp")
+// include(":backendApp")
 include(":shared")
 include(":shared:model")
 include(":shared-mobile")

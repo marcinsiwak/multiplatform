@@ -13,14 +13,11 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("com.google.firebase.appdistribution")
     id("pl.msiwak.convention.target.config")
-
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 kotlin {
-
-
 //    @OptIn(ExperimentalWasmDsl::class)
 //    wasmJs {
 //        moduleName = "composeApp"

@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -103,11 +102,12 @@ kotlin {
         }
     }
 }
-//
-//android {
-//    namespace = "pl.msiwak.multiplatform.shared"
-//    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-//}
+
+// android {
+//     namespace = "pl.msiwak.multiplatform.shared"
+//     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+// }
+
 android {
     namespace = "pl.msiwak.multiplatform.shared"
 }
