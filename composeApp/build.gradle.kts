@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import pl.msiwak.multiplatform.dependencies.Modules
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.kotlinCompose)
+    alias(libs.plugins.serialization)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
@@ -16,7 +17,6 @@ plugins {
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
-
 
 kotlin {
 
@@ -56,10 +56,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 //            implementation(libs.androidx.lifecycle.viewmodel)
 //            implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(project(":shared-mobile"))
-            implementation(project(":shared:model"))
-//            projects
-//            implementation(projects.shared.lib)
+            implementation(project(Modules.sharedMobile))
+            implementation(project(Modules.sharedModel))
         }
     }
 }
@@ -218,7 +216,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.appcompat)
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
@@ -245,6 +242,8 @@ dependencies {
     implementation(libs.koin.compose.android)
 
     implementation(libs.google.android.playservices.ads)
+
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     debugImplementation(compose.uiTooling)
 }

@@ -2,6 +2,7 @@
 accompanistNavigationMaterial = "0.25.0"
 activityCompose = "1.9.2"
 agp = "8.5.2"
+desugar_jdk_libs = "2.1.3"
 ksp = "2.0.21-1.0.25"
 
 appcompat = "1.7.0"
@@ -45,6 +46,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
 components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose-multiplatform" }
+desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-common = { module = "com.google.firebase:firebase-common", version.ref = "firebaseCommon" }
 firebase-config = { module = "com.google.firebase:firebase-config", version.ref = "firebaseConfig" }
