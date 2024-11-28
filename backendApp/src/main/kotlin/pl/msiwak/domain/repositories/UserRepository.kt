@@ -1,7 +1,7 @@
 package pl.msiwak.domain.repositories
 
-import pl.msiwak.infrastructure.database.dao.user.UserDao
 import pl.msiwak.domain.entities.UserEntity
+import pl.msiwak.infrastructure.database.dao.user.UserDao
 
 class UserRepository(private val userDao: UserDao) {
 

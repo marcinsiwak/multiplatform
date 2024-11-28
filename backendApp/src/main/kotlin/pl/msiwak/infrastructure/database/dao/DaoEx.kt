@@ -11,11 +11,13 @@ suspend fun <T> dbQuery(block: suspend () -> T): T = newSuspendedTransaction(Dis
     block()
 }
 
-fun <T : Auditable> upsertWithAudit(table: T, body: T.(UpsertStatement<Long>) -> Unit): UpsertStatement<Long> {
+fun <T : Auditable> upsertWithAudit(
+    table: T,
+    body: T.(UpsertStatement<Long>) -> Unit
+): UpsertStatement<Long> {
     val now = Clock.System.now()
 
-    val upsertStatement = table.upsert(onUpdateExclude = listOf(table.createdAtUtc))
-    {
+    val upsertStatement = table.upsert(onUpdateExclude = listOf(table.createdAtUtc)) {
         body(it)
         it[createdAtUtc] = now
         it[modifiedAtUtc] = now

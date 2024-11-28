@@ -1,6 +1,6 @@
 package pl.msiwak.infrastructure.database
 
-import io.ktor.server.config.*
+import io.ktor.server.config.ApplicationConfig
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
