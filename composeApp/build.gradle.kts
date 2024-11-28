@@ -51,6 +51,8 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
+            implementation(libs.kotlinx.serialization)
 //            implementation(libs.androidx.lifecycle.viewmodel)
 //            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(project(Modules.sharedMobile))
@@ -81,7 +83,7 @@ android {
             useSupportLibrary = true
         }
         val firebaseServiceCredentialsFile =
-            rootProject.file("androidApp/sportplatform-b5318-816058b49361.json")
+            rootProject.file("composeApp/sportplatform-b5318-816058b49361.json")
 
         if (firebaseServiceCredentialsFile.exists()) {
             configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
@@ -166,7 +168,7 @@ android {
         getByName("staging") {
             applicationIdSuffix = ".staging"
 
-            val stagingPropertiesFile = rootProject.file("androidApp/staging.properties")
+            val stagingPropertiesFile = rootProject.file("composeApp/staging.properties")
             if (stagingPropertiesFile.exists()) {
                 val stagingProperties = Properties()
                 stagingProperties.load(FileInputStream(stagingPropertiesFile))
@@ -179,7 +181,7 @@ android {
             }
         }
         getByName("production") {
-            val productionPropertiesFile = rootProject.file("androidApp/production.properties")
+            val productionPropertiesFile = rootProject.file("composeApp/production.properties")
             if (productionPropertiesFile.exists()) {
                 val productionProperties = Properties()
                 productionProperties.load(FileInputStream(productionPropertiesFile))

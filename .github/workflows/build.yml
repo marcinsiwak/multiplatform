@@ -30,7 +30,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Update staging.properties
@@ -38,7 +38,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
       - name: Run ktlintCheck
@@ -59,7 +59,7 @@ jobs:
           encodedString: ${{ secrets.SIGNING_RELEASE }}
 
       - name: Build APK
-        run: ./gradlew :androidApp:assembleRelease -x test
+        run: ./gradlew :composeApp:assembleRelease -x test
         env:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -104,7 +104,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Update staging.properties
@@ -112,7 +112,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
       - run: ./gradlew :shared-mobile:generateDummyFramework
@@ -170,7 +170,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Decode debug Keystore
@@ -182,7 +182,7 @@ jobs:
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Build productionDebug APK
-        run: ./gradlew :androidApp:assembleProductionDebug
+        run: ./gradlew :composeApp:assembleProductionDebug
         env:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
@@ -194,7 +194,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/composeApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
@@ -247,7 +247,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
       - name: Update production.properties
@@ -255,7 +255,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Decode debug Keystore
@@ -271,7 +271,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/composeApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
@@ -325,7 +325,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Decode Keystore
@@ -341,7 +341,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/composeApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
