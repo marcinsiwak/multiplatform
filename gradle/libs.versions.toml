@@ -2,7 +2,9 @@
 accompanistNavigationMaterial = "0.25.0"
 activityCompose = "1.9.2"
 agp = "8.5.2"
-desugar_jdk_libs = "2.1.3"
+desugar_jdk_libs = "2.1.2"
+exposed = "0.53.0"
+firebaseAdmin = "9.3.0"
 ksp = "2.0.21-1.0.25"
 
 appcompat = "1.7.0"
@@ -32,11 +34,15 @@ kotlinx-serialization = "1.7.0-RC"
 google-playservices-auth = "20.6.0"
 google-playservices-ads = "22.5.0"
 ktlint = "11.5.1"
-detekt = "1.19.0"
+detekt = "1.23.1"
 firebase-appDistribution = "4.0.1"
 compose-multiplatform = "1.7.0"
 compose-multiplatform-navigation = "2.8.0-alpha10"
 kermit = "2.0.3"
+postgresql_driver_version = "42.7.2"
+koin_ktor_version="3.6.0-wasm-alpha2"
+logback_version="1.4.14"
+flyway_version="6.5.2"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
@@ -44,53 +50,85 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
 components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose-multiplatform" }
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+
+exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
+exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
+exposed-kotlin-datetime = { module = "org.jetbrains.exposed:exposed-kotlin-datetime", version.ref = "exposed" }
+exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
+firebase-admin = { module = "com.google.firebase:firebase-admin", version.ref = "firebaseAdmin" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-common = { module = "com.google.firebase:firebase-common", version.ref = "firebaseCommon" }
 firebase-config = { module = "com.google.firebase:firebase-config", version.ref = "firebaseConfig" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
+
+flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway_version" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin_ktor_version" }
+koin-logger-slf4j = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin_ktor_version" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin"}
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin"}
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
-koin-compose-android = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-compose-android"}
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose"}
-firebase-gitlive-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseGitlive"}
-firebase-gitlive-remoteConfig = { module = "dev.gitlive:firebase-config", version.ref = "firebaseGitlive"}
-firebase-gitlive-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebaseGitlive"}
-firebase-andorid-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom"}
-firebase-andorid-messaging = { module = "com.google.firebase:firebase-messaging-ktx"}
-kotlinx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "kotlinx-lifecycle"}
-kotlinx-lifecycle-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "kotlinx-lifecycle"}
-kotlinx-viewModel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kotlinx-viewModel"}
-kotlinx-viewModel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "kotlinx-viewModel"}
-kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines"}
-kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-dateTime"}
-kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
-ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor"}
-ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor"}
-ktor-ios = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor"}
-ktor-contentNegation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor"}
-ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor"}
-ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor"}
-ktor-logger = { module = "io.ktor:ktor-client-logging", version.ref = "ktor"}
-sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight"}
-sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight"}
-sqlDelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight"}
-sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight"}
-google-android-playservices-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-playservices-auth"}
-google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads"}
+
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose-android = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-compose-android" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
+
+firebase-gitlive-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseGitlive" }
+firebase-gitlive-remoteConfig = { module = "dev.gitlive:firebase-config", version.ref = "firebaseGitlive" }
+firebase-gitlive-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebaseGitlive" }
+firebase-andorid-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom" }
+firebase-andorid-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+kotlinx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "kotlinx-lifecycle" }
+kotlinx-lifecycle-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "kotlinx-lifecycle" }
+kotlinx-viewModel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kotlinx-viewModel" }
+kotlinx-viewModel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "kotlinx-viewModel" }
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-dateTime" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-ios = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-contentNegation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-logger = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-serialization-kotlinx-json-jvm = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm" }
+ktor-server-auth-jvm = { module = "io.ktor:ktor-server-auth-jvm" }
+ktor-server-auth-jwt-jvm = { module = "io.ktor:ktor-server-auth-jwt-jvm" }
+ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor" }
+ktor-server-content-negotiation-jvm = { module = "io.ktor:ktor-server-content-negotiation-jvm" }
+ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm" }
+ktor-server-host-common-jvm = { module = "io.ktor:ktor-server-host-common-jvm" }
+ktor-server-html-builder = { module = "io.ktor:ktor-server-html-builder", version.ref = "ktor" }
+ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm" }
+
+ktor-server-tests-jvm = { module = "io.ktor:ktor-server-tests-jvm" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback_version" }
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql_driver_version" }
+sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight" }
+sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+sqlDelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
+
+google-android-playservices-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-playservices-auth" }
+google-android-playservices-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "google-playservices-ads" }
+
 compose-multiplatform-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-multiplatform-navigation" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
-local-model = { module = "pl.msiwak.shared:model"}
+local-model = { module = "pl.msiwak.shared:model" }
 
 # Gradle scripts depdendecies
 gradle-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
@@ -111,3 +149,4 @@ firebase-appdistribution = { id = "com.google.firebase.appdistribution", version
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
