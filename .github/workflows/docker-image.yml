@@ -36,6 +36,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Update production.properties
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+        run: |
+          echo BASE_URL="BASE_URL" > ./production.properties
+
       - name: Decode Keystore
         id: decode_keystore
         uses: timheuer/base64-to-file@v1.2
@@ -45,10 +51,7 @@ jobs:
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Build app
-        run: ./gradlew backendApp:build \
-          -x :shared-mobile:build \
-          -x :shared-mobile:auth:build \
-          -x :shared-mobile:utils:build
+        run: ./gradlew backendApp:build
 
   build-and-push:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
@@ -80,10 +83,7 @@ jobs:
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Build app
-        run: ./gradlew backendApp:build \
-          -x :shared-mobile:build \
-          -x :shared-mobile:auth:build \
-          -x :shared-mobile:utils:build
+        run: ./gradlew backendApp:build
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
