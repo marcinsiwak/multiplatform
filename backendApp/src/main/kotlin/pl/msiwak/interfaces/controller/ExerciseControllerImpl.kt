@@ -1,11 +1,21 @@
 package pl.msiwak.interfaces.controller
 
 import kotlinx.datetime.Instant
-import pl.msiwak.application.usecases.*
+import pl.msiwak.application.usecases.AddCategoryUseCase
+import pl.msiwak.application.usecases.AddExerciseUseCase
+import pl.msiwak.application.usecases.AddResultUseCase
+import pl.msiwak.application.usecases.GetCategoriesUseCase
+import pl.msiwak.application.usecases.GetCategoryUseCase
+import pl.msiwak.application.usecases.GetExerciseUseCase
+import pl.msiwak.application.usecases.RemoveCategoryUseCase
+import pl.msiwak.application.usecases.RemoveExerciseUseCase
+import pl.msiwak.application.usecases.RemoveResultUseCase
+import pl.msiwak.application.usecases.SynchronizeDataUseCase
 import pl.msiwak.multiplatform.shared.model.ApiCategory
 import pl.msiwak.multiplatform.shared.model.ApiExercise
 import pl.msiwak.multiplatform.shared.model.ApiResult
 
+@Suppress("LongParameterList")
 class ExerciseControllerImpl(
     private val addCategoryUseCase: AddCategoryUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase,
@@ -76,7 +86,7 @@ class ExerciseControllerImpl(
         categoriesDTO: List<ApiCategory>,
         exercisesDTO: List<ApiExercise>,
         resultsDTO: List<ApiResult>,
-        userId: String,
+        userId: String
     ) {
         synchronizeDataUseCase(categoriesDTO, exercisesDTO, resultsDTO, userId)
     }

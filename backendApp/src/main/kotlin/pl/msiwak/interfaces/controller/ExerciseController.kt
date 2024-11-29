@@ -13,7 +13,13 @@ interface ExerciseController {
     suspend fun addExercise(categoryId: String, name: String): ApiExercise?
     suspend fun getExercise(exerciseId: String): ApiExercise?
     suspend fun removeExercise(exerciseId: String)
-    suspend fun addResult(exerciseId: String, amount: String, result: String, date: Instant): ApiResult?
+    suspend fun addResult(
+        exerciseId: String,
+        amount: String,
+        result: String,
+        date: Instant
+    ): ApiResult?
+
     suspend fun removeResult(resultId: String)
     suspend fun synchronizeData(
         categoriesDTO: List<ApiCategory>,

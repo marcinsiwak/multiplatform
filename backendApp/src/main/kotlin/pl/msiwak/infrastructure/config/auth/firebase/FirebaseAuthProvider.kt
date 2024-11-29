@@ -2,11 +2,15 @@ package pl.msiwak.infrastructure.config.auth.firebase
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseToken
-import io.ktor.http.*
-import io.ktor.http.auth.*
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.response.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.auth.HttpAuthHeader
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.auth.AuthenticationContext
+import io.ktor.server.auth.AuthenticationFailedCause
+import io.ktor.server.auth.AuthenticationProvider
+import io.ktor.server.auth.Principal
+import io.ktor.server.auth.UnauthorizedResponse
+import io.ktor.server.response.respond
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -19,7 +23,7 @@ class FirebaseAuthProvider(config: FirebaseConfig) : AuthenticationProvider(conf
 
         if (token == null) {
             context.challenge(
-                FirebaseJWTAuthKey,
+                FIREBASE_JWT_AUTH_KEY,
                 AuthenticationFailedCause.InvalidCredentials
             ) { challengeFunc, call ->
                 challengeFunc.complete()
@@ -28,17 +32,12 @@ class FirebaseAuthProvider(config: FirebaseConfig) : AuthenticationProvider(conf
             return
         }
 
-        try {
-            val principal = verifyFirebaseIdToken(context.call, token, authFunction)
+        val principal = verifyFirebaseIdToken(context.call, token, authFunction)
 
-            if (principal != null) {
-                context.principal(principal)
-            } else {
-                context.call.respond(HttpStatusCode.Unauthorized)
-            }
-        } catch (cause: Throwable) {
-            val message = cause.message ?: cause.javaClass.simpleName
-            context.error(FirebaseJWTAuthKey, AuthenticationFailedCause.Error(message))
+        if (principal != null) {
+            context.principal(principal)
+        } else {
+            context.call.respond(HttpStatusCode.Unauthorized)
         }
     }
 }
@@ -48,18 +47,13 @@ suspend fun verifyFirebaseIdToken(
     authHeader: HttpAuthHeader,
     tokenData: suspend ApplicationCall.(FirebaseToken) -> Principal?
 ): Principal? {
-    val token: FirebaseToken = try {
-        if (authHeader.authScheme == "Bearer" && authHeader is HttpAuthHeader.Single) {
-            withContext(Dispatchers.IO) {
-                FirebaseAuth.getInstance().verifyIdToken(authHeader.blob)
-            }
-        } else {
-            null
+    val token: FirebaseToken = if (authHeader.authScheme == "Bearer" && authHeader is HttpAuthHeader.Single) {
+        withContext(Dispatchers.IO) {
+            FirebaseAuth.getInstance().verifyIdToken(authHeader.blob)
         }
-    } catch (ex: Exception) {
-        ex.printStackTrace()
+    } else {
         return null
-    } ?: return null
+    }
     return tokenData(call, token)
 }
 
@@ -67,5 +61,4 @@ fun HttpAuthHeader.Companion.bearerAuthChallenge(realm: String): HttpAuthHeader 
     HttpAuthHeader.Parameterized("Bearer", mapOf(HttpAuthHeader.Parameters.Realm to realm))
 
 const val FIREBASE_AUTH = "FIREBASE_AUTH"
-const val FirebaseJWTAuthKey: String = "FirebaseAuth"
-
+const val FIREBASE_JWT_AUTH_KEY: String = "FIREBASE_JWT_AUTH_KEY"

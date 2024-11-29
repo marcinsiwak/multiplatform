@@ -15,6 +15,7 @@ import pl.msiwak.infrastructure.database.table.Categories
 import pl.msiwak.infrastructure.database.table.Exercises
 import pl.msiwak.infrastructure.database.table.Results
 
+@Suppress("TooManyFunctions")
 class ExercisesDaoImpl : ExercisesDao {
 
     override suspend fun updateCategory(category: CategoryEntity) {
@@ -31,7 +32,6 @@ class ExercisesDaoImpl : ExercisesDao {
                 .where { Exercises.categoryId eq category.id!! }
                 .map(::resultRowToExercise)
                 .toMutableList()
-
 
             category.exercises.forEach { updatedExercise ->
                 upsertWithAudit(Exercises) {
@@ -106,7 +106,9 @@ class ExercisesDaoImpl : ExercisesDao {
                 Exercises.selectAll().where { Exercises.categoryId eq categoryId }
                     .map(::resultRowToExercise)
                     .map { exercise ->
-                        exercise.copy(results = Results.selectAll().map(::resultRowToResult).toHashSet())
+                        exercise.copy(
+                            results = Results.selectAll().map(::resultRowToResult).toHashSet()
+                        )
                     }
             return resultRowToCategory(it, exercises)
         }
@@ -115,7 +117,8 @@ class ExercisesDaoImpl : ExercisesDao {
 
     override suspend fun getCategories(userId: String): List<CategoryEntity> {
         return dbQuery {
-            val categories = Categories.selectAll().where { Categories.userId eq userId }.map(::resultRowToCategory)
+            val categories = Categories.selectAll().where { Categories.userId eq userId }
+                .map(::resultRowToCategory)
             return@dbQuery categories.map { category ->
                 val exercises =
                     Exercises.selectAll().where { Exercises.categoryId eq category.id!! }
@@ -137,15 +140,18 @@ class ExercisesDaoImpl : ExercisesDao {
     }
 
     override suspend fun getCategoryByResult(resultId: String): CategoryEntity? = dbQuery {
-        val result = Results.selectAll().where { Results.id eq resultId }.map(::resultRowToResult).singleOrNull()
+        val result = Results.selectAll().where { Results.id eq resultId }.map(::resultRowToResult)
+            .singleOrNull()
             ?: return@dbQuery null
-        val exercise = Exercises.selectAll().where { Exercises.id eq result.exerciseId!! }.map(::resultRowToExercise)
+        val exercise = Exercises.selectAll().where { Exercises.id eq result.exerciseId!! }
+            .map(::resultRowToExercise)
             .singleOrNull() ?: return@dbQuery null
-        val exercises = Exercises.selectAll().where { Exercises.categoryId eq exercise.categoryId!! }.map {
-            val exerciseId = it[Exercises.id]
-            val results = getResultsByExercise(exerciseId)
-            resultRowToExercise(it, results)
-        }
+        val exercises =
+            Exercises.selectAll().where { Exercises.categoryId eq exercise.categoryId!! }.map {
+                val exerciseId = it[Exercises.id]
+                val results = getResultsByExercise(exerciseId)
+                resultRowToExercise(it, results)
+            }
 
         return@dbQuery Categories.selectAll().where { Categories.id eq exercise.categoryId!! }
             .map { resultRowToCategory(it, exercises) }.singleOrNull()
@@ -218,24 +224,27 @@ class ExercisesDaoImpl : ExercisesDao {
 
     private fun getResultsByExercise(exerciseId: String): List<ResultEntity> {
         val results =
-            Results.selectAll().where { Results.exerciseId eq exerciseId }.mapNotNull { resultRowToResult(it) }
+            Results.selectAll().where { Results.exerciseId eq exerciseId }
+                .mapNotNull { resultRowToResult(it) }
         return results
     }
 
-    private fun resultRowToCategory(row: ResultRow, exercises: List<ExerciseEntity> = emptyList()) = CategoryEntity(
-        id = row[Categories.id],
-        name = row[Categories.name],
-        userId = row[Categories.userId],
-        exerciseType = row[Categories.exerciseType],
-        exercises = exercises.toHashSet()
-    )
+    private fun resultRowToCategory(row: ResultRow, exercises: List<ExerciseEntity> = emptyList()) =
+        CategoryEntity(
+            id = row[Categories.id],
+            name = row[Categories.name],
+            userId = row[Categories.userId],
+            exerciseType = row[Categories.exerciseType],
+            exercises = exercises.toHashSet()
+        )
 
-    private fun resultRowToExercise(row: ResultRow, results: List<ResultEntity> = emptyList()) = ExerciseEntity(
-        id = row[Exercises.id],
-        categoryId = row[Exercises.categoryId],
-        name = row[Exercises.name],
-        results = results.toHashSet()
-    )
+    private fun resultRowToExercise(row: ResultRow, results: List<ResultEntity> = emptyList()) =
+        ExerciseEntity(
+            id = row[Exercises.id],
+            categoryId = row[Exercises.categoryId],
+            name = row[Exercises.name],
+            results = results.toHashSet()
+        )
 
     private fun resultRowToResult(row: ResultRow) = ResultEntity(
         id = row[Results.id],

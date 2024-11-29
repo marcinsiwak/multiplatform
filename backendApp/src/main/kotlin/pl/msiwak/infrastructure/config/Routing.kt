@@ -1,10 +1,18 @@
 package pl.msiwak.infrastructure.config
 
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.html.*
-import io.ktor.server.routing.*
-import kotlinx.html.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.Application
+import io.ktor.server.application.call
+import io.ktor.server.html.respondHtml
+import io.ktor.server.routing.get
+import io.ktor.server.routing.route
+import io.ktor.server.routing.routing
+import kotlinx.html.a
+import kotlinx.html.body
+import kotlinx.html.h1
+import kotlinx.html.head
+import kotlinx.html.p
+import kotlinx.html.title
 import pl.msiwak.interfaces.routing.addExerciseRoute
 import pl.msiwak.interfaces.routing.addUserRoutes
 

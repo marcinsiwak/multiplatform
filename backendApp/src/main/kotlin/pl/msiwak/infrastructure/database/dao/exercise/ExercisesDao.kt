@@ -4,6 +4,7 @@ import pl.msiwak.domain.entities.CategoryEntity
 import pl.msiwak.domain.entities.ExerciseEntity
 import pl.msiwak.domain.entities.ResultEntity
 
+@Suppress("TooManyFunctions")
 interface ExercisesDao {
     suspend fun getCategory(categoryId: String): CategoryEntity?
     suspend fun getCategoryByExercise(exerciseId: String): CategoryEntity?

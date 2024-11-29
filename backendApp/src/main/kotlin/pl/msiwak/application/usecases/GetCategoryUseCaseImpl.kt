@@ -6,10 +6,10 @@ import pl.msiwak.multiplatform.shared.model.ApiCategory
 
 class GetCategoryUseCaseImpl(
     private val exerciseRepository: ExerciseRepository,
-    private val ApiCategoryMapper: ApiCategoryMapper
+    private val apiCategoryMapper: ApiCategoryMapper
 ) : GetCategoryUseCase {
     override suspend operator fun invoke(id: String): ApiCategory? {
         val categoryEntity = exerciseRepository.getCategory(id) ?: return null
-        return ApiCategoryMapper(categoryEntity)
+        return apiCategoryMapper(categoryEntity)
     }
 }

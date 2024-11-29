@@ -1,6 +1,6 @@
 package pl.msiwak.infrastructure.config.auth.firebase
 
-import io.ktor.server.auth.*
+import io.ktor.server.auth.AuthenticationConfig
 
 fun AuthenticationConfig.firebase(
     name: String? = FIREBASE_AUTH,

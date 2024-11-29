@@ -11,9 +11,6 @@ jobs:
   Pull-Request-Android:
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false && (contains(github.event.pull_request.labels.*.name, 'KMP') || contains(github.event.pull_request.labels.*.name, 'Android'))) }}
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./mobile
 
     steps:
       - name: Checkout code
@@ -23,14 +20,13 @@ jobs:
         uses: ./.github/actions/prepare-env-android
         with:
           os: ${{ runner.os }}
-          working-directory: ./mobile
 
       - name: Update production.properties
         env:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Update staging.properties
@@ -38,28 +34,28 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
       - name: Run ktlintCheck
-        run: ./gradlew ktlintCheck
+        run: ./gradlew :composeApp:ktlintCheck
 
       - name: Run detekt
-        run: ./gradlew detekt
+        run: ./gradlew :composeApp:detekt
 
       - name: Run tests
-        run: ./gradlew test
+        run: ./gradlew :composeApp:test
 
       - name: Decode Keystore
         id: decode_keystore
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'release.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_RELEASE }}
 
       - name: Build APK
-        run: ./gradlew :androidApp:assembleRelease -x test
+        run: ./gradlew :composeApp:assembleRelease -x test
         env:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -68,9 +64,6 @@ jobs:
   Pull-Request-iOS:
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false && (contains(github.event.pull_request.labels.*.name, 'KMP') || contains(github.event.pull_request.labels.*.name, 'iOS'))) }}
     runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: ./mobile
 
     steps:
       - uses: actions/checkout@v3
@@ -104,7 +97,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Update staging.properties
@@ -112,14 +105,14 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
       - run: ./gradlew :shared-mobile:generateDummyFramework
       - name: Set up cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
         with:
-          podfile-path: mobile/iosApp/Podfile.lock
+          podfile-path: iosApp/Podfile.lock
       - name: Install Dependencies
         run: |
           cd iosApp
@@ -132,9 +125,6 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop'}}
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./mobile
 
     steps:
       - name: Checkout code
@@ -144,7 +134,6 @@ jobs:
         uses: ./.github/actions/prepare-env-android
         with:
           os: ${{ runner.os }}
-          working-directory: ./mobile
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
@@ -170,7 +159,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Decode debug Keystore
@@ -178,11 +167,11 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'debug.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Build productionDebug APK
-        run: ./gradlew :androidApp:assembleProductionDebug
+        run: ./gradlew :composeApp:assembleProductionDebug
         env:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
@@ -194,11 +183,11 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/composeApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
-        run: ./gradlew assembleProductionDebug appDistributionUploadProductionDebug
+        run: ./gradlew :composeApp:assembleProductionDebug appDistributionUploadProductionDebug
         env:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
@@ -209,9 +198,6 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop'}}
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./mobile
 
     steps:
       - name: Checkout code
@@ -221,7 +207,6 @@ jobs:
         uses: ./.github/actions/prepare-env-android
         with:
           os: ${{ runner.os }}
-          working-directory: ./mobile
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
@@ -247,7 +232,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/staging.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
           echo BASE_URL="BASE_URL" > ./staging.properties
 
       - name: Update production.properties
@@ -255,7 +240,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Decode debug Keystore
@@ -263,7 +248,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'debug.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_DEBUG }}
 
       - name: Decode app distribution service credentials file
@@ -271,11 +256,11 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/composeApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
-        run: ./gradlew assembleStagingDebug appDistributionUploadStagingDebug
+        run: ./gradlew :composeApp:assembleStagingDebug appDistributionUploadStagingDebug
         env:
           KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
           KEY_PASSWORD_DEBUG: ${{ secrets.KEY_PASSWORD_DEBUG }}
@@ -287,9 +272,6 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./mobile
 
     steps:
       - name: Checkout code
@@ -299,7 +281,6 @@ jobs:
         uses: ./.github/actions/prepare-env-android
         with:
           os: ${{ runner.os }}
-          working-directory: ./mobile
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
@@ -325,7 +306,7 @@ jobs:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./androidApp/production.properties
+          echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
           echo BASE_URL="BASE_URL" > ./production.properties
 
       - name: Decode Keystore
@@ -333,7 +314,7 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'release.jks'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/signing/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/signing/'
           encodedString: ${{ secrets.SIGNING_RELEASE }}
 
       - name: Decode app distribution service credentials file
@@ -341,11 +322,11 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'sportplatform-b5318-816058b49361.json'
-          fileDir: '/home/runner/work/multiplatform/multiplatform/mobile/androidApp/'
+          fileDir: '/home/runner/work/multiplatform/multiplatform/composeApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
-        run: ./gradlew assembleProductionRelease appDistributionUploadProductionRelease
+        run: ./gradlew :composeApp:assembleProductionRelease appDistributionUploadProductionRelease
         env:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}

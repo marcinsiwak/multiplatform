@@ -3,7 +3,6 @@ package pl.msiwak.domain.entities
 import kotlinx.serialization.Serializable
 import java.util.*
 
-
 @Serializable
 data class CategoryEntity(
     val id: String? = null,

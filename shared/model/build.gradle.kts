@@ -1,23 +1,21 @@
 plugins {
-    alias(sharedLibs.plugins.kotlinMultiplatform)
-    alias(sharedLibs.plugins.serialization)
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.androidLibrary)
+    id("pl.msiwak.convention.android.config")
+    id("pl.msiwak.convention.target.config")
 }
-
-group = "pl.msiwak.shared"
-version = "1.0.0"
 
 kotlin {
     jvm()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(sharedLibs.kotlinx.serialization)
-                implementation(sharedLibs.kotlinx.dateTime)
-            }
+        commonMain.dependencies {
+            implementation(libs.kotlinx.serialization)
+            implementation(libs.kotlinx.dateTime)
         }
     }
+}
+
+android {
+    namespace = "pl.msiwak.multiplatform.sharedmodel"
 }

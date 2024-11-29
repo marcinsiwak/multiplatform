@@ -1,1 +1,7 @@
-/shared/local.properties
+/.gradle
+/.idea
+/.kotlin
+/build
+/production.properties
+/staging.properties
+/signing
