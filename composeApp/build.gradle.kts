@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import pl.msiwak.multiplatform.dependencies.Modules
 import java.io.FileInputStream
@@ -14,12 +15,22 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("com.google.firebase.appdistribution")
-    id("pl.msiwak.convention.target.config")
+//    id("pl.msiwak.convention.target.config")
 }
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+    jvmToolchain(17)
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         moduleName = "composeApp"
@@ -55,8 +66,11 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+
             implementation(libs.kotlinx.serialization)
-//            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.kotlinx.viewModel)
 //            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(project(Modules.sharedModel))
         }

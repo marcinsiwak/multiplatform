@@ -34,6 +34,9 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.ktor.cio)
+        }
         commonMain.dependencies {
             implementation(project(Modules.commonObject))
             implementation(project(Modules.buildConfig))
@@ -42,7 +45,6 @@ kotlin {
             implementation(libs.ktor.core)
             implementation(libs.ktor.contentNegation)
             implementation(libs.ktor.serialization)
-            implementation(libs.ktor.cio)
             implementation(libs.ktor.logger)
 
             implementation(libs.kermit)
