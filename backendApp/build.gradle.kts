@@ -58,6 +58,5 @@ dependencies {
     // Flyaway - db migrations
     implementation(libs.flyway.core)
     implementation(libs.logback.classic)
-    testImplementation(libs.ktor.server.tests.jvm)
     testImplementation(libs.kotlin.test.junit)
 }
