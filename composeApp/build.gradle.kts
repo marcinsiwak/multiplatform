@@ -56,7 +56,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-            implementation(project(Modules.sharedMobile))
+//            implementation(project(Modules.sharedMobile))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -71,6 +71,7 @@ kotlin {
 
             implementation(libs.kotlinx.serialization)
             implementation(project(Modules.sharedModel))
+            implementation(project(Modules.sharedMobile))
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -80,10 +81,10 @@ kotlin {
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
         }
-
-        iosMain.dependencies {
-            implementation(project(Modules.sharedMobile))
-        }
+//
+//        iosMain.dependencies {
+//            implementation(project(Modules.sharedMobile))
+//        }
     }
 }
 

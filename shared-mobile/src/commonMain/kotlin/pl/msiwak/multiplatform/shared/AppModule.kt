@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.shared
 
+import org.koin.core.module.Module
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.auth.SessionStore
@@ -12,10 +13,6 @@ import pl.msiwak.multiplatform.data.remote.repository.RemoteConfigRepository
 import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
 import pl.msiwak.multiplatform.data.remote.repository.UserRepository
 import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
-import pl.msiwak.multiplatform.database.Database
-import pl.msiwak.multiplatform.database.dao.CategoriesDao
-import pl.msiwak.multiplatform.database.dao.ExercisesDao
-import pl.msiwak.multiplatform.database.dao.ResultsDao
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCaseImpl
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
@@ -157,13 +154,6 @@ fun appModule() = listOf(
     clientModule,
     navigationModule
 )
-
-val databaseModule = module {
-    single { Database(get()) }
-    single { CategoriesDao(get()) }
-    single { ExercisesDao(get()) }
-    single { ResultsDao(get()) }
-}
 
 val storeModule = module {
     single { LanguageStore(get()) }
@@ -339,3 +329,6 @@ val navigationModule = module {
     }
     single { BottomNavigationProvider(get(), get()) }
 }
+
+
+expect val databaseModule: Module

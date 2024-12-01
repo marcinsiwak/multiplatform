@@ -62,6 +62,10 @@ kotlin {
             implementation(libs.ktor.ios)
         }
 
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.web)
+        }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }

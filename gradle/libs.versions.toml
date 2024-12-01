@@ -28,7 +28,7 @@ firebaseGitlive = "2.1.0"
 firebase-android-bom = "32.3.1"
 kotlinx-lifecycle = "2.8.5"
 kotlinx-viewModel = "2.8.0-beta02"
-kotlinx-coroutines = "1.9.0-RC"
+kotlinx-coroutines = "1.9.0"
 kotlinx-dateTime = "0.6.0"
 kotlinx-serialization = "1.7.0-RC"
 google-playservices-auth = "20.6.0"
@@ -94,16 +94,20 @@ kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version
 kotlinx-lifecycle-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "kotlinx-lifecycle" }
 
 kotlinx-lifecycle = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
-kotlinx-viewModel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+kotlinx-viewModel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 
 kotlinx-viewModel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "kotlinx-viewModel" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-dateTime" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
+kotlinx-lifecycle-test = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "kotlinx-lifecycle" }
+kotlinx-viewModel-test = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kotlinx-viewModel" }
+
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-ios = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-web = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 ktor-contentNegation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
