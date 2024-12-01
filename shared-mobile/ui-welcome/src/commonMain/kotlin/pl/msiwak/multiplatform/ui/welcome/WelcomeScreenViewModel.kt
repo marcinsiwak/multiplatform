@@ -2,7 +2,6 @@ package pl.msiwak.multiplatform.ui.welcome
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.gitlive.firebase.auth.FirebaseAuthInvalidCredentialsException
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -39,12 +38,12 @@ class WelcomeScreenViewModel(
 
     private val errorHandler = globalErrorHandler.handleError { throwable ->
         when (throwable) {
-            is FirebaseAuthInvalidCredentialsException -> {
-                _viewState.update {
-                    it.copy(authErrorMessage = "", isErrorDialogVisible = true)
-                }
-                true
-            }
+//            is FirebaseAuthInvalidCredentialsException -> {
+//                _viewState.update {
+//                    it.copy(authErrorMessage = "", isErrorDialogVisible = true)
+//                }
+//                true
+//            }
 
             else -> false
         }

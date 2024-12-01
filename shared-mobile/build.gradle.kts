@@ -49,11 +49,17 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            api(project(Modules.database))
+        }
+
+        iosMain.dependencies {
+            api(project(Modules.database))
+        }
 
         commonMain.dependencies {
             api(project(Modules.commonResources))
             api(project(Modules.commonObject))
-            api(project(Modules.database))
             api(project(Modules.utils))
             api(project(Modules.auth))
             api(project(Modules.network))
@@ -78,6 +84,7 @@ kotlin {
             api(project(Modules.notifications))
             api(project(Modules.uiCommonComponent))
             api(project(Modules.uiTerms))
+            api(project(Modules.databaseWasm))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)

@@ -36,17 +36,27 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(project(Modules.database))
+        }
         commonMain.dependencies {
             implementation(project(Modules.utils))
             implementation(project(Modules.commonObject))
             implementation(project(Modules.auth))
-            implementation(project(Modules.database))
             implementation(project(Modules.network))
             implementation(project(Modules.remoteConfig))
 
             implementation(libs.kotlinx.coroutines)
 
             implementation(project(Modules.sharedModel))
+        }
+
+        iosMain.dependencies {
+            implementation(project(Modules.database))
+        }
+
+        wasmJsMain.dependencies {
+            implementation(project(Modules.databaseWasm))
         }
 
         commonTest.dependencies {

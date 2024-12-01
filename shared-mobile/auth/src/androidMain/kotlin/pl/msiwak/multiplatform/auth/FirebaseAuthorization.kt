@@ -20,7 +20,13 @@ actual class FirebaseAuthorization {
     actual suspend fun loginUser(email: String, password: String): AuthResult {
         return auth.signInWithEmailAndPassword(email, password).let {
             AuthResult(
-                token = it.user?.getIdTokenResult(true)?.token
+                user = FirebaseUser(
+                    uid = it.user?.uid,
+                    email = it.user?.email,
+                    displayName = it.user?.displayName,
+                    isEmailVerified = it.user?.isEmailVerified ?: false,
+                    token = it.user?.getIdTokenResult(true)?.token
+                )
             )
         }
     }
@@ -33,13 +39,27 @@ actual class FirebaseAuthorization {
             )
         ).let {
             AuthResult(
-                token = it.user?.getIdTokenResult(true)?.token
+                user = FirebaseUser(
+                    uid = it.user?.uid,
+                    email = it.user?.email,
+                    displayName = it.user?.displayName,
+                    isEmailVerified = it.user?.isEmailVerified ?: false,
+                    token = it.user?.getIdTokenResult(true)?.token
+                )
             )
         }
     }
 
     actual fun observeAuthStateChanged(): Flow<FirebaseUser?> {
-        return auth.authStateChanged.map { FirebaseUser(it?.uid, it?.email, it?.displayName, it?.isEmailVerified) }
+        return auth.authStateChanged.map {
+            FirebaseUser(
+                it?.uid,
+                it?.email,
+                it?.displayName,
+                it?.isEmailVerified ?: false,
+                token = it?.getIdToken(false)
+            )
+        }
     }
 
     actual suspend fun logoutUser() {

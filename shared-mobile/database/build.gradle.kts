@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -5,13 +8,20 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.sqlDelight)
-    id("pl.msiwak.convention.target.config")
+//    id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.releaseonly.config")
     id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    androidTarget()
+    jvmToolchain(17)
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
     cocoapods {
         summary = "Database Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"

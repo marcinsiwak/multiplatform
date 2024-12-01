@@ -5,6 +5,7 @@ import dev.gitlive.firebase.auth.GoogleAuthProvider
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
 actual class FirebaseAuthorization {
 
@@ -18,7 +19,13 @@ actual class FirebaseAuthorization {
     actual suspend fun loginUser(email: String, password: String): pl.msiwak.multiplatform.commonObject.AuthResult {
         return auth.signInWithEmailAndPassword(email, password).let {
             pl.msiwak.multiplatform.commonObject.AuthResult(
-                token = it.user?.getIdTokenResult(true)?.token
+                user = FirebaseUser(
+                    uid = it.user?.uid,
+                    email = it.user?.email,
+                    displayName = it.user?.displayName,
+                    isEmailVerified = it.user?.isEmailVerified ?: false,
+                    token = it.user?.getIdTokenResult(true)?.token
+                )
             )
         }
     }
@@ -34,18 +41,25 @@ actual class FirebaseAuthorization {
             )
         ).let {
             pl.msiwak.multiplatform.commonObject.AuthResult(
-                token = it.user?.getIdTokenResult(true)?.token
+                user = FirebaseUser(
+                    uid = it.user?.uid,
+                    email = it.user?.email,
+                    displayName = it.user?.displayName,
+                    isEmailVerified = it.user?.isEmailVerified ?: false,
+                    token = it.user?.getIdTokenResult(true)?.token
+                )
             )
         }
     }
 
-    actual fun observeAuthStateChanged(): Flow<pl.msiwak.multiplatform.commonObject.FirebaseUser?> {
+    actual fun observeAuthStateChanged(): Flow<FirebaseUser?> {
         return auth.authStateChanged.map {
-            pl.msiwak.multiplatform.commonObject.FirebaseUser(
+            FirebaseUser(
                 it?.uid,
                 it?.email,
                 it?.displayName,
-                it?.isEmailVerified
+                it?.isEmailVerified ?: false,
+                it?.getIdToken(false)
             )
         }
     }
