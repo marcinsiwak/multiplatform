@@ -70,9 +70,15 @@ kotlin {
             implementation(libs.koin.compose)
 
             implementation(libs.kotlinx.serialization)
-            implementation(libs.kotlinx.viewModel)
-//            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(project(Modules.sharedModel))
+
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(libs.kotlinx.lifecycle)
+            implementation(libs.kotlinx.viewModel)
         }
 
         iosMain.dependencies {
