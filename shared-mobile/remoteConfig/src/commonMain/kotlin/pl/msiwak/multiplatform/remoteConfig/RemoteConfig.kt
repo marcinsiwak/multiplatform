@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.remoteConfig
 
-expect class RemoteConfig {
+expect class RemoteConfig() {
     suspend fun fetch()
 
     fun getMinVersion(): String

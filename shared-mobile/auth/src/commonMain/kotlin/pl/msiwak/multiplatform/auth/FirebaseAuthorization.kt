@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
-expect class FirebaseAuthorization {
+expect class FirebaseAuthorization() {
 
     suspend fun createNewUser(email: String, password: String)
 

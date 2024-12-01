@@ -85,6 +85,7 @@ kotlin {
             api(project(Modules.uiCommonComponent))
             api(project(Modules.uiTerms))
             api(project(Modules.databaseWasm))
+            api(project(Modules.database))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
