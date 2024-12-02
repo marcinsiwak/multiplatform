@@ -152,7 +152,8 @@ fun appModule() = listOf(
     storeModule,
     serviceModule,
     clientModule,
-    navigationModule
+    navigationModule,
+    platformRepositoryModule
 )
 
 val storeModule = module {
@@ -280,7 +281,6 @@ val useCaseModule = module {
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
-    single { CategoryRepository(get(), get(), get(), get(), get(), get()) }
     single { RemoteConfigRepository(get()) }
     single { VersionRepository(get()) }
     single { SessionRepository(get()) }
@@ -330,5 +330,6 @@ val navigationModule = module {
     single { BottomNavigationProvider(get(), get()) }
 }
 
+expect val platformRepositoryModule: Module
 
 expect val databaseModule: Module

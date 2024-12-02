@@ -45,7 +45,6 @@ kotlin {
             implementation(project(Modules.auth))
             implementation(project(Modules.network))
             implementation(project(Modules.remoteConfig))
-            implementation(project(Modules.database))
 
             implementation(libs.kotlinx.coroutines)
 
