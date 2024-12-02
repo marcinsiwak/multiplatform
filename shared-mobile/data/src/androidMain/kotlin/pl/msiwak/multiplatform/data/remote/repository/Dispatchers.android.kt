@@ -4,9 +4,9 @@ import kotlin.coroutines.CoroutineContext
 
 actual object Dispatchers {
     actual val Main: CoroutineContext
-        get() = Dispatchers.Main
+        get() = kotlinx.coroutines.Dispatchers.Main
     actual val IO: CoroutineContext
-        get() = Dispatchers.IO
+        get() = kotlinx.coroutines.Dispatchers.IO
     actual val Default: CoroutineContext
-        get() = Dispatchers.Default
+        get() = kotlinx.coroutines.Dispatchers.Default
 }

@@ -2,13 +2,21 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
-    id("pl.msiwak.convention.target.config")
+//    id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.releaseonly.config")
     id("pl.msiwak.convention.android.config")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    androidTarget()
+    jvmToolchain(17)
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+
     cocoapods {
         summary = "Remote config Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -26,15 +34,15 @@ kotlin {
     }
 
     sourceSets {
-        androidMain.dependencies {
-            api(libs.firebase.gitlive.remoteConfig)
-        }
-//        commonMain.dependencies {
+//        androidMain.dependencies {
 //            api(libs.firebase.gitlive.remoteConfig)
 //        }
-        iosMain.dependencies {
+        commonMain.dependencies {
             api(libs.firebase.gitlive.remoteConfig)
         }
+//        iosMain.dependencies {
+//            api(libs.firebase.gitlive.remoteConfig)
+//        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }

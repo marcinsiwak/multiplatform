@@ -4,7 +4,7 @@ import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
 
 class RemoteConfigRepository(private val remoteConfig: RemoteConfig) {
-    suspend fun fetch() = withContext(Dispatchers.IO) {
+    suspend fun fetch() = withContext(Dispatchers.Main) {
         remoteConfig.fetch()
     }
 

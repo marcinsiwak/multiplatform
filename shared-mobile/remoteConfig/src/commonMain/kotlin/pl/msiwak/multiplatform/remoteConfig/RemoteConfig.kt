@@ -1,8 +1,21 @@
 package pl.msiwak.multiplatform.remoteConfig
 
-expect class RemoteConfig() {
-    suspend fun fetch()
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.remoteconfig.FirebaseRemoteConfig
+import dev.gitlive.firebase.remoteconfig.remoteConfig
 
-    fun getMinVersion(): String
-    fun getLastVersion(): String
+class RemoteConfig {
+    private val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+
+    suspend fun fetch() {
+        remoteConfig.fetchAndActivate()
+    }
+
+    fun getMinVersion() = remoteConfig.getValue(FORCE_UPDATE_MIN_VERSION_KEY).asString()
+    fun getLastVersion() = remoteConfig.getValue(FORCE_UPDATE_LAST_VERSION_KEY).asString()
+
+    companion object {
+        private const val FORCE_UPDATE_MIN_VERSION_KEY = "and_min_version"
+        private const val FORCE_UPDATE_LAST_VERSION_KEY = "and_last_version"
+    }
 }
