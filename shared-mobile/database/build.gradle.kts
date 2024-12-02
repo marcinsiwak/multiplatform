@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -14,7 +15,6 @@ plugins {
     id("pl.msiwak.convention.android.config")
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     androidTarget()
     jvmToolchain(17)
@@ -22,6 +22,17 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+
+    metadata {
+        compilations.all {
+            val compilationName = name
+            compileTaskProvider.configure {
+                if (this is KotlinCompileCommon) {
+                    moduleName = "${project.group}:${project.name}_$compilationName"
+                }
+            }
+        }
+    }
 
     cocoapods {
         summary = "Database Shared Module"
@@ -46,7 +57,7 @@ kotlin {
             implementation(project(Modules.commonObject))
 
             implementation(libs.sqlDelight.coroutines)
-            implementation(libs.kotlinx.coroutines)
+//            implementation(libs.kotlinx.coroutines)
             implementation(libs.kotlinx.dateTime)
             implementation(libs.kotlinx.serialization)
         }
@@ -71,7 +82,7 @@ android {
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("pl.msiwak.multiplatform.shared.database")
+            packageName.set("pl.msiwak.multiplatform.shared.database.sql")
         }
     }
     linkSqlite.set(true)

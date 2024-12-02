@@ -5,11 +5,11 @@ actual class RemoteConfig {
     }
 
     actual fun getMinVersion(): String {
-        TODO("Not yet implemented")
+        return "1.0.0"
     }
 
     actual fun getLastVersion(): String {
-        TODO("Not yet implemented")
+        return "1.0.0"
     }
 
 }

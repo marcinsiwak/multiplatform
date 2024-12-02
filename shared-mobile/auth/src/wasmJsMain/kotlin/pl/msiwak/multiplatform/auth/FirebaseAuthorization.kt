@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.auth
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
@@ -12,18 +13,18 @@ actual class FirebaseAuthorization {
         email: String,
         password: String
     ): AuthResult {
-        TODO("Not yet implemented")
+        return AuthResult(null) // todo
     }
 
     actual suspend fun loginWithGoogle(
         googleToken: String?,
         accessToken: String?
     ): AuthResult {
-        TODO("Not yet implemented")
+        return AuthResult(null) // todo
     }
 
     actual fun observeAuthStateChanged(): Flow<FirebaseUser?> {
-        TODO("Not yet implemented")
+        return flow { FirebaseUser("14", "a@a.com", null, true, "fwoanfwn") } // todo
     }
 
     actual suspend fun logoutUser() {

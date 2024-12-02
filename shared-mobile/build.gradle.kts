@@ -84,7 +84,6 @@ kotlin {
             api(project(Modules.notifications))
             api(project(Modules.uiCommonComponent))
             api(project(Modules.uiTerms))
-            api(project(Modules.databaseWasm))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
@@ -94,7 +93,6 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
-            implementation(compose.components.resources)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
@@ -102,6 +100,10 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.koin.android)
+        }
+
+        wasmJsMain.dependencies {
+            api(project(Modules.databaseWasm))
         }
 
         commonTest.dependencies {

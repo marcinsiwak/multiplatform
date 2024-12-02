@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.database
 
-import pl.msiwak.multiplatform.shared.database.AppDatabase
+import pl.msiwak.multiplatform.shared.database.sql.AppDatabase
 import plmsiwakmultiplatformdatabasecache.CategoryDB
 import plmsiwakmultiplatformdatabasecache.ExerciseDB
 import plmsiwakmultiplatformdatabasecache.ResultDB

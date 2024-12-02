@@ -35,7 +35,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(Modules.commonObject))
 //            implementation(libs.firebase.gitlive.auth)
-
+            implementation(libs.kotlinx.coroutines)
             implementation(libs.kermit)
         }
 

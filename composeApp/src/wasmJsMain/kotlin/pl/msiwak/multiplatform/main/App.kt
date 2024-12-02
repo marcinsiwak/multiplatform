@@ -6,14 +6,22 @@ import kotlinx.browser.document
 import org.koin.core.context.startKoin
 import pl.msiwak.multiplatform.shared.MainView
 import pl.msiwak.multiplatform.shared.appModule
+import pl.msiwak.multiplatform.shared.databaseModule
+import pl.msiwak.multiplatform.shared.repositoryUseModule
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     startKoin {
-        modules(appModule())
+        modules(appModule() + databaseModule + repositoryUseModule)
     }
+    try {
+        print("Starting WASM application...")
+        // Your initialization code here
 
-    ComposeViewport(document.body!!) {
-        MainView()
+        ComposeViewport(document.body!!) {
+            MainView()
+        }
+    } catch (e: Exception) {
+        println("Error occurred in WASM application: $e")
     }
 }
