@@ -1,23 +1,16 @@
 package pl.msiwak.multiplatform.utils
 
-class KMMPreferences(private val context: KMMContext) {
+interface KMMPreferences {
 
-    fun put(key: String, value: Int) {
-        context.putInt(key, value)
-    }
+    fun put(key: String, value: Int)
 
-    fun put(key: String, value: String) {
-        context.putString(key, value)
-    }
+    fun put(key: String, value: String)
 
-    fun put(key: String, value: Boolean) {
-        context.putBool(key, value)
-    }
+    fun put(key: String, value: Boolean)
 
-    fun getInt(key: String, default: Int): Int = context.getInt(key, default)
+    fun getInt(key: String, default: Int): Int
 
-    fun getString(key: String): String? = context.getString(key)
+    fun getString(key: String): String?
 
-    fun getBool(key: String, default: Boolean): Boolean =
-        context.getBool(key, default)
+    fun getBool(key: String, default: Boolean): Boolean
 }

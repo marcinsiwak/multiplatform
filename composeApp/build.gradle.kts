@@ -78,6 +78,7 @@ kotlin {
             implementation(compose.ui)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
+            implementation(libs.compose.multiplatform.navigation)
         }
 //
 //        iosMain.dependencies {

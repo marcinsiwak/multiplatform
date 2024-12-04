@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.shared
 
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.auth.SessionStore
@@ -8,7 +9,6 @@ import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
 import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
-import pl.msiwak.multiplatform.data.remote.repository.CategoryRepository
 import pl.msiwak.multiplatform.data.remote.repository.RemoteConfigRepository
 import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
 import pl.msiwak.multiplatform.data.remote.repository.UserRepository
@@ -144,16 +144,16 @@ import pl.msiwak.multiplatform.utils.validators.Validator
 
 fun appModule() = listOf(
     apiModule,
-    viewModelsModule,
-    databaseModule,
-    useCaseModule,
-    toolsModule,
-    repositoryUseModule,
-    storeModule,
-    serviceModule,
-    clientModule,
     navigationModule,
-    platformRepositoryModule
+    databaseModule,
+    toolsModule,
+    storeModule,
+    clientModule,
+    serviceModule,
+    repositoryUseModule,
+    platformRepositoryModule,
+    useCaseModule,
+    viewModelsModule,
 )
 
 val storeModule = module {
@@ -181,7 +181,7 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition {
+    viewModel {
         MainViewModel(
             get(),
             get(),
@@ -191,12 +191,12 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition { RegisterViewModel(get(), get(), get()) }
-    viewModelDefinition { VerifyEmailViewModel(get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
-    viewModelDefinition { TermsConfirmationViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
-    viewModelDefinition {
+    viewModel { RegisterViewModel(get(), get(), get()) }
+    viewModel { VerifyEmailViewModel(get(), get()) }
+    viewModel { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { TermsConfirmationViewModel(get(), get(), get(), get()) }
+    viewModel { SummaryViewModel(get(), get(), get(), get()) }
+    viewModel {
         AddExerciseViewModel(
             get(),
             get(),
@@ -212,7 +212,7 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition {
+    viewModel {
         CategoryViewModel(
             get(),
             get(),
@@ -221,12 +221,12 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition { AddCategoryViewModel(get(), get()) }
-    viewModelDefinition { SettingsViewModel(get(), get()) }
-    viewModelDefinition { LanguageViewModel(get(), get()) }
-    viewModelDefinition { UnitViewModel(get(), get()) }
-    viewModelDefinition { ForceUpdateViewModel() }
-    viewModelDefinition { DashboardViewModel(get()) }
+    viewModel { AddCategoryViewModel(get(), get()) }
+    viewModel { SettingsViewModel(get(), get()) }
+    viewModel { LanguageViewModel(get(), get()) }
+    viewModel { UnitViewModel(get(), get()) }
+    viewModel { ForceUpdateViewModel() }
+    viewModel { DashboardViewModel(get()) }
 }
 
 val useCaseModule = module {
@@ -282,7 +282,6 @@ val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
     single { RemoteConfigRepository(get()) }
-    single { VersionRepository(get()) }
     single { SessionRepository(get()) }
 }
 

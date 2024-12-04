@@ -41,9 +41,9 @@ class MainViewModel(
             if (!getUserTokenUseCase().isNullOrEmpty()) {
                 _viewState.update { it.copy(directions = NavDestination.DashboardDestination.NavDashboardGraphDestination) }
             }
-            if (getForceUpdateStateUseCase()) {
-                _viewState.update { it.copy(directions = NavDestination.ForceUpdateDestination.NavForceUpdateGraphDestination) }
-            }
+//            if (getForceUpdateStateUseCase()) {
+//                _viewState.update { it.copy(directions = NavDestination.ForceUpdateDestination.NavForceUpdateGraphDestination) }
+//            }
             delay(500)
             _viewState.update { it.copy(isLoading = false) }
         }

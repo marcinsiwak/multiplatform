@@ -8,6 +8,6 @@ class RemoteConfigRepository(private val remoteConfig: RemoteConfig) {
         remoteConfig.fetch()
     }
 
-    fun getMinVersion() = remoteConfig.getMinVersion()
-    fun getLastVersion() = remoteConfig.getLastVersion()
+    fun getMinVersion(): String = remoteConfig.getMinVersion()
+    fun getLastVersion(): String = remoteConfig.getLastVersion()
 }

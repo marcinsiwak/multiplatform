@@ -1,11 +1,12 @@
 package pl.msiwak.multiplatform.data.remote.repository
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 
-actual class VersionRepository actual constructor(private val context: KMMVersionContext) {
+class VersionRepositoryImpl(private val context: Context) : VersionRepository {
 
-    actual fun getVersionName(): String {
+    override fun getVersionName(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.packageManager.getPackageInfo(
                 context.packageName,
@@ -16,7 +17,7 @@ actual class VersionRepository actual constructor(private val context: KMMVersio
         }
     }
 
-    actual fun getLongerVersionCode(): String {
+    override fun getLongerVersionCode(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.packageManager.getPackageInfo(
                 context.packageName,

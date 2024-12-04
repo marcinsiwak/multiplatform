@@ -1,7 +1,9 @@
 package pl.msiwak.multiplatform.shared
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import org.koin.compose.koinInject
@@ -10,7 +12,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.Loader
 
 @Composable
 fun MainView(
-    viewModel: MainViewModel = koinInject()
+    viewModel: MainViewModel = koinInject<MainViewModel>()
 ) {
     val viewState = viewModel.viewState.collectAsState()
     val navigationProvider = viewModel.navigationProvider
