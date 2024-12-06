@@ -5,6 +5,7 @@ agp = "8.5.2"
 desugar_jdk_libs = "2.1.2"
 exposed = "0.53.0"
 firebaseAdmin = "9.3.0"
+rich-editor = "1.0.0-rc10"
 ksp = "2.0.21-1.0.25"
 
 appcompat = "1.7.0"
@@ -66,6 +67,7 @@ firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlyti
 
 flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway_version" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+rich-editor = { module = "com.mohamedrejeb.richeditor:richeditor-compose", version.ref = "rich-editor" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 koin-logger-slf4j = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
