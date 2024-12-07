@@ -51,7 +51,7 @@ class WelcomeScreenViewModel(
 
     private fun prepareGoogleLoginErrorHandler(uuid: String): CoroutineExceptionHandler =
         globalErrorHandler.handleError { _ ->
-            viewModelScope.launch {
+            viewModelScope.launch(errorHandler) {
                 _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions(uuid))
             }
             false
@@ -79,6 +79,7 @@ class WelcomeScreenViewModel(
 
     private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
         viewModelScope.launch(errorHandler) {
+
             val loginJob = async {
                 val result = googleLoginUseCase(idToken, accessToken)
                 return@async result

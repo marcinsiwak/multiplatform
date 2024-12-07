@@ -4,8 +4,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
+import pl.msiwak.multiplatform.network.FirebaseApi
 
 actual class FirebaseAuthorization {
+
+    private val firebaseApi = FirebaseApi()
     actual suspend fun createNewUser(email: String, password: String) {
     }
 
@@ -20,6 +23,10 @@ actual class FirebaseAuthorization {
         googleToken: String?,
         accessToken: String?
     ): AuthResult {
+        if (googleToken != null) {
+            firebaseApi.loginUserWithGoogle(googleToken)
+        }
+
         return AuthResult(null) // todo
     }
 
@@ -32,5 +39,4 @@ actual class FirebaseAuthorization {
 
     actual suspend fun resendVerificationEmail() {
     }
-
 }

@@ -46,6 +46,10 @@ kotlin {
             implementation(libs.firebase.gitlive.auth)
         }
 
+        wasmJsMain.dependencies {
+            implementation(project(Modules.network))
+        }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
