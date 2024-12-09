@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.data.remote.repository
 
 import kotlinx.coroutines.withContext
-import pl.msiwak.multiplatform.auth.SessionStore
+import pl.msiwak.multiplatform.store.SessionStore
 
 class SessionRepository(private val sessionStore: SessionStore) {
 

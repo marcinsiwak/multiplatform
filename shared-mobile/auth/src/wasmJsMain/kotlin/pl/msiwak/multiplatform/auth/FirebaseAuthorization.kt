@@ -23,11 +23,18 @@ actual class FirebaseAuthorization {
         googleToken: String?,
         accessToken: String?
     ): AuthResult {
-        if (googleToken != null) {
-            firebaseApi.loginUserWithGoogle(googleToken)
-        }
-
-        return AuthResult(null) // todo
+        val response = googleToken?.let { firebaseApi.loginUserWithGoogle(it) }
+        return AuthResult(
+            user = response?.let {
+                FirebaseUser(
+                    uid = it.localId,
+                    email = it.email,
+                    displayName = it.displayName,
+                    isEmailVerified = it.emailVerified,
+                    token = it.idToken
+                )
+            }
+        )
     }
 
     actual fun observeAuthStateChanged(): Flow<FirebaseUser?> {

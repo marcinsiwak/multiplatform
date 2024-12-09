@@ -23,7 +23,6 @@ kotlin {
 
             export(project(Modules.commonObject))
             export(project(Modules.buildConfig))
-            export(project(Modules.auth))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -40,7 +39,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(Modules.commonObject))
             implementation(project(Modules.buildConfig))
-            implementation(project(Modules.auth))
+            implementation(project(Modules.store))
 
             implementation(libs.ktor.core)
             implementation(libs.ktor.contentNegation)

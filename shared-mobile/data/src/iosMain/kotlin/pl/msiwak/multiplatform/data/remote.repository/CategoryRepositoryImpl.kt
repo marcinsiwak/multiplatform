@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
-import pl.msiwak.multiplatform.auth.SessionStore
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ResultData
@@ -21,6 +20,7 @@ import pl.msiwak.multiplatform.shared.model.ApiExercise
 import pl.msiwak.multiplatform.shared.model.ApiResult
 import pl.msiwak.multiplatform.shared.model.ApiSynchronizationRequest
 import pl.msiwak.multiplatform.shared.model.ApiUpdateExerciseNameRequest
+import pl.msiwak.multiplatform.store.SessionStore
 
 class CategoryRepositoryImpl(
     private val categoriesDao: CategoriesDao,

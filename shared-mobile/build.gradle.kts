@@ -84,6 +84,7 @@ kotlin {
             api(project(Modules.notifications))
             api(project(Modules.uiCommonComponent))
             api(project(Modules.uiTerms))
+            api(project(Modules.store))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)

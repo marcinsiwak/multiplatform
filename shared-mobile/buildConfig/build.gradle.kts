@@ -56,6 +56,7 @@ buildkonfig {
         buildConfigField(STRING, "BUILD_FLAVOUR", "default")
         buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
         buildConfigField(BOOLEAN, "IsDebug", "false")
+        buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
     }
 
     targetConfigs {
@@ -63,12 +64,14 @@ buildkonfig {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseAndroid")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
+            buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
         }
 
         ios {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseIos")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "false")
+            buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
         }
     }
 
@@ -77,11 +80,13 @@ buildkonfig {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugAndroid")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
+            buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
         }
         ios {
             buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugIos")
             buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
             buildConfigField(BOOLEAN, "IsDebug", "true")
+            buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
         }
     }
 
@@ -95,11 +100,13 @@ buildkonfig {
                 buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugAndroid")
                 buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
                 buildConfigField(BOOLEAN, "IsDebug", "true")
+                buildConfigField(STRING, "FIREBASE_KEY", stagingProperties["FIREBASE_KEY"] as String)
             }
             ios {
                 buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugIos")
                 buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
                 buildConfigField(BOOLEAN, "IsDebug", "true")
+                buildConfigField(STRING, "FIREBASE_KEY", stagingProperties["FIREBASE_KEY"] as String)
             }
         }
     }

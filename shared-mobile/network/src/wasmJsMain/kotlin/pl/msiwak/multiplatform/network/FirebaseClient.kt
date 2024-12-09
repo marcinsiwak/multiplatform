@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.network
 
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.js.Js
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -21,7 +20,7 @@ import pl.msiwak.multiplatform.network.exception.ServerErrorException
 import co.touchlab.kermit.Logger as KermitLogger
 
 class FirebaseClient {
-    val httpClient: HttpClient = HttpClient(Js) {
+    val httpClient: HttpClient = HttpClient(io.ktor.client.engine.js.JsClient()) {
         if (BuildConfig.IsDebug) {
             install(Logging) {
                 level = LogLevel.ALL
@@ -46,8 +45,6 @@ class FirebaseClient {
         }
         defaultRequest {
             contentType(ContentType.Application.Json)
-//            url("https://identitytoolkit.googleapis.com/v1")
-//            bearerAuth(sessionStore.getToken() ?: "")
         }
 
         HttpResponseValidator {

@@ -30,6 +30,7 @@ object Modules {
     const val uiCommonComponent = "$sharedMobile:ui-common-component"
     const val uiTerms = "$sharedMobile:ui-terms"
     const val databaseWasm = "$sharedMobile:database-wasm"
+    const val store = "$sharedMobile:store"
 
     const val shared = ":shared"
     const val sharedModel = "$shared:model"

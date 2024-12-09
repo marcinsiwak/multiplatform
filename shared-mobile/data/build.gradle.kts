@@ -45,6 +45,7 @@ kotlin {
             implementation(project(Modules.auth))
             implementation(project(Modules.network))
             implementation(project(Modules.remoteConfig))
+            implementation(project(Modules.store))
 
             implementation(libs.kotlinx.coroutines)
 

@@ -9,6 +9,7 @@ class GoogleLoginUseCaseImpl(
 ) : GoogleLoginUseCase {
     override suspend operator fun invoke(tokenId: String?, accessToken: String?): String? {
         val result = authRepository.loginWithGoogle(tokenId, accessToken)
+        println("HERE2")
         val token = result?.user?.token
         token?.let { sessionRepository.saveToken(it) }
         return result?.user?.uid

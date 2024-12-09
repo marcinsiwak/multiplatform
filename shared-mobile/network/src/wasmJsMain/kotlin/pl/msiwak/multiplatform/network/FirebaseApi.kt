@@ -2,21 +2,27 @@ package pl.msiwak.multiplatform.network
 
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
+import pl.msiwak.multiplatform.buildconfig.BuildConfig
 
-class FirebaseApi {
+// todo remove firebaseApi when gitlive will support wasm
 
-    private val firebaseClient: FirebaseClient = FirebaseClient()
+class FirebaseApi(private val firebaseClient: FirebaseClient) {
 
-    suspend fun loginUserWithGoogle(idToken: String) {
-        firebaseClient.httpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=AIzaSyABbsF1ktwz4i5CNrXYs-kcU2CzqW7UWXs") {
-            setBody(buildJsonObject {
-//                put("postBody", "id_token=$googleIdToken&providerId=google.com")
-//                put("requestUri", requestUri)
-//                put("returnIdpCredential", true)
-//                put("returnSecureToken", true)
-            })
-        }
-
+    suspend fun loginUserWithGoogle(idToken: String): AuthResponse {
+        val response =
+            firebaseClient.httpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${BuildConfig.firebaseKey}") {
+                setBody(buildJsonObject {
+                    put("postBody", "id_token=$idToken&providerId=google.com")
+                    put("returnIdpCredential", true)
+                    put("returnSecureToken", true)
+                    put("requestUri", "http://localhost:8080")
+                })
+            }.bodyAsText()
+        val json = Json { ignoreUnknownKeys = true }
+        return json.decodeFromString(response)
     }
 }

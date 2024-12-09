@@ -4,7 +4,6 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
-import pl.msiwak.multiplatform.auth.SessionStore
 import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
@@ -12,7 +11,6 @@ import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
 import pl.msiwak.multiplatform.data.remote.repository.RemoteConfigRepository
 import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
 import pl.msiwak.multiplatform.data.remote.repository.UserRepository
-import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCaseImpl
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
@@ -109,6 +107,7 @@ import pl.msiwak.multiplatform.network.service.CategoryService
 import pl.msiwak.multiplatform.network.service.UserService
 import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
+import pl.msiwak.multiplatform.store.SessionStore
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseGraph

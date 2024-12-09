@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.auth
+package pl.msiwak.multiplatform.store
 
 import pl.msiwak.multiplatform.utils.KMMPreferences
 
