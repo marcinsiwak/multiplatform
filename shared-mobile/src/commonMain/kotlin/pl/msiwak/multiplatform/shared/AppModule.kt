@@ -153,6 +153,7 @@ fun appModule() = listOf(
     platformRepositoryModule,
     useCaseModule,
     viewModelsModule,
+    authModule
 )
 
 val storeModule = module {
@@ -163,7 +164,6 @@ val storeModule = module {
 }
 
 val apiModule = module {
-    single { FirebaseAuthorization() }
     single { RemoteConfig() }
 }
 
@@ -331,3 +331,5 @@ val navigationModule = module {
 expect val platformRepositoryModule: Module
 
 expect val databaseModule: Module
+
+expect val authModule: Module

@@ -25,4 +25,17 @@ class FirebaseApi(private val firebaseClient: FirebaseClient) {
         val json = Json { ignoreUnknownKeys = true }
         return json.decodeFromString(response)
     }
+
+    suspend fun loginUserWithPassword(email: String, password: String): AuthResponse {
+        val response =
+            firebaseClient.httpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${BuildConfig.firebaseKey}") {
+                setBody(buildJsonObject {
+                    put("email", email)
+                    put("password", password)
+                    put("returnSecureToken", true)
+                })
+            }.bodyAsText()
+        val json = Json { ignoreUnknownKeys = true }
+        return json.decodeFromString(response)
+    }
 }

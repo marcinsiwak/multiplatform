@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.map
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
-actual class FirebaseAuthorization {
+class FirebaseAuthorizationImpl: FirebaseAuthorization {
 
     private val auth = Firebase.auth
 

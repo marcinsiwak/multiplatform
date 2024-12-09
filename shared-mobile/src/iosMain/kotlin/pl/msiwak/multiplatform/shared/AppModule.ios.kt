@@ -2,6 +2,8 @@ package pl.msiwak.multiplatform.shared
 
 import org.koin.core.module.Module
 import org.koin.dsl.module
+import pl.msiwak.multiplatform.auth.FirebaseAuthorization
+import pl.msiwak.multiplatform.auth.FirebaseAuthorizationImpl
 import pl.msiwak.multiplatform.data.remote.repository.CategoryRepository
 import pl.msiwak.multiplatform.data.remote.repository.CategoryRepositoryImpl
 import pl.msiwak.multiplatform.database.Database
@@ -18,4 +20,8 @@ actual val databaseModule: Module = module {
 
 actual val platformRepositoryModule = module {
     single<CategoryRepository> { CategoryRepositoryImpl(get(), get(), get(), get(), get(), get()) }
+}
+
+actual val authModule = module {
+    single<FirebaseAuthorization> { FirebaseAuthorizationImpl() }
 }

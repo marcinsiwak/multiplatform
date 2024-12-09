@@ -6,20 +6,29 @@ import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 import pl.msiwak.multiplatform.network.FirebaseApi
 
-actual class FirebaseAuthorization {
+class FirebaseAuthorizationImpl(private val firebaseApi: FirebaseApi) : FirebaseAuthorization {
 
-    private val firebaseApi = FirebaseApi()
-    actual suspend fun createNewUser(email: String, password: String) {
+    override suspend fun createNewUser(email: String, password: String) {
     }
 
-    actual suspend fun loginUser(
+    override suspend fun loginUser(
         email: String,
         password: String
     ): AuthResult {
-        return AuthResult(null) // todo
+        return AuthResult(
+            user = firebaseApi.loginUserWithPassword(email, password).let {
+                FirebaseUser(
+                    uid = it.localId,
+                    email = it.email,
+                    displayName = it.displayName,
+                    isEmailVerified = it.emailVerified ?: false,
+                    token = it.idToken
+                )
+            }
+        )
     }
 
-    actual suspend fun loginWithGoogle(
+    override suspend fun loginWithGoogle(
         googleToken: String?,
         accessToken: String?
     ): AuthResult {
@@ -30,20 +39,20 @@ actual class FirebaseAuthorization {
                     uid = it.localId,
                     email = it.email,
                     displayName = it.displayName,
-                    isEmailVerified = it.emailVerified,
+                    isEmailVerified = it.emailVerified ?: false,
                     token = it.idToken
                 )
             }
         )
     }
 
-    actual fun observeAuthStateChanged(): Flow<FirebaseUser?> {
+    override fun observeAuthStateChanged(): Flow<FirebaseUser?> {
         return flow { FirebaseUser("14", "a@a.com", null, true, "fwoanfwn") } // todo
     }
 
-    actual suspend fun logoutUser() {
+    override suspend fun logoutUser() {
     }
 
-    actual suspend fun resendVerificationEmail() {
+    override suspend fun resendVerificationEmail() {
     }
 }

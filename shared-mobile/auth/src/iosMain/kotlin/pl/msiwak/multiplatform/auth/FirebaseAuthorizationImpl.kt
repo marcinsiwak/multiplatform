@@ -7,16 +7,16 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
-actual class FirebaseAuthorization {
+class FirebaseAuthorizationImpl : FirebaseAuthorization {
 
     private val auth = Firebase.auth
 
-    actual suspend fun createNewUser(email: String, password: String) {
+    override suspend fun createNewUser(email: String, password: String) {
         val result = auth.createUserWithEmailAndPassword(email, password)
         result.user?.sendEmailVerification()
     }
 
-    actual suspend fun loginUser(email: String, password: String): pl.msiwak.multiplatform.commonObject.AuthResult {
+    override suspend fun loginUser(email: String, password: String): pl.msiwak.multiplatform.commonObject.AuthResult {
         return auth.signInWithEmailAndPassword(email, password).let {
             pl.msiwak.multiplatform.commonObject.AuthResult(
                 user = FirebaseUser(
@@ -30,7 +30,7 @@ actual class FirebaseAuthorization {
         }
     }
 
-    actual suspend fun loginWithGoogle(
+    override suspend fun loginWithGoogle(
         googleToken: String?,
         accessToken: String?
     ): pl.msiwak.multiplatform.commonObject.AuthResult {
@@ -52,7 +52,7 @@ actual class FirebaseAuthorization {
         }
     }
 
-    actual fun observeAuthStateChanged(): Flow<FirebaseUser?> {
+    override fun observeAuthStateChanged(): Flow<FirebaseUser?> {
         return auth.authStateChanged.map {
             FirebaseUser(
                 it?.uid,
@@ -64,11 +64,11 @@ actual class FirebaseAuthorization {
         }
     }
 
-    actual suspend fun logoutUser() {
+    override suspend fun logoutUser() {
         auth.signOut()
     }
 
-    actual suspend fun resendVerificationEmail() {
+    override suspend fun resendVerificationEmail() {
         auth.currentUser?.sendEmailVerification()
     }
 }

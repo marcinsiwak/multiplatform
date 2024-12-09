@@ -12,41 +12,41 @@ import kotlinx.serialization.json.Json
 
 @Serializable
 data class AuthResponse(
-    val federatedId: String,
-    val providerId: String,
-    val email: String,
-    val emailVerified: Boolean,
-    val firstName: String,
-    val fullName: String,
-    val lastName: String,
-    val photoUrl: String,
-    val localId: String,
-    val displayName: String,
-    val idToken: String,
-    val refreshToken: String,
-    val expiresIn: String,
-    val oauthIdToken: String,
+    val federatedId: String?,
+    val providerId: String?,
+    val email: String?,
+    val emailVerified: Boolean?,
+    val firstName: String?,
+    val fullName: String?,
+    val lastName: String?,
+    val photoUrl: String?,
+    val localId: String?,
+    val displayName: String?,
+    val idToken: String?,
+    val refreshToken: String?,
+    val expiresIn: String?,
+    val oauthIdToken: String?,
     @Serializable(with = RawUserInfoSerializer::class)
-    val rawUserInfo: RawUserInfo,
-    val kind: String
+    val rawUserInfo: RawUserInfo?,
+    val kind: String?
 )
 
 @Serializable
 data class RawUserInfo(
-    val iss: String,
-    val azp: String,
-    val aud: String,
-    val sub: String,
-    val email: String,
-    val email_verified: Boolean,
-    val nbf: Long,
-    val name: String,
-    val picture: String,
-    val given_name: String,
-    val family_name: String,
-    val iat: Long,
-    val exp: Long,
-    val jti: String
+    val iss: String?,
+    val azp: String?,
+    val aud: String?,
+    val sub: String?,
+    val email: String?,
+    val email_verified: Boolean?,
+    val nbf: Long?,
+    val name: String?,
+    val picture: String?,
+    val given_name: String?,
+    val family_name: String?,
+    val iat: Long?,
+    val exp: Long?,
+    val jti: String?
 )
 
 object RawUserInfoSerializer : KSerializer<RawUserInfo> {

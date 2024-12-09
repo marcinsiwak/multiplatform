@@ -24,5 +24,8 @@ actual val platformRepositoryModule = module {
     single<CategoryRepository> { CategoryRepositoryImpl(get(), get(), get(), get(), get(), get()) }
     single<KMMPreferences> { KMMPreferencesImpl(get()) }
     single<VersionRepository> { VersionRepositoryImpl(get()) }
+}
 
+actual val authModule = module {
+    single<FirebaseAuthorization> { FirebaseAuthorizationImpl() }
 }
