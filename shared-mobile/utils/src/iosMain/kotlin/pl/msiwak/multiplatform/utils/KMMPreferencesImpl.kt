@@ -4,15 +4,15 @@ import platform.darwin.NSObject
 
 class KMMPreferencesImpl(private val nsObject: NSObject) : KMMPreferences {
 
-    override fun put(key: String, value: Int) {
+    override fun put(key: String, value: Int, isHttpOnly: Boolean) {
         nsObject.putInt(key, value)
     }
 
-    override fun put(key: String, value: String) {
+    override fun put(key: String, value: String, isHttpOnly: Boolean) {
         nsObject.putString(key, value)
     }
 
-    override fun put(key: String, value: Boolean) {
+    override fun put(key: String, value: Boolean, isHttpOnly: Boolean) {
         nsObject.putBool(key, value)
     }
 

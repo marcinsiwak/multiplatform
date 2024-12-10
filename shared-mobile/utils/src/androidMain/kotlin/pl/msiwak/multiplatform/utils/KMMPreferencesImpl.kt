@@ -4,15 +4,15 @@ import android.content.Context
 
 class KMMPreferencesImpl(private val context: Context) : KMMPreferences {
 
-    override fun put(key: String, value: Int) {
+    override fun put(key: String, value: Int, isHttpOnly: Boolean) {
         context.putInt(key, value)
     }
 
-    override fun put(key: String, value: String) {
+    override fun put(key: String, value: String, isHttpOnly: Boolean) {
         context.putString(key, value)
     }
 
-    override fun put(key: String, value: Boolean) {
+    override fun put(key: String, value: Boolean, isHttpOnly: Boolean) {
         context.putBool(key, value)
     }
 

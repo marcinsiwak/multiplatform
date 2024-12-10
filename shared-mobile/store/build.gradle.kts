@@ -36,6 +36,10 @@ kotlin {
             implementation(libs.kotlinx.coroutines)
         }
 
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.core)
+        }
+
     }
 }
 

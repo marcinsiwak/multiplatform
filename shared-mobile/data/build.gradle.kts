@@ -26,6 +26,7 @@ kotlin {
             export(project(Modules.database))
             export(project(Modules.network))
             export(project(Modules.remoteConfig))
+            export(project(Modules.store))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE

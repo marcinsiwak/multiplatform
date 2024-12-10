@@ -14,6 +14,7 @@ import pl.msiwak.multiplatform.utils.KMMPreferences
 import pl.msiwak.multiplatform.utils.KMMPreferencesImpl
 import platform.Foundation.NSBundle
 import platform.Foundation.NSURL
+import platform.darwin.NSObject
 
 fun initKoin() {
     startKoin {
@@ -37,13 +38,11 @@ fun initGIDSingIn(url: NSURL): Boolean {
 }
 
 val sharedPreferencesModule = module {
-    single<KMMPreferences> { KMMPreferencesImpl(get()) }
+    single<KMMPreferences> { KMMPreferencesImpl(NSObject()) }
 }
 
 val iosRepositoryModule = module {
-    single { VersionRepositoryImpl(NSBundle.mainBundle()) }
-    single<VersionRepository> { VersionRepositoryImpl(get()) }
-
+    single<VersionRepository> { VersionRepositoryImpl(NSBundle.mainBundle()) }
 }
 
 val iosDatabaseModule = module {

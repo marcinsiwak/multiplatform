@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.utils.errorHandler
 
-//import co.touchlab.kermit.Logger
-//import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
+import co.touchlab.kermit.Logger
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 class GlobalErrorHandler {
@@ -15,7 +14,7 @@ class GlobalErrorHandler {
 //                    }
 
                     else -> {
-//                        Logger.e("Error: $throwable")
+                        Logger.e("Error: $throwable")
                     }
                 }
             }

@@ -24,6 +24,7 @@ import co.touchlab.kermit.Logger as KermitLogger
 
 class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider) {
     val httpClient = HttpClient(engine.getEngine()) {
+
         if (BuildConfig.IsDebug) {
             install(Logging) {
                 level = LogLevel.ALL

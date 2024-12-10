@@ -12,12 +12,12 @@ class FirebaseAuthorizationImpl: FirebaseAuthorization {
 
     private val auth = Firebase.auth
 
-    actual suspend fun createNewUser(email: String, password: String) {
+    override suspend fun createNewUser(email: String, password: String) {
         val result = auth.createUserWithEmailAndPassword(email, password)
         result.user?.sendEmailVerification()
     }
 
-    actual suspend fun loginUser(email: String, password: String): AuthResult {
+    override suspend fun loginUser(email: String, password: String): AuthResult {
         return auth.signInWithEmailAndPassword(email, password).let {
             AuthResult(
                 user = FirebaseUser(
@@ -31,7 +31,7 @@ class FirebaseAuthorizationImpl: FirebaseAuthorization {
         }
     }
 
-    actual suspend fun loginWithGoogle(googleToken: String?, accessToken: String?): AuthResult {
+    override suspend fun loginWithGoogle(googleToken: String?, accessToken: String?): AuthResult {
         return auth.signInWithCredential(
             authCredential = GoogleAuthProvider.credential(
                 idToken = googleToken,
@@ -50,7 +50,7 @@ class FirebaseAuthorizationImpl: FirebaseAuthorization {
         }
     }
 
-    actual fun observeAuthStateChanged(): Flow<FirebaseUser?> {
+    override fun observeAuthStateChanged(): Flow<FirebaseUser?> {
         return auth.authStateChanged.map {
             FirebaseUser(
                 it?.uid,
@@ -62,11 +62,11 @@ class FirebaseAuthorizationImpl: FirebaseAuthorization {
         }
     }
 
-    actual suspend fun logoutUser() {
+    override suspend fun logoutUser() {
         auth.signOut()
     }
 
-    actual suspend fun resendVerificationEmail() {
+    override suspend fun resendVerificationEmail() {
         auth.currentUser?.sendEmailVerification()
     }
 }

@@ -1,29 +1,30 @@
 package pl.msiwak.multiplatform.utils
 
-class KMMPreferencesImpl() : KMMPreferences {
+private const val STORE_FOREVER = 1000000
 
-//    val document = getDocument()
+class KMMPreferencesImpl : KMMPreferences {
 
-    override fun put(key: String, value: Int) {
-
+    override fun put(key: String, value: Int, isHttpOnly: Boolean) {
+        setCookie(key, value, STORE_FOREVER, isHttpOnly = isHttpOnly)
     }
 
-    override fun put(key: String, value: String) {
+    override fun put(key: String, value: String, isHttpOnly: Boolean) {
+        setCookie(key, value, STORE_FOREVER, isHttpOnly = isHttpOnly)
     }
 
-    override fun put(key: String, value: Boolean) {
+    override fun put(key: String, value: Boolean, isHttpOnly: Boolean) {
+        setCookie(key, value, STORE_FOREVER, isHttpOnly = isHttpOnly)
     }
 
-    override fun getInt(key: String, default: Int): Int = 0
+    override fun getInt(key: String, default: Int): Int {
+        return getCookie(key)?.toInt() ?: default
+    }
 
-    override fun getString(key: String): String? = ""
+    override fun getString(key: String): String? {
+        return getCookie(key)
+    }
 
-    override fun getBool(key: String, default: Boolean): Boolean = true
-
+    override fun getBool(key: String, default: Boolean): Boolean {
+        return getCookie(key)?.toBoolean() ?: default
+    }
 }
-
-
-//    val date = createDate()
-//    date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000)) // Set expiration
-//    val expires = "expires=${date.toUTCString()}"
-//    document.cookie = "$key=$value;$expires;path=/"
