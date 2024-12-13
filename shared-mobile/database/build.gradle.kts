@@ -41,6 +41,7 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "database"
+            linkerOpts += "-lsqlite3"
 
             export(project(Modules.commonObject))
         }

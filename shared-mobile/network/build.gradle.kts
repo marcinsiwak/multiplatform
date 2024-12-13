@@ -20,9 +20,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "network"
-
-            export(project(Modules.commonObject))
-            export(project(Modules.buildConfig))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -59,10 +56,6 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.ktor.ios)
-        }
-
-        wasmJsMain.dependencies {
-            implementation(libs.ktor.web)
         }
 
         commonTest.dependencies {
