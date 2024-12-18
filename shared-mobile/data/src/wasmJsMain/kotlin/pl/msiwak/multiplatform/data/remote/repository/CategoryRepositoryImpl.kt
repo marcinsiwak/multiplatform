@@ -6,13 +6,10 @@ import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.commonObject.ResultData
 
-class CategoryRepositoryImpl() : CategoryRepository {
-    override suspend fun downloadCategories() {
+class CategoryRepositoryImpl : CategoryRepository {
+    override suspend fun downloadCategories() {}
 
-    }
-
-    override suspend fun downloadCategory(id: String) {
-    }
+    override suspend fun downloadCategory(id: String) {}
 
     override suspend fun observeCategory(id: String): Flow<Category> {
         return flow {
@@ -24,14 +21,11 @@ class CategoryRepositoryImpl() : CategoryRepository {
         return flow { listOf(Category()) }
     }
 
-    override suspend fun createCategory(category: Category) {
-    }
+    override suspend fun createCategory(category: Category) {}
 
-    override suspend fun removeCategory(categoryId: String) {
-    }
+    override suspend fun removeCategory(categoryId: String) {}
 
-    override suspend fun downloadExercise(exerciseId: String) {
-    }
+    override suspend fun downloadExercise(exerciseId: String) {}
 
     override suspend fun observeExercise(exerciseId: String): Flow<Exercise> {
         return flow {
@@ -43,27 +37,19 @@ class CategoryRepositoryImpl() : CategoryRepository {
         return ""
     }
 
-    override suspend fun updateExerciseName(exercise: Exercise) {
-    }
+    override suspend fun updateExerciseName(exercise: Exercise) {}
 
-    override suspend fun removeExercise(exercise: Exercise) {
-    }
+    override suspend fun removeExercise(exercise: Exercise) {}
 
-    override suspend fun addResult(result: ResultData) {
-    }
+    override suspend fun addResult(result: ResultData) {}
 
-    override suspend fun removeResult(id: String) {
-    }
+    override suspend fun removeResult(id: String) {}
 
-    override suspend fun clearDatabase() {
-    }
+    override suspend fun clearDatabase() {}
 
     override suspend fun checkIfSynchronizationIsPossible(): Boolean {
         return true
     }
 
-    override suspend fun startInitialSynchronization() {
-    }
-
-
+    override suspend fun startInitialSynchronization() {}
 }

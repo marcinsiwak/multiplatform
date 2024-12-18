@@ -19,7 +19,6 @@ class TargetConfigPlugin : Plugin<Project> {
                 }
             }
             jvmToolchain(17)
-            @OptIn(ExperimentalWasmDsl::class)
             wasmJs {
                 browser {
                     val rootDirPath = project.rootDir.path

@@ -4,4 +4,3 @@ external fun setCookie(name: String, value: String, days: Int, isHttpOnly: Boole
 external fun setCookie(name: String, value: Boolean, days: Int, isHttpOnly: Boolean)
 external fun setCookie(name: String, value: Int, days: Int, isHttpOnly: Boolean)
 external fun getCookie(name: String): String?
-

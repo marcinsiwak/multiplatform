@@ -1,7 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import pl.msiwak.multiplatform.dependencies.Modules
 
@@ -10,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.sqlDelight)
-//    id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.releaseonly.config")
     id("pl.msiwak.convention.android.config")
 }

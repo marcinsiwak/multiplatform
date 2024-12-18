@@ -8,6 +8,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.bearerAuth
+import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
@@ -51,6 +52,9 @@ class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider)
             contentType(ContentType.Application.Json)
             url(BuildConfig.BASE_URL)
             bearerAuth(sessionStore.getToken() ?: "")
+            header(HttpHeaders.AccessControlAllowHeaders, "Content-Type")
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+            header(HttpHeaders.AccessControlAllowMethods, "OPTIONS,POST,GET")
         }
 
         HttpResponseValidator {

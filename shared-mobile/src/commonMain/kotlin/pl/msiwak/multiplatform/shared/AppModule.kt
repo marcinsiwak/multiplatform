@@ -3,7 +3,6 @@ package pl.msiwak.multiplatform.shared
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
-import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
@@ -225,13 +224,13 @@ val viewModelsModule = module {
     viewModel { LanguageViewModel(get(), get()) }
     viewModel { UnitViewModel(get(), get()) }
     viewModel { ForceUpdateViewModel() }
-    viewModel { DashboardViewModel(get()) }
+    viewModel { DashboardViewModel(get(), get(), get()) }
 }
 
 val useCaseModule = module {
     single<RegisterUserUseCase> { RegisterUserUseCaseImpl(get()) }
     single<LoginUseCase> { LoginUseCaseImpl(get(), get()) }
-    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get()) }
+    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get(), get()) }
     single<LogoutUseCase> { LogoutUseCaseImpl(get(), get()) }
     single<SaveUserTokenUseCase> { SaveUserTokenUseCaseImpl(get()) }
     single<GetUserTokenUseCase> { GetUserTokenUseCaseImpl(get()) }

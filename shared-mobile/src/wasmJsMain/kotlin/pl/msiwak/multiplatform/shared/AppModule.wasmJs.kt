@@ -14,9 +14,7 @@ import pl.msiwak.multiplatform.network.FirebaseClient
 import pl.msiwak.multiplatform.utils.KMMPreferences
 import pl.msiwak.multiplatform.utils.KMMPreferencesImpl
 
-actual val databaseModule: Module = module {
-
-}
+actual val databaseModule: Module = module {}
 
 actual val platformRepositoryModule: Module = module {
     single<CategoryRepository> { CategoryRepositoryImpl() }

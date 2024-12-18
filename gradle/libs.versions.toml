@@ -118,6 +118,7 @@ ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm" }
 ktor-server-host-common-jvm = { module = "io.ktor:ktor-server-host-common-jvm" }
 ktor-server-html-builder = { module = "io.ktor:ktor-server-html-builder", version.ref = "ktor" }
 ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm" }
+ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }
 
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback_version" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql_driver_version" }

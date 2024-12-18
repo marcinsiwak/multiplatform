@@ -31,7 +31,6 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.firebase.gitlive.auth)
-
         }
 
         commonMain.dependencies {

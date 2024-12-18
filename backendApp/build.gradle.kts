@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.ktor.server.core.jvm)
     implementation(libs.ktor.server.netty.jvm)
     implementation(libs.ktor.server.html.builder)
+    implementation(libs.ktor.server.cors)
 
     // Content Negotiation and Serialization
     implementation(libs.ktor.server.content.negotiation.jvm)

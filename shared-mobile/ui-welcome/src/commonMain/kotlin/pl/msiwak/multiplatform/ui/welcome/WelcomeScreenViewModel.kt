@@ -79,7 +79,6 @@ class WelcomeScreenViewModel(
 
     private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
         viewModelScope.launch(errorHandler) {
-
             val loginJob = async {
                 val result = googleLoginUseCase(idToken, accessToken)
                 return@async result
@@ -87,7 +86,7 @@ class WelcomeScreenViewModel(
             val uuid = loginJob.await() ?: throw Exception()
 
             viewModelScope.launch(prepareGoogleLoginErrorHandler(uuid)) {
-//                getUser()
+                getUser()
                 _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
             }
         }

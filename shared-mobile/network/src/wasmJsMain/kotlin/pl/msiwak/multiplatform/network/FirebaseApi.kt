@@ -15,12 +15,14 @@ class FirebaseApi(private val firebaseClient: FirebaseClient) {
     suspend fun loginUserWithGoogle(idToken: String): AuthResponse {
         val response =
             firebaseClient.httpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${BuildConfig.firebaseKey}") {
-                setBody(buildJsonObject {
-                    put("postBody", "id_token=$idToken&providerId=google.com")
-                    put("returnIdpCredential", true)
-                    put("returnSecureToken", true)
-                    put("requestUri", "http://localhost:8080")
-                })
+                setBody(
+                    buildJsonObject {
+                        put("postBody", "id_token=$idToken&providerId=google.com")
+                        put("returnIdpCredential", true)
+                        put("returnSecureToken", true)
+                        put("requestUri", "http://localhost:3000")
+                    }
+                )
             }.bodyAsText()
         val json = Json { ignoreUnknownKeys = true }
         return json.decodeFromString(response)
@@ -29,11 +31,13 @@ class FirebaseApi(private val firebaseClient: FirebaseClient) {
     suspend fun loginUserWithPassword(email: String, password: String): AuthResponse {
         val response =
             firebaseClient.httpClient.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${BuildConfig.firebaseKey}") {
-                setBody(buildJsonObject {
-                    put("email", email)
-                    put("password", password)
-                    put("returnSecureToken", true)
-                })
+                setBody(
+                    buildJsonObject {
+                        put("email", email)
+                        put("password", password)
+                        put("returnSecureToken", true)
+                    }
+                )
             }.bodyAsText()
         val json = Json { ignoreUnknownKeys = true }
         return json.decodeFromString(response)

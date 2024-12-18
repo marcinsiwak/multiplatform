@@ -11,12 +11,12 @@ function setCookie(name, value, days, isHttpOnly) {
 
 
 function getCookie(name) {
-    const cookieArr = document.cookie.split(';'); // Split cookies into an array
-    console.log('All Cookies:', document.cookie); // Log the whole cookies string
+    const cookieArr = document.cookie.split(';');
+    console.log('All Cookies:', document.cookie);
     for (let i = 0; i < cookieArr.length; i++) {
-        const cookie = cookieArr[i].trim(); // Trim leading/trailing spaces
-        if (cookie.startsWith(name + '=')) { // Find the cookie by name
-            return cookie.substring(name.length + 1); // Return the value after '='
+        const cookie = cookieArr[i].trim();
+        if (cookie.startsWith(name + '=')) {
+            return cookie.substring(name.length + 1);
         }
     }
     return null;

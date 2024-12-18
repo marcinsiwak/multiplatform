@@ -9,9 +9,9 @@ plugins {
     id("pl.msiwak.convention.target.config")
 }
 
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     jvm()
-    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser {
             val rootDirPath = project.rootDir.path

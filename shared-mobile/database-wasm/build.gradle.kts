@@ -5,12 +5,10 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     jvmToolchain(17)
     jvm()
-
-    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser {
             val rootDirPath = project.rootDir.path

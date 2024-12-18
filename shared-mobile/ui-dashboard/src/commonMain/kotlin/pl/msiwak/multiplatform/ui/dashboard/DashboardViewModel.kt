@@ -1,17 +1,29 @@
 package pl.msiwak.multiplatform.ui.dashboard
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import pl.msiwak.multiplatform.domain.user.GetUserUseCase
+import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class DashboardViewModel(
-    val bottomNavigationProvider: BottomNavigationProvider
+    val bottomNavigationProvider: BottomNavigationProvider,
+    private val getUserUseCase: GetUserUseCase,
+    private val globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(DashboardState())
     val viewState: StateFlow<DashboardState> = _viewState.asStateFlow()
+
+    init {
+        viewModelScope.launch(globalErrorHandler.handleError()) {
+            getUserUseCase()
+        }
+    }
 
     fun onUiAction(action: DashboardUiAction) {
         when (action) {

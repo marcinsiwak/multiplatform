@@ -1,22 +1,15 @@
 package pl.msiwak.multiplatform.ui.commonComponent
 
 import androidx.compose.runtime.Composable
+import pl.msiwak.multiplatform.buildconfig.BuildConfig
 
 @Composable
 actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String, String?) -> Unit): () -> Unit {
     return {
-        initializeGoogleLogin { idToken ->
+        initializeGoogleLogin(clientId = BuildConfig.firebaseClientId) { idToken ->
             onResultOk(idToken, null)
         }
     }
 }
 
-external interface GoogleButtonOptions {
-    var theme: String
-    var size: String
-}
-
-external fun initializeGoogleLogin(callback: (String) -> Unit)
-external fun printLog(): String
-external fun renderGoogleButton(elementId: String, options: GoogleButtonOptions)
-external fun promptGoogleLogin()
+external fun initializeGoogleLogin(clientId: String, callback: (String) -> Unit)

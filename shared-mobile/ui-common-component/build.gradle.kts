@@ -41,6 +41,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
+            implementation(project(Modules.buildConfig))
 
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
