@@ -10,7 +10,7 @@ class ObserveAuthStateChangedUseCaseImpl(
     override suspend operator fun invoke() {
         authRepository.observeAuthStateChanged().collect {
             if (it != null && it.isEmailVerified) {
-                it.getIdToken(true)?.let { token ->
+                it.token?.let { token ->
                     sessionRepository.saveToken(token)
                 }
             } else {

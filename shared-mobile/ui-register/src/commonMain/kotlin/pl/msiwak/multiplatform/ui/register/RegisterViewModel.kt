@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import athletetrack.shared_mobile.commonresources.generated.resources.Res
 import athletetrack.shared_mobile.commonresources.generated.resources.input_wrong_format
-import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -33,12 +32,12 @@ class RegisterViewModel(
 
     private val errorHandler = globalErrorHandler.handleError { throwable ->
         when (throwable) {
-            is FirebaseAuthUserCollisionException -> {
-                viewModelScope.launch {
-                    _viewEvent.emit(RegisterEvent.NavigateToVerifyEmail)
-                }
-                true
-            }
+//            is FirebaseAuthUserCollisionException -> {
+//                viewModelScope.launch {
+//                    _viewEvent.emit(RegisterEvent.NavigateToVerifyEmail)
+//                }
+//                true
+//            }
 
             else -> false
         }

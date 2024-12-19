@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -5,13 +6,29 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.sqlDelight)
-    id("pl.msiwak.convention.target.config")
     id("pl.msiwak.convention.releaseonly.config")
     id("pl.msiwak.convention.android.config")
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    androidTarget()
+    jvmToolchain(17)
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    metadata {
+        compilations.all {
+            val compilationName = name
+            compileTaskProvider.configure {
+                if (this is KotlinCompileCommon) {
+                    moduleName = "${project.group}:${project.name}_$compilationName"
+                }
+            }
+        }
+    }
+
     cocoapods {
         summary = "Database Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
@@ -19,6 +36,7 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "database"
+            linkerOpts += "-lsqlite3"
 
             export(project(Modules.commonObject))
         }
@@ -35,7 +53,7 @@ kotlin {
             implementation(project(Modules.commonObject))
 
             implementation(libs.sqlDelight.coroutines)
-            implementation(libs.kotlinx.coroutines)
+//            implementation(libs.kotlinx.coroutines)
             implementation(libs.kotlinx.dateTime)
             implementation(libs.kotlinx.serialization)
         }
@@ -60,7 +78,7 @@ android {
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("pl.msiwak.multiplatform.shared.database")
+            packageName.set("pl.msiwak.multiplatform.shared.database.sql")
         }
     }
     linkSqlite.set(true)

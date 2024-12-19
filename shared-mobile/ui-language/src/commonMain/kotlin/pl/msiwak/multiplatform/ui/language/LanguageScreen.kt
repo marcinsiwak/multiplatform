@@ -23,7 +23,7 @@ import athletetrack.shared_mobile.commonresources.generated.resources.Res
 import athletetrack.shared_mobile.commonresources.generated.resources.language
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
@@ -31,7 +31,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 @Composable
 fun LanguageScreen(
     navController: NavController,
-    viewModel: LanguageViewModel = koinInject()
+    viewModel: LanguageViewModel = koinViewModel<LanguageViewModel>()
 ) {
     val viewState = viewModel.viewState.collectAsState()
 

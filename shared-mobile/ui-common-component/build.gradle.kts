@@ -33,6 +33,7 @@ kotlin {
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
         pod("Google-Mobile-Ads-SDK", moduleName = "GoogleMobileAds")
+        pod("FirebaseCore")
         pod("GoogleSignIn")
     }
 
@@ -40,6 +41,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
+            implementation(project(Modules.buildConfig))
 
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)

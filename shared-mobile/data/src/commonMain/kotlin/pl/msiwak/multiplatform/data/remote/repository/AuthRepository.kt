@@ -1,12 +1,10 @@
 package pl.msiwak.multiplatform.data.remote.repository
 
-import dev.gitlive.firebase.auth.AuthResult
-import dev.gitlive.firebase.auth.FirebaseUser
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
+import pl.msiwak.multiplatform.commonObject.AuthResult
+import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
 class AuthRepository(
     private val firebaseAuthorization: FirebaseAuthorization
