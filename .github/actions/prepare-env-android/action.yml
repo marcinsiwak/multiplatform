@@ -1,7 +1,7 @@
 name: Prepare Environment for Android
 
 inputs:
-  GOOGLE_AUTH_WEB_CLIENT_ID:
+  AUTH_WEB_CLIENT_ID:
     required: true
     description: ""
   BASE_URL:
@@ -59,7 +59,6 @@ runs:
         ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
       shell: bash
       run: |
-        echo "GOOGLE_AUTH_WEB_CLIENT_ID: $AUTH_WEB_CLIENT_ID"
         cat <<EOF > ./composeApp/production.properties
         GOOGLE_AUTH_WEB_CLIENT_ID=${AUTH_WEB_CLIENT_ID}
         EOF
