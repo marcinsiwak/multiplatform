@@ -23,6 +23,7 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
+          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
           os: ${{ runner.os }}
 #
 #      - name: Update production.properties
@@ -127,6 +128,7 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
+          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
@@ -196,6 +198,7 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
+          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
@@ -258,6 +261,7 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
+          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
 
       - uses: actions/github-script@v6
         id: get_pull_request_number

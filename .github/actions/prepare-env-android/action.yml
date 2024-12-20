@@ -13,6 +13,9 @@ inputs:
   ANDROID_FIREBASE_CLIENT_ID:
     required: true
     description: ""
+  WEBAPP_FIREBASE_CLIENT_ID:
+    required: true
+    description: ""
   os:
     required: true
     description: ""
@@ -56,10 +59,15 @@ runs:
         ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
       shell: bash
       run: |
-        echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
-        echo BASE_URL="BASE_URL" > ./production.properties
-        echo FIREBASE_KEY="FIREBASE_KEY" > ./production.properties
-        echo ANDROID_FIREBASE_CLIENT_ID="ANDROID_FIREBASE_CLIENT_ID" > ./production.properties
+        cat <<EOF > ./composeApp/production.properties
+        GOOGLE_AUTH_WEB_CLIENT_ID=${AUTH_WEB_CLIENT_ID}
+        EOF
+        cat <<EOF > ./production.properties
+        BASE_URL=${BASE_URL}
+        FIREBASE_KEY=${FIREBASE_KEY}
+        ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID}
+        WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID}
+        EOF
 
     - name: Update staging.properties
       env:
@@ -67,9 +75,15 @@ runs:
         BASE_URL: ${{ inputs.BASE_URL }}
         FIREBASE_KEY: ${{ inputs.FIREBASE_KEY }}
         ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
+        WEBAPP_FIREBASE_CLIENT_ID: ${{ inputs.WEBAPP_FIREBASE_CLIENT_ID }}
       shell: bash
       run: |
-        echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
-        echo BASE_URL="BASE_URL" > ./staging.properties
-        echo FIREBASE_KEY="FIREBASE_KEY" > ./staging.properties
-        echo ANDROID_FIREBASE_CLIENT_ID="ANDROID_FIREBASE_CLIENT_ID" > ./staging.properties
+        cat <<EOF > ./composeApp/staging.properties
+        GOOGLE_AUTH_WEB_CLIENT_ID=${AUTH_WEB_CLIENT_ID}
+        EOF
+        cat <<EOF > ./staging.properties
+        BASE_URL=${BASE_URL}
+        FIREBASE_KEY=${FIREBASE_KEY}
+        ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID}
+        WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID}
+        EOF
