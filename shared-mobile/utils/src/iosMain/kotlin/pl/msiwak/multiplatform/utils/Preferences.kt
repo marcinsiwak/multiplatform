@@ -1,27 +1,28 @@
 package pl.msiwak.multiplatform.utils
 
 import platform.Foundation.NSUserDefaults
+import platform.darwin.NSObject
 
-actual fun KMMContext.putInt(key: String, value: Int) {
+fun NSObject.putInt(key: String, value: Int) {
     NSUserDefaults.standardUserDefaults.setInteger(value.toLong(), key)
 }
 
-actual fun KMMContext.getInt(key: String, default: Int): Int {
+fun NSObject.getInt(key: String, default: Int): Int {
     return NSUserDefaults.standardUserDefaults.integerForKey(key).toInt()
 }
 
-actual fun KMMContext.putString(key: String, value: String) {
+fun NSObject.putString(key: String, value: String) {
     NSUserDefaults.standardUserDefaults.setObject(value, key)
 }
 
-actual fun KMMContext.getString(key: String): String? {
+fun NSObject.getString(key: String): String? {
     return NSUserDefaults.standardUserDefaults.stringForKey(key)
 }
 
-actual fun KMMContext.putBool(key: String, value: Boolean) {
+fun NSObject.putBool(key: String, value: Boolean) {
     NSUserDefaults.standardUserDefaults.setBool(value, key)
 }
 
-actual fun KMMContext.getBool(key: String, default: Boolean): Boolean {
+fun NSObject.getBool(key: String, default: Boolean): Boolean {
     return NSUserDefaults.standardUserDefaults.boolForKey(key)
 }

@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.ktor.server.core.jvm)
     implementation(libs.ktor.server.netty.jvm)
     implementation(libs.ktor.server.html.builder)
+    implementation(libs.ktor.server.cors)
 
     // Content Negotiation and Serialization
     implementation(libs.ktor.server.content.negotiation.jvm)
@@ -58,6 +59,5 @@ dependencies {
     // Flyaway - db migrations
     implementation(libs.flyway.core)
     implementation(libs.logback.classic)
-    testImplementation(libs.ktor.server.tests.jvm)
     testImplementation(libs.kotlin.test.junit)
 }

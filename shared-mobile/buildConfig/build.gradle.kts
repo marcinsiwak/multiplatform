@@ -5,7 +5,7 @@ import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
 import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin
 import java.io.FileInputStream
-import java.util.Properties
+import java.util.*
 import java.util.regex.Pattern
 
 plugins {
@@ -52,36 +52,90 @@ buildkonfig {
     val productionProperties = Properties()
     productionProperties.load(FileInputStream(productionPropertiesFile))
 
-    defaultConfigs {
-        buildConfigField(STRING, "BUILD_FLAVOUR", "default")
-        buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
-        buildConfigField(BOOLEAN, "IsDebug", "false")
-    }
+    if (productionPropertiesFile.exists()) {
 
-    targetConfigs {
-        android {
-            buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseAndroid")
-            buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
+        defaultConfigs {
+            buildConfigField(STRING, "BUILD_FLAVOUR", "default")
+            buildConfigField(STRING, "BASE_URL", "https://msiwak-api.pl")
             buildConfigField(BOOLEAN, "IsDebug", "false")
+            buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
+            buildConfigField(STRING, "FIREBASE_CLIENT_ID", productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String)
         }
 
-        ios {
-            buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseIos")
-            buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "false")
-        }
-    }
+        targetConfigs {
+            android {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseAndroid")
+                buildConfigField(STRING, "BASE_URL", "https://msiwak-api.pl")
+                buildConfigField(BOOLEAN, "IsDebug", "false")
+                buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
+                buildConfigField(
+                    STRING,
+                    "FIREBASE_CLIENT_ID",
+                    productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
+                )
+            }
 
-    targetConfigs("productionDebug") {
-        android {
-            buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugAndroid")
-            buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "true")
+            ios {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseIos")
+                buildConfigField(STRING, "BASE_URL", "https://msiwak-api.pl")
+                buildConfigField(BOOLEAN, "IsDebug", "false")
+                buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
+                buildConfigField(
+                    STRING,
+                    "FIREBASE_CLIENT_ID",
+                    productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
+                )
+            }
+
+            wasmJS {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "productionReleaseWasm")
+                buildConfigField(STRING, "BASE_URL", "https://msiwak-api.pl")
+                buildConfigField(BOOLEAN, "IsDebug", "false")
+                buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
+                buildConfigField(
+                    STRING,
+                    "FIREBASE_CLIENT_ID",
+                    productionProperties["WEBAPP_FIREBASE_CLIENT_ID"] as String
+                )
+            }
         }
-        ios {
-            buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugIos")
-            buildConfigField(STRING, "BASE_URL", productionProperties["BASE_URL"] as String)
-            buildConfigField(BOOLEAN, "IsDebug", "true")
+
+        targetConfigs("productionDebug") {
+            android {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugAndroid")
+                buildConfigField(STRING, "BASE_URL", "https://msiwak-api.pl")
+                buildConfigField(BOOLEAN, "IsDebug", "true")
+                buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
+                buildConfigField(
+                    STRING,
+                    "FIREBASE_CLIENT_ID",
+                    productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
+                )
+            }
+
+            ios {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugIos")
+                buildConfigField(STRING, "BASE_URL", "https://msiwak-api.pl")
+                buildConfigField(BOOLEAN, "IsDebug", "true")
+                buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
+                buildConfigField(
+                    STRING,
+                    "FIREBASE_CLIENT_ID",
+                    productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
+                )
+            }
+
+            wasmJS {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "productionDebugWasm")
+                buildConfigField(STRING, "BASE_URL", "https://msiwak-api.pl")
+                buildConfigField(BOOLEAN, "IsDebug", "true")
+                buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
+                buildConfigField(
+                    STRING,
+                    "FIREBASE_CLIENT_ID",
+                    productionProperties["WEBAPP_FIREBASE_CLIENT_ID"] as String
+                )
+            }
         }
     }
 
@@ -93,20 +147,40 @@ buildkonfig {
 
             android {
                 buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugAndroid")
-                buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
+                buildConfigField(STRING, "BASE_URL", "http://192.168.0.13:8080")
                 buildConfigField(BOOLEAN, "IsDebug", "true")
+                buildConfigField(STRING, "FIREBASE_KEY", stagingProperties["FIREBASE_KEY"] as String)
+                buildConfigField(
+                    STRING,
+                    "FIREBASE_CLIENT_ID",
+                    stagingProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
+                )
             }
+
             ios {
                 buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugIos")
-                buildConfigField(STRING, "BASE_URL", stagingProperties["BASE_URL"] as String)
+                buildConfigField(STRING, "BASE_URL", "http://192.168.0.13:8080")
                 buildConfigField(BOOLEAN, "IsDebug", "true")
+                buildConfigField(STRING, "FIREBASE_KEY", stagingProperties["FIREBASE_KEY"] as String)
+                buildConfigField(
+                    STRING,
+                    "FIREBASE_CLIENT_ID",
+                    stagingProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
+                )
+            }
+
+            wasmJS {
+                buildConfigField(STRING, "BUILD_FLAVOUR", "stagingDebugWasmJS")
+                buildConfigField(STRING, "BASE_URL", "http://192.168.0.13:8080")
+                buildConfigField(BOOLEAN, "IsDebug", "true")
+                buildConfigField(STRING, "FIREBASE_KEY", stagingProperties["FIREBASE_KEY"] as String)
+                buildConfigField(STRING, "FIREBASE_CLIENT_ID", stagingProperties["WEBAPP_FIREBASE_CLIENT_ID"] as String)
             }
         }
     }
 }
 
 fun getCurrentVariant(): String {
-    val gradle: Gradle = gradle
     val tskReqStr: String = gradle.startParameter.taskRequests.toString()
 
     val pattern: Pattern = if (tskReqStr.contains("assemble")) {
@@ -126,7 +200,6 @@ fun getCurrentVariant(): String {
 }
 
 fun getCurrentFlavor(): String {
-    val gradle: Gradle = gradle
     val tskReqStr: String = gradle.startParameter.taskRequests.toString()
 
     val pattern: Pattern = when {
@@ -155,18 +228,15 @@ tasks.create("setupBuildkonfigIos") {
 tasks.create("setupBuildkonfig") {
     val variant = getCurrentVariant()
     val flavor = getCurrentFlavor()
-    val kmmFlavor = flavor.plus(variant.capitalized())
+    val androidKMPFlavor = flavor.plus(variant.capitalized())
 
-    println("CONFIG kmmFlavor OUTPUT: $kmmFlavor")
-
-    if (kmmFlavor.isEmpty()) {
-        val iosVariant = project.findProperty(KotlinCocoapodsPlugin.CONFIGURATION_PROPERTY)
-        println("CONFIG OUTPUT: $iosVariant")
-
-        project.setProperty("buildkonfig.flavor", iosVariant)
-    } else {
-        project.setProperty("buildkonfig.flavor", kmmFlavor)
+    val buildKonfigFlavor = when {
+        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserDevelopmentRun") -> "stagingDebug"
+        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserProductionRun") -> "productionRelease"
+        androidKMPFlavor.isEmpty() -> project.findProperty(KotlinCocoapodsPlugin.CONFIGURATION_PROPERTY).toString()
+        else -> androidKMPFlavor
     }
+    project.setProperty("buildkonfig.flavor", buildKonfigFlavor)
 }
 
 tasks.preBuild.dependsOn("setupBuildkonfig")
@@ -187,4 +257,8 @@ fun NamedDomainObjectContainer<TargetConfigDsl>.ios(block: TargetConfigDsl.() ->
 
 fun NamedDomainObjectContainer<TargetConfigDsl>.android(block: TargetConfigDsl.() -> Unit) {
     create("android", block)
+}
+
+fun NamedDomainObjectContainer<TargetConfigDsl>.wasmJS(block: TargetConfigDsl.() -> Unit) {
+    create("wasmJs", block)
 }

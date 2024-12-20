@@ -3,11 +3,13 @@ name: Prepare Environment for Android
 inputs:
   os:
     required: true
-    type: string
+    description: ""
   working-directory:
     required: false
-    type: string
+    description: ""
     default: '.'
+
+description: ""
 
 runs:
   using: "composite"

@@ -1,7 +1,5 @@
 package pl.msiwak.multiplatform.data.remote.repository
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.commonObject.User

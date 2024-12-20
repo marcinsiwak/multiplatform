@@ -11,6 +11,7 @@ import co.touchlab.kermit.Logger
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
+import pl.msiwak.multiplatform.buildconfig.BuildConfig
 import pl.msiwak.multiplatform.ui.commonComponent.extensions.findActivity
 
 @Composable
@@ -20,12 +21,12 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String, Str
     val oneTapClient: SignInClient = remember {
         Identity.getSignInClient(context)
     }
-    val signInRequest: BeginSignInRequest = remember {
+    val signInRequest: BeginSignInRequest? = remember {
         BeginSignInRequest.builder()
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
-                    .setServerClientId("607279059338-tf6mpi0ac6fdecs7jq0b05pkvvnirdmd.apps.googleusercontent.com")
+                    .setServerClientId(BuildConfig.firebaseClientId)
                     .setFilterByAuthorizedAccounts(false)
                     .build()
             )
@@ -44,16 +45,18 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String, Str
     )
 
     return {
-        oneTapClient.beginSignIn(signInRequest)
-            .addOnSuccessListener { result ->
-                googleAuthContract.launch(
-                    IntentSenderRequest
-                        .Builder(result.pendingIntent.intentSender)
-                        .build()
-                )
-            }
-            .addOnFailureListener { e ->
-                Logger.e("GOOGLE AUTH FAILED: $e")
-            }
+        signInRequest?.let {
+            oneTapClient.beginSignIn(it)
+                .addOnSuccessListener { result ->
+                    googleAuthContract.launch(
+                        IntentSenderRequest
+                            .Builder(result.pendingIntent.intentSender)
+                            .build()
+                    )
+                }
+                .addOnFailureListener { e ->
+                    Logger.e("GOOGLE AUTH FAILED: $e")
+                }
+        }
     }
 }

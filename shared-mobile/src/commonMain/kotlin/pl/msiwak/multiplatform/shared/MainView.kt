@@ -10,7 +10,7 @@ import pl.msiwak.multiplatform.ui.commonComponent.Loader
 
 @Composable
 fun MainView(
-    viewModel: MainViewModel = koinInject()
+    viewModel: MainViewModel = koinInject<MainViewModel>()
 ) {
     val viewState = viewModel.viewState.collectAsState()
     val navigationProvider = viewModel.navigationProvider

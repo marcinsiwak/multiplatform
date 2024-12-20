@@ -29,11 +29,24 @@ kotlin {
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.firebase.gitlive.auth)
+        }
+
         commonMain.dependencies {
+            implementation(project(Modules.commonObject))
             implementation(project(Modules.utils))
 
-            implementation(libs.firebase.gitlive.auth)
             implementation(libs.kotlinx.coroutines)
+        }
+
+        iosMain.dependencies {
+
+            implementation(libs.firebase.gitlive.auth)
+        }
+
+        wasmJsMain.dependencies {
+            implementation(project(Modules.network))
         }
 
         commonTest.dependencies {

@@ -3,7 +3,6 @@ package pl.msiwak.infrastructure.config.auth.firebase
 import com.google.firebase.auth.FirebaseToken
 import io.ktor.http.auth.HttpAuthHeader
 import io.ktor.server.application.ApplicationCall
-import io.ktor.server.auth.AuthenticationFunction
 import io.ktor.server.auth.AuthenticationProvider
 import io.ktor.server.auth.parseAuthorizationHeader
 import io.ktor.server.request.ApplicationRequest
@@ -15,7 +14,7 @@ class FirebaseConfig(name: String?) : AuthenticationProvider.Config(name) {
     internal var authHeader: (ApplicationCall) -> HttpAuthHeader? =
         { call -> call.request.parseAuthorizationHeaderOrNull() }
 
-    var firebaseAuthenticationFunction: AuthenticationFunction<FirebaseToken> = {
+    var firebaseAuthenticationFunction: suspend ApplicationCall.(FirebaseToken) -> FirebaseUser? = {
         throw NotImplementedError(FIREBASE_IMPLEMENTATION_ERROR)
     }
 

@@ -1,21 +1,15 @@
 package pl.msiwak.multiplatform.shared
 
+import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
-import pl.msiwak.multiplatform.auth.FirebaseAuthorization
-import pl.msiwak.multiplatform.auth.SessionStore
 import pl.msiwak.multiplatform.data.local.store.LanguageStore
 import pl.msiwak.multiplatform.data.local.store.OfflineStore
 import pl.msiwak.multiplatform.data.local.store.UnitStore
 import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
-import pl.msiwak.multiplatform.data.remote.repository.CategoryRepository
 import pl.msiwak.multiplatform.data.remote.repository.RemoteConfigRepository
 import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
 import pl.msiwak.multiplatform.data.remote.repository.UserRepository
-import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
-import pl.msiwak.multiplatform.database.Database
-import pl.msiwak.multiplatform.database.dao.CategoriesDao
-import pl.msiwak.multiplatform.database.dao.ExercisesDao
-import pl.msiwak.multiplatform.database.dao.ResultsDao
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCaseImpl
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
@@ -112,6 +106,7 @@ import pl.msiwak.multiplatform.network.service.CategoryService
 import pl.msiwak.multiplatform.network.service.UserService
 import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
+import pl.msiwak.multiplatform.store.SessionStore
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseGraph
@@ -147,23 +142,18 @@ import pl.msiwak.multiplatform.utils.validators.Validator
 
 fun appModule() = listOf(
     apiModule,
-    viewModelsModule,
+    navigationModule,
     databaseModule,
-    useCaseModule,
     toolsModule,
-    repositoryUseModule,
     storeModule,
-    serviceModule,
     clientModule,
-    navigationModule
+    serviceModule,
+    repositoryUseModule,
+    platformRepositoryModule,
+    useCaseModule,
+    viewModelsModule,
+    authModule
 )
-
-val databaseModule = module {
-    single { Database(get()) }
-    single { CategoriesDao(get()) }
-    single { ExercisesDao(get()) }
-    single { ResultsDao(get()) }
-}
 
 val storeModule = module {
     single { LanguageStore(get()) }
@@ -173,7 +163,6 @@ val storeModule = module {
 }
 
 val apiModule = module {
-    single { FirebaseAuthorization() }
     single { RemoteConfig() }
 }
 
@@ -190,7 +179,7 @@ val toolsModule = module {
 }
 
 val viewModelsModule = module {
-    viewModelDefinition {
+    viewModel {
         MainViewModel(
             get(),
             get(),
@@ -200,12 +189,12 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition { RegisterViewModel(get(), get(), get()) }
-    viewModelDefinition { VerifyEmailViewModel(get(), get()) }
-    viewModelDefinition { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
-    viewModelDefinition { TermsConfirmationViewModel(get(), get(), get(), get()) }
-    viewModelDefinition { SummaryViewModel(get(), get(), get(), get()) }
-    viewModelDefinition {
+    viewModel { RegisterViewModel(get(), get(), get()) }
+    viewModel { VerifyEmailViewModel(get(), get()) }
+    viewModel { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { TermsConfirmationViewModel(get(), get(), get(), get()) }
+    viewModel { SummaryViewModel(get(), get(), get(), get()) }
+    viewModel {
         AddExerciseViewModel(
             get(),
             get(),
@@ -221,7 +210,7 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition {
+    viewModel {
         CategoryViewModel(
             get(),
             get(),
@@ -230,18 +219,18 @@ val viewModelsModule = module {
             get()
         )
     }
-    viewModelDefinition { AddCategoryViewModel(get(), get()) }
-    viewModelDefinition { SettingsViewModel(get(), get()) }
-    viewModelDefinition { LanguageViewModel(get(), get()) }
-    viewModelDefinition { UnitViewModel(get(), get()) }
-    viewModelDefinition { ForceUpdateViewModel() }
-    viewModelDefinition { DashboardViewModel(get()) }
+    viewModel { AddCategoryViewModel(get(), get()) }
+    viewModel { SettingsViewModel(get(), get()) }
+    viewModel { LanguageViewModel(get(), get()) }
+    viewModel { UnitViewModel(get(), get()) }
+    viewModel { ForceUpdateViewModel() }
+    viewModel { DashboardViewModel(get(), get(), get()) }
 }
 
 val useCaseModule = module {
     single<RegisterUserUseCase> { RegisterUserUseCaseImpl(get()) }
     single<LoginUseCase> { LoginUseCaseImpl(get(), get()) }
-    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get()) }
+    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get(), get()) }
     single<LogoutUseCase> { LogoutUseCaseImpl(get(), get()) }
     single<SaveUserTokenUseCase> { SaveUserTokenUseCaseImpl(get()) }
     single<GetUserTokenUseCase> { GetUserTokenUseCaseImpl(get()) }
@@ -290,9 +279,7 @@ val useCaseModule = module {
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
-    single { CategoryRepository(get(), get(), get(), get(), get(), get()) }
     single { RemoteConfigRepository(get()) }
-    single { VersionRepository(get()) }
     single { SessionRepository(get()) }
 }
 
@@ -339,3 +326,9 @@ val navigationModule = module {
     }
     single { BottomNavigationProvider(get(), get()) }
 }
+
+expect val platformRepositoryModule: Module
+
+expect val databaseModule: Module
+
+expect val authModule: Module

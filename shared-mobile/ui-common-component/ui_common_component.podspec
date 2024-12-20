@@ -9,6 +9,7 @@ Pod::Spec.new do |spec|
     spec.vendored_frameworks      = 'build/cocoapods/framework/ui_common_component.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target    = '14.1'
+    spec.dependency 'FirebaseCore'
     spec.dependency 'Google-Mobile-Ads-SDK'
     spec.dependency 'GoogleSignIn'
                 

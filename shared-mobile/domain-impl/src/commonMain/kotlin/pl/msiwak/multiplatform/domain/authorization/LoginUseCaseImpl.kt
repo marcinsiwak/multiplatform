@@ -9,7 +9,7 @@ class LoginUseCaseImpl(
 ) : LoginUseCase {
     override suspend fun invoke(params: LoginUseCase.Params): Boolean {
         val result = authRepository.login(params.login, params.password)
-        val token = result.user?.getIdTokenResult(true)?.token
+        val token = result.user?.token
         val isEmailVerified = result.user?.isEmailVerified ?: false
         if (token != null && isEmailVerified) {
             sessionRepository.saveToken(token)
