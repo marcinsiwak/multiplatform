@@ -1,6 +1,6 @@
-function initializeGoogleLogin(callback) {
+function initializeGoogleLogin(clientId, callback) {
   google.accounts.id.initialize({
-    client_id: '607279059338-3k018la7lvokmc1f1j8u3vr3eqhr7pa0.apps.googleusercontent.com',
+    client_id: clientId,
     callback: (response) => {
         callback(response.credential);
     }
@@ -30,27 +30,3 @@ async function loginGoogle(idToken) {
     throw error;
   }
 }
-//
-// function handleCredentialResponse(response) {
-//     // decodeJwtResponse() is a custom function defined by you
-//     // to decode the credential response.
-//     const responsePayload = decodeJwtResponse(response.credential);
-//
-//     console.log("ID: " + responsePayload.sub);
-//     console.log('Full Name: ' + responsePayload.name);
-//     console.log('Given Name: ' + responsePayload.given_name);
-//     console.log('Family Name: ' + responsePayload.family_name);
-//     console.log("Image URL: " + responsePayload.picture);
-//     console.log("Email: " + responsePayload.email);
-//  }
-
-//function renderGoogleButton(elementId, options) {
-//    google.accounts.id.renderButton(
-//        document.getElementById(elementId),
-//        options
-//    );
-//}
-//
-//function promptGoogleLogin() {
-//    google.accounts.id.prompt();
-//}
