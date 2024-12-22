@@ -40,7 +40,6 @@ jobs:
         uses: ./.github/actions/prepare-env-android
         with:
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
-          BASE_URL: ${{ secrets.BASE_URL }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}

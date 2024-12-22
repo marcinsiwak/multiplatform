@@ -25,7 +25,6 @@ jobs:
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
           os: ${{ runner.os }}
 
-
       - name: Run ktlintCheck
         run: ./gradlew :composeApp:ktlintCheck
 
@@ -81,6 +80,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Prepare env
+        uses: ./.github/actions/prepare-env-android
+        with:
+          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
+          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+          ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
+          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          os: ${{ runner.os }}
 
       - run: ./gradlew :shared-mobile:generateDummyFramework
       - name: Set up cocoapods
@@ -107,11 +114,11 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          os: ${{ runner.os }}
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          os: ${{ runner.os }}
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
@@ -176,11 +183,11 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          os: ${{ runner.os }}
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          os: ${{ runner.os }}
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
@@ -238,11 +245,11 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          os: ${{ runner.os }}
           AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          os: ${{ runner.os }}
 
       - uses: actions/github-script@v6
         id: get_pull_request_number
