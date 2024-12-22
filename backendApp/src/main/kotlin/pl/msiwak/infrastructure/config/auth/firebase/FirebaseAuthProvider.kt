@@ -8,7 +8,6 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.auth.AuthenticationContext
 import io.ktor.server.auth.AuthenticationFailedCause
 import io.ktor.server.auth.AuthenticationProvider
-import io.ktor.server.auth.Principal
 import io.ktor.server.auth.UnauthorizedResponse
 import io.ktor.server.response.respond
 import kotlinx.coroutines.Dispatchers
@@ -45,8 +44,8 @@ class FirebaseAuthProvider(config: FirebaseConfig) : AuthenticationProvider(conf
 suspend fun verifyFirebaseIdToken(
     call: ApplicationCall,
     authHeader: HttpAuthHeader,
-    tokenData: suspend ApplicationCall.(FirebaseToken) -> Principal?
-): Principal? {
+    tokenData: suspend ApplicationCall.(FirebaseToken) -> FirebaseUser?
+): FirebaseUser? {
     val token: FirebaseToken = if (authHeader.authScheme == "Bearer" && authHeader is HttpAuthHeader.Single) {
         withContext(Dispatchers.IO) {
             FirebaseAuth.getInstance().verifyIdToken(authHeader.blob)

@@ -26,6 +26,7 @@ kotlin {
             export(project(Modules.database))
             export(project(Modules.network))
             export(project(Modules.remoteConfig))
+            export(project(Modules.store))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -36,17 +37,28 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(project(Modules.database))
+        }
         commonMain.dependencies {
             implementation(project(Modules.utils))
             implementation(project(Modules.commonObject))
             implementation(project(Modules.auth))
-            implementation(project(Modules.database))
             implementation(project(Modules.network))
             implementation(project(Modules.remoteConfig))
+            implementation(project(Modules.store))
 
             implementation(libs.kotlinx.coroutines)
 
             implementation(project(Modules.sharedModel))
+        }
+
+        iosMain.dependencies {
+            implementation(project(Modules.database))
+        }
+
+        wasmJsMain.dependencies {
+            implementation(project(Modules.databaseWasm))
         }
 
         commonTest.dependencies {

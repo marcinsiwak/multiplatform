@@ -26,7 +26,13 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
+        androidMain.dependencies {
+            api(libs.firebase.gitlive.remoteConfig)
+        }
+//        commonMain.dependencies {
+//            api(libs.firebase.gitlive.remoteConfig)
+//        }
+        iosMain.dependencies {
             api(libs.firebase.gitlive.remoteConfig)
         }
         commonTest.dependencies {

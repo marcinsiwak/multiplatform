@@ -34,12 +34,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project(Modules.commonResources))
+            implementation(project(Modules.commonResources))
 
             api(libs.kotlinx.dateTime)
 
-            api(libs.firebase.gitlive.auth)
-            api(libs.firebase.gitlive.remoteConfig)
+//            api(libs.firebase.gitlive.auth)
+//            api(libs.firebase.gitlive.remoteConfig)
 
             implementation(compose.runtime)
             implementation(compose.components.resources)

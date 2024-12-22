@@ -20,10 +20,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "network"
-
-            export(project(Modules.commonObject))
-            export(project(Modules.buildConfig))
-            export(project(Modules.auth))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -34,15 +30,17 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.ktor.cio)
+        }
         commonMain.dependencies {
             implementation(project(Modules.commonObject))
             implementation(project(Modules.buildConfig))
-            implementation(project(Modules.auth))
+            implementation(project(Modules.store))
 
             implementation(libs.ktor.core)
             implementation(libs.ktor.contentNegation)
             implementation(libs.ktor.serialization)
-            implementation(libs.ktor.cio)
             implementation(libs.ktor.logger)
 
             implementation(libs.kermit)

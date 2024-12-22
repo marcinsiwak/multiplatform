@@ -1,13 +1,30 @@
 name: Prepare Environment for Android
 
 inputs:
+  AUTH_WEB_CLIENT_ID:
+    required: true
+    description: ""
+  BASE_URL:
+    required: true
+    description: ""
+  FIREBASE_KEY:
+    required: true
+    description: ""
+  ANDROID_FIREBASE_CLIENT_ID:
+    required: true
+    description: ""
+  WEBAPP_FIREBASE_CLIENT_ID:
+    required: true
+    description: ""
   os:
     required: true
-    type: string
+    description: ""
   working-directory:
     required: false
-    type: string
+    description: ""
     default: '.'
+
+description: ""
 
 runs:
   using: "composite"
@@ -33,3 +50,29 @@ runs:
         key: ${{ inputs.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ inputs.os }}-gradle-
+
+    - name: Update production.properties
+      env:
+        AUTH_WEB_CLIENT_ID: ${{ inputs.AUTH_WEB_CLIENT_ID }}
+        FIREBASE_KEY: ${{ inputs.FIREBASE_KEY }}
+        ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
+        WEBAPP_FIREBASE_CLIENT_ID: ${{ inputs.WEBAPP_FIREBASE_CLIENT_ID }}
+      shell: bash
+      run: |
+        echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
+        echo FIREBASE_KEY=${FIREBASE_KEY} >> ./production.properties
+        echo ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID} >> ./production.properties
+        echo WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID} >> ./production.properties
+        
+    - name: Update staging.properties
+      env:
+        AUTH_WEB_CLIENT_ID: ${{ inputs.AUTH_WEB_CLIENT_ID }}
+        FIREBASE_KEY: ${{ inputs.FIREBASE_KEY }}
+        ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
+        WEBAPP_FIREBASE_CLIENT_ID: ${{ inputs.WEBAPP_FIREBASE_CLIENT_ID }}
+      shell: bash
+      run: |
+        echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
+        echo FIREBASE_KEY=${FIREBASE_KEY} >> ./staging.properties
+        echo ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID} >> ./staging.properties
+        echo WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID} >> ./staging.properties

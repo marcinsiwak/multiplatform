@@ -29,12 +29,18 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.firebase.gitlive.crashlytics)
+        }
         commonMain.dependencies {
             implementation(project(Modules.commonObject))
-            implementation(libs.firebase.gitlive.auth)
-            implementation(libs.firebase.gitlive.crashlytics)
-
+//            implementation(libs.firebase.gitlive.auth)
+            implementation(libs.kotlinx.coroutines)
             implementation(libs.kermit)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.firebase.gitlive.crashlytics)
         }
 
         commonTest.dependencies {

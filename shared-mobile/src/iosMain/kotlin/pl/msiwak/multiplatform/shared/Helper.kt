@@ -8,8 +8,10 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.data.remote.repository.VersionRepository
+import pl.msiwak.multiplatform.data.remote.repository.VersionRepositoryImpl
 import pl.msiwak.multiplatform.database.DatabaseDriverFactory
 import pl.msiwak.multiplatform.utils.KMMPreferences
+import pl.msiwak.multiplatform.utils.KMMPreferencesImpl
 import platform.Foundation.NSBundle
 import platform.Foundation.NSURL
 import platform.darwin.NSObject
@@ -36,11 +38,11 @@ fun initGIDSingIn(url: NSURL): Boolean {
 }
 
 val sharedPreferencesModule = module {
-    single { KMMPreferences(NSObject()) }
+    single<KMMPreferences> { KMMPreferencesImpl(NSObject()) }
 }
 
 val iosRepositoryModule = module {
-    single { VersionRepository(NSBundle.mainBundle()) }
+    single<VersionRepository> { VersionRepositoryImpl(NSBundle.mainBundle()) }
 }
 
 val iosDatabaseModule = module {

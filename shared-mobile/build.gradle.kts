@@ -49,11 +49,17 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            api(project(Modules.database))
+        }
+
+        iosMain.dependencies {
+            api(project(Modules.database))
+        }
 
         commonMain.dependencies {
             api(project(Modules.commonResources))
             api(project(Modules.commonObject))
-            api(project(Modules.database))
             api(project(Modules.utils))
             api(project(Modules.auth))
             api(project(Modules.network))
@@ -78,16 +84,17 @@ kotlin {
             api(project(Modules.notifications))
             api(project(Modules.uiCommonComponent))
             api(project(Modules.uiTerms))
+            api(project(Modules.store))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
             implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
-            implementation(compose.components.resources)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
@@ -95,6 +102,10 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.koin.android)
+        }
+
+        wasmJsMain.dependencies {
+            api(project(Modules.databaseWasm))
         }
 
         commonTest.dependencies {
