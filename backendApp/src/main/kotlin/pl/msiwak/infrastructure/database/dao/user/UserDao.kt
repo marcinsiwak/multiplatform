@@ -1,6 +1,6 @@
 package pl.msiwak.infrastructure.database.dao.user
 
-import pl.msiwak.domain.entities.UserEntity
+import pl.msiwak.infrastructure.entities.UserEntity
 
 interface UserDao {
     suspend fun getUser(id: String): UserEntity?

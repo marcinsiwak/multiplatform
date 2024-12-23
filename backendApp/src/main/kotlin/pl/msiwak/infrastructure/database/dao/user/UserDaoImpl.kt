@@ -3,7 +3,7 @@ package pl.msiwak.infrastructure.database.dao.user
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
-import pl.msiwak.domain.entities.UserEntity
+import pl.msiwak.infrastructure.entities.UserEntity
 import pl.msiwak.infrastructure.database.dao.dbQuery
 import pl.msiwak.infrastructure.database.table.Users
 

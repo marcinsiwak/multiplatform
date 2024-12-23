@@ -1,7 +1,7 @@
 package pl.msiwak.interfaces.controller
 
-import pl.msiwak.application.usecases.AddUserUseCase
-import pl.msiwak.application.usecases.GetUserUseCase
+import pl.msiwak.domain.usecases.AddUserUseCase
+import pl.msiwak.domain.usecases.GetUserUseCase
 import pl.msiwak.multiplatform.shared.model.ApiUser
 
 class UserControllerImpl(

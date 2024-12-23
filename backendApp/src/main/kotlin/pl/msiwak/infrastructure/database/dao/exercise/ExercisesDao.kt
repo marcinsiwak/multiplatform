@@ -1,8 +1,8 @@
 package pl.msiwak.infrastructure.database.dao.exercise
 
-import pl.msiwak.domain.entities.CategoryEntity
-import pl.msiwak.domain.entities.ExerciseEntity
-import pl.msiwak.domain.entities.ResultEntity
+import pl.msiwak.infrastructure.entities.CategoryEntity
+import pl.msiwak.infrastructure.entities.ExerciseEntity
+import pl.msiwak.infrastructure.entities.ResultEntity
 
 @Suppress("TooManyFunctions")
 interface ExercisesDao {

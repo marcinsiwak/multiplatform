@@ -1,6 +1,6 @@
 package pl.msiwak.interfaces.mapper
 
-import pl.msiwak.domain.entities.CategoryEntity
+import pl.msiwak.infrastructure.entities.CategoryEntity
 import pl.msiwak.multiplatform.shared.model.ApiCategory
 
 class ApiCategoryMapper(

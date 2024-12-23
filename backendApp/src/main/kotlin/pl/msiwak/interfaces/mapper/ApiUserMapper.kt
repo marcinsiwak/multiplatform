@@ -1,6 +1,6 @@
 package pl.msiwak.interfaces.mapper
 
-import pl.msiwak.domain.entities.UserEntity
+import pl.msiwak.infrastructure.entities.UserEntity
 import pl.msiwak.multiplatform.shared.model.ApiUser
 
 class ApiUserMapper : Mapper<UserEntity, ApiUser>() {
