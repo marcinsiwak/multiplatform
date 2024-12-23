@@ -3,9 +3,9 @@ package pl.msiwak.infrastructure.database.dao.user
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
-import pl.msiwak.infrastructure.entities.UserEntity
 import pl.msiwak.infrastructure.database.dao.dbQuery
 import pl.msiwak.infrastructure.database.table.Users
+import pl.msiwak.infrastructure.entities.UserEntity
 
 class UserDaoImpl : UserDao {
     override suspend fun getUser(id: String): UserEntity? = dbQuery {

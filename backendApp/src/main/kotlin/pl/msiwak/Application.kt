@@ -19,6 +19,7 @@ import pl.msiwak.infrastructure.di.diDaoModule
 import pl.msiwak.infrastructure.di.diMapperModule
 import pl.msiwak.infrastructure.di.diModule
 import pl.msiwak.infrastructure.di.diRepositoryModule
+import pl.msiwak.infrastructure.di.diUtilsModule
 
 fun main(args: Array<String>) {
     EngineMain.main(args)
@@ -34,7 +35,8 @@ fun Application.module() {
             diMapperModule,
             diRepositoryModule,
             diControllerModule,
-            diDaoModule
+            diDaoModule,
+            diUtilsModule
         )
     }
     install(ContentNegotiation) {

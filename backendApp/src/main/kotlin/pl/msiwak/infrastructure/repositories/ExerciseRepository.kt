@@ -1,7 +1,7 @@
 package pl.msiwak.infrastructure.repositories
 
-import pl.msiwak.infrastructure.entities.CategoryEntity
 import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDao
+import pl.msiwak.infrastructure.entities.CategoryEntity
 
 class ExerciseRepository(private val exercisesDao: ExercisesDao) {
 
