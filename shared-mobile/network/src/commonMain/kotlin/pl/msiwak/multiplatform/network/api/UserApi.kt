@@ -12,8 +12,7 @@ import pl.msiwak.multiplatform.shared.model.ApiUser
 class UserApi(private val ktorClient: KtorClient) {
 
     suspend fun getUser(): Flow<ApiUser> {
-        val response: ApiUser =
-            ktorClient.httpClient.get("api/user").body()
+        val response: ApiUser = ktorClient.httpClient.get("api/user").body()
         return flowOf(response)
     }
 

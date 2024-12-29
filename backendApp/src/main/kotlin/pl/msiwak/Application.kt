@@ -2,15 +2,19 @@ package pl.msiwak
 
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.netty.EngineMain
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.plugins.statuspages.StatusPages
+import io.ktor.server.response.respond
 import kotlinx.serialization.json.Json
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
+import org.postgresql.util.PSQLException
 import pl.msiwak.infrastructure.config.auth.firebase.configureFirebaseAuth
 import pl.msiwak.infrastructure.config.configureRouting
 import pl.msiwak.infrastructure.config.initialConfiguration
@@ -59,6 +63,23 @@ fun Application.module() {
         allowMethod(HttpMethod.Patch)
         allowMethod(HttpMethod.Delete)
     }
+
+    install(StatusPages) {
+        exception<Throwable> { call, cause ->
+            when (cause) {
+                is PSQLException -> {
+                    if (cause.message?.contains("duplicate key value violates unique constraint") == true) {
+                        call.respond(HttpStatusCode.Conflict, "Entry already exists")
+                    } else {
+                        call.respond(HttpStatusCode.InternalServerError, "Database error: ${cause.message}")
+                    }
+                }
+
+                else -> call.respond(HttpStatusCode.InternalServerError, "Database error: ${cause.message}")
+            }
+        }
+    }
+
     configureFirebaseAuth()
     configureRouting()
 }

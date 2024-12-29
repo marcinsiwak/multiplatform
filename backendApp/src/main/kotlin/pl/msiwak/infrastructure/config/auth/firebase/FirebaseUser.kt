@@ -1,6 +1,6 @@
 package pl.msiwak.infrastructure.config.auth.firebase
 
-import pl.msiwak.infrastructure.config.auth.roles.Role
+import pl.msiwak.multiplatform.shared.common.Role
 
 data class FirebaseUser(
     val userId: String = "",

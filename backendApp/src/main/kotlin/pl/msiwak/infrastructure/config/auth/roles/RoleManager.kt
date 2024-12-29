@@ -1,6 +1,7 @@
 package pl.msiwak.infrastructure.config.auth.roles
 
 import com.google.firebase.auth.FirebaseAuth
+import pl.msiwak.multiplatform.shared.common.Role
 
 class RoleManager {
 

@@ -3,7 +3,7 @@ package pl.msiwak.infrastructure.config.auth.firebase
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.auth.Authentication
-import pl.msiwak.infrastructure.config.auth.roles.Role
+import pl.msiwak.multiplatform.shared.common.Role
 
 fun Application.configureFirebaseAuth() {
     install(Authentication) {

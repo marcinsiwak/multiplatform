@@ -13,7 +13,10 @@ class GoogleLoginUseCaseImpl(
         val result = authRepository.loginWithGoogle(tokenId, accessToken)
         val token = result?.user?.token
         token?.let { sessionRepository.saveToken(it) }
-        result?.user?.uid?.let { createUserUseCase(it) }
+        if (result?.user?.isNewUser == true) {
+            result.user?.uid?.let { createUserUseCase(it) }
+        }
+        println("OUTPUT USER: ${result?.user}")
         return result?.user?.uid
     }
 }

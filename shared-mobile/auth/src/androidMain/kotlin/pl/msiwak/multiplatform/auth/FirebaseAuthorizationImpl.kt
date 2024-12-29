@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.auth
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.GoogleAuthProvider
+import dev.gitlive.firebase.auth.android
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -44,7 +45,8 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
                     email = it.user?.email,
                     displayName = it.user?.displayName,
                     isEmailVerified = it.user?.isEmailVerified ?: false,
-                    token = it.user?.getIdTokenResult(true)?.token
+                    token = it.user?.getIdTokenResult(true)?.token,
+                    isNewUser = it.additionalUserInfo?.isNewUser
                 )
             )
         }

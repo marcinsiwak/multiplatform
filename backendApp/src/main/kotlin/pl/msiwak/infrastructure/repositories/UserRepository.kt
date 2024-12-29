@@ -1,9 +1,9 @@
 package pl.msiwak.infrastructure.repositories
 
-import pl.msiwak.infrastructure.config.auth.roles.Role
 import pl.msiwak.infrastructure.config.auth.roles.RoleManager
 import pl.msiwak.infrastructure.database.dao.user.UserDao
 import pl.msiwak.infrastructure.entities.UserEntity
+import pl.msiwak.multiplatform.shared.common.Role
 
 class UserRepository(
     private val userDao: UserDao,
@@ -11,12 +11,13 @@ class UserRepository(
 ) {
 
     suspend fun addUser(id: String, name: String, email: String) {
-        userDao.addNewUser(id, name, email)
-        if (email == "marcinsiwak15@gmail.com") {
-            roleManager.setRole(id, Role.ADMIN)
+        val role = if (email == "marcinsiwak15@gmail.com") {
+            Role.ADMIN
         } else {
-            roleManager.setRole(id, Role.USER)
+            Role.USER
         }
+        roleManager.setRole(id, role)
+        userDao.addNewUser(id, name, email, role.name)
     }
 
     suspend fun getUser(id: String): UserEntity? {
