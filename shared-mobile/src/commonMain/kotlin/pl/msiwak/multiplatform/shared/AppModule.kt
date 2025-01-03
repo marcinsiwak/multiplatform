@@ -88,6 +88,8 @@ import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
 import pl.msiwak.multiplatform.domain.user.CreateUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCaseImpl
+import pl.msiwak.multiplatform.domain.user.UpdateUserUseCase
+import pl.msiwak.multiplatform.domain.user.UpdateUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
@@ -256,6 +258,7 @@ val useCaseModule = module {
     single<GetVersionNameUseCase> { GetVersionNameUseCaseImpl(get()) }
     single<GetUserUseCase> { GetUserUseCaseImpl(get()) }
     single<CreateUserUseCase> { CreateUserUseCaseImpl(get()) }
+    single<UpdateUserUseCase> { UpdateUserUseCaseImpl(get()) }
     single<ObserveAuthStateChangedUseCase> { ObserveAuthStateChangedUseCaseImpl(get(), get()) }
     single<ResendVerificationEmailUseCase> { ResendVerificationEmailUseCaseImpl(get()) }
     single<AddExerciseUseCase> { AddExerciseUseCaseImpl(get()) }

@@ -3,6 +3,7 @@ package pl.msiwak.infrastructure.database.dao.user
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.update
 import pl.msiwak.infrastructure.database.dao.dbQuery
 import pl.msiwak.infrastructure.database.table.Users
 import pl.msiwak.infrastructure.entities.UserEntity
@@ -22,6 +23,15 @@ class UserDaoImpl : UserDao {
             it[Users.role] = role
         }
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToUser)
+    }
+
+    override suspend fun updateUser(userId: String, name: String?, email: String?, role: String?): Unit = dbQuery {
+        Users.update {
+            it[id] = userId
+            name?.let { userName -> it[Users.name] = userName }
+            email?.let { userEmail -> it[Users.email] = userEmail }
+            role?.let { userRole -> it[Users.role] = userRole }
+        }
     }
 
     private fun resultRowToUser(row: ResultRow) = UserEntity(

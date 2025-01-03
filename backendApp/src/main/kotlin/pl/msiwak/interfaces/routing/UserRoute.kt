@@ -1,7 +1,6 @@
 package pl.msiwak.interfaces.routing
 
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.principal
 import io.ktor.server.request.receive
@@ -9,6 +8,7 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
+import io.ktor.server.routing.put
 import org.koin.ktor.ext.inject
 import pl.msiwak.infrastructure.config.auth.firebase.FIREBASE_AUTH
 import pl.msiwak.infrastructure.config.auth.firebase.FirebaseUser
@@ -24,6 +24,20 @@ fun Route.addUserRoutes() {
                 val principal = principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
                 receive<ApiUser>().run {
                     userController.addUser(
+                        username ?: principal.displayName,
+                        principal.displayName,
+                        principal.userId
+                    )
+                }
+                respond(HttpStatusCode.OK)
+            }
+        }
+
+        put("/user") {
+            with(call) {
+                val principal = principal<FirebaseUser>() ?: return@put call.respond(HttpStatusCode.Unauthorized)
+                receive<ApiUser>().run {
+                    userController.updateUser(
                         username ?: principal.displayName,
                         principal.displayName,
                         principal.userId

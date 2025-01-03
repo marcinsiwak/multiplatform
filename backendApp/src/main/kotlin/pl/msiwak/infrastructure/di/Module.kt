@@ -1,6 +1,16 @@
 package pl.msiwak.infrastructure.di
 
 import org.koin.dsl.module
+import pl.msiwak.domain.usecases.AddCategoryUseCase
+import pl.msiwak.domain.usecases.AddCategoryUseCaseImpl
+import pl.msiwak.domain.usecases.AddExerciseUseCase
+import pl.msiwak.domain.usecases.AddExerciseUseCaseImpl
+import pl.msiwak.domain.usecases.AddResultUseCase
+import pl.msiwak.domain.usecases.AddResultUseCaseImpl
+import pl.msiwak.domain.usecases.AddUserUseCase
+import pl.msiwak.domain.usecases.AddUserUseCaseImpl
+import pl.msiwak.domain.usecases.GetCategoriesUseCase
+import pl.msiwak.domain.usecases.GetCategoriesUseCaseImpl
 import pl.msiwak.domain.usecases.GetCategoryUseCase
 import pl.msiwak.domain.usecases.GetCategoryUseCaseImpl
 import pl.msiwak.domain.usecases.GetExerciseUseCase
@@ -15,6 +25,8 @@ import pl.msiwak.domain.usecases.RemoveResultUseCase
 import pl.msiwak.domain.usecases.RemoveResultUseCaseImpl
 import pl.msiwak.domain.usecases.SynchronizeDataUseCase
 import pl.msiwak.domain.usecases.SynchronizeDataUseCaseImpl
+import pl.msiwak.domain.usecases.UpdateUserUseCase
+import pl.msiwak.domain.usecases.UpdateUserUseCaseImpl
 import pl.msiwak.infrastructure.config.auth.roles.RoleManager
 import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDao
 import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDaoImpl
@@ -32,25 +44,26 @@ import pl.msiwak.interfaces.mapper.ApiResultMapper
 import pl.msiwak.interfaces.mapper.ApiUserMapper
 
 val diModule = module {
-    single<pl.msiwak.domain.usecases.AddUserUseCase> { pl.msiwak.domain.usecases.AddUserUseCaseImpl(get()) }
-    single<pl.msiwak.domain.usecases.AddCategoryUseCase> {
-        pl.msiwak.domain.usecases.AddCategoryUseCaseImpl(
+    single<AddUserUseCase> { AddUserUseCaseImpl(get()) }
+    single<UpdateUserUseCase> { UpdateUserUseCaseImpl(get()) }
+    single<AddCategoryUseCase> {
+        AddCategoryUseCaseImpl(
             get(),
             get()
         )
     }
-    single<pl.msiwak.domain.usecases.AddExerciseUseCase> {
-        pl.msiwak.domain.usecases.AddExerciseUseCaseImpl(
+    single<AddExerciseUseCase> {
+        AddExerciseUseCaseImpl(
             get(),
             get()
         )
     }
-    single<pl.msiwak.domain.usecases.AddResultUseCase> { pl.msiwak.domain.usecases.AddResultUseCaseImpl(get(), get()) }
+    single<AddResultUseCase> { AddResultUseCaseImpl(get(), get()) }
     single<GetUserUseCase> { GetUserUseCaseImpl(get(), get()) }
     single<GetCategoryUseCase> { GetCategoryUseCaseImpl(get(), get()) }
     single<GetExerciseUseCase> { GetExerciseUseCaseImpl(get(), get()) }
-    single<pl.msiwak.domain.usecases.GetCategoriesUseCase> {
-        pl.msiwak.domain.usecases.GetCategoriesUseCaseImpl(
+    single<GetCategoriesUseCase> {
+        GetCategoriesUseCaseImpl(
             get(),
             get()
         )
@@ -79,7 +92,7 @@ val diMapperModule = module {
 }
 
 val diControllerModule = module {
-    single<UserController> { UserControllerImpl(get(), get()) }
+    single<UserController> { UserControllerImpl(get(), get(), get()) }
     single<ExerciseController> {
         ExerciseControllerImpl(
             get(),

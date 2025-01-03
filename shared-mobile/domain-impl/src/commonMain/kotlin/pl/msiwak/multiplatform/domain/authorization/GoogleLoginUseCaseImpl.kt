@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.domain.authorization
 import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
 import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
 import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
+import pl.msiwak.multiplatform.domain.user.UpdateUserUseCase
 
 class GoogleLoginUseCaseImpl(
     private val authRepository: AuthRepository,

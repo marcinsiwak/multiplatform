@@ -2,10 +2,10 @@ package pl.msiwak.domain.usecases
 
 import pl.msiwak.infrastructure.repositories.UserRepository
 
-class AddUserUseCaseImpl(
+class UpdateUserUseCaseImpl(
     private val userRepository: UserRepository
-) : AddUserUseCase {
+) : UpdateUserUseCase {
     override suspend operator fun invoke(name: String, email: String, userId: String) {
-        userRepository.updateUser(userId, name, email)
+        userRepository.addUser(userId, name, email)
     }
 }

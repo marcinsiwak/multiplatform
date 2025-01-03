@@ -18,4 +18,8 @@ class UserService(
     suspend fun createUser(uuid: String) {
         return client.createUser(uuid)
     }
+
+    suspend fun updateUser(uuid: String) {
+        return client.updateUser(uuid)
+    }
 }
