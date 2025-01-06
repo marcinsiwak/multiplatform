@@ -19,12 +19,6 @@ class DashboardViewModel(
     private val _viewState = MutableStateFlow(DashboardState())
     val viewState: StateFlow<DashboardState> = _viewState.asStateFlow()
 
-    init {
-        viewModelScope.launch(globalErrorHandler.handleError()) {
-            getUserUseCase()
-        }
-    }
-
     fun onUiAction(action: DashboardUiAction) {
         when (action) {
             is DashboardUiAction.OnTabChanges -> onTabChanges(action.pos)

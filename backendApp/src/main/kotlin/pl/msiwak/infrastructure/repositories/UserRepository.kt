@@ -1,7 +1,5 @@
 package pl.msiwak.infrastructure.repositories
 
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
 import pl.msiwak.infrastructure.config.auth.roles.RoleManager
 import pl.msiwak.infrastructure.database.dao.user.UserDao
 import pl.msiwak.infrastructure.entities.UserEntity
@@ -11,11 +9,6 @@ class UserRepository(
     private val userDao: UserDao,
     private val roleManager: RoleManager
 ) {
-
-    suspend fun loginUser() {
-        FirebaseAuth.getInstance()
-    }
-
     suspend fun addUser(id: String, name: String, email: String) {
         val role = if (email == "marcinsiwak15@gmail.com") {
             Role.ADMIN
