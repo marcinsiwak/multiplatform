@@ -2,8 +2,6 @@ package pl.msiwak.multiplatform.ui.welcome
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -12,6 +10,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import pl.msiwak.multiplatform.commonObject.exception.ClientErrorException
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
@@ -27,7 +26,7 @@ class WelcomeScreenViewModel(
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
     private val googleLoginUseCase: GoogleLoginUseCase,
     private val getUser: GetUserUseCase,
-    private val globalErrorHandler: GlobalErrorHandler
+    private val globalErrorHandler: GlobalErrorHandler,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(WelcomeState())
@@ -37,7 +36,13 @@ class WelcomeScreenViewModel(
     val viewEvent: SharedFlow<WelcomeEvent> = _viewEvent.asSharedFlow()
 
     private val errorHandler = globalErrorHandler.handleError { throwable ->
-        when (throwable) {
+        when {
+            throwable is ClientErrorException && throwable.httpCode == 404 -> {
+                viewModelScope.launch {
+                    _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions)
+                }
+                true
+            }
 //            is FirebaseAuthInvalidCredentialsException -> {
 //                _viewState.update {
 //                    it.copy(authErrorMessage = "", isErrorDialogVisible = true)
@@ -48,14 +53,6 @@ class WelcomeScreenViewModel(
             else -> false
         }
     }
-
-    private fun prepareGoogleLoginErrorHandler(uuid: String): CoroutineExceptionHandler =
-        globalErrorHandler.handleError { _ ->
-            viewModelScope.launch(errorHandler) {
-                _viewEvent.emit(WelcomeEvent.NavigateToTermsAndConditions(uuid))
-            }
-            false
-        }
 
     fun onUiAction(action: WelcomeUiAction) {
         when (action) {
@@ -79,16 +76,9 @@ class WelcomeScreenViewModel(
 
     private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
         viewModelScope.launch(errorHandler) {
-            val loginJob = async {
-                val result = googleLoginUseCase(idToken, accessToken)
-                return@async result
-            }
-            val uuid = loginJob.await() ?: throw Exception()
-
-            viewModelScope.launch(prepareGoogleLoginErrorHandler(uuid)) {
-                getUser()
-                _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
-            }
+            googleLoginUseCase(idToken, accessToken)
+            getUser()
+            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
         }
     }
 
@@ -103,12 +93,12 @@ class WelcomeScreenViewModel(
     private fun onLoginClicked() {
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
-            val isUserVerified =
-                loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
+            val isUserVerified = loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
             _viewState.update { it.copy(isLoading = false) }
             val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
 
             if (isUserVerified) {
+                getUser()
                 if (isSynchronizationPossible) {
                     _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
                 } else {

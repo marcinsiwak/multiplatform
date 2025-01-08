@@ -15,11 +15,15 @@ class UserService(
         return client.getUser().map { mapper(it) }
     }
 
-    suspend fun createUser(uuid: String) {
-        return client.createUser(uuid)
+    suspend fun createUser(uuid: String, email: String) {
+        return client.createUser(uuid, email)
     }
 
-    suspend fun updateUser(uuid: String) {
-        return client.updateUser(uuid)
+    suspend fun createUserWithGoogle() {
+        return client.createUserWithGoogle()
     }
+
+//    suspend fun updateUser(uuid: String) {
+//        return client.updateUser(uuid)
+//    }
 }

@@ -26,8 +26,11 @@ class UserDaoImpl : UserDao {
     }
 
     override suspend fun updateUser(userId: String, name: String?, email: String?, role: String?): Unit = dbQuery {
-        Users.update {
-            it[id] = userId
+        Users.update(
+            where = {
+                Users.id eq userId
+            }
+        ) {
             name?.let { userName -> it[Users.name] = userName }
             email?.let { userEmail -> it[Users.email] = userEmail }
             role?.let { userRole -> it[Users.role] = userRole }

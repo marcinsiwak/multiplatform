@@ -17,9 +17,9 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import pl.msiwak.multiplatform.buildconfig.BuildConfig
 import pl.msiwak.multiplatform.network.EngineProvider
-import pl.msiwak.multiplatform.network.exception.ClientErrorException
-import pl.msiwak.multiplatform.network.exception.InvalidAuthTokenException
-import pl.msiwak.multiplatform.network.exception.ServerErrorException
+import pl.msiwak.multiplatform.commonObject.exception.ClientErrorException
+import pl.msiwak.multiplatform.commonObject.exception.InvalidAuthTokenException
+import pl.msiwak.multiplatform.commonObject.exception.ServerErrorException
 import pl.msiwak.multiplatform.store.SessionStore
 import co.touchlab.kermit.Logger as KermitLogger
 

@@ -2,7 +2,6 @@ package pl.msiwak.multiplatform.auth
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.GoogleAuthProvider
-import dev.gitlive.firebase.auth.android
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -13,9 +12,19 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
 
     private val auth = Firebase.auth
 
-    override suspend fun createNewUser(email: String, password: String) {
-        val result = auth.createUserWithEmailAndPassword(email, password)
-        result.user?.sendEmailVerification()
+    override suspend fun createNewUser(email: String, password: String): AuthResult {
+        return auth.createUserWithEmailAndPassword(email, password).let {
+            it.user?.sendEmailVerification()
+            AuthResult(
+                user = FirebaseUser(
+                    uid = it.user?.uid,
+                    email = it.user?.email,
+                    displayName = it.user?.displayName,
+                    isEmailVerified = it.user?.isEmailVerified ?: false,
+                    token = it.user?.getIdTokenResult(true)?.token
+                )
+            )
+        }
     }
 
     override suspend fun loginUser(email: String, password: String): AuthResult {

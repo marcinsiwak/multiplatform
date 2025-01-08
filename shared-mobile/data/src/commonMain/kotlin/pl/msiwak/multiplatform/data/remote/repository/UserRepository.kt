@@ -11,11 +11,14 @@ class UserRepository(private val userService: UserService) {
         return@withContext userService.getUser().first()
     }
 
-    suspend fun createUser(uuid: String) = withContext(Dispatchers.IO) {
-        return@withContext userService.createUser(uuid)
+    suspend fun createUser(uuid: String?, email: String?) = withContext(Dispatchers.IO) {
+        if (uuid == null || email == null) {
+            return@withContext userService.createUserWithGoogle()
+        }
+        return@withContext userService.createUser(uuid, email)
     }
 
-    suspend fun updateUser(uuid: String) = withContext(Dispatchers.IO) {
-        return@withContext userService.updateUser(uuid)
-    }
+//    suspend fun updateUser(uuid: String) = withContext(Dispatchers.IO) {
+//        return@withContext userService.updateUser(uuid)
+//    }
 }

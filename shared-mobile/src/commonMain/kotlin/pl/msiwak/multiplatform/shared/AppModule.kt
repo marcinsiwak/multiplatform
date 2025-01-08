@@ -231,7 +231,7 @@ val viewModelsModule = module {
 }
 
 val useCaseModule = module {
-    single<RegisterUserUseCase> { RegisterUserUseCaseImpl(get()) }
+    single<RegisterUserUseCase> { RegisterUserUseCaseImpl(get(), get()) }
     single<LoginUseCase> { LoginUseCaseImpl(get(), get()) }
     single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get()) }
     single<LogoutUseCase> { LogoutUseCaseImpl(get(), get()) }

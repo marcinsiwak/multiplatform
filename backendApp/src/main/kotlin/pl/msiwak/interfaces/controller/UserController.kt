@@ -3,7 +3,7 @@ package pl.msiwak.interfaces.controller
 import pl.msiwak.multiplatform.shared.model.ApiUser
 
 interface UserController {
-    suspend fun addUser(name: String, email: String, userId: String)
-    suspend fun updateUser(name: String, email: String, userId: String)
+    suspend fun addUser(userId: String, name: String, email: String)
+    suspend fun updateUser(userId: String, name: String, email: String)
     suspend fun getUser(userId: String): ApiUser?
 }

@@ -3,7 +3,6 @@ package pl.msiwak.multiplatform.network.api
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post
-import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -17,15 +16,15 @@ class UserApi(private val ktorClient: KtorClient) {
         return flowOf(response)
     }
 
-    suspend fun createUser(uuid: String) {
+    suspend fun createUserWithGoogle() {
+        ktorClient.httpClient.post("api/googleUser")
+    }
+
+    suspend fun createUser(uuid: String, email: String) {
         ktorClient.httpClient.post("api/user") {
-            setBody(ApiUser(id = uuid))
+            setBody(ApiUser(id = uuid, email = email))
         }
     }
 
-    suspend fun updateUser(uuid: String) {
-        ktorClient.httpClient.put("api/user") {
-            setBody(ApiUser(id = uuid))
-        }
-    }
+//    suspend fun updateUser(uuid: String) {}
 }

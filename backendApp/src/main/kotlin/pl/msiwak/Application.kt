@@ -1,8 +1,10 @@
 package pl.msiwak
 
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
+import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -29,6 +31,7 @@ fun main(args: Array<String>) {
     EngineMain.main(args)
 }
 
+@Suppress("LongMethod")
 fun Application.module() {
     initialConfiguration()
 
@@ -48,9 +51,22 @@ fun Application.module() {
             json = Json {
                 prettyPrint = true
                 isLenient = true
+                ignoreUnknownKeys = true
             }
         )
+
+        register(
+            ContentType.Text.Html,
+            KotlinxSerializationConverter(
+                Json {
+                    prettyPrint = true
+                    isLenient = true
+                    ignoreUnknownKeys = true
+                }
+            )
+        )
     }
+
     install(CORS) {
         anyHost()
         allowHeader(HttpHeaders.ContentType)

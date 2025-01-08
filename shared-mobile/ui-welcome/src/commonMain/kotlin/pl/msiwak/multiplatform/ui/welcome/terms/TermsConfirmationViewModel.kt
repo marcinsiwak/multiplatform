@@ -32,17 +32,16 @@ class TermsConfirmationViewModel(
 
     fun onUiAction(action: TermsConfirmationUiAction) {
         when (action) {
-            is TermsConfirmationUiAction.OnButtonClick -> onCreateAccount(action.uuid)
-
+            is TermsConfirmationUiAction.OnButtonClick -> onCreateAccount()
             TermsConfirmationUiAction.OnConfirmSynchronizationClicked -> onConfirmSynchronizationClicked()
             TermsConfirmationUiAction.OnDismissSynchronizationClicked -> onDismissSynchronizationClicked()
             else -> Unit
         }
     }
 
-    private fun onCreateAccount(uuid: String) {
+    private fun onCreateAccount() {
         viewModelScope.launch(errorHandler) {
-            createUserUseCase(uuid)
+            createUserUseCase()
             val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
             _viewState.update { it.copy(isLoading = true) }
             if (isSynchronizationPossible) {
