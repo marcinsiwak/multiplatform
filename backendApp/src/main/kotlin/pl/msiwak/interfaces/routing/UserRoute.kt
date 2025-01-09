@@ -23,7 +23,7 @@ fun Route.addUserRoutes() {
                 userController.addUser(
                     id,
                     email,
-                    email,
+                    email
                 )
                 respond(HttpStatusCode.OK)
             }
@@ -37,7 +37,7 @@ fun Route.addUserRoutes() {
                 userController.addUser(
                     principal.userId,
                     principal.displayName,
-                    principal.displayName,
+                    principal.displayName
                 )
                 respond(HttpStatusCode.OK)
             }

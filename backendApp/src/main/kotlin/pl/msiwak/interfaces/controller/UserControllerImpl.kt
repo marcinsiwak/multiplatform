@@ -16,7 +16,7 @@ class UserControllerImpl(
     }
 
     override suspend fun updateUser(userId: String, name: String, email: String) {
-        updateUserUseCase(userId,name, email)
+        updateUserUseCase(userId, name, email)
     }
 
     override suspend fun getUser(userId: String): ApiUser? {

@@ -120,6 +120,7 @@ ktor-server-html-builder = { module = "io.ktor:ktor-server-html-builder", versio
 ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm" }
 ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }
 ktor-server-statusPages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
+ktor-server-client-engine = { module = "io.ktor:ktor-client-apache5", version.ref = "ktor" }
 
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback_version" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql_driver_version" }
