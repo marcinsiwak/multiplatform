@@ -27,6 +27,7 @@ import athletetrack.shared_mobile.commonresources.generated.resources.deny
 import athletetrack.shared_mobile.commonresources.generated.resources.synchronization_dialog_description
 import athletetrack.shared_mobile.commonresources.generated.resources.synchronization_dialog_title
 import athletetrack.shared_mobile.commonresources.generated.resources.terms
+import athletetrack.shared_mobile.commonresources.generated.resources.terms_confirmation_accept
 import athletetrack.shared_mobile.commonresources.generated.resources.terms_confirmation_description
 import athletetrack.shared_mobile.commonresources.generated.resources.terms_confirmation_title
 import kotlinx.coroutines.flow.collectLatest
@@ -141,7 +142,7 @@ private fun TermsConfirmationContent(
 
                 MainButton(
                     modifier = Modifier.padding(MaterialTheme.dimens.space_16),
-                    text = stringResource(Res.string.terms_confirmation_title),
+                    text = stringResource(Res.string.terms_confirmation_accept),
                     onClick = {
                         onUiAction(TermsConfirmationUiAction.OnButtonClick)
                     }

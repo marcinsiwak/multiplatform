@@ -93,7 +93,8 @@
 
     <string name="accept_terms">Accept terms and conditions</string>
     <string name="terms">Terms and conditions</string>
-    <string name="terms_confirmation_title">Create account</string>
-    <string name="terms_confirmation_description">By selecting Create an account, you agree to our terms and conditions.</string>
+    <string name="terms_confirmation_title">Terms and conditions</string>
+    <string name="terms_confirmation_description">To access the app you need to accept terms and conditions.</string>
+    <string name="terms_confirmation_accept">Accept</string>
 
 </resources>

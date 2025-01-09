@@ -32,14 +32,14 @@ class TermsConfirmationViewModel(
 
     fun onUiAction(action: TermsConfirmationUiAction) {
         when (action) {
-            is TermsConfirmationUiAction.OnButtonClick -> onCreateAccount()
+            is TermsConfirmationUiAction.OnButtonClick -> onAcceptTerms()
             TermsConfirmationUiAction.OnConfirmSynchronizationClicked -> onConfirmSynchronizationClicked()
             TermsConfirmationUiAction.OnDismissSynchronizationClicked -> onDismissSynchronizationClicked()
             else -> Unit
         }
     }
 
-    private fun onCreateAccount() {
+    private fun onAcceptTerms() {
         viewModelScope.launch(errorHandler) {
             createUserUseCase()
             val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
