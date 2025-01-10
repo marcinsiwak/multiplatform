@@ -10,7 +10,7 @@ class RegisterUserUseCaseImpl(
 
     override suspend fun invoke(params: RegisterUserUseCase.Params) {
         authRepository.createNewUser(params.login, params.password).also {
-            createUserUseCase(it.user?.uid, it.user?.email)
+            createUserUseCase(it?.user?.uid, it?.user?.email)
         }
     }
 }

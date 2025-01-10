@@ -14,7 +14,8 @@ class GlobalErrorHandler {
 //                    }
 
                     else -> {
-                        Logger.e("Error: $throwable")
+                        println("ERrror: ${throwable.message}")
+//                        Logger.e("Error: $throwable")
                     }
                 }
             }
