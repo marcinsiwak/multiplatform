@@ -6,6 +6,5 @@ data class FirebaseUser(
     val displayName: String?,
     val isEmailVerified: Boolean = false,
     val token: String?,
-    val isNewUser: Boolean? = false,
-    
+    val isNewUser: Boolean? = false
 )

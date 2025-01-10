@@ -19,8 +19,3 @@ class FirebaseSetupManager {
         }
     }
 }
-
-//@JsName("createFirebaseSetupManager")
-//fun createFirebaseSetupManager(): FirebaseSetupManager {
-//    return FirebaseSetupManager()
-//}

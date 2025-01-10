@@ -49,9 +49,9 @@ buildkonfig {
     packageName = "pl.msiwak.multiplatform.shared.buildConfig"
 
     val productionPropertiesFile = rootProject.file("production.properties")
-    val productionProperties = Properties()
-    productionProperties.load(FileInputStream(productionPropertiesFile))
-    
+    val productionProperties = Properties().apply {
+        load(FileInputStream(productionPropertiesFile))
+    }
     val productionBaseUrl = "https://msiwak-api.pl"
     val stagingBaseUrl = "http://192.168.0.13:8080"
 

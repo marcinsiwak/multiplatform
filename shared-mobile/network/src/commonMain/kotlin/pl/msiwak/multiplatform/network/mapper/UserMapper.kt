@@ -7,9 +7,9 @@ import pl.msiwak.multiplatform.shared.model.ApiUser
 class UserMapper : Mapper<ApiUser, User>() {
     override fun map(value: ApiUser): User {
         return User(
-            value.email ?: "",
+            value.email,
             value.username ?: "",
-                value.role ?: Role.USER
+            value.role ?: Role.USER
         )
     }
 }

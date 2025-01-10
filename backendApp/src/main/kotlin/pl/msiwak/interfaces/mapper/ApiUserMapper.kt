@@ -15,8 +15,8 @@ class ApiUserMapper : Mapper<UserEntity, ApiUser>() {
     }
 
     private fun mapRole(roleString: String): Role {
-        return when (roleString) {
-            "admin" -> Role.ADMIN
+        return when {
+            roleString.equals("admin", true) -> Role.ADMIN
             else -> Role.USER
         }
     }

@@ -26,7 +26,7 @@ class WelcomeScreenViewModel(
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
     private val googleLoginUseCase: GoogleLoginUseCase,
     private val getUser: GetUserUseCase,
-    private val globalErrorHandler: GlobalErrorHandler,
+    globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(WelcomeState())

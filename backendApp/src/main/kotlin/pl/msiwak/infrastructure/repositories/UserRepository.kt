@@ -15,6 +15,7 @@ class UserRepository(
         } else {
             Role.USER
         }
+        println("OUTPUT: $role")
         roleManager.setRole(id, role)
         userDao.addNewUser(id, name, email, role.name)
     }

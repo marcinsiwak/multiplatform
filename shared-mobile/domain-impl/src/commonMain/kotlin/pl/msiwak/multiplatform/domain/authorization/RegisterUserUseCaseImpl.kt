@@ -5,7 +5,7 @@ import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
 
 class RegisterUserUseCaseImpl(
     private val authRepository: AuthRepository,
-    private val createUserUseCase: CreateUserUseCase,
+    private val createUserUseCase: CreateUserUseCase
 ) : RegisterUserUseCase {
 
     override suspend fun invoke(params: RegisterUserUseCase.Params) {
