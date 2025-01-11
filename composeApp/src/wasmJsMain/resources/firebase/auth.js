@@ -17,6 +17,8 @@ const analytics = getAnalytics(firebaseApp);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
+let unsubscribe;
+
 export async function createUser(email, password){
     const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -55,9 +57,8 @@ export async function loginUserWithGoogle(tokenId){
         };
 }
 
-
 export async function authStateChanged(callback){
-        onAuthStateChanged(auth, async (user) => {
+        unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const accessToken = await user.getIdToken();
 
@@ -74,11 +75,19 @@ export async function authStateChanged(callback){
         });
 }
 
+export function clearAuthStateListener() {
+    if (unsubscribe) {
+        unsubscribe();
+    }
+}
 
-export async function resendEmail(){
-    const user = await auth.currentUser
-
-    await sendEmailVerification(user)
+export async function resendEmail(errorCallback){
+    try {
+        const user = await auth.currentUser
+        await sendEmailVerification(user)
+    } catch(error) {
+        errorCallback(error.message)
+    }
 }
 
 export async function signUserOut(){

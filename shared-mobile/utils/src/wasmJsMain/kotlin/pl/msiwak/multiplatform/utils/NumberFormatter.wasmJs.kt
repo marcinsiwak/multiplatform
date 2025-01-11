@@ -6,7 +6,7 @@ actual class NumberFormatter actual constructor() {
     }
 }
 
-@JsModule("./NumberFormatter.js")
+@JsModule("./utils/NumberFormatter.js")
 external object JsNumberFormatter {
     fun formatNumber(number: Double): String
 }
