@@ -2,6 +2,11 @@ package pl.msiwak.multiplatform.utils
 
 actual class NumberFormatter actual constructor() {
     actual fun formatNumber(number: Double): String {
-        TODO("Not yet implemented")
+        return JsNumberFormatter.formatNumber(number)
     }
+}
+
+@JsModule("./NumberFormatter.js")
+external object JsNumberFormatter {
+    fun formatNumber(number: Double): String
 }
