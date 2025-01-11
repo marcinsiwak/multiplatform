@@ -12,9 +12,19 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
 
     private val auth = Firebase.auth
 
-    override suspend fun createNewUser(email: String, password: String) {
-        val result = auth.createUserWithEmailAndPassword(email, password)
-        result.user?.sendEmailVerification()
+    override suspend fun createNewUser(email: String, password: String): AuthResult {
+        return auth.createUserWithEmailAndPassword(email, password).let {
+            it.user?.sendEmailVerification()
+            AuthResult(
+                user = FirebaseUser(
+                    uid = it.user?.uid,
+                    email = it.user?.email,
+                    displayName = it.user?.displayName,
+                    isEmailVerified = it.user?.isEmailVerified ?: false,
+                    token = it.user?.getIdTokenResult(true)?.token
+                )
+            )
+        }
     }
 
     override suspend fun loginUser(email: String, password: String): AuthResult {
@@ -44,7 +54,8 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
                     email = it.user?.email,
                     displayName = it.user?.displayName,
                     isEmailVerified = it.user?.isEmailVerified ?: false,
-                    token = it.user?.getIdTokenResult(true)?.token
+                    token = it.user?.getIdTokenResult(true)?.token,
+                    isNewUser = it.additionalUserInfo?.isNewUser
                 )
             )
         }

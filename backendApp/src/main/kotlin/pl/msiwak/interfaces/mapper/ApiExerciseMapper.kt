@@ -1,6 +1,6 @@
 package pl.msiwak.interfaces.mapper
 
-import pl.msiwak.domain.entities.ExerciseEntity
+import pl.msiwak.infrastructure.entities.ExerciseEntity
 import pl.msiwak.multiplatform.shared.model.ApiExercise
 
 class ApiExerciseMapper(

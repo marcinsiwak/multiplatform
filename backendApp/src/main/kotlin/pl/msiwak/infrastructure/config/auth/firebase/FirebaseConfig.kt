@@ -23,7 +23,7 @@ class FirebaseConfig(name: String?) : AuthenticationProvider.Config(name) {
     }
 }
 
-fun ApplicationRequest.parseAuthorizationHeaderOrNull(): HttpAuthHeader? = try {
+private fun ApplicationRequest.parseAuthorizationHeaderOrNull(): HttpAuthHeader? = try {
     parseAuthorizationHeader()
 } catch (ex: IllegalArgumentException) {
     println("failed to parse token: $ex")

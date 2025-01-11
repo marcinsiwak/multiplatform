@@ -27,6 +27,7 @@ import athletetrack.shared_mobile.commonresources.generated.resources.deny
 import athletetrack.shared_mobile.commonresources.generated.resources.synchronization_dialog_description
 import athletetrack.shared_mobile.commonresources.generated.resources.synchronization_dialog_title
 import athletetrack.shared_mobile.commonresources.generated.resources.terms
+import athletetrack.shared_mobile.commonresources.generated.resources.terms_confirmation_accept
 import athletetrack.shared_mobile.commonresources.generated.resources.terms_confirmation_description
 import athletetrack.shared_mobile.commonresources.generated.resources.terms_confirmation_title
 import kotlinx.coroutines.flow.collectLatest
@@ -42,7 +43,6 @@ import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
 fun TermsConfirmationScreen(
-    uuid: String,
     navController: NavController,
     viewModel: TermsConfirmationViewModel = koinInject()
 ) {
@@ -59,7 +59,6 @@ fun TermsConfirmationScreen(
     }
 
     TermsConfirmationContent(
-        uuid = uuid,
         navController = navController,
         viewState = viewState,
         onUiAction = {
@@ -73,7 +72,6 @@ fun TermsConfirmationScreen(
 
 @Composable
 private fun TermsConfirmationContent(
-    uuid: String,
     navController: NavController,
     viewState: State<TermsConfirmationState>,
     onUiAction: (TermsConfirmationUiAction) -> Unit
@@ -144,9 +142,9 @@ private fun TermsConfirmationContent(
 
                 MainButton(
                     modifier = Modifier.padding(MaterialTheme.dimens.space_16),
-                    text = stringResource(Res.string.terms_confirmation_title),
+                    text = stringResource(Res.string.terms_confirmation_accept),
                     onClick = {
-                        onUiAction(TermsConfirmationUiAction.OnButtonClick(uuid))
+                        onUiAction(TermsConfirmationUiAction.OnButtonClick)
                     }
                 )
             }
@@ -159,7 +157,6 @@ private fun TermsConfirmationContent(
 private fun TermsConfirmationPreview() {
     AppTheme {
         TermsConfirmationScreen(
-            uuid = "",
             navController = rememberNavController()
         )
     }

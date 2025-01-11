@@ -6,14 +6,14 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.batchUpsert
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.selectAll
-import pl.msiwak.domain.entities.CategoryEntity
-import pl.msiwak.domain.entities.ExerciseEntity
-import pl.msiwak.domain.entities.ResultEntity
 import pl.msiwak.infrastructure.database.dao.dbQuery
 import pl.msiwak.infrastructure.database.dao.upsertWithAudit
 import pl.msiwak.infrastructure.database.table.Categories
 import pl.msiwak.infrastructure.database.table.Exercises
 import pl.msiwak.infrastructure.database.table.Results
+import pl.msiwak.infrastructure.entities.CategoryEntity
+import pl.msiwak.infrastructure.entities.ExerciseEntity
+import pl.msiwak.infrastructure.entities.ResultEntity
 
 @Suppress("TooManyFunctions")
 class ExercisesDaoImpl : ExercisesDao {

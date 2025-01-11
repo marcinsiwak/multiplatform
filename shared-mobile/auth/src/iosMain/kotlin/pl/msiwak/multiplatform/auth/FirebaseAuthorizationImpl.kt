@@ -5,20 +5,32 @@ import dev.gitlive.firebase.auth.GoogleAuthProvider
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
 class FirebaseAuthorizationImpl : FirebaseAuthorization {
 
     private val auth = Firebase.auth
 
-    override suspend fun createNewUser(email: String, password: String) {
+    override suspend fun createNewUser(email: String, password: String): AuthResult {
         val result = auth.createUserWithEmailAndPassword(email, password)
         result.user?.sendEmailVerification()
+        return result.let {
+            AuthResult(
+                user = FirebaseUser(
+                    uid = it.user?.uid,
+                    email = it.user?.email,
+                    displayName = it.user?.displayName,
+                    isEmailVerified = it.user?.isEmailVerified ?: false,
+                    token = it.user?.getIdTokenResult(true)?.token
+                )
+            )
+        }
     }
 
-    override suspend fun loginUser(email: String, password: String): pl.msiwak.multiplatform.commonObject.AuthResult {
+    override suspend fun loginUser(email: String, password: String): AuthResult {
         return auth.signInWithEmailAndPassword(email, password).let {
-            pl.msiwak.multiplatform.commonObject.AuthResult(
+            AuthResult(
                 user = FirebaseUser(
                     uid = it.user?.uid,
                     email = it.user?.email,
@@ -33,14 +45,14 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
     override suspend fun loginWithGoogle(
         googleToken: String?,
         accessToken: String?
-    ): pl.msiwak.multiplatform.commonObject.AuthResult {
+    ): AuthResult {
         return auth.signInWithCredential(
             authCredential = GoogleAuthProvider.credential(
                 idToken = googleToken,
                 accessToken = accessToken
             )
         ).let {
-            pl.msiwak.multiplatform.commonObject.AuthResult(
+            AuthResult(
                 user = FirebaseUser(
                     uid = it.user?.uid,
                     email = it.user?.email,

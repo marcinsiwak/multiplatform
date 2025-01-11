@@ -27,6 +27,7 @@ class VerifyEmailViewModel(
     }
 
     private fun onResendMailClicked() = viewModelScope.launch(errorHandler) {
+        // todo add timer to resend
         resendVerificationEmailUseCase()
     }
 }

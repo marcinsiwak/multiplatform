@@ -1,28 +1,47 @@
 package pl.msiwak.multiplatform.auth
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.callbackFlow
+import pl.msiwak.multiplatform.auth.Firebase.authStateChanged
+import pl.msiwak.multiplatform.auth.Firebase.createUser
+import pl.msiwak.multiplatform.auth.Firebase.loginUserWithGoogle
+import pl.msiwak.multiplatform.auth.Firebase.loginUserWithPassword
+import pl.msiwak.multiplatform.auth.Firebase.resendEmail
+import pl.msiwak.multiplatform.auth.Firebase.signUserOut
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
-import pl.msiwak.multiplatform.network.FirebaseApi
 
-class FirebaseAuthorizationImpl(private val firebaseApi: FirebaseApi) : FirebaseAuthorization {
+class FirebaseAuthorizationImpl : FirebaseAuthorization {
 
-    override suspend fun createNewUser(email: String, password: String) {
+    override suspend fun createNewUser(email: String, password: String): AuthResult? {
+        val response = createUser(email, password).await()
+        return AuthResult(
+            user = response.let {
+                FirebaseUser(
+                    uid = it.uid,
+                    email = it.email,
+                    displayName = it.displayName,
+                    isEmailVerified = it.emailVerified,
+                    token = it.accessToken
+                )
+            }
+        )
     }
 
     override suspend fun loginUser(
         email: String,
         password: String
     ): AuthResult {
+        val response = loginUserWithPassword(email, password).await()
+
         return AuthResult(
-            user = firebaseApi.loginUserWithPassword(email, password).let {
+            user = response.let {
                 FirebaseUser(
-                    uid = it.localId,
+                    uid = it.uid,
                     email = it.email,
                     displayName = it.displayName,
-                    isEmailVerified = it.emailVerified ?: false,
-                    token = it.idToken
+                    isEmailVerified = it.emailVerified,
+                    token = it.accessToken
                 )
             }
         )
@@ -32,27 +51,40 @@ class FirebaseAuthorizationImpl(private val firebaseApi: FirebaseApi) : Firebase
         googleToken: String?,
         accessToken: String?
     ): AuthResult {
-        val response = googleToken?.let { firebaseApi.loginUserWithGoogle(it) }
+        val response = googleToken?.let { loginUserWithGoogle(it).await() }
         return AuthResult(
             user = response?.let {
                 FirebaseUser(
-                    uid = it.localId,
+                    uid = it.uid,
                     email = it.email,
                     displayName = it.displayName,
-                    isEmailVerified = it.emailVerified ?: false,
-                    token = it.idToken
+                    isEmailVerified = it.emailVerified,
+                    token = it.accessToken
                 )
             }
         )
     }
 
-    override fun observeAuthStateChanged(): Flow<FirebaseUser?> {
-        return flow { FirebaseUser("14", "a@a.com", null, true, "fwoanfwn") } // todo
+    override fun observeAuthStateChanged(): Flow<FirebaseUser?> = callbackFlow {
+        authStateChanged {
+            trySend(
+                FirebaseUser(
+                    uid = it?.uid,
+                    email = it?.email,
+                    displayName = it?.displayName,
+                    isEmailVerified = it?.emailVerified ?: false,
+                    token = it?.accessToken
+                )
+            )
+        }
     }
 
     override suspend fun logoutUser() {
+        signUserOut()
     }
 
     override suspend fun resendVerificationEmail() {
+        // todo handle errorhandling in auth.js
+        resendEmail()
     }
 }

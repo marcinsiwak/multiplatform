@@ -12,14 +12,19 @@ import pl.msiwak.multiplatform.shared.model.ApiUser
 class UserApi(private val ktorClient: KtorClient) {
 
     suspend fun getUser(): Flow<ApiUser> {
-        val response: ApiUser =
-            ktorClient.httpClient.get("api/user").body()
+        val response: ApiUser = ktorClient.httpClient.get("api/user").body()
         return flowOf(response)
     }
 
-    suspend fun createUser(uuid: String) {
+    suspend fun createUserWithGoogle() {
+        ktorClient.httpClient.post("api/googleUser")
+    }
+
+    suspend fun createUser(uuid: String, email: String) {
         ktorClient.httpClient.post("api/user") {
-            setBody(ApiUser(id = uuid))
+            setBody(ApiUser(id = uuid, email = email))
         }
     }
+
+//    suspend fun updateUser(uuid: String) {}
 }

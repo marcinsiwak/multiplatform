@@ -80,8 +80,9 @@ fun VerifyEmailScreenContent(
                         )
                     )
                     .padding(
-                        vertical = MaterialTheme.dimens.space_32,
-                        horizontal = MaterialTheme.dimens.space_16
+                        top = it.calculateTopPadding(),
+                        start = MaterialTheme.dimens.space_16,
+                        end = MaterialTheme.dimens.space_16
                     )
             ) {
                 Text(

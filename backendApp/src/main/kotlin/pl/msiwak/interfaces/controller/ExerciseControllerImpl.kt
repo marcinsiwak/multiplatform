@@ -1,16 +1,16 @@
 package pl.msiwak.interfaces.controller
 
 import kotlinx.datetime.Instant
-import pl.msiwak.application.usecases.AddCategoryUseCase
-import pl.msiwak.application.usecases.AddExerciseUseCase
-import pl.msiwak.application.usecases.AddResultUseCase
-import pl.msiwak.application.usecases.GetCategoriesUseCase
-import pl.msiwak.application.usecases.GetCategoryUseCase
-import pl.msiwak.application.usecases.GetExerciseUseCase
-import pl.msiwak.application.usecases.RemoveCategoryUseCase
-import pl.msiwak.application.usecases.RemoveExerciseUseCase
-import pl.msiwak.application.usecases.RemoveResultUseCase
-import pl.msiwak.application.usecases.SynchronizeDataUseCase
+import pl.msiwak.domain.usecases.AddCategoryUseCase
+import pl.msiwak.domain.usecases.AddExerciseUseCase
+import pl.msiwak.domain.usecases.AddResultUseCase
+import pl.msiwak.domain.usecases.GetCategoriesUseCase
+import pl.msiwak.domain.usecases.GetCategoryUseCase
+import pl.msiwak.domain.usecases.GetExerciseUseCase
+import pl.msiwak.domain.usecases.RemoveCategoryUseCase
+import pl.msiwak.domain.usecases.RemoveExerciseUseCase
+import pl.msiwak.domain.usecases.RemoveResultUseCase
+import pl.msiwak.domain.usecases.SynchronizeDataUseCase
 import pl.msiwak.multiplatform.shared.model.ApiCategory
 import pl.msiwak.multiplatform.shared.model.ApiExercise
 import pl.msiwak.multiplatform.shared.model.ApiResult

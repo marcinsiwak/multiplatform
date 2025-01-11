@@ -1,6 +1,6 @@
 package pl.msiwak.interfaces.mapper
 
-import pl.msiwak.domain.entities.ResultEntity
+import pl.msiwak.infrastructure.entities.ResultEntity
 import pl.msiwak.multiplatform.shared.model.ApiResult
 
 class ApiResultMapper : Mapper<ResultEntity, ApiResult>() {

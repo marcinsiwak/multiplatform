@@ -82,9 +82,7 @@ fun WelcomeScreen(
                 )
 
                 is WelcomeEvent.NavigateToTermsAndConditions -> navController.navigate(
-                    NavDestination.WelcomeDestination.NavTermsConfirmationScreen.route(
-                        event.uuid
-                    )
+                    NavDestination.WelcomeDestination.NavTermsConfirmationScreen.route
                 )
             }
         }

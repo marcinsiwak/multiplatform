@@ -92,7 +92,8 @@
 
     <string name="accept_terms">Zaakceptuj regulamin</string>
     <string name="terms">Regulamin</string>
-    <string name="terms_confirmation_title">Utwórz konto</string>
-    <string name="terms_confirmation_description">Wybierając opcję Utwórz konto, wyrażasz zgodę na nasz regulamin.</string>
+    <string name="terms_confirmation_title">Regulamin</string>
+    <string name="terms_confirmation_description">Aby używać aplikacji musisz zaakceptować regulamin.</string>
+    <string name="terms_confirmation_accept">Akceptuję</string>
 
 </resources>

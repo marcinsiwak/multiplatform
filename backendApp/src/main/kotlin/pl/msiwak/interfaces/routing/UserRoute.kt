@@ -1,7 +1,6 @@
 package pl.msiwak.interfaces.routing
 
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.principal
 import io.ktor.server.request.receive
@@ -18,20 +17,45 @@ import pl.msiwak.multiplatform.shared.model.ApiUser
 fun Route.addUserRoutes() {
     val userController by inject<UserController>()
 
-    authenticate(FIREBASE_AUTH) {
-        post("/user") {
-            with(call) {
-                val principal = principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
-                receive<ApiUser>().run {
-                    userController.addUser(
-                        username ?: principal.displayName,
-                        principal.displayName,
-                        principal.userId
-                    )
-                }
+    post("/user") {
+        with(call) {
+            receive<ApiUser>().run {
+                userController.addUser(
+                    id,
+                    email,
+                    email
+                )
                 respond(HttpStatusCode.OK)
             }
         }
+    }
+
+    authenticate(FIREBASE_AUTH) {
+        post("/googleUser") {
+            with(call) {
+                val principal = principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
+                userController.addUser(
+                    principal.userId,
+                    principal.displayName,
+                    principal.displayName
+                )
+                respond(HttpStatusCode.OK)
+            }
+        }
+//
+//        put("/user") {
+//            with(call) {
+//                val principal = principal<FirebaseUser>() ?: return@put call.respond(HttpStatusCode.Unauthorized)
+//                receive<ApiUser>().run {
+//                    userController.updateUser(
+//                        username ?: principal.displayName,
+//                        principal.displayName,
+//                        principal.userId
+//                    )
+//                }
+//                respond(HttpStatusCode.OK)
+//            }
+//        }
 
         get("/user") {
             with(call) {

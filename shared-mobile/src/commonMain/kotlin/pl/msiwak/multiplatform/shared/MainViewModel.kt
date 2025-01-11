@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
 import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
+import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
@@ -22,10 +23,15 @@ class MainViewModel(
     globalErrorHandler: GlobalErrorHandler,
     getUserTokenUseCase: GetUserTokenUseCase,
     observeAuthStateChangedUseCase: ObserveAuthStateChangedUseCase,
+    private val getUserUseCase: GetUserUseCase,
     val navigationProvider: NavigationProvider
 ) : ViewModel() {
 
     private val errorHandler = globalErrorHandler.handleError()
+    private val getUserErrorHandler = globalErrorHandler.handleError {
+        _viewState.update { it.copy(directions = NavDestination.WelcomeDestination.NavWelcomeGraphDestination) }
+        true
+    }
 
     private val _viewState = MutableStateFlow(MainState())
     val viewState: StateFlow<MainState> = _viewState.asStateFlow()
@@ -38,14 +44,18 @@ class MainViewModel(
             _viewState.update { it.copy(isLoading = true) }
             fetchRemoteConfigUseCase()
 
-            if (!getUserTokenUseCase().isNullOrEmpty()) {
-                _viewState.update { it.copy(directions = NavDestination.DashboardDestination.NavDashboardGraphDestination) }
-            }
 //            if (getForceUpdateStateUseCase()) {
 //                _viewState.update { it.copy(directions = NavDestination.ForceUpdateDestination.NavForceUpdateGraphDestination) }
 //            }
             delay(500)
             _viewState.update { it.copy(isLoading = false) }
+        }
+
+        viewModelScope.launch(getUserErrorHandler) {
+            if (!getUserTokenUseCase().isNullOrEmpty()) {
+                getUserUseCase()
+                _viewState.update { it.copy(directions = NavDestination.DashboardDestination.NavDashboardGraphDestination) }
+            }
         }
     }
 }

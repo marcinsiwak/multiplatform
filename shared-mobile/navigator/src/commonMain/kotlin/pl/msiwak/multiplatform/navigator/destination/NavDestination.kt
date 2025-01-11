@@ -9,7 +9,6 @@ import pl.msiwak.multiplatform.navigator.ADD_CATEGORY_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.ADD_EXERCISE_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.ARG_CATEGORY_ID
 import pl.msiwak.multiplatform.navigator.ARG_EXERCISE_ID
-import pl.msiwak.multiplatform.navigator.ARG_UUID_ID
 import pl.msiwak.multiplatform.navigator.CATEGORY_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.DASHBOARD_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.FORCE_UPDATE_SCREEN_ROUTE
@@ -27,13 +26,7 @@ sealed class NavDestination(val route: String) {
     sealed class WelcomeDestination(route: String) : NavDestination(route) {
         object NavWelcomeGraphDestination : WelcomeDestination("welcome_graph")
         object NavWelcomeScreen : WelcomeDestination(WELCOME_SCREEN_ROUTE)
-
-        object NavTermsConfirmationScreen :
-            WelcomeDestination("$TERMS_CONFIRMATION_SCREEN_ROUTE/{$ARG_UUID_ID}") {
-            fun route(uuid: String): String {
-                return "$TERMS_CONFIRMATION_SCREEN_ROUTE/$uuid"
-            }
-        }
+        object NavTermsConfirmationScreen : WelcomeDestination(TERMS_CONFIRMATION_SCREEN_ROUTE)
     }
 
     sealed class RegistrationDestination(route: String) : NavDestination(route) {

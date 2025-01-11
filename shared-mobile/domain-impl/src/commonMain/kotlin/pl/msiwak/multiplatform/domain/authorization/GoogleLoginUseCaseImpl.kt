@@ -2,18 +2,15 @@ package pl.msiwak.multiplatform.domain.authorization
 
 import pl.msiwak.multiplatform.data.remote.repository.AuthRepository
 import pl.msiwak.multiplatform.data.remote.repository.SessionRepository
-import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
 
 class GoogleLoginUseCaseImpl(
     private val authRepository: AuthRepository,
-    private val sessionRepository: SessionRepository,
-    private val createUserUseCase: CreateUserUseCase
+    private val sessionRepository: SessionRepository
 ) : GoogleLoginUseCase {
-    override suspend operator fun invoke(tokenId: String?, accessToken: String?): String? {
+    override suspend operator fun invoke(tokenId: String?, accessToken: String?) {
         val result = authRepository.loginWithGoogle(tokenId, accessToken)
         val token = result?.user?.token
         token?.let { sessionRepository.saveToken(it) }
-        result?.user?.uid?.let { createUserUseCase(it) }
-        return result?.user?.uid
+        println("OUTPUT USER: ${result?.user}")
     }
 }

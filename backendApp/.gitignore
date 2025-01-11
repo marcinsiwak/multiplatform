@@ -34,7 +34,7 @@ out/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/sportplatform-b5318-firebase-adminsdk-egpiw-0065c30f75.json
+/src/main/resources/firebase-adminsdk.json
 
 .env
 tmp/

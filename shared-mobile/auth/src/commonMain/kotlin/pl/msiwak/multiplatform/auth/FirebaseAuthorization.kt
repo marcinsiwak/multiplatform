@@ -6,7 +6,7 @@ import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
 interface FirebaseAuthorization {
 
-    suspend fun createNewUser(email: String, password: String)
+    suspend fun createNewUser(email: String, password: String): AuthResult?
 
     suspend fun loginUser(email: String, password: String): AuthResult
 
