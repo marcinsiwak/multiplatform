@@ -14,6 +14,7 @@ fun main() {
     startKoin {
         modules(appModule() + platformRepositoryModule + databaseModule)
     }
+
     ComposeViewport(document.body!!) {
         MainView()
     }
