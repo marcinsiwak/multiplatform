@@ -46,6 +46,7 @@ kotlin {
 
         wasmJsMain.dependencies {
             implementation(project(Modules.network))
+            implementation(npm("firebase", "11.1.0"))
         }
 
         commonTest.dependencies {
