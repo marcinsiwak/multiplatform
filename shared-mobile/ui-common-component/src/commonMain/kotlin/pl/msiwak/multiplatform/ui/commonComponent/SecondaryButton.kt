@@ -10,8 +10,9 @@ import androidx.compose.ui.Modifier
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 
 @Composable
-fun SecondaryButton(modifier: Modifier = Modifier, onClick: () -> Unit, text: String) {
+fun SecondaryButton(modifier: Modifier = Modifier, enabled: Boolean = true, onClick: () -> Unit, text: String) {
     Button(
+        enabled = enabled,
         modifier = modifier.height(MaterialTheme.dimens.default_button_height),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(

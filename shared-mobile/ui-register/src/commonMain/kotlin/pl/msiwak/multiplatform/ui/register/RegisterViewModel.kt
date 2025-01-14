@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.PasswordRequirement
 import pl.msiwak.multiplatform.commonObject.PasswordRequirementType
+import pl.msiwak.multiplatform.commonObject.exception.UserAlreadyExistsException
 import pl.msiwak.multiplatform.domain.authorization.RegisterUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 import pl.msiwak.multiplatform.utils.validators.Validator
@@ -32,12 +33,12 @@ class RegisterViewModel(
 
     private val errorHandler = globalErrorHandler.handleError { throwable ->
         when (throwable) {
-//            is FirebaseAuthUserCollisionException -> {
-//                viewModelScope.launch {
-//                    _viewEvent.emit(RegisterEvent.NavigateToVerifyEmail)
-//                }
-//                true
-//            }
+            is UserAlreadyExistsException -> {
+                viewModelScope.launch {
+                    _viewEvent.emit(RegisterEvent.NavigateToVerifyEmail)
+                }
+                true
+            }
 
             else -> false
         }

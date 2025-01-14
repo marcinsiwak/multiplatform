@@ -16,7 +16,7 @@ class AndroidConfigPlugin : Plugin<Project> {
             compileSdkVersion(34)
 
             with(defaultConfig) {
-                minSdk = 24
+                minSdk = 27
             }
         }
 

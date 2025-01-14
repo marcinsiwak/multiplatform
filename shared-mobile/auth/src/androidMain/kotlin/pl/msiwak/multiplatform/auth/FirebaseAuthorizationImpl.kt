@@ -21,7 +21,7 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
                     email = it.user?.email,
                     displayName = it.user?.displayName,
                     isEmailVerified = it.user?.isEmailVerified ?: false,
-                    token = it.user?.getIdTokenResult(true)?.token
+                    token = it.user?.getIdToken(true)
                 )
             )
         }
@@ -35,7 +35,7 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
                     email = it.user?.email,
                     displayName = it.user?.displayName,
                     isEmailVerified = it.user?.isEmailVerified ?: false,
-                    token = it.user?.getIdTokenResult(true)?.token
+                    token = it.user?.getIdToken(true)
                 )
             )
         }
@@ -54,7 +54,7 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
                     email = it.user?.email,
                     displayName = it.user?.displayName,
                     isEmailVerified = it.user?.isEmailVerified ?: false,
-                    token = it.user?.getIdTokenResult(true)?.token,
+                    token = it.user?.getIdToken(true),
                     isNewUser = it.additionalUserInfo?.isNewUser
                 )
             )

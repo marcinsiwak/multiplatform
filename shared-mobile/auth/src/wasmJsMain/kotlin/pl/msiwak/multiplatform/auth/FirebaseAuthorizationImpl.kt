@@ -1,8 +1,10 @@
 package pl.msiwak.multiplatform.auth
 
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import pl.msiwak.multiplatform.auth.Firebase.authStateChanged
+import pl.msiwak.multiplatform.auth.Firebase.clearAuthStateListener
 import pl.msiwak.multiplatform.auth.Firebase.createUser
 import pl.msiwak.multiplatform.auth.Firebase.loginUserWithGoogle
 import pl.msiwak.multiplatform.auth.Firebase.loginUserWithPassword
@@ -77,6 +79,7 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
                 )
             )
         }
+        awaitClose { clearAuthStateListener() }
     }
 
     override suspend fun logoutUser() {
@@ -84,7 +87,16 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
     }
 
     override suspend fun resendVerificationEmail() {
-        // todo handle errorhandling in auth.js
-        resendEmail()
+        // hack for strange problem with error handling
+        callbackFlow {
+            resendEmail(
+                errorCallback = {
+                    trySend(it)
+                }
+            )
+            awaitClose()
+        }.collect {
+            throw Throwable(it)
+        }
     }
 }

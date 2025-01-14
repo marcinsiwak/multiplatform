@@ -20,6 +20,7 @@ import athletetrack.shared_mobile.commonresources.generated.resources.Res
 import athletetrack.shared_mobile.commonresources.generated.resources.verify_description
 import athletetrack.shared_mobile.commonresources.generated.resources.verify_login
 import athletetrack.shared_mobile.commonresources.generated.resources.verify_resend_mail
+import athletetrack.shared_mobile.commonresources.generated.resources.verify_resend_mail_time
 import athletetrack.shared_mobile.commonresources.generated.resources.verify_title
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.stringResource
@@ -101,8 +102,13 @@ fun VerifyEmailScreenContent(
 
                 SecondaryButton(
                     modifier = Modifier.fillMaxWidth(),
+                    enabled = viewState.value.resendDelay == 0,
                     onClick = { onUiAction(VerifyEmailUiAction.OnResendMailClicked) },
-                    text = stringResource(Res.string.verify_resend_mail)
+                    text = if (viewState.value.resendDelay > 0) {
+                        stringResource(Res.string.verify_resend_mail_time, viewState.value.resendDelay.toString())
+                    } else {
+                        stringResource(Res.string.verify_resend_mail)
+                    }
                 )
 
                 MainButton(

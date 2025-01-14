@@ -9,12 +9,8 @@ class GlobalErrorHandler {
         CoroutineExceptionHandler { _, throwable: Throwable ->
             if (!customHandle(throwable)) {
                 when (throwable) {
-//                    is FirebaseAuthUserCollisionException -> {
-//                        Logger.e("Same user error: $throwable")
-//                    }
-
                     else -> {
-                        Logger.e("Error: $throwable")
+                        Logger.e("Error: ${throwable.message}")
                     }
                 }
             }

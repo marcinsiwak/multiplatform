@@ -235,6 +235,7 @@ tasks.create("setupBuildkonfig") {
 
     val buildKonfigFlavor = when {
         gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserDevelopmentRun") -> "stagingDebug"
+        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserDistribution") -> "productionRelease"
         gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserProductionRun") -> "productionRelease"
         androidKMPFlavor.isEmpty() -> project.findProperty(KotlinCocoapodsPlugin.CONFIGURATION_PROPERTY).toString()
         else -> androidKMPFlavor
