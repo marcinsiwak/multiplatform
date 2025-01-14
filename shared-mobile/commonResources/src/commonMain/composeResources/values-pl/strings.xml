@@ -63,6 +63,7 @@
     <string name="verify_description">Wysłano link aktywacyjny. Sprawdź swoją pocztę i potwierdź stworzenie konta.</string>
     <string name="verify_open_mail">Otwórz pocztę</string>
     <string name="verify_resend_mail">Wyślij ponownie</string>
+    <string name="verify_resend_mail_time">Wyślij ponownie (%1$s)</string>
     <string name="verify_login">Zaloguj</string>
 
     <string name="password_requirements_number">Zawiera numer</string>
