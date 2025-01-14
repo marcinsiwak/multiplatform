@@ -3,7 +3,6 @@ package pl.msiwak.multiplatform.main
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
-import kotlinx.browser.window
 import org.koin.core.context.startKoin
 import pl.msiwak.multiplatform.shared.MainView
 import pl.msiwak.multiplatform.shared.appModule
@@ -15,13 +14,7 @@ fun main() {
     startKoin {
         modules(appModule() + platformRepositoryModule + databaseModule)
     }
-
-    try {
-        print("Starting WASM application...")
-        ComposeViewport(document.body!!) {
-            MainView()
-        }
-    } catch (e: Exception) {
-        println("Error new occurred in WASM application: ${e.message}")
+    ComposeViewport(document.body!!) {
+        MainView()
     }
 }
