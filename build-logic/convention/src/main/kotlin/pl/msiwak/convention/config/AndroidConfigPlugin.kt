@@ -4,12 +4,11 @@ import com.android.build.gradle.BaseExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 
-class AndroidConfigPlugin: Plugin<Project> {
+class AndroidConfigPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val javaVersion = JavaVersion.VERSION_17
 
@@ -17,10 +16,12 @@ class AndroidConfigPlugin: Plugin<Project> {
             compileSdkVersion(34)
 
             with(defaultConfig) {
-                minSdk = 24
+                minSdk = 27
             }
         }
 
-        project.kotlinExtension.jvmToolchain(JavaLanguageVersion.of(javaVersion.majorVersion).asInt())
+        project.kotlinExtension.jvmToolchain(
+            JavaLanguageVersion.of(javaVersion.majorVersion).asInt()
+        )
     }
 }

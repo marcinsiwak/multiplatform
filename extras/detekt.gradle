@@ -5,5 +5,9 @@ detekt {
     allRules = false
     ignoreFailures = false
     parallel = true
-    config = files("$rootDir/config/detekt/detekt.yml")
+    config.setFrom(file("$rootDir/config/detekt/detekt.yml"))
+
+    dependencies {
+        detektPlugins(libs.detekt.formatting)
+    }
 }

@@ -1,0 +1,12 @@
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - web
+    ports:
+      - "3000:3000"
+networks:
+  web:
+    driver: bridge

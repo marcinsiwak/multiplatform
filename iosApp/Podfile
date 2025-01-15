@@ -1,7 +1,7 @@
 target 'iosApp' do
   use_frameworks!
   platform :ios, '16.2'
-  pod 'shared', :path => '../shared'
+  pod 'shared_mobile', :path => '../shared-mobile'
 end
 
 post_install do |installer|

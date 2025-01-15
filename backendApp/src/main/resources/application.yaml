@@ -1,0 +1,12 @@
+ktor:
+    application:
+        modules:
+            - pl.msiwak.ApplicationKt.module
+#    development: true
+    deployment:
+        port: 8080
+storage:
+    driverClassName: "org.postgresql.Driver"
+    jdbcURL: "$DATABASE_URL"
+    user: "$DATABASE_USER"
+    password: "$DATABASE_PASSWORD"
