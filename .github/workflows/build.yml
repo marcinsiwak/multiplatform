@@ -25,6 +25,9 @@ jobs:
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
           os: ${{ runner.os }}
 
+      - name: Run clean
+        run: ./gradlew :composeApp:clean
+
       - name: Run ktlintCheck
         run: ./gradlew :composeApp:ktlintCheck
 
