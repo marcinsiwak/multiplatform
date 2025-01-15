@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "develop", "master" ]
+    branches: [ "develop", "master", "release/*" ]
   pull_request:
-    branches: [ "develop", "master" ]
+    branches: [ "develop", "master", "release/*" ]
 
 jobs:
 #  Pull request script
@@ -24,6 +24,9 @@ jobs:
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
           os: ${{ runner.os }}
+
+      - name: Run clean
+        run: ./gradlew :composeApp:clean
 
       - name: Run ktlintCheck
         run: ./gradlew :composeApp:ktlintCheck
