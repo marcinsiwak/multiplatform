@@ -298,13 +298,13 @@ jobs:
           BUILD_NUMBER: ${{steps.get_pull_request_number.outputs.result}}
 
   backendAppJob:
-    if: ${{contains(github.event.pull_request.labels.*.name, 'Backend') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'Backend') }}
     name: Run Backend App
     uses: ./.github/workflows/backend-app.yml
     secrets: inherit
 
   wasmAppJob:
-    if: ${{contains(github.event.pull_request.labels.*.name, 'Wasm') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'Wasm') }}
     name: Run Wasm App
     uses: ./.github/workflows/wasm-app.yml
     secrets: inherit
