@@ -9,8 +9,11 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false)}}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) && contains(github.event.pull_request.labels.*.name, 'Backend')}}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backendApp
 
     steps:
       - name: Checkout repository
@@ -39,8 +42,11 @@ jobs:
           ./gradlew :backendApp:build
 
   build-and-push:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && contains(github.event.pull_request.labels.*.name, 'Backend')}}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backendApp
 
     steps:
       - name: Checkout repository
