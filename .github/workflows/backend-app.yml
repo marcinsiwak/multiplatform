@@ -34,7 +34,9 @@ jobs:
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Build app
-        run: ./gradlew :backendApp:build
+        run: |
+          ls
+          ./gradlew :backendApp:build
 
   build-and-push:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
@@ -62,9 +64,7 @@ jobs:
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Build app
-        run: |
-          ls
-          ./gradlew :backendApp:build
+        run: ./gradlew :backendApp:build
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
