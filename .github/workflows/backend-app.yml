@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) && contains(github.event.pull_request.labels.*.name, 'Backend') }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
     runs-on: ubuntu-latest
 
     steps:
@@ -81,11 +81,12 @@ jobs:
 
       - name: Build and push the Docker image
         run: |
+          cd backendApp
           docker buildx create --use
           docker buildx build --push --platform linux/amd64,linux/arm64,linux/arm64/v8 \
           -t marcinsiwak/athletetrack-api-kotlin:${{ github.sha }} \
           -t marcinsiwak/athletetrack-api-kotlin:latest \
-          -f backendApp/Dockerfile .
+          -f Dockerfile .
 
   deploy:
     runs-on: ubuntu-latest
