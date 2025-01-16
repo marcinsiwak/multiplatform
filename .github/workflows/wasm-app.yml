@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) && contains(github.event.pull_request.labels.*.name, 'Wasm')}}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) }}
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +31,7 @@ jobs:
           ./gradlew :composeApp:wasmJsBrowserDistribution
 
   build-and-push:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && contains(github.event.pull_request.labels.*.name, 'Wasm')}}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
     runs-on: ubuntu-latest
 
     steps:
