@@ -35,7 +35,7 @@ jobs:
 
       - name: Build app
         run: |
-          ls
+          cd ..
           ./gradlew :backendApp:build
 
   build-and-push:
@@ -79,12 +79,11 @@ jobs:
 
       - name: Build and push the Docker image
         run: |
-          cd backendApp
           docker buildx create --use
           docker buildx build --push --platform linux/amd64,linux/arm64,linux/arm64/v8 \
           -t marcinsiwak/athletetrack-api-kotlin:${{ github.sha }} \
           -t marcinsiwak/athletetrack-api-kotlin:latest \
-          -f Dockerfile .
+          -f backendApp/Dockerfile .
 
   deploy:
     runs-on: ubuntu-latest
