@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false)}}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) && contains(github.event.pull_request.labels.*.name, 'Backend')}}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
@@ -37,10 +37,12 @@ jobs:
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Build app
-        run: ./gradlew backendApp:build
+        run: |
+          cd ..
+          ./gradlew :backendApp:build
 
   build-and-push:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && contains(github.event.pull_request.labels.*.name, 'Backend')}}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,7 +50,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
@@ -68,7 +70,9 @@ jobs:
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Build app
-        run: ./gradlew backendApp:build
+        run: |
+          cd ..
+          ./gradlew :backendApp:build
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -83,7 +87,6 @@ jobs:
 
       - name: Build and push the Docker image
         run: |
-          cd backendApp
           docker buildx create --use
           docker buildx build --push --platform linux/amd64,linux/arm64,linux/arm64/v8 \
           -t marcinsiwak/athletetrack-api-kotlin:${{ github.sha }} \
