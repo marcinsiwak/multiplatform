@@ -35,7 +35,7 @@ jobs:
           ./gradlew :composeApp:wasmJsBrowserDistribution
 
   build-and-push:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && contains(github.event.pull_request.labels.*.name, 'Wasm')}}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     defaults:
       run:
