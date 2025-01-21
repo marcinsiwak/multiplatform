@@ -2,8 +2,12 @@ package pl.msiwak.multiplatform.network.service
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
+import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.commonObject.ResultData
 import pl.msiwak.multiplatform.network.api.CategoryApi
 import pl.msiwak.multiplatform.network.mapper.CategoryMapper
@@ -23,21 +27,19 @@ class CategoryService(
 ) {
 
     suspend fun downloadCategories(): Flow<List<Category>> {
-        return categoryApi.downloadCategories()
-            .map { category ->
-                category.map {
-                    categoryMapper(it)
-                }
+        return categoryApi.downloadCategories().map { categories ->
+            categories.map {
+                categoryMapper(it)
             }
+        }
     }
 
     suspend fun downloadCategory(id: String): Flow<Category> {
-        return categoryApi.downloadCategory(id)
-            .map { categoryMapper(it) }
+        return categoryApi.downloadCategory(id).map { categoryMapper(it) }
     }
 
-    suspend fun createCategory(category: ApiCategory) {
-        categoryApi.createCategory(category)
+    suspend fun createCategory(name: String, exerciseType: ExerciseType) {
+        categoryApi.createCategory(ApiCategory(name = name, exerciseType = exerciseType.name))
     }
 
     suspend fun removeCategory(id: String) {
@@ -45,13 +47,17 @@ class CategoryService(
     }
 
     suspend fun downloadExercise(id: String): Flow<Exercise> {
-        return categoryApi.downloadExercise(id)
-            .map { exerciseMapper(it) }
+        return categoryApi.downloadExercise(id).map { exerciseMapper(it) }
     }
 
-    suspend fun addExercise(exerciseRequest: ApiExercise): Flow<Exercise> {
-        return categoryApi.addExercise(exerciseRequest)
-            .map { exerciseMapper(it) }
+    suspend fun addExercise(categoryId: String, name: String, exerciseType: ExerciseType): Flow<Exercise> {
+        return categoryApi.addExercise(
+            ApiExercise(
+                categoryId = categoryId,
+                name = name,
+                exerciseType = exerciseType.name
+            )
+        ).map { exerciseMapper(it) }
     }
 
     suspend fun updateExerciseName(updateExerciseNameRequest: ApiUpdateExerciseNameRequest) {
@@ -62,9 +68,20 @@ class CategoryService(
         categoryApi.removeExercise(id)
     }
 
-    suspend fun addResult(result: ApiResult): Flow<ResultData> {
-        return categoryApi.addResult(result)
-            .map { resultMapper(it) }
+    suspend fun addResult(
+        exerciseId: String,
+        result: String,
+        amount: String,
+        dateTime: LocalDateTime
+    ): Flow<ResultData> {
+        return categoryApi.addResult(
+            ApiResult(
+                exerciseId = exerciseId,
+                result = result,
+                amount = amount,
+                date = dateTime.toInstant(TimeZone.UTC)
+            )
+        ).map { resultMapper(it) }
     }
 
     suspend fun removeResult(id: String) {

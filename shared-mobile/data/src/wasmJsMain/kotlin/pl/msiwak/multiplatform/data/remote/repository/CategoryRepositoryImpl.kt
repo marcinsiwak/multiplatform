@@ -3,20 +3,14 @@ package pl.msiwak.multiplatform.data.remote.repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
+import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.Exercise
-import pl.msiwak.multiplatform.commonObject.ResultData
+import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.network.service.CategoryService
-import pl.msiwak.multiplatform.shared.model.ApiCategory
-import pl.msiwak.multiplatform.shared.model.ApiExercise
-import pl.msiwak.multiplatform.shared.model.ApiResult
 import pl.msiwak.multiplatform.shared.model.ApiUpdateExerciseNameRequest
 
-class CategoryRepositoryImpl(
-    private val categoryService: CategoryService,
-) : CategoryRepository {
+class CategoryRepositoryImpl(private val categoryService: CategoryService) : CategoryRepository {
 
     override suspend fun downloadCategories() {}
 
@@ -30,13 +24,8 @@ class CategoryRepositoryImpl(
         return@withContext categoryService.downloadCategories()
     }
 
-    override suspend fun createCategory(category: Category) = withContext(Dispatchers.IO) {
-        categoryService.createCategory(
-            ApiCategory(
-                name = category.name,
-                exerciseType = category.exerciseType.name
-            )
-        )
+    override suspend fun createCategory(name: String, exerciseType: ExerciseType) = withContext(Dispatchers.IO) {
+        categoryService.createCategory(name = name, exerciseType = exerciseType)
     }
 
     override suspend fun removeCategory(categoryId: String) = withContext(Dispatchers.IO) {
@@ -49,15 +38,14 @@ class CategoryRepositoryImpl(
         return@withContext categoryService.downloadExercise(exerciseId)
     }
 
-    override suspend fun addExercise(exercise: Exercise): String = withContext(Dispatchers.IO) {
-        return@withContext categoryService.addExercise(
-            ApiExercise(
-                categoryId = exercise.categoryId,
-                name = exercise.exerciseTitle,
-                exerciseType = exercise.exerciseType.name
-            )
-        ).first().id
-    }
+    override suspend fun addExercise(categoryId: String, name: String, exerciseType: ExerciseType): String =
+        withContext(Dispatchers.IO) {
+            return@withContext categoryService.addExercise(
+                categoryId = categoryId,
+                name = name,
+                exerciseType = exerciseType
+            ).first().id
+        }
 
     override suspend fun updateExerciseName(exercise: Exercise) = withContext(Dispatchers.IO) {
         categoryService.updateExerciseName(
@@ -70,19 +58,11 @@ class CategoryRepositoryImpl(
 
     override suspend fun removeExercise(exercise: Exercise) = withContext(Dispatchers.IO) {
         categoryService.removeExercise(exercise.id)
-
     }
 
-    override suspend fun addResult(result: ResultData) {
+    override suspend fun addResult(exerciseId: String, result: String, amount: String, dateTime: LocalDateTime) {
         withContext(Dispatchers.IO) {
-            categoryService.addResult(
-                ApiResult(
-                    exerciseId = result.exerciseId,
-                    result = result.result,
-                    amount = result.amount,
-                    date = result.date.toInstant(TimeZone.currentSystemDefault())
-                )
-            )
+            categoryService.addResult(exerciseId, result, amount, dateTime)
         }
     }
 

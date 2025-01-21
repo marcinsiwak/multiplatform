@@ -8,8 +8,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Exercise(
-    val id: String = "",
-    val categoryId: String = "",
+    val id: String,
+    val categoryId: String,
     var exerciseTitle: String = "",
     val results: List<ResultData> = emptyList(),
     val exerciseType: ExerciseType = ExerciseType.GYM,

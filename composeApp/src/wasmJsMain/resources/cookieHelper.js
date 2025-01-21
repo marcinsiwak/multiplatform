@@ -18,5 +18,5 @@ function getCookie(name) {
             return cookie.substring(name.length + 1);
         }
     }
-    return null;
+    return "";
 }
