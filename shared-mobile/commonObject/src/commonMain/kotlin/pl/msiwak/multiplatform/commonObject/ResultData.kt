@@ -8,8 +8,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResultData(
-    val id: String = "",
-    val exerciseId: String = "",
+    val id: String,
+    val exerciseId: String,
     val result: String,
     val amount: String,
     val date: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())

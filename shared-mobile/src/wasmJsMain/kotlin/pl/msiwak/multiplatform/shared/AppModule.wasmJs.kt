@@ -15,7 +15,7 @@ import pl.msiwak.multiplatform.utils.KMMPreferencesImpl
 actual val databaseModule: Module = module {}
 
 actual val platformRepositoryModule: Module = module {
-    single<CategoryRepository> { CategoryRepositoryImpl() }
+    single<CategoryRepository> { CategoryRepositoryImpl(get()) }
     single { RemoteConfigRepository(get()) }
     single<KMMPreferences> { KMMPreferencesImpl() }
     single<VersionRepository> { VersionRepositoryImpl() }

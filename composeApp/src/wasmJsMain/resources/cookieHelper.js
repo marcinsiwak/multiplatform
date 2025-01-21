@@ -1,14 +1,13 @@
-function setCookie(name, value, days, isHttpOnly) {
+function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     const expires = "expires=" + date.toUTCString();
-    if(isHttpOnly) {
-        document.cookie = name + "=" + value + ";" + expires + ";path=/";
-    } else {
-        document.cookie = name + "=" + value + ";" + expires + ";path=/;Secure;HttpOnly";
-    }
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
+function clearCookie(name, value, days) {
+      document.cookie = name +'=;path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
 
 function getCookie(name) {
     const cookieArr = document.cookie.split(';');
@@ -19,5 +18,5 @@ function getCookie(name) {
             return cookie.substring(name.length + 1);
         }
     }
-    return null;
+    return "";
 }

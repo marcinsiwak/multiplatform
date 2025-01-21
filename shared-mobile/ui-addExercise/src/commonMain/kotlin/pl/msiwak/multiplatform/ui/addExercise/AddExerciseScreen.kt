@@ -39,7 +39,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.util.fastForEachIndexed
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import athletetrack.shared_mobile.commonresources.generated.resources.Res
@@ -68,7 +67,6 @@ import pl.msiwak.multiplatform.ui.commonComponent.ResultsTimeFilterView
 import pl.msiwak.multiplatform.ui.commonComponent.RunningTimeInputDialog
 import pl.msiwak.multiplatform.ui.commonComponent.TextWithDrawableView
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
-import pl.msiwak.multiplatform.ui.commonComponent.util.OnLifecycleEvent
 
 private const val FOCUS_REQUESTERS_AMOUNT = 4
 
@@ -83,11 +81,11 @@ fun AddExerciseScreen(
     val focusManager = LocalFocusManager.current
     val focusRequesters = List(FOCUS_REQUESTERS_AMOUNT) { remember { FocusRequester() } }
 
-    OnLifecycleEvent { _, event ->
-        if (event == Lifecycle.Event.ON_PAUSE) {
-            viewModel.onPause()
-        }
-    }
+//    OnLifecycleEvent { _, event ->
+//        if (event == Lifecycle.Event.ON_PAUSE) {
+//            viewModel.onPause()
+//        }
+//    }
 
     LaunchedEffect(Unit) {
         viewModel.onInit(id)

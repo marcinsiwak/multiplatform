@@ -10,9 +10,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import pl.msiwak.multiplatform.commonObject.Exercise
 import pl.msiwak.multiplatform.domain.summaries.AddExerciseUseCase
 import pl.msiwak.multiplatform.domain.summaries.DownloadCategoryUseCase
@@ -99,12 +96,10 @@ class CategoryViewModel(
 
         viewModelScope.launch(errorHandler) {
             val id = addExerciseUseCase(
-                Exercise(
+                AddExerciseUseCase.Params(
                     categoryId = categoryId,
-                    exerciseTitle = viewState.value.newExerciseName,
-                    exerciseType = viewState.value.exerciseType,
-                    creationDate = Clock.System.now()
-                        .toLocalDateTime(TimeZone.currentSystemDefault())
+                    name = viewState.value.newExerciseName,
+                    exerciseType = viewState.value.exerciseType
                 )
             )
             _viewState.update { it.copy(isLoading = false) }
