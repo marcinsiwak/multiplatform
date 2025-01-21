@@ -4,16 +4,20 @@ private const val STORE_FOREVER = 1000000
 
 class KMMPreferencesImpl : KMMPreferences {
 
-    override fun put(key: String, value: Int, isHttpOnly: Boolean) {
-        setCookie(key, value, STORE_FOREVER, isHttpOnly = isHttpOnly)
+    override fun put(key: String, value: Int) {
+        setCookie(key, value, STORE_FOREVER)
     }
 
-    override fun put(key: String, value: String, isHttpOnly: Boolean) {
-        setCookie(key, value, STORE_FOREVER, isHttpOnly = isHttpOnly)
+    override fun put(key: String, value: String) {
+        if (value.isEmpty()) {
+            clearCookie(key)
+        } else {
+            setCookie(key, value, STORE_FOREVER)
+        }
     }
 
-    override fun put(key: String, value: Boolean, isHttpOnly: Boolean) {
-        setCookie(key, value, STORE_FOREVER, isHttpOnly = isHttpOnly)
+    override fun put(key: String, value: Boolean) {
+        setCookie(key, value, STORE_FOREVER)
     }
 
     override fun getInt(key: String, default: Int): Int {

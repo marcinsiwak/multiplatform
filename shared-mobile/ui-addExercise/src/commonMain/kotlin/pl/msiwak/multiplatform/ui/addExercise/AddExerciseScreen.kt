@@ -83,11 +83,11 @@ fun AddExerciseScreen(
     val focusManager = LocalFocusManager.current
     val focusRequesters = List(FOCUS_REQUESTERS_AMOUNT) { remember { FocusRequester() } }
 
-    OnLifecycleEvent { _, event ->
-        if (event == Lifecycle.Event.ON_PAUSE) {
-            viewModel.onPause()
-        }
-    }
+//    OnLifecycleEvent { _, event ->
+//        if (event == Lifecycle.Event.ON_PAUSE) {
+//            viewModel.onPause()
+//        }
+//    }
 
     LaunchedEffect(Unit) {
         viewModel.onInit(id)
