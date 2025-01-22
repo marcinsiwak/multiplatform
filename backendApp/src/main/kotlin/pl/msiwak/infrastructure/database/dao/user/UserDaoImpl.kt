@@ -37,6 +37,10 @@ class UserDaoImpl : UserDao {
         }
     }
 
+    override suspend fun getUsers(): List<UserEntity> = dbQuery{
+        return@dbQuery Users.selectAll().map(::resultRowToUser)
+    }
+
     private fun resultRowToUser(row: ResultRow) = UserEntity(
         id = row[Users.id],
         name = row[Users.name],

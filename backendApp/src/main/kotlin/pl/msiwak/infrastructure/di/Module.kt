@@ -17,6 +17,8 @@ import pl.msiwak.domain.usecases.GetExerciseUseCase
 import pl.msiwak.domain.usecases.GetExerciseUseCaseImpl
 import pl.msiwak.domain.usecases.GetUserUseCase
 import pl.msiwak.domain.usecases.GetUserUseCaseImpl
+import pl.msiwak.domain.usecases.GetUsersUseCase
+import pl.msiwak.domain.usecases.GetUsersUseCaseImpl
 import pl.msiwak.domain.usecases.RemoveCategoryUseCase
 import pl.msiwak.domain.usecases.RemoveCategoryUseCaseImpl
 import pl.msiwak.domain.usecases.RemoveExerciseUseCase
@@ -27,7 +29,7 @@ import pl.msiwak.domain.usecases.SynchronizeDataUseCase
 import pl.msiwak.domain.usecases.SynchronizeDataUseCaseImpl
 import pl.msiwak.domain.usecases.UpdateUserUseCase
 import pl.msiwak.domain.usecases.UpdateUserUseCaseImpl
-import pl.msiwak.infrastructure.config.auth.roles.RoleManager
+import pl.msiwak.infrastructure.config.auth.role.RoleManager
 import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDao
 import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDaoImpl
 import pl.msiwak.infrastructure.database.dao.user.UserDao
@@ -60,6 +62,7 @@ val diModule = module {
     }
     single<AddResultUseCase> { AddResultUseCaseImpl(get(), get()) }
     single<GetUserUseCase> { GetUserUseCaseImpl(get(), get()) }
+    single<GetUsersUseCase> { GetUsersUseCaseImpl(get(), get()) }
     single<GetCategoryUseCase> { GetCategoryUseCaseImpl(get(), get()) }
     single<GetExerciseUseCase> { GetExerciseUseCaseImpl(get(), get()) }
     single<GetCategoriesUseCase> {

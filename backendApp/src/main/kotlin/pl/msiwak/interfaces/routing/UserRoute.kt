@@ -6,12 +6,14 @@ import io.ktor.server.auth.principal
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
+import io.ktor.server.routing.RoutingCall
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import org.koin.ktor.ext.inject
 import pl.msiwak.infrastructure.config.auth.firebase.FIREBASE_AUTH
 import pl.msiwak.infrastructure.config.auth.firebase.FirebaseUser
 import pl.msiwak.interfaces.controller.UserController
+import pl.msiwak.multiplatform.shared.common.Role
 import pl.msiwak.multiplatform.shared.model.ApiUser
 
 fun Route.addUserRoutes() {
@@ -65,5 +67,21 @@ fun Route.addUserRoutes() {
                 } ?: return@get call.respond(HttpStatusCode.NotFound)
             }
         }
+
+        get("/users") {
+            with(call) {
+                adminAuth {
+                    userController.getUsers().run {
+                        respond(status = HttpStatusCode.OK, message = it)
+                    }
+                }
+            }
+        }
     }
+}
+
+private suspend fun RoutingCall.adminAuth(block: suspend (FirebaseUser) -> Unit) {
+    val principal = principal<FirebaseUser>() ?: return respond(HttpStatusCode.Unauthorized)
+    if (principal.role != Role.ADMIN) return respond(HttpStatusCode.Forbidden)
+    block(principal)
 }
