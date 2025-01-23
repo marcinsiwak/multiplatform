@@ -32,6 +32,10 @@ object Modules {
     const val databaseWasm = "$sharedMobile:database-wasm"
     const val store = "$sharedMobile:store"
 
+    // Admin
+    const val uiAdminPanel = "$sharedMobile:ui-admin-panel"
+
+    // Shared
     const val shared = ":shared"
     const val sharedModel = "$shared:model"
 }

@@ -7,6 +7,7 @@
     <string name="settings">Ustawienia</string>
     <string name="summary_add_category">Dodaj kategorię</string>
     <string name="email">E-mail</string>
+    <string name="username">Nazwa użytkownika</string>
     <string name="password">Hasło</string>
     <string name="register">Zarejestruj</string>
     <string name="login">Zaloguj</string>
@@ -16,6 +17,7 @@
     <string name="ok">Ok</string>
     <string name="confirm">Ok</string>
     <string name="deny">Anuluj</string>
+    <string name="user_type">Typ użytkownika</string>
 
     <string name="exercise">ćwiczenie</string>
     <string name="exercise_name">Nazwa ćwiczenia</string>
@@ -96,5 +98,7 @@
     <string name="terms_confirmation_title">Regulamin</string>
     <string name="terms_confirmation_description">Aby używać aplikacji musisz zaakceptować regulamin.</string>
     <string name="terms_confirmation_accept">Akceptuję</string>
+
+    <string name="admin_panel">Panel admina</string>
 
 </resources>

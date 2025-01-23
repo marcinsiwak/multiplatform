@@ -37,7 +37,7 @@ class UserDaoImpl : UserDao {
         }
     }
 
-    override suspend fun getUsers(): List<UserEntity> = dbQuery{
+    override suspend fun getUsers(): List<UserEntity> = dbQuery {
         return@dbQuery Users.selectAll().map(::resultRowToUser)
     }
 

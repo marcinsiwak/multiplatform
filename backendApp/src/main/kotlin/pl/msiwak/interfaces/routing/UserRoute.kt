@@ -70,9 +70,9 @@ fun Route.addUserRoutes() {
 
         get("/users") {
             with(call) {
-                adminAuth {
+                adminAuth { _ ->
                     userController.getUsers().run {
-                        respond(status = HttpStatusCode.OK, message = it)
+                        respond(status = HttpStatusCode.OK, message = this)
                     }
                 }
             }
