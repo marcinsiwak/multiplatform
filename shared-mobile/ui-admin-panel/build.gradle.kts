@@ -14,13 +14,14 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+
     cocoapods {
-        summary = "Ui Settings Shared Module"
+        summary = "Ui Admin Panel Shared Module"
         homepage = "https://github.com/marcinsiwak/multiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "ui-settings"
+            baseName = "ui-admin-panel"
 
             export(project(Modules.navigator))
             export(project(Modules.domain))
@@ -48,19 +49,17 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
 
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
             implementation(compose.components.uiToolingPreview)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 
 android {
-    namespace = "pl.msiwak.multiplatform.ui.settings"
+    namespace = "pl.msiwak.multiplatform.ui.adminpanel"
+    buildFeatures { compose = true }
 }

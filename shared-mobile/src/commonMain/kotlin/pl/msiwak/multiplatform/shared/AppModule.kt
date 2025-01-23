@@ -88,6 +88,8 @@ import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
 import pl.msiwak.multiplatform.domain.user.CreateUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCaseImpl
+import pl.msiwak.multiplatform.domain.user.GetUsersUseCase
+import pl.msiwak.multiplatform.domain.user.GetUsersUseCaseImpl
 import pl.msiwak.multiplatform.domain.user.UpdateUserUseCase
 import pl.msiwak.multiplatform.domain.user.UpdateUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
@@ -113,6 +115,8 @@ import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryViewModel
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseGraph
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseViewModel
+import pl.msiwak.multiplatform.ui.adminpanel.AdminPanelGraph
+import pl.msiwak.multiplatform.ui.adminpanel.AdminPanelViewModel
 import pl.msiwak.multiplatform.ui.category.CategoryGraph
 import pl.msiwak.multiplatform.ui.category.CategoryViewModel
 import pl.msiwak.multiplatform.ui.dashboard.BottomNavigationProvider
@@ -223,11 +227,12 @@ val viewModelsModule = module {
         )
     }
     viewModel { AddCategoryViewModel(get(), get()) }
-    viewModel { SettingsViewModel(get(), get()) }
+    viewModel { SettingsViewModel(get(), get(), get(), get()) }
     viewModel { LanguageViewModel(get(), get()) }
     viewModel { UnitViewModel(get(), get()) }
     viewModel { ForceUpdateViewModel() }
     viewModel { DashboardViewModel(get()) }
+    viewModel { AdminPanelViewModel(get(), get()) }
 }
 
 val useCaseModule = module {
@@ -258,6 +263,7 @@ val useCaseModule = module {
     single<GetCurrentAppCodeUseCase> { GetCurrentAppCodeUseCaseImpl(get()) }
     single<GetVersionNameUseCase> { GetVersionNameUseCaseImpl(get()) }
     single<GetUserUseCase> { GetUserUseCaseImpl(get()) }
+    single<GetUsersUseCase> { GetUsersUseCaseImpl(get()) }
     single<CreateUserUseCase> { CreateUserUseCaseImpl(get()) }
     single<UpdateUserUseCase> { UpdateUserUseCaseImpl(get()) }
     single<ObserveAuthStateChangedUseCase> { ObserveAuthStateChangedUseCaseImpl(get(), get()) }
@@ -313,8 +319,10 @@ val navigationModule = module {
     single { VerifyEmailGraph() }
     single { SummaryGraph() }
     single { SettingsGraph() }
+    single { AdminPanelGraph() }
     single {
         NavigationProvider(
+            get(),
             get(),
             get(),
             get(),

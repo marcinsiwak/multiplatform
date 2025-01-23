@@ -15,6 +15,10 @@ class UserService(
         return client.getUser().map { mapper(it) }
     }
 
+    suspend fun getUsers(): Flow<List<User>> {
+        return client.getUsers().map { it.map { mapper(it) } }
+    }
+
     suspend fun createUser(uuid: String, email: String) {
         return client.createUser(uuid, email)
     }

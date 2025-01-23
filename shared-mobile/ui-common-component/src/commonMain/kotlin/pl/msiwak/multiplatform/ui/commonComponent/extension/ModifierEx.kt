@@ -56,6 +56,32 @@ fun Modifier.topBorder(strokeWidth: Dp, color: Color) = composed(
     }
 )
 
+fun Modifier.verticalBorder(strokeWidth: Dp, color: Color) = composed(
+    factory = {
+        val density = LocalDensity.current
+        val strokeWidthPx = density.run { strokeWidth.toPx() }
+
+        Modifier.drawBehind {
+            val height = size.height
+            val width = size.width
+
+            drawLine(
+                color = color,
+                start = Offset(x = 0f, y = 0f),
+                end = Offset(x = 0f, y = height),
+                strokeWidth = strokeWidthPx
+            )
+
+            drawLine(
+                color = color,
+                start = Offset(x = width, y = 0f),
+                end = Offset(x = width, y = height),
+                strokeWidth = strokeWidthPx
+            )
+        }
+    }
+)
+
 fun Modifier.fittingTabIndicatorOffset(
     currentTabPosition: TabPosition,
     tabWidth: Dp

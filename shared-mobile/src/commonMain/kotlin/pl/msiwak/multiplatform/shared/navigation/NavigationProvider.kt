@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.shared.navigation
 
 import pl.msiwak.multiplatform.ui.addCategory.AddCategoryGraph
 import pl.msiwak.multiplatform.ui.addExercise.AddExerciseGraph
+import pl.msiwak.multiplatform.ui.adminpanel.AdminPanelGraph
 import pl.msiwak.multiplatform.ui.category.CategoryGraph
 import pl.msiwak.multiplatform.ui.dashboard.DashboardGraph
 import pl.msiwak.multiplatform.ui.forceUpdate.ForceUpdateGraph
@@ -23,5 +24,6 @@ data class NavigationProvider(
     val unitGraph: UnitGraph,
     val languageGraph: LanguageGraph,
     val forceUpdateGraph: ForceUpdateGraph,
-    val verifyEmailGraph: VerifyEmailGraph
+    val verifyEmailGraph: VerifyEmailGraph,
+    val adminPanelGraph: AdminPanelGraph
 )

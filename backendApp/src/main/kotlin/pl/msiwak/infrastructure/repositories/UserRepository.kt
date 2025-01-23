@@ -1,6 +1,6 @@
 package pl.msiwak.infrastructure.repositories
 
-import pl.msiwak.infrastructure.config.auth.roles.RoleManager
+import pl.msiwak.infrastructure.config.auth.role.RoleManager
 import pl.msiwak.infrastructure.database.dao.user.UserDao
 import pl.msiwak.infrastructure.entities.UserEntity
 import pl.msiwak.multiplatform.shared.common.Role
@@ -15,7 +15,6 @@ class UserRepository(
         } else {
             Role.USER
         }
-        println("OUTPUT: $role")
         roleManager.setRole(id, role)
         userDao.addNewUser(id, name, email, role.name)
     }
@@ -32,5 +31,9 @@ class UserRepository(
 
     suspend fun getUser(id: String): UserEntity? {
         return userDao.getUser(id)
+    }
+
+    suspend fun getUsers(): List<UserEntity> {
+        return userDao.getUsers()
     }
 }

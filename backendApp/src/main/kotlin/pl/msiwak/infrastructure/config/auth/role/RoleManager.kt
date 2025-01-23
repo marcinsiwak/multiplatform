@@ -1,4 +1,4 @@
-package pl.msiwak.infrastructure.config.auth.roles
+package pl.msiwak.infrastructure.config.auth.role
 
 import com.google.firebase.auth.FirebaseAuth
 import pl.msiwak.multiplatform.shared.common.Role

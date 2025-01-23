@@ -296,15 +296,3 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
           BUILD_NUMBER: ${{steps.get_pull_request_number.outputs.result}}
-
-#  backendAppJob:
-#    if: ${{ contains(github.event.pull_request.labels.*.name, 'Backend') }}
-#    name: Run Backend App
-#    uses: ./.github/workflows/backend-app.yml
-#    secrets: inherit
-#
-#  wasmAppJob:
-#    if: ${{ contains(github.event.pull_request.labels.*.name, 'Wasm') }}
-#    name: Run Wasm App
-#    uses: ./.github/workflows/wasm-app.yml
-#    secrets: inherit
