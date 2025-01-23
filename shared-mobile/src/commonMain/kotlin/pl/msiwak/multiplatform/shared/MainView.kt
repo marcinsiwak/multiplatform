@@ -36,6 +36,7 @@ fun MainView(
                     languageGraph.create(navController, this@NavHost)
                     forceUpdateGraph.create(navController, this@NavHost)
                     verifyEmailGraph.create(navController, this@NavHost)
+                    adminPanelGraph.create(navController, this@NavHost)
                 }
             }
         }

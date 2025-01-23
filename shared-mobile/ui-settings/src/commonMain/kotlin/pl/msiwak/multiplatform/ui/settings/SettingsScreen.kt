@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import athletetrack.shared_mobile.commonresources.generated.resources.Res
+import athletetrack.shared_mobile.commonresources.generated.resources.admin_panel
+import athletetrack.shared_mobile.commonresources.generated.resources.email
 import athletetrack.shared_mobile.commonresources.generated.resources.settings
 import athletetrack.shared_mobile.commonresources.generated.resources.settings_language
 import athletetrack.shared_mobile.commonresources.generated.resources.settings_logout
@@ -42,6 +44,7 @@ fun SettingsScreen(
         viewModel.viewEvent.collectLatest {
             when (it) {
                 SettingsEvent.Logout -> navController.navigate(NavDestination.WelcomeDestination.NavWelcomeScreen.route)
+                SettingsEvent.NavigateToAdminPanel -> navController.navigate(NavDestination.AdminPanelDestination.NavAdminPanelScreen.route)
             }
         }
     }
@@ -105,6 +108,16 @@ fun SettingsScreenContent(
                             onUiAction(SettingsUiAction.OnLogoutClicked)
                         },
                     text = stringResource(Res.string.settings_logout)
+                )
+            }
+            if (viewState.value.isAdmin) {
+                SettingsItem(
+                    modifier = Modifier
+                        .padding(top = MaterialTheme.dimens.space_8)
+                        .clickable {
+                            onUiAction(SettingsUiAction.OnAdminPanelClicked)
+                        },
+                    text = stringResource(Res.string.admin_panel)
                 )
             }
         }

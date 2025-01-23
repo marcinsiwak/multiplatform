@@ -85,6 +85,7 @@ kotlin {
             api(project(Modules.uiCommonComponent))
             api(project(Modules.uiTerms))
             api(project(Modules.store))
+            api(project(Modules.uiAdminPanel))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)

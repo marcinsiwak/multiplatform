@@ -7,6 +7,10 @@ import pl.msiwak.multiplatform.network.service.UserService
 
 class UserRepository(private val userService: UserService) {
 
+    suspend fun getUsers(): List<User> = withContext(Dispatchers.IO) {
+        return@withContext userService.getUsers().first()
+    }
+
     suspend fun getUser(): User = withContext(Dispatchers.IO) {
         return@withContext userService.getUser().first()
     }
