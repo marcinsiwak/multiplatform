@@ -32,6 +32,14 @@
 				<string>com.googleusercontent.apps.607279059338-ldhf7gjg8vrgadbqd0ou2ol45ujf113h</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.716683021770-7qjsmfb3k2c5utmno8c8puumfqia73l1</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -50,7 +58,6 @@
 			<key>0.0.0.0:8080</key>
 			<string></string>
 		</dict>
-
 	</dict>
 	<key>SKAdNetworkItems</key>
 	<array>

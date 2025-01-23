@@ -34,7 +34,8 @@ out/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/firebase-adminsdk.json
+/src/main/resources/production/firebase-adminsdk.json
+/src/main/resources/dev/firebase-adminsdk.json
 
 .env
 tmp/
