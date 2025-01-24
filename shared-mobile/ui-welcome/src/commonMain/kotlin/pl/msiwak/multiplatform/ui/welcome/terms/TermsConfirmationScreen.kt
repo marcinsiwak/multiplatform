@@ -22,10 +22,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import athletetrack.shared_mobile.commonresources.generated.resources.Res
-import athletetrack.shared_mobile.commonresources.generated.resources.confirm
-import athletetrack.shared_mobile.commonresources.generated.resources.deny
-import athletetrack.shared_mobile.commonresources.generated.resources.synchronization_dialog_description
-import athletetrack.shared_mobile.commonresources.generated.resources.synchronization_dialog_title
 import athletetrack.shared_mobile.commonresources.generated.resources.terms
 import athletetrack.shared_mobile.commonresources.generated.resources.terms_confirmation_accept
 import athletetrack.shared_mobile.commonresources.generated.resources.terms_confirmation_description
@@ -37,8 +33,8 @@ import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
+import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
-import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
@@ -76,19 +72,9 @@ private fun TermsConfirmationContent(
     viewState: State<TermsConfirmationState>,
     onUiAction: (TermsConfirmationUiAction) -> Unit
 ) {
-    if (viewState.value.isSynchronizationDialogVisible) {
-        PopupDialog(
-            title = stringResource(Res.string.synchronization_dialog_title),
-            description = stringResource(Res.string.synchronization_dialog_description),
-            confirmButtonTitle = stringResource(Res.string.confirm),
-            dismissButtonTitle = stringResource(Res.string.deny),
-            onConfirmClicked = {
-                onUiAction(TermsConfirmationUiAction.OnConfirmSynchronizationClicked)
-            },
-            onDismissClicked = {
-                onUiAction(TermsConfirmationUiAction.OnDismissSynchronizationClicked)
-            }
-        )
+
+    if (viewState.value.isLoading) {
+        Loader()
     }
 
     Scaffold(

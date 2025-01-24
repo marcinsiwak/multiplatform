@@ -116,21 +116,6 @@ fun WelcomeScreenContent(
         )
     }
 
-    if (viewState.value.isSynchronizationDialogVisible) {
-        PopupDialog(
-            title = stringResource(Res.string.synchronization_dialog_title),
-            description = stringResource(Res.string.synchronization_dialog_description),
-            confirmButtonTitle = stringResource(Res.string.confirm),
-            dismissButtonTitle = stringResource(Res.string.deny),
-            onConfirmClicked = {
-                onUiAction(WelcomeUiAction.OnConfirmSynchronizationClicked)
-            },
-            onDismissClicked = {
-                onUiAction(WelcomeUiAction.OnDismissSynchronizationClicked)
-            }
-        )
-    }
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         content = {
