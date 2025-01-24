@@ -12,7 +12,6 @@
 		2152FB042600AC8F00CF470E /* IOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* IOSApp.swift */; };
 		711E8B962A575ADD00151063 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8B952A575ADD00151063 /* SplashScreen.swift */; };
 		711E8BB92A575EE700151063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E8BB82A575EE700151063 /* AppDelegate.swift */; };
-		71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */; };
 		71D05CA22B3338DF00994291 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 71D05CA12B3338DF00994291 /* .swiftlint.yml */; };
 		71DF459A2A56C3B70037EC5E /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B40B6D5B60771EDD44B218 /* Pods_iosApp.framework */; };
 		71FF1CA02B95193500FFFDCE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FF1C9F2B95193500FFFDCE /* MainView.swift */; };
@@ -37,6 +36,7 @@
 		2152FB032600AC8F00CF470E /* IOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSApp.swift; sourceTree = "<group>"; };
 		321EE48D0E4A0D68324B171D /* Pods-iosApp.stagingdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.stagingdebug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.stagingdebug.xcconfig"; sourceTree = "<group>"; };
 		6AFEB18FD9875F7CA0588D4D /* Pods-iosApp.productiondebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.productiondebug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.productiondebug.xcconfig"; sourceTree = "<group>"; };
+		710D6F9B2D427533009ED0B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		711E8B952A575ADD00151063 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		711E8BB82A575EE700151063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -88,6 +88,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		710D6F972D4274E3009ED0B4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				710D6F982D4274EC009ED0B4 /* Firebase */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		710D6F982D4274EC009ED0B4 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				710D6F9A2D4274FE009ED0B4 /* Staging */,
+				710D6F992D4274F5009ED0B4 /* Production */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		710D6F992D4274F5009ED0B4 /* Production */ = {
+			isa = PBXGroup;
+			children = (
+				71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */,
+			);
+			path = Production;
+			sourceTree = "<group>";
+		};
+		710D6F9A2D4274FE009ED0B4 /* Staging */ = {
+			isa = PBXGroup;
+			children = (
+				710D6F9B2D427533009ED0B4 /* GoogleService-Info.plist */,
+			);
+			path = Staging;
+			sourceTree = "<group>";
+		};
 		711E8B682A57585F00151063 /* ui */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,7 +159,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */,
+				710D6F972D4274E3009ED0B4 /* Supporting Files */,
 				711E8B682A57585F00151063 /* ui */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				71FF1C9F2B95193500FFFDCE /* MainView.swift */,
@@ -152,6 +185,7 @@
 				D69727772ADB122A2C460D8B /* [CP] Embed Pods Frameworks */,
 				71DF45992A56C3A60037EC5E /* Embed Frameworks */,
 				D042C78284026030E6E9371C /* [CP] Copy Pods Resources */,
+				710D6F9D2D42756B009ED0B4 /* Firebase env setup */,
 			);
 			buildRules = (
 			);
@@ -204,7 +238,6 @@
 				71D05CA22B3338DF00994291 /* .swiftlint.yml in Resources */,
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
-				71A5EF462AFBDF2F00E373DF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +265,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		710D6F9D2D42756B009ED0B4 /* Firebase env setup */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Firebase env setup";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "INFO_PLIST=GoogleService-Info.plist\n\nSTAGING_INFO_PLIST=${PROJECT_DIR}/${TARGET_NAME}/Supporting\\ Files/Firebase/Staging/${INFO_PLIST}\nPRODUCTION_INFO_PLIST=${PROJECT_DIR}/${TARGET_NAME}/Supporting\\ Files/Firebase/Production/${INFO_PLIST}\n\necho \"Checking ${INFO_PLIST} in ${STAGING_INFO_PLIST}\"\nif [ ! -f $STAGING_INFO_PLIST ] ; then\n    echo \"STAGING GoogleService-Info.plist not found.\"\n    exit 1\nfi\n\necho \"Checking ${INFO_PLIST} in ${PRODUCTION_INFO_PLIST}\"\nif [ ! -f $PRODUCTION_INFO_PLIST ] ; then\n    echo \"PRODUCTION GoogleService-Info.plist not found.\"\n    exit 1\nfi\n\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Copying ${INFO_PLIST} to final destination: ${PLIST_DESTINATION}\"\necho \"CONFIGURATION HERE ${CONFIGURATION}\"\n\nif [ \"${CONFIGURATION}\" == \"stagingDebug\" ] ; then\n    echo \"Copied ${STAGING_INFO_PLIST}.\"\n    cp \"${STAGING_INFO_PLIST}\" \"${PLIST_DESTINATION}\"\nelse\n    echo \"Copied ${PRODUCTION_INFO_PLIST}.\"\n    cp \"${PRODUCTION_INFO_PLIST}\" \"${PLIST_DESTINATION}\"\nfi\n";
 		};
 		D042C78284026030E6E9371C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

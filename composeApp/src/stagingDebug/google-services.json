@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "716683021770",
+    "project_id": "sportplatform-dev",
+    "storage_bucket": "sportplatform-dev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716683021770:android:bf9ee315f91d0852ec9333",
+        "android_client_info": {
+          "package_name": "pl.msiwak.athletetrack.android.staging.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716683021770-bk4pijvtn852if39ug2pikpko6rjl630.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.msiwak.athletetrack.android.staging.debug",
+            "certificate_hash": "8f5e2af74847e6bc8466b91553350322ebac6094"
+          }
+        },
+        {
+          "client_id": "716683021770-q5pt8q0ra5j59t0rar9osujkcgs8pt32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNrIEjwArB4aS6TPhgxUq_R7YXqxJOZOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716683021770-q5pt8q0ra5j59t0rar9osujkcgs8pt32.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "716683021770-7qjsmfb3k2c5utmno8c8puumfqia73l1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pl.msiwak.athletetrack.ios.staging.debug"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
