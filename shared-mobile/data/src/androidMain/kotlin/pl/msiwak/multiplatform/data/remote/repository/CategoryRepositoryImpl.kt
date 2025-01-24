@@ -31,7 +31,7 @@ class CategoryRepositoryImpl(
 ) : CategoryRepository {
 
     override suspend fun downloadCategories() = withContext(Dispatchers.IO) {
-        val categories = categoryService.downloadCategories().first()
+        val categories = categoryService.downloadCategories()
         categoriesDao.removeAllCategories()
         exercisesDao.removeAllExercises()
         categoriesDao.updateCategories(categories)
@@ -40,7 +40,7 @@ class CategoryRepositoryImpl(
     }
 
     override suspend fun downloadCategory(id: String) = withContext(Dispatchers.IO) {
-        val category = categoryService.downloadCategory(id).first()
+        val category = categoryService.downloadCategory(id)
         categoriesDao.updateCategory(category)
         exercisesDao.updateExercises(category.exercises)
     }

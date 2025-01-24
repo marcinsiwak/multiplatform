@@ -16,7 +16,6 @@ import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class TermsConfirmationViewModel(
-    private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
     private val createUserUseCase: CreateUserUseCase,
     globalErrorHandler: GlobalErrorHandler
@@ -40,15 +39,10 @@ class TermsConfirmationViewModel(
     }
 
     private fun onAcceptTerms() {
+        _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
             createUserUseCase()
-            val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
-            _viewState.update { it.copy(isLoading = true) }
-            if (isSynchronizationPossible) {
-                _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
-            } else {
-                _viewEvent.emit(TermsConfirmationEvent.NavigateToDashboard)
-            }
+            _viewEvent.emit(TermsConfirmationEvent.NavigateToDashboard)
             _viewState.update { it.copy(isLoading = false) }
         }
     }

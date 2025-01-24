@@ -18,14 +18,14 @@ import pl.msiwak.multiplatform.shared.model.ApiUpdateExerciseNameRequest
 
 class CategoryApi(private val ktorClient: KtorClient) {
 
-    suspend fun downloadCategories(): Flow<List<ApiCategory>> {
+    suspend fun downloadCategories(): List<ApiCategory> {
         val response: List<ApiCategory> = ktorClient.httpClient.get("api/categories").body()
-        return flowOf(response)
+        return response
     }
 
-    suspend fun downloadCategory(id: String): Flow<ApiCategory> {
+    suspend fun downloadCategory(id: String): ApiCategory {
         val response: ApiCategory = ktorClient.httpClient.get("api/category/$id").body()
-        return flowOf(response)
+        return response
     }
 
     suspend fun createCategory(category: ApiCategory) {

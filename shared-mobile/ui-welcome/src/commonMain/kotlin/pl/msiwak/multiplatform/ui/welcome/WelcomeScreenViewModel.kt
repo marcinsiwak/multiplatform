@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.exception.ClientErrorException
-import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
@@ -22,7 +21,6 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
     private val setOfflineModeUseCase: SetOfflineModeUseCase,
-    private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
     private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
     private val googleLoginUseCase: GoogleLoginUseCase,
     private val getUser: GetUserUseCase,
@@ -94,19 +92,13 @@ class WelcomeScreenViewModel(
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             val isUserVerified = loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
-            _viewState.update { it.copy(isLoading = false) }
-            val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
-
             if (isUserVerified) {
                 getUser()
-                if (isSynchronizationPossible) {
-                    _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
-                } else {
-                    _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
-                }
+                _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
             } else {
                 _viewEvent.emit(WelcomeEvent.NavigateToVerifyEmail)
             }
+            _viewState.update { it.copy(isLoading = false) }
         }
     }
 

@@ -26,16 +26,14 @@ class CategoryService(
     private val resultMapper: ResultMapper
 ) {
 
-    suspend fun downloadCategories(): Flow<List<Category>> {
+    suspend fun downloadCategories(): List<Category> {
         return categoryApi.downloadCategories().map { categories ->
-            categories.map {
-                categoryMapper(it)
-            }
+            categoryMapper(categories)
         }
     }
 
-    suspend fun downloadCategory(id: String): Flow<Category> {
-        return categoryApi.downloadCategory(id).map { categoryMapper(it) }
+    suspend fun downloadCategory(id: String): Category {
+        return categoryMapper(categoryApi.downloadCategory(id))
     }
 
     suspend fun createCategory(name: String, exerciseType: ExerciseType) {
