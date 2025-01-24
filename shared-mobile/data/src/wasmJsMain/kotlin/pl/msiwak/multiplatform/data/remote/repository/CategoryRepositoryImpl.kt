@@ -2,6 +2,7 @@ package pl.msiwak.multiplatform.data.remote.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
 import pl.msiwak.multiplatform.commonObject.Category
@@ -17,11 +18,11 @@ class CategoryRepositoryImpl(private val categoryService: CategoryService) : Cat
     override suspend fun downloadCategory(id: String) {}
 
     override suspend fun observeCategory(id: String): Flow<Category> = withContext(Dispatchers.IO) {
-        return@withContext categoryService.downloadCategory(id)
+        return@withContext flowOf(categoryService.downloadCategory(id))
     }
 
     override suspend fun observeCategories(): Flow<List<Category>> = withContext(Dispatchers.IO) {
-        return@withContext categoryService.downloadCategories()
+        return@withContext flowOf(categoryService.downloadCategories())
     }
 
     override suspend fun createCategory(name: String, exerciseType: ExerciseType) = withContext(Dispatchers.IO) {
@@ -73,7 +74,7 @@ class CategoryRepositoryImpl(private val categoryService: CategoryService) : Cat
     override suspend fun clearDatabase() {}
 
     override suspend fun checkIfSynchronizationIsPossible(): Boolean {
-        return true
+        return false
     }
 
     override suspend fun startInitialSynchronization() {}

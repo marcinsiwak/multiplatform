@@ -4,21 +4,19 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import pl.msiwak.multiplatform.network.client.KtorClient
 import pl.msiwak.multiplatform.shared.model.ApiUser
 
 class UserApi(private val ktorClient: KtorClient) {
 
-    suspend fun getUsers(): Flow<List<ApiUser>> {
+    suspend fun getUsers(): List<ApiUser> {
         val response: List<ApiUser> = ktorClient.httpClient.get("api/users").body()
-        return flowOf(response)
+        return response
     }
 
-    suspend fun getUser(): Flow<ApiUser> {
+    suspend fun getUser(): ApiUser {
         val response: ApiUser = ktorClient.httpClient.get("api/user").body()
-        return flowOf(response)
+        return response
     }
 
     suspend fun createUserWithGoogle() {

@@ -11,10 +11,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.commonObject.exception.ClientErrorException
-import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
-import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
@@ -22,8 +20,6 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
     private val setOfflineModeUseCase: SetOfflineModeUseCase,
-    private val checkIfSynchronizationIsPossibleUseCase: CheckIfSynchronizationIsPossibleUseCase,
-    private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
     private val googleLoginUseCase: GoogleLoginUseCase,
     private val getUser: GetUserUseCase,
     globalErrorHandler: GlobalErrorHandler
@@ -57,8 +53,6 @@ class WelcomeScreenViewModel(
     fun onUiAction(action: WelcomeUiAction) {
         when (action) {
             WelcomeUiAction.OnConfirmDialogButtonClicked -> onConfirmDialogButtonClicked()
-            WelcomeUiAction.OnConfirmSynchronizationClicked -> onConfirmSynchronizationClicked()
-            WelcomeUiAction.OnDismissSynchronizationClicked -> onDismissSynchronizationClicked()
             is WelcomeUiAction.OnLoginChanged -> onLoginChanged(action.login)
             WelcomeUiAction.OnLoginClicked -> onLoginClicked()
             WelcomeUiAction.OnOfflineModeClicked -> onOfflineModeClicked()
@@ -94,19 +88,13 @@ class WelcomeScreenViewModel(
         viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             val isUserVerified = loginUseCase(LoginUseCase.Params(viewState.value.login, viewState.value.password))
-            _viewState.update { it.copy(isLoading = false) }
-            val isSynchronizationPossible = checkIfSynchronizationIsPossibleUseCase()
-
             if (isUserVerified) {
                 getUser()
-                if (isSynchronizationPossible) {
-                    _viewState.update { it.copy(isSynchronizationDialogVisible = true) }
-                } else {
-                    _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
-                }
+                _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
             } else {
                 _viewEvent.emit(WelcomeEvent.NavigateToVerifyEmail)
             }
+            _viewState.update { it.copy(isLoading = false) }
         }
     }
 
@@ -132,22 +120,5 @@ class WelcomeScreenViewModel(
 
     private fun onConfirmDialogButtonClicked() {
         _viewState.update { it.copy(isErrorDialogVisible = false) }
-    }
-
-    private fun onConfirmSynchronizationClicked() {
-        _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
-        viewModelScope.launch(errorHandler) {
-            _viewState.update { it.copy(isLoading = true) }
-            synchronizeDatabaseUseCase()
-            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
-            _viewState.update { it.copy(isLoading = false) }
-        }
-    }
-
-    private fun onDismissSynchronizationClicked() {
-        _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
-        viewModelScope.launch {
-            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
-        }
     }
 }
