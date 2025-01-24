@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import pl.msiwak.multiplatform.dependencies.Modules
 import java.io.FileInputStream
-import java.util.*
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -104,7 +104,7 @@ android {
             useSupportLibrary = true
         }
         val firebaseServiceCredentialsFile =
-            rootProject.file("composeApp/sportplatform-b5318-816058b49361.json")
+            rootProject.file("composeApp/sportplatform-distribution.json")
 
         if (firebaseServiceCredentialsFile.exists()) {
             configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
@@ -188,32 +188,8 @@ android {
     productFlavors {
         getByName("staging") {
             applicationIdSuffix = ".staging"
-
-            val stagingPropertiesFile = rootProject.file("composeApp/staging.properties")
-            if (stagingPropertiesFile.exists()) {
-                val stagingProperties = Properties()
-                stagingProperties.load(FileInputStream(stagingPropertiesFile))
-
-                buildConfigField(
-                    "String",
-                    "GOOGLE_AUTH_WEB_CLIENT_ID",
-                    stagingProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-                )
-            }
         }
-        getByName("production") {
-            val productionPropertiesFile = rootProject.file("composeApp/production.properties")
-            if (productionPropertiesFile.exists()) {
-                val productionProperties = Properties()
-                productionProperties.load(FileInputStream(productionPropertiesFile))
-
-                buildConfigField(
-                    "String",
-                    "GOOGLE_AUTH_WEB_CLIENT_ID",
-                    productionProperties["GOOGLE_AUTH_WEB_CLIENT_ID"] as String
-                )
-            }
-        }
+        getByName("production")
     }
 
     applicationVariants.all {

@@ -6,12 +6,20 @@ import com.google.firebase.FirebaseOptions
 import java.io.InputStream
 
 object FirebaseAdmin {
-    private val serviceAccount: InputStream? =
-        this::class.java.classLoader?.getResourceAsStream("firebase-adminsdk.json")
+    fun init(isDevMode: Boolean): FirebaseApp {
+        val serviceAccount: InputStream? =
+            this::class.java.classLoader?.getResourceAsStream(getFirebaseAdminSkdFile(isDevMode))
+        val options: FirebaseOptions = FirebaseOptions.builder()
+            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            .build()
+        return FirebaseApp.initializeApp(options)
+    }
 
-    private val options: FirebaseOptions = FirebaseOptions.builder()
-        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-        .build()
-
-    fun init(): FirebaseApp = FirebaseApp.initializeApp(options)
+    private fun getFirebaseAdminSkdFile(isDevMode: Boolean): String {
+        return if (isDevMode) {
+            "production/firebase-adminsdk.json"
+        } else {
+            "dev/firebase-adminsdk.json"
+        }
+    }
 }
