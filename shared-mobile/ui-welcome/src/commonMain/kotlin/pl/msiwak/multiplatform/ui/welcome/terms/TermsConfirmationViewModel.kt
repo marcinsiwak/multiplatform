@@ -10,13 +10,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
-import pl.msiwak.multiplatform.domain.authorization.SynchronizeDatabaseUseCase
 import pl.msiwak.multiplatform.domain.user.CreateUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class TermsConfirmationViewModel(
-    private val synchronizeDatabaseUseCase: SynchronizeDatabaseUseCase,
     private val createUserUseCase: CreateUserUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
@@ -32,8 +29,6 @@ class TermsConfirmationViewModel(
     fun onUiAction(action: TermsConfirmationUiAction) {
         when (action) {
             is TermsConfirmationUiAction.OnButtonClick -> onAcceptTerms()
-            TermsConfirmationUiAction.OnConfirmSynchronizationClicked -> onConfirmSynchronizationClicked()
-            TermsConfirmationUiAction.OnDismissSynchronizationClicked -> onDismissSynchronizationClicked()
             else -> Unit
         }
     }
@@ -44,23 +39,6 @@ class TermsConfirmationViewModel(
             createUserUseCase()
             _viewEvent.emit(TermsConfirmationEvent.NavigateToDashboard)
             _viewState.update { it.copy(isLoading = false) }
-        }
-    }
-
-    private fun onConfirmSynchronizationClicked() {
-        _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
-        viewModelScope.launch(errorHandler) {
-            _viewState.update { it.copy(isLoading = true) }
-            synchronizeDatabaseUseCase()
-            _viewEvent.emit(TermsConfirmationEvent.NavigateToDashboard)
-            _viewState.update { it.copy(isLoading = false) }
-        }
-    }
-
-    private fun onDismissSynchronizationClicked() {
-        _viewState.update { it.copy(isSynchronizationDialogVisible = false) }
-        viewModelScope.launch {
-            _viewEvent.emit(TermsConfirmationEvent.NavigateToDashboard)
         }
     }
 }

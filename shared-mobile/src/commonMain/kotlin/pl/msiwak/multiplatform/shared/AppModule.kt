@@ -198,8 +198,8 @@ val viewModelsModule = module {
     }
     viewModel { RegisterViewModel(get(), get(), get()) }
     viewModel { VerifyEmailViewModel(get(), get()) }
-    viewModel { WelcomeScreenViewModel(get(), get(), get(), get(), get(), get()) }
-    viewModel { TermsConfirmationViewModel(get(), get(), get()) }
+    viewModel { WelcomeScreenViewModel(get(), get(), get(), get(), get()) }
+    viewModel { TermsConfirmationViewModel(get(), get()) }
     viewModel { SummaryViewModel(get(), get(), get(), get()) }
     viewModel {
         AddExerciseViewModel(
