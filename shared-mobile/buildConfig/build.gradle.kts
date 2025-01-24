@@ -56,8 +56,8 @@ buildkonfig {
     val stagingBaseUrl = "http://192.168.0.13:8080"
 
     if (productionPropertiesFile.exists()) {
-
         defaultConfigs {
+            setupProductionFirebase()
             buildConfigField(STRING, "BUILD_FLAVOUR", "default")
             buildConfigField(STRING, "BASE_URL", productionBaseUrl)
             buildConfigField(BOOLEAN, "IsDebug", "false")
@@ -221,6 +221,44 @@ fun getCurrentFlavor(): String {
     }
 }
 
+fun setupStagingFirebase() {
+    val firebaseConfig = """
+                export const firebaseConfig = {
+                    apiKey: "AIzaSyBuIB07aopv1LEdRi0QNvxsQppIMSIyw0M",
+                    authDomain: "sportplatform-dev.firebaseapp.com",
+                    projectId: "sportplatform-dev",
+                    storageBucket: "sportplatform-dev.firebasestorage.app",
+                    messagingSenderId: "716683021770",
+                    appId: "1:716683021770:web:13fdee031e3ec36fec9333",
+                    measurementId: "G-4J799NGSXJ"
+                };
+                    
+            """.trimIndent()
+
+    val moduleComposeAppDir = project(":composeApp").projectDir
+
+    file("$moduleComposeAppDir/src/wasmJsMain/resources/firebase/firebaseConfig.js").writeText(firebaseConfig)
+}
+
+
+fun setupProductionFirebase() {
+    val firebaseConfig = """
+                export const firebaseConfig = {
+                    apiKey: "AIzaSyC6NQgwckIiz7L5S7EVLHidsO8IByB3y_E",
+                    authDomain: "sportplatform-b5318.firebaseapp.com",
+                    projectId: "sportplatform-b5318",
+                    storageBucket: "sportplatform-b5318.firebasestorage.app",
+                    messagingSenderId: "607279059338",
+                    appId: "1:607279059338:web:23cf771c199457fdcb3873",
+                    measurementId: "G-N93CDPCXM5"
+                };
+            """.trimIndent()
+
+    val moduleComposeAppDir = project(":composeApp").projectDir
+
+    file("$moduleComposeAppDir/src/wasmJsMain/resources/firebase/firebaseConfig.js").writeText(firebaseConfig)
+}
+
 tasks.create("setupBuildkonfigIos") {
     doLast {
         val flavour = project.findProperty("kmmflavour") as String?
@@ -234,9 +272,18 @@ tasks.create("setupBuildkonfig") {
     val androidKMPFlavor = flavor.plus(variant.capitalized())
 
     val buildKonfigFlavor = when {
-        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserDevelopmentRun") -> "stagingDebug"
-        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserDistribution") -> "productionRelease"
-        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserProductionRun") -> "productionRelease"
+        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserDevelopmentRun") -> {
+            setupStagingFirebase()
+            "stagingDebug"
+        }
+        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserDistribution") -> {
+            setupProductionFirebase()
+            "productionRelease"
+        }
+        gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserProductionRun") -> {
+            setupProductionFirebase()
+            "productionRelease"
+        }
         androidKMPFlavor.isEmpty() -> project.findProperty(KotlinCocoapodsPlugin.CONFIGURATION_PROPERTY).toString()
         else -> androidKMPFlavor
     }
