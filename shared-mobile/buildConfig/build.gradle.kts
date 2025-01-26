@@ -53,7 +53,8 @@ buildkonfig {
         load(FileInputStream(productionPropertiesFile))
     }
     val productionBaseUrl = "https://msiwak-api.pl"
-    val stagingBaseUrl = "http://192.168.0.13:8080"
+    val stagingBaseUrl = "http://192.168.100.144:8080"
+//    val stagingBaseUrl = "http://192.168.0.13:8080"
 
     if (productionPropertiesFile.exists()) {
         defaultConfigs {
@@ -63,6 +64,7 @@ buildkonfig {
             buildConfigField(BOOLEAN, "IsDebug", "false")
             buildConfigField(STRING, "FIREBASE_KEY", productionProperties["FIREBASE_KEY"] as String)
             buildConfigField(STRING, "FIREBASE_CLIENT_ID", productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String)
+            buildConfigField(STRING, "API_KEY", productionProperties["API_KEY"] as String)
         }
 
         targetConfigs {
@@ -76,6 +78,7 @@ buildkonfig {
                     "FIREBASE_CLIENT_ID",
                     productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
                 )
+                buildConfigField(STRING, "API_KEY", productionProperties["API_KEY"] as String)
             }
 
             ios {
@@ -88,6 +91,7 @@ buildkonfig {
                     "FIREBASE_CLIENT_ID",
                     productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
                 )
+                buildConfigField(STRING, "API_KEY", productionProperties["API_KEY"] as String)
             }
 
             wasmJS {
@@ -100,6 +104,7 @@ buildkonfig {
                     "FIREBASE_CLIENT_ID",
                     productionProperties["WEBAPP_FIREBASE_CLIENT_ID"] as String
                 )
+                buildConfigField(STRING, "API_KEY", productionProperties["API_KEY"] as String)
             }
         }
 
@@ -114,6 +119,7 @@ buildkonfig {
                     "FIREBASE_CLIENT_ID",
                     productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
                 )
+                buildConfigField(STRING, "API_KEY", productionProperties["API_KEY"] as String)
             }
 
             ios {
@@ -126,6 +132,7 @@ buildkonfig {
                     "FIREBASE_CLIENT_ID",
                     productionProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
                 )
+                buildConfigField(STRING, "API_KEY", productionProperties["API_KEY"] as String)
             }
 
             wasmJS {
@@ -138,6 +145,7 @@ buildkonfig {
                     "FIREBASE_CLIENT_ID",
                     productionProperties["WEBAPP_FIREBASE_CLIENT_ID"] as String
                 )
+                buildConfigField(STRING, "API_KEY", productionProperties["API_KEY"] as String)
             }
         }
     }
@@ -158,6 +166,7 @@ buildkonfig {
                     "FIREBASE_CLIENT_ID",
                     stagingProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
                 )
+                buildConfigField(STRING, "API_KEY", stagingProperties["API_KEY"] as String)
             }
 
             ios {
@@ -170,6 +179,7 @@ buildkonfig {
                     "FIREBASE_CLIENT_ID",
                     stagingProperties["ANDROID_FIREBASE_CLIENT_ID"] as String
                 )
+                buildConfigField(STRING, "API_KEY", stagingProperties["API_KEY"] as String)
             }
 
             wasmJS {
@@ -178,6 +188,7 @@ buildkonfig {
                 buildConfigField(BOOLEAN, "IsDebug", "true")
                 buildConfigField(STRING, "FIREBASE_KEY", stagingProperties["FIREBASE_KEY"] as String)
                 buildConfigField(STRING, "FIREBASE_CLIENT_ID", stagingProperties["WEBAPP_FIREBASE_CLIENT_ID"] as String)
+                buildConfigField(STRING, "API_KEY", stagingProperties["API_KEY"] as String)
             }
         }
     }
@@ -276,14 +287,17 @@ tasks.create("setupBuildkonfig") {
             setupStagingFirebase()
             "stagingDebug"
         }
+
         gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserDistribution") -> {
             setupProductionFirebase()
             "productionRelease"
         }
+
         gradle.startParameter.taskNames.contains("composeApp:wasmJsBrowserProductionRun") -> {
             setupProductionFirebase()
             "productionRelease"
         }
+
         androidKMPFlavor.isEmpty() -> project.findProperty(KotlinCocoapodsPlugin.CONFIGURATION_PROPERTY).toString()
         else -> androidKMPFlavor
     }
