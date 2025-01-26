@@ -13,6 +13,9 @@ inputs:
   WEBAPP_FIREBASE_CLIENT_ID:
     required: true
     description: ""
+  API_KEY:
+    required: true
+    description: ""
   os:
     required: true
     description: ""
@@ -53,17 +56,19 @@ runs:
         FIREBASE_KEY: ${{ inputs.FIREBASE_KEY }}
         ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
         WEBAPP_FIREBASE_CLIENT_ID: ${{ inputs.WEBAPP_FIREBASE_CLIENT_ID }}
+        API_KEY: ${{ inputs.API_KEY }}
       shell: bash
       run: |
         echo FIREBASE_KEY=${FIREBASE_KEY} >> ./release.properties
         echo ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID} >> ./release.properties
         echo WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID} >> ./release.properties
-        
+
     - name: Update staging.properties
       env:
         FIREBASE_KEY: ${{ inputs.FIREBASE_KEY }}
         ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
         WEBAPP_FIREBASE_CLIENT_ID: ${{ inputs.WEBAPP_FIREBASE_CLIENT_ID }}
+        API_KEY: ${{ inputs.API_KEY }}
       shell: bash
       run: |
         echo FIREBASE_KEY=${FIREBASE_KEY} >> ./staging.properties
