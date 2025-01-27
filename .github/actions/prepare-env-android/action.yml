@@ -59,9 +59,10 @@ runs:
         API_KEY: ${{ inputs.API_KEY }}
       shell: bash
       run: |
-        echo FIREBASE_KEY=${FIREBASE_KEY} >> ./release.properties
-        echo ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID} >> ./release.properties
-        echo WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID} >> ./release.properties
+        echo FIREBASE_KEY=${FIREBASE_KEY} >> ./production.properties
+        echo ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID} >> ./production.properties
+        echo WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID} >> ./production.properties
+        echo API_KEY=${API_KEY} >> ./production.properties
 
     - name: Update staging.properties
       env:
@@ -74,3 +75,4 @@ runs:
         echo FIREBASE_KEY=${FIREBASE_KEY} >> ./staging.properties
         echo ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID} >> ./staging.properties
         echo WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID} >> ./staging.properties
+        echo API_KEY=${API_KEY} >> ./staging.properties
