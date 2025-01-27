@@ -6,7 +6,7 @@ import pl.msiwak.multiplatform.buildconfig.BuildConfig
 @Composable
 actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String, String?) -> Unit): () -> Unit {
     return {
-        initializeGoogleLogin(clientId = BuildConfig.firebaseClientId) { idToken ->
+        initializeGoogleLogin(clientId = BuildConfig.FIREBASE_CLIENT_ID) { idToken ->
             onResultOk(idToken, null)
         }
     }

@@ -1,2 +1,3 @@
 /build
 /src/wasmJsMain/resources/firebase/firebaseConfig.js
+/.env

@@ -5,3 +5,6 @@
 /production.properties
 /staging.properties
 /signing
+/iosApp/Pods
+/iosApp/build
+/kotlin-js-store/yarn.lock
