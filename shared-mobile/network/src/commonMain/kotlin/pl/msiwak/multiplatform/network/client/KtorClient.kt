@@ -14,16 +14,23 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.datetime.Clock
 import kotlinx.serialization.json.Json
 import pl.msiwak.multiplatform.buildconfig.BuildConfig
 import pl.msiwak.multiplatform.commonObject.exception.ClientErrorException
 import pl.msiwak.multiplatform.commonObject.exception.InvalidAuthTokenException
 import pl.msiwak.multiplatform.commonObject.exception.ServerErrorException
 import pl.msiwak.multiplatform.network.EngineProvider
+import pl.msiwak.multiplatform.shared.common.API_KEY_HEADER
+import pl.msiwak.multiplatform.shared.common.API_KEY_NONCE_HEADER
+import pl.msiwak.multiplatform.shared.common.API_KEY_TIMESTAMP_HEADER
 import pl.msiwak.multiplatform.store.SessionStore
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 import co.touchlab.kermit.Logger as KermitLogger
 
 class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider) {
+    @OptIn(ExperimentalUuidApi::class)
     val httpClient = HttpClient(engine.getEngine()) {
 
         if (BuildConfig.IsDebug) {
@@ -55,6 +62,9 @@ class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider)
             header(HttpHeaders.AccessControlAllowHeaders, "Content-Type")
             header(HttpHeaders.AccessControlAllowOrigin, "*")
             header(HttpHeaders.AccessControlAllowMethods, "OPTIONS,POST,GET")
+            header(API_KEY_HEADER, BuildConfig.API_KEY)
+            header(API_KEY_NONCE_HEADER, Uuid.random().toString())
+            header(API_KEY_TIMESTAMP_HEADER, Clock.System.now().toEpochMilliseconds())
         }
 
         HttpResponseValidator {

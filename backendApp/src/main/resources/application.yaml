@@ -10,3 +10,5 @@ storage:
     jdbcURL: "$DATABASE_URL"
     user: "$DATABASE_USER"
     password: "$DATABASE_PASSWORD"
+
+apiKey: "$API_KEY"

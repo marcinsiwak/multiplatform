@@ -32,6 +32,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization)
             implementation(libs.kotlinx.dateTime)
+            implementation(libs.okio)
         }
     }
 }

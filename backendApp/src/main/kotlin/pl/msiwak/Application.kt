@@ -17,7 +17,7 @@ import kotlinx.serialization.json.Json
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 import org.postgresql.util.PSQLException
-import pl.msiwak.infrastructure.config.auth.firebase.configureFirebaseAuth
+import pl.msiwak.infrastructure.config.auth.configureAuthorization
 import pl.msiwak.infrastructure.config.configureRouting
 import pl.msiwak.infrastructure.config.initialConfiguration
 import pl.msiwak.infrastructure.di.diControllerModule
@@ -96,6 +96,6 @@ fun Application.module() {
         }
     }
 
-    configureFirebaseAuth()
+    configureAuthorization()
     configureRouting()
 }

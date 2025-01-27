@@ -13,8 +13,11 @@ import io.ktor.server.response.respond
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+const val FIREBASE_AUTH = "FIREBASE_AUTH"
+const val FIREBASE_JWT_AUTH_KEY: String = "FIREBASE_JWT_AUTH_KEY"
+
 class FirebaseAuthProvider(config: FirebaseConfig) : AuthenticationProvider(config) {
-    val authHeader: (ApplicationCall) -> HttpAuthHeader? = config.authHeader
+    private val authHeader: (ApplicationCall) -> HttpAuthHeader? = config.authHeader
     private val authFunction = config.firebaseAuthenticationFunction
 
     override suspend fun onAuthenticate(context: AuthenticationContext) {
@@ -39,25 +42,22 @@ class FirebaseAuthProvider(config: FirebaseConfig) : AuthenticationProvider(conf
             context.call.respond(HttpStatusCode.Unauthorized)
         }
     }
-}
 
-suspend fun verifyFirebaseIdToken(
-    call: ApplicationCall,
-    authHeader: HttpAuthHeader,
-    tokenData: suspend ApplicationCall.(FirebaseToken) -> FirebaseUser?
-): FirebaseUser? {
-    val token: FirebaseToken = if (authHeader.authScheme == "Bearer" && authHeader is HttpAuthHeader.Single) {
-        withContext(Dispatchers.IO) {
-            FirebaseAuth.getInstance().verifyIdToken(authHeader.blob)
+    private suspend fun verifyFirebaseIdToken(
+        call: ApplicationCall,
+        authHeader: HttpAuthHeader,
+        tokenData: suspend ApplicationCall.(FirebaseToken) -> FirebaseUser?
+    ): FirebaseUser? {
+        val token: FirebaseToken = if (authHeader.authScheme == "Bearer" && authHeader is HttpAuthHeader.Single) {
+            withContext(Dispatchers.IO) {
+                FirebaseAuth.getInstance().verifyIdToken(authHeader.blob)
+            }
+        } else {
+            return null
         }
-    } else {
-        return null
+        return tokenData(call, token)
     }
-    return tokenData(call, token)
+
+    private fun HttpAuthHeader.Companion.bearerAuthChallenge(realm: String): HttpAuthHeader =
+        HttpAuthHeader.Parameterized("Bearer", mapOf(HttpAuthHeader.Parameters.Realm to realm))
 }
-
-fun HttpAuthHeader.Companion.bearerAuthChallenge(realm: String): HttpAuthHeader =
-    HttpAuthHeader.Parameterized("Bearer", mapOf(HttpAuthHeader.Parameters.Realm to realm))
-
-const val FIREBASE_AUTH = "FIREBASE_AUTH"
-const val FIREBASE_JWT_AUTH_KEY: String = "FIREBASE_JWT_AUTH_KEY"
