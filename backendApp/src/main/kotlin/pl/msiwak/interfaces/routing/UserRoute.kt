@@ -37,7 +37,8 @@ fun Route.addUserRoutes() {
         authenticate(FIREBASE_AUTH) {
             post("/googleUser") {
                 with(call) {
-                    val principal = principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
+                    val principal =
+                        principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
                     userController.addUser(
                         principal.userId,
                         principal.displayName,
@@ -63,7 +64,8 @@ fun Route.addUserRoutes() {
 
             get("/user") {
                 with(call) {
-                    val principal = principal<FirebaseUser>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
+                    val principal =
+                        call.principal<FirebaseUser>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
                     userController.getUser(principal.userId)?.let {
                         respond(status = HttpStatusCode.OK, message = it)
                     } ?: return@get call.respond(HttpStatusCode.NotFound)
