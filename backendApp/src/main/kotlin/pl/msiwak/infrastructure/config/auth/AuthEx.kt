@@ -4,14 +4,15 @@ import io.ktor.server.auth.AuthenticationConfig
 import pl.msiwak.infrastructure.config.auth.apikey.API_KEY_AUTH
 import pl.msiwak.infrastructure.config.auth.apikey.ApiKeyAuthProvider
 import pl.msiwak.infrastructure.config.auth.apikey.ApiKeyConfig
+import pl.msiwak.infrastructure.config.auth.firebase.FIREBASE_AUTH
+import pl.msiwak.infrastructure.config.auth.firebase.FirebaseAuthProvider
+import pl.msiwak.infrastructure.config.auth.firebase.FirebaseConfig
 
 fun AuthenticationConfig.firebase(
-    name: String? = pl.msiwak.infrastructure.config.auth.firebase.FIREBASE_AUTH,
-    configure: pl.msiwak.infrastructure.config.auth.firebase.FirebaseConfig.() -> Unit
+    name: String? = FIREBASE_AUTH,
+    configure: FirebaseConfig.() -> Unit
 ) {
-    val provider = pl.msiwak.infrastructure.config.auth.firebase.FirebaseAuthProvider(
-        pl.msiwak.infrastructure.config.auth.firebase.FirebaseConfig(name).apply(configure)
-    )
+    val provider = FirebaseAuthProvider(FirebaseConfig(name).apply(configure))
     register(provider)
 }
 

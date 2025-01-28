@@ -16,9 +16,7 @@ class ApiKeyAuthProvider(config: ApiKeyConfig) : AuthenticationProvider(config) 
 
     override suspend fun onAuthenticate(context: AuthenticationContext) {
         val principal = verifyApiKey(context.call, authFunction)
-        if (principal != null) {
-            context.principal(principal)
-        } else {
+        if (principal == null) {
             context.call.respond(HttpStatusCode.Unauthorized)
         }
     }

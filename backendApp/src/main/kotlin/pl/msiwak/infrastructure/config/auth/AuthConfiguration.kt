@@ -11,15 +11,6 @@ import pl.msiwak.multiplatform.shared.security.prepareDynamicApiKey
 fun Application.configureAuthorization() {
     val backendApiKey = environment.config.property("apiKey").getString()
     install(Authentication) {
-        firebase {
-            validate {
-                FirebaseUser(
-                    it.uid,
-                    it.email.orEmpty(),
-                    mapRole(it.claims)
-                )
-            }
-        }
         apiKey {
             validate { apiKey, nonce, timestamp ->
                 val hashedBackendApiKey = prepareDynamicApiKey(backendApiKey, nonce, timestamp)
@@ -28,6 +19,15 @@ fun Application.configureAuthorization() {
                 } else {
                     null
                 }
+            }
+        }
+        firebase {
+            validate {
+                FirebaseUser(
+                    it.uid,
+                    it.email.orEmpty(),
+                    mapRole(it.claims)
+                )
             }
         }
     }

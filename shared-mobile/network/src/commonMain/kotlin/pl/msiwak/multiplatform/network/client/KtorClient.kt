@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.network.client
 
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -8,7 +9,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.bearerAuth
-import io.ktor.client.request.header
+import io.ktor.client.request.headers
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
@@ -24,13 +25,13 @@ import pl.msiwak.multiplatform.network.EngineProvider
 import pl.msiwak.multiplatform.shared.common.API_KEY_HEADER
 import pl.msiwak.multiplatform.shared.common.API_KEY_NONCE_HEADER
 import pl.msiwak.multiplatform.shared.common.API_KEY_TIMESTAMP_HEADER
+import pl.msiwak.multiplatform.shared.security.prepareDynamicApiKey
 import pl.msiwak.multiplatform.store.SessionStore
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 import co.touchlab.kermit.Logger as KermitLogger
 
 class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider) {
-    @OptIn(ExperimentalUuidApi::class)
     val httpClient = HttpClient(engine.getEngine()) {
 
         if (BuildConfig.IsDebug) {
@@ -59,12 +60,8 @@ class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider)
             contentType(ContentType.Application.Json)
             url(BuildConfig.BASE_URL)
             bearerAuth(sessionStore.getToken() ?: "")
-            header(HttpHeaders.AccessControlAllowHeaders, "Content-Type")
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-            header(HttpHeaders.AccessControlAllowMethods, "OPTIONS,POST,GET")
-            header(API_KEY_HEADER, BuildConfig.API_KEY)
-            header(API_KEY_NONCE_HEADER, Uuid.random().toString())
-            header(API_KEY_TIMESTAMP_HEADER, Clock.System.now().toEpochMilliseconds())
+            setupCorsHeaders()
+            setupApiKeyHeaders()
         }
 
         HttpResponseValidator {
@@ -116,6 +113,26 @@ class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider)
 
     private fun parseServerErrors(httpCode: Int, httpMessage: String?): Throwable =
         ServerErrorException(httpCode, httpMessage)
+
+    @OptIn(ExperimentalUuidApi::class)
+    private fun DefaultRequest.DefaultRequestBuilder.setupApiKeyHeaders() {
+        val uuid = Uuid.random().toString()
+        val timestamp = Clock.System.now().toEpochMilliseconds().toString()
+        headers {
+            append(
+                API_KEY_HEADER,
+                prepareDynamicApiKey(backendApiKey = BuildConfig.API_KEY, nonce = uuid, timestamp = timestamp)
+            )
+            append(API_KEY_NONCE_HEADER, uuid)
+            append(API_KEY_TIMESTAMP_HEADER, timestamp)
+        }
+    }
+
+    private fun DefaultRequest.DefaultRequestBuilder.setupCorsHeaders() = headers {
+        append(HttpHeaders.AccessControlAllowHeaders, "Content-Type")
+        append(HttpHeaders.AccessControlAllowOrigin, "*")
+        append(HttpHeaders.AccessControlAllowMethods, "OPTIONS,POST,GET")
+    }
 
     companion object {
         const val CLIENT_ERROR_RANGE_START = 400
