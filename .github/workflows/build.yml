@@ -19,10 +19,10 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
-          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
-          ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
-          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          FIREBASE_KEY: ${{ secrets.STAGING_FIREBASE_KEY }}
+          ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.DEV_ANDROID_FIREBASE_CLIENT_ID }}
+          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.DEV_WEBAPP_FIREBASE_CLIENT_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
       - name: Run clean
@@ -86,10 +86,10 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
-          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
-          ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
-          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          FIREBASE_KEY: ${{ secrets.STAGING_FIREBASE_KEY }}
+          ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.DEV_ANDROID_FIREBASE_CLIENT_ID }}
+          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.DEV_WEBAPP_FIREBASE_CLIENT_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
       - run: ./gradlew :shared-mobile:generateDummyFramework
@@ -117,10 +117,10 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
-          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+          FIREBASE_KEY: ${{ secrets.STAGING_FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
       - uses: actions/github-script@v6
@@ -162,7 +162,7 @@ jobs:
         id: decode_service_credentials
         uses: timheuer/base64-to-file@v1.2
         with:
-          fileName: 'sportplatform-b5318-816058b49361.json'
+          fileName: 'sportplatform-distribution.json'
           fileDir: '/home/runner/work/multiplatform/multiplatform/composeApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
@@ -186,10 +186,10 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
-          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
-          ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
-          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          FIREBASE_KEY: ${{ secrets.STAGING_FIREBASE_KEY }}
+          ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.DEV_ANDROID_FIREBASE_CLIENT_ID }}
+          WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.DEV_WEBAPP_FIREBASE_CLIENT_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
       - uses: actions/github-script@v6
@@ -223,9 +223,9 @@ jobs:
         id: decode_service_credentials
         uses: timheuer/base64-to-file@v1.2
         with:
-          fileName: 'sportplatform-b5318-816058b49361.json'
+          fileName: 'sportplatform-distribution.json'
           fileDir: '/home/runner/work/multiplatform/multiplatform/composeApp/'
-          encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
+          encodedString: ${{ secrets.DEV_FAD_SERVICE_CREDENTIALS }}
 
       - name: Distribute app
         run: ./gradlew :composeApp:assembleStagingDebug appDistributionUploadStagingDebug
@@ -248,10 +248,10 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
       - uses: actions/github-script@v6
@@ -285,7 +285,7 @@ jobs:
         id: decode_service_credentials
         uses: timheuer/base64-to-file@v1.2
         with:
-          fileName: 'sportplatform-b5318-816058b49361.json'
+          fileName: 'sportplatform-distribution.json'
           fileDir: '/home/runner/work/multiplatform/multiplatform/composeApp/'
           encodedString: ${{ secrets.FAD_SERVICE_CREDENTIALS }}
 
@@ -296,15 +296,3 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
           BUILD_NUMBER: ${{steps.get_pull_request_number.outputs.result}}
-
-#  backendAppJob:
-#    if: ${{ contains(github.event.pull_request.labels.*.name, 'Backend') }}
-#    name: Run Backend App
-#    uses: ./.github/workflows/backend-app.yml
-#    secrets: inherit
-#
-#  wasmAppJob:
-#    if: ${{ contains(github.event.pull_request.labels.*.name, 'Wasm') }}
-#    name: Run Wasm App
-#    uses: ./.github/workflows/wasm-app.yml
-#    secrets: inherit

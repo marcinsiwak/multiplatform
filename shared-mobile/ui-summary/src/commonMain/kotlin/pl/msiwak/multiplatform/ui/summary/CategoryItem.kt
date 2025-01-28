@@ -105,6 +105,11 @@ fun CategoryItem(
 @Composable
 fun CategoryItemPreview() {
     AppTheme {
-        CategoryItem(category = Category())
+        CategoryItem(
+            category = Category(
+                id = "",
+                name = ""
+            )
+        )
     }
 }

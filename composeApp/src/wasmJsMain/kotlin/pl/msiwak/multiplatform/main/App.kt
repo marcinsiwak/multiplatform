@@ -15,7 +15,12 @@ fun main() {
         modules(appModule() + platformRepositoryModule + databaseModule)
     }
 
-    ComposeViewport(document.body!!) {
-        MainView()
+    try {
+        print("Starting WASM application...")
+        ComposeViewport(document.body!!) {
+            MainView()
+        }
+    } catch (e: Exception) {
+        println("Error new occurred in WASM application: ${e.message}")
     }
 }

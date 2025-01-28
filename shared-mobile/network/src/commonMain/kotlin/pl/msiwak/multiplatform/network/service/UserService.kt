@@ -11,8 +11,12 @@ class UserService(
     private val mapper: UserMapper
 ) {
 
-    suspend fun getUser(): Flow<User> {
-        return client.getUser().map { mapper(it) }
+    suspend fun getUser(): User {
+        return mapper(client.getUser())
+    }
+
+    suspend fun getUsers(): List<User> {
+        return client.getUsers().map { users -> mapper(users) }
     }
 
     suspend fun createUser(uuid: String, email: String) {

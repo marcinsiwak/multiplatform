@@ -1,9 +1,6 @@
 name: Prepare Environment for Android
 
 inputs:
-  AUTH_WEB_CLIENT_ID:
-    required: true
-    description: ""
   BASE_URL:
     required: true
     description: ""
@@ -14,6 +11,9 @@ inputs:
     required: true
     description: ""
   WEBAPP_FIREBASE_CLIENT_ID:
+    required: true
+    description: ""
+  API_KEY:
     required: true
     description: ""
   os:
@@ -53,26 +53,26 @@ runs:
 
     - name: Update production.properties
       env:
-        AUTH_WEB_CLIENT_ID: ${{ inputs.AUTH_WEB_CLIENT_ID }}
         FIREBASE_KEY: ${{ inputs.FIREBASE_KEY }}
         ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
         WEBAPP_FIREBASE_CLIENT_ID: ${{ inputs.WEBAPP_FIREBASE_CLIENT_ID }}
+        API_KEY: ${{ inputs.API_KEY }}
       shell: bash
       run: |
-        echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/production.properties
         echo FIREBASE_KEY=${FIREBASE_KEY} >> ./production.properties
         echo ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID} >> ./production.properties
         echo WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID} >> ./production.properties
-        
+        echo API_KEY=${API_KEY} >> ./production.properties
+
     - name: Update staging.properties
       env:
-        AUTH_WEB_CLIENT_ID: ${{ inputs.AUTH_WEB_CLIENT_ID }}
         FIREBASE_KEY: ${{ inputs.FIREBASE_KEY }}
         ANDROID_FIREBASE_CLIENT_ID: ${{ inputs.ANDROID_FIREBASE_CLIENT_ID }}
         WEBAPP_FIREBASE_CLIENT_ID: ${{ inputs.WEBAPP_FIREBASE_CLIENT_ID }}
+        API_KEY: ${{ inputs.API_KEY }}
       shell: bash
       run: |
-        echo GOOGLE_AUTH_WEB_CLIENT_ID="${AUTH_WEB_CLIENT_ID}" > ./composeApp/staging.properties
         echo FIREBASE_KEY=${FIREBASE_KEY} >> ./staging.properties
         echo ANDROID_FIREBASE_CLIENT_ID=${ANDROID_FIREBASE_CLIENT_ID} >> ./staging.properties
         echo WEBAPP_FIREBASE_CLIENT_ID=${WEBAPP_FIREBASE_CLIENT_ID} >> ./staging.properties
+        echo API_KEY=${API_KEY} >> ./staging.properties

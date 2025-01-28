@@ -10,11 +10,17 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
+import pl.msiwak.multiplatform.domain.user.GetUserUseCase
+import pl.msiwak.multiplatform.domain.user.GetUsersUseCase
 import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCase
+import pl.msiwak.multiplatform.shared.common.Role
+import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class SettingsViewModel(
     getVersionNameUseCase: GetVersionNameUseCase,
-    private val logoutUseCase: LogoutUseCase
+    private val logoutUseCase: LogoutUseCase,
+    private val getUserUseCase: GetUserUseCase,
+    globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(SettingsState())
@@ -23,11 +29,15 @@ class SettingsViewModel(
     private val _viewEvent = MutableSharedFlow<SettingsEvent>()
     val viewEvent: SharedFlow<SettingsEvent> = _viewEvent.asSharedFlow()
 
+    private val errorHandler = globalErrorHandler.handleError()
+
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
+            val user = getUserUseCase()
             _viewState.update {
                 it.copy(
-                    versionName = getVersionNameUseCase()
+                    versionName = getVersionNameUseCase(),
+                    isAdmin = user.role == Role.ADMIN
                 )
             }
         }
@@ -36,6 +46,7 @@ class SettingsViewModel(
     fun onUiAction(action: SettingsUiAction) {
         when (action) {
             SettingsUiAction.OnLogoutClicked -> onLogoutClicked()
+            SettingsUiAction.OnAdminPanelClicked -> onAdminPanelClicked()
             else -> Unit
         }
     }
@@ -44,6 +55,12 @@ class SettingsViewModel(
         viewModelScope.launch {
             logoutUseCase()
             _viewEvent.emit(SettingsEvent.Logout)
+        }
+    }
+
+    private fun onAdminPanelClicked() {
+        viewModelScope.launch {
+            _viewEvent.emit(SettingsEvent.NavigateToAdminPanel)
         }
     }
 }

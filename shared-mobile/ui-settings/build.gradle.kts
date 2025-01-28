@@ -44,6 +44,7 @@ kotlin {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.commonObject))
             implementation(project(Modules.uiCommonComponent))
+            implementation(project(Modules.sharedModel))
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)

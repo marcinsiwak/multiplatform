@@ -26,7 +26,7 @@ actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String, Str
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
-                    .setServerClientId(BuildConfig.firebaseClientId)
+                    .setServerClientId(BuildConfig.FIREBASE_CLIENT_ID)
                     .setFilterByAuthorizedAccounts(false)
                     .build()
             )

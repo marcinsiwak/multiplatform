@@ -135,7 +135,13 @@ class AddExerciseViewModel(
             AddExerciseUiAction.OnAddNewResultClicked -> onAddNewResultClicked()
             AddExerciseUiAction.OnAmountClicked -> onAmountClicked()
             is AddExerciseUiAction.OnAmountValueChanged -> onAmountValueChanged(action.amount)
-            is AddExerciseUiAction.OnConfirmRunningAmount -> onConfirmRunningAmount(action.hours, action.minutes, action.seconds, action.milliseconds)
+            is AddExerciseUiAction.OnConfirmRunningAmount -> onConfirmRunningAmount(
+                action.hours,
+                action.minutes,
+                action.seconds,
+                action.milliseconds
+            )
+
             AddExerciseUiAction.OnDateClicked -> onDateClicked()
             is AddExerciseUiAction.OnDateConfirmClicked -> onDatePicked(action.selectedDateMillis)
             AddExerciseUiAction.OnDateDismiss -> onDateDismiss()
@@ -186,7 +192,8 @@ class AddExerciseViewModel(
                         exerciseId = exerciseId,
                         result = result,
                         amount = amount,
-                        date = Instant.fromEpochMilliseconds(pickedDate).toLocalDateTime(TimeZone.currentSystemDefault()),
+                        date = Instant.fromEpochMilliseconds(pickedDate)
+                            .toLocalDateTime(TimeZone.currentSystemDefault()),
                         exerciseType = currentExercise!!.exerciseType
                     )
                 )
@@ -234,7 +241,12 @@ class AddExerciseViewModel(
     private fun onDatePicked(date: Long?) {
         if (date == null) return
         pickedDate = date
-        _viewState.update { it.copy(newResultData = it.newResultData.copy(date = formatDateUseCase(date)), isDatePickerVisible = false) }
+        _viewState.update {
+            it.copy(
+                newResultData = it.newResultData.copy(date = formatDateUseCase(date)),
+                isDatePickerVisible = false
+            )
+        }
     }
 
     private fun onResultLongClicked(resultIndex: Int) {
@@ -248,7 +260,12 @@ class AddExerciseViewModel(
         _viewState.update {
             it.copy(
                 resultDataTitles = setTitlesArrow(labelPosition),
-                results = formatResultsUseCase(FormatResultsUseCase.Params(currentResults, currentExercise!!.exerciseType))
+                results = formatResultsUseCase(
+                    FormatResultsUseCase.Params(
+                        currentResults,
+                        currentExercise!!.exerciseType
+                    )
+                )
             )
         }
     }
@@ -268,7 +285,14 @@ class AddExerciseViewModel(
     }
 
     private fun onResultValueChanged(text: String) {
-        _viewState.update { it.copy(newResultData = _viewState.value.newResultData.copy(result = text.filter { it.isNumber() }, isResultError = false)) }
+        _viewState.update {
+            it.copy(
+                newResultData = _viewState.value.newResultData.copy(
+                    result = text.filter { it.isNumber() },
+                    isResultError = false
+                )
+            )
+        }
     }
 
     private fun onAmountValueChanged(text: String) {
@@ -307,21 +331,49 @@ class AddExerciseViewModel(
     }
 
     private fun filterAll() {
-        _viewState.update { it.copy(results = formatResultsUseCase(FormatResultsUseCase.Params(currentResults, currentExercise!!.exerciseType))) }
+        _viewState.update {
+            it.copy(
+                results = formatResultsUseCase(
+                    FormatResultsUseCase.Params(
+                        currentResults,
+                        currentExercise!!.exerciseType
+                    )
+                )
+            )
+        }
     }
 
     private fun filterDay() {
         val filteredResults = currentResults.filter {
             it.date.dayOfYear == Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).dayOfYear
         }
-        _viewState.update { it.copy(results = formatResultsUseCase(FormatResultsUseCase.Params(filteredResults, currentExercise!!.exerciseType))) }
+        _viewState.update {
+            it.copy(
+                results = formatResultsUseCase(
+                    FormatResultsUseCase.Params(
+                        filteredResults,
+                        currentExercise!!.exerciseType
+                    )
+                )
+            )
+        }
     }
 
     private fun filter(previousDaysCount: Int) {
         val filteredResults = currentResults.filter {
-            Clock.System.now().minus(it.date.toInstant(TimeZone.currentSystemDefault())).inWholeDays in 0..previousDaysCount
+            Clock.System.now()
+                .minus(it.date.toInstant(TimeZone.currentSystemDefault())).inWholeDays in 0..previousDaysCount
         }
-        _viewState.update { it.copy(results = formatResultsUseCase(FormatResultsUseCase.Params(filteredResults, currentExercise!!.exerciseType))) }
+        _viewState.update {
+            it.copy(
+                results = formatResultsUseCase(
+                    FormatResultsUseCase.Params(
+                        filteredResults,
+                        currentExercise!!.exerciseType
+                    )
+                )
+            )
+        }
     }
 
     private fun sortResults(labelPosition: Int) {

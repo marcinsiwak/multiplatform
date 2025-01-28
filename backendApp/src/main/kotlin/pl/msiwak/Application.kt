@@ -17,7 +17,7 @@ import kotlinx.serialization.json.Json
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 import org.postgresql.util.PSQLException
-import pl.msiwak.infrastructure.config.auth.firebase.configureFirebaseAuth
+import pl.msiwak.infrastructure.config.auth.configureAuthorization
 import pl.msiwak.infrastructure.config.configureRouting
 import pl.msiwak.infrastructure.config.initialConfiguration
 import pl.msiwak.infrastructure.di.diControllerModule
@@ -26,6 +26,9 @@ import pl.msiwak.infrastructure.di.diMapperModule
 import pl.msiwak.infrastructure.di.diModule
 import pl.msiwak.infrastructure.di.diRepositoryModule
 import pl.msiwak.infrastructure.di.diUtilsModule
+import pl.msiwak.multiplatform.shared.common.API_KEY_HEADER
+import pl.msiwak.multiplatform.shared.common.API_KEY_NONCE_HEADER
+import pl.msiwak.multiplatform.shared.common.API_KEY_TIMESTAMP_HEADER
 
 fun main(args: Array<String>) {
     EngineMain.main(args)
@@ -74,7 +77,11 @@ fun Application.module() {
         allowHeader(HttpHeaders.AccessControlAllowOrigin)
         allowHeader(HttpHeaders.AccessControlAllowMethods)
         allowHeader(HttpHeaders.Authorization)
+        allowHeader(API_KEY_HEADER)
+        allowHeader(API_KEY_NONCE_HEADER)
+        allowHeader(API_KEY_TIMESTAMP_HEADER)
         allowMethod(HttpMethod.Options)
+        allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Put)
         allowMethod(HttpMethod.Patch)
         allowMethod(HttpMethod.Delete)
@@ -96,6 +103,6 @@ fun Application.module() {
         }
     }
 
-    configureFirebaseAuth()
+    configureAuthorization()
     configureRouting()
 }

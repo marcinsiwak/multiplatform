@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.commonObject.Category
 import pl.msiwak.multiplatform.commonObject.ExerciseType
 import pl.msiwak.multiplatform.domain.summaries.CreateCategoryUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
@@ -50,7 +49,12 @@ class AddCategoryViewModel(
     private fun onSaveCategoryClicked() {
         _viewState.update { it.copy(isLoading = true) }
         viewModelScope.launch(errorHandler) {
-            createCategoryUseCase(Category(name = viewState.value.name, exerciseType = viewState.value.exerciseType))
+            createCategoryUseCase(
+                CreateCategoryUseCase.Params(
+                    name = viewState.value.name,
+                    exerciseType = viewState.value.exerciseType
+                )
+            )
             _viewState.update { it.copy(isLoading = false) }
             _viewEvent.emit(AddCategoryEvent.NavigateBack)
         }

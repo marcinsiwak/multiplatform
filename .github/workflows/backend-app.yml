@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) }}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false && contains(github.event.pull_request.labels.*.name, 'Backend'))  }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -22,10 +22,10 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
       - name: Decode Keystore
@@ -55,10 +55,10 @@ jobs:
       - name: Prepare env
         uses: ./.github/actions/prepare-env-android
         with:
-          AUTH_WEB_CLIENT_ID: ${{ secrets.AUTH_WEB_CLIENT_ID }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
           ANDROID_FIREBASE_CLIENT_ID: ${{ secrets.ANDROID_FIREBASE_CLIENT_ID }}
           WEBAPP_FIREBASE_CLIENT_ID: ${{ secrets.WEBAPP_FIREBASE_CLIENT_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
       - name: Decode Keystore
@@ -107,8 +107,8 @@ jobs:
           port: ${{ secrets.RPI_PORT }}
           passphrase: ${{ secrets.RPI_PASSPHRASE }}
           script: |
-            cd server/athletetrack
+            cd server
             sudo docker compose down
             sudo docker compose pull
-            sudo docker compose up -d
+            sudo docker compose up --build -d
             exit 0

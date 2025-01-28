@@ -112,4 +112,9 @@ sealed class NavDestination(val route: String) {
         object NavVerifyEmailGraphDestination : VerifyEmailDestination("verify_email_graph")
         object NavVerifyEmailScreen : VerifyEmailDestination(VERIFY_EMAIL_SCREEN_ROUTE)
     }
+
+    sealed class AdminPanelDestination(route: String) : NavDestination(route) {
+        object NavAdminPanelGraphDestination : VerifyEmailDestination("verify_email_graph")
+        object NavAdminPanelScreen : VerifyEmailDestination(VERIFY_EMAIL_SCREEN_ROUTE)
+    }
 }

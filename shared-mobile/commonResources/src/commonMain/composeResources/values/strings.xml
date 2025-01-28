@@ -7,6 +7,7 @@
     <string name="settings">Settings</string>
     <string name="summary_add_category">Add category</string>
     <string name="email">E-mail</string>
+    <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
@@ -16,6 +17,7 @@
     <string name="ok">Ok</string>
     <string name="confirm">Confirm</string>
     <string name="deny">Deny</string>
+    <string name="user_type">User type</string>
 
     <string name="exercise">Exercise</string>
     <string name="exercise_name">Exercise name</string>
@@ -97,5 +99,7 @@
     <string name="terms_confirmation_title">Terms and conditions</string>
     <string name="terms_confirmation_description">To access the app you need to accept terms and conditions.</string>
     <string name="terms_confirmation_accept">Accept</string>
+
+    <string name="admin_panel">Admin panel</string>
 
 </resources>
