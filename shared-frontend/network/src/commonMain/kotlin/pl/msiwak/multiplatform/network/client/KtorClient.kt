@@ -9,6 +9,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.bearerAuth
+import io.ktor.client.request.header
 import io.ktor.client.request.headers
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
@@ -22,9 +23,7 @@ import pl.msiwak.multiplatform.commonObject.exception.ClientErrorException
 import pl.msiwak.multiplatform.commonObject.exception.InvalidAuthTokenException
 import pl.msiwak.multiplatform.commonObject.exception.ServerErrorException
 import pl.msiwak.multiplatform.network.EngineProvider
-import pl.msiwak.multiplatform.shared.common.API_KEY_HEADER
-import pl.msiwak.multiplatform.shared.common.API_KEY_NONCE_HEADER
-import pl.msiwak.multiplatform.shared.common.API_KEY_TIMESTAMP_HEADER
+import pl.msiwak.multiplatform.shared.common.CustomHttpHeaders
 import pl.msiwak.multiplatform.shared.security.prepareDynamicApiKey
 import pl.msiwak.multiplatform.store.SessionStore
 import kotlin.uuid.ExperimentalUuidApi
@@ -62,6 +61,7 @@ class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider)
             bearerAuth(sessionStore.getToken() ?: "")
             setupCorsHeaders()
             setupApiKeyHeaders()
+            header(CustomHttpHeaders.PERMISSION_POLICY_HEADER, "fedcm=(self)")
         }
 
         HttpResponseValidator {
@@ -120,11 +120,11 @@ class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider)
         val timestamp = Clock.System.now().toEpochMilliseconds().toString()
         headers {
             append(
-                API_KEY_HEADER,
+                CustomHttpHeaders.API_KEY_HEADER,
                 prepareDynamicApiKey(backendApiKey = BuildConfig.API_KEY, nonce = uuid, timestamp = timestamp)
             )
-            append(API_KEY_NONCE_HEADER, uuid)
-            append(API_KEY_TIMESTAMP_HEADER, timestamp)
+            append(CustomHttpHeaders.API_KEY_NONCE_HEADER, uuid)
+            append(CustomHttpHeaders.API_KEY_TIMESTAMP_HEADER, timestamp)
         }
     }
 
