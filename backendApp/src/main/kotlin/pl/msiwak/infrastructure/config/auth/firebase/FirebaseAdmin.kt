@@ -17,9 +17,9 @@ object FirebaseAdmin {
 
     private fun getFirebaseAdminSkdFile(isDevMode: Boolean): String {
         return if (isDevMode) {
-            "production/firebase-adminsdk.json"
-        } else {
             "dev/firebase-adminsdk.json"
+        } else {
+            "production/firebase-adminsdk.json"
         }
     }
 }
