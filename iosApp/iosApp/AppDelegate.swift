@@ -1,5 +1,5 @@
 import Foundation
-import shared_mobile
+import shared_frontend
 import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
