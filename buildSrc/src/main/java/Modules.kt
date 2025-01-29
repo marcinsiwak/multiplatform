@@ -1,7 +1,8 @@
 package pl.msiwak.multiplatform.dependencies
 
 object Modules {
-    const val sharedFrontend =":shared-frontend"
+    // Shared frontend
+    const val sharedFrontend = ":shared-frontend"
     const val commonResources = "$sharedFrontend:commonResources"
     const val commonObject = "$sharedFrontend:commonObject"
     const val database = "$sharedFrontend:database"
@@ -38,4 +39,5 @@ object Modules {
     // Shared
     const val shared = ":shared"
     const val sharedModel = "$shared:model"
+    const val sharedUtils = "$shared:utils"
 }

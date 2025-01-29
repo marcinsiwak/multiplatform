@@ -20,6 +20,7 @@ application {
 
 dependencies {
     implementation(project(Modules.sharedModel))
+    implementation(project(Modules.sharedUtils))
 
     // Ktor Core
     implementation(libs.ktor.server.core.jvm)

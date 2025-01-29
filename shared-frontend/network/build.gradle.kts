@@ -48,6 +48,7 @@ kotlin {
             implementation(libs.kotlinx.serialization)
 
             implementation(project(Modules.sharedModel))
+            implementation(project(Modules.sharedUtils))
         }
 
         androidMain.dependencies {
