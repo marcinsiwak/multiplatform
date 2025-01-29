@@ -1,5 +1,5 @@
-import shared_mobile
-import SwiftUI
+// import shared_frontend
+// import SwiftUI
 
 //struct SplashScreen: View {
 //    private let navigate: (NavigationDirections) -> Void
