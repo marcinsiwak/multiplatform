@@ -69,7 +69,7 @@ kotlin {
 
             implementation(libs.kotlinx.serialization)
             implementation(project(Modules.sharedModel))
-            implementation(project(Modules.sharedMobile))
+            implementation(project(Modules.sharedFrontend))
 
             implementation(compose.runtime)
             implementation(compose.foundation)
