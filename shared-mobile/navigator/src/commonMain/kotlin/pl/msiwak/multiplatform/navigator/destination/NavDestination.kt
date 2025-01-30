@@ -7,6 +7,7 @@ import athletetrack.shared_mobile.commonresources.generated.resources.settings
 import athletetrack.shared_mobile.commonresources.generated.resources.summary
 import pl.msiwak.multiplatform.navigator.ADD_CATEGORY_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.ADD_EXERCISE_SCREEN_ROUTE
+import pl.msiwak.multiplatform.navigator.ADMIN_PANEL_SCREEN_ROUTE
 import pl.msiwak.multiplatform.navigator.ARG_CATEGORY_ID
 import pl.msiwak.multiplatform.navigator.ARG_EXERCISE_ID
 import pl.msiwak.multiplatform.navigator.CATEGORY_SCREEN_ROUTE
@@ -114,7 +115,7 @@ sealed class NavDestination(val route: String) {
     }
 
     sealed class AdminPanelDestination(route: String) : NavDestination(route) {
-        object NavAdminPanelGraphDestination : VerifyEmailDestination("verify_email_graph")
-        object NavAdminPanelScreen : VerifyEmailDestination(VERIFY_EMAIL_SCREEN_ROUTE)
+        object NavAdminPanelGraphDestination : VerifyEmailDestination("admin_panel_graph")
+        object NavAdminPanelScreen : VerifyEmailDestination(ADMIN_PANEL_SCREEN_ROUTE)
     }
 }
