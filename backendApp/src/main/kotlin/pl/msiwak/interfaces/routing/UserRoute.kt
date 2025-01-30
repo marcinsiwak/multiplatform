@@ -15,6 +15,7 @@ import pl.msiwak.infrastructure.config.auth.firebase.FIREBASE_AUTH
 import pl.msiwak.infrastructure.config.auth.firebase.FirebaseUser
 import pl.msiwak.interfaces.controller.UserController
 import pl.msiwak.multiplatform.shared.common.Role
+import pl.msiwak.multiplatform.shared.model.ApiDeviceToken
 import pl.msiwak.multiplatform.shared.model.ApiUser
 
 fun Route.addUserRoutes() {
@@ -69,6 +70,17 @@ fun Route.addUserRoutes() {
                     userController.getUser(principal.userId)?.let {
                         respond(status = HttpStatusCode.OK, message = it)
                     } ?: return@get call.respond(HttpStatusCode.NotFound)
+                }
+            }
+
+            post("/user/notification") {
+                with(call) {
+                    val principal =
+                        call.principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
+                    receive<ApiDeviceToken>().run {
+                        userController.registerUserDeviceForNotification(token, principal.userId)
+                        respond(HttpStatusCode.OK)
+                    }
                 }
             }
 

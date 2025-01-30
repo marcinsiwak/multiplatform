@@ -5,6 +5,7 @@ object Users : Auditable() {
     val name = varchar("name", FIELD_VALUE_LENGTH)
     val email = varchar("email", FIELD_VALUE_LENGTH)
     val role = varchar("role", FIELD_VALUE_LENGTH)
+    val deviceToken = varchar("deviceToken", FIELD_VALUE_LENGTH).nullable().default(null)
 
     override val primaryKey = PrimaryKey(id)
 }

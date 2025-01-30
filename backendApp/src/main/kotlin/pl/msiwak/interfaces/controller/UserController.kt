@@ -7,4 +7,5 @@ interface UserController {
     suspend fun updateUser(userId: String, name: String, email: String)
     suspend fun getUser(userId: String): ApiUser?
     suspend fun getUsers(): List<ApiUser>
+    suspend fun registerUserDeviceForNotification(deviceToken: String, userId: String)
 }

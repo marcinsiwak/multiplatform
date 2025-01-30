@@ -1,0 +1,2 @@
+ALTER TABLE users
+ADD COLUMN deviceToken VARCHAR(255) DEFAULT null;

@@ -4,13 +4,15 @@ import pl.msiwak.domain.usecases.AddUserUseCase
 import pl.msiwak.domain.usecases.GetUserUseCase
 import pl.msiwak.domain.usecases.GetUsersUseCase
 import pl.msiwak.domain.usecases.UpdateUserUseCase
+import pl.msiwak.domain.usecases.notification.RegisterDeviceForNotificationsUseCase
 import pl.msiwak.multiplatform.shared.model.ApiUser
 
 class UserControllerImpl(
     private val addUserUseCase: AddUserUseCase,
     private val updateUserUseCase: UpdateUserUseCase,
     private val getUserUseCase: GetUserUseCase,
-    private val getUsersUseCase: GetUsersUseCase
+    private val getUsersUseCase: GetUsersUseCase,
+    private val registerDeviceForNotificationsUseCase: RegisterDeviceForNotificationsUseCase
 ) : UserController {
 
     override suspend fun addUser(userId: String, name: String, email: String) {
@@ -27,5 +29,9 @@ class UserControllerImpl(
 
     override suspend fun getUsers(): List<ApiUser> {
         return getUsersUseCase()
+    }
+
+    override suspend fun registerUserDeviceForNotification(deviceToken: String, userId: String) {
+        registerDeviceForNotificationsUseCase(deviceToken, userId)
     }
 }

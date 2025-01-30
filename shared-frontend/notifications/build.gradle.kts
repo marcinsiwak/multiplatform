@@ -1,3 +1,5 @@
+import pl.msiwak.multiplatform.dependencies.Modules
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
@@ -35,11 +37,8 @@ kotlin {
         }
 
         commonMain.dependencies {
+            implementation(project(Modules.network))
             implementation(libs.kermit)
-        }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }

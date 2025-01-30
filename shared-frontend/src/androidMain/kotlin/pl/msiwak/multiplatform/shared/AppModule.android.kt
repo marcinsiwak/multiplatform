@@ -12,6 +12,7 @@ import pl.msiwak.multiplatform.database.Database
 import pl.msiwak.multiplatform.database.dao.CategoriesDao
 import pl.msiwak.multiplatform.database.dao.ExercisesDao
 import pl.msiwak.multiplatform.database.dao.ResultsDao
+import pl.msiwak.multiplatform.notifications.NotificationsService
 import pl.msiwak.multiplatform.utils.KMMPreferences
 import pl.msiwak.multiplatform.utils.KMMPreferencesImpl
 
@@ -26,6 +27,8 @@ actual val platformRepositoryModule = module {
     single<CategoryRepository> { CategoryRepositoryImpl(get(), get(), get(), get(), get()) }
     single<KMMPreferences> { KMMPreferencesImpl(get()) }
     single<VersionRepository> { VersionRepositoryImpl(get()) }
+
+    single { NotificationsService(get()) }
 }
 
 actual val authModule = module {

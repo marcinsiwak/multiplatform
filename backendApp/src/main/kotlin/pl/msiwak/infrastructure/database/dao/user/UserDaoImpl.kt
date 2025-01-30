@@ -25,15 +25,16 @@ class UserDaoImpl : UserDao {
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToUser)
     }
 
-    override suspend fun updateUser(userId: String, name: String?, email: String?, role: String?): Unit = dbQuery {
+    override suspend fun updateUser(userEntity: UserEntity): Unit = dbQuery {
         Users.update(
             where = {
-                Users.id eq userId
+                Users.id eq userEntity.id
             }
         ) {
-            name?.let { userName -> it[Users.name] = userName }
-            email?.let { userEmail -> it[Users.email] = userEmail }
-            role?.let { userRole -> it[Users.role] = userRole }
+            userEntity.name.let { userName -> it[Users.name] = userName }
+            userEntity.email.let { userEmail -> it[Users.email] = userEmail }
+            userEntity.role.let { userRole -> it[Users.role] = userRole }
+            userEntity.deviceToken.let { userDeviceToken -> it[Users.deviceToken] = userDeviceToken }
         }
     }
 
@@ -45,6 +46,7 @@ class UserDaoImpl : UserDao {
         id = row[Users.id],
         name = row[Users.name],
         email = row[Users.email],
-        role = row[Users.role]
+        role = row[Users.role],
+        deviceToken = row[Users.deviceToken]
     )
 }

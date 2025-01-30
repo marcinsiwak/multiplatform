@@ -26,7 +26,9 @@ import pl.msiwak.infrastructure.di.diMapperModule
 import pl.msiwak.infrastructure.di.diModule
 import pl.msiwak.infrastructure.di.diRepositoryModule
 import pl.msiwak.infrastructure.di.diUtilsModule
+import pl.msiwak.infrastructure.di.servicesModule
 import pl.msiwak.multiplatform.shared.common.CustomHttpHeaders
+import pl.msiwak.multiplatform.shared.exception.UserNotFoundException
 
 fun main(args: Array<String>) {
     EngineMain.main(args)
@@ -44,7 +46,8 @@ fun Application.module() {
             diRepositoryModule,
             diControllerModule,
             diDaoModule,
-            diUtilsModule
+            diUtilsModule,
+            servicesModule
         )
     }
     install(ContentNegotiation) {
@@ -95,6 +98,7 @@ fun Application.module() {
                         call.respond(HttpStatusCode.InternalServerError, "Database error: ${cause.message}")
                     }
                 }
+                is UserNotFoundException -> call.respond(HttpStatusCode.NotFound)
 
                 else -> call.respond(HttpStatusCode.InternalServerError, "Database error: ${cause.message}")
             }
