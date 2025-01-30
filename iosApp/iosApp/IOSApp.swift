@@ -1,4 +1,4 @@
-import shared_mobile
+import shared_frontend
 import SwiftUI
 
 @main
