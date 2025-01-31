@@ -14,8 +14,8 @@ class ObserveAuthStateChangedUseCaseImpl(
                     sessionRepository.saveToken(token)
                 }
             } else {
+                sessionRepository.unregisterDeviceForNotifications()
                 sessionRepository.clearToken()
-                sessionRepository.clearMessagingToken()
             }
         }
     }

@@ -29,6 +29,10 @@ class UserService(
         client.registerDeviceForNotifications(deviceToken)
     }
 
+    suspend fun unregisterDeviceForNotifications(deviceToken: String) {
+        client.unregisterDeviceForNotifications(deviceToken)
+    }
+
     suspend fun sendNotifications(user: User) {
         client.sendNotifications(user)
     }

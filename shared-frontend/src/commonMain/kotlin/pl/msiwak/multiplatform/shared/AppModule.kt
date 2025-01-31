@@ -110,6 +110,7 @@ import pl.msiwak.multiplatform.network.mapper.ResultMapper
 import pl.msiwak.multiplatform.network.mapper.UserMapper
 import pl.msiwak.multiplatform.network.service.CategoryService
 import pl.msiwak.multiplatform.network.service.UserService
+import pl.msiwak.multiplatform.notifications.NotificationsManager
 import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
 import pl.msiwak.multiplatform.store.SessionStore
@@ -184,6 +185,7 @@ val toolsModule = module {
     single { ExerciseMapper(get()) }
     single { ResultMapper() }
     single { CategoryMapper(get()) }
+    single { NotificationsManager() }
 }
 
 val viewModelsModule = module {
@@ -239,8 +241,8 @@ val viewModelsModule = module {
 
 val useCaseModule = module {
     single<RegisterUserUseCase> { RegisterUserUseCaseImpl(get(), get()) }
-    single<LoginUseCase> { LoginUseCaseImpl(get(), get()) }
-    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get()) }
+    single<LoginUseCase> { LoginUseCaseImpl(get(), get(), get()) }
+    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get(), get()) }
     single<LogoutUseCase> { LogoutUseCaseImpl(get(), get()) }
     single<SaveUserTokenUseCase> { SaveUserTokenUseCaseImpl(get()) }
     single<GetUserTokenUseCase> { GetUserTokenUseCaseImpl(get()) }

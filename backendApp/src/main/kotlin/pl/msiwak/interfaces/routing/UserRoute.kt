@@ -9,6 +9,7 @@ import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.RoutingCall
+import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import org.koin.ktor.ext.inject
@@ -32,6 +33,15 @@ fun Route.addUserRoutes() {
                         email,
                         email
                     )
+                    respond(HttpStatusCode.OK)
+                }
+            }
+        }
+
+        delete("/user/notification") {
+            with(call) {
+                receive<ApiDeviceToken>().run {
+                    userController.unregisterUserDeviceForNotification(token)
                     respond(HttpStatusCode.OK)
                 }
             }

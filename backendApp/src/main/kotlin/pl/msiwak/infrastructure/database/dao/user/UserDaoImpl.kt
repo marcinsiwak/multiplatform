@@ -15,6 +15,12 @@ class UserDaoImpl : UserDao {
             .singleOrNull()
     }
 
+    override suspend fun getUserByDeviceToken(deviceToken: String): UserEntity? = dbQuery {
+        return@dbQuery Users.selectAll().where { Users.deviceToken eq deviceToken }
+            .map(::resultRowToUser)
+            .singleOrNull()
+    }
+
     override suspend fun addNewUser(userId: String, name: String, email: String, role: String) = dbQuery {
         val insertStatement = Users.insert {
             it[id] = userId

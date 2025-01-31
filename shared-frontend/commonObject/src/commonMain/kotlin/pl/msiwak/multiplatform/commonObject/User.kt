@@ -6,5 +6,6 @@ data class User(
     val id: String,
     val email: String,
     val userName: String,
-    val role: Role
+    val role: Role,
+    val deviceToken: String? = null
 )

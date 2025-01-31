@@ -10,7 +10,8 @@ class ApiUserMapper : Mapper<UserEntity, ApiUser>() {
             id = id,
             email = email,
             username = name,
-            role = mapRole(value.role)
+            role = mapRole(value.role),
+            deviceToken = deviceToken
         )
     }
 

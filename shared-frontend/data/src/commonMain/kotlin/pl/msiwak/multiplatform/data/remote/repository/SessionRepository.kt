@@ -1,7 +1,6 @@
 package pl.msiwak.multiplatform.data.remote.repository
 
 import kotlinx.coroutines.withContext
-import pl.msiwak.multiplatform.commonObject.User
 import pl.msiwak.multiplatform.network.service.UserService
 import pl.msiwak.multiplatform.store.SessionStore
 
@@ -30,14 +29,15 @@ class SessionRepository(
         sessionStore.getIsOfflineSession()
     }
 
-    suspend fun clearMessagingToken() = withContext(Dispatchers.IO) {
-        sessionStore.clearMessagingToken()
+    suspend fun registerDeviceForNotifications(deviceToken: String) = withContext(Dispatchers.IO) {
+        sessionStore.saveMessagingToken(deviceToken)
+        userService.registerDeviceForNotifications(deviceToken)
     }
 
-    suspend fun registerDeviceForNotifications() = withContext(Dispatchers.IO) {
-        val token = sessionStore.getMessagingToken()
-        if (!token.isNullOrEmpty()) {
-            userService.registerDeviceForNotifications(token)
+    suspend fun unregisterDeviceForNotifications() = withContext(Dispatchers.IO) {
+        runCatching {
+            sessionStore.getMessagingToken()?.let { userService.unregisterDeviceForNotifications(it) }
         }
+        sessionStore.clearMessagingToken()
     }
 }

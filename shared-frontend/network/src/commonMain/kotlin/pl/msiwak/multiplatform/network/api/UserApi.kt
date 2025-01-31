@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.network.api
 
 import io.ktor.client.call.body
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -33,6 +34,13 @@ class UserApi(private val ktorClient: KtorClient) {
 
     suspend fun registerDeviceForNotifications(deviceToken: String) {
         ktorClient.httpClient.post("api/user/notification") {
+            setBody(ApiDeviceToken(token = deviceToken))
+        }
+    }
+
+    // unregister on all devices
+    suspend fun unregisterDeviceForNotifications(deviceToken: String) {
+        ktorClient.httpClient.delete("api/user/notification") {
             setBody(ApiDeviceToken(token = deviceToken))
         }
     }

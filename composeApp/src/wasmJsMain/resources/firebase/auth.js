@@ -57,22 +57,30 @@ export async function loginUserWithGoogle(tokenId){
         };
 }
 
-export async function authStateChanged(callback){
-        unsubscribe = onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const accessToken = await user.getIdToken();
+export function authStateChanged(callback) {
+    if (unsubscribe) {
+        unsubscribe(); // Ensure only one listener is active
+    }
 
+    unsubscribe = onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            try {
+                const accessToken = await user.getIdToken();
                 callback({
                     uid: user.uid,
                     email: user.email,
                     displayName: user.displayName,
                     emailVerified: user.emailVerified,
-                    accessToken,
+                    accessToken
                 });
-            } else {
+            } catch (error) {
+                console.error("Error fetching ID token:", error);
                 callback(null);
             }
-        });
+        } else {
+            callback(null);
+        }
+    });
 }
 
 export function clearAuthStateListener() {

@@ -68,16 +68,19 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
     }
 
     override fun observeAuthStateChanged(): Flow<FirebaseUser?> = callbackFlow {
-        authStateChanged {
+        authStateChanged { appUser ->
             trySend(
-                FirebaseUser(
-                    uid = it?.uid,
-                    email = it?.email,
-                    displayName = it?.displayName,
-                    isEmailVerified = it?.emailVerified ?: false,
-                    token = it?.accessToken
-                )
+                appUser?.let {
+                    FirebaseUser(
+                        uid = it.uid,
+                        email = it.email,
+                        displayName = it.displayName,
+                        isEmailVerified = it.emailVerified,
+                        token = it.accessToken
+                    )
+                }
             )
+
         }
         awaitClose { clearAuthStateListener() }
     }

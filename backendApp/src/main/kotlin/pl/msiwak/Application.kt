@@ -81,13 +81,13 @@ fun Application.module() {
         allowHeader(CustomHttpHeaders.API_KEY_HEADER)
         allowHeader(CustomHttpHeaders.API_KEY_NONCE_HEADER)
         allowHeader(CustomHttpHeaders.API_KEY_TIMESTAMP_HEADER)
+        allowHeader(CustomHttpHeaders.PERMISSION_POLICY_HEADER)
         allowMethod(HttpMethod.Options)
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Put)
         allowMethod(HttpMethod.Post)
         allowMethod(HttpMethod.Patch)
         allowMethod(HttpMethod.Delete)
-        allowCredentials = true
     }
 
     install(StatusPages) {

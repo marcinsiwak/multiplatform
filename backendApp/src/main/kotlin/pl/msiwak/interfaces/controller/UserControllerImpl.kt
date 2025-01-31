@@ -6,14 +6,17 @@ import pl.msiwak.domain.usecases.GetUsersUseCase
 import pl.msiwak.domain.usecases.UpdateUserUseCase
 import pl.msiwak.domain.usecases.notification.RegisterDeviceForNotificationsUseCase
 import pl.msiwak.domain.usecases.notification.SendNotificationsUseCase
+import pl.msiwak.domain.usecases.notification.UnregisterDeviceForNotificationsUseCase
 import pl.msiwak.multiplatform.shared.model.ApiUser
 
+@Suppress("LongParameterList")
 class UserControllerImpl(
     private val addUserUseCase: AddUserUseCase,
     private val updateUserUseCase: UpdateUserUseCase,
     private val getUserUseCase: GetUserUseCase,
     private val getUsersUseCase: GetUsersUseCase,
     private val registerDeviceForNotificationsUseCase: RegisterDeviceForNotificationsUseCase,
+    private val unregisterDeviceForNotificationsUseCase: UnregisterDeviceForNotificationsUseCase,
     private val sendNotificationsUseCase: SendNotificationsUseCase
 ) : UserController {
 
@@ -35,6 +38,10 @@ class UserControllerImpl(
 
     override suspend fun registerUserDeviceForNotification(deviceToken: String, userId: String) {
         registerDeviceForNotificationsUseCase(deviceToken, userId)
+    }
+
+    override suspend fun unregisterUserDeviceForNotification(deviceToken: String) {
+        unregisterDeviceForNotificationsUseCase(deviceToken)
     }
 
     override suspend fun sendNotification(userId: String) {
