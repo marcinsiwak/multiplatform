@@ -2,7 +2,7 @@ ktor:
     application:
         modules:
             - pl.msiwak.ApplicationKt.module
-    development: true
+#    development: true
     deployment:
         port: 8080
 storage:

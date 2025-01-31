@@ -28,12 +28,12 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
-      - name: Decode Keystore
-        id: decode_keystore
+      - name: Decode FSA
+        id: decode_fsa
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'firebase-adminsdk.json'
-          fileDir: './src/main/resources/'
+          fileDir: './src/main/resources/production/'
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Build app
@@ -61,12 +61,12 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
-      - name: Decode Keystore
-        id: decode_keystore
+      - name: Decode FSA
+        id: decode_fsa
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'firebase-adminsdk.json'
-          fileDir: './src/main/resources/'
+          fileDir: './src/main/resources/production/'
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Build app
