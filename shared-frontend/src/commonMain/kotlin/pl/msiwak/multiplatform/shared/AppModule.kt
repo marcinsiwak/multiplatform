@@ -90,6 +90,8 @@ import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.user.GetUsersUseCase
 import pl.msiwak.multiplatform.domain.user.GetUsersUseCaseImpl
+import pl.msiwak.multiplatform.domain.user.SendNotificationUseCase
+import pl.msiwak.multiplatform.domain.user.SendNotificationUseCaseImpl
 import pl.msiwak.multiplatform.domain.user.UpdateUserUseCase
 import pl.msiwak.multiplatform.domain.user.UpdateUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
@@ -232,7 +234,7 @@ val viewModelsModule = module {
     viewModel { UnitViewModel(get(), get()) }
     viewModel { ForceUpdateViewModel() }
     viewModel { DashboardViewModel(get()) }
-    viewModel { AdminPanelViewModel(get(), get()) }
+    viewModel { AdminPanelViewModel(get(), get(), get()) }
 }
 
 val useCaseModule = module {
@@ -284,13 +286,14 @@ val useCaseModule = module {
     single<FormatMillisecondsToRunningAmountUseCase> { FormatMillisecondsToRunningAmountUseCaseImpl() }
     single<FormatRunningAmountToMillisecondsUseCase> { FormatRunningAmountToMillisecondsUseCaseImpl() }
     single<FormatRunningAmountUseCase> { FormatRunningAmountUseCaseImpl() }
+    single<SendNotificationUseCase> { SendNotificationUseCaseImpl(get()) }
 }
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
     single { RemoteConfigRepository(get()) }
-    single { SessionRepository(get()) }
+    single { SessionRepository(get(), get()) }
 }
 
 val serviceModule = module {

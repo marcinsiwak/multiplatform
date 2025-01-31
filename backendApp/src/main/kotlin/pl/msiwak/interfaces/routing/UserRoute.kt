@@ -1,3 +1,5 @@
+@file:Suppress("LongMethod", "CyclomaticComplexMethod")
+
 package pl.msiwak.interfaces.routing
 
 import io.ktor.http.HttpStatusCode
@@ -89,6 +91,17 @@ fun Route.addUserRoutes() {
                     adminAuth { _ ->
                         userController.getUsers().run {
                             respond(status = HttpStatusCode.OK, message = this)
+                        }
+                    }
+                }
+            }
+
+            post("/user/sendNotification") {
+                with(call) {
+                    adminAuth { _ ->
+                        receive<ApiUser>().run {
+                            userController.sendNotification(id)
+                            respond(HttpStatusCode.OK)
                         }
                     }
                 }

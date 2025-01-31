@@ -21,6 +21,10 @@ class UserRepository(private val userService: UserService) {
         return@withContext userService.createUser(uuid, email)
     }
 
+    suspend fun sendNotifications(user: User) {
+        userService.sendNotifications(user)
+    }
+
 //    suspend fun updateUser(uuid: String) = withContext(Dispatchers.IO) {
 //        return@withContext userService.updateUser(uuid)
 //    }

@@ -15,6 +15,7 @@ class ObserveAuthStateChangedUseCaseImpl(
                 }
             } else {
                 sessionRepository.clearToken()
+                sessionRepository.clearMessagingToken()
             }
         }
     }

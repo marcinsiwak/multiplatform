@@ -3,15 +3,12 @@ package pl.msiwak.multiplatform.notifications
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import pl.msiwak.multiplatform.network.api.UserApi
+import org.koin.java.KoinJavaComponent.inject
+import pl.msiwak.multiplatform.store.SessionStore
 
-class NotificationsService(private val userApi: UserApi) : FirebaseMessagingService() {
+class NotificationsService : FirebaseMessagingService() {
 
-    private var scope: Job? = null
+    private val sessionStore: SessionStore by inject(SessionStore::class.java)
 
     init {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(
@@ -25,14 +22,6 @@ class NotificationsService(private val userApi: UserApi) : FirebaseMessagingServ
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        scope = CoroutineScope(Dispatchers.IO).launch {
-            userApi.registerDeviceForNotifications(token)
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        scope?.cancel()
-        scope = null
+        sessionStore.saveMessagingToken(token)
     }
 }

@@ -14,6 +14,7 @@ class LoginUseCaseImpl(
         if (token != null && isEmailVerified) {
             sessionRepository.saveToken(token)
         }
+        sessionRepository.registerDeviceForNotifications()
         return isEmailVerified
     }
 }

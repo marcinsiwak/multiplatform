@@ -34,10 +34,12 @@ kotlin {
         androidMain.dependencies {
             implementation(project.dependencies.platform("com.google.firebase:firebase-bom:33.1.0"))
             implementation(libs.firebase.andorid.messaging)
+            implementation(libs.koin.core)
+
         }
 
         commonMain.dependencies {
-            implementation(project(Modules.network))
+            implementation(project(Modules.store))
             implementation(libs.kermit)
         }
     }

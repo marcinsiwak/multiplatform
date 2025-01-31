@@ -25,6 +25,14 @@ class UserService(
         return client.createUserWithGoogle()
     }
 
+    suspend fun registerDeviceForNotifications(deviceToken: String) {
+        client.registerDeviceForNotifications(deviceToken)
+    }
+
+    suspend fun sendNotifications(user: User) {
+        client.sendNotifications(user)
+    }
+
 //    suspend fun updateUser(uuid: String) {
 //        return client.updateUser(uuid)
 //    }
