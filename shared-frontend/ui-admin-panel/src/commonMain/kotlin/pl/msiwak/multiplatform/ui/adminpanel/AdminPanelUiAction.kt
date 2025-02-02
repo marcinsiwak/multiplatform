@@ -1,5 +1,7 @@
 package pl.msiwak.multiplatform.ui.adminpanel
 
-sealed class AdminPanelUiAction {
+import pl.msiwak.multiplatform.commonObject.User
 
+sealed class AdminPanelUiAction {
+    class OnUserClick(val user: User) : AdminPanelUiAction()
 }

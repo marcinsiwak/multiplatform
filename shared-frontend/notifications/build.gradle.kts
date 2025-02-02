@@ -1,3 +1,5 @@
+import pl.msiwak.multiplatform.dependencies.Modules
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
@@ -32,14 +34,13 @@ kotlin {
         androidMain.dependencies {
             implementation(project.dependencies.platform("com.google.firebase:firebase-bom:33.1.0"))
             implementation(libs.firebase.andorid.messaging)
+            implementation(libs.koin.core)
+
         }
 
         commonMain.dependencies {
+            implementation(project(Modules.store))
             implementation(libs.kermit)
-        }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }

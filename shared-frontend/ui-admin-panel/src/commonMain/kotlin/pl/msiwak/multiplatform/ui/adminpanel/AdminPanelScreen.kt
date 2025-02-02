@@ -1,5 +1,6 @@
 package pl.msiwak.multiplatform.ui.adminpanel
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -21,14 +22,12 @@ import androidx.navigation.compose.rememberNavController
 import athletetrack.shared_frontend.commonresources.generated.resources.Res
 import athletetrack.shared_frontend.commonresources.generated.resources.admin_panel
 import athletetrack.shared_frontend.commonresources.generated.resources.email
-import athletetrack.shared_frontend.commonresources.generated.resources.language
 import athletetrack.shared_frontend.commonresources.generated.resources.user_type
 import athletetrack.shared_frontend.commonresources.generated.resources.username
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
-import pl.msiwak.multiplatform.commonResources.theme.color
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.ui.commonComponent.AppBar
 import pl.msiwak.multiplatform.ui.commonComponent.extension.verticalBorder
@@ -78,12 +77,19 @@ fun AdminPanelScreenContent(
                     )
                 }
 
-                HorizontalDivider(thickness = MaterialTheme.dimens.border_width, color = MaterialTheme.colorScheme.onPrimary)
+                HorizontalDivider(
+                    thickness = MaterialTheme.dimens.border_width,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
 
                 LazyColumn {
                     items(viewState.value.users) { item ->
                         Row(
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    onUiAction(AdminPanelUiAction.OnUserClick(item))
+                                }
                         ) {
                             TableCell(
                                 text = item.email,

@@ -7,11 +7,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.msiwak.multiplatform.domain.user.GetUsersUseCase
+import pl.msiwak.multiplatform.domain.user.SendNotificationUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 
 class AdminPanelViewModel(
     private val getUsersUseCase: GetUsersUseCase,
-    globalErrorHandler: GlobalErrorHandler
+    globalErrorHandler: GlobalErrorHandler,
+    private val sendNotificationUseCase: SendNotificationUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(AdminPanelState())
@@ -27,6 +29,10 @@ class AdminPanelViewModel(
     }
 
     fun onUiAction(action: AdminPanelUiAction) {
-
+        when(action) {
+            is AdminPanelUiAction.OnUserClick -> viewModelScope.launch {
+                sendNotificationUseCase(action.user)
+            }
+        }
     }
 }

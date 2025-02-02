@@ -9,7 +9,6 @@ import pl.msiwak.infrastructure.database.table.Categories
 import pl.msiwak.infrastructure.database.table.Exercises
 import pl.msiwak.infrastructure.database.table.Results
 import pl.msiwak.infrastructure.database.table.Users
-import java.io.File
 
 object DatabaseFactory {
     fun init(config: ApplicationConfig) {
@@ -17,30 +16,18 @@ object DatabaseFactory {
         val user = config.property("storage.user").getString()
         val password = config.property("storage.password").getString()
 
+        Flyway.configure().baselineOnMigrate(true).dataSource(url, user, password).load().also {
+            it.migrate()
+        }
+
         val database = Database.connect(
             url = url,
             user = user,
             password = password
         )
 
-        Flyway.configure().baselineOnMigrate(true).dataSource(url, user, password).load().also {
-            it.migrate()
-        }
-
         transaction(database) {
-            SchemaUtils.create(Users, Categories, Exercises, Results)
-        }
-    }
-
-    // function example for migration
-    fun generateAlterTableScript() {
-        val outputFile = File("src/main/resources/db/migration/V2__Add_Age_Column.sql")
-
-        transaction {
-//            val sqlStatements = SchemaUtils.createMissingTablesAndColumns(Users, Categories, Exercises, Results)
-            val sqlStatements = SchemaUtils.statementsRequiredForDatabaseMigration()
-
-            outputFile.writeText(sqlStatements.joinToString(";\n") + ";")
+            SchemaUtils.createMissingTablesAndColumns(Users, Categories, Exercises, Results)
         }
     }
 }

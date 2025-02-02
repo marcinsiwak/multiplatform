@@ -5,9 +5,7 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.auth.AuthenticationContext
 import io.ktor.server.auth.AuthenticationProvider
 import io.ktor.server.response.respond
-import pl.msiwak.multiplatform.shared.common.API_KEY_HEADER
-import pl.msiwak.multiplatform.shared.common.API_KEY_NONCE_HEADER
-import pl.msiwak.multiplatform.shared.common.API_KEY_TIMESTAMP_HEADER
+import pl.msiwak.multiplatform.shared.common.CustomHttpHeaders
 
 const val API_KEY_AUTH = "API_KEY"
 
@@ -25,9 +23,9 @@ class ApiKeyAuthProvider(config: ApiKeyConfig) : AuthenticationProvider(config) 
         call: ApplicationCall,
         authFunction: suspend ApplicationCall.(String, String, String) -> ApiKeyPrincipal?
     ): ApiKeyPrincipal? {
-        val apiKey = call.request.headers[API_KEY_HEADER] ?: return null
-        val nonce = call.request.headers[API_KEY_NONCE_HEADER] ?: return null
-        val timestamp = call.request.headers[API_KEY_TIMESTAMP_HEADER] ?: return null
+        val apiKey = call.request.headers[CustomHttpHeaders.API_KEY_HEADER] ?: return null
+        val nonce = call.request.headers[CustomHttpHeaders.API_KEY_NONCE_HEADER] ?: return null
+        val timestamp = call.request.headers[CustomHttpHeaders.API_KEY_TIMESTAMP_HEADER] ?: return null
         return authFunction(call, apiKey, nonce, timestamp)
     }
 }

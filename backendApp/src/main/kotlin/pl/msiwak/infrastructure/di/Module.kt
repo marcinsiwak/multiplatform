@@ -29,13 +29,21 @@ import pl.msiwak.domain.usecases.SynchronizeDataUseCase
 import pl.msiwak.domain.usecases.SynchronizeDataUseCaseImpl
 import pl.msiwak.domain.usecases.UpdateUserUseCase
 import pl.msiwak.domain.usecases.UpdateUserUseCaseImpl
+import pl.msiwak.domain.usecases.notification.RegisterDeviceForNotificationsUseCase
+import pl.msiwak.domain.usecases.notification.RegisterDeviceForNotificationsUseCaseImpl
+import pl.msiwak.domain.usecases.notification.SendNotificationsUseCase
+import pl.msiwak.domain.usecases.notification.SendNotificationsUseCaseImpl
+import pl.msiwak.domain.usecases.notification.UnregisterDeviceForNotificationsUseCase
+import pl.msiwak.domain.usecases.notification.UnregisterDeviceForNotificationsUseCaseImpl
 import pl.msiwak.infrastructure.config.auth.role.RoleManager
 import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDao
 import pl.msiwak.infrastructure.database.dao.exercise.ExercisesDaoImpl
 import pl.msiwak.infrastructure.database.dao.user.UserDao
 import pl.msiwak.infrastructure.database.dao.user.UserDaoImpl
 import pl.msiwak.infrastructure.repositories.ExerciseRepository
+import pl.msiwak.infrastructure.repositories.NotificationRepository
 import pl.msiwak.infrastructure.repositories.UserRepository
+import pl.msiwak.infrastructure.service.NotificationService
 import pl.msiwak.interfaces.controller.ExerciseController
 import pl.msiwak.interfaces.controller.ExerciseControllerImpl
 import pl.msiwak.interfaces.controller.UserController
@@ -50,6 +58,8 @@ val diModule = module {
     single<UpdateUserUseCase> { UpdateUserUseCaseImpl(get()) }
     single<AddCategoryUseCase> {
         AddCategoryUseCaseImpl(
+            get(),
+            get(),
             get(),
             get()
         )
@@ -75,11 +85,15 @@ val diModule = module {
     single<RemoveExerciseUseCase> { RemoveExerciseUseCaseImpl(get()) }
     single<RemoveResultUseCase> { RemoveResultUseCaseImpl(get()) }
     single<SynchronizeDataUseCase> { SynchronizeDataUseCaseImpl(get()) }
+    single<RegisterDeviceForNotificationsUseCase> { RegisterDeviceForNotificationsUseCaseImpl(get()) }
+    single<UnregisterDeviceForNotificationsUseCase> { UnregisterDeviceForNotificationsUseCaseImpl(get()) }
+    single<SendNotificationsUseCase> { SendNotificationsUseCaseImpl(get(), get()) }
 }
 
 val diRepositoryModule = module {
     single { UserRepository(get(), get()) }
     single { ExerciseRepository(get()) }
+    single { NotificationRepository(get()) }
 }
 
 val diDaoModule = module {
@@ -95,7 +109,7 @@ val diMapperModule = module {
 }
 
 val diControllerModule = module {
-    single<UserController> { UserControllerImpl(get(), get(), get(), get()) }
+    single<UserController> { UserControllerImpl(get(), get(), get(), get(), get(), get(), get()) }
     single<ExerciseController> {
         ExerciseControllerImpl(
             get(),
@@ -114,4 +128,8 @@ val diControllerModule = module {
 
 val diUtilsModule = module {
     single { RoleManager() }
+}
+
+val servicesModule = module {
+    single { NotificationService() }
 }

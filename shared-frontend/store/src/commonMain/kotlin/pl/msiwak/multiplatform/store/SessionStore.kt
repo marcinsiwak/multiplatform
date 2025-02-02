@@ -24,8 +24,19 @@ class SessionStore(private val sharedPreferences: KMMPreferences) {
         return sharedPreferences.getBool(PREFS_OFFLINE_KEY, false)
     }
 
+    fun saveMessagingToken(token: String) {
+        sharedPreferences.put(PREFS_MESSAGING_TOKEN_KEY, token)
+    }
+
+    fun clearMessagingToken() {
+        sharedPreferences.put(PREFS_MESSAGING_TOKEN_KEY, "")
+    }
+
+    fun getMessagingToken() = sharedPreferences.getString(PREFS_MESSAGING_TOKEN_KEY)
+
     companion object {
         const val PREFS_TOKEN_KEY = "PREFS_TOKEN_KEY"
         const val PREFS_OFFLINE_KEY = "PREFS_OFFLINE_KEY"
+        const val PREFS_MESSAGING_TOKEN_KEY = "PREFS_MESSAGING_TOKEN_KEY"
     }
 }

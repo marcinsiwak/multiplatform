@@ -1,7 +1,5 @@
 package pl.msiwak.multiplatform.network.service
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import pl.msiwak.multiplatform.commonObject.User
 import pl.msiwak.multiplatform.network.api.UserApi
 import pl.msiwak.multiplatform.network.mapper.UserMapper
@@ -25,6 +23,18 @@ class UserService(
 
     suspend fun createUserWithGoogle() {
         return client.createUserWithGoogle()
+    }
+
+    suspend fun registerDeviceForNotifications(deviceToken: String) {
+        client.registerDeviceForNotifications(deviceToken)
+    }
+
+    suspend fun unregisterDeviceForNotifications(deviceToken: String) {
+        client.unregisterDeviceForNotifications(deviceToken)
+    }
+
+    suspend fun sendNotifications(user: User) {
+        client.sendNotifications(user)
     }
 
 //    suspend fun updateUser(uuid: String) {

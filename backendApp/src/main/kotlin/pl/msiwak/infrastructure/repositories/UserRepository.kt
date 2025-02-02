@@ -19,18 +19,22 @@ class UserRepository(
         userDao.addNewUser(id, name, email, role.name)
     }
 
-    suspend fun updateUser(id: String, name: String, email: String) {
-        val role = if (email == "marcinsiwak15@gmail.com") {
+    suspend fun updateUser(userEntity: UserEntity) {
+        val role = if (userEntity.email == "marcinsiwak15@gmail.com") {
             Role.ADMIN
         } else {
             Role.USER
         }
-        roleManager.setRole(id, role)
-        userDao.updateUser(id, name, email, role.name)
+        roleManager.setRole(userEntity.id, role)
+        userDao.updateUser(userEntity)
     }
 
     suspend fun getUser(id: String): UserEntity? {
         return userDao.getUser(id)
+    }
+
+    suspend fun getUserByToken(deviceToken: String): UserEntity? {
+        return userDao.getUserByDeviceToken(deviceToken)
     }
 
     suspend fun getUsers(): List<UserEntity> {

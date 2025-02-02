@@ -90,6 +90,8 @@ import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.user.GetUsersUseCase
 import pl.msiwak.multiplatform.domain.user.GetUsersUseCaseImpl
+import pl.msiwak.multiplatform.domain.user.SendNotificationUseCase
+import pl.msiwak.multiplatform.domain.user.SendNotificationUseCaseImpl
 import pl.msiwak.multiplatform.domain.user.UpdateUserUseCase
 import pl.msiwak.multiplatform.domain.user.UpdateUserUseCaseImpl
 import pl.msiwak.multiplatform.domain.version.GetCurrentAppCodeUseCase
@@ -108,6 +110,7 @@ import pl.msiwak.multiplatform.network.mapper.ResultMapper
 import pl.msiwak.multiplatform.network.mapper.UserMapper
 import pl.msiwak.multiplatform.network.service.CategoryService
 import pl.msiwak.multiplatform.network.service.UserService
+import pl.msiwak.multiplatform.notifications.NotificationsManager
 import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
 import pl.msiwak.multiplatform.store.SessionStore
@@ -182,6 +185,7 @@ val toolsModule = module {
     single { ExerciseMapper(get()) }
     single { ResultMapper() }
     single { CategoryMapper(get()) }
+    single { NotificationsManager() }
 }
 
 val viewModelsModule = module {
@@ -232,13 +236,13 @@ val viewModelsModule = module {
     viewModel { UnitViewModel(get(), get()) }
     viewModel { ForceUpdateViewModel() }
     viewModel { DashboardViewModel(get()) }
-    viewModel { AdminPanelViewModel(get(), get()) }
+    viewModel { AdminPanelViewModel(get(), get(), get()) }
 }
 
 val useCaseModule = module {
     single<RegisterUserUseCase> { RegisterUserUseCaseImpl(get(), get()) }
-    single<LoginUseCase> { LoginUseCaseImpl(get(), get()) }
-    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get()) }
+    single<LoginUseCase> { LoginUseCaseImpl(get(), get(), get()) }
+    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get(), get()) }
     single<LogoutUseCase> { LogoutUseCaseImpl(get(), get()) }
     single<SaveUserTokenUseCase> { SaveUserTokenUseCaseImpl(get()) }
     single<GetUserTokenUseCase> { GetUserTokenUseCaseImpl(get()) }
@@ -284,13 +288,14 @@ val useCaseModule = module {
     single<FormatMillisecondsToRunningAmountUseCase> { FormatMillisecondsToRunningAmountUseCaseImpl() }
     single<FormatRunningAmountToMillisecondsUseCase> { FormatRunningAmountToMillisecondsUseCaseImpl() }
     single<FormatRunningAmountUseCase> { FormatRunningAmountUseCaseImpl() }
+    single<SendNotificationUseCase> { SendNotificationUseCaseImpl(get()) }
 }
 
 val repositoryUseModule = module {
     single { AuthRepository(get()) }
     single { UserRepository(get()) }
     single { RemoteConfigRepository(get()) }
-    single { SessionRepository(get()) }
+    single { SessionRepository(get(), get()) }
 }
 
 val serviceModule = module {

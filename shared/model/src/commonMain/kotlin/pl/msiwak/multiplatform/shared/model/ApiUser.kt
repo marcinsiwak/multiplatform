@@ -8,5 +8,6 @@ data class ApiUser(
     val id: String,
     val email: String,
     val username: String? = null,
-    val role: Role? = null
+    val role: Role? = null,
+    val deviceToken: String? = null
 )
