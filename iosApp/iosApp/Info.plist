@@ -258,6 +258,8 @@
 			<string>3qcr597p9d.skadnetwork</string>
 		</dict>
 	</array>
+    <key>NSUserNotificationsUsageDescription</key>
+    <string>To show notifications</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
