@@ -24,7 +24,6 @@ class PermissionBridge {
     fun isPermissionGranted(permission: AppPermission): Boolean {
         return listener?.isPermissionGranted(permission) ?: false
     }
-
 }
 
 interface PermissionResultCallback {

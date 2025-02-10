@@ -1,5 +1,3 @@
-import pl.msiwak.multiplatform.dependencies.Modules
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
@@ -19,8 +17,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "permission-manager"
-
-            export(project(Modules.commonResources))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE

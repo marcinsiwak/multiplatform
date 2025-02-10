@@ -1,4 +1,4 @@
-name: Wasm App
+name: Wasm App CI
 
 on:
   workflow_call:
