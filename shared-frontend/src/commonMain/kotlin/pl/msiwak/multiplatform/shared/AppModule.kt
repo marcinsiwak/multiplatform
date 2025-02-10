@@ -111,6 +111,7 @@ import pl.msiwak.multiplatform.network.mapper.UserMapper
 import pl.msiwak.multiplatform.network.service.CategoryService
 import pl.msiwak.multiplatform.network.service.UserService
 import pl.msiwak.multiplatform.notifications.NotificationsManager
+import pl.msiwak.multiplatform.permissionmanager.PermissionBridge
 import pl.msiwak.multiplatform.remoteConfig.RemoteConfig
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
 import pl.msiwak.multiplatform.store.SessionStore
@@ -308,6 +309,7 @@ val clientModule = module {
     single { UserApi(get()) }
     single { CategoryApi(get()) }
     single { EngineProvider() }
+    single { PermissionBridge() }
 }
 
 val navigationModule = module {

@@ -32,6 +32,7 @@ object Modules {
     const val uiTerms = "$sharedFrontend:ui-terms"
     const val databaseWasm = "$sharedFrontend:database-wasm"
     const val store = "$sharedFrontend:store"
+    const val permissionManager = "$sharedFrontend:permission-manager"
 
     // Admin
     const val uiAdminPanel = "$sharedFrontend:ui-admin-panel"

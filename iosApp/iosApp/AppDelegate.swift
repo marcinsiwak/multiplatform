@@ -2,23 +2,17 @@ import Foundation
 import shared_frontend
 import SwiftUI
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, PermissionListener {
+
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         HelperKt.doInitKoin()
         HelperKt.doInitFirebase()
         HelperKt.doInitMobileAds()
-        //NotificationService()
-
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-          options: authOptions,
-          completionHandler: { _, _ in }
-        )
-
-        application.registerForRemoteNotifications()
-        
+            
+        PermissionsHelper().setListener(listener: self)
+            
         return true
     }
 
@@ -26,5 +20,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         return HelperKt.doInitGIDSingIn(url: url)
+    }
+    
+    func isPermissionGranted(permission: AppPermission) -> Bool {
+        return PermissionsHandler().checkIsPermissionGranted(permission: permission)
+    }
+    
+    func requestPermission(permission: AppPermission, callback: PermissionResultCallback) {
+        PermissionsHandler().handlePermission(permission: permission, callback: callback)
     }
 }

@@ -30,6 +30,8 @@ kotlin {
             isStatic = true
             compilation.kotlinOptions.freeCompilerArgs += arrayOf("-linker-options", "-lsqlite3")
             compilation.project.setProperty("buildkonfig.flavor", "productionDebug")
+
+            export(project(Modules.permissionManager))
         }
 
         xcodeConfigurationToNativeBuildType["productionRelease"] =
@@ -86,6 +88,7 @@ kotlin {
             api(project(Modules.uiTerms))
             api(project(Modules.store))
             api(project(Modules.uiAdminPanel))
+            api(project(Modules.permissionManager))
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
