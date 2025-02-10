@@ -71,10 +71,6 @@ kotlin {
             implementation(project(Modules.sharedModel))
             implementation(project(Modules.sharedFrontend))
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
@@ -240,6 +236,4 @@ dependencies {
     implementation(libs.google.android.playservices.ads)
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
-
-    debugImplementation(compose.uiTooling)
 }

@@ -53,6 +53,8 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             api(project(Modules.database))
+
+            implementation(libs.koin.android)
         }
 
         iosMain.dependencies {
@@ -95,33 +97,16 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
         }
 
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
-
         wasmJsMain.dependencies {
             api(project(Modules.databaseWasm))
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
-
-// android {
-//     namespace = "pl.msiwak.multiplatform.shared"
-//     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-// }
 
 android {
     namespace = "pl.msiwak.multiplatform.shared"

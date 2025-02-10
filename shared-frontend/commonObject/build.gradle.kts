@@ -38,13 +38,6 @@ kotlin {
             implementation(project(Modules.sharedModel))
 
             api(libs.kotlinx.dateTime)
-
-//            api(libs.firebase.gitlive.auth)
-//            api(libs.firebase.gitlive.remoteConfig)
-
-            implementation(compose.runtime)
-            implementation(compose.components.resources)
-            implementation(libs.kotlinx.serialization)
         }
 
         commonTest.dependencies {
