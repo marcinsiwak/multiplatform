@@ -5,6 +5,7 @@ import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
+import pl.msiwak.multiplatform.commonObject.dispatcher.Dispatchers
 
 class AuthRepository(
     private val firebaseAuthorization: FirebaseAuthorization

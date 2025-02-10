@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.data.remote.repository
+package pl.msiwak.multiplatform.commonObject.dispatcher
 
 expect object Dispatchers {
     val Main: kotlin.coroutines.CoroutineContext

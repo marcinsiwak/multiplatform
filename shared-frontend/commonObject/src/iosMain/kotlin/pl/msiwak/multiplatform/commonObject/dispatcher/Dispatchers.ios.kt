@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.data.remote.repository
+package pl.msiwak.multiplatform.commonObject.dispatcher
 
 import kotlinx.coroutines.IO
 import kotlin.coroutines.CoroutineContext

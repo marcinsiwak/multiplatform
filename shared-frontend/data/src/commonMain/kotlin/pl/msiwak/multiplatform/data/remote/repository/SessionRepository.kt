@@ -1,6 +1,7 @@
 package pl.msiwak.multiplatform.data.remote.repository
 
 import kotlinx.coroutines.withContext
+import pl.msiwak.multiplatform.commonObject.dispatcher.Dispatchers
 import pl.msiwak.multiplatform.network.service.UserService
 import pl.msiwak.multiplatform.store.SessionStore
 

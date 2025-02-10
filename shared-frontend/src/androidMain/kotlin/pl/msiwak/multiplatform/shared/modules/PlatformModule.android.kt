@@ -23,7 +23,7 @@ actual val databaseModule: Module = module {
 }
 
 actual val platformRepositoryModule = module {
-    single<CategoryRepository> { CategoryRepositoryImpl(get(), get(), get(), get(), get()) }
+    single<CategoryRepository> { CategoryRepositoryImpl(get(), get(), get(), get()) }
     single<KMPPreferences> { KMPPreferencesImpl(get()) }
     single<VersionRepository> { VersionRepositoryImpl(get()) }
 }
