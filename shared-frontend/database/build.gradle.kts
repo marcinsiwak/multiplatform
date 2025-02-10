@@ -37,8 +37,6 @@ kotlin {
         framework {
             baseName = "database"
             linkerOpts += "-lsqlite3"
-
-            export(project(Modules.commonObject))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
@@ -53,7 +51,6 @@ kotlin {
             implementation(project(Modules.commonObject))
 
             implementation(libs.sqlDelight.coroutines)
-//            implementation(libs.kotlinx.coroutines)
             implementation(libs.kotlinx.dateTime)
             implementation(libs.kotlinx.serialization)
         }

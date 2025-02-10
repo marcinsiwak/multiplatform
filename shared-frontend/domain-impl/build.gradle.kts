@@ -19,12 +19,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "domain-impl"
-
-            export(project(Modules.data))
-            export(project(Modules.domain))
-            export(project(Modules.commonObject))
-            export(project(Modules.commonResources))
-            export(project(Modules.utils))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE

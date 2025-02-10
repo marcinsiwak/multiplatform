@@ -21,9 +21,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "ui-common-component"
-
-            export(project(Modules.commonResources))
-            export(project(Modules.commonObject))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE

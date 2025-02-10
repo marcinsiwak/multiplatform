@@ -21,13 +21,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "ui-verifyEmail"
-
-            export(project(Modules.navigator))
-            export(project(Modules.domain))
-            export(project(Modules.utils))
-            export(project(Modules.commonResources))
-            export(project(Modules.commonObject))
-            export(project(Modules.commonResources))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE

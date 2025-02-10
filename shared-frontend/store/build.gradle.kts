@@ -18,8 +18,6 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "store"
-
-            export(project(Modules.utils))
         }
         xcodeConfigurationToNativeBuildType["productionRelease"] =
             org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
