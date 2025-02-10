@@ -1,6 +1,6 @@
 package pl.msiwak.multiplatform.utils
 
-interface KMMPreferences {
+interface KMPPreferences {
 
     fun put(key: String, value: Int)
 

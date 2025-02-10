@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -20,7 +19,7 @@ plugins {
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class, ExperimentalWasmDsl::class)
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     androidTarget {
         compilerOptions {

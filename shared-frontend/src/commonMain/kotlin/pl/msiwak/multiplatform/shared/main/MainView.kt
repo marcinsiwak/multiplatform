@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.shared
+package pl.msiwak.multiplatform.shared.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

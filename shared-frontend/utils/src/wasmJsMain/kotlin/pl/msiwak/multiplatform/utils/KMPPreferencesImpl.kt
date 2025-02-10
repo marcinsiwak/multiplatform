@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.utils
 
 private const val STORE_FOREVER = 1000000
 
-class KMMPreferencesImpl : KMMPreferences {
+class KMPPreferencesImpl : KMPPreferences {
 
     override fun put(key: String, value: Int) {
         setCookie(key, value, STORE_FOREVER)

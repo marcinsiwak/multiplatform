@@ -1,4 +1,4 @@
-package pl.msiwak.multiplatform.shared
+package pl.msiwak.multiplatform.shared.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

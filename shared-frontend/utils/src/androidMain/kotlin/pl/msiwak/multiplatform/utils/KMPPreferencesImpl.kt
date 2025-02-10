@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.utils
 
 import android.content.Context
 
-class KMMPreferencesImpl(private val context: Context) : KMMPreferences {
+class KMPPreferencesImpl(private val context: Context) : KMPPreferences {
 
     override fun put(key: String, value: Int) {
         context.putInt(key, value)

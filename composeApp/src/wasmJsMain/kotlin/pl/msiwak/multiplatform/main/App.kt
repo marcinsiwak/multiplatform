@@ -4,10 +4,10 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import org.koin.core.context.startKoin
-import pl.msiwak.multiplatform.shared.MainView
 import pl.msiwak.multiplatform.shared.appModule
-import pl.msiwak.multiplatform.shared.databaseModule
-import pl.msiwak.multiplatform.shared.platformRepositoryModule
+import pl.msiwak.multiplatform.shared.main.MainView
+import pl.msiwak.multiplatform.shared.modules.databaseModule
+import pl.msiwak.multiplatform.shared.modules.platformRepositoryModule
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {

@@ -1,14 +1,14 @@
 package pl.msiwak.multiplatform.data.local.store
 
-import pl.msiwak.multiplatform.utils.KMMPreferences
+import pl.msiwak.multiplatform.utils.KMPPreferences
 
-class LanguageStore(private val sharedKMMPreferences: KMMPreferences) {
+class LanguageStore(private val sharedKMPPreferences: KMPPreferences) {
     fun saveLanguage(languageCode: String) {
-        sharedKMMPreferences.put(PREFS_LANGUAGE_KEY, languageCode)
+        sharedKMPPreferences.put(PREFS_LANGUAGE_KEY, languageCode)
     }
 
     fun geLanguage(): String {
-        return sharedKMMPreferences.getString(PREFS_LANGUAGE_KEY) ?: DEFAULT_LANGUAGE_VALUE
+        return sharedKMPPreferences.getString(PREFS_LANGUAGE_KEY) ?: DEFAULT_LANGUAGE_VALUE
     }
 
     companion object {

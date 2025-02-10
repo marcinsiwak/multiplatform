@@ -1,15 +1,15 @@
 package pl.msiwak.multiplatform.data.local.store
 
 import pl.msiwak.multiplatform.commonObject.UnitType
-import pl.msiwak.multiplatform.utils.KMMPreferences
+import pl.msiwak.multiplatform.utils.KMPPreferences
 
-class UnitStore(private val sharedKMMPreferences: KMMPreferences) {
+class UnitStore(private val sharedKMPPreferences: KMPPreferences) {
     fun saveUnit(unit: UnitType) {
-        sharedKMMPreferences.put(PREFS_UNIT_KEY, unit.name)
+        sharedKMPPreferences.put(PREFS_UNIT_KEY, unit.name)
     }
 
     fun getUnit(): String {
-        return sharedKMMPreferences.getString(PREFS_UNIT_KEY) ?: DEFAULT_UNIT_VALUE
+        return sharedKMPPreferences.getString(PREFS_UNIT_KEY) ?: DEFAULT_UNIT_VALUE
     }
 
     companion object {

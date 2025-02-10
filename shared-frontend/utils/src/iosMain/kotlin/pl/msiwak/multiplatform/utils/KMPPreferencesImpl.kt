@@ -2,7 +2,7 @@ package pl.msiwak.multiplatform.utils
 
 import platform.darwin.NSObject
 
-class KMMPreferencesImpl(private val nsObject: NSObject) : KMMPreferences {
+class KMPPreferencesImpl(private val nsObject: NSObject) : KMPPreferences {
 
     override fun put(key: String, value: Int) {
         nsObject.putInt(key, value)

@@ -269,13 +269,6 @@ fun setupProductionFirebase() {
     file("$moduleComposeAppDir/src/wasmJsMain/resources/firebase/firebaseConfig.js").writeText(firebaseConfig)
 }
 
-tasks.create("setupBuildkonfigIos") {
-    doLast {
-        val flavour = project.findProperty("kmmflavour") as String?
-        project.extra["buildkonfig.flavor"] = flavour
-    }
-}
-
 tasks.create("setupBuildkonfig") {
     val variant = getCurrentVariant()
     val flavor = getCurrentFlavor()

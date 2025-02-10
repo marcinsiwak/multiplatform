@@ -38,6 +38,8 @@ kotlin {
             implementation(project(Modules.sharedModel))
 
             api(libs.kotlinx.dateTime)
+            implementation(libs.kotlinx.serialization)
+
         }
 
         commonTest.dependencies {

@@ -1,8 +1,8 @@
 package pl.msiwak.multiplatform.store
 
-import pl.msiwak.multiplatform.utils.KMMPreferences
+import pl.msiwak.multiplatform.utils.KMPPreferences
 
-class SessionStore(private val sharedPreferences: KMMPreferences) {
+class SessionStore(private val sharedPreferences: KMPPreferences) {
 
     fun saveToken(token: String) {
         sharedPreferences.put(PREFS_TOKEN_KEY, token)
