@@ -1,3 +1,4 @@
+import pl.msiwak.convention.config.baseSetup
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -16,19 +17,10 @@ plugins {
 kotlin {
 
     cocoapods {
-        summary = "Ui AddCategory Shared Module"
-        homepage = "https://github.com/marcinsiwak/multiplatform"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
+        baseSetup()
         framework {
             baseName = "ui-addCategory"
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {

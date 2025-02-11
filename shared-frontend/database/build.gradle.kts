@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
+import pl.msiwak.convention.config.baseSetup
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -30,20 +31,11 @@ kotlin {
     }
 
     cocoapods {
-        summary = "Database Shared Module"
-        homepage = "https://github.com/marcinsiwak/multiplatform"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
+        baseSetup()
         framework {
             baseName = "database"
             linkerOpts += "-lsqlite3"
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {

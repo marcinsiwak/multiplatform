@@ -1,3 +1,4 @@
+import pl.msiwak.convention.config.baseSetup
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -12,20 +13,10 @@ plugins {
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
+        baseSetup()
         framework {
             baseName = "notifications"
         }
-
-        xcodeConfigurationToNativeBuildType["productionRelease"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
         pod("FirebaseMessaging")
     }

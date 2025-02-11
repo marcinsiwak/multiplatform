@@ -1,14 +1,14 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'notifications'
     spec.version                  = '1.0'
-    spec.homepage                 = 'Link to the Shared Module homepage'
+    spec.homepage                 = 'https://github.com/marcinsiwak/multiplatform'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Some description for the Shared Module'
+    spec.summary                  = 'Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/notifications.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target    = '14.1'
+    spec.ios.deployment_target    = '16.0'
     spec.dependency 'FirebaseMessaging'
                 
     if !Dir.exist?('build/cocoapods/framework/notifications.framework') || Dir.empty?('build/cocoapods/framework/notifications.framework')
