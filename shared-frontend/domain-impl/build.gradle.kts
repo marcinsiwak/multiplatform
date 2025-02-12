@@ -1,3 +1,4 @@
+import pl.msiwak.convention.config.baseSetup
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -13,25 +14,10 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     cocoapods {
-        summary = "Domain Implementation Shared Module"
-        homepage = "https://github.com/marcinsiwak/multiplatform"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
+        baseSetup()
         framework {
             baseName = "domain-impl"
-
-            export(project(Modules.data))
-            export(project(Modules.domain))
-            export(project(Modules.commonObject))
-            export(project(Modules.commonResources))
-            export(project(Modules.utils))
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {
@@ -42,10 +28,6 @@ kotlin {
             implementation(project(Modules.commonResources))
             implementation(project(Modules.utils))
             implementation(project(Modules.notifications))
-        }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }

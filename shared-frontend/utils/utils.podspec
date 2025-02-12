@@ -5,10 +5,10 @@ Pod::Spec.new do |spec|
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Utils Shared Module'
+    spec.summary                  = 'Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/utils.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target    = '14.1'
+    spec.ios.deployment_target    = '16.0'
                 
                 
     if !Dir.exist?('build/cocoapods/framework/utils.framework') || Dir.empty?('build/cocoapods/framework/utils.framework')

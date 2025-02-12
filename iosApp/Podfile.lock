@@ -194,7 +194,7 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  shared_frontend: 13e5b410f0a5654bdef0d01ffce36837a494b39c
+  shared_frontend: cf7af9ebf9400b7603795a1a75cc0368f6248d38
 
 PODFILE CHECKSUM: b35c7c8968e75e1188aca81cc8e273570d8483d1
 

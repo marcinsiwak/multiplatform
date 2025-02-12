@@ -7,19 +7,16 @@ class AppDelegate: NSObject, UIApplicationDelegate, PermissionListener {
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        HelperKt.doInitKoin()
-        HelperKt.doInitFirebase()
-        HelperKt.doInitMobileAds()
+            AppKt.doInitKoin()
+            AppKt.doInitFirebase()
+            AppKt.doInitMobileAds()
             
-        PermissionsHelper().setListener(listener: self)
-            
-        return true
-    }
+            PermissionsHelper().setListener(listener: self)
+            return true
+        }
 
-    func application(_ app: UIApplication,
-                     open url: URL,
-                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        return HelperKt.doInitGIDSingIn(url: url)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        return AppKt.doInitGIDSingIn(url: url)
     }
     
     func isPermissionGranted(permission: AppPermission) -> Bool {

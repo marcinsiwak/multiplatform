@@ -1,3 +1,4 @@
+import pl.msiwak.convention.config.baseSetup
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -15,21 +16,10 @@ plugins {
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     cocoapods {
-        summary = "CommonObject Shared Module"
-        homepage = "https://github.com/marcinsiwak/multiplatform"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
+        baseSetup()
         framework {
             baseName = "commonObject"
-
-            export(project(Modules.commonResources))
         }
-        xcodeConfigurationToNativeBuildType["productionRelease"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {
@@ -38,17 +28,8 @@ kotlin {
             implementation(project(Modules.sharedModel))
 
             api(libs.kotlinx.dateTime)
-
-//            api(libs.firebase.gitlive.auth)
-//            api(libs.firebase.gitlive.remoteConfig)
-
-            implementation(compose.runtime)
-            implementation(compose.components.resources)
             implementation(libs.kotlinx.serialization)
-        }
 
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }

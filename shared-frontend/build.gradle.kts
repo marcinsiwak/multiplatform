@@ -1,3 +1,4 @@
+import pl.msiwak.convention.config.baseSetup
 import pl.msiwak.multiplatform.dependencies.Modules
 
 plugins {
@@ -15,10 +16,7 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 
 kotlin {
     cocoapods {
-        summary = "Main Shared Module"
-        homepage = "https://github.com/marcinsiwak/multiplatform"
-        version = "1.0"
-        ios.deploymentTarget = "16.2"
+        baseSetup()
 
         podfile = project.file("../iosApp/Podfile")
 
@@ -34,13 +32,6 @@ kotlin {
             export(project(Modules.permissionManager))
         }
 
-        xcodeConfigurationToNativeBuildType["productionRelease"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-
         pod("FirebaseCore", linkOnly = true)
         pod("FirebaseAuth", linkOnly = true)
         pod("FirebaseRemoteConfig", linkOnly = true)
@@ -53,6 +44,8 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             api(project(Modules.database))
+
+            implementation(libs.koin.android)
         }
 
         iosMain.dependencies {
@@ -95,33 +88,16 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
         }
 
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
-
         wasmJsMain.dependencies {
             api(project(Modules.databaseWasm))
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
-
-// android {
-//     namespace = "pl.msiwak.multiplatform.shared"
-//     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-// }
 
 android {
     namespace = "pl.msiwak.multiplatform.shared"

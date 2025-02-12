@@ -5,10 +5,10 @@ Pod::Spec.new do |spec|
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Main Shared Module'
+    spec.summary                  = 'Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/shared_frontend.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target    = '16.2'
+    spec.ios.deployment_target    = '16.0'
     spec.dependency 'FirebaseAuth'
     spec.dependency 'FirebaseCore'
     spec.dependency 'FirebaseCrashlytics'

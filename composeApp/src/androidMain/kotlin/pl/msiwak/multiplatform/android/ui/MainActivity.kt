@@ -14,8 +14,8 @@ import pl.msiwak.multiplatform.permissionmanager.PermissionBridge
 import pl.msiwak.multiplatform.permissionmanager.PermissionListener
 import pl.msiwak.multiplatform.permissionmanager.PermissionResultCallback
 import pl.msiwak.multiplatform.permissionmanager.PermissionsHandler
-import pl.msiwak.multiplatform.shared.MainView
-import pl.msiwak.multiplatform.shared.MainViewModel
+import pl.msiwak.multiplatform.shared.main.MainView
+import pl.msiwak.multiplatform.shared.main.MainViewModel
 
 @Suppress("LongMethod")
 class MainActivity : ComponentActivity(), PermissionListener {

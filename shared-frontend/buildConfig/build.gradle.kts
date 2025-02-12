@@ -4,6 +4,7 @@ import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
 import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin
+import pl.msiwak.convention.config.baseSetup
 import java.io.FileInputStream
 import java.util.*
 import java.util.regex.Pattern
@@ -22,20 +23,10 @@ apply(from = "$rootDir/gradle/buildVariants.gradle")
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
+        baseSetup()
         framework {
             baseName = "buildConfig"
         }
-
-        xcodeConfigurationToNativeBuildType["productionRelease"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["productionDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["stagingDebug"] =
-            org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
 
     sourceSets {
@@ -267,13 +258,6 @@ fun setupProductionFirebase() {
     val moduleComposeAppDir = project(":composeApp").projectDir
 
     file("$moduleComposeAppDir/src/wasmJsMain/resources/firebase/firebaseConfig.js").writeText(firebaseConfig)
-}
-
-tasks.create("setupBuildkonfigIos") {
-    doLast {
-        val flavour = project.findProperty("kmmflavour") as String?
-        project.extra["buildkonfig.flavor"] = flavour
-    }
 }
 
 tasks.create("setupBuildkonfig") {

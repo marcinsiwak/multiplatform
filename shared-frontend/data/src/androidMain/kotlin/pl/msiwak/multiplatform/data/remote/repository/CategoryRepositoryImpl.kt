@@ -26,8 +26,7 @@ class CategoryRepositoryImpl(
     private val categoriesDao: CategoriesDao,
     private val exercisesDao: ExercisesDao,
     private val resultsDao: ResultsDao,
-    private val categoryService: CategoryService,
-    private val offlineStore: OfflineStore
+    private val categoryService: CategoryService
 ) : CategoryRepository {
 
     override suspend fun downloadCategories() = withContext(Dispatchers.IO) {

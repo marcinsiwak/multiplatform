@@ -1,24 +1,24 @@
 package pl.msiwak.multiplatform.data.local.store
 
-import pl.msiwak.multiplatform.utils.KMMPreferences
+import pl.msiwak.multiplatform.utils.KMPPreferences
 
-class OfflineStore(private val sharedKMMPreferences: KMMPreferences) {
+class OfflineStore(private val sharedKMPPreferences: KMPPreferences) {
 
     fun getCategoryLastId(): String {
-        val lastId = sharedKMMPreferences.getInt(PREFS_CATEGORY_LAST_ID_KEY, 0)
-        sharedKMMPreferences.put(PREFS_CATEGORY_LAST_ID_KEY, lastId.plus(1))
+        val lastId = sharedKMPPreferences.getInt(PREFS_CATEGORY_LAST_ID_KEY, 0)
+        sharedKMPPreferences.put(PREFS_CATEGORY_LAST_ID_KEY, lastId.plus(1))
         return lastId.toString()
     }
 
     fun getExerciseLastId(): String {
-        val lastId = sharedKMMPreferences.getInt(PREFS_EXERCISE_LAST_ID_KEY, 0)
-        sharedKMMPreferences.put(PREFS_EXERCISE_LAST_ID_KEY, lastId.plus(1))
+        val lastId = sharedKMPPreferences.getInt(PREFS_EXERCISE_LAST_ID_KEY, 0)
+        sharedKMPPreferences.put(PREFS_EXERCISE_LAST_ID_KEY, lastId.plus(1))
         return lastId.toString()
     }
 
     fun getResultLastId(): String {
-        val lastId = sharedKMMPreferences.getInt(PREFS_RESULT_LAST_ID_KEY, 0)
-        sharedKMMPreferences.put(PREFS_RESULT_LAST_ID_KEY, lastId.plus(1))
+        val lastId = sharedKMPPreferences.getInt(PREFS_RESULT_LAST_ID_KEY, 0)
+        sharedKMPPreferences.put(PREFS_RESULT_LAST_ID_KEY, lastId.plus(1))
         return lastId.toString()
     }
 

@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -20,7 +19,7 @@ plugins {
 
 apply(from = "$rootDir/gradle/buildVariants.gradle")
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class, ExperimentalWasmDsl::class)
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     androidTarget {
         compilerOptions {
@@ -71,10 +70,6 @@ kotlin {
             implementation(project(Modules.sharedModel))
             implementation(project(Modules.sharedFrontend))
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
             implementation(libs.compose.multiplatform.navigation)
@@ -225,13 +220,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.accompanist.navigation.material)
 
     implementation(libs.components.resources)
-
-    api(libs.firebase.common)
-    api(libs.firebase.auth)
-    api(libs.firebase.config)
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
@@ -240,6 +230,4 @@ dependencies {
     implementation(libs.google.android.playservices.ads)
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
-
-    debugImplementation(compose.uiTooling)
 }
