@@ -31,10 +31,6 @@ kotlin {
             implementation(libs.kotlinx.serialization)
 
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

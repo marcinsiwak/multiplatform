@@ -43,10 +43,6 @@ kotlin {
         wasmJsMain.dependencies {
             implementation(libs.rich.editor)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

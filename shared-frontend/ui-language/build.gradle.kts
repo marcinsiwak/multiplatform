@@ -41,10 +41,6 @@ kotlin {
             implementation(libs.compose.multiplatform.navigation)
             implementation(compose.components.uiToolingPreview)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

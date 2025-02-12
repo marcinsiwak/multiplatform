@@ -41,10 +41,6 @@ kotlin {
             implementation(libs.kotlinx.lifecycle)
             implementation(libs.kotlinx.viewModel)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

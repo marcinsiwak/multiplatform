@@ -50,10 +50,6 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.ios)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

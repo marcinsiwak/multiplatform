@@ -53,10 +53,6 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.sqlDelight.ios)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

@@ -33,10 +33,6 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.firebase.gitlive.crashlytics)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

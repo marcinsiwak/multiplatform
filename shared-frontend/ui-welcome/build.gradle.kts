@@ -46,10 +46,6 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.google.android.playservices.auth)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

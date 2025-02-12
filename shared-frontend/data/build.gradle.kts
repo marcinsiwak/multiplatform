@@ -44,10 +44,6 @@ kotlin {
         wasmJsMain.dependencies {
             implementation(project(Modules.databaseWasm))
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 

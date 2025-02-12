@@ -26,10 +26,6 @@ kotlin {
 
             implementation(libs.kotlinx.coroutines)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 
