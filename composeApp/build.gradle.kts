@@ -220,13 +220,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.accompanist.navigation.material)
 
     implementation(libs.components.resources)
-
-    api(libs.firebase.common)
-    api(libs.firebase.auth)
-    api(libs.firebase.config)
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
