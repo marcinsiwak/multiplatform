@@ -32,7 +32,7 @@ jobs:
         id: decode_fsa
         uses: timheuer/base64-to-file@v1.2
         with:
-          fileName: 'firebase-adminsdk.json'
+          fileName: 'production/firebase-adminsdk.json'
           fileDir: './src/main/resources/production/'
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
@@ -65,7 +65,7 @@ jobs:
         id: decode_fsa
         uses: timheuer/base64-to-file@v1.2
         with:
-          fileName: 'firebase-adminsdk.json'
+          fileName: 'production/firebase-adminsdk.json'
           fileDir: './src/main/resources/production/'
           encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 

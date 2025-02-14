@@ -59,8 +59,6 @@ val diModule = module {
     single<AddCategoryUseCase> {
         AddCategoryUseCaseImpl(
             get(),
-            get(),
-            get(),
             get()
         )
     }
