@@ -1,31 +1,35 @@
-package pl.msiwak.infrastructure.config.auth.apikey
+package pl.msiwak.infrastructure.config.auth.defaultAuth
 
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.auth.AuthenticationContext
 import io.ktor.server.auth.AuthenticationProvider
 import io.ktor.server.response.respond
-import pl.msiwak.multiplatform.shared.common.CustomHttpHeaders
 
-const val API_KEY_AUTH = "API_KEY"
+const val DEFAULT_AUTH = "DEFAULT_AUTH"
 
-class ApiKeyAuthProvider(config: ApiKeyConfig) : AuthenticationProvider(config) {
+class DefaultAuthProvider(config: DefaultAuthConfig) : AuthenticationProvider(config) {
     private val authFunction = config.apiKeyAuthenticationFunction
 
     override suspend fun onAuthenticate(context: AuthenticationContext) {
-        val principal = verifyApiKey(context.call, authFunction)
-        if (principal == null) {
+        val (apiKey, nonce, timestamp) = context.apiKeyHeadersHandler(context.call.request.headers) ?: return
+
+        val principal = verifyApiKey(context.call, apiKey, nonce, timestamp, authFunction)
+
+        if (principal != null) {
+            context.principal(principal)
+        } else {
             context.call.respond(HttpStatusCode.Unauthorized)
         }
     }
 
     private suspend fun verifyApiKey(
         call: ApplicationCall,
+        apiKey: String,
+        nonce: String,
+        timestamp: String,
         authFunction: suspend ApplicationCall.(String, String, String) -> ApiKeyPrincipal?
     ): ApiKeyPrincipal? {
-        val apiKey = call.request.headers[CustomHttpHeaders.API_KEY_HEADER] ?: return null
-        val nonce = call.request.headers[CustomHttpHeaders.API_KEY_NONCE_HEADER] ?: return null
-        val timestamp = call.request.headers[CustomHttpHeaders.API_KEY_TIMESTAMP_HEADER] ?: return null
         return authFunction(call, apiKey, nonce, timestamp)
     }
 }

@@ -100,6 +100,7 @@ fun Application.module() {
                         call.respond(HttpStatusCode.InternalServerError, "Database error: ${cause.message}")
                     }
                 }
+
                 is UserNotFoundException -> call.respond(HttpStatusCode.NotFound)
 
                 else -> call.respond(HttpStatusCode.InternalServerError, "Database error: ${cause.message}")

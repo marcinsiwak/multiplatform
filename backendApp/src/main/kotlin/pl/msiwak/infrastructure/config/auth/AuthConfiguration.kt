@@ -3,7 +3,7 @@ package pl.msiwak.infrastructure.config.auth
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.auth.Authentication
-import pl.msiwak.infrastructure.config.auth.apikey.ApiKeyPrincipal
+import pl.msiwak.infrastructure.config.auth.defaultAuth.ApiKeyPrincipal
 import pl.msiwak.infrastructure.config.auth.firebase.FirebaseUser
 import pl.msiwak.multiplatform.shared.common.Role
 import pl.msiwak.multiplatform.shared.security.prepareDynamicApiKey
@@ -11,23 +11,26 @@ import pl.msiwak.multiplatform.shared.security.prepareDynamicApiKey
 fun Application.configureAuthorization() {
     val backendApiKey = environment.config.property("apiKey").getString()
     install(Authentication) {
-        apiKey {
+        defaultAuth {
             validate { apiKey, nonce, timestamp ->
-                val hashedBackendApiKey = prepareDynamicApiKey(backendApiKey, nonce, timestamp)
-                if (hashedBackendApiKey == apiKey) {
+                if (prepareDynamicApiKey(backendApiKey, nonce, timestamp) == apiKey) {
                     ApiKeyPrincipal(apiKey, nonce, timestamp)
                 } else {
                     null
                 }
             }
         }
-        firebase {
-            validate {
-                FirebaseUser(
-                    it.uid,
-                    it.email.orEmpty(),
-                    mapRole(it.claims)
-                )
+        loggedUserAuth {
+            validate { apiKey, nonce, timestamp, firebaseToken ->
+                if (prepareDynamicApiKey(backendApiKey, nonce, timestamp) == apiKey) {
+                    FirebaseUser(
+                        firebaseToken.uid,
+                        firebaseToken.email.orEmpty(),
+                        mapRole(firebaseToken.claims)
+                    )
+                } else {
+                    null
+                }
             }
         }
     }

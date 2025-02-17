@@ -121,7 +121,7 @@ class KtorClient(private val sessionStore: SessionStore, engine: EngineProvider)
         headers {
             append(
                 CustomHttpHeaders.API_KEY_HEADER,
-                prepareDynamicApiKey(backendApiKey = BuildConfig.API_KEY, nonce = uuid, timestamp = timestamp)
+                prepareDynamicApiKey(apiKey = BuildConfig.API_KEY, nonce = uuid, timestamp = timestamp)
             )
             append(CustomHttpHeaders.API_KEY_NONCE_HEADER, uuid)
             append(CustomHttpHeaders.API_KEY_TIMESTAMP_HEADER, timestamp)
