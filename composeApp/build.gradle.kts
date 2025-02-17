@@ -228,6 +228,9 @@ dependencies {
     implementation(libs.koin.compose.android)
 
     implementation(libs.google.android.playservices.ads)
+    implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
+    implementation("com.google.firebase:firebase-config-ktx")
+    implementation("com.google.firebase:firebase-common-ktx")
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 }

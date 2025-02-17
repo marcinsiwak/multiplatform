@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity(), PermissionListener {
         }
     }
 
-    override fun requestPermission(permission: AppPermission, callback: PermissionResultCallback) {
+    override fun requestPermission(permission: AppPermission, callback: PermissionResultCallback?) {
         PermissionsHandler.handlePermission(this, permission, callback) { androidPermission ->
             permissionResultCallback = callback
             requestPermissionLauncher(androidPermission).launch(androidPermission)

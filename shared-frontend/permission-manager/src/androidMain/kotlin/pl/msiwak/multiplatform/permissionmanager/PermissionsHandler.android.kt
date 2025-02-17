@@ -9,7 +9,7 @@ object PermissionsHandler {
     fun handlePermission(
         activity: Activity,
         permission: AppPermission,
-        callback: PermissionResultCallback,
+        callback: PermissionResultCallback?,
         onMissingPermission: (String) -> Unit
     ) {
         val androidPermission = when (permission) {
@@ -20,11 +20,11 @@ object PermissionsHandler {
                 activity,
                 androidPermission
             ) == PackageManager.PERMISSION_GRANTED -> {
-                callback.onPermissionGranted()
+                callback?.onPermissionGranted()
             }
 
             activity.shouldShowRequestPermissionRationale(androidPermission) -> {
-                callback.onPermissionDenied(false)
+                callback?.onPermissionDenied(false)
             }
 
             else -> onMissingPermission(androidPermission)
