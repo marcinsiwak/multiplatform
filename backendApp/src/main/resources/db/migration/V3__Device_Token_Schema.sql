@@ -1,2 +1,2 @@
 ALTER TABLE users
-ADD COLUMN deviceToken VARCHAR(255) DEFAULT null;
+ADD COLUMN device_token VARCHAR(255) DEFAULT null;
