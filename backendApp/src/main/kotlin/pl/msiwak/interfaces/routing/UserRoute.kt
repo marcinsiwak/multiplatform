@@ -13,7 +13,7 @@ import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import org.koin.ktor.ext.inject
-import pl.msiwak.infrastructure.config.auth.apikey.API_KEY_AUTH
+import pl.msiwak.infrastructure.config.auth.defaultAuth.DEFAULT_AUTH
 import pl.msiwak.infrastructure.config.auth.firebase.FIREBASE_AUTH
 import pl.msiwak.infrastructure.config.auth.firebase.FirebaseUser
 import pl.msiwak.interfaces.controller.UserController
@@ -24,7 +24,7 @@ import pl.msiwak.multiplatform.shared.model.ApiUser
 fun Route.addUserRoutes() {
     val userController by inject<UserController>()
 
-    authenticate(API_KEY_AUTH) {
+    authenticate(DEFAULT_AUTH) {
         post("/user") {
             with(call) {
                 receive<ApiUser>().run {
@@ -46,20 +46,20 @@ fun Route.addUserRoutes() {
                 }
             }
         }
-
-        authenticate(FIREBASE_AUTH) {
-            post("/googleUser") {
-                with(call) {
-                    val principal =
-                        principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
-                    userController.addUser(
-                        principal.userId,
-                        principal.displayName,
-                        principal.displayName
-                    )
-                    respond(HttpStatusCode.OK)
-                }
+    }
+    authenticate(FIREBASE_AUTH) {
+        post("/googleUser") {
+            with(call) {
+                val principal =
+                    principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
+                userController.addUser(
+                    principal.userId,
+                    principal.displayName,
+                    principal.displayName
+                )
+                respond(HttpStatusCode.OK)
             }
+        }
 //
 //        put("/user") {
 //            with(call) {
@@ -75,44 +75,43 @@ fun Route.addUserRoutes() {
 //            }
 //        }
 
-            get("/user") {
-                with(call) {
-                    val principal =
-                        call.principal<FirebaseUser>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
-                    userController.getUser(principal.userId)?.let {
-                        respond(status = HttpStatusCode.OK, message = it)
-                    } ?: return@get call.respond(HttpStatusCode.NotFound)
+        get("/user") {
+            with(call) {
+                val principal =
+                    call.principal<FirebaseUser>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
+                userController.getUser(principal.userId)?.let {
+                    respond(status = HttpStatusCode.OK, message = it)
+                } ?: return@get call.respond(HttpStatusCode.NotFound)
+            }
+        }
+
+        post("/user/notification") {
+            with(call) {
+                val principal =
+                    call.principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
+                receive<ApiDeviceToken>().run {
+                    userController.registerUserDeviceForNotification(token, principal.userId)
+                    respond(HttpStatusCode.OK)
                 }
             }
+        }
 
-            post("/user/notification") {
-                with(call) {
-                    val principal =
-                        call.principal<FirebaseUser>() ?: return@post call.respond(HttpStatusCode.Unauthorized)
-                    receive<ApiDeviceToken>().run {
-                        userController.registerUserDeviceForNotification(token, principal.userId)
+        get("/users") {
+            with(call) {
+                adminAuth { _ ->
+                    userController.getUsers().run {
+                        respond(status = HttpStatusCode.OK, message = this)
+                    }
+                }
+            }
+        }
+
+        post("/user/sendNotification") {
+            with(call) {
+                adminAuth { _ ->
+                    receive<ApiUser>().run {
+                        userController.sendNotification(id)
                         respond(HttpStatusCode.OK)
-                    }
-                }
-            }
-
-            get("/users") {
-                with(call) {
-                    adminAuth { _ ->
-                        userController.getUsers().run {
-                            respond(status = HttpStatusCode.OK, message = this)
-                        }
-                    }
-                }
-            }
-
-            post("/user/sendNotification") {
-                with(call) {
-                    adminAuth { _ ->
-                        receive<ApiUser>().run {
-                            userController.sendNotification(id)
-                            respond(HttpStatusCode.OK)
-                        }
                     }
                 }
             }

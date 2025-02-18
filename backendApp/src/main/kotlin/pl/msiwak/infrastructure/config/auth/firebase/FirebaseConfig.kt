@@ -14,12 +14,13 @@ class FirebaseConfig(name: String?) : AuthenticationProvider.Config(name) {
     internal var authHeader: (ApplicationCall) -> HttpAuthHeader? =
         { call -> call.request.parseAuthorizationHeaderOrNull() }
 
-    var firebaseAuthenticationFunction: suspend ApplicationCall.(FirebaseToken) -> FirebaseUser? = {
-        throw NotImplementedError(AUTH_IMPLEMENTATION_ERROR)
-    }
+    var firebaseAuthFunction: suspend ApplicationCall.(String, String, String, FirebaseToken) -> FirebaseUser? =
+        { _, _, _, _ ->
+            throw NotImplementedError(AUTH_IMPLEMENTATION_ERROR)
+        }
 
-    fun validate(validate: suspend ApplicationCall.(FirebaseToken) -> FirebaseUser?) {
-        firebaseAuthenticationFunction = validate
+    fun validate(validate: suspend ApplicationCall.(String, String, String, FirebaseToken) -> FirebaseUser?) {
+        firebaseAuthFunction = validate
     }
 }
 

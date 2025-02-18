@@ -19,7 +19,7 @@ import pl.msiwak.multiplatform.ui.welcome.WelcomeScreenViewModel
 import pl.msiwak.multiplatform.ui.welcome.terms.TermsConfirmationViewModel
 
 val viewModelsModule = module {
-    viewModel { MainViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { MainViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModel { RegisterViewModel(get(), get(), get()) }
     viewModel { VerifyEmailViewModel(get(), get()) }
     viewModel { WelcomeScreenViewModel(get(), get(), get(), get(), get()) }

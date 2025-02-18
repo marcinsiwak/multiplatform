@@ -12,7 +12,7 @@ import kotlin.coroutines.suspendCoroutine
 object PermissionsHandler {
     fun handlePermission(
         permission: AppPermission,
-        callback: PermissionResultCallback
+        callback: PermissionResultCallback?
     ) {
         when (permission) {
             AppPermission.NOTIFICATIONS -> {
@@ -20,9 +20,9 @@ object PermissionsHandler {
                     options = UNAuthorizationOptionAlert or UNAuthorizationOptionSound or UNAuthorizationOptionBadge
                 ) { granted, _ ->
                     if (granted) {
-                        callback.onPermissionGranted()
+                        callback?.onPermissionGranted()
                     } else {
-                        callback.onPermissionDenied(false)
+                        callback?.onPermissionDenied(false)
                     }
                 }
             }

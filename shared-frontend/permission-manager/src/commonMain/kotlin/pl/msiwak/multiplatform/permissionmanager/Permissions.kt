@@ -1,7 +1,7 @@
 package pl.msiwak.multiplatform.permissionmanager
 
 expect interface PermissionListener {
-    fun requestPermission(permission: AppPermission, callback: PermissionResultCallback)
+    fun requestPermission(permission: AppPermission, callback: PermissionResultCallback?)
     fun isPermissionGranted(permission: AppPermission): Boolean
 }
 
@@ -17,7 +17,7 @@ class PermissionBridge {
         this.listener = listener
     }
 
-    fun requestPermission(permission: AppPermission,callback: PermissionResultCallback) {
+    fun requestPermission(permission: AppPermission,callback: PermissionResultCallback? = null) {
         listener?.requestPermission(permission, callback) ?: error("Callback handler not set")
     }
 
