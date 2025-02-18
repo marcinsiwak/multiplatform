@@ -8,7 +8,9 @@ import {
     signInWithCredential,
     sendEmailVerification,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence
 } from "firebase/auth";
 import { firebaseConfig } from "./firebaseConfig";
 
@@ -16,6 +18,8 @@ const firebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(firebaseApp);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
+
+setPersistence(auth, browserLocalPersistence)
 
 let unsubscribe;
 

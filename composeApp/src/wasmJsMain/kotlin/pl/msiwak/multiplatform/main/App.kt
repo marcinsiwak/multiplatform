@@ -18,16 +18,14 @@ import pl.msiwak.multiplatform.shared.modules.platformRepositoryModule
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     startKoin {
-        modules(appModule() + platformRepositoryModule + databaseModule + localPlatformModule)
+        modules(appModule() + platformRepositoryModule + databaseModule + permissionModule)
     }
 
     try {
         print("Starting WASM application...")
         ComposeViewport(document.body!!) {
-
             val permissionManager: PermissionListener = koinInject<PermissionListener>()
             val permissionBridge: PermissionBridge = koinInject<PermissionBridge>()
-
 
             permissionBridge.setListener(permissionManager)
             MainView()
@@ -37,16 +35,17 @@ fun main() {
     }
 }
 
-val localPlatformModule = module {
+val permissionModule = module {
     single<PermissionListener> { WebPermissionManager() }
 }
 
 class WebPermissionManager : PermissionListener {
     override fun requestPermission(permission: AppPermission, callback: PermissionResultCallback?) {
-
+        // todo
     }
 
     override fun isPermissionGranted(permission: AppPermission): Boolean {
+        // todo
         return false
     }
 }
