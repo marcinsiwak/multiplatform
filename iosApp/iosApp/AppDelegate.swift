@@ -23,7 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, PermissionListener {
         return PermissionsHandler().checkIsPermissionGranted(permission: permission)
     }
     
-    func requestPermission(permission: AppPermission, callback: PermissionResultCallback) {
+    func requestPermission(permission: AppPermission, callback: PermissionResultCallback?) {
         PermissionsHandler().handlePermission(permission: permission, callback: callback)
     }
 }

@@ -14,7 +14,6 @@ import pl.msiwak.multiplatform.domain.remoteConfig.FetchRemoteConfigUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.version.GetForceUpdateStateUseCase
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
-import pl.msiwak.multiplatform.notifications.NotificationsManager
 import pl.msiwak.multiplatform.permissionmanager.AppPermission
 import pl.msiwak.multiplatform.permissionmanager.PermissionBridge
 import pl.msiwak.multiplatform.shared.navigation.NavigationProvider
@@ -28,7 +27,7 @@ class MainViewModel(
     observeAuthStateChangedUseCase: ObserveAuthStateChangedUseCase,
     private val getUserUseCase: GetUserUseCase,
     val navigationProvider: NavigationProvider,
-    permissionBridge: PermissionBridge
+    private val permissionBridge: PermissionBridge
 ) : ViewModel() {
 
     private val errorHandler = globalErrorHandler.handleError()
@@ -45,11 +44,9 @@ class MainViewModel(
             observeAuthStateChangedUseCase()
         }
         viewModelScope.launch(errorHandler) {
-            permissionBridge.requestPermission(AppPermission.NOTIFICATIONS)
-        }
-        viewModelScope.launch(errorHandler) {
             _viewState.update { it.copy(isLoading = true) }
             fetchRemoteConfigUseCase()
+            permissionBridge.requestPermission(AppPermission.NOTIFICATIONS)
 
             if (getForceUpdateStateUseCase()) {
                 _viewState.update { it.copy(directions = NavDestination.ForceUpdateDestination.NavForceUpdateGraphDestination) }

@@ -25,14 +25,12 @@ class MainActivity : ComponentActivity(), PermissionListener {
     private val permissionBridge: PermissionBridge by inject(PermissionBridge::class.java)
     private var permissionResultCallback: PermissionResultCallback? = null
 
-    private fun requestPermissionLauncher(permission: String): ActivityResultLauncher<String> =
+    private val requestPermissionLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 permissionResultCallback?.onPermissionGranted()
             } else {
-                val permanentlyDenied =
-                    !shouldShowRequestPermissionRationale(permission)
-                permissionResultCallback?.onPermissionDenied(permanentlyDenied)
+                permissionResultCallback?.onPermissionDenied(false)
             }
         }
 
@@ -55,7 +53,7 @@ class MainActivity : ComponentActivity(), PermissionListener {
     override fun requestPermission(permission: AppPermission, callback: PermissionResultCallback?) {
         PermissionsHandler.handlePermission(this, permission, callback) { androidPermission ->
             permissionResultCallback = callback
-            requestPermissionLauncher(androidPermission).launch(androidPermission)
+            requestPermissionLauncher.launch(androidPermission)
         }
     }
 
