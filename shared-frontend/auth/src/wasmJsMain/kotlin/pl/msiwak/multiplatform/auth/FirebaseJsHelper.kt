@@ -37,7 +37,6 @@ suspend fun <T : JsAny> Promise<T>.await(): T = suspendCoroutine { cont ->
             a
         },
         onRejected = { js ->
-            println("JS BODY: $js")
             val errorResponse = js.unsafeCast<ErrorResponse>()
             cont.resumeWithException(parseError(errorResponse))
             errorResponse
