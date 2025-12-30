@@ -43,7 +43,7 @@ buildkonfig {
     val productionProperties = Properties().apply {
         load(FileInputStream(productionPropertiesFile))
     }
-    val productionBaseUrl = "https://msiwak-api.pl"
+    val productionBaseUrl = "https://backend.codeflowms.pl"
     val stagingBaseUrl = "http://192.168.0.13:8080"
 
     if (productionPropertiesFile.exists()) {
