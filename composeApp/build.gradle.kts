@@ -79,7 +79,7 @@ kotlin {
 
 val versionMajor = 1
 val versionMinor = 1
-val versionPatch = 7
+val versionPatch = 8
 val versionBuild = 0
 val versionCode =
     1_000_000 * versionMajor + 10_000 * versionMinor + 100 * versionPatch + versionBuild
