@@ -1,5 +1,5 @@
 target 'iosApp' do
-  use_frameworks!
+  use_frameworks! :linkage => :dynamic
   platform :ios, '16.2'
   pod 'shared_frontend', :path => '../shared-frontend'
 end
