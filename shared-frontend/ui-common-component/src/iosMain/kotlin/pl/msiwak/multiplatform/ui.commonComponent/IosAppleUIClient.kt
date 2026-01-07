@@ -30,10 +30,10 @@ class AppleSignInManager() :
     ASAuthorizationControllerDelegateProtocol,
     ASAuthorizationControllerPresentationContextProvidingProtocol {
 
-    private var callback: ((String, String) -> Unit)? = null
+    private var callback: ((String?, String?, String?) -> Unit)? = null
     private var currentNonce: String? = null
 
-    fun signIn(callback: (String, String) -> Unit) {
+    fun signIn(callback: (String?, String?, String?) -> Unit) {
         this.callback = callback
         currentNonce = randomNonceString()
 
@@ -56,8 +56,12 @@ class AppleSignInManager() :
         controller: ASAuthorizationController,
         didCompleteWithAuthorization: ASAuthorization
     ) {
+        println("OUTPUT HERE")
+
         val credential = didCompleteWithAuthorization.credential
                 as? ASAuthorizationAppleIDCredential
+
+        println("OUTPUT HERE MID")
 
         val tokenData = credential?.identityToken
         val tokenString = tokenData?.let {
@@ -66,23 +70,28 @@ class AppleSignInManager() :
 
         val nonce = currentNonce
 
-        if (tokenString == null || nonce == null) {
-            throw Exception("Unable to fetch Apple ID token")
-        }
+        println("OUTPUT HERE1")
 
-        callback?.invoke(tokenString, nonce)
+        if (tokenString == null || nonce == null) {
+            println("OUTPUT HERE EXCEPTION")
+            callback?.invoke(null, null, "Failed to fetch identity token")
+        }
+        println("OUTPUT HERE2")
+        callback?.invoke(tokenString, nonce, null)
     }
 
     override fun authorizationController(
         controller: ASAuthorizationController,
         didCompleteWithError: NSError
     ) {
-        throw Exception(didCompleteWithError.localizedDescription)
+        println("OUTPUT TEST1")
+        callback?.invoke(null, null, didCompleteWithError.localizedDescription)
     }
 
     override fun presentationAnchorForAuthorizationController(
         controller: ASAuthorizationController
     ): ASPresentationAnchor {
+        println("OUTPUT TEST2")
         return UIApplication.sharedApplication.keyWindow
             ?: UIApplication.sharedApplication.windows.first() as UIWindow
     }

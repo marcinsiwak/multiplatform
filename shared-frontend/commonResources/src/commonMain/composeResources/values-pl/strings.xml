@@ -59,6 +59,7 @@
     <string name="welcome_no_account">Nie masz konta?</string>
     <string name="welcome_create_account">Stwórz konto</string>
     <string name="welcome_google_login">Zaloguj przez Google</string>
+    <string name="welcome_apple_login">Zaloguj przez Apple</string>
     <string name="welcome_offline_mode">Tryb offline</string>
 
     <string name="verify_title">Zweryfikuj swoje konto</string>

@@ -123,7 +123,7 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v8
         id: get_pull_request_number
         with:
           script: |
@@ -192,7 +192,7 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v8
         id: get_pull_request_number
         with:
           script: |
@@ -254,7 +254,7 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
           os: ${{ runner.os }}
 
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v8
         id: get_pull_request_number
         with:
           script: |

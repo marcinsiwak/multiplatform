@@ -46,6 +46,7 @@ import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.ui.commonComponent.AppleButton
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
+import pl.msiwak.multiplatform.ui.commonComponent.Loader
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.rememberGoogleLoginLauncherForActivityResult
@@ -112,6 +113,10 @@ fun WelcomeScreenContent(
                 onUiAction(WelcomeUiAction.OnConfirmDialogButtonClicked)
             }
         )
+    }
+
+    if (viewState.value.isLoading) {
+        Loader()
     }
 
     Scaffold(
@@ -194,9 +199,13 @@ fun WelcomeScreenContent(
                 )
 
                 AppleButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    callback = { tokenString: String, nonce: String ->
-                        onUiAction(WelcomeUiAction.OnAppleLoginSucceed(tokenString, nonce))
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = MaterialTheme.dimens.space_16
+                        ),
+                    callback = { tokenString: String?, nonce: String?, error: String? ->
+                        onUiAction(WelcomeUiAction.OnAppleLoginSucceed(tokenString, nonce, error))
                     }
                 )
 

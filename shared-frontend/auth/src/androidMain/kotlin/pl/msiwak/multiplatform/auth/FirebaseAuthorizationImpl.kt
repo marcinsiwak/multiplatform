@@ -2,9 +2,11 @@ package pl.msiwak.multiplatform.auth
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.GoogleAuthProvider
+import dev.gitlive.firebase.auth.OAuthProvider
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import pl.msiwak.multiplatform.commonObject.AuthProvider
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
@@ -41,21 +43,35 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
         }
     }
 
-    override suspend fun loginWithGoogle(googleToken: String?, accessToken: String?): AuthResult {
-        return auth.signInWithCredential(
-            authCredential = GoogleAuthProvider.credential(
-                idToken = googleToken,
-                accessToken = accessToken
-            )
-        ).let {
+    override suspend fun loginWithProvider(
+        authProvider: AuthProvider
+    ): AuthResult {
+        return when (authProvider) {
+            is AuthProvider.Apple -> {
+                val credential = OAuthProvider.credential(
+                    providerId = "apple.com",
+                    idToken = authProvider.idToken,
+                    rawNonce = authProvider.nonce
+                )
+                auth.signInWithCredential(authCredential = credential)
+            }
+
+            is AuthProvider.Google -> {
+                auth.signInWithCredential(
+                    authCredential = GoogleAuthProvider.credential(
+                        idToken = authProvider.tokenId,
+                        accessToken = authProvider.accessToken
+                    )
+                )
+            }
+        }.let {
             AuthResult(
                 user = FirebaseUser(
                     uid = it.user?.uid,
                     email = it.user?.email,
                     displayName = it.user?.displayName,
                     isEmailVerified = it.user?.isEmailVerified ?: false,
-                    token = it.user?.getIdToken(true),
-                    isNewUser = it.additionalUserInfo?.isNewUser
+                    token = it.user?.getIdTokenResult(true)?.token
                 )
             )
         }

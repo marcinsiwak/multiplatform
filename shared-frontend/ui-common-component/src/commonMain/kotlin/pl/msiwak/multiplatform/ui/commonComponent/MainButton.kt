@@ -15,6 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import pl.msiwak.multiplatform.commonResources.theme.dimens
@@ -25,6 +27,7 @@ fun MainButton(
     enabled: Boolean = true,
     onClick: () -> Unit,
     leadingIcon: DrawableResource? = null,
+    iconTint: Color? = null,
     text: String
 ) {
     Button(
@@ -49,6 +52,7 @@ fun MainButton(
                         .size(MaterialTheme.dimens.google_icon_size)
                         .padding(start = MaterialTheme.dimens.space_16),
                     painter = painterResource(it),
+                    colorFilter = iconTint?.let { tint -> ColorFilter.tint(tint) },
                     contentDescription = null
                 )
             }
