@@ -44,6 +44,7 @@ import org.koin.compose.koinInject
 import pl.msiwak.multiplatform.commonResources.theme.AppTheme
 import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
+import pl.msiwak.multiplatform.ui.commonComponent.AppleButton
 import pl.msiwak.multiplatform.ui.commonComponent.InputView
 import pl.msiwak.multiplatform.ui.commonComponent.MainButton
 import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
@@ -190,6 +191,13 @@ fun WelcomeScreenContent(
                     },
                     leadingIcon = Res.drawable.ic_google,
                     text = stringResource(Res.string.welcome_google_login)
+                )
+
+                AppleButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    callback = { tokenString: String, nonce: String ->
+                        onUiAction(WelcomeUiAction.OnAppleLoginSucceed(tokenString, nonce))
+                    }
                 )
 
                 // todo: improve offline mode - currently feature is disabled

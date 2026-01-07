@@ -10,8 +10,9 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import pl.msiwak.multiplatform.commonObject.AuthProvider
 import pl.msiwak.multiplatform.commonObject.exception.ClientErrorException
-import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
+import pl.msiwak.multiplatform.domain.authorization.LoginWithProviderUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
@@ -20,7 +21,7 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
     private val setOfflineModeUseCase: SetOfflineModeUseCase,
-    private val googleLoginUseCase: GoogleLoginUseCase,
+    private val loginWithProviderUseCase: LoginWithProviderUseCase,
     private val getUser: GetUserUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
@@ -63,6 +64,7 @@ class WelcomeScreenViewModel(
                 action.idToken,
                 action.accessToken
             )
+            is WelcomeUiAction.OnAppleLoginSucceed -> onAppleLoginSucceed(action.tokenString, action.nonce)
 
             else -> Unit
         }
@@ -70,7 +72,15 @@ class WelcomeScreenViewModel(
 
     private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
         viewModelScope.launch(errorHandler) {
-            googleLoginUseCase(idToken, accessToken)
+            loginWithProviderUseCase(AuthProvider.Google(idToken, accessToken))
+            getUser()
+            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
+        }
+    }
+
+    private fun onAppleLoginSucceed(tokenString: String, nonce: String) {
+        viewModelScope.launch(errorHandler) {
+            loginWithProviderUseCase(AuthProvider.Apple(tokenString, nonce))
             getUser()
             _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
         }
