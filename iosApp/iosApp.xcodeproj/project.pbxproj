@@ -36,6 +36,7 @@
 		224D82D6B77746805D0F1963 /* Pods-iosApp.productiondebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.productiondebug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.productiondebug.xcconfig"; sourceTree = "<group>"; };
 		710D6F9B2D427533009ED0B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		711E8BB82A575EE700151063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7190DD732F0BEFB600E33425 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71D05CA12B3338DF00994291 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		71FF1C9F2B95193500FFFDCE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		710D6F982D4274EC009ED0B4 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				7190DD742F0BEFD800E33425 /* ProductionRelease */,
 				710D6F9A2D4274FE009ED0B4 /* Staging */,
 				710D6F992D4274F5009ED0B4 /* Production */,
 			);
@@ -98,7 +100,7 @@
 		710D6F992D4274F5009ED0B4 /* Production */ = {
 			isa = PBXGroup;
 			children = (
-				71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */,
+				7190DD732F0BEFB600E33425 /* GoogleService-Info.plist */,
 			);
 			path = Production;
 			sourceTree = "<group>";
@@ -124,6 +126,14 @@
 			children = (
 			);
 			path = main;
+			sourceTree = "<group>";
+		};
+		7190DD742F0BEFD800E33425 /* ProductionRelease */ = {
+			isa = PBXGroup;
+			children = (
+				71A5EF452AFBDF2F00E373DF /* GoogleService-Info.plist */,
+			);
+			path = ProductionRelease;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -257,7 +267,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "INFO_PLIST=GoogleService-Info.plist\n\nSTAGING_INFO_PLIST=${PROJECT_DIR}/${TARGET_NAME}/Supporting\\ Files/Firebase/Staging/${INFO_PLIST}\nPRODUCTION_INFO_PLIST=${PROJECT_DIR}/${TARGET_NAME}/Supporting\\ Files/Firebase/Production/${INFO_PLIST}\n\necho \"Checking ${INFO_PLIST} in ${STAGING_INFO_PLIST}\"\nif [ ! -f $STAGING_INFO_PLIST ] ; then\n    echo \"STAGING GoogleService-Info.plist not found.\"\n    exit 1\nfi\n\necho \"Checking ${INFO_PLIST} in ${PRODUCTION_INFO_PLIST}\"\nif [ ! -f $PRODUCTION_INFO_PLIST ] ; then\n    echo \"PRODUCTION GoogleService-Info.plist not found.\"\n    exit 1\nfi\n\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Copying ${INFO_PLIST} to final destination: ${PLIST_DESTINATION}\"\necho \"CONFIGURATION HERE ${CONFIGURATION}\"\n\nif [ \"${CONFIGURATION}\" == \"stagingDebug\" ] ; then\n    echo \"Copied ${STAGING_INFO_PLIST}.\"\n    cp \"${STAGING_INFO_PLIST}\" \"${PLIST_DESTINATION}\"\nelse\n    echo \"Copied ${PRODUCTION_INFO_PLIST}.\"\n    cp \"${PRODUCTION_INFO_PLIST}\" \"${PLIST_DESTINATION}\"\nfi\n";
+			shellScript = "INFO_PLIST=GoogleService-Info.plist\n\nSTAGING_INFO_PLIST=${PROJECT_DIR}/${TARGET_NAME}/Supporting\\ Files/Firebase/Staging/${INFO_PLIST}\nPRODUCTION_INFO_PLIST=${PROJECT_DIR}/${TARGET_NAME}/Supporting\\ Files/Firebase/Production/${INFO_PLIST}\nPRODUCTION_RELEASE_INFO_PLIST=${PROJECT_DIR}/${TARGET_NAME}/Supporting\\ Files/Firebase/ProductionRelease/${INFO_PLIST}\n\necho \"Checking ${INFO_PLIST} in ${STAGING_INFO_PLIST}\"\nif [ ! -f $STAGING_INFO_PLIST ] ; then\n    echo \"STAGING GoogleService-Info.plist not found.\"\n    exit 1\nfi\n\necho \"Checking ${INFO_PLIST} in ${PRODUCTION_INFO_PLIST}\"\nif [ ! -f $PRODUCTION_INFO_PLIST ] ; then\n    echo \"PRODUCTION GoogleService-Info.plist not found.\"\n    exit 1\nfi\n\necho \"Checking ${INFO_PLIST} in ${PRODUCTION_RELEASE_INFO_PLIST}\"\nif [ ! -f $PRODUCTION_RELEASE_INFO_PLIST ] ; then\n    echo \"PRODUCTION Release GoogleService-Info.plist not found.\"\n    exit 1\nfi\n\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Copying ${INFO_PLIST} to final destination: ${PLIST_DESTINATION}\"\necho \"CONFIGURATION HERE ${CONFIGURATION}\"\n\nif [ \"${CONFIGURATION}\" == \"stagingDebug\" ] ; then\n    echo \"Copied ${STAGING_INFO_PLIST}.\"\n    cp \"${STAGING_INFO_PLIST}\" \"${PLIST_DESTINATION}\"\nelif [ \"${CONFIGURATION}\" == \"productionDebug\" ] ; then\n    echo \"Copied ${PRODUCTION_INFO_PLIST}.\"\n    cp \"${PRODUCTION_INFO_PLIST}\" \"${PLIST_DESTINATION}\"\nelse \n    echo \"Copied ${PRODUCTION_RELEASE_INFO_PLIST}.\"\n    cp \"${PRODUCTION_RELEASE_INFO_PLIST}\" \"${PLIST_DESTINATION}\"\nfi\n";
 		};
 		72C5AE764D557B749DCC21C6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -400,7 +410,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
+				DEVELOPMENT_TEAM = 35C4Z35MDY;
 				ENABLE_PREVIEWS = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = iosApp/Info.plist;
@@ -518,8 +528,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.athletetrack.ios.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = productionDebug;
 		};
@@ -714,8 +728,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.athletetrack.ios.staging.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = stagingDebug;
 		};
@@ -968,8 +986,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.athletetrack.ios.base.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1100,8 +1122,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pl.msiwak.athletetrack.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = productionRelease;
 		};
