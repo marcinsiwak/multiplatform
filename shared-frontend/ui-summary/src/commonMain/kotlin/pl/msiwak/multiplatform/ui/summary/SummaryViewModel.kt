@@ -25,7 +25,10 @@ class SummaryViewModel(
     private var categoryToRemovePosition: Int? = null
     private var currentCategories: List<Category> = mutableListOf()
 
-    private val errorHandler = globalErrorHandler.handleError()
+    private val errorHandler = globalErrorHandler.handleError {
+        _viewState.update { it.copy(isLoading = false) }
+        true
+    }
 
     init {
         viewModelScope.launch(errorHandler) {

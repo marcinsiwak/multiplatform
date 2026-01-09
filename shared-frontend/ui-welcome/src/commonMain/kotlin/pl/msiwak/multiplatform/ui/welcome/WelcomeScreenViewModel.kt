@@ -42,7 +42,7 @@ class WelcomeScreenViewModel(
             }
 
             else -> {
-                _viewState.update { it.copy(isErrorDialogVisible = true) }
+                _viewState.update { it.copy(isErrorDialogVisible = true, isLoading = false) }
                 false
             }
         }

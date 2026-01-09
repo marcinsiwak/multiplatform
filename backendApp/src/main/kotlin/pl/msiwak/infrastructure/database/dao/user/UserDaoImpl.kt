@@ -17,8 +17,8 @@ class UserDaoImpl : UserDao {
             .singleOrNull()
     }
 
-    override suspend fun deleteUser(id: String): Int {
-        return Users.deleteWhere { Users.id eq id }
+    override suspend fun deleteUser(id: String): Int = dbQuery {
+        return@dbQuery Users.deleteWhere { Users.id eq id }
     }
 
     override suspend fun getUserByDeviceToken(deviceToken: String): UserEntity? = dbQuery {

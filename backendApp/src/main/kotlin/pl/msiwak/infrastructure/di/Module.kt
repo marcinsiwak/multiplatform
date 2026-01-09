@@ -88,7 +88,7 @@ val diModule = module {
     single<RegisterDeviceForNotificationsUseCase> { RegisterDeviceForNotificationsUseCaseImpl(get()) }
     single<UnregisterDeviceForNotificationsUseCase> { UnregisterDeviceForNotificationsUseCaseImpl(get()) }
     single<SendNotificationsUseCase> { SendNotificationsUseCaseImpl(get(), get()) }
-    single<DeleteUserUseCase> { DeleteUserUseCaseImpl(get()) }
+    single<DeleteUserUseCase> { DeleteUserUseCaseImpl(get(), get()) }
 }
 
 val diRepositoryModule = module {
@@ -110,7 +110,7 @@ val diMapperModule = module {
 }
 
 val diControllerModule = module {
-    single<UserController> { UserControllerImpl(get(), get(), get(), get(), get(), get(), get()) }
+    single<UserController> { UserControllerImpl(get(), get(), get(), get(), get(), get(), get(), get()) }
     single<ExerciseController> {
         ExerciseControllerImpl(
             get(),

@@ -140,5 +140,5 @@ val useCaseModule = module {
     single<FormatRunningAmountToMillisecondsUseCase> { FormatRunningAmountToMillisecondsUseCaseImpl() }
     single<FormatRunningAmountUseCase> { FormatRunningAmountUseCaseImpl() }
     single<SendNotificationUseCase> { SendNotificationUseCaseImpl(get()) }
-    single<DeleteAccountUseCase> { DeleteAccountUseCaseImpl(get()) }
+    single<DeleteAccountUseCase> { DeleteAccountUseCaseImpl(get(), get()) }
 }

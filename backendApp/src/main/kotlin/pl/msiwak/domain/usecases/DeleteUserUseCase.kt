@@ -1,5 +1,6 @@
 package pl.msiwak.domain.usecases
 
+import pl.msiwak.infrastructure.repositories.ExerciseRepository
 import pl.msiwak.infrastructure.repositories.UserRepository
 
 interface DeleteUserUseCase {
@@ -7,9 +8,12 @@ interface DeleteUserUseCase {
 }
 
 class DeleteUserUseCaseImpl(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val exerciseRepository: ExerciseRepository
 ) : DeleteUserUseCase {
     override suspend fun invoke(userId: String): Int {
-        return userRepository.deleteUser(userId)
+        return userRepository.deleteUser(userId).also {
+            exerciseRepository.clearUserData(userId)
+        }
     }
 }
