@@ -41,6 +41,9 @@
     <string name="settings_language">Język</string>
     <string name="settings_unit">Jednostka</string>
     <string name="settings_logout">Wyloguj</string>
+    <string name="settings_delete">Usuń konto</string>
+    <string name="settings_delete_question_title">Usuwanie konta</string>
+    <string name="settings_delete_question_subtitle">Czy na pewno chcesz usunąć konto</string>
 
     <string name="language">Jezyk</string>
 

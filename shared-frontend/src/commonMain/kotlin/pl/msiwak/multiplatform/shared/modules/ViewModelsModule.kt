@@ -28,7 +28,7 @@ val viewModelsModule = module {
     viewModel { AddExerciseViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModel { CategoryViewModel(get(), get(), get(), get(), get()) }
     viewModel { AddCategoryViewModel(get(), get()) }
-    viewModel { SettingsViewModel(get(), get(), get(), get()) }
+    viewModel { SettingsViewModel(get(), get(), get(), get(), get()) }
     viewModel { LanguageViewModel(get(), get()) }
     viewModel { UnitViewModel(get(), get()) }
     viewModel { ForceUpdateViewModel() }

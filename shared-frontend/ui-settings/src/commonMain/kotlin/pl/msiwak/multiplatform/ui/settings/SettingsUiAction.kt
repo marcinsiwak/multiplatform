@@ -5,4 +5,6 @@ sealed class SettingsUiAction {
     data object OnLanguageClicked : SettingsUiAction()
     data object OnLogoutClicked : SettingsUiAction()
     data object OnAdminPanelClicked : SettingsUiAction()
+    data object OnDeleteAccount : SettingsUiAction()
+    data object OnDeleteAccountConfirmed : SettingsUiAction()
 }

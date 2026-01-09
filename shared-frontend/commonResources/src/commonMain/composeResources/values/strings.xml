@@ -41,6 +41,9 @@
     <string name="settings_language">Language</string>
     <string name="settings_unit">Unit type</string>
     <string name="settings_logout">Logout</string>
+    <string name="settings_delete">Delete account</string>
+    <string name="settings_delete_question_title">Account deletion</string>
+    <string name="settings_delete_question_subtitle">Are you sure?</string>
 
     <string name="language">Language</string>
 

@@ -15,6 +15,10 @@ class UserRepository(private val userService: UserService) {
         return@withContext userService.getUser()
     }
 
+    suspend fun deleteUser() = withContext(Dispatchers.IO) {
+        userService.deleteUser()
+    }
+
     suspend fun createUser(uuid: String?, email: String?) = withContext(Dispatchers.IO) {
         if (uuid == null || email == null) {
             return@withContext userService.createUserWithGoogle()

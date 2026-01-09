@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import pl.msiwak.multiplatform.domain.authorization.DeleteAccountUseCase
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.domain.user.GetUsersUseCase
@@ -19,6 +20,7 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 class SettingsViewModel(
     getVersionNameUseCase: GetVersionNameUseCase,
     private val logoutUseCase: LogoutUseCase,
+    private val deleteAccountUseCase: DeleteAccountUseCase,
     private val getUserUseCase: GetUserUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
@@ -29,7 +31,10 @@ class SettingsViewModel(
     private val _viewEvent = MutableSharedFlow<SettingsEvent>()
     val viewEvent: SharedFlow<SettingsEvent> = _viewEvent.asSharedFlow()
 
-    private val errorHandler = globalErrorHandler.handleError()
+    private val errorHandler = globalErrorHandler.handleError {
+        _viewState.update { it.copy(isLoading = false, isDeleteAccountPopupVisible = false) }
+        false
+    }
 
     init {
         viewModelScope.launch(errorHandler) {
@@ -47,6 +52,8 @@ class SettingsViewModel(
         when (action) {
             SettingsUiAction.OnLogoutClicked -> onLogoutClicked()
             SettingsUiAction.OnAdminPanelClicked -> onAdminPanelClicked()
+            SettingsUiAction.OnDeleteAccount -> onDeleteAccountClicked()
+            SettingsUiAction.OnDeleteAccountConfirmed -> onDeleteAccountConfirmedClicked()
             else -> Unit
         }
     }
@@ -55,6 +62,19 @@ class SettingsViewModel(
         viewModelScope.launch {
             logoutUseCase()
             _viewEvent.emit(SettingsEvent.Logout)
+        }
+    }
+
+    private fun onDeleteAccountClicked() {
+        _viewState.update { it.copy(isDeleteAccountPopupVisible = true) }
+    }
+
+    private fun onDeleteAccountConfirmedClicked() {
+        viewModelScope.launch(errorHandler) {
+            _viewState.update { it.copy(isLoading = true) }
+            deleteAccountUseCase()
+            _viewEvent.emit(SettingsEvent.Logout)
+            _viewState.update { it.copy(isDeleteAccountPopupVisible = false, isLoading = false) }
         }
     }
 
