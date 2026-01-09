@@ -85,6 +85,20 @@ fun Route.addUserRoutes() {
             }
         }
 
+        delete("/user") {
+            with(call) {
+                val principal =
+                    call.principal<FirebaseUser>() ?: return@delete call.respond(HttpStatusCode.Unauthorized)
+                userController.deleteUser(principal.userId).let {
+                    if (it > 0) {
+                        return@delete respond(status = HttpStatusCode.OK, message = "User deleted")
+                    } else {
+                        return@delete call.respond(HttpStatusCode.NotFound)
+                    }
+                }
+            }
+        }
+
         post("/user/notification") {
             with(call) {
                 val principal =

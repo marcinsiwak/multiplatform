@@ -33,6 +33,10 @@ class UserRepository(
         return userDao.getUser(id)
     }
 
+    suspend fun deleteUser(id: String): Int {
+        return userDao.deleteUser(id)
+    }
+
     suspend fun getUserByToken(deviceToken: String): UserEntity? {
         return userDao.getUserByDeviceToken(deviceToken)
     }
