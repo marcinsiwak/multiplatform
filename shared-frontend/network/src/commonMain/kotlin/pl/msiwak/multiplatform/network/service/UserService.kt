@@ -12,6 +12,9 @@ class UserService(
     suspend fun getUser(): User {
         return mapper(client.getUser())
     }
+    suspend fun deleteUser() {
+        client.deleteUser()
+    }
 
     suspend fun getUsers(): List<User> {
         return client.getUsers().map { users -> mapper(users) }

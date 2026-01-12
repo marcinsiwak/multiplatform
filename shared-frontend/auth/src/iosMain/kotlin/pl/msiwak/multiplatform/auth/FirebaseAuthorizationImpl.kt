@@ -2,9 +2,11 @@ package pl.msiwak.multiplatform.auth
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.GoogleAuthProvider
+import dev.gitlive.firebase.auth.OAuthProvider
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import pl.msiwak.multiplatform.commonObject.AuthProvider
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 
@@ -42,16 +44,28 @@ class FirebaseAuthorizationImpl : FirebaseAuthorization {
         }
     }
 
-    override suspend fun loginWithGoogle(
-        googleToken: String?,
-        accessToken: String?
+    override suspend fun loginWithProvider(
+        authProvider: AuthProvider
     ): AuthResult {
-        return auth.signInWithCredential(
-            authCredential = GoogleAuthProvider.credential(
-                idToken = googleToken,
-                accessToken = accessToken
-            )
-        ).let {
+        return when (authProvider) {
+            is AuthProvider.Apple -> {
+                val credential = OAuthProvider.credential(
+                    providerId = "apple.com",
+                    idToken = authProvider.idToken,
+                    rawNonce = authProvider.nonce
+                )
+                auth.signInWithCredential(authCredential = credential)
+            }
+
+            is AuthProvider.Google -> {
+                auth.signInWithCredential(
+                    authCredential = GoogleAuthProvider.credential(
+                        idToken = authProvider.tokenId,
+                        accessToken = authProvider.accessToken
+                    )
+                )
+            }
+        }.let {
             AuthResult(
                 user = FirebaseUser(
                     uid = it.user?.uid,

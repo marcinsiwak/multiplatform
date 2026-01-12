@@ -18,4 +18,5 @@ interface ExercisesDao {
     suspend fun syncCategories(categories: List<CategoryEntity>)
     suspend fun syncExercises(exercises: List<ExerciseEntity>)
     suspend fun syncResults(results: List<ResultEntity>)
+    suspend fun clearUserData(userId: String)
 }

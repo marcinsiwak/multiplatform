@@ -21,7 +21,6 @@ kotlin {
             baseName = "ui-common-component"
         }
         pod("Google-Mobile-Ads-SDK", moduleName = "GoogleMobileAds")
-        pod("FirebaseCore")
         pod("GoogleSignIn")
     }
 

@@ -9,6 +9,8 @@ import pl.msiwak.domain.usecases.AddResultUseCase
 import pl.msiwak.domain.usecases.AddResultUseCaseImpl
 import pl.msiwak.domain.usecases.AddUserUseCase
 import pl.msiwak.domain.usecases.AddUserUseCaseImpl
+import pl.msiwak.domain.usecases.DeleteUserUseCase
+import pl.msiwak.domain.usecases.DeleteUserUseCaseImpl
 import pl.msiwak.domain.usecases.GetCategoriesUseCase
 import pl.msiwak.domain.usecases.GetCategoriesUseCaseImpl
 import pl.msiwak.domain.usecases.GetCategoryUseCase
@@ -86,6 +88,7 @@ val diModule = module {
     single<RegisterDeviceForNotificationsUseCase> { RegisterDeviceForNotificationsUseCaseImpl(get()) }
     single<UnregisterDeviceForNotificationsUseCase> { UnregisterDeviceForNotificationsUseCaseImpl(get()) }
     single<SendNotificationsUseCase> { SendNotificationsUseCaseImpl(get(), get()) }
+    single<DeleteUserUseCase> { DeleteUserUseCaseImpl(get(), get()) }
 }
 
 val diRepositoryModule = module {
@@ -107,7 +110,7 @@ val diMapperModule = module {
 }
 
 val diControllerModule = module {
-    single<UserController> { UserControllerImpl(get(), get(), get(), get(), get(), get(), get()) }
+    single<UserController> { UserControllerImpl(get(), get(), get(), get(), get(), get(), get(), get()) }
     single<ExerciseController> {
         ExerciseControllerImpl(
             get(),

@@ -10,9 +10,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import pl.msiwak.multiplatform.commonObject.AuthProvider
 import pl.msiwak.multiplatform.commonObject.exception.ClientErrorException
-import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
+import pl.msiwak.multiplatform.domain.authorization.LoginWithProviderUseCase
 import pl.msiwak.multiplatform.domain.offline.SetOfflineModeUseCase
 import pl.msiwak.multiplatform.domain.user.GetUserUseCase
 import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
@@ -20,7 +21,7 @@ import pl.msiwak.multiplatform.utils.errorHandler.GlobalErrorHandler
 class WelcomeScreenViewModel(
     private val loginUseCase: LoginUseCase,
     private val setOfflineModeUseCase: SetOfflineModeUseCase,
-    private val googleLoginUseCase: GoogleLoginUseCase,
+    private val loginWithProviderUseCase: LoginWithProviderUseCase,
     private val getUser: GetUserUseCase,
     globalErrorHandler: GlobalErrorHandler
 ) : ViewModel() {
@@ -39,14 +40,11 @@ class WelcomeScreenViewModel(
                 }
                 true
             }
-//            is FirebaseAuthInvalidCredentialsException -> {
-//                _viewState.update {
-//                    it.copy(authErrorMessage = "", isErrorDialogVisible = true)
-//                }
-//                true
-//            }
 
-            else -> false
+            else -> {
+                _viewState.update { it.copy(isErrorDialogVisible = true, isLoading = false) }
+                false
+            }
         }
     }
 
@@ -64,14 +62,34 @@ class WelcomeScreenViewModel(
                 action.accessToken
             )
 
+            is WelcomeUiAction.OnAppleLoginSucceed -> onAppleLoginSucceed(
+                action.tokenString,
+                action.nonce,
+                action.error
+            )
+
             else -> Unit
         }
     }
 
     private fun onGoogleLoginSucceed(idToken: String, accessToken: String?) {
         viewModelScope.launch(errorHandler) {
-            googleLoginUseCase(idToken, accessToken)
+            _viewState.update { it.copy(isLoading = true) }
+            loginWithProviderUseCase(AuthProvider.Google(idToken, accessToken))
             getUser()
+            _viewState.update { it.copy(isLoading = false) }
+            _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
+        }
+    }
+
+    private fun onAppleLoginSucceed(tokenString: String?, nonce: String?, error: String?) {
+        viewModelScope.launch(errorHandler) {
+            if (error != null) throw Exception(error)
+            _viewState.update { it.copy(isLoading = true) }
+            if (tokenString == null || nonce == null) throw Exception("Failed to fetch identity token")
+            loginWithProviderUseCase(AuthProvider.Apple(tokenString, nonce))
+            getUser()
+            _viewState.update { it.copy(isLoading = false) }
             _viewEvent.emit(WelcomeEvent.NavigateToDashboard)
         }
     }
@@ -97,8 +115,6 @@ class WelcomeScreenViewModel(
             _viewState.update { it.copy(isLoading = false) }
         }
     }
-
-    // TODO: Add Apple login
 
     private fun onOfflineModeClicked() {
         // todo: improve offline mode - currently feature is disabled

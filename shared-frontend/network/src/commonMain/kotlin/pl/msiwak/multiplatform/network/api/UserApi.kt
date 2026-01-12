@@ -22,6 +22,10 @@ class UserApi(private val ktorClient: KtorClient) {
         return response
     }
 
+    suspend fun deleteUser() {
+        ktorClient.httpClient.delete("api/user")
+    }
+
     suspend fun createUserWithGoogle() {
         ktorClient.httpClient.post("api/googleUser")
     }

@@ -214,6 +214,12 @@ class ExercisesDaoImpl : ExercisesDao {
         }
     }
 
+    override suspend fun clearUserData(userId: String) {
+        dbQuery {
+            Categories.deleteWhere { Categories.userId eq userId }
+        }
+    }
+
     private fun getExercise(exerciseId: String): ExerciseEntity? {
         val results = getResultsByExercise(exerciseId)
         val exercise =

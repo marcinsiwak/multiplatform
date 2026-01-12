@@ -41,6 +41,9 @@
     <string name="settings_language">Język</string>
     <string name="settings_unit">Jednostka</string>
     <string name="settings_logout">Wyloguj</string>
+    <string name="settings_delete">Usuń konto</string>
+    <string name="settings_delete_question_title">Usuwanie konta</string>
+    <string name="settings_delete_question_subtitle">Czy na pewno chcesz usunąć konto</string>
 
     <string name="language">Jezyk</string>
 
@@ -59,6 +62,7 @@
     <string name="welcome_no_account">Nie masz konta?</string>
     <string name="welcome_create_account">Stwórz konto</string>
     <string name="welcome_google_login">Zaloguj przez Google</string>
+    <string name="welcome_apple_login">Zaloguj przez Apple</string>
     <string name="welcome_offline_mode">Tryb offline</string>
 
     <string name="verify_title">Zweryfikuj swoje konto</string>

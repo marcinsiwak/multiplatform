@@ -1,6 +1,7 @@
 package pl.msiwak.interfaces.controller
 
 import pl.msiwak.domain.usecases.AddUserUseCase
+import pl.msiwak.domain.usecases.DeleteUserUseCase
 import pl.msiwak.domain.usecases.GetUserUseCase
 import pl.msiwak.domain.usecases.GetUsersUseCase
 import pl.msiwak.domain.usecases.UpdateUserUseCase
@@ -15,6 +16,7 @@ class UserControllerImpl(
     private val updateUserUseCase: UpdateUserUseCase,
     private val getUserUseCase: GetUserUseCase,
     private val getUsersUseCase: GetUsersUseCase,
+    private val deleteUserUseCase: DeleteUserUseCase,
     private val registerDeviceForNotificationsUseCase: RegisterDeviceForNotificationsUseCase,
     private val unregisterDeviceForNotificationsUseCase: UnregisterDeviceForNotificationsUseCase,
     private val sendNotificationsUseCase: SendNotificationsUseCase
@@ -30,6 +32,10 @@ class UserControllerImpl(
 
     override suspend fun getUser(userId: String): ApiUser? {
         return getUserUseCase(userId)
+    }
+
+    override suspend fun deleteUser(userId: String): Int {
+        return deleteUserUseCase(userId)
     }
 
     override suspend fun getUsers(): List<ApiUser> {

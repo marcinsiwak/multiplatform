@@ -10,4 +10,5 @@ sealed class WelcomeUiAction {
     data object OnRegistrationClicked : WelcomeUiAction()
     data object OnGoogleLoginClicked : WelcomeUiAction()
     data class OnGoogleLoginSucceed(val idToken: String, val accessToken: String?) : WelcomeUiAction()
+    data class OnAppleLoginSucceed(val tokenString: String?, val nonce: String?, val error: String?) : WelcomeUiAction()
 }

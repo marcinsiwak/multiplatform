@@ -6,6 +6,7 @@ interface UserController {
     suspend fun addUser(userId: String, name: String, email: String)
     suspend fun updateUser(userId: String, name: String, email: String)
     suspend fun getUser(userId: String): ApiUser?
+    suspend fun deleteUser(userId: String): Int
     suspend fun getUsers(): List<ApiUser>
     suspend fun registerUserDeviceForNotification(deviceToken: String, userId: String)
     suspend fun unregisterUserDeviceForNotification(deviceToken: String)

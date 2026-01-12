@@ -3,6 +3,7 @@ package pl.msiwak.multiplatform.data.remote.repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import pl.msiwak.multiplatform.auth.FirebaseAuthorization
+import pl.msiwak.multiplatform.commonObject.AuthProvider
 import pl.msiwak.multiplatform.commonObject.AuthResult
 import pl.msiwak.multiplatform.commonObject.FirebaseUser
 import pl.msiwak.multiplatform.commonObject.dispatcher.Dispatchers
@@ -19,9 +20,9 @@ class AuthRepository(
         return@withContext firebaseAuthorization.loginUser(login, password)
     }
 
-    suspend fun loginWithGoogle(googleToken: String?, accessToken: String?): AuthResult? =
+    suspend fun loginWithProvider(authProvider: AuthProvider): AuthResult =
         withContext(Dispatchers.IO) {
-            return@withContext firebaseAuthorization.loginWithGoogle(googleToken, accessToken)
+            return@withContext firebaseAuthorization.loginWithProvider(authProvider)
         }
 
     suspend fun observeAuthStateChanged(): Flow<FirebaseUser?> = withContext(Dispatchers.IO) {

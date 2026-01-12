@@ -1,6 +1,8 @@
 package pl.msiwak.infrastructure.database.dao.user
 
 import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
@@ -13,6 +15,10 @@ class UserDaoImpl : UserDao {
         return@dbQuery Users.selectAll().where { Users.id eq id }
             .map(::resultRowToUser)
             .singleOrNull()
+    }
+
+    override suspend fun deleteUser(id: String): Int = dbQuery {
+        return@dbQuery Users.deleteWhere { Users.id eq id }
     }
 
     override suspend fun getUserByDeviceToken(deviceToken: String): UserEntity? = dbQuery {

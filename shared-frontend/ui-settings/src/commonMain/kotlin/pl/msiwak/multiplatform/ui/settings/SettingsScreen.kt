@@ -17,8 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import athletetrack.shared_frontend.commonresources.generated.resources.Res
 import athletetrack.shared_frontend.commonresources.generated.resources.admin_panel
-import athletetrack.shared_frontend.commonresources.generated.resources.email
+import athletetrack.shared_frontend.commonresources.generated.resources.confirm
 import athletetrack.shared_frontend.commonresources.generated.resources.settings
+import athletetrack.shared_frontend.commonresources.generated.resources.settings_delete
+import athletetrack.shared_frontend.commonresources.generated.resources.settings_delete_question_subtitle
+import athletetrack.shared_frontend.commonresources.generated.resources.settings_delete_question_title
 import athletetrack.shared_frontend.commonresources.generated.resources.settings_language
 import athletetrack.shared_frontend.commonresources.generated.resources.settings_logout
 import athletetrack.shared_frontend.commonresources.generated.resources.settings_unit
@@ -31,6 +34,8 @@ import pl.msiwak.multiplatform.commonResources.theme.dimens
 import pl.msiwak.multiplatform.commonResources.theme.font
 import pl.msiwak.multiplatform.navigator.destination.NavDestination
 import pl.msiwak.multiplatform.navigator.destination.NavDestination.LanguageDestination
+import pl.msiwak.multiplatform.ui.commonComponent.Loader
+import pl.msiwak.multiplatform.ui.commonComponent.PopupDialog
 import pl.msiwak.multiplatform.ui.commonComponent.util.DarkLightPreview
 
 @Composable
@@ -66,6 +71,21 @@ fun SettingsScreenContent(
     viewState: State<SettingsState>,
     onUiAction: (SettingsUiAction) -> Unit
 ) {
+    if (viewState.value.isDeleteAccountPopupVisible) {
+        PopupDialog(
+            title = stringResource(Res.string.settings_delete_question_title),
+            description = stringResource(Res.string.settings_delete_question_subtitle),
+            confirmButtonTitle = stringResource(Res.string.confirm),
+            onConfirmClicked = {
+                onUiAction(SettingsUiAction.OnDeleteAccountConfirmed)
+            }
+        )
+    }
+
+    if (viewState.value.isLoading) {
+        Loader()
+    }
+
     Box {
         Column(
             modifier = Modifier
@@ -120,6 +140,14 @@ fun SettingsScreenContent(
                     text = stringResource(Res.string.admin_panel)
                 )
             }
+            SettingsItem(
+                modifier = Modifier
+                    .padding(top = MaterialTheme.dimens.space_8)
+                    .clickable {
+                        onUiAction(SettingsUiAction.OnDeleteAccount)
+                    },
+                text = stringResource(Res.string.settings_delete)
+            )
         }
         Text(
             modifier = Modifier

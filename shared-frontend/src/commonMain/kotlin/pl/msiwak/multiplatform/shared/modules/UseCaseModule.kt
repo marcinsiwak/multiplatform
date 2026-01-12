@@ -3,12 +3,14 @@ package pl.msiwak.multiplatform.shared.modules
 import org.koin.dsl.module
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCase
 import pl.msiwak.multiplatform.domain.authorization.CheckIfSynchronizationIsPossibleUseCaseImpl
+import pl.msiwak.multiplatform.domain.authorization.DeleteAccountUseCase
+import pl.msiwak.multiplatform.domain.authorization.DeleteAccountUseCaseImpl
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCase
 import pl.msiwak.multiplatform.domain.authorization.GetUserTokenUseCaseImpl
-import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCase
-import pl.msiwak.multiplatform.domain.authorization.GoogleLoginUseCaseImpl
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCase
 import pl.msiwak.multiplatform.domain.authorization.LoginUseCaseImpl
+import pl.msiwak.multiplatform.domain.authorization.LoginWithProviderUseCase
+import pl.msiwak.multiplatform.domain.authorization.LoginWithProviderUseCaseImpl
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCase
 import pl.msiwak.multiplatform.domain.authorization.LogoutUseCaseImpl
 import pl.msiwak.multiplatform.domain.authorization.ObserveAuthStateChangedUseCase
@@ -95,7 +97,7 @@ import pl.msiwak.multiplatform.domain.version.GetVersionNameUseCaseImpl
 val useCaseModule = module {
     single<RegisterUserUseCase> { RegisterUserUseCaseImpl(get(), get()) }
     single<LoginUseCase> { LoginUseCaseImpl(get(), get(), get()) }
-    single<GoogleLoginUseCase> { GoogleLoginUseCaseImpl(get(), get(), get()) }
+    single<LoginWithProviderUseCase> { LoginWithProviderUseCaseImpl(get(), get(), get()) }
     single<LogoutUseCase> { LogoutUseCaseImpl(get(), get()) }
     single<SaveUserTokenUseCase> { SaveUserTokenUseCaseImpl(get()) }
     single<GetUserTokenUseCase> { GetUserTokenUseCaseImpl(get()) }
@@ -138,4 +140,5 @@ val useCaseModule = module {
     single<FormatRunningAmountToMillisecondsUseCase> { FormatRunningAmountToMillisecondsUseCaseImpl() }
     single<FormatRunningAmountUseCase> { FormatRunningAmountUseCaseImpl() }
     single<SendNotificationUseCase> { SendNotificationUseCaseImpl(get()) }
+    single<DeleteAccountUseCase> { DeleteAccountUseCaseImpl(get(), get()) }
 }

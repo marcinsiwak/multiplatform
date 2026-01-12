@@ -50,4 +50,8 @@ class ExerciseRepository(private val exercisesDao: ExercisesDao) {
             }
         }
     }
+
+    suspend fun clearUserData(userId: String) {
+        exercisesDao.clearUserData(userId)
+    }
 }

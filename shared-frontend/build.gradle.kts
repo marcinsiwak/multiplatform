@@ -32,7 +32,6 @@ kotlin {
             export(project(Modules.permissionManager))
         }
 
-        pod("FirebaseCore", linkOnly = true)
         pod("FirebaseAuth", linkOnly = true)
         pod("FirebaseRemoteConfig", linkOnly = true)
         pod("FirebaseCrashlytics", linkOnly = true)

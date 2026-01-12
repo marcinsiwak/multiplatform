@@ -2,7 +2,6 @@ package pl.msiwak.multiplatform.ui.commonComponent
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import cocoapods.FirebaseCore.FIRApp
 import cocoapods.GoogleSignIn.GIDConfiguration
 import cocoapods.GoogleSignIn.GIDSignIn
 import cocoapods.GoogleSignIn.GIDSignInResult
@@ -15,7 +14,7 @@ import platform.UIKit.UIWindowScene
 @Composable
 actual fun rememberGoogleLoginLauncherForActivityResult(onResultOk: (String, String?) -> Unit): () -> Unit {
     LaunchedEffect(Unit) {
-        val firebaseClientId = FIRApp.defaultApp()?.options?.clientID ?: return@LaunchedEffect
+        val firebaseClientId = "607279059338-ldhf7gjg8vrgadbqd0ou2ol45ujf113h.apps.googleusercontent.com"
         val signInConfig = GIDConfiguration(clientID = firebaseClientId)
         GIDSignIn.sharedInstance.configuration = signInConfig
     }
